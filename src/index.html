@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="menu.js"></script>
+
+</head>
+<style>
+    .orange-border {
+        display: inline-block;
+    }
+
+    .inner-content {
+        padding: 5px;
+        /* Ajustez la marge interne pour le contenu de chaque indice de ligne */
+    }
+
+    .orange-border p {
+        margin: 0;
+        /* Supprimez les marges internes pour le paragraphe */
+    }
+
+    .tcm-details {
+        margin-bottom: 20px;
+    }
+</style>
+
+<body>
+    <div id="menu-container"></div>
+
+
+
+    <br>
+    <div id="TCM" class="container"></div>
+    <div class="md:container md:mx-auto">
+        <div class="flex flex-col w-full lg:flex-row">
+            <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+                <h1 class="text-primary text-5xl font-bold text-center">Voyagez facilement à <span
+                        class="text-accent text-5xl font-bold"> Clermont-Ferrand</span> !</h1>
+
+            </div>
+            <div class="divider lg:divider-horizontal bg-base300"></div>
+            <div class="grid flex-grow h-32 card bg-primary-focus rounded-box place-items-center">
+                <div id="lignes" class="grid grid-flow-row auto-rows-max"></div>
+            </div>
+        </div>
+        <br>
+        <div class="bg-secondary-content rounded-md py-24 sm:py-32">
+            <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                <div class="mx-auto max-w-2xl lg:mx-0">
+                    <h2 class="text-3xl font-bold tracking-tight text-secondary sm:text-4xl">Notre Actualité</h2>
+                    <p class="mt-2 text-lg leading-8 text-secondary-focus">En direct de notre rédaction, toute
+                        l'actualité TCM.</p>
+                </div>
+                <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-base-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-6"
+                    id="content"></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer footer-center p-10 bg-primary text-primary-content">
+        <aside>
+            <img src="\img\TCM.png" width="100" height="100" alt="Logo TCM"
+                class="bg-gray-200 bg-opacity-30 p-2 rounded ">
+            <p class="font-bold">
+                Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
+            </p>
+            <p>Copyright © 2023 - Tous droits réservés</p>
+        </aside>
+    </footer>
+
+</body>
+<script>
+    const url = "test.json";
+
+    function afficherInfoTrafic() {
+        $.getJSON(url, function (data) {
+            // Créez un conteneur pour les détails de la ligne TCM
+            const tcmDetailsContainer = $("<div>").addClass("tcm-details");
+
+            // Créez un conteneur pour les indices des autres lignes
+            const otherLinesContainer = $("<div>").addClass("other-lines");
+
+            // Créez un ensemble pour suivre les lignes auxquelles vous avez déjà ajouté un logo
+            const addedLineLogos = new Set();
+
+            $.each(data.lignes, function (i, ligne) {
+                const dateActuelle = new Date();
+                let logoHtml = "";
+
+                $.each(ligne.infos_trafic, function (j, info) {
+                    const dateDebut = new Date(Date.parse(info.annonce));
+                    const dateFin = new Date(Date.parse(info.fin));
+                    dateFin.setDate(dateFin.getDate() + 1);
+
+                    if (dateActuelle >= dateDebut && dateActuelle <= dateFin) {
+                        // Vérifiez si le logo de la ligne n'a pas déjà été ajouté
+                        if (!addedLineLogos.has(ligne.ligne)) {
+                            // Ajoutez le logo au format spécifié à la variable logoHtml
+                            if (ligne.ligne === "TCM") {
+                                // Ajoutez la description de l'info pour la ligne "TCM"
+                                logoHtml += `<div class="alert alert-info">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                                logoHtml += `<span>${info.description}</span>`;
+                                logoHtml += `</div>`;
+                                addedLineLogos.add(ligne.ligne);
+                            } else {
+                                logoHtml += `<div class="orange-border"><div class="inner-content"><img id='logo' src='/img/${ligne.ligne}.png' width="50" height="50" alt='Logo de la ligne' class="bg-gray-200 p-2 border border-orange-500 rounded-md"></a><img src='/img/assets/warning.png' style='position: relative; width: 20px; height: 20px; top: -10px; left: 35px;'></div>`;
+                                logoHtml += `</div>`;
+                                addedLineLogos.add(ligne.ligne);
+                            }
+                        }
+                    }
+                });
+
+                // Si un incident est trouvé pour cette ligne, ajoutez le logo à la liste correspondante
+                if (logoHtml !== "") {
+                    if (ligne.ligne === "TCM") {
+                        tcmDetailsContainer.html(logoHtml);
+                    } else {
+                        otherLinesContainer.append(logoHtml);
+                    }
+                }
+            });
+
+            // Ajoutez les conteneurs à la page
+            $("#lignes").append(otherLinesContainer);
+            $("#TCM").append(tcmDetailsContainer);
+        });
+    }
+
+    afficherInfoTrafic();
+</script>
+
+<script>
+    $(function () {
+        var url = "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts?categories=8";
+
+        $.get(url, function (data) {
+            var content = "";
+
+            if (data.length === 0) {
+                $("#content").html("<p>Aucun résultat.</p>");
+            } else {
+
+                $.each(data, function (index, article) {
+                    // Construit l'URL de l'image en utilisant l'URL spécifiée
+                    const apiUrl = "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/media/" + article.featured_media;
+
+                    fetch(apiUrl)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Erreur lors de la récupération des données de l\'article');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Vous pouvez maintenant accéder à guide.rendered à partir des données récupérées
+                            const featuredMediaUrl = data.guid.rendered;
+
+                            // Construit le contenu HTML de l'article en utilisant la structure de la carte
+                            content += `
+              <div class="card w-96 bg-base-100 shadow-xl">
+                <figure><img src="${featuredMediaUrl}" alt="${article.title.rendered}" /></figure>
+                <div class="card-body">
+                  <h2 class="card-title">${article.title.rendered}</h2>
+                  <p>${article.excerpt.rendered}</p>
+                  <div class="card-actions justify-end">
+                    <a href="${article.link}" class="btn btn-primary">Lire la suite</a>
+                  </div>
+                </div>
+              </div>
+              <br>
+            `;
+
+                            // Insérer le contenu HTML dans #content après avoir récupéré les données de l'image
+                            $("#content").html(content);
+                        })
+                        .catch(error => {
+                            console.error('Une erreur s\'est produite :', error);
+                        });
+                });
+            }
+        }).fail(function () {
+            $("#content").html("<p>Aye Caramba !</p>");
+        });
+    });
+
+    // Sélectionnez le conteneur du menu
+    const menuContainer = document.getElementById("menu-container");
+
+    // Utilisez fetch pour charger le contenu du menu depuis menu.html
+    fetch("menu.html")
+        .then(response => response.text())
+        .then(menuHTML => {
+            // Insérez le contenu du menu dans le conteneur
+            menuContainer.innerHTML = menuHTML;
+        })
+        .catch(error => {
+            console.error("Erreur lors du chargement du menu : ", error);
+        });
+</script>
+
+</html>

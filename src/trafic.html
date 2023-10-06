@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="menu.js"></script>
+
+</head>
+
+<body>
+    <div id="menu-container"></div>
+    <br>
+    <div class="container mx-auto">
+        <h1 class="text-5xl font-bold text-center">Info trafic TCM</h1>
+    </div>
+    <div class="container mx-auto p-12">
+        <div id="lignes"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const url = "test.json";
+        //const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
+
+        function afficherInfoTrafic() {
+            const dateActuelle = new Date(); // Définir dateActuelle ici
+
+            $.getJSON(url, function (data) {
+                $.each(data.lignes, function (i, ligne) {
+                    const card = $("<div>")
+                        .addClass("p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800")
+                        .attr("role", "alert");
+
+                    const cardHeader = $("<div>").addClass("flex items-center justify-between");
+                    let logoLigne;
+
+                    if (ligne.ligne === "TCM") {
+                        logoLigne = $("<img>")
+                            .attr("src", "/img/" + ligne.ligne + ".png")
+                            .addClass("w-15 h-12");
+                    } else {
+                        logoLigne = $("<img>")
+                            .attr("src", "/img/" + ligne.ligne + ".png")
+                            .addClass("w-15 h-12");
+                    }
+
+                    cardHeader.append(logoLigne);
+                    cardHeader.append($("<span>").addClass("sr-only").text("Info"));
+
+                    const infosTrafic = ligne.infos_trafic.filter(info => {
+                        const dateDebut = new Date(Date.parse(info.annonce));
+                        const dateFin = new Date(Date.parse(info.fin));
+                        dateFin.setDate(dateFin.getDate() + 1);
+                        return dateActuelle >= dateDebut && dateActuelle <= dateFin;
+                    });
+
+                    const infosCount = infosTrafic.length;
+
+                    const infosText = infosCount === 1 ? "1 info trafic" : infosCount + " infos trafic";
+
+                    const infosDiv = $("<div>").addClass("text-sm text-left").text(infosText);
+
+                    cardHeader.append(infosDiv);
+
+                    const viewButton = $("<button>")
+                        .addClass("")
+                        .html(
+                            `<svg class="-ml-0.5 mr-2 h-3 w-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
+        </svg>`
+                        )
+                        .click(function () {
+                            window.location.href = "details.html#" + ligne.ligne;
+                        });
+
+
+                    cardHeader.append(viewButton);
+
+                    card.append(cardHeader);
+
+                    $("#lignes").append(card);
+                });
+            });
+        }
+
+        afficherInfoTrafic();
+        // Sélectionnez le conteneur du menu
+        const menuContainer = document.getElementById("menu-container");
+
+        // Utilisez fetch pour charger le contenu du menu depuis menu.html
+        fetch("menu.html")
+            .then(response => response.text())
+            .then(menuHTML => {
+                // Insérez le contenu du menu dans le conteneur
+                menuContainer.innerHTML = menuHTML;
+            })
+            .catch(error => {
+                console.error("Erreur lors du chargement du menu : ", error);
+            });
+    </script>
+
+</body>
+<footer class="footer footer-center p-10 bg-primary text-primary-content">
+    <aside>
+        <img src="\img\TCM.png" width="100" height="100" alt="Logo TCM" class="bg-gray-200 bg-opacity-30 p-2 rounded ">
+        <p class="font-bold">
+            Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
+        </p>
+        <p>Copyright © 2023 - Tous droits réservés</p>
+    </aside>
+</footer>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="menu.js"></script>
+</head>
+
+<body>
+    <div id="menu-container"></div>
+    <br>
+    <div class="container mx-auto">
+        <h1 id="pageTitle" class="text-5xl font-bold text-center">Détails de la Ligne</h1>
+        <div class="divider"></div>
+        <div id="details"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Fonction pour extraire l'ID de la ligne à partir de l'URL
+        function getLigneIDFromURL() {
+            const url = window.location.href;
+            const parts = url.split('#');
+            if (parts.length > 1) {
+                return parts[1];
+            }
+            return null;
+        }
+
+        const ligneID = getLigneIDFromURL();
+
+        // Fonction pour afficher les détails de la ligne
+        function afficherDetailsLigne() {
+            if (ligneID !== null) {
+                const url = "test.json"
+                //const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
+
+                $.getJSON(url, function (data) {
+                    const ligne = data.lignes.find(l => l.ligne === ligneID);
+
+                    if (ligne) {
+                        const cardHeader = $("<div>").addClass("mb-2");
+                        let logoLigne;
+
+                        if (ligne.ligne !== "TCM") {
+                            logoLigne = $("<img>")
+                                .attr("src", "/img/" + ligne.ligne + ".png")
+                                .addClass("w-15 h-12");
+                        }
+
+                        cardHeader.append(logoLigne);
+                        $("#details").append(cardHeader);
+
+                        if (ligne.infos_trafic.length === 0) {
+                            // Ligne sans info trafic
+                            $("#details").append($("<p>").text("La Ligne n'a pas d'info trafic pour le moment."));
+                        } else {
+                            $.each(ligne.infos_trafic, function (j, info) {
+                                const dateActuelle = new Date(); // Ajout du contrôle de la date
+
+                                const dateDebut = new Date(Date.parse(info.annonce));
+                                const dateDd = new Date(Date.parse(info.debut));
+                                const dateFin = new Date(Date.parse(info.fin));
+                                const dateFinAffichee = new Date(Date.parse(info.fin));
+                                dateFin.setDate(dateFin.getDate() + 1);
+
+                                if (dateActuelle >= dateDebut && dateActuelle <= dateFin) { // Vérification de la date
+                                    const card = $("<div>").addClass("p-4 mb-4 border rounded-lg");
+                                    let theme;
+
+                                    let icon;
+                                    let currentDate = new Date(); // Obtenez la date actuelle
+
+                                    if (info.type.includes("travaux")) {
+                                        let startDate = new Date(info.debut); // Convertissez la date de début du format texte en objet Date
+                                        let endDate = new Date(info.fin); // Convertissez la date de fin du format texte en objet Date
+
+                                        if (currentDate < startDate) {
+                                            // Les travaux sont à venir
+                                            theme = "p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800";
+                                            icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
+                                        } else if (currentDate >= startDate && currentDate <= endDate) {
+                                            // Les travaux sont en cours
+                                            theme = "p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800";
+                                            icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+                                        } else {
+                                            // Les travaux sont terminés
+                                            theme = "p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800";
+                                            icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> `;
+                                        }
+                                    } else if (info.type.includes("information")) {
+                                        theme = "p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800";
+                                        icon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> `;
+                                    } else if (info.type.includes("fermeture")) {
+                                        theme = "p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800";
+                                        icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
+                                    } else if (info.type.includes("attention")) {
+                                        theme = "p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800";
+                                        icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
+                                    } else if (info.type.includes("perturbation")) {
+                                        theme = "p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800";
+                                        icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
+                                    } else {
+                                        // Thème par défaut
+                                        theme = "p-4 border border-gray-300 rounded-lg bg-gray-50 dark:border-gray-600 dark:bg-gray-800";
+                                        icon = "";
+                                    }
+
+
+                                    card.addClass(theme);
+                                    card.attr("role", "alert");
+
+                                    card.append($("<div>").addClass("flex items-center").append(
+                                        icon,
+                                        $("<h3>").addClass("text-xl font-big").text(" " + info.titre) // Ajoutez un espace ici
+                                    ));
+
+
+
+                                    card.append($("<div>").addClass("mt-2 mb-4 text-sm").text(info.description));
+
+                                    card.append($("<hr>").addClass("border-current opacity-30"));
+
+                                    card.append($("<p>").addClass("mb-0 mt-4").text("Date: " + info.debut + " → " + info.fin));
+
+                                    $("#details").append(card);
+                                }
+                            });
+                        }
+
+                        // Mettre à jour le titre de la page avec le numéro de la ligne
+                        if (ligneID === "TCM") {
+                            $("#pageTitle").text("Détail de l'info du réseau");
+                        } else {
+                            $("#pageTitle").text("Détails de la Ligne " + ligne.ligne);
+                        }
+                    } else {
+                        $("#pageTitle").text("Détails de la Ligne " + ligneID);
+                        $("#details").append(
+                            $("<div>").attr("id", "alert-additional-content-3").addClass("p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800").attr("role", "alert").append(
+                                $("<div>").addClass("flex items-center").append(
+                                    $('<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>'),
+                                    $("<span>").addClass("sr-only").text("Info"),
+                                    $("<h3>").addClass("text-lg font-medium").text("Tout va bien actuellement")
+                                ),
+                                $("<div>").addClass("mt-2 mb-4 text-sm").text("Aucune information de trafic à signaler pour cette ligne. Tout circule normalement."),
+                            )
+
+                        );
+
+                    }
+                });
+            } else {
+                $("#details").append($("<p>").text("ID de ligne non spécifié dans l'URL."));
+            }
+        }
+
+        afficherDetailsLigne();
+        // Sélectionnez le conteneur du menu
+        const menuContainer = document.getElementById("menu-container");
+
+        // Utilisez fetch pour charger le contenu du menu depuis menu.html
+        fetch("menu.html")
+            .then(response => response.text())
+            .then(menuHTML => {
+                // Insérez le contenu du menu dans le conteneur
+                menuContainer.innerHTML = menuHTML;
+            })
+            .catch(error => {
+                console.error("Erreur lors du chargement du menu : ", error);
+            });
+    </script>
+</body>
+
+</html>

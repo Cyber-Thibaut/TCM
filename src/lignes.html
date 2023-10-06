@@ -29,7 +29,6 @@
 </style>
 
 <body>
-    <div id="menu-container"></div>
     <br>
     <div class="bg-white">
         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -94,20 +93,5 @@
     </footer>
 
 </body>
-<script>
-    // Sélectionnez le conteneur du menu
-    const menuContainer = document.getElementById("menu-container");
-
-    // Utilisez fetch pour charger le contenu du menu depuis menu.html
-    fetch("menu.html")
-        .then(response => response.text())
-        .then(menuHTML => {
-            // Insérez le contenu du menu dans le conteneur
-            menuContainer.innerHTML = menuHTML;
-        })
-        .catch(error => {
-            console.error("Erreur lors du chargement du menu : ", error);
-        });
-</script>
 
 </html>

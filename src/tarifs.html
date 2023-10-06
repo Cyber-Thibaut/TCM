@@ -10,7 +10,6 @@
 </head>
 
 <body>
-    <div id="menu-container"></div>
     <br>
     <section class="bg-white dark:bg-base-100">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -226,21 +225,6 @@
             </div>
         </div>
     </section>
-    <script>
-        // Sélectionnez le conteneur du menu
-        const menuContainer = document.getElementById("menu-container");
-
-        // Utilisez fetch pour charger le contenu du menu depuis menu.html
-        fetch("menu.html")
-            .then(response => response.text())
-            .then(menuHTML => {
-                // Insérez le contenu du menu dans le conteneur
-                menuContainer.innerHTML = menuHTML;
-            })
-            .catch(error => {
-                console.error("Erreur lors du chargement du menu : ", error);
-            });
-    </script>
 
 
 </body>

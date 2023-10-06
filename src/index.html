@@ -30,10 +30,6 @@
 </style>
 
 <body>
-    <div id="menu-container"></div>
-
-
-
     <br>
     <div id="TCM" class="container"></div>
     <div class="md:container md:mx-auto">
@@ -188,20 +184,6 @@
             $("#content").html("<p>Aye Caramba !</p>");
         });
     });
-
-    // Sélectionnez le conteneur du menu
-    const menuContainer = document.getElementById("menu-container");
-
-    // Utilisez fetch pour charger le contenu du menu depuis menu.html
-    fetch("menu.html")
-        .then(response => response.text())
-        .then(menuHTML => {
-            // Insérez le contenu du menu dans le conteneur
-            menuContainer.innerHTML = menuHTML;
-        })
-        .catch(error => {
-            console.error("Erreur lors du chargement du menu : ", error);
-        });
 </script>
 
 </html>

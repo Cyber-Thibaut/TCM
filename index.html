@@ -32,7 +32,7 @@
 <body>
     <br>
     <div class="md:container md:mx-auto">
-    <div id="TCM" class="transform: translate(-50%, -50%); position: fixed;"></div>
+        <div id="TCM" class="transform: translate(-50%, -50%); position: fixed;"></div>
     </div>
     <div class="md:container md:mx-auto">
 
@@ -44,13 +44,13 @@
                         class="text-accent text-5xl font-bold"> Clermont-Ferrand</span> !</h1>
 
             </div>
-            <div class="divider lg:divider-horizontal bg-base300"></div>
+            <div class="divider lg:divider-horizontal "></div>
             <div class="grid flex-grow h-32 card bg-primary-focus rounded-box place-items-center">
                 <div id="lignes" class="grid grid-flow-row auto-rows-max"></div>
             </div>
         </div>
         <br>
-        <div class="bg-secondary-content rounded-md py-24 sm:py-32">
+        <div class="bg-secondary-content dark:bg-base-200 rounded-md py-24 sm:py-32">
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl lg:mx-0">
                     <h2 class="text-3xl font-bold tracking-tight text-secondary sm:text-4xl">Notre Actualité</h2>
@@ -75,7 +75,7 @@
 
 </body>
 <script>
-    const url = "src/test.json";
+    const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
 
     function afficherInfoTrafic() {
         $.getJSON(url, function (data) {

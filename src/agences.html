@@ -1,0 +1,607 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/src/menu.js"></script>
+</head>
+<style>
+    .orange-border {
+        display: inline-block;
+    }
+
+    .inner-content {
+        padding: 5px;
+        /* Ajustez la marge interne pour le contenu de chaque indice de ligne */
+    }
+
+    .orange-border p {
+        margin: 0;
+        /* Supprimez les marges internes pour le paragraphe */
+    }
+
+    .tcm-details {
+        margin-bottom: 20px;
+    }
+</style>
+
+<body>
+    <br>
+    <div class="hero min-h-screen"
+        style="background-image: url(https://cdn.pixabay.com/photo/2019/01/04/14/49/landscape-3913309_1280.jpg);">
+        <div class="hero-overlay bg-opacity-60 py-24 sm:py-32"></div>
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl lg:mx-0">
+                <h2 class="text-3xl font-bold tracking-tight text-white dark:text-gray-200 sm:text-4xl">Nos agences,
+                    à votre service !</h2>
+                <p class="mt-2 text-lg leading-8 text-gray-200 dark:text-gray-200">Nous avons cinq agences partout dans
+                    la métropole
+                    Clermontoise. Elles donnent des informations, des conseils, vendent des tickets, des abonnements et
+                    facilitent vos déplacements quotidiens. Nos agents vous aident à choisir le transport adapté à vos
+                    besoins et budget. Voyagez en toute sécurité avec Transport Clermont Métropole.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-base-100 py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div
+                class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                <div class=" card w-96 bg-base-100 shadow-xl">
+                    <figure><img src="../img/gc.png" alt="Gare Centrale" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-primary">Gare Centrale <div id="GC"></div>
+                        </h2>
+
+                        <div class="card-actions justify-end">
+                            <button onclick="GC_modal.showModal()" class="btn btn-primary">Plus d'info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card w-96 bg-base-100 shadow-xl">
+                    <figure><img src="../img/GO.png" alt="Gare Centrale" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-primary">Gare de l'Ouest <div id="GO"></div>
+                        </h2>
+
+                        <div class="card-actions justify-end">
+                            <button onclick="GO_modal.showModal()" class="btn btn-primary">Plus d'info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card w-96 bg-base-100 shadow-xl">
+                    <figure><img src="../img/A.png" alt="Gare Centrale" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-primary">Aéroport <div id="A"></div>
+                        </h2>
+
+                        <div class="card-actions justify-end">
+                            <button onclick="A_modal.showModal()" class="btn btn-primary">Plus d'info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card w-96 bg-base-100 shadow-xl">
+                    <figure><img src="../img/CMG.png" alt="Gare Centrale" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-primary">Campus Marthe Gautier (Lettres)
+                        </h2>
+                        <h2 class="card-title text-primary">
+                            <div id="CMG"></div>
+                        </h2>
+
+                        <div class="card-actions justify-end">
+                            <button onclick="CMG_modal.showModal()" class="btn btn-primary">Plus d'info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card w-96 bg-base-100 shadow-xl">
+                    <figure><img src="../img/CdC.png" alt="Gare Centrale" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-primary">Campus des Cézeaux (Sciences)
+                        </h2>
+                        <h2 class="card-title text-primary">
+                            <div id="CC"></div>
+                        </h2>
+
+                        <div class="card-actions justify-end">
+                            <button onclick="CdC_modal.showModal()" class="btn btn-primary">Plus d'info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More posts... -->
+            </div>
+        </div>
+    </div>
+    <dialog id="GC_modal" class="modal">
+        <div class="modal-box relative">
+            <!-- Logo en haut à droite -->
+            <img src="../img/gc.png" alt="Logo GC" class="absolute right-2 w-15 h-12" />
+
+            <!-- Contenu du modal -->
+            <h6 class="text-black dark:text-gray-200">Services</h6>
+            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <br>
+            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
+            <ul>
+                <li>Du lundi au vendredi de 7h à 21h</li>
+                <li>Samedi de 8h à 20h</li>
+                <li>Dimanche et jours fériés de 10h à 17h</li>
+            </ul>
+            <br>
+            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
+            <div class="flex space-x-4">
+                <a href="/sections/bus-francais/lignes/1.html">
+                    <img src="/img/1.png" alt="Ligne 1" class="w-15 h-12" />
+                </a>
+                <a href="/sections/bus-francais/lignes/2.html">
+                    <img src="/img/2.png" alt="Ligne 2" class="w-15 h-12" />
+                </a>
+                <a href="/sections/bus-francais/lignes/3.html">
+                    <img src="/img/3.png" alt="Ligne 3" class="w-15 h-12" />
+                </a>
+                <a href="/sections/bus-francais/lignes/4.html">
+                    <img src="/img/4.png" alt="Ligne 4" class="w-15 h-12" />
+                </a>
+            </div>
+
+            <!-- Auteur -->
+            <div class="author mt-4">
+                <h5><span id="GC"></span></h5>
+            </div>
+        </div>
+
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+    <dialog id="GO_modal" class="modal">
+        <div class="modal-box relative">
+            <!-- Logo en haut à droite -->
+            <img src="../img/GO.png" alt="Logo GC" class="absolute top-2 right-2 w-15 h-12" />
+
+            <!-- Contenu du modal -->
+            <h6 class="text-black dark:text-gray-200">Services</h6>
+            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <br>
+            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
+            <ul>
+                <li>Du lundi au vendredi de 9h à 19h</li>
+                <li>Samedi de 10h à 18h</li>
+                <li>Fermé le dimanche</li>
+                <li>Le 1er jour du mois de 7h à 20h</li>
+            </ul>
+            <br>
+            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
+            <div class="flex space-x-4">
+                <a href="/sections/bus-francais/lignes/1.html">
+                    <img src="/img/5.png" alt="Ligne 1" class="w-15 h-12" />
+                </a>
+                <a href="/sections/bus-francais/lignes/2.html">
+                    <img src="/img/7.png" alt="Ligne 7" class="w-15 h-12" />
+                </a>
+                <a href="/sections/bus-francais/lignes/3.html">
+                    <img src="/img/61.png" alt="Ligne 61" class="w-15 h-12" />
+                </a>
+            </div>
+
+            <!-- Auteur -->
+            <div class="author mt-4">
+                <h5><span id="GO"></span></h5>
+            </div>
+        </div>
+
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+    <dialog id="A_modal" class="modal">
+        <div class="modal-box relative">
+            <!-- Logo en haut à droite -->
+            <img src="../img/A.png" alt="Logo A" class="absolute top-2 right-2 w-15 h-12" />
+
+            <!-- Contenu du modal -->
+            <h6 class="text-black dark:text-gray-200">Services</h6>
+            <p>Information – Conseils – Ventes</p>
+            <br>
+            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
+            <ul>
+                <li>Du lundi au vendredi de 7h à 21h</li>
+                <li>Samedi de 8h à 20h</li>
+                <li>Dimanche et jours fériés de 10h à 17h</li>
+            </ul>
+            <br>
+            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
+            <div class="flex space-x-4">
+                <a href="/sections/bus-francais/lignes/2.html">
+                    <img src="/img/2.png" alt="Ligne 2" class="w-15 h-12" />
+                </a>
+            </div>
+
+            <!-- Auteur -->
+            <div class="author mt-4">
+                <h5><span id="GO"></span></h5>
+            </div>
+        </div>
+
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+    <dialog id="CMG_modal" class="modal">
+        <div class="modal-box relative">
+            <!-- Logo en haut à droite -->
+            <img src="../img/CMG.png" alt="Logo CMG" class="absolute top-2 right-2 w-15 h-12" />
+
+            <!-- Contenu du modal -->
+            <h6 class="text-black dark:text-gray-200">Services</h6>
+            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <br>
+            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
+            <ul>
+                <li>Du lundi au vendredi de 9h à 19h</li>
+                <li>Samedi de 10h à 18h</li>
+                <li>Fermé le dimanche</li>
+                <li>Le 1er jour du mois de 7h à 20h</li>
+            </ul>
+            <br>
+            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
+            <div class="flex space-x-4">
+                <a href="/sections/bus-francais/lignes/2.html">
+                    <img src="/img/3.png" alt="Ligne 3" class="w-15 h-12" />
+                </a>
+                <a href="/sections/bus-francais/lignes/2.html">
+                    <img src="/img/8.png" alt="Ligne 8" class="w-15 h-12" />
+                </a>
+                <a href="/sections/bus-francais/lignes/11.html">
+                    <img src="/img/11.png" alt="Ligne 8" class="w-15 h-12" />
+                </a>
+            </div>
+
+            <!-- Auteur -->
+            <div class="author mt-4">
+                <h5><span id="GO"></span></h5>
+            </div>
+        </div>
+
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+    <dialog id="CdC_modal" class="modal">
+        <div class="modal-box relative">
+            <!-- Logo en haut à droite -->
+            <img src="../img/CdC.png" alt="Logo CdC" class="absolute top-2 right-2 w-15 h-12" />
+
+            <!-- Contenu du modal -->
+            <h6 class="text-black dark:text-gray-200">Services</h6>
+            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <br>
+            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
+            <ul>
+                <li>Du lundi au vendredi de 9h à 19h</li>
+                <li>Samedi de 10h à 18h</li>
+                <li>Fermé le dimanche</li>
+                <li>Le 1er jour du mois de 7h à 20h</li>
+            </ul>
+            <br>
+            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
+            <div class="flex space-x-4">
+                <a href="/sections/bus-francais/lignes/2.html">
+                    <img src="/img/1.png" alt="Ligne 3" class="w-15 h-12" />
+                </a>
+                <a href="/sections/bus-francais/lignes/2.html">
+                    <img src="/img/9.png" alt="Ligne 8" class="w-15 h-12" />
+                </a>
+                <a href="/sections/bus-francais/lignes/11.html">
+                    <img src="/img/10.png" alt="Ligne 8" class="w-15 h-12" />
+                </a>
+            </div>
+
+            <!-- Auteur -->
+            <div class="author mt-4">
+                <h5><span id="GO"></span></h5>
+            </div>
+        </div>
+
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+
+
+    <footer class="footer footer-center p-10 bg-primary text-primary-content">
+        <aside>
+            <img src="\img\TCM.png" width="100" height="100" alt="Logo TCM"
+                class="bg-gray-200 bg-opacity-30 p-2 rounded ">
+            <p class="font-bold">
+                Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
+            </p>
+            <p>Copyright © 2023 - Tous droits réservés</p>
+        </aside>
+    </footer>
+    <script>
+        function pause(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function GC() {
+            while (true) {
+                await pause(1000);
+                var cejour = new Date();
+                var options = { weekday: "long", year: "numeric", month: "long", day: "2-digit" };
+                var date = cejour.toLocaleDateString("fr-FR", options);
+                var date = date.replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
+                var heure = cejour.getHours();
+                var day = cejour.getDay();
+                var classe = ""; // Initialisez la variable classe
+
+                if ((day >= 1) && (day <= 5) && (heure >= 7) && (heure < 20)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 20) && (heure < 21)) {
+                    var texte = "L'agence ferme à 21h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 8) && (heure < 19)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 19) && (heure < 20)) {
+                    var texte = "L'agence ferme à 20h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 16)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 0) && (heure >= 16) && (heure < 17)) {
+                    var texte = "L'agence ferme à 17h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else {
+                    var texte = "L'agence est fermée";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                }
+
+                var aficher_heure = date + " " + ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) + ":" + ("0" + cejour.getSeconds()).slice(-2);
+                document.getElementById('GC').innerHTML = texte;
+
+                // Sélectionnez l'élément HTML auquel vous souhaitez ajouter la classe
+                var elementHTML = document.getElementById("GC");
+
+                // Ajoutez la classe à l'élément HTML
+                elementHTML.className = classe;
+
+                // Effacez toutes les classes précédentes pour éviter un comportement inattendu
+                elementHTML.classList.remove("badge badge-success");
+                elementHTML.classList.remove("badge badge-warning");
+                elementHTML.classList.remove("badge badge-error");
+            }
+        }
+
+        GC();
+
+        async function GO() {
+            while (true) {
+                await pause(1000);
+                var cejour = new Date();
+                var options = { weekday: "long", year: "numeric", month: "long", day: "2-digit" };
+                var date = cejour.toLocaleDateString("fr-FR", options);
+                var date = date.replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
+                var heure = cejour.getHours();
+                var day = cejour.getDay();
+                var jour = cejour.getDate();
+                var classe = ""; // Initialisez la variable classe
+
+                if ((jour == 1) && (heure >= 7) && (heure < 19)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((jour == 1) && (heure >= 19) && (heure < 20)) {
+                    var texte = "L'agence ferme à 20h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 9) && (heure < 18)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 18) && (heure < 19)) {
+                    var texte = "L'agence ferme à 19h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 10) && (heure < 17)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 17) && (heure < 18)) {
+                    var texte = "L'agence ferme à 18h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 17)) {
+                    var texte = "L'agence est fermée, reportez vous sur une autre agence de notre réseau";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                } else {
+                    var texte = "L'agence est fermée";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                }
+
+                var aficher_heure = date + " " + ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) + ":" + ("0" + cejour.getSeconds()).slice(-2);
+                document.getElementById('GO').innerHTML = texte;
+
+                // Sélectionnez l'élément HTML auquel vous souhaitez ajouter la classe
+                var elementHTML = document.getElementById("GO");
+
+                // Ajoutez la classe à l'élément HTML
+                elementHTML.className = classe;
+
+                // Effacez toutes les classes précédentes pour éviter un comportement inattendu
+                elementHTML.classList.remove("badge badge-success");
+                elementHTML.classList.remove("badge badge-warning");
+                elementHTML.classList.remove("badge badge-error");
+            }
+        }
+
+        GO();
+
+        async function CMG() {
+            while (true) {
+                await pause(1000);
+                var cejour = new Date();
+                var options = { weekday: "long", year: "numeric", month: "long", day: "2-digit" };
+                var date = cejour.toLocaleDateString("fr-FR", options);
+                var date = date.replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
+                var heure = cejour.getHours();
+                var day = cejour.getDay();
+                var jour = cejour.getDate();
+                var classe = ""; // Initialisez la variable classe
+
+                if ((jour == 1) && (heure >= 7) && (heure < 19)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((jour == 1) && (heure >= 19) && (heure < 20)) {
+                    var texte = "L'agence ferme à 20h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 9) && (heure < 18)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 18) && (heure < 19)) {
+                    var texte = "L'agence ferme à 19h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 10) && (heure < 17)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 17) && (heure < 18)) {
+                    var texte = "L'agence ferme à 18h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 17)) {
+                    var texte = "L'agence est fermée, reportez-vous sur une autre agence de notre réseau";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                } else {
+                    var texte = "L'agence est fermée";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                }
+
+                var aficher_heure = date + " " + ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) + ":" + ("0" + cejour.getSeconds()).slice(-2);
+                document.getElementById('CMG').innerHTML = texte;
+
+                // Sélectionnez l'élément HTML auquel vous souhaitez ajouter la classe
+                var elementHTML = document.getElementById("CMG");
+
+                // Ajoutez la classe à l'élément HTML
+                elementHTML.className = classe;
+
+                // Effacez toutes les classes précédentes pour éviter un comportement inattendu
+                elementHTML.classList.remove("badge badge-success");
+                elementHTML.classList.remove("badge badge-warning");
+                elementHTML.classList.remove("badge badge-error");
+            }
+        }
+
+        CMG();
+
+        async function A() {
+            while (true) {
+                await pause(1000);
+                var cejour = new Date();
+                var options = { weekday: "long", year: "numeric", month: "long", day: "2-digit" };
+                var date = cejour.toLocaleDateString("fr-FR", options);
+                var date = date.replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
+                var heure = cejour.getHours();
+                var day = cejour.getDay();
+                var jour = cejour.getDate();
+                var classe = ""; // Initialisez la variable classe
+
+                if ((day >= 1) && (day <= 5) && (heure >= 7) && (heure < 20)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 20) && (heure < 21)) {
+                    var texte = "L'agence ferme à 21h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 8) && (heure < 19)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 19) && (heure < 20)) {
+                    var texte = "L'agence ferme à 20h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 16)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 0) && (heure >= 16) && (heure < 17)) {
+                    var texte = "L'agence ferme à 17h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else {
+                    var texte = "L'agence est fermée";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                }
+
+                var aficher_heure = date + " " + ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) + ":" + ("0" + cejour.getSeconds()).slice(-2);
+                document.getElementById('A').innerHTML = texte;
+
+                // Sélectionnez l'élément HTML auquel vous souhaitez ajouter la classe
+                var elementHTML = document.getElementById("A");
+
+                // Ajoutez la classe à l'élément HTML
+                elementHTML.className = classe;
+
+                // Effacez toutes les classes précédentes pour éviter un comportement inattendu
+                elementHTML.classList.remove("badge badge-success");
+                elementHTML.classList.remove("badge badge-warning");
+                elementHTML.classList.remove("badge badge-error");
+            }
+        }
+
+        A();
+
+        async function CC() {
+            while (true) {
+                await pause(1000);
+                var cejour = new Date();
+                var options = { weekday: "long", year: "numeric", month: "long", day: "2-digit" };
+                var date = cejour.toLocaleDateString("fr-FR", options);
+                var date = date.replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
+                var heure = cejour.getHours();
+                var day = cejour.getDay();
+                var jour = cejour.getDate();
+                var classe = ""; // Initialisez la variable classe
+
+                if ((jour == 1) && (heure >= 7) && (heure < 19)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((jour == 1) && (heure >= 19) && (heure < 20)) {
+                    var texte = "L'agence ferme à 20h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 9) && (heure < 18)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 18) && (heure < 19)) {
+                    var texte = "L'agence ferme à 19h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 10) && (heure < 17)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 17) && (heure < 18)) {
+                    var texte = "L'agence ferme à 18h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 17)) {
+                    var texte = "L'agence est fermée, reportez-vous sur une autre agence de notre réseau";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                } else {
+                    var texte = "L'agence est fermée";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                }
+
+                var aficher_heure = date + " " + ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) + ":" + ("0" + cejour.getSeconds()).slice(-2);
+                document.getElementById('CC').innerHTML = texte;
+
+                // Sélectionnez l'élément HTML auquel vous souhaitez ajouter la classe
+                var elementHTML = document.getElementById("CC");
+
+                // Ajoutez la classe à l'élément HTML
+                elementHTML.className = classe;
+
+                // Effacez toutes les classes précédentes pour éviter un comportement inattendu
+                elementHTML.classList.remove("badge badge-success");
+                elementHTML.classList.remove("badge badge-warning");
+                elementHTML.classList.remove("badge badge-error");
+            }
+        }
+
+        CC();
+
+    </script>
+</body>
+
+</html>

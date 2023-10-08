@@ -1,0 +1,184 @@
+{
+    "lignes": [
+        {
+            "id": 1,
+            "nom": "Gare Centrale <> Campus Cézeaux",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "Cette ligne vous emmène du Campus Alan Turing à la Gare Centrale, en passant par des lieux emblématiques de Clermont-Ferrand. Admirez la vue depuis le campus avant de vous rendre à la gare.",
+            "stats": {
+                "nombre_arrets": 20,
+                "temps_trajet": "30 minutes",
+                "longueur_ligne": "10 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 2,
+            "nom": "Aéroport <> Gare Centrale",
+            "type": "Volc'Express",
+            "description": "Partez de l'aéroport et rejoignez la Gare Centrale en passant par les rues animées de Clermont-Ferrand. Découvrez la ville en BHNS (Bus à Haut Niveau de Service).",
+            "stats": {
+                "nombre_arrets": 34,
+                "temps_trajet": "40 minutes",
+                "longueur_ligne": "10 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 3,
+            "nom": "Gare Centrale <> Campus Marthe Gautier",
+            "type": "Volc'Express",
+            "description": "Cette ligne relie la Gare Centrale au Campus Marthe Gautier en BHNS. Profitez du confort du bus tout en explorant la ville.",
+            "stats": {
+                "nombre_arrets": 27,
+                "temps_trajet": "32 minutes",
+                "longueur_ligne": "8 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 4,
+            "nom": "Gare Centrale <> Gare de l'Est (marchandises)",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "Pour les voyageurs intrépides, cette ligne vous emmène de la Gare Centrale à la Gare de l'Est. Un trajet rapide de 28 minutes.",
+            "stats": {
+                "nombre_arrets": 24,
+                "temps_trajet": "28 minutes",
+                "longueur_ligne": "7 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 5,
+            "nom": "Musée d'Art Moderne <> Pôle Luca Pacioli",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "Plongez dans l'art en prenant cette ligne du Musée d'Art Moderne au Pôle Luca Pacioli. Un trajet de 40 minutes à travers la ville.",
+            "stats": {
+                "nombre_arrets": 34,
+                "temps_trajet": "40 minutes",
+                "longueur_ligne": "9 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 6,
+            "nom": "Grand Palais <> Campus Cézeaux",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "Explorez le Grand Palais et le Campus Cézeaux en prenant cette ligne. Un court trajet de 20 minutes.",
+            "stats": {
+                "nombre_arrets": 17,
+                "temps_trajet": "20 minutes",
+                "longueur_ligne": "5 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 7,
+            "nom": "Port fluvial <> Grand Palais",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "Cette ligne vous conduit du Port fluvial au Grand Palais en passant par des lieux pittoresques de Clermont-Ferrand. Un voyage de 36 minutes.",
+            "stats": {
+                "nombre_arrets": 30,
+                "temps_trajet": "36 minutes",
+                "longueur_ligne": "10 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 8,
+            "nom": "Place de l'Europe <> Campus Marthe Gautier",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "Découvrez la Place de l'Europe et le Campus Marthe Gautier grâce à cette ligne. Un trajet de 32 minutes à travers la ville.",
+            "stats": {
+                "nombre_arrets": 27,
+                "temps_trajet": "32 minutes",
+                "longueur_ligne": "8 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 9,
+            "nom": "Haute-Ville <> Campus Alan Turing",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "Explorez la charmante Haute-Ville avant de vous rendre au Campus Alan Turing en bus. Un voyage de 18 minutes.",
+            "stats": {
+                "nombre_arrets": 12,
+                "temps_trajet": "18 minutes",
+                "longueur_ligne": "6 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 10,
+            "nom": "Campus Cézeaux <> CRT Est",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "Cette ligne vous conduit du Campus Cézeaux au CRT Est. Un trajet de 30 minutes avec des véhicules confortables.",
+            "stats": {
+                "nombre_arrets": 20,
+                "temps_trajet": "30 minutes",
+                "longueur_ligne": "10 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 11,
+            "nom": "Campus Marthe Gautier <> Clinique Saint Paul",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "Partez du Campus Marthe Gautier pour rejoindre la Clinique Saint Paul en un court trajet de 21 minutes.",
+            "stats": {
+                "nombre_arrets": 14,
+                "temps_trajet": "21 minutes",
+                "longueur_ligne": "7 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 60,
+            "nom": "Préfecture <> Lycée Karl Marx",
+            "type": "Erupt'Urbain - Puy-de-Pariou",
+            "description": "Pour les étudiants, cette ligne vous emmène de la Préfecture au Lycée Karl Marx en seulement 20 minutes.",
+            "stats": {
+                "nombre_arrets": 17,
+                "temps_trajet": "20 minutes",
+                "longueur_ligne": "5 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 61,
+            "nom": "Gare de l'Ouest <> Parc Jolimont",
+            "type": "Erupt'Urbain - Puy-de-Pariou",
+            "description": "Découvrez la beauté de la Gare de l'Ouest et du Parc Jolimont en prenant cette ligne. Un trajet de 32 minutes.",
+            "stats": {
+                "nombre_arrets": 27,
+                "temps_trajet": "32 minutes",
+                "longueur_ligne": "8 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 901,
+            "nom": "Bellevue <> Haute-Ville",
+            "type": "Volca'Demande",
+            "description": "Pour un service à la demande, prenez la ligne 901 de Bellevue à la Haute-Ville. Un trajet de 12 minutes.",
+            "stats": {
+                "nombre_arrets": 10,
+                "temps_trajet": "12 minutes",
+                "longueur_ligne": "4 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 902,
+            "nom": "Parc de l'Étang <> Observatoire",
+            "type": "Volca'Demande",
+            "description": "Découvrez le Parc de l'Étang et l'Observatoire grâce à cette ligne à la demande. Un trajet de 20 minutes.",
+            "stats": {
+                "nombre_arrets": 17,
+                "temps_trajet": "20 minutes",
+                "longueur_ligne": "5 km"
+            },
+            "pdf_url": ""
+        }
+    ]
+}

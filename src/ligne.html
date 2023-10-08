@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../dist/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="menu.js"></script>
+    <style>
+        .my-4 {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+
+</head>
+
+<body>
+    <br>
+    <div class="container mx-auto">
+        <h1 id="pageTitle" class="text-5xl font-bold text-center">Détails de la Ligne</h1>
+        <div class="divider"></div>
+        <div id="details"></div>
+    </div>
+
+    <!-- Conteneur pour afficher les informations -->
+    <div id="infos-ligne" class="max-w-xl mx-auto ">
+
+        <!-- Les informations de la ligne seront affichées ici -->
+    </div>
+
+    <!-- Script JavaScript pour charger et afficher les données depuis le JSON -->
+    <script>
+        // Fonction pour charger et afficher les informations de la ligne
+        async function chargerInfosLigne(numeroLigne) {
+            try {
+                const response = await fetch('ligne.json'); // Charge le fichier JSON
+                const data = await response.json(); // Convertit la réponse en objet JavaScript
+
+                // Recherche la ligne correspondant au numéro de ligne
+                const ligne = data.lignes.find(l => l.id === parseInt(numeroLigne));
+
+                if (ligne) {
+                    const ligneContainer = document.createElement('div');
+                    ligneContainer.classList.add('space-y-4');
+
+                    // Récupérer le lien du plan de la ligne en fonction de l'ID
+                    const planUrl = `https://transport-manager.net/assets/img/lignes/N3_L${ligne.id}_blanc2.png`;
+
+                    // Plan de la ligne
+                    const planLigne = document.createElement('img');
+                    planLigne.src = planUrl;
+                    planLigne.alt = `Plan de la ligne ${ligne.id}`;
+                    planLigne.classList.add('w-full', 'h-auto'); // Ajoutez des classes de style TailwindCSS pour redimensionner l'image
+                    ligneContainer.appendChild(planLigne);
+
+                    const numeroLigneElement = document.createElement('img');
+                    numeroLigneElement.src = "/img/" + ligne.id + ".png";
+                    numeroLigneElement.classList.add("w-15", "h-12");
+                    ligneContainer.appendChild(numeroLigneElement);
+
+                    const typeLigne = document.createElement('p');
+                    typeLigne.classList.add('text-lg', 'text-secondary');
+                    typeLigne.textContent = `Réseau ${ligne.type}`;
+                    ligneContainer.appendChild(typeLigne);
+
+                    // Crée une div pour les statistiques de la ligne
+                    const statsContainer = document.createElement('div');
+                    statsContainer.classList.add('stats', 'stats-vertical', 'lg:stats-horizontal', 'shadow');
+
+                    // Fonction pour ajouter une statistique à la div de statistiques
+                    function ajouterStatistique(titre, valeur, description) {
+                        const stat = document.createElement('div');
+                        stat.classList.add('stat');
+
+                        const statTitre = document.createElement('div');
+                        statTitre.classList.add('stat-title');
+                        statTitre.textContent = titre;
+
+                        const statValeur = document.createElement('div');
+                        statValeur.classList.add('stat-value');
+                        statValeur.textContent = valeur;
+
+                        const statDesc = document.createElement('div');
+                        statDesc.classList.add('stat-desc');
+                        statDesc.textContent = description;
+
+                        stat.appendChild(statTitre);
+                        stat.appendChild(statValeur);
+                        stat.appendChild(statDesc);
+
+                        statsContainer.appendChild(stat);
+                    }
+
+                    // Ajoute les statistiques de la ligne à la div de statistiques
+                    ajouterStatistique('Nombre d\'arrêts', ligne.stats.nombre_arrets, '');
+                    ajouterStatistique('Temps de trajet', ligne.stats.temps_trajet, '');
+                    ajouterStatistique('Longueur de la ligne', ligne.stats.longueur_ligne, '');
+
+                    // Ajoute la div de statistiques au conteneur principal
+                    ligneContainer.appendChild(statsContainer);
+
+                    const descriptionLigne = document.createElement('p');
+                    descriptionLigne.classList.add('text-lg', 'text-gray-500', 'dark:text-gray-400');
+                    descriptionLigne.textContent = `${ligne.description}`;
+                    ligneContainer.appendChild(descriptionLigne);
+
+                    const espaceVertical = document.createElement('div');
+                    espaceVertical.classList.add('my-4'); // Ajoutez la classe d'espace vertical
+                    ligneContainer.appendChild(espaceVertical);
+
+                    if (ligne.pdf_url) {
+                        const boutonPDF = document.createElement('a');
+                        boutonPDF.classList.add('bg-blue-500', 'text-white', 'rounded-full', 'py-2', 'px-4', 'font-semibold', 'hover:bg-blue-600');
+                        boutonPDF.href = ligne.pdf_url;
+                        boutonPDF.textContent = 'Télécharger PDF';
+
+                        // Vérifiez si l'URL du PDF est vide
+                        if (!ligne.pdf_url.trim()) {
+                            boutonPDF.classList.add('btn', 'disabled');
+                            boutonPDF.removeAttribute('href'); // Supprime le lien si le PDF est vide
+                            boutonPDF.setAttribute('disabled', 'disabled');
+                        }
+
+                        ligneContainer.appendChild(boutonPDF);
+                    }
+
+                    // Ajoute le conteneur de la ligne au conteneur principal
+                    document.getElementById('infos-ligne').appendChild(ligneContainer);
+                    $("#pageTitle").html("Ligne " + ligne.id + " <br> " + ligne.nom);
+                } else {
+                    console.error('Ligne non trouvée.');
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement des données :', error);
+            }
+        }
+
+        // Obtient le numéro de ligne depuis l'URL
+        const url = new URL(window.location.href);
+        const numeroLigne = url.hash.substring(1); // Extrait le numéro de ligne de la partie de l'URL après le "#" (par exemple, #1)
+
+        // Appelle la fonction pour charger les informations de la ligne
+        chargerInfosLigne(numeroLigne);
+    </script>
+</body>
+
+</html>

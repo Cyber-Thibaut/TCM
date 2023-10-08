@@ -40,7 +40,7 @@
 
 <body>
     <br>
-    <div class="container mx-auto">
+    <div class="mx-auto">
         <h1 id="pageTitle" class="text-5xl font-bold text-center">Détails de la Ligne</h1>
         <div class="divider"></div>
         <div id="details"></div>
@@ -51,7 +51,17 @@
 
         <!-- Les informations de la ligne seront affichées ici -->
     </div>
-
+    <br>
+    <footer class="footer footer-center p-10 bg-primary text-primary-content">
+        <aside>
+            <img src="\img\TCM.png" width="100" height="100" alt="Logo TCM"
+                class="bg-gray-200 bg-opacity-30 p-2 rounded ">
+            <p class="font-bold">
+                Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
+            </p>
+            <p>Copyright © 2023 - Tous droits réservés</p>
+        </aside>
+    </footer>
     <!-- Script JavaScript pour charger et afficher les données depuis le JSON -->
     <script>
         // Fonction pour charger et afficher les informations de la ligne
@@ -125,7 +135,7 @@
 
                     const descriptionLigne = document.createElement('p');
                     descriptionLigne.classList.add('text-lg', 'text-gray-500', 'dark:text-gray-400');
-                    descriptionLigne.textContent = `${ligne.description}`;
+                    descriptionLigne.innerHTML = ligne.description.replace(/\n/g, "<br><br>");
                     ligneContainer.appendChild(descriptionLigne);
 
                     const espaceVertical = document.createElement('div');

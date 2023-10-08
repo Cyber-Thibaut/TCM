@@ -53,7 +53,11 @@
                 $.each(data.lignes, function (i, ligne) {
                     const card = $("<div>")
                         .addClass("p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800")
-                        .attr("role", "alert");
+                        .attr("role", "button")
+                        .click(function() {
+                            window.location.href = "details.html#" + ligne.ligne;
+                        });
+
 
                     const cardHeader = $("<div>").addClass("flex items-center justify-between");
                     let logoLigne;

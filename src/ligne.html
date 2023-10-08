@@ -29,25 +29,20 @@
     <link href="../dist/output.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="menu.js"></script>
-    <style>
-        .my-4 {
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-    </style>
+
 
 </head>
 
-<body>
+<body >
     <br>
-    <div class="mx-auto">
-        <h1 id="pageTitle" class="text-5xl font-bold text-center">Détails de la Ligne</h1>
+    <div>
+        <h1 id="pageTitle" class="text-5xl font-bold text-center"></h1>
         <div class="divider"></div>
         <div id="details"></div>
     </div>
 
     <!-- Conteneur pour afficher les informations -->
-    <div id="infos-ligne" class="max-w-xl mx-auto ">
+    <div id="infos-ligne">
 
         <!-- Les informations de la ligne seront affichées ici -->
     </div>
@@ -75,11 +70,29 @@
 
                 if (ligne) {
                     const ligneContainer = document.createElement('div');
-                    ligneContainer.classList.add('space-y-4');
+                    ligneContainer.classList.add('container', 'mx-auto', 'flex', 'flex-col', 'items-center', 'justify-center', 'space-y-4', 'py-4');
 
+                    // Créer le conteneur pour l'image et le texte
+                    const imageEtTexteContainer = document.createElement('div');
+                    imageEtTexteContainer.classList.add('text-5xl', 'font-bold', 'text-center', 'flex', 'flex-row', 'items-center', 'justify-center', 'space-x-4');
+
+                    // Créer l'élément d'image
+                    const numeroLigneElement = document.createElement('img');
+                    numeroLigneElement.src = "/img/" + ligne.id + ".png";
+                    numeroLigneElement.classList.add("w-15", "h-12", "mr-2");
+                    imageEtTexteContainer.appendChild(numeroLigneElement);
+
+                    // Créer l'élément de texte
+                    const texteLigneElement = document.createElement('p');
+                    texteLigneElement.textContent = `${ligne.nom}`;
+                    imageEtTexteContainer.appendChild(texteLigneElement);
+
+                    // Ajouter le conteneur imageEtTexteContainer à #pageTitle
+                    const pageTitle = document.getElementById('pageTitle');
+                    pageTitle.appendChild(imageEtTexteContainer);
                     // Récupérer le lien du plan de la ligne en fonction de l'ID
                     const planUrl = `https://transport-manager.net/assets/img/lignes/N3_L${ligne.id}_blanc2.png`;
-
+                    
                     // Plan de la ligne
                     const planLigne = document.createElement('img');
                     planLigne.src = planUrl;
@@ -87,10 +100,8 @@
                     planLigne.classList.add('w-full', 'h-auto'); // Ajoutez des classes de style TailwindCSS pour redimensionner l'image
                     ligneContainer.appendChild(planLigne);
 
-                    const numeroLigneElement = document.createElement('img');
-                    numeroLigneElement.src = "/img/" + ligne.id + ".png";
-                    numeroLigneElement.classList.add("w-15", "h-12");
-                    ligneContainer.appendChild(numeroLigneElement);
+                    const ligneInfoContainer = document.createElement('div');
+
 
                     const typeLigne = document.createElement('p');
                     typeLigne.classList.add('text-lg', 'text-secondary');
@@ -160,7 +171,6 @@
 
                     // Ajoute le conteneur de la ligne au conteneur principal
                     document.getElementById('infos-ligne').appendChild(ligneContainer);
-                    $("#pageTitle").html("Ligne " + ligne.id + " <br> " + ligne.nom);
                 } else {
                     console.error('Ligne non trouvée.');
                 }

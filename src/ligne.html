@@ -33,7 +33,7 @@
 
 </head>
 
-<body >
+<body>
     <br>
     <div>
         <h1 id="pageTitle" class="text-5xl font-bold text-center"></h1>
@@ -92,7 +92,7 @@
                     pageTitle.appendChild(imageEtTexteContainer);
                     // Récupérer le lien du plan de la ligne en fonction de l'ID
                     const planUrl = `https://transport-manager.net/assets/img/lignes/N3_L${ligne.id}_blanc2.png`;
-                    
+
                     // Plan de la ligne
                     const planLigne = document.createElement('img');
                     planLigne.src = planUrl;
@@ -155,9 +155,35 @@
 
                     if (ligne.pdf_url) {
                         const boutonPDF = document.createElement('a');
-                        boutonPDF.classList.add('bg-blue-500', 'text-white', 'rounded-full', 'py-2', 'px-4', 'font-semibold', 'hover:bg-blue-600');
+                        boutonPDF.classList.add(
+                            'bg-blue-500',
+                            'text-white',
+                            'dark:text-gray-800',
+                            'rounded-full',
+                            'py-2',
+                            'px-4',
+                            'font-semibold',
+                            'hover:bg-blue-600',
+                            'flex',
+                            'items-center'
+                        );
                         boutonPDF.href = ligne.pdf_url;
-                        boutonPDF.textContent = 'Télécharger PDF';
+
+                        // Créer l'icône SVG en tant qu'image
+                        const icon = document.createElement('img');
+                        icon.classList.add('w-6', 'h-6', 'dark:text-gray-800', 'text-white');
+                        icon.setAttribute('src', 'data:image/svg+xml,' + encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+  </svg>
+`));
+
+                        // Texte du bouton
+                        const buttonText = document.createTextNode(' Horaires du 2 septembre 2023 au 5 juillet 2024');
+
+                        // Ajouter l'icône et le texte au boutonPDF
+                        boutonPDF.appendChild(icon);
+                        boutonPDF.appendChild(buttonText);
 
                         // Vérifiez si l'URL du PDF est vide
                         if (!ligne.pdf_url.trim()) {
@@ -167,6 +193,7 @@
                         }
 
                         ligneContainer.appendChild(boutonPDF);
+
                     }
 
                     // Ajoute le conteneur de la ligne au conteneur principal
@@ -186,6 +213,26 @@
         // Appelle la fonction pour charger les informations de la ligne
         chargerInfosLigne(numeroLigne);
     </script>
+    <script>
+        // Obtenir le fragment de l'URL
+        const fragment = window.location.hash.substring(1);
+
+        // Vérifier s'il y a un fragment
+        if (fragment) {
+            // Construire le nom du script en fonction du fragment
+            const scriptName = "/src/scripts/" + fragment + ".js";
+
+            // Créer un élément de script
+            const script = document.createElement("script");
+
+            // Spécifier l'attribut "src" pour charger le script correspondant
+            script.src = scriptName;
+
+            // Ajouter le script à la page
+            document.head.appendChild(script);
+        }
+    </script>
+
 </body>
 
 </html>

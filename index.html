@@ -68,8 +68,10 @@
             </div>
             <div class="divider lg:divider-horizontal "></div>
             <div class="grid flex-grow h-32 card bg-primary-focus rounded-box place-items-center">
+                <h2 class="text-2xl font-bold mb-4">Info trafic</h2> <!-- Titre ajouté -->
                 <div id="lignes" class="grid grid-flow-row auto-rows-max"></div>
             </div>
+
         </div>
         <br>
         <div class="bg-secondary-content dark:bg-base-200 rounded-md py-24 sm:py-32">
@@ -97,6 +99,7 @@
 
 </body>
 <script>
+    //const url = "src/test.json";
     const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
 
     function afficherInfoTrafic() {
@@ -126,7 +129,7 @@
                             if (ligne.ligne === "TCM") {
                                 // Ajoutez la description de l'info pour la ligne "TCM"
                                 logoHtml += `<div class="alert alert-info">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
                                 logoHtml += `<span>${info.description}</span>`;
                                 logoHtml += `</div>`;
                                 addedLineLogos.add(ligne.ligne);
@@ -149,6 +152,14 @@
                 }
             });
 
+            // Vérifiez si otherLinesContainer est vide et ajoutez le logo si c'est le cas
+            if (otherLinesContainer.children().length === 0) {
+                let logoHtml = "";
+                logoHtml += `<div class="green-border"><div class="inner-content"><img id='logo' src='img/TCM.png' width="50" height="50" alt='Logo de la ligne' class="bg-gray-200 p-2 border border-green-500 rounded-md"></a><img src='/img/assets/valid.png' style='position: relative; width: 20px; height: 20px; top: -10px; left: 35px;'></div>`;
+                logoHtml += `</div>`;
+                otherLinesContainer.append(logoHtml);
+            }
+
             // Ajoutez les conteneurs à la page
             $("#lignes").append(otherLinesContainer);
             $("#TCM").append(tcmDetailsContainer);
@@ -160,7 +171,7 @@
 
 <script>
     $(function () {
-        var url = "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts?categories=8";
+        var url = "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts?categories=8&per_page=9";
 
         $.get(url, function (data) {
             var content = "";

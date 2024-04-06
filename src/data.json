@@ -1,0 +1,100 @@
+{
+    "lignes": [
+        {
+            "numéro": "1",
+            "destinations": [
+                "Gare Centrale",
+                "Campus Cézeaux"
+            ],
+            "description": "Pratique, Universitaire, Efficace.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 15,
+                "distance": 10,
+                "duree_parcours": 30
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 8,
+                    "pointe": 7,
+                    "soir": 24
+                },
+                "samedi": {
+                    "creuse": 12,
+                    "pointe": 8,
+                    "soir": 16
+                },
+                "dimanche": {
+                    "creuse": 12,
+                    "pointe": 10,
+                    "soir": 24
+                },
+                "vacances": {
+                    "samedi": {
+                        "creuse": 10,
+                        "pointe": 7,
+                        "soir": 12
+                    },
+                    "dimanche": {
+                        "creuse": 12,
+                        "pointe": 10,
+                        "soir": 24
+                    },
+                    "jour_semaine": {
+                        "creuse": 7,
+                        "pointe": 5,
+                        "soir": 13
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "11",
+            "destinations": [
+                "Gare Centrale",
+                "Campus Cézeaux"
+            ],
+            "description": "Pratique, Universitaire, Efficace.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 15,
+                "distance": 10,
+                "duree_parcours": 30
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 8,
+                    "pointe": 7,
+                    "soir": 24
+                },
+                "samedi": {
+                    "creuse": 12,
+                    "pointe": 8,
+                    "soir": 16
+                },
+                "dimanche": {
+                    "creuse": 12,
+                    "pointe": 10,
+                    "soir": 24
+                },
+                "vacances": {
+                    "samedi": {
+                        "creuse": 10,
+                        "pointe": 7,
+                        "soir": 12
+                    },
+                    "dimanche": {
+                        "creuse": 12,
+                        "pointe": 10,
+                        "soir": 24
+                    },
+                    "jour_semaine": {
+                        "creuse": 7,
+                        "pointe": 5,
+                        "soir": 13
+                    }
+                }
+            }
+        }
+    ]
+}

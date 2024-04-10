@@ -297,10 +297,15 @@ function updateBusTimes() {
 
     // if (nextBusFreq === -1) {
     //     if ((hour === 0 && minute >= 0) || (hour >= 1 && hour < 4)) {
-    //         nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Le réseau est temporairement fermé. Le prochain départ est prévu à 4h du matin.</span></div>`;
-    //     } else {
-    //         nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Aucun bus n'est actuellement en circulation.</span></div>`;
-    //     }
+//     // Message pour la nuit
+//     nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Veuillez noter que le service de transport scolaire est actuellement suspendu. Nous reprendrons nos activités à 4h du matin. Merci pour votre compréhension et bonne nuit.</span></div>`;
+// } else if (hour >= 9 && hour < 15) {
+//     // Message pour la journée avec le prochain départ
+//     nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Prochain départ depuis l'établissement scolaire à 17h.</span></div>`;
+// } else {
+//     // Message pour la journée sans prochain départ
+//     nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Pour le moment, aucun bus de transport scolaire n'est en service.</span></div>`;
+// }
 
 
     //     const followingBus = "";
@@ -379,7 +384,7 @@ function updateCurrentTime() {
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     currentTimeElement.textContent = `Mis à jour à : ${hours}:${minutes}`;
-    document.getElementById('destination').innerHTML = `<h2 style='font-size: 40px; color: #dc241f;'>Direction Campus Cézeaux (Sciences) ♿</h2><br>`;
+    document.getElementById('destination').innerHTML = `<h2 class="text-4xl font-bold">Direction Lycée Jeanne d'Arc ♿</h2><br>`;
 
 }
 setInterval(updateCurrentTime, 1000);

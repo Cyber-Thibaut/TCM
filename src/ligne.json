@@ -194,7 +194,7 @@
         },
         {
             "id": 63,
-            "nom": "Place de Jaude <> Parc Vulcania",
+            "nom": "Place de Jaude <> L'Aventure Michelin",
             "type": "Erupt'Urbain - Puy-de-Pariou",
             "description": "",
             "stats": {
@@ -210,9 +210,141 @@
             "type": "Erupt'Urbain - Puy-de-Pariou",
             "description": "La ligne 61 du réseau urbain de Clermont-Ferrand relie la Gare de l'Ouest au Puy de Montaudoux, offrant aux passagers un moyen pratique et agréable de se déplacer dans la ville.\nLe trajet commence à la Gare de l'Ouest, un important point d'entrée et de sortie de la ville. Les passagers peuvent monter à bord d'un bus confortable et moderne, avec des sièges spacieux et des commodités pour assurer un voyage agréable dès le départ.\nLa ligne 61 traverse ensuite différents quartiers de Clermont-Ferrand, offrant aux passagers un aperçu de la diversité de la ville. En chemin, ils peuvent admirer les sites historiques, les rues animées et les parcs verdoyants, créant ainsi une expérience visuelle intéressante pendant le trajet.\nLe terminus de la ligne 61 se situe au Puy de Montaudoux, offrant aux passagers un accès pratique à cette destination prisée. Que ce soit pour se promener dans la nature, faire de la randonnée ou profiter des vues panoramiques sur la ville, le Puy de Montaudoux offre une escapade paisible loin de l'agitation urbaine.\nLes horaires de la ligne 61 sont bien planifiés pour répondre aux besoins des passagers, avec des fréquences régulières tout au long de la journée. Cela permet aux utilisateurs de planifier leurs déplacements en toute confiance, que ce soit pour des rendez-vous, des visites touristiques ou des moments de détente.\nEn résumé, la ligne 61 du réseau urbain de Clermont-Ferrand relie la Gare de l'Ouest au Puy de Montaudoux, offrant aux passagers un moyen pratique et agréable de se déplacer dans la ville. Avec son confort, sa diversité de trajet et ses horaires bien pensés, la ligne 61 est un choix idéal pour les résidents et les visiteurs souhaitant explorer Clermont-Ferrand et profiter de ses attractions. ",
             "stats": {
-                "nombre_arrets": 10,
+                "nombre_arrets": 13,
                 "temps_trajet": "14 minutes",
                 "longueur_ligne": "4 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 101,
+            "nom": "Hôtel de Région <> ARRONAY Etangs",
+            "type": "Puy'Périphérique",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 16,
+                "temps_trajet": "36 minutes",
+                "longueur_ligne": "21 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 102,
+            "nom": "Stade <> BRINTE Avenue de la Liberté",
+            "type": "Puy'Périphérique",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 12,
+                "temps_trajet": "27 minutes",
+                "longueur_ligne": "18 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 103,
+            "nom": "Place de l'Europe <> CLORENT Centre de recyclage",
+            "type": "Puy'Périphérique",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 8,
+                "temps_trajet": "21 minutes",
+                "longueur_ligne": "11 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 104,
+            "nom": "Science Po <> LACANAC Place du marché",
+            "type": "Puy'Périphérique",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 10,
+                "temps_trajet": "24 minutes",
+                "longueur_ligne": "12 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 201,
+            "nom": "Campus Cézeaux <> RIOM Gare Routière",
+            "type": "Monts'Connection",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 2,
+                "temps_trajet": "58 minutes",
+                "longueur_ligne": "49 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 202,
+            "nom": "Campus Cézeaux <> MINIA Gare Routière",
+            "type": "Monts'Connection",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 4,
+                "temps_trajet": "37 minutes",
+                "longueur_ligne": "29 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 203,
+            "nom": "Gare de l'Ouest <> Montjuzet",
+            "type": "Monts'Connection",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 5,
+                "temps_trajet": "62 minutes",
+                "longueur_ligne": "43 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 601,
+            "nom": "Lycée Jeanne d'Arc <> LACANAC Hôtel de ville",
+            "type": "Édu'Volcan",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 5,
+                "temps_trajet": "25 minutes",
+                "longueur_ligne": "13 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 602,
+            "nom": "Collège Victor Hugo <> LE ROTO Avenue du Parc",
+            "type": "Édu'Volcan",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 7,
+                "temps_trajet": "30 minutes",
+                "longueur_ligne": "18 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 651,
+            "nom": "Lycée Blaise Pascal <> NAUBOURG Grand-Place",
+            "type": "Édu'Volcan",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 8,
+                "temps_trajet": "60 minutes",
+                "longueur_ligne": "37 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 652,
+            "nom": "Lycée Jeanne d'Arc <> SALANBOURG Eglise Sainte Marie",
+            "type": "Édu'Volcan",
+            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "stats": {
+                "nombre_arrets": 5,
+                "temps_trajet": "40 minutes",
+                "longueur_ligne": "24 km"
             },
             "pdf_url": ""
         },
@@ -237,138 +369,6 @@
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
                 "longueur_ligne": "5 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 101,
-            "nom": "Hôtel de Région <> ARRONAY Etangs",
-            "type": "Puy'Périphérique",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 102,
-            "nom": "Stade <> BRINTE Avenue de la Liberté",
-            "type": "Puy'Périphérique",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 103,
-            "nom": "Place de l'Europe <> CLORENT Centre de recyclage",
-            "type": "Puy'Périphérique",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 104,
-            "nom": "Science Po <> LACANAC Place du marché",
-            "type": "Puy'Périphérique",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 201,
-            "nom": "Campus Cézeaux <> RIOM Gare Routière",
-            "type": "Monts'Connection",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 202,
-            "nom": "Campus Cézeaux <> MINIA Gare Routière",
-            "type": "Monts'Connection",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 203,
-            "nom": "Gare de l'Ouest <> LUDORGUE Mont Ludorgue",
-            "type": "Monts'Connection",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 601,
-            "nom": "Lycée Anne Frank <> LACANAC Hôtel de ville",
-            "type": "Édu'Volcan",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 602,
-            "nom": "Collège Victor Hugo <> LE ROTO Avenue du Parc",
-            "type": "Édu'Volcan",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 651,
-            "nom": "Lycée Karl Max <> NAUBOURG Grand-Place",
-            "type": "Édu'Volcan",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
-        },
-        {
-            "id": 652,
-            "nom": "Lycée Anne Frank <> SALANBOURG Eglise Sainte Marie",
-            "type": "Édu'Volcan",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
-            "stats": {
-                "nombre_arrets": 16,
-                "temps_trajet": "36 minutes",
-                "longueur_ligne": "21 km"
             },
             "pdf_url": ""
         }

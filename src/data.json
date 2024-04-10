@@ -49,6 +49,246 @@
             }
         },
         {
+            "numéro": "2",
+            "destinations": [
+                "Gare Centrale",
+                "Aéroport"
+            ],
+            "description": "Rapide, Pratique, Connecté.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 34,
+                "distance": 10,
+                "duree_parcours": 40
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 8,
+                    "pointe": 7,
+                    "soir": 24
+                },
+                "samedi": {
+                    "creuse": 12,
+                    "pointe": 8,
+                    "soir": 16
+                },
+                "dimanche": {
+                    "creuse": 12,
+                    "pointe": 10,
+                    "soir": 24
+                },
+                "vacances": {
+                    "samedi": {
+                        "creuse": 10,
+                        "pointe": 7,
+                        "soir": 12
+                    },
+                    "dimanche": {
+                        "creuse": 12,
+                        "pointe": 10,
+                        "soir": 24
+                    },
+                    "jour_semaine": {
+                        "creuse": 7,
+                        "pointe": 5,
+                        "soir": 13
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "3",
+            "destinations": [
+                "Gare Centrale",
+                "Campus Gabriel Montpied"
+            ],
+            "description": "Pratique, Fréquent, Connecté.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 27,
+                "distance": 8,
+                "duree_parcours": 32
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 8,
+                    "pointe": 7,
+                    "soir": 24
+                },
+                "samedi": {
+                    "creuse": 12,
+                    "pointe": 8,
+                    "soir": 16
+                },
+                "dimanche": {
+                    "creuse": 12,
+                    "pointe": 10,
+                    "soir": 24
+                },
+                "vacances": {
+                    "samedi": {
+                        "creuse": 10,
+                        "pointe": 7,
+                        "soir": 12
+                    },
+                    "dimanche": {
+                        "creuse": 12,
+                        "pointe": 10,
+                        "soir": 24
+                    },
+                    "jour_semaine": {
+                        "creuse": 7,
+                        "pointe": 5,
+                        "soir": 13
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "4",
+            "destinations": [
+                "Gare Centrale",
+                "Campus Gabriel Montpied"
+            ],
+            "description": "Pratique, Fréquent, Connecté.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 27,
+                "distance": 8,
+                "duree_parcours": 32
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 8,
+                    "pointe": 7,
+                    "soir": 24
+                },
+                "samedi": {
+                    "creuse": 12,
+                    "pointe": 8,
+                    "soir": 16
+                },
+                "dimanche": {
+                    "creuse": 12,
+                    "pointe": 10,
+                    "soir": 24
+                },
+                "vacances": {
+                    "samedi": {
+                        "creuse": 10,
+                        "pointe": 7,
+                        "soir": 12
+                    },
+                    "dimanche": {
+                        "creuse": 12,
+                        "pointe": 10,
+                        "soir": 24
+                    },
+                    "jour_semaine": {
+                        "creuse": 7,
+                        "pointe": 5,
+                        "soir": 13
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "5",
+            "destinations": [
+                "Gare Centrale",
+                "Campus Gabriel Montpied"
+            ],
+            "description": "Pratique, Fréquent, Connecté.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 27,
+                "distance": 8,
+                "duree_parcours": 32
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 8,
+                    "pointe": 7,
+                    "soir": 24
+                },
+                "samedi": {
+                    "creuse": 12,
+                    "pointe": 8,
+                    "soir": 16
+                },
+                "dimanche": {
+                    "creuse": 12,
+                    "pointe": 10,
+                    "soir": 24
+                },
+                "vacances": {
+                    "samedi": {
+                        "creuse": 10,
+                        "pointe": 7,
+                        "soir": 12
+                    },
+                    "dimanche": {
+                        "creuse": 12,
+                        "pointe": 10,
+                        "soir": 24
+                    },
+                    "jour_semaine": {
+                        "creuse": 7,
+                        "pointe": 5,
+                        "soir": 13
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "6",
+            "destinations": [
+                "Grand Palais",
+                "Campus Cézeaux"
+            ],
+            "description": "Pratique, Fréquent, Connecté.",
+            "reseau": "Erupt'Urbain - Puy-de-Dôme",
+            "stats": {
+                "nb_arrets": 17,
+                "distance": 5,
+                "duree_parcours": 20
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 8,
+                    "pointe": 7,
+                    "soir": 24
+                },
+                "samedi": {
+                    "creuse": 12,
+                    "pointe": 8,
+                    "soir": 16
+                },
+                "dimanche": {
+                    "creuse": "-",
+                    "pointe": 10,
+                    "soir": 24
+                },
+                "vacances": {
+                    "samedi": {
+                        "creuse": 10,
+                        "pointe": 7,
+                        "soir": 12
+                    },
+                    "dimanche": {
+                        "creuse": 12,
+                        "pointe": 10,
+                        "soir": 24
+                    },
+                    "jour_semaine": {
+                        "creuse": 7,
+                        "pointe": 5,
+                        "soir": 13
+                    }
+                }
+            }
+        },
+        {
             "numéro": "11",
             "destinations": [
                 "Gare Centrale",

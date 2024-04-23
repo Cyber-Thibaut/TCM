@@ -12,6 +12,7 @@ const vacationDates = [
     { start: new Date("2023-07-01"), end: new Date("2023-09-03") }, // Période de vacances en juillet-septembre 2023
     { start: new Date("2023-10-21"), end: new Date("2023-11-05") }, // Période de vacances en octobre-novembre 2023
     { start: new Date("2023-12-23"), end: new Date("2024-01-07") }, // Période de vacances en décembre-janvier 2024
+    { start: new Date("2024-05-22"), end: new Date("2024-02-23") }, // Période de vacances en mai 2024 
     { start: new Date("2024-02-17"), end: new Date("2024-03-03") }, // Période de vacances en février-mars 2024
     { start: new Date("2024-04-13"), end: new Date("2024-04-28") }, // Période de vacances en avril 2024
     { start: new Date("2024-07-06"), end: new Date("2024-09-01") }  // Période de vacances en juillet-septembre 2024

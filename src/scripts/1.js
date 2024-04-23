@@ -12,6 +12,7 @@ const vacationDates = [
     { start: new Date("2023-07-01"), end: new Date("2023-09-03") }, // Période de vacances en juillet-septembre 2023
     { start: new Date("2023-10-21"), end: new Date("2023-11-05") }, // Période de vacances en octobre-novembre 2023
     { start: new Date("2023-12-23"), end: new Date("2024-01-07") }, // Période de vacances en décembre-janvier 2024
+    { start: new Date("2024-05-22"), end: new Date("2024-02-23") }, // Période de vacances en mai 2024 
     { start: new Date("2024-02-17"), end: new Date("2024-03-03") }, // Période de vacances en février-mars 2024
     { start: new Date("2024-04-13"), end: new Date("2024-04-28") }, // Période de vacances en avril 2024
     { start: new Date("2024-07-06"), end: new Date("2024-09-01") }  // Période de vacances en juillet-septembre 2024
@@ -69,59 +70,13 @@ function calculateNextBusTime(weekday, hour, minute) {
             }
             // Fréquences pour Samedi
             if (hour >= 4 && hour < 7) {
-                frequency = 12; // Creuse
-            } else if (hour >= 7 && hour < 9) {
-                frequency = 8; // Pointe
-            } else if (hour >= 9 && hour < 16) {
-                frequency = 12; // Creuse
-            } else if (hour >= 16 && hour < 20) {
-                frequency = 8; // Pointe
-            } else {
-                frequency = 16; // Soir
-            }
-        } else if (weekday === 0) { // Dimanche
-            if ((hour === 1 && minute >= 0) || (hour >= 2 && hour < 4)) {
-                return -1; // Créneau fermé
-            }
-            // Fréquences pour Dimanche
-            if (hour >= 4 && hour < 7) {
-                frequency = 12; // Creuse
-            } else if (hour >= 7 && hour < 9) {
-                frequency = 10; // Pointe
-            } else {
-                frequency = 12; // Creuse
-            }
-        } else { // Semaine (Lundi - Vendredi)
-            if ((hour === 0 && minute >= 0) || (hour >= 1 && hour < 4)) {
-                return -1; // Créneau fermé
-            }
-            // Fréquences pour Semaine
-            if (hour >= 4 && hour < 7) {
                 frequency = 8; // Creuse
             } else if (hour >= 7 && hour < 9) {
-                frequency = 7; // Pointe
+                frequency = 4; // Pointe
             } else if (hour >= 9 && hour < 16) {
                 frequency = 8; // Creuse
             } else if (hour >= 16 && hour < 20) {
-                frequency = 7; // Pointe
-            } else {
-                frequency = 24; // Soir
-            }
-        }
-    } else {
-        if (weekday === 6) { // Samedi
-            if ((hour === 1 && minute >= 0) || (hour >= 2 && hour < 4)) {
-                return -1; // Créneau fermé
-            }
-            // Fréquences pour Samedi
-            if (hour >= 4 && hour < 7) {
-                frequency = 10; // Creuse
-            } else if (hour >= 7 && hour < 9) {
-                frequency = 7; // Pointe
-            } else if (hour >= 9 && hour < 16) {
-                frequency = 10; // Creuse
-            } else if (hour >= 16 && hour < 20) {
-                frequency = 7; // Pointe
+                frequency = 4; // Pointe
             } else {
                 frequency = 12; // Soir
             }
@@ -131,11 +86,11 @@ function calculateNextBusTime(weekday, hour, minute) {
             }
             // Fréquences pour Dimanche
             if (hour >= 4 && hour < 7) {
-                frequency = 12; // Creuse
+                frequency = 16; // Creuse
             } else if (hour >= 7 && hour < 9) {
                 frequency = 10; // Pointe
             } else {
-                frequency = 12; // Creuse
+                frequency = 16; // Creuse
             }
         } else { // Semaine (Lundi - Vendredi)
             if ((hour === 0 && minute >= 0) || (hour >= 1 && hour < 4)) {
@@ -143,19 +98,64 @@ function calculateNextBusTime(weekday, hour, minute) {
             }
             // Fréquences pour Semaine
             if (hour >= 4 && hour < 7) {
-                frequency = 7; // Creuse
+                frequency = 8; // Creuse
             } else if (hour >= 7 && hour < 9) {
-                frequency = 5; // Pointe
+                frequency = 6; // Pointe
             } else if (hour >= 9 && hour < 16) {
-                frequency = 7; // Creuse
+                frequency = 8; // Creuse
             } else if (hour >= 16 && hour < 20) {
-                frequency = 5; // Pointe
+                frequency = 6; // Pointe
             } else {
-                frequency = 13; // Soir
+                frequency = 12; // Soir
+            }
+        }
+    } else {
+        if (weekday === 6) { // Samedi
+            if ((hour === 1 && minute >= 0) || (hour >= 2 && hour < 4)) {
+                return -1; // Créneau fermé
+            }
+            // Fréquences pour Samedi
+            if (hour >= 4 && hour < 7) {
+                frequency = 8; // Creuse
+            } else if (hour >= 7 && hour < 9) {
+                frequency = 4; // Pointe
+            } else if (hour >= 9 && hour < 16) {
+                frequency = 8; // Creuse
+            } else if (hour >= 16 && hour < 20) {
+                frequency = 4; // Pointe
+            } else {
+                frequency = 12; // Soir
+            }
+        } else if (weekday === 0) { // Dimanche
+            if ((hour === 1 && minute >= 0) || (hour >= 2 && hour < 4)) {
+                return -1; // Créneau fermé
+            }
+            // Fréquences pour Dimanche
+            if (hour >= 4 && hour < 7) {
+                frequency = 16; // Creuse
+            } else if (hour >= 7 && hour < 9) {
+                frequency = 10; // Pointe
+            } else {
+                frequency = 16; // Creuse
+            }
+        } else { // Semaine (Lundi - Vendredi)
+            if ((hour === 0 && minute >= 0) || (hour >= 1 && hour < 4)) {
+                return -1; // Créneau fermé
+            }
+            // Fréquences pour Semaine
+            if (hour >= 4 && hour < 7) {
+                frequency = 8; // Creuse
+            } else if (hour >= 7 && hour < 9) {
+                frequency = 6; // Pointe
+            } else if (hour >= 9 && hour < 16) {
+                frequency = 8; // Creuse
+            } else if (hour >= 16 && hour < 20) {
+                frequency = 6; // Pointe
+            } else {
+                frequency = 12; // Soir
             }
         }
     }
-
     return frequency - (minute % frequency);
 }
 

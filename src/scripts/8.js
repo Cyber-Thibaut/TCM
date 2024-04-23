@@ -12,6 +12,7 @@ const vacationDates = [
     { start: new Date("2023-07-01"), end: new Date("2023-09-03") }, // Période de vacances en juillet-septembre 2023
     { start: new Date("2023-10-21"), end: new Date("2023-11-05") }, // Période de vacances en octobre-novembre 2023
     { start: new Date("2023-12-23"), end: new Date("2024-01-07") }, // Période de vacances en décembre-janvier 2024
+    { start: new Date("2024-05-22"), end: new Date("2024-02-23") }, // Période de vacances en mai 2024 
     { start: new Date("2024-02-17"), end: new Date("2024-03-03") }, // Période de vacances en février-mars 2024
     { start: new Date("2024-04-13"), end: new Date("2024-04-28") }, // Période de vacances en avril 2024
     { start: new Date("2024-07-06"), end: new Date("2024-09-01") }  // Période de vacances en juillet-septembre 2024
@@ -245,57 +246,66 @@ function updateBusTimes() {
     const nextBusFreq = calculateNextBusTime(now.getDay(), now.getHours(), now.getMinutes());
     const followingBusFreq = calculateFollowingBusTime(now.getDay(), now.getHours(), now.getMinutes(), nextBusFreq);
 
-    // Liste des icônes et couleurs correspondantes
-    const frequentationIcons = [
-        { icon: '/img/icone-complet.png', color: "red" },      // Complet / Plein (Rouge)
-        { icon: '/img/icone-moyen.png', color: "yellow" },     // Places disponibles (Jaune)
-        { icon: '/img/icone-vide.png', color: "green" }         // Vide (Vert)
-    ];
+    // // Liste des icônes et couleurs correspondantes
+    // const frequentationIcons = [
+    //     { icon: '/img/icone-complet.png', color: "red" },      // Complet / Plein (Rouge)
+    //     { icon: '/img/icone-moyen.png', color: "yellow" },     // Places disponibles (Jaune)
+    //     { icon: '/img/icone-vide.png', color: "green" }         // Vide (Vert)
+    // ];
 
-    // Génération d'une valeur aléatoire entre 0 et 2 pour représenter la fréquentation
-    const randomFrequentation1 = Math.floor(Math.random() * 3);
+    // // Génération d'une valeur aléatoire entre 0 et 2 pour représenter la fréquentation
+    // const randomFrequentation1 = Math.floor(Math.random() * 3);
 
-    // Sélection de l'icône et de la couleur en fonction de la fréquentation
-    const selectedIcon1 = frequentationIcons[randomFrequentation1].icon;
+    // // Sélection de l'icône et de la couleur en fonction de la fréquentation
+    // const selectedIcon1 = frequentationIcons[randomFrequentation1].icon;
 
-    // Génération d'une valeur aléatoire entre 0 et 2 pour représenter la fréquentation
-    const randomFrequentation2 = Math.floor(Math.random() * 3);
+    // // Génération d'une valeur aléatoire entre 0 et 2 pour représenter la fréquentation
+    // const randomFrequentation2 = Math.floor(Math.random() * 3);
 
-    // Sélection de l'icône et de la couleur en fonction de la fréquentation
-    const selectedIcon2 = frequentationIcons[randomFrequentation2].icon;
+    // // Sélection de l'icône et de la couleur en fonction de la fréquentation
+    // const selectedIcon2 = frequentationIcons[randomFrequentation2].icon;
 
-    // Affichage de l'icône et de la couleur
-    const frequentation2 = `<img src="${selectedIcon2}" style="width: 50px; height: auto; margin-top: 25px">`;
+    // // Affichage de l'icône et de la couleur
+    // const frequentation2 = `<img src="${selectedIcon2}" style="width: 50px; height: auto; margin-top: 25px">`;
 
-    if (nextBusFreq === -1) {
-        if ((hour === 0 && minute >= 0) || (hour >= 1 && hour < 4)) {
-            nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Veuillez noter que le service est actuellement suspendu. Nous reprendrons nos activités à 4h du matin. Merci pour votre compréhension et bonne nuit.</span></div>`;
-        } else {
-            nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Pour le moment, aucun bus n'est en service.</span></div>`;
-        }
-
-
-        const followingBus = "";
-        document.getElementById("nextBusTime").innerHTML = nextBus + followingBus;
-    } else {
-        const nextBus = nextBusFreq === 1 ?
-            `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"> </div>` :
-            nextBusFreq === 2 ?
-                `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche <img src="${selectedIcon1}" style="width: 50px; height: auto; margin-top: -35px"></div>` :
-                `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${nextBusFreq} min  <img src="${selectedIcon1}" style="width: 50px; height: auto; margin-top: -35px"></div>`;
-
-        const followingBus = followingBusFreq === 0 ?
-            `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>Arrivé</div>` :
-            followingBusFreq === 1 ?
-                `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>1 min</div>` :
-                `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${followingBusFreq} min <img src="${selectedIcon2}" style="width: 50px; height: auto; margin-top: -35px"></div>`;
-
-        const divider = `<div class="divider lg:divider-horizontal"></div>`;
-
-        document.getElementById("nextBusTime").innerHTML = nextBus + divider + followingBus;
+    // if (nextBusFreq === -1) {
+    //     if ((hour === 0 && minute >= 0) || (hour >= 1 && hour < 4)) {
+    //     nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Veuillez noter que le service est actuellement suspendu. Nous reprendrons nos activités à 4h du matin. Merci pour votre compréhension et bonne nuit.</span></div>`;
+    // } else {
+    //     nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Pour le moment, aucun bus n'est en service.</span></div>`;
+    // }
 
 
-    }
+    //     const followingBus = "";
+    //     document.getElementById("nextBusTime").innerHTML = nextBus + followingBus;
+    // } else {
+    //     const nextBus = nextBusFreq === 1 ?
+    //         `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"> </div>` :
+    //         nextBusFreq === 2 ?
+    //             `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche <img src="${selectedIcon1}" style="width: 50px; height: auto; margin-top: -35px"></div>` :
+    //             `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${nextBusFreq} min  <img src="${selectedIcon1}" style="width: 50px; height: auto; margin-top: -35px"></div>`;
+
+    //     const followingBus = followingBusFreq === 0 ?
+    //         `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>Arrivé</div>` :
+    //         followingBusFreq === 1 ?
+    //             `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>1 min</div>` :
+    //             `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${followingBusFreq} min <img src="${selectedIcon2}" style="width: 50px; height: auto; margin-top: -35px"></div>`;
+
+    //     const divider = `<div class="divider lg:divider-horizontal"></div>`;
+
+    //     document.getElementById("nextBusTime").innerHTML = nextBus + divider + followingBus;
+
+
+    // }
+
+    const nextBus = `<div role="alert" class="alert alert-warning">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+    <span>La ligne est actuellement fermée, aucun bus n'est en circulation.</span>
+</div>`;
+    const followingBus = "";
+    document.getElementById("nextBusTime").innerHTML = nextBus + followingBus;
 
     const alertMessage = document.getElementById("alertMessage");
 

@@ -16,34 +16,32 @@
             "horaires": {
                 "jour_semaine": {
                     "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
+                    "pointe": 4,
+                    "soir": 12
                 },
                 "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
+                    "creuse": 8,
+                    "pointe": 6,
+                    "soir": 12
                 },
                 "dimanche": {
-                    "creuse": 12,
-                    "pointe": 10,
-                    "soir": 24
+                    "creuse": 16,
+                    "pointe": 10
                 },
                 "vacances": {
+                    "jour_semaine": {
+                        "creuse": 8,
+                        "pointe": 4,
+                        "soir": 12
+                    },
                     "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
+                        "creuse": 8,
+                        "pointe": 6,
                         "soir": 12
                     },
                     "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
+                        "creuse": 16,
+                        "pointe": 10
                     }
                 }
             }
@@ -63,35 +61,33 @@
             },
             "horaires": {
                 "jour_semaine": {
-                    "creuse": 8,
+                    "creuse": 7,
                     "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
                     "soir": 16
                 },
+                "samedi": {
+                    "creuse": 8,
+                    "pointe": 6,
+                    "soir": 11
+                },
                 "dimanche": {
-                    "creuse": 12,
-                    "pointe": 10,
-                    "soir": 24
+                    "creuse": 13,
+                    "pointe": 10
                 },
                 "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
                     "jour_semaine": {
                         "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
+                        "pointe": 7,
+                        "soir": 16
+                    },
+                    "samedi": {
+                        "creuse": 8,
+                        "pointe": 6,
+                        "soir": 11
+                    },
+                    "dimanche": {
+                        "creuse": 13,
+                        "pointe": 10
                     }
                 }
             }
@@ -100,7 +96,7 @@
             "numéro": "3",
             "destinations": [
                 "Gare Centrale",
-                "Campus Gabriel Montpied"
+                "Campus Montpied"
             ],
             "description": "Pratique, Fréquent, Connecté.",
             "reseau": "Volc'Express",
@@ -111,35 +107,33 @@
             },
             "horaires": {
                 "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
+                    "creuse": 6,
+                    "pointe": 4,
+                    "soir": 13
                 },
                 "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
+                    "creuse": 9,
+                    "pointe": 7,
+                    "soir": 11
                 },
                 "dimanche": {
-                    "creuse": 12,
-                    "pointe": 10,
-                    "soir": 24
+                    "creuse": 16,
+                    "pointe": 11
                 },
                 "vacances": {
+                    "jour_semaine": {
+                        "creuse": 6,
+                        "pointe": 4,
+                        "soir": 13
+                    },
                     "samedi": {
-                        "creuse": 10,
+                        "creuse": 9,
                         "pointe": 7,
-                        "soir": 12
+                        "soir": 11
                     },
                     "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
+                        "creuse": 16,
+                        "pointe": 11
                     }
                 }
             }
@@ -148,46 +142,44 @@
             "numéro": "4",
             "destinations": [
                 "Gare Centrale",
-                "Campus Gabriel Montpied"
+                "Gare de l'Est"
             ],
             "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Volc'Express",
+            "reseau": "Erupt'Urbain",
             "stats": {
-                "nb_arrets": 27,
-                "distance": 8,
-                "duree_parcours": 32
+                "nb_arrets": 24,
+                "distance": 7,
+                "duree_parcours": 28
             },
             "horaires": {
                 "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
+                    "creuse": 14,
+                    "pointe": 9,
+                    "soir": 28
                 },
                 "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
+                    "creuse": 19,
+                    "pointe": 19,
+                    "soir": 28
                 },
                 "dimanche": {
-                    "creuse": 12,
-                    "pointe": 10,
-                    "soir": 24
+                    "creuse": 28,
+                    "pointe": 19
                 },
                 "vacances": {
+                    "jour_semaine": {
+                        "creuse": 14,
+                        "pointe": 9,
+                        "soir": 28
+                    },
                     "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
+                        "creuse": 19,
+                        "pointe": 19,
+                        "soir": 28
                     },
                     "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
+                        "creuse": 28,
+                        "pointe": 19
                     }
                 }
             }
@@ -195,11 +187,11 @@
         {
             "numéro": "5",
             "destinations": [
-                "Gare Centrale",
-                "Campus Gabriel Montpied"
+                "MaM",
+                "Pôle L. Pacioli"
             ],
             "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Volc'Express",
+            "reseau": "Erupt'Urbain",
             "stats": {
                 "nb_arrets": 27,
                 "distance": 8,
@@ -207,35 +199,33 @@
             },
             "horaires": {
                 "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
+                    "creuse": 9,
+                    "pointe": 6,
+                    "soir": 27
                 },
                 "samedi": {
-                    "creuse": 12,
+                    "creuse": 13,
                     "pointe": 8,
-                    "soir": 16
+                    "soir": 20
                 },
                 "dimanche": {
-                    "creuse": 12,
-                    "pointe": 10,
-                    "soir": 24
+                    "creuse": 27,
+                    "pointe": 20
                 },
                 "vacances": {
+                    "jour_semaine": {
+                        "creuse": 9,
+                        "pointe": 6,
+                        "soir": 27
+                    },
                     "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
+                        "creuse": 13,
+                        "pointe": 8,
+                        "soir": 20
                     },
                     "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
+                        "creuse": 27,
+                        "pointe": 20
                     }
                 }
             }
@@ -247,823 +237,7 @@
                 "Campus Cézeaux"
             ],
             "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "7",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "8",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "9",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "10",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "11",
-            "destinations": [
-                "Gare Centrale",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Universitaire, Efficace.",
-            "reseau": "Volc'Express",
-            "stats": {
-                "nb_arrets": 15,
-                "distance": 10,
-                "duree_parcours": 30
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": 12,
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "12",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "13",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "60",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "61",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "62",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "63",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "64",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "101",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "102",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "103",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "104",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
-            "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
-                "duree_parcours": 20
-            },
-            "horaires": {
-                "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
-                },
-                "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
-                },
-                "dimanche": {
-                    "creuse": "-",
-                    "pointe": 10,
-                    "soir": 24
-                },
-                "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
-                    },
-                    "dimanche": {
-                        "creuse": 12,
-                        "pointe": 10,
-                        "soir": 24
-                    },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
-                    }
-                }
-            }
-        },
-        {
-            "numéro": "201",
-            "destinations": [
-                "Grand Palais",
-                "Campus Cézeaux"
-            ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain - Puy-de-Dôme",
+            "reseau": "Erupt'Urbain",
             "stats": {
                 "nb_arrets": 17,
                 "distance": 5,

@@ -157,10 +157,178 @@
             "pdf_url": ""
         },
         {
+            "id": 62,
+            "nom": "Parc de l'Étang <> Parc de l'Étang",
+            "type": "Erupt'Urbain - Puy-de-Pariou",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 30,
+                "temps_trajet": "40 minutes",
+                "longueur_ligne": "10 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 63,
+            "nom": "Place de Jaude <> L'Aventure Michelin",
+            "type": "Erupt'Urbain - Puy-de-Pariou",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 26,
+                "temps_trajet": "29 minutes",
+                "longueur_ligne": "8 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 64,
+            "nom": "Place de Jaude <> Hôtel de région",
+            "type": "Erupt'Urbain - Puy-de-Pariou",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 13,
+                "temps_trajet": "14 minutes",
+                "longueur_ligne": "4 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 101,
+            "nom": "Hôtel de Région <> ARRONAY Etangs",
+            "type": "Puy'Périphérique",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 16,
+                "temps_trajet": "36 minutes",
+                "longueur_ligne": "21 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 102,
+            "nom": "Stade <> BRINTE Avenue de la Liberté",
+            "type": "Puy'Périphérique",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 12,
+                "temps_trajet": "27 minutes",
+                "longueur_ligne": "18 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 103,
+            "nom": "Place de l'Europe <> CLORENT Centre de recyclage",
+            "type": "Puy'Périphérique",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 8,
+                "temps_trajet": "21 minutes",
+                "longueur_ligne": "11 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 104,
+            "nom": "Science Po <> LACANAC Place du marché",
+            "type": "Puy'Périphérique",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 10,
+                "temps_trajet": "24 minutes",
+                "longueur_ligne": "12 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 201,
+            "nom": "Campus Cézeaux <> RIOM Gare Routière",
+            "type": "Monts'Connection",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 2,
+                "temps_trajet": "58 minutes",
+                "longueur_ligne": "49 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 202,
+            "nom": "Campus Cézeaux <> MINIA Gare Routière",
+            "type": "Monts'Connection",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 4,
+                "temps_trajet": "37 minutes",
+                "longueur_ligne": "29 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 203,
+            "nom": "Gare de l'Ouest <> Montjuzet",
+            "type": "Monts'Connection",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 5,
+                "temps_trajet": "62 minutes",
+                "longueur_ligne": "43 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 601,
+            "nom": "Lycée Jeanne d'Arc <> LACANAC Hôtel de ville",
+            "type": "Édu'Volcan",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 5,
+                "temps_trajet": "25 minutes",
+                "longueur_ligne": "13 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 602,
+            "nom": "Collège Victor Hugo <> LE ROTO Avenue du Parc",
+            "type": "Édu'Volcan",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 7,
+                "temps_trajet": "30 minutes",
+                "longueur_ligne": "18 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 651,
+            "nom": "Lycée Blaise Pascal <> NAUBOURG Grand-Place",
+            "type": "Édu'Volcan",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 8,
+                "temps_trajet": "60 minutes",
+                "longueur_ligne": "37 km"
+            },
+            "pdf_url": ""
+        },
+        {
+            "id": 652,
+            "nom": "Lycée Jeanne d'Arc <> SALANBOURG Eglise Sainte Marie",
+            "type": "Édu'Volcan",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 5,
+                "temps_trajet": "40 minutes",
+                "longueur_ligne": "24 km"
+            },
+            "pdf_url": ""
+        },
+        {
             "id": 901,
             "nom": "Bellevue <> Haute-Ville",
             "type": "Volca'Demande",
-            "description": "La ligne 901 de Transport à la Demande (TAD) de la société TCM relie Haute-Ville, avec une correspondance pratique avec la ligne 9 du réseau urbain de Clermont-Ferrand, à Bellevue. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ. Les minibus sont équipés de tout le confort nécessaire, et les chauffeurs professionnels garantissent un service de qualité. Une fois arrivés à Bellevue, les passagers peuvent explorer les nombreux magasins, restaurants et attractions touristiques de la ville.",
+            "description": "",
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "12 minutes",
@@ -172,7 +340,7 @@
             "id": 902,
             "nom": "Parc de l'Étang <> Observatoire",
             "type": "Volca'Demande",
-            "description": "La ligne 902 de TAD offre une expérience de voyage unique à travers les paysages naturels et préservés de la ville de Clermont-Ferrand. Les minibus de la ligne sont confortables et offrent une vue panoramique sur les collines verdoyantes et les paysages naturels pittoresques de la ville. Les passagers peuvent réserver leur voyage à l'avance et personnaliser leur itinéraire et leur heure de départ.\nEn rejoignant la ligne 902 de TAD à l'Observatoire, les passagers peuvent explorer la ville de Clermont-Ferrand tout en profitant de l'air frais et de la beauté naturelle de la région. La ligne offre également une correspondance pratique avec la ligne 10 du réseau urbain de Clermont-Ferrand au Parc de l'Étang. Les passagers peuvent ainsi se déplacer facilement dans la ville et explorer les nombreux sites touristiques de la région.\nLa ligne 902 de TAD est pratique pour les passagers qui souhaitent découvrir la nature environnante de Clermont-Ferrand tout en bénéficiant d'un service de transport personnalisé et confortable. Les minibus sont équipés de tout le confort nécessaire pour garantir un voyage agréable, et les chauffeurs professionnels s'assurent que chaque passager bénéficie d'un service de qualité.\nEn résumé, la ligne 902 de TAD de la société TCM offre une expérience de voyage panoramique, pratique et naturelle à travers les paysages préservés de la ville de Clermont-Ferrand, avec une correspondance pratique avec la ligne 10 du réseau urbain de la ville. ",
+            "description": "",
             "stats": {
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",

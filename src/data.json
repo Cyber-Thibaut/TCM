@@ -1,0 +1,282 @@
+{
+    "lignes": [
+        {
+            "numéro": "1",
+            "destinations": [
+                "Gare Centrale",
+                "Campus Cézeaux"
+            ],
+            "description": "Pratique, Universitaire, Efficace.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 15,
+                "distance": 10,
+                "duree_parcours": 30
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 8,
+                    "pointe": 4,
+                    "soir": 12
+                },
+                "samedi": {
+                    "creuse": 8,
+                    "pointe": 6,
+                    "soir": 12
+                },
+                "dimanche": {
+                    "creuse": 16,
+                    "pointe": 10
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 8,
+                        "pointe": 4,
+                        "soir": 12
+                    },
+                    "samedi": {
+                        "creuse": 8,
+                        "pointe": 6,
+                        "soir": 12
+                    },
+                    "dimanche": {
+                        "creuse": 16,
+                        "pointe": 10
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "2",
+            "destinations": [
+                "Gare Centrale",
+                "Aéroport"
+            ],
+            "description": "Rapide, Pratique, Connecté.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 34,
+                "distance": 10,
+                "duree_parcours": 40
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 7,
+                    "pointe": 7,
+                    "soir": 16
+                },
+                "samedi": {
+                    "creuse": 8,
+                    "pointe": 6,
+                    "soir": 11
+                },
+                "dimanche": {
+                    "creuse": 13,
+                    "pointe": 10
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 7,
+                        "pointe": 7,
+                        "soir": 16
+                    },
+                    "samedi": {
+                        "creuse": 8,
+                        "pointe": 6,
+                        "soir": 11
+                    },
+                    "dimanche": {
+                        "creuse": 13,
+                        "pointe": 10
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "3",
+            "destinations": [
+                "Gare Centrale",
+                "Campus Montpied"
+            ],
+            "description": "Pratique, Fréquent, Connecté.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 27,
+                "distance": 8,
+                "duree_parcours": 32
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 6,
+                    "pointe": 4,
+                    "soir": 13
+                },
+                "samedi": {
+                    "creuse": 9,
+                    "pointe": 7,
+                    "soir": 11
+                },
+                "dimanche": {
+                    "creuse": 16,
+                    "pointe": 11
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 6,
+                        "pointe": 4,
+                        "soir": 13
+                    },
+                    "samedi": {
+                        "creuse": 9,
+                        "pointe": 7,
+                        "soir": 11
+                    },
+                    "dimanche": {
+                        "creuse": 16,
+                        "pointe": 11
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "4",
+            "destinations": [
+                "Gare Centrale",
+                "Gare de l'Est"
+            ],
+            "description": "Pratique, Fréquent, Connecté.",
+            "reseau": "Erupt'Urbain",
+            "stats": {
+                "nb_arrets": 24,
+                "distance": 7,
+                "duree_parcours": 28
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 14,
+                    "pointe": 9,
+                    "soir": 28
+                },
+                "samedi": {
+                    "creuse": 19,
+                    "pointe": 19,
+                    "soir": 28
+                },
+                "dimanche": {
+                    "creuse": 28,
+                    "pointe": 19
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 14,
+                        "pointe": 9,
+                        "soir": 28
+                    },
+                    "samedi": {
+                        "creuse": 19,
+                        "pointe": 19,
+                        "soir": 28
+                    },
+                    "dimanche": {
+                        "creuse": 28,
+                        "pointe": 19
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "5",
+            "destinations": [
+                "MaM",
+                "Pôle L. Pacioli"
+            ],
+            "description": "Pratique, Fréquent, Connecté.",
+            "reseau": "Erupt'Urbain",
+            "stats": {
+                "nb_arrets": 27,
+                "distance": 8,
+                "duree_parcours": 32
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 9,
+                    "pointe": 6,
+                    "soir": 27
+                },
+                "samedi": {
+                    "creuse": 13,
+                    "pointe": 8,
+                    "soir": 20
+                },
+                "dimanche": {
+                    "creuse": 27,
+                    "pointe": 20
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 9,
+                        "pointe": 6,
+                        "soir": 27
+                    },
+                    "samedi": {
+                        "creuse": 13,
+                        "pointe": 8,
+                        "soir": 20
+                    },
+                    "dimanche": {
+                        "creuse": 27,
+                        "pointe": 20
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "6",
+            "destinations": [
+                "Grand Palais",
+                "Campus Cézeaux"
+            ],
+            "description": "Pratique, Fréquent, Connecté.",
+            "reseau": "Erupt'Urbain",
+            "stats": {
+                "nb_arrets": 17,
+                "distance": 5,
+                "duree_parcours": 20
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 8,
+                    "pointe": 7,
+                    "soir": 24
+                },
+                "samedi": {
+                    "creuse": 12,
+                    "pointe": 8,
+                    "soir": 16
+                },
+                "dimanche": {
+                    "creuse": "-",
+                    "pointe": 10,
+                    "soir": 24
+                },
+                "vacances": {
+                    "samedi": {
+                        "creuse": 10,
+                        "pointe": 7,
+                        "soir": 12
+                    },
+                    "dimanche": {
+                        "creuse": 12,
+                        "pointe": 10,
+                        "soir": 24
+                    },
+                    "jour_semaine": {
+                        "creuse": 7,
+                        "pointe": 5,
+                        "soir": 13
+                    }
+                }
+            }
+        }
+    ]
+}

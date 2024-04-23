@@ -139,6 +139,48 @@
                         </div>
                     </div>
                 </div>
+                <div class=" card w-96 bg-base-100 shadow-xl">
+                    <figure><img src="../img/PdJ.png" alt="Gare Centrale" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-primary">Place de Jaude
+                        </h2>
+                        <h2 class="card-title text-primary">
+                            <div id="PdJ"></div>
+                        </h2>
+
+                        <div class="card-actions justify-end">
+                            <button onclick="PdJ_modal.showModal()" class="btn btn-primary">Plus d'info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card w-96 bg-base-100 shadow-xl">
+                    <figure><img src="../img/Riom.png" alt="Gare Centrale" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-primary">RIOM Gare Routière
+                        </h2>
+                        <h2 class="card-title text-primary">
+                            <div id="Riom"></div>
+                        </h2>
+
+                        <div class="card-actions justify-end">
+                            <button onclick="Riom_modal.showModal()" class="btn btn-primary">Plus d'info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card w-96 bg-base-100 shadow-xl">
+                    <figure><img src="../img/Aubiere.png" alt="Gare Centrale" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title text-primary">Aubière Place du marché
+                        </h2>
+                        <h2 class="card-title text-primary">
+                            <div id="Aubiere"></div>
+                        </h2>
+
+                        <div class="card-actions justify-end">
+                            <button onclick="Aubiere_modal.showModal()" class="btn btn-primary">Plus d'info</button>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- More posts... -->
             </div>
@@ -326,6 +368,119 @@
                 </a>
                 <a href="/src/ligne.html#10">
                     <img src="/img/10.png" alt="Ligne 10" class="w-15 h-12" />
+                </a>
+            </div>
+
+            <!-- Auteur -->
+            <div class="author mt-4">
+                <h5><span id="GO"></span></h5>
+            </div>
+        </div>
+
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+    <dialog id="PdJ_modal" class="modal">
+        <div class="modal-box relative">
+            <!-- Logo en haut à droite -->
+            <img src="../img/PdJ.png" alt="Logo CdC" class="absolute top-2 right-2 w-15 h-12" />
+
+            <!-- Contenu du modal -->
+            <h6 class="text-black dark:text-gray-200">Services</h6>
+            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <br>
+            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
+            <ul>
+                <li>Du lundi au vendredi de 7h à 21h</li>
+                <li>Samedi de 8h à 20h</li>
+                <li>Dimanche et jours fériés de 10h à 17h</li>
+            </ul>
+            <br>
+            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
+            <div class="flex space-x-4">
+                <a href="/src/ligne.html#8">
+                    <img src="/img/8.png" alt="Ligne 8" class="w-15 h-12" />
+                </a>
+                <a href="/src/ligne.html#64">
+                    <img src="/img/64.png" alt="Ligne 64" class="w-15 h-12" />
+                </a>
+                <a href="/src/ligne.html#63">
+                    <img src="/img/63.png" alt="Ligne 63" class="w-15 h-12" />
+                </a>
+                <a href="/src/ligne.html#103">
+                    <img src="/img/103.png" alt="Ligne 103" class="w-15 h-12" />
+                </a>
+            </div>
+
+            <!-- Auteur -->
+            <div class="author mt-4">
+                <h5><span id="GO"></span></h5>
+            </div>
+        </div>
+
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+    <dialog id="Riom_modal" class="modal">
+        <div class="modal-box relative">
+            <!-- Logo en haut à droite -->
+            <img src="../img/CdC.png" alt="Logo CdC" class="absolute top-2 right-2 w-15 h-12" />
+
+            <!-- Contenu du modal -->
+            <h6 class="text-black dark:text-gray-200">Services</h6>
+            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <br>
+            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
+            <ul>
+                <li>Du lundi au vendredi de 9h à 19h</li>
+                <li>Samedi de 10h à 18h</li>
+                <li>Fermé le dimanche</li>
+                <li>Le 1er jour du mois de 7h à 20h</li>
+            </ul>
+            <br>
+            <h6 class="text-gray-500 dark:text-gray-200">Correspondance</h6>
+            <div class="flex space-x-4">
+                <a href="/src/ligne.html#201">
+                    <img src="/img/201.png" alt="Ligne 201" class="w-15 h-12" />
+                </a>
+            </div>
+
+            <!-- Auteur -->
+            <div class="author mt-4">
+                <h5><span id="GO"></span></h5>
+            </div>
+        </div>
+
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+    <dialog id="Aubiere_modal" class="modal">
+        <div class="modal-box relative">
+            <!-- Logo en haut à droite -->
+            <img src="../img/CdC.png" alt="Logo CdC" class="absolute top-2 right-2 w-15 h-12" />
+
+            <!-- Contenu du modal -->
+            <h6 class="text-black dark:text-gray-200">Services</h6>
+            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <br>
+            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
+            <ul>
+                <li>Du lundi au vendredi de 9h à 19h</li>
+                <li>Samedi de 10h à 18h</li>
+                <li>Fermé le dimanche</li>
+                <li>Le 1er jour du mois de 7h à 20h</li>
+            </ul>
+            <br>
+            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
+            <div class="flex space-x-4">
+                <a href="/src/ligne.html#103">
+                    <img src="/img/103.png" alt="Ligne 103" class="w-15 h-12" />
+                </a>
+                <a href="/src/ligne.html#602">
+                    <img src="/img/602.png" alt="Ligne 602" class="w-15 h-12" />
                 </a>
             </div>
 
@@ -629,6 +784,177 @@
         }
 
         CC();
+
+        async function PdJ() {
+            while (true) {
+                await pause(1000);
+                var cejour = new Date();
+                var options = { weekday: "long", year: "numeric", month: "long", day: "2-digit" };
+                var date = cejour.toLocaleDateString("fr-FR", options);
+                var date = date.replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
+                var heure = cejour.getHours();
+                var day = cejour.getDay();
+                var jour = cejour.getDate();
+                var classe = ""; // Initialisez la variable classe
+
+                if (cejour < new Date("2024-05-02")) {
+                    var texte = "L'agence est en travaux actuellement.";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "en travaux"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 7) && (heure < 20)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 20) && (heure < 21)) {
+                    var texte = "L'agence ferme à 21h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 8) && (heure < 19)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 19) && (heure < 20)) {
+                    var texte = "L'agence ferme à 20h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 16)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 0) && (heure >= 16) && (heure < 17)) {
+                    var texte = "L'agence ferme à 17h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else {
+                    var texte = "L'agence est fermée";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                }
+
+
+                var aficher_heure = date + " " + ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) + ":" + ("0" + cejour.getSeconds()).slice(-2);
+                document.getElementById('PdJ').innerHTML = texte;
+
+                // Sélectionnez l'élément HTML auquel vous souhaitez ajouter la classe
+                var elementHTML = document.getElementById("PdJ");
+
+                // Ajoutez la classe à l'élément HTML
+                elementHTML.className = classe;
+
+                // Effacez toutes les classes précédentes pour éviter un comportement inattendu
+                elementHTML.classList.remove("badge badge-success");
+                elementHTML.classList.remove("badge badge-warning");
+                elementHTML.classList.remove("badge badge-error");
+            }
+        }
+
+        PdJ();
+
+        async function Riom() {
+            while (true) {
+                await pause(1000);
+                var cejour = new Date();
+                var options = { weekday: "long", year: "numeric", month: "long", day: "2-digit" };
+                var date = cejour.toLocaleDateString("fr-FR", options);
+                var date = date.replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
+                var heure = cejour.getHours();
+                var day = cejour.getDay();
+                var jour = cejour.getDate();
+                var classe = ""; // Initialisez la variable classe
+
+                if (cejour < new Date("2024-05-02")) {
+                    var texte = "L'agence est en travaux actuellement.";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "en travaux"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 7) && (heure < 20)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 20) && (heure < 21)) {
+                    var texte = "L'agence ferme à 21h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 8) && (heure < 19)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 19) && (heure < 20)) {
+                    var texte = "L'agence ferme à 20h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 16)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 0) && (heure >= 16) && (heure < 17)) {
+                    var texte = "L'agence ferme à 17h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else {
+                    var texte = "L'agence est fermée";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                }
+
+
+                var aficher_heure = date + " " + ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) + ":" + ("0" + cejour.getSeconds()).slice(-2);
+                document.getElementById('Riom').innerHTML = texte;
+
+                // Sélectionnez l'élément HTML auquel vous souhaitez ajouter la classe
+                var elementHTML = document.getElementById("Riom");
+
+                // Ajoutez la classe à l'élément HTML
+                elementHTML.className = classe;
+
+                // Effacez toutes les classes précédentes pour éviter un comportement inattendu
+                elementHTML.classList.remove("badge badge-success");
+                elementHTML.classList.remove("badge badge-warning");
+                elementHTML.classList.remove("badge badge-error");
+            }
+        }
+
+        Riom();
+
+        async function Aubiere() {
+            while (true) {
+                await pause(1000);
+                var cejour = new Date();
+                var options = { weekday: "long", year: "numeric", month: "long", day: "2-digit" };
+                var date = cejour.toLocaleDateString("fr-FR", options);
+                var date = date.replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
+                var heure = cejour.getHours();
+                var day = cejour.getDay();
+                var jour = cejour.getDate();
+                var classe = ""; // Initialisez la variable classe
+
+                if (cejour < new Date("2024-05-02")) {
+                    var texte = "L'agence est en travaux actuellement.";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "en travaux"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 7) && (heure < 20)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day >= 1) && (day <= 5) && (heure >= 20) && (heure < 21)) {
+                    var texte = "L'agence ferme à 21h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 8) && (heure < 19)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 19) && (heure < 20)) {
+                    var texte = "L'agence ferme à 20h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 16)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 0) && (heure >= 16) && (heure < 17)) {
+                    var texte = "L'agence ferme à 17h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else {
+                    var texte = "L'agence est fermée";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
+                }
+
+
+                var aficher_heure = date + " " + ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) + ":" + ("0" + cejour.getSeconds()).slice(-2);
+                document.getElementById('Aubiere').innerHTML = texte;
+
+                // Sélectionnez l'élément HTML auquel vous souhaitez ajouter la classe
+                var elementHTML = document.getElementById("Aubiere");
+
+                // Ajoutez la classe à l'élément HTML
+                elementHTML.className = classe;
+
+                // Effacez toutes les classes précédentes pour éviter un comportement inattendu
+                elementHTML.classList.remove("badge badge-success");
+                elementHTML.classList.remove("badge badge-warning");
+                elementHTML.classList.remove("badge badge-error");
+            }
+        }
+
+        Aubiere();
 
     </script>
 </body>

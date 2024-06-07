@@ -155,10 +155,13 @@
 
                         // Mettre à jour le titre de la page avec le numéro de la ligne
                         if (ligneID === "TCM") {
-                            $("#pageTitle").text("Détail de l'info du réseau");
+                            $("#pageTitle").text("Détails des informations du réseau");
+                        } else if (ligneID === "NS") {
+                            $("#pageTitle").text("Détails des informations trafic de la navette spéciale");
                         } else {
-                            $("#pageTitle").text("Détails de la ligne " + ligne.ligne);
+                            $("#pageTitle").text("Détails du trafic de la ligne " + ligne.ligne);
                         }
+
                     } else {
                         $("#pageTitle").text("Détails de la ligne " + ligneID);
                         $("#details").append(

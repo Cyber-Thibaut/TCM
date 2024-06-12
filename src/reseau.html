@@ -122,8 +122,10 @@
 
                 const nomLigne = document.createElement("h3");
                 nomLigne.classList.add("mt-4", "text-lg", "text-primary");
-                nomLigne.textContent = `Ligne ${ligne.id}`;
-
+                if (ligne.id === "NS") {
+                    nomLigne.textContent = `Navette Spéciale`;}
+                else {
+                nomLigne.textContent = `Ligne ${ligne.id}`;}
                 const typeLigne = document.createElement("p");
                 typeLigne.classList.add("mt-1", "text-lg", "font-medium", "text-primary-focus");
                 typeLigne.textContent = ligne.nom;

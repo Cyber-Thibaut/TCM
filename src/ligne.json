@@ -1,6 +1,17 @@
 {
     "lignes": [
         {
+            "id": "NS",
+            "nom": "Gare SNCF <> Zénith d'Auvergne",
+            "type": "Navette Spéciale",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 5,
+                "temps_trajet": "17 minutes",
+                "longueur_ligne": "6 km"
+            }
+        },
+        {
             "id": 1,
             "nom": "Gare Centrale <> Campus Cézeaux",
             "type": "Volc'Express",
@@ -9,8 +20,7 @@
                 "nombre_arrets": 20,
                 "temps_trajet": "30 minutes",
                 "longueur_ligne": "10 km"
-            },
-            "pdf_url": "/pdf/L1 - 20232024.pdf"
+            }
         },
         {
             "id": 2,
@@ -21,8 +31,7 @@
                 "nombre_arrets": 34,
                 "temps_trajet": "40 minutes",
                 "longueur_ligne": "10 km"
-            },
-            "pdf_url": "/pdf/L2 - 20232024.pdf"
+            }
         },
         {
             "id": 3,
@@ -33,8 +42,7 @@
                 "nombre_arrets": 27,
                 "temps_trajet": "32 minutes",
                 "longueur_ligne": "8 km"
-            },
-            "pdf_url": "/pdf/L3 - 20232024.pdf"
+            }
         },
         {
             "id": 4,
@@ -45,8 +53,7 @@
                 "nombre_arrets": 24,
                 "temps_trajet": "28 minutes",
                 "longueur_ligne": "7 km"
-            },
-            "pdf_url": "/pdf/L4 - 20232024.pdf"
+            }
         },
         {
             "id": 5,
@@ -57,8 +64,7 @@
                 "nombre_arrets": 34,
                 "temps_trajet": "40 minutes",
                 "longueur_ligne": "9 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 6,
@@ -69,8 +75,7 @@
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
                 "longueur_ligne": "5 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 7,
@@ -81,8 +86,7 @@
                 "nombre_arrets": 30,
                 "temps_trajet": "36 minutes",
                 "longueur_ligne": "10 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 8,
@@ -93,8 +97,7 @@
                 "nombre_arrets": 27,
                 "temps_trajet": "32 minutes",
                 "longueur_ligne": "8 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 9,
@@ -105,8 +108,7 @@
                 "nombre_arrets": 12,
                 "temps_trajet": "18 minutes",
                 "longueur_ligne": "6 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 10,
@@ -117,8 +119,7 @@
                 "nombre_arrets": 20,
                 "temps_trajet": "30 minutes",
                 "longueur_ligne": "10 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 11,
@@ -129,8 +130,7 @@
                 "nombre_arrets": 14,
                 "temps_trajet": "21 minutes",
                 "longueur_ligne": "7 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 60,
@@ -141,8 +141,7 @@
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
                 "longueur_ligne": "5 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 61,
@@ -153,8 +152,7 @@
                 "nombre_arrets": 27,
                 "temps_trajet": "32 minutes",
                 "longueur_ligne": "8 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 62,
@@ -165,8 +163,7 @@
                 "nombre_arrets": 30,
                 "temps_trajet": "40 minutes",
                 "longueur_ligne": "10 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 63,
@@ -177,8 +174,7 @@
                 "nombre_arrets": 26,
                 "temps_trajet": "29 minutes",
                 "longueur_ligne": "8 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 64,
@@ -189,8 +185,7 @@
                 "nombre_arrets": 13,
                 "temps_trajet": "14 minutes",
                 "longueur_ligne": "4 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 101,
@@ -201,8 +196,7 @@
                 "nombre_arrets": 16,
                 "temps_trajet": "36 minutes",
                 "longueur_ligne": "21 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 102,
@@ -213,8 +207,7 @@
                 "nombre_arrets": 12,
                 "temps_trajet": "27 minutes",
                 "longueur_ligne": "18 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 103,
@@ -225,8 +218,7 @@
                 "nombre_arrets": 8,
                 "temps_trajet": "21 minutes",
                 "longueur_ligne": "11 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 104,
@@ -237,8 +229,7 @@
                 "nombre_arrets": 10,
                 "temps_trajet": "24 minutes",
                 "longueur_ligne": "12 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 201,
@@ -249,8 +240,7 @@
                 "nombre_arrets": 2,
                 "temps_trajet": "58 minutes",
                 "longueur_ligne": "49 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 202,
@@ -261,8 +251,7 @@
                 "nombre_arrets": 4,
                 "temps_trajet": "37 minutes",
                 "longueur_ligne": "29 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 203,
@@ -273,8 +262,7 @@
                 "nombre_arrets": 5,
                 "temps_trajet": "62 minutes",
                 "longueur_ligne": "43 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 601,
@@ -285,8 +273,7 @@
                 "nombre_arrets": 5,
                 "temps_trajet": "25 minutes",
                 "longueur_ligne": "13 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 602,
@@ -297,8 +284,7 @@
                 "nombre_arrets": 7,
                 "temps_trajet": "30 minutes",
                 "longueur_ligne": "18 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 651,
@@ -309,8 +295,7 @@
                 "nombre_arrets": 8,
                 "temps_trajet": "60 minutes",
                 "longueur_ligne": "37 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 652,
@@ -321,8 +306,7 @@
                 "nombre_arrets": 5,
                 "temps_trajet": "40 minutes",
                 "longueur_ligne": "24 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 901,
@@ -333,8 +317,7 @@
                 "nombre_arrets": 10,
                 "temps_trajet": "12 minutes",
                 "longueur_ligne": "4 km"
-            },
-            "pdf_url": ""
+            }
         },
         {
             "id": 902,
@@ -345,8 +328,7 @@
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
                 "longueur_ligne": "5 km"
-            },
-            "pdf_url": ""
+            }
         }
     ]
 }

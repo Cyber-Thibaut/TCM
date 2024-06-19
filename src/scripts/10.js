@@ -370,7 +370,7 @@ function updateCurrentTime() {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
-    currentTimeElement.textContent = `Mis à jour à : ${hours}:${minutes}`;
+    currentTimeElement.textContent = `Dernière mise à jour : ${hours}:${minutes}`;
     document.getElementById('destination').innerHTML = `<h2 class="text-4xl font-bold">Direction CRT Est ♿</h2><br>`;
 
 }

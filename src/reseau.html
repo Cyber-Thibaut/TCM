@@ -33,8 +33,11 @@
 
 
 <body>
-    <div class="bg-white dark:bg-base-100 py-24 sm:py-32">
+    <div class="bg-base-content py-24 sm:py-32">
         <div class="mx-auto max-w-screen-xl py-24 sm:py-32 lg:max-w-7xl lg:px-8">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Notre réseau</h2>
+            <img src="https://transport-manager.net/assets/img/lignes/Plan_N4.png">
+            <br>
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Nos Lignes</h2>
 
             <div id="ligne-cards"
@@ -43,9 +46,6 @@
             </div>
         </div>
     </div>
-
-
-
     <footer class="footer footer-center p-10 bg-primary text-primary-content">
         <aside>
             <img src="\img\TCM.png" width="100" height="100" alt="Logo TCM"
@@ -53,7 +53,9 @@
             <p class="font-bold">
                 Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
             </p>
-            <p>Copyright © 2023 - Tous droits réservés</p>
+            <p>Copyright ©
+                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
+            </p>
         </aside>
     </footer>
     <script>
@@ -114,20 +116,22 @@
                 // Création du span pour le badge avec le lien
                 const badge = document.createElement("a");
                 badge.href = `ligne.html#${ligne.id}`;
-                badge.classList.add("badge", "badge-flat", "badge-secondary", "absolute", "top-2", "right-2", "m-2", "px-2", "py-1", "text-xs");
+                badge.classList.add("badge", "badge-primary", "absolute", "top-2", "right-2", "m-2", "px-2", "py-1");
                 badge.textContent = ligne.type; // Contenu du badge
                 imageLigne.appendChild(badge);
 
                 imageLigne.appendChild(image);
 
                 const nomLigne = document.createElement("h3");
-                nomLigne.classList.add("mt-4", "text-lg", "text-primary");
+                nomLigne.classList.add("mt-4", "text-lg", "text-secondary");
                 if (ligne.id === "NS") {
-                    nomLigne.textContent = `Navette Spéciale`;}
+                    nomLigne.textContent = `Navette Spéciale`;
+                }
                 else {
-                nomLigne.textContent = `Ligne ${ligne.id}`;}
+                    nomLigne.textContent = `Ligne ${ligne.id}`;
+                }
                 const typeLigne = document.createElement("p");
-                typeLigne.classList.add("mt-1", "text-lg", "font-medium", "text-primary-focus");
+                typeLigne.classList.add("mt-1", "text-lg", "font-medium", "text-secondary-content");
                 typeLigne.textContent = ligne.nom;
 
                 carteLigne.appendChild(imageLigne);

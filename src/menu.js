@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
           </svg> Nos Agences</a></li>
             </ul>
         </div>
-        <a class="btn btn-ghost normal-case text-xl" href="/index.html">TCM</a>
+        <a class="btn btn-ghost normal-case text-xl" href="/index.html"><img src="/img/TCM.png" width="50" height="50" alt="Logo TCM"></a>
     </div>
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">

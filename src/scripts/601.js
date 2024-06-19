@@ -5,6 +5,7 @@ const alertMessage = document.getElementById("alertMessage");
 const destinationElement = document.getElementById('destination');
 const currentTimeElement = document.getElementById('current-time');
 
+
 const now = new Date();
 const weekday = now.getDay(); // 0 (Dimanche) à 6 (Samedi)
 const hour = now.getHours();

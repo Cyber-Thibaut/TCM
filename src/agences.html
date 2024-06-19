@@ -430,7 +430,7 @@
 
             <!-- Contenu du modal -->
             <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <p>Information – Ventes</p>
             <br>
             <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
             <ul>
@@ -464,7 +464,7 @@
 
             <!-- Contenu du modal -->
             <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <p>Information – Ventes</p>
             <br>
             <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
             <ul>
@@ -503,7 +503,7 @@
             <p class="font-bold">
                 Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
             </p>
-            <p>Copyright © 2023 - Tous droits réservés</p>
+            <p>Copyright © <script>document.write(new Date().getFullYear())</script> - Tous droits réservés</p>
         </aside>
     </footer>
     <script>
@@ -854,32 +854,34 @@
                 var jour = cejour.getDate();
                 var classe = ""; // Initialisez la variable classe
 
-                if (cejour < new Date("2024-05-02")) {
+                if (cejour < new Date("2024-09-02")) {
                     var texte = "L'agence est en travaux actuellement.";
                     classe = "badge badge-warning"; // Ajoutez la classe pour "en travaux"
-                } else if ((day >= 1) && (day <= 5) && (heure >= 7) && (heure < 20)) {
+                } else if ((jour == 1) && (heure >= 7) && (heure < 19)) {
                     var texte = "L'agence est ouverte";
                     classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day >= 1) && (day <= 5) && (heure >= 20) && (heure < 21)) {
-                    var texte = "L'agence ferme à 21h";
-                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
-                } else if ((day == 6) && (heure >= 8) && (heure < 19)) {
-                    var texte = "L'agence est ouverte";
-                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day == 6) && (heure >= 19) && (heure < 20)) {
+                } else if ((jour == 1) && (heure >= 19) && (heure < 20)) {
                     var texte = "L'agence ferme à 20h";
                     classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
-                } else if ((day == 0) && (heure >= 10) && (heure < 16)) {
+                } else if ((day >= 1) && (day <= 5) && (heure >= 9) && (heure < 18)) {
                     var texte = "L'agence est ouverte";
                     classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day == 0) && (heure >= 16) && (heure < 17)) {
-                    var texte = "L'agence ferme à 17h";
+                } else if ((day >= 1) && (day <= 5) && (heure >= 18) && (heure < 19)) {
+                    var texte = "L'agence ferme à 19h";
                     classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 10) && (heure < 17)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 17) && (heure < 18)) {
+                    var texte = "L'agence ferme à 18h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 17)) {
+                    var texte = "Agence fermée, utilisez une autre agence";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
                 } else {
                     var texte = "L'agence est fermée";
                     classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
                 }
-
 
                 var aficher_heure = date + " " + ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) + ":" + ("0" + cejour.getSeconds()).slice(-2);
                 document.getElementById('Riom').innerHTML = texte;
@@ -911,27 +913,30 @@
                 var jour = cejour.getDate();
                 var classe = ""; // Initialisez la variable classe
 
-                if (cejour < new Date("2024-05-02")) {
+                if (cejour < new Date("2024-09-02")) {
                     var texte = "L'agence est en travaux actuellement.";
                     classe = "badge badge-warning"; // Ajoutez la classe pour "en travaux"
-                } else if ((day >= 1) && (day <= 5) && (heure >= 7) && (heure < 20)) {
+                } else if ((jour == 1) && (heure >= 7) && (heure < 19)) {
                     var texte = "L'agence est ouverte";
                     classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day >= 1) && (day <= 5) && (heure >= 20) && (heure < 21)) {
-                    var texte = "L'agence ferme à 21h";
-                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
-                } else if ((day == 6) && (heure >= 8) && (heure < 19)) {
-                    var texte = "L'agence est ouverte";
-                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day == 6) && (heure >= 19) && (heure < 20)) {
+                } else if ((jour == 1) && (heure >= 19) && (heure < 20)) {
                     var texte = "L'agence ferme à 20h";
                     classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
-                } else if ((day == 0) && (heure >= 10) && (heure < 16)) {
+                } else if ((day >= 1) && (day <= 5) && (heure >= 9) && (heure < 18)) {
                     var texte = "L'agence est ouverte";
                     classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day == 0) && (heure >= 16) && (heure < 17)) {
-                    var texte = "L'agence ferme à 17h";
+                } else if ((day >= 1) && (day <= 5) && (heure >= 18) && (heure < 19)) {
+                    var texte = "L'agence ferme à 19h";
                     classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 10) && (heure < 17)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 17) && (heure < 18)) {
+                    var texte = "L'agence ferme à 18h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 17)) {
+                    var texte = "Agence fermée, utilisez une autre agence";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
                 } else {
                     var texte = "L'agence est fermée";
                     classe = "badge badge-error"; // Ajoutez la classe pour "fermée"

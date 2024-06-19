@@ -1,11 +1,3 @@
-const now = new Date();
-const weekday = now.getDay(); // 0 (Dimanche) à 6 (Samedi)
-const hour = now.getHours();
-const minute = now.getMinutes();
-const date = formatDate(now); // Convertir la date en chaîne "YYYY-MM-DD"
-const today = new Date();
-
-
 function updateBusTimes() {
     const nextBus = `<div role="alert" class="alert alert-warning">
     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">

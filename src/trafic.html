@@ -29,7 +29,18 @@
     <link href="../dist/output.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="menu.js"></script>
+    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
+    <style>
+        .jw-album-image img,
+        .jw-element-image img {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+        }
 
+        .pswp__share-tooltip .pswp__share--download {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -45,13 +56,13 @@
     <script>
         //const url = "test.json";
         const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
-    
+
         function afficherInfoTrafic() {
             const dateActuelle = new Date();
-    
+
             $.getJSON(url, function (data) {
                 let lignesTrouvees = false; // Variable pour suivre si des lignes ont été trouvées
-    
+
                 $.each(data.lignes, function (i, ligne) {
                     const infosTrafic = ligne.infos_trafic.filter(info => {
                         const dateDebut = new Date(Date.parse(info.annonce));
@@ -59,20 +70,20 @@
                         dateFin.setDate(dateFin.getDate() + 1);
                         return dateActuelle >= dateDebut && dateActuelle <= dateFin;
                     });
-    
+
                     if (infosTrafic.length > 0) {
                         lignesTrouvees = true; // Marquer que des lignes ont été trouvées
-    
+
                         const card = $("<div>")
                             .addClass("p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800")
                             .attr("role", "button")
                             .click(function () {
                                 window.location.href = "details.html#" + ligne.ligne;
                             });
-    
+
                         const cardHeader = $("<div>").addClass("flex items-center justify-between");
                         let logoLigne;
-    
+
                         if (ligne.ligne === "TCM") {
                             logoLigne = $("<img>")
                                 .attr("src", "/img/" + ligne.ligne + ".png")
@@ -82,16 +93,16 @@
                                 .attr("src", "/img/" + ligne.ligne + ".png")
                                 .addClass("w-15 h-12");
                         }
-    
+
                         cardHeader.append(logoLigne);
                         cardHeader.append($("<span>").addClass("sr-only").text("Info"));
-    
+
                         const infosCount = infosTrafic.length;
                         const infosText = infosCount === 1 ? "1 info trafic" : infosCount + " infos trafic";
                         const infosDiv = $("<div>").addClass("text-sm text-left").text(infosText);
-    
+
                         cardHeader.append(infosDiv);
-    
+
                         const viewButton = $("<button>")
                             .addClass("")
                             .html(
@@ -102,15 +113,15 @@
                             .click(function () {
                                 window.location.href = "details.html#" + ligne.ligne;
                             });
-    
+
                         cardHeader.append(viewButton);
-    
+
                         card.append(cardHeader);
-    
+
                         $("#lignes").append(card);
                     }
                 });
-    
+
                 // Si aucune ligne n'a été trouvée, afficher le deuxième code
                 if (!lignesTrouvees) {
                     $("#lignes").html(`<div id="alert-additional-content-3" class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
@@ -124,10 +135,10 @@
                 }
             });
         }
-    
+
         afficherInfoTrafic();
     </script>
-    
+
 
 
 </body>
@@ -137,14 +148,10 @@
         <p class="font-bold">
             Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
         </p>
-        <p>Copyright © <script>document.write(new Date().getFullYear())</script> - Tous droits réservés</p>
+        <p>Copyright ©
+            <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
+        </p>
     </aside>
 </footer>
-
-
-
-
-
-
 
 </html>

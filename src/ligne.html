@@ -35,6 +35,18 @@
             cursor: pointer;
         }
     </style>
+    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
+    <style>
+        .jw-album-image img,
+        .jw-element-image img {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+        }
+
+        .pswp__share-tooltip .pswp__share--download {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -87,7 +99,9 @@
             <p class="font-bold">
                 Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
             </p>
-            <p>Copyright © <script>document.write(new Date().getFullYear())</script> - Tous droits réservés</p>
+            <p>Copyright ©
+                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
+            </p>
         </aside>
     </footer>
     <!-- Script JavaScript pour charger et afficher les données depuis le JSON -->
@@ -389,7 +403,7 @@
                         <div class="mt-2 mb-4 text-sm">Aucune information de trafic à signaler pour la ligne ${ligneID}. Tout circule normalement.</div>
                     </div>`);
                     }
-                    
+
                 }
             });
         }

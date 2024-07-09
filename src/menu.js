@@ -40,14 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         </svg> Nos Agences</a></li>
             </ul>
         </div>
-<<<<<<< Updated upstream
-        <a class="btn btn-ghost normal-case text-xl" href="/index.html">TCM</a>
-=======
         <a class="btn btn-ghost normal-case text-xl" href="/index.html"><img class="block dark:hidden" src="/img/TCM-Clair.png" width="50" height="50"
                 alt="Logo TCM"></a>
         <a class="btn btn-ghost normal-case text-xl" href="/index.html"><img class="hidden dark:block" src="/img/TCM-Sombre.png" width="50" height="50"
                 alt="Logo TCM"></a>
->>>>>>> Stashed changes
     </div>
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">

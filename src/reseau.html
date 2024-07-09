@@ -112,39 +112,15 @@
                         "object-center"
                     );
 
-<<<<<<< Updated upstream
-                // Création du span pour le badge avec le lien
-                const badge = document.createElement("a");
-                badge.href = `ligne.html#${ligne.id}`;
-                badge.classList.add("badge", "badge-flat", "badge-secondary", "absolute", "top-2", "right-2", "m-2", "px-2", "py-1", "text-xs");
-                badge.textContent = ligne.type; // Contenu du badge
-                imageLigne.appendChild(badge);
-=======
                     // Création du span pour le badge avec le lien
                     const badge = document.createElement("a");
                     badge.href = `ligne.html#${ligne.id}`;
-                    badge.classList.add("badge", "badge-primary", "absolute", "top-2", "right-2", "m-2", "px-2", "py-1");
+                    badge.classList.add("badge", "badge-flat", "badge-secondary", "absolute", "top-2", "right-2", "m-2", "px-2", "py-1", "text-xs");
                     badge.textContent = ligne.type; // Contenu du badge
                     imageLigne.appendChild(badge);
->>>>>>> Stashed changes
 
                     imageLigne.appendChild(image);
 
-<<<<<<< Updated upstream
-                const nomLigne = document.createElement("h3");
-                nomLigne.classList.add("mt-4", "text-lg", "text-primary");
-                nomLigne.textContent = `Ligne ${ligne.id}`;
-
-                const typeLigne = document.createElement("p");
-                typeLigne.classList.add("mt-1", "text-lg", "font-medium", "text-primary-focus");
-                typeLigne.textContent = ligne.nom;
-
-                carteLigne.appendChild(imageLigne);
-                carteLigne.appendChild(nomLigne);
-                carteLigne.appendChild(typeLigne);
-
-                ligneCardsContainer.appendChild(carteLigne);
-=======
                     const nomLigne = document.createElement("h3");
                     nomLigne.classList.add("mt-4", "text-lg", "text-secondary");
                     if (ligne.id === "NS") {
@@ -163,7 +139,6 @@
 
                     ligneCardsContainer.appendChild(carteLigne);
                 }
->>>>>>> Stashed changes
             });
         }
 

@@ -34,18 +34,6 @@
         .bouton-pdf:hover {
             cursor: pointer;
         }
-    </style>
-    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
-    <style>
-        .jw-album-image img,
-        .jw-element-image img {
-            pointer-events: none;
-            -webkit-touch-callout: none;
-        }
-
-        .pswp__share-tooltip .pswp__share--download {
-            display: none;
-        }
 
         @font-face {
             font-family: 'Paris2024';
@@ -54,7 +42,6 @@
             /* Spécifiez une plage si la police est variable */
             font-style: normal;
         }
-
 
         .special-font {
             font-family: 'Paris2024', sans-serif;
@@ -65,7 +52,7 @@
 <body>
     <br>
     <div>
-        <h1 id="pageTitle" class="text-5xl special-font font-bold text-center"></h1>
+        <h1 id="pageTitle" class="special-font text-5xl font-bold text-center"></h1>
         <div class="divider"></div>
         <div id="details"></div>
     </div>
@@ -75,37 +62,41 @@
 
             <!-- Les informations de la ligne seront affichées ici -->
         </div>
-        <div id="bus-panel" class="container p-10 mx-auto md:max-w-md lg:max-w-lg xl:max-w-xl bg-base-content">
-            <div class="bus-info">
+        <div
+            class="container mx-auto items-center justify-center py-8 bg-base-content dark:bg-base-300 rounded-lg grid grid-cols-6 gap-4">
+            <div
+                class="col-start-2 col-span-4 text-5xl, font-bold, text-center, flex, flex-row, items-center, py-8 justify-center">
+                <div>
 
-                <div class="time" id="current-time" style="text-align: center;"></div>
-            </div>
-
-            <div class="divider"></div>
-            <div class="bus-info" style="text-align:center; font: size 48px; color:dc241f;">
-                <div class="destination">
-                    <h2 class="title" id="destination"></h2>
+                    <div class="time text-secondary-content dark:text-secondary" id="current-time"
+                        style="text-align: center;"></div>
                 </div>
-            </div>
-            <div class="bus-info" style="text-align:center; font: size 48px;">
-                <div class="flex flex-col w-full lg:flex-row" id="nextBusTime"></div>
-            </div>
-            <br>
-            <br>
-            <div class="alert-message" id="alertMessage"></div>
-            <br>
-            <div class="divider"></div>
-            <div class="container">
-                <div id="lignes" class="container p-10 mx-auto md:max-w-md lg:max-w-lg xl:max-w-xl"></div>
-            </div>
-            <br>
 
+                <div class="divider divider-neutral"></div>
+                <div style="text-align:center; font: size 48px; color:dc241f;">
+                    <div class="destination">
+                        <h2 class="title" id="destination"></h2>
+                    </div>
+                </div>
+                <div style="text-align:center; font: size 48px;">
+                    <div class="flex flex-col w-full lg:flex-row" id="nextBusTime"></div>
+                </div>
+                <br>
+                <div class="alert-message" id="alertMessage"></div>
+                <br>
+                <div class="divider divider-neutral"></div>
+                <div class="container">
+                    <div id="lignes" class="container"></div>
+                </div>
+                <br>
+
+            </div>
         </div>
 
     </div>
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <br>
-        <footer class="footer footer-center p-10 bg-primary text-primary-content">
+    <footer class="footer footer-center p-10 bg-primary text-primary-content">
         <aside>
             <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
             <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
@@ -163,8 +154,6 @@
                     ligneContainer.appendChild(planLigne);
 
                     const ligneInfoContainer = document.createElement('div');
-
-
 
                     // Crée une div pour les statistiques de la ligne
                     const statsContainer = document.createElement('div');
@@ -236,7 +225,7 @@
 `));
 
                     // Texte du bouton
-                    const buttonText = document.createTextNode(' Fiche horaire (PDF)');
+                    const buttonText = document.createTextNode(" Fiche horaire (PDF)");
 
                     // Ajouter l'icône et le texte au boutonPDF
                     boutonPDF.appendChild(icon);
@@ -299,12 +288,7 @@
             return null;
         }
 
-        let ligneID = getLigneIDFromURL();
-
-        if (ligneID === "navette%20sp%C3%A9ciale") {
-            ligneID = "NS";
-        }
-
+        const ligneID = getLigneIDFromURL();
 
         // Affichage des informations de trafic
         function afficherInfoTrafic() {
@@ -338,7 +322,7 @@
                             ligneTrouvee = true;
 
                             const card = $("<div>")
-                                .addClass("p-4 mb-4 text-info border border-alert bg-blue-50 rounded-lg bg-info")
+                                .addClass("p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800")
                                 .attr("role", "button")
                                 .click(function () {
                                     window.location.href = "details.html#" + ligne.ligne;
@@ -362,7 +346,7 @@
 
                             const infosCount = infosTrafic.length;
                             const infosText = infosCount === 1 ? "1 info trafic" : infosCount + " infos trafic";
-                            const infosDiv = $("<p>").addClass("text-xl text-left text-info").text(infosText);
+                            const infosDiv = $("<div>").addClass("text-sm text-left").text(infosText);
 
                             cardHeader.append(infosDiv);
 
@@ -387,27 +371,14 @@
                 });
 
                 if (!ligneTrouvee) {
-                    if (ligneID === "NS") {
-                        $("#lignes").html(`<div id="alert-additional-content-3" class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+                    $("#lignes").html(`<div id="alert-additional-content-3" class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                             <span class="sr-only">Info</span>
-                            <h3 class="text-lg font-medium">La navette spéciale n'est pas en circulation</h3>
+                            <h3 class="text-lg font-medium">Tout va bien actuellement</h3>
                         </div>
-                        <div class="mt-2 mb-4 text-sm">Il n'y a pas d'évènement prévu au Zénith prochainement.</div>
+                        <div class="mt-2 mb-4 text-sm">Aucune information de trafic à signaler pour la ligne ${ligneID}. Tout circule normalement.</div>
                     </div>`);
-
-                    } else {
-                        $("#lignes").html(`<div id="alert-additional-content-3" class="p-4 mb-4 text-alert-success border border-alert-success rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-                        <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <span class="sr-only">Info</span>
-                            <h3 class="text-lg font-medium special-font"> Tout va bien actuellement</h3>
-                        </div>
-                        <div class="mt-2 mb-4 text-sm special-font">Aucune information de trafic à signaler pour la ligne ${ligneID}. Tout circule normalement.</div>
-                    </div>`);
-                    }
-
                 }
             });
         }

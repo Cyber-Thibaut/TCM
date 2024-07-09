@@ -29,13 +29,43 @@
     <link href="../dist/output.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="menu.js"></script>
+    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
+    <style>
+        .jw-album-image img,
+        .jw-element-image img {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+        }
+
+        .pswp__share-tooltip .pswp__share--download {
+            display: none;
+        }
+
+        @font-face {
+            font-family: 'Paris2024';
+            src: url('/dist/police-estivale.ttf') format('truetype');
+            font-weight: 100 900;
+            /* Spécifiez une plage si la police est variable */
+            font-style: normal;
+        }
+
+        .special-font {
+            font-family: 'Paris2024', sans-serif;
+        }
+    </style>
 </head>
 
 
 <body>
-    <div class="bg-white dark:bg-base-100 py-24 sm:py-32">
+
+    <div class="bg-base-content py-24 sm:py-32">
+        <center> <img src="/img/jo_black.png" class="block dark:hidden" alt="Logo TCM">
+            <img src="/img/jo_white.png" class="hidden dark:block" alt="Logo TCM">
+        </center>
         <div class="mx-auto max-w-screen-xl py-24 sm:py-32 lg:max-w-7xl lg:px-8">
-            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Nos Lignes</h2>
+            <div class="special-font mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+                Nos lignes spéciales pendant les Jeux Olympiques et Paralympiques de Clermont 2024
+            </div>
 
             <div id="ligne-cards"
                 class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
@@ -43,9 +73,6 @@
             </div>
         </div>
     </div>
-
-
-
     <footer class="footer footer-center p-10 bg-primary text-primary-content">
         <aside>
             <img src="\img\TCM.png" width="100" height="100" alt="Logo TCM"
@@ -53,9 +80,30 @@
             <p class="font-bold">
                 Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
             </p>
-            <p>Copyright © 2023 - Tous droits réservés</p>
+            <p>Copyright ©
+                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
+            </p>
         </aside>
     </footer>
+    <script>
+        // Ajoute ou supprime la classe 'dark' selon les préférences de l'utilisateur
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+        if (prefersDarkScheme.matches) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        // Écoute les changements dans les préférences de l'utilisateur
+        prefersDarkScheme.addEventListener("change", (e) => {
+            if (e.matches) {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+        });
+    </script>
     <script>
         // Fonction pour charger les données des lignes depuis le fichier JSON
         async function chargerDonneesLignes() {
@@ -82,9 +130,9 @@
             const ligneCardsContainer = document.getElementById("ligne-cards");
 
             lignesData.forEach((ligne) => {
-                if (ligne.type != "JO") {
+                if (ligne.type === "JO") {
                     const carteLigne = document.createElement("a");
-                    carteLigne.href = `ligne.html#${ligne.id}`;
+                    carteLigne.href = `jo_ligne.html#${ligne.id}`;
                     carteLigne.classList.add("group");
 
                     const imageLigne = document.createElement("div");
@@ -103,7 +151,7 @@
                     );
 
                     const image = document.createElement("img");
-                    image.src = `../img/${ligne.id}.png`; // Remplacez par le chemin réel de l'image
+                    image.src = `../img/${ligne.id}-jo.png`; // Remplacez par le chemin réel de l'image
                     image.alt = `Image de la Ligne ${ligne.id}`;
                     image.classList.add(
                         "h-full",
@@ -112,41 +160,10 @@
                         "object-center"
                     );
 
-<<<<<<< Updated upstream
-                // Création du span pour le badge avec le lien
-                const badge = document.createElement("a");
-                badge.href = `ligne.html#${ligne.id}`;
-                badge.classList.add("badge", "badge-flat", "badge-secondary", "absolute", "top-2", "right-2", "m-2", "px-2", "py-1", "text-xs");
-                badge.textContent = ligne.type; // Contenu du badge
-                imageLigne.appendChild(badge);
-=======
-                    // Création du span pour le badge avec le lien
-                    const badge = document.createElement("a");
-                    badge.href = `ligne.html#${ligne.id}`;
-                    badge.classList.add("badge", "badge-primary", "absolute", "top-2", "right-2", "m-2", "px-2", "py-1");
-                    badge.textContent = ligne.type; // Contenu du badge
-                    imageLigne.appendChild(badge);
->>>>>>> Stashed changes
-
                     imageLigne.appendChild(image);
 
-<<<<<<< Updated upstream
-                const nomLigne = document.createElement("h3");
-                nomLigne.classList.add("mt-4", "text-lg", "text-primary");
-                nomLigne.textContent = `Ligne ${ligne.id}`;
-
-                const typeLigne = document.createElement("p");
-                typeLigne.classList.add("mt-1", "text-lg", "font-medium", "text-primary-focus");
-                typeLigne.textContent = ligne.nom;
-
-                carteLigne.appendChild(imageLigne);
-                carteLigne.appendChild(nomLigne);
-                carteLigne.appendChild(typeLigne);
-
-                ligneCardsContainer.appendChild(carteLigne);
-=======
                     const nomLigne = document.createElement("h3");
-                    nomLigne.classList.add("mt-4", "text-lg", "text-secondary");
+                    nomLigne.classList.add("mt-4", "special-font", "text-lg", "text-secondary");
                     if (ligne.id === "NS") {
                         nomLigne.textContent = `Navette Spéciale`;
                     }
@@ -154,7 +171,7 @@
                         nomLigne.textContent = `Ligne ${ligne.id}`;
                     }
                     const typeLigne = document.createElement("p");
-                    typeLigne.classList.add("mt-1", "text-lg", "font-medium", "text-secondary-content");
+                    typeLigne.classList.add("mt-1", "special-font", "text-lg", "font-medium", "text-secondary-content");
                     typeLigne.textContent = ligne.nom;
 
                     carteLigne.appendChild(imageLigne);
@@ -163,7 +180,6 @@
 
                     ligneCardsContainer.appendChild(carteLigne);
                 }
->>>>>>> Stashed changes
             });
         }
 

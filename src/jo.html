@@ -65,7 +65,7 @@
             </div>
         </center>
         <div class="mx-auto max-w-screen-xl py-24 sm:py-32 lg:max-w-7xl lg:px-8">
-            <div class="special-font mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+            <div class="special-font mb-4 text-4xl tracking-tight font-extrabold text-white">
                 Nos lignes spéciales pendant les Jeux Olympiques et Paralympiques de Clermont 2024
             </div>
 
@@ -163,7 +163,7 @@
                     imageLigne.appendChild(image);
 
                     const nomLigne = document.createElement("h3");
-                    nomLigne.classList.add("mt-4", "special-font", "text-lg", "text-secondary");
+                    nomLigne.classList.add("mt-4", "special-font", "text-lg", "text-info");
                     if (ligne.id === "NS") {
                         nomLigne.textContent = `Navette Spéciale`;
                     }
@@ -171,7 +171,7 @@
                         nomLigne.textContent = `Ligne ${ligne.id}`;
                     }
                     const typeLigne = document.createElement("p");
-                    typeLigne.classList.add("mt-1", "special-font", "text-lg", "font-medium", "text-secondary-content");
+                    typeLigne.classList.add("mt-1", "special-font", "text-lg", "font-medium", "text-base-100", "dark:text-neutral-content");
                     typeLigne.textContent = ligne.nom;
 
                     carteLigne.appendChild(imageLigne);

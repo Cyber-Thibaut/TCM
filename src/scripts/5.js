@@ -308,16 +308,16 @@ function updateBusTimes() {
         document.getElementById("nextBusTime").innerHTML = nextBus + followingBus;
     } else {
         const nextBus = nextBusFreq === 1 ?
-            `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"> </div>` :
+            `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"> </div>` :
             nextBusFreq === 2 ?
-                `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche <img src="${selectedIcon1}" style="width: 50px; height: auto; margin-top: -35px"></div>` :
-                `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${nextBusFreq} min  <img src="${selectedIcon1}" style="width: 50px; height: auto; margin-top: -35px"></div>`;
+                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
+                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${nextBusFreq} min  <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>`;
 
         const followingBus = followingBusFreq === 0 ?
-            `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>Arrivé</div>` :
+            `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>Arrivé <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
             followingBusFreq === 1 ?
-                `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>1 min</div>` :
-                `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${followingBusFreq} min <img src="${selectedIcon2}" style="width: 50px; height: auto; margin-top: -35px"></div>`;
+                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>1 min <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
+                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${followingBusFreq} min <img src="${selectedIcon2}" style="width: 50px; height: auto; margin-top: -35px"></div>`;
 
         const divider = `<div class="divider lg:divider-horizontal"></div>`;
 
@@ -371,7 +371,7 @@ function updateCurrentTime() {
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     currentTimeElement.textContent = `Mis à jour à : ${hours}:${minutes}`;
-    document.getElementById('destination').innerHTML = `<h2 class="text-4xl font-bold">Direction Musée d'Art Moderne ♿</h2><br>`;
+    document.getElementById('destination').innerHTML = `<h2 class="text-4xl text-primary-content dark:text-primary font-bold">Direction Musée d'Art Moderne ♿</h2><br>`;
 
 }
 setInterval(updateCurrentTime, 1000);

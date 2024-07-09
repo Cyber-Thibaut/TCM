@@ -81,10 +81,10 @@
     <br>
     <footer class="footer footer-center p-10 bg-primary text-primary-content">
         <aside>
-            <img src="\img\TCM.png" width="100" height="100" alt="Logo TCM"
-                class="bg-gray-200 bg-opacity-30 p-2 rounded ">
+            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
+            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
             <p class="font-bold">
-                Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
+                Partenaire de vos déplacements depuis 1989.
             </p>
             <p>Copyright © 2023 - Tous droits réservés</p>
         </aside>
@@ -98,7 +98,11 @@
                 const data = await response.json(); // Convertit la réponse en objet JavaScript
 
                 // Recherche la ligne correspondant au numéro de ligne
-                const ligne = data.lignes.find(l => l.id === parseInt(numeroLigne));
+                if (numeroLigne === "NS") {
+                    ligne = data.lignes.find(l => l.id === "NS");
+                } else {
+                    ligne = data.lignes.find(l => l.id === parseInt(numeroLigne));
+                }
 
                 if (ligne) {
                     const ligneContainer = document.createElement('div');
@@ -134,11 +138,13 @@
 
                     const ligneInfoContainer = document.createElement('div');
 
-
-                    const typeLigne = document.createElement('p');
-                    typeLigne.classList.add('text-lg', 'text-secondary');
-                    typeLigne.textContent = `Réseau ${ligne.type}`;
-                    ligneContainer.appendChild(typeLigne);
+                    if (ligne.id === "NS") {
+                    } else {
+                        const typeLigne = document.createElement('p');
+                        typeLigne.classList.add('text-lg', 'text-secondary');
+                        typeLigne.textContent = `Réseau ${ligne.type}`;
+                        ligneContainer.appendChild(typeLigne);
+                    }
 
                     // Crée une div pour les statistiques de la ligne
                     const statsContainer = document.createElement('div');
@@ -449,12 +455,12 @@
                                     doc.text(155, 179, `${ligne.horaires.vacances.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
                                     doc.text(189, 179, `${ligne.horaires.vacances.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
                                     doc.text(233, 179, `${ligne.horaires.vacances.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(264, 179, `${ligne.horaires.vacances.jour_semaine.soir}`); 
+                                    doc.text(264, 179, `${ligne.horaires.vacances.jour_semaine.soir}`);
                                     doc.text(131, 185.5, `${ligne.horaires.vacances.samedi.creuse}`); doc.setTextColor(236, 230, 202);
                                     doc.text(155, 185.5, `${ligne.horaires.vacances.samedi.pointe}`); doc.setTextColor(25, 64, 89);
                                     doc.text(189, 185.5, `${ligne.horaires.vacances.samedi.creuse}`); doc.setTextColor(236, 230, 202);
                                     doc.text(233, 185.5, `${ligne.horaires.vacances.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(264, 185.5, `${ligne.horaires.vacances.samedi.soir}`); 
+                                    doc.text(264, 185.5, `${ligne.horaires.vacances.samedi.soir}`);
                                     doc.text(131, 192, `${ligne.horaires.vacances.dimanche.creuse}`); doc.setTextColor(236, 230, 202);
                                     doc.text(155, 192, `${ligne.horaires.vacances.dimanche.pointe}`); doc.setTextColor(25, 64, 89);
                                     doc.text(219, 192, `${ligne.horaires.vacances.dimanche.creuse}`);

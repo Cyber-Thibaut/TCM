@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const menu = `
-    <div class="navbar bg-base-300">
+    <div class="navbar bg-base-300 dark:bg-base-100">
     <div class="navbar-start">
         <div class="dropdown">
             <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         </svg> Nos Agences</a></li>
             </ul>
         </div>
-        <a class="btn btn-ghost normal-case text-xl visible dark:invisible" href="/index.html"><img src="/img/TCM-Clair.png" width="50" height="50"
+        <a class="btn btn-ghost normal-case text-xl hidden dark:block" href="/index.html"><img src="/img/TCM-Clair.png" width="75" height="75"
                 alt="Logo TCM"></a>
-        <a class="btn btn-ghost normal-case text-xl invisible dark:visible" href="/index.html"><img src="/img/TCM-Sombre.png" width="50" height="50"
+        <a class="btn btn-ghost normal-case text-xl block dark:hidden" href="/index.html"><img src="/img/TCM-Sombre.png" width="75" height="75"
                 alt="Logo TCM"></a>
     </div>
     <div class="navbar-center hidden lg:flex">

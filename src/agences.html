@@ -29,6 +29,7 @@
     <link href="/dist/output.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/src/menu.js"></script>
+    <script>document.addEventListener('contextmenu',function(e){e.preventDefault();e.stopPropagation();});document.addEventListener('copy',function(e){e.preventDefault();e.stopPropagation();});document.addEventListener('cut',function(e){e.preventDefault();e.stopPropagation();});</script><style>.jw-album-image img, .jw-element-image img { pointer-events: none; -webkit-touch-callout: none; }.pswp__share-tooltip .pswp__share--download { display: none; }</style>
 </head>
 <style>
     .orange-border {
@@ -430,7 +431,7 @@
 
             <!-- Contenu du modal -->
             <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <p>Information – Ventes</p>
             <br>
             <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
             <ul>
@@ -464,7 +465,7 @@
 
             <!-- Contenu du modal -->
             <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Conseils – Ventes – Espace Abonnements</p>
+            <p>Information – Ventes</p>
             <br>
             <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
             <ul>
@@ -797,9 +798,9 @@
                 var jour = cejour.getDate();
                 var classe = ""; // Initialisez la variable classe
 
-                if (cejour < new Date("2024-05-02")) {
-                    var texte = "L'agence est en travaux actuellement.";
-                    classe = "badge badge-warning"; // Ajoutez la classe pour "en travaux"
+                if (cejour < new Date("2024-09-02")) {
+                    var texte = "<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' class='inline-block h-4 w-4 stroke-current'> <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12'></path></svg>L'agence est en travaux actuellement.";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "en travaux"
                 } else if ((day >= 1) && (day <= 5) && (heure >= 7) && (heure < 20)) {
                     var texte = "L'agence est ouverte";
                     classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
@@ -854,32 +855,34 @@
                 var jour = cejour.getDate();
                 var classe = ""; // Initialisez la variable classe
 
-                if (cejour < new Date("2024-05-02")) {
-                    var texte = "L'agence est en travaux actuellement.";
-                    classe = "badge badge-warning"; // Ajoutez la classe pour "en travaux"
-                } else if ((day >= 1) && (day <= 5) && (heure >= 7) && (heure < 20)) {
+                if (cejour < new Date("2024-09-02")) {
+                    var texte = "<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' class='inline-block h-4 w-4 stroke-current'> <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12'></path></svg>L'agence est en travaux actuellement.";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "en travaux"
+                } else if ((jour == 1) && (heure >= 7) && (heure < 19)) {
                     var texte = "L'agence est ouverte";
                     classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day >= 1) && (day <= 5) && (heure >= 20) && (heure < 21)) {
-                    var texte = "L'agence ferme à 21h";
-                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
-                } else if ((day == 6) && (heure >= 8) && (heure < 19)) {
-                    var texte = "L'agence est ouverte";
-                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day == 6) && (heure >= 19) && (heure < 20)) {
+                } else if ((jour == 1) && (heure >= 19) && (heure < 20)) {
                     var texte = "L'agence ferme à 20h";
                     classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
-                } else if ((day == 0) && (heure >= 10) && (heure < 16)) {
+                } else if ((day >= 1) && (day <= 5) && (heure >= 9) && (heure < 18)) {
                     var texte = "L'agence est ouverte";
                     classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day == 0) && (heure >= 16) && (heure < 17)) {
-                    var texte = "L'agence ferme à 17h";
+                } else if ((day >= 1) && (day <= 5) && (heure >= 18) && (heure < 19)) {
+                    var texte = "L'agence ferme à 19h";
                     classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 10) && (heure < 17)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 17) && (heure < 18)) {
+                    var texte = "L'agence ferme à 18h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 17)) {
+                    var texte = "Agence fermée, utilisez une autre agence";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
                 } else {
                     var texte = "L'agence est fermée";
                     classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
                 }
-
 
                 var aficher_heure = date + " " + ("0" + cejour.getHours()).slice(-2) + ":" + ("0" + cejour.getMinutes()).slice(-2) + ":" + ("0" + cejour.getSeconds()).slice(-2);
                 document.getElementById('Riom').innerHTML = texte;
@@ -911,27 +914,30 @@
                 var jour = cejour.getDate();
                 var classe = ""; // Initialisez la variable classe
 
-                if (cejour < new Date("2024-05-02")) {
-                    var texte = "L'agence est en travaux actuellement.";
-                    classe = "badge badge-warning"; // Ajoutez la classe pour "en travaux"
-                } else if ((day >= 1) && (day <= 5) && (heure >= 7) && (heure < 20)) {
+                if (cejour < new Date("2024-09-02")) {
+                    var texte = "<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' class='inline-block h-4 w-4 stroke-current'> <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 18L18 6M6 6l12 12'></path></svg>L'agence est en travaux actuellement.";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "en travaux"
+                } else if ((jour == 1) && (heure >= 7) && (heure < 19)) {
                     var texte = "L'agence est ouverte";
                     classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day >= 1) && (day <= 5) && (heure >= 20) && (heure < 21)) {
-                    var texte = "L'agence ferme à 21h";
-                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
-                } else if ((day == 6) && (heure >= 8) && (heure < 19)) {
-                    var texte = "L'agence est ouverte";
-                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day == 6) && (heure >= 19) && (heure < 20)) {
+                } else if ((jour == 1) && (heure >= 19) && (heure < 20)) {
                     var texte = "L'agence ferme à 20h";
                     classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
-                } else if ((day == 0) && (heure >= 10) && (heure < 16)) {
+                } else if ((day >= 1) && (day <= 5) && (heure >= 9) && (heure < 18)) {
                     var texte = "L'agence est ouverte";
                     classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
-                } else if ((day == 0) && (heure >= 16) && (heure < 17)) {
-                    var texte = "L'agence ferme à 17h";
+                } else if ((day >= 1) && (day <= 5) && (heure >= 18) && (heure < 19)) {
+                    var texte = "L'agence ferme à 19h";
                     classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 6) && (heure >= 10) && (heure < 17)) {
+                    var texte = "L'agence est ouverte";
+                    classe = "badge badge-success"; // Ajoutez la classe pour "ouverte"
+                } else if ((day == 6) && (heure >= 17) && (heure < 18)) {
+                    var texte = "L'agence ferme à 18h";
+                    classe = "badge badge-warning"; // Ajoutez la classe pour "fermée dans 1h"
+                } else if ((day == 0) && (heure >= 10) && (heure < 17)) {
+                    var texte = "Agence fermée, utilisez une autre agence";
+                    classe = "badge badge-error"; // Ajoutez la classe pour "fermée"
                 } else {
                     var texte = "L'agence est fermée";
                     classe = "badge badge-error"; // Ajoutez la classe pour "fermée"

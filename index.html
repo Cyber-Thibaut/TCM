@@ -26,10 +26,21 @@
     <!-- Couleur de fond pour l'intégration -->
     <meta name="theme-color" content="#204BFE">
     <!-- Meta Tags Generated with https://metatags.io -->
-    <link href="../dist/output.css" rel="stylesheet">
+    <link href="/dist/output.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="src/menu.js"></script>
+    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
+    <style>
+        .jw-album-image img,
+        .jw-element-image img {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+        }
 
+        .pswp__share-tooltip .pswp__share--download {
+            display: none;
+        }
+    </style>
 </head>
 <style>
     .orange-border {
@@ -57,24 +68,23 @@
         <div id="TCM" class="transform: translate(-50%, -50%); position: fixed;"></div>
     </div>
     <div class="md:container md:mx-auto">
-
-        <div class="flex flex-col w-full lg:flex-row">
-
-            <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-
-                <h1 class="text-primary text-5xl font-bold text-center">Voyagez facilement à <span
-                        class="text-accent text-5xl font-bold"> Clermont-Ferrand</span> !</h1>
-
+        <div class="flex w-full flex-col lg:flex-row">
+            <div class="card bg-base-300 rounded-box grid h-32 flex-grow place-items-center">
+                <div class="flex flex-col justify-center items-center h-full card bg-base-300 rounded-box p-4">
+                    <h1 class="text-primary text-5xl font-bold text-center">
+                        Voyagez facilement à <span class="text-accent text-5xl font-bold"> Clermont-Ferrand</span> !
+                    </h1>
+                </div>
             </div>
-            <div class="divider lg:divider-horizontal "></div>
-            <div class="grid flex-grow h-32 card bg-primary-focus rounded-box place-items-center bg-neutral-content">
-                <h2 class="text-neutral text-2xl font-bold mb-4">Info trafic</h2> <!-- Titre ajouté -->
-                <div id="lignes" class="grid grid-flow-row auto-rows-max"></div>
-            </div>
+            <div class="divider lg:divider-horizontal"></div>
 
+            <div class="card rounded-box grid h-32 flex-grow place-items-center bg-primary">
+                <h2 class="text-2xl font-bold mb-4 text-primary-content">Info trafic</h2>
+                <div id="lignes" class="grid grid-flow-row auto-rows-max gap-4"></div>
+            </div>
         </div>
         <br>
-        <div class="bg-secondary-content dark:bg-base-200 rounded-md py-24 sm:py-32">
+        <div class="bg-secondary-content dark:bg-base-200 rounded-box py-24 sm:py-32">
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl lg:mx-0">
                     <h2 class="text-3xl font-bold tracking-tight text-secondary sm:text-4xl">Notre Actualité</h2>
@@ -88,12 +98,14 @@
     </div>
     <footer class="footer footer-center p-10 bg-primary text-primary-content">
         <aside>
-            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
-            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
+            <img src="\img\TCM.png" width="100" height="100" alt="Logo TCM"
+                class="bg-gray-200 bg-opacity-30 p-2 rounded ">
             <p class="font-bold">
-                Partenaire de vos déplacements depuis 1989.
+                Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
             </p>
-            <p>Copyright © 2023 - Tous droits réservés</p>
+            <p>Copyright ©
+                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
+            </p>
         </aside>
     </footer>
 
@@ -107,11 +119,11 @@
             // Créez un conteneur pour les détails de la ligne TCM
             const tcmDetailsContainer = $("<div>").addClass("tcm-details");
 
-            // Créez un conteneur pour les indices des autres lignes
             const otherLinesContainer = $("<div>").addClass("other-lines");
 
             // Créez un ensemble pour suivre les lignes auxquelles vous avez déjà ajouté un logo
             const addedLineLogos = new Set();
+            let nbLogo = 0;
 
             $.each(data.lignes, function (i, ligne) {
                 const dateActuelle = new Date();
@@ -129,30 +141,27 @@
                             if (ligne.ligne === "TCM") {
                                 // Ajoutez la description de l'info pour la ligne "TCM"
                                 if (info.type.includes("travaux")) {
-                                    let startDate = new Date(info.debut); // Convertissez la date de début du format texte en objet Date
-                                    let endDate = new Date(info.fin); // Convertissez la date de fin du format texte en objet Date
-
                                     if (dateActuelle < dateDebut) {
                                         // Les travaux sont à venir
                                         logoHtml += `<div class="alert alert-warning">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
                                     } else if (dateActuelle >= dateDebut && dateActuelle <= dateFin) {
                                         // Les travaux sont en cours
                                         logoHtml += `<div class="alert alert-error">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
                                     }
                                 } else if (info.type.includes("information")) {
                                     logoHtml += `<div class="alert alert-info">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
                                 } else if (info.type.includes("fermeture")) {
                                     logoHtml += `<div class="alert alert-error">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
                                 } else if (info.type.includes("attention")) {
                                     logoHtml += `<div class="alert alert-warning">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
                                 } else if (info.type.includes("perturbation")) {
                                     logoHtml += `<div class="alert alert-warningr">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
                                 } else {
                                     // Thème par défaut
                                     theme = "p-4 border border-gray-300 rounded-lg bg-gray-50 dark:border-gray-600 dark:bg-gray-800";
@@ -166,6 +175,7 @@
                                 logoHtml += `</div>`;
                                 addedLineLogos.add(ligne.ligne);
                             }
+
                         }
                     }
                 });
@@ -176,10 +186,15 @@
                         tcmDetailsContainer.html(logoHtml);
                     } else {
                         otherLinesContainer.append(logoHtml);
+                        nbLogo += 1;
+                        // Ajoutez un saut de ligne après chaque groupe de 3 logos
+                        if (nbLogo === 4) {
+                            otherLinesContainer.append("<br>");
+                            nbLogo = 0;  // Remettre à zéro le compteur après 3 logos
+                        }
                     }
                 }
             });
-
             // Vérifiez si otherLinesContainer est vide et ajoutez le logo si c'est le cas
             if (otherLinesContainer.children().length === 0) {
                 let logoHtml = "";
@@ -187,7 +202,6 @@
                 logoHtml += `</div>`;
                 otherLinesContainer.append(logoHtml);
             }
-
             // Ajoutez les conteneurs à la page
             $("#lignes").append(otherLinesContainer);
             $("#TCM").append(tcmDetailsContainer);

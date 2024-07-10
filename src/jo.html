@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Métadonnées du site -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité">
+    <meta name="author" content="Transport Clermont Métropole">
+    <title>Transport Clermont Métropole</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png">
+
+    <!-- Intégrations pour réseaux sociaux -->
+    <meta property="og:title" content="Transport Clermont Métropole">
+    <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
+    <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
+    <meta name="twitter:title" content="Transport Clermont Métropole">
+    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Couleur de fond pour l'intégration -->
+    <meta name="theme-color" content="#204BFE">
+
+    <link href="../dist/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="menu.js"></script>
+    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
+    <style>
+        .jw-album-image img,
+        .jw-element-image img {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+        }
+
+        .pswp__share-tooltip .pswp__share--download {
+            display: none;
+        }
+
+        @font-face {
+            font-family: 'Paris2024';
+            src: url('/dist/police-estivale.ttf') format('truetype');
+            font-weight: 100 900;
+            /* Spécifiez une plage si la police est variable */
+            font-style: normal;
+        }
+
+        .special-font {
+            font-family: 'Paris2024', sans-serif;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="bg-base-content dark:bg-blue-950 py-24 sm:py-24">
+        <center>
+            <div>
+                <img src="/img/jo-tcm_white.png" width="50%" height="50%" alt="Logo TCM">
+            </div>
+        </center>
+        <div class="mx-auto max-w-screen-xl py-24 sm:py-32 lg:max-w-7xl lg:px-8">
+            <div class="special-font mb-4 text-4xl tracking-tight font-extrabold text-white">
+                Nos lignes spéciales pendant les Jeux Olympiques et Paralympiques de Clermont 2024
+            </div>
+
+            <div id="ligne-cards"
+                class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                <!-- Les cartes des lignes seront générées ici par JavaScript -->
+            </div>
+        </div>
+    </div>
+        <footer class="footer footer-center p-10 bg-primary text-primary-content">
+        <aside>
+            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
+            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
+            <p class="font-bold">
+                Partenaire de vos déplacements depuis 1989.
+            </p>
+            <p>Copyright © 2023 - Tous droits réservés</p>
+        </aside>
+    </footer>
+    <script>
+        // Ajoute ou supprime la classe 'dark' selon les préférences de l'utilisateur
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+        if (prefersDarkScheme.matches) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        // Écoute les changements dans les préférences de l'utilisateur
+        prefersDarkScheme.addEventListener("change", (e) => {
+            if (e.matches) {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+        });
+    </script>
+    <script>
+        // Fonction pour charger les données des lignes depuis le fichier JSON
+        async function chargerDonneesLignes() {
+            try {
+                const response = await fetch('ligne.json'); // Charge le fichier JSON
+                const data = await response.json(); // Convertit la réponse en objet JavaScript
+
+                // Vérifiez que les données ont été chargées avec succès
+                if (Array.isArray(data.lignes)) {
+                    return data.lignes;
+                } else {
+                    throw new Error("Format de données incorrect dans le fichier JSON");
+                }
+            } catch (erreur) {
+                console.error("Erreur lors du chargement des données des lignes : ", erreur);
+                return []; // Retourne un tableau vide en cas d'erreur
+            }
+        }
+
+        // Fonction pour générer les cartes des lignes
+        async function genererCartesLignes() {
+            const lignesData = await chargerDonneesLignes(); // Charge les données des lignes
+
+            const ligneCardsContainer = document.getElementById("ligne-cards");
+
+            lignesData.forEach((ligne) => {
+                if (ligne.type === "JO") {
+                    const carteLigne = document.createElement("a");
+                    carteLigne.href = `jo_ligne.html#${ligne.id}`;
+                    carteLigne.classList.add("group");
+
+                    const imageLigne = document.createElement("div");
+                    imageLigne.classList.add(
+                        "aspect-h-1",
+                        "aspect-w-1",
+                        "relative", // Pour positionner le span à l'intérieur
+                        "overflow-hidden",
+                        "rounded-lg",
+                        "xl:aspect-h-8",
+                        "xl:aspect-w-7",
+                        "group-hover:opacity-75", // Ajout de la classe pour l'effet de survol
+                        "cursor-pointer" // Changement du curseur au survol
+                    );
+
+                    const image = document.createElement("img");
+                    image.src = `../img/${ligne.id}-jo.png`; // Remplacez par le chemin réel de l'image
+                    image.alt = `Image de la Ligne ${ligne.id}`;
+                    image.classList.add(
+                        "h-full",
+                        "w-full",
+                        "object-cover",
+                        "object-center"
+                    );
+
+                    imageLigne.appendChild(image);
+
+                    const nomLigne = document.createElement("h3");
+                    nomLigne.classList.add("mt-4", "special-font", "text-lg", "text-info");
+                    if (ligne.id === "NS") {
+                        nomLigne.textContent = `Navette Spéciale`;
+                    }
+                    else {
+                        nomLigne.textContent = `Ligne ${ligne.id}`;
+                    }
+                    const typeLigne = document.createElement("p");
+                    typeLigne.classList.add("mt-1", "special-font", "text-lg", "font-medium", "text-base-100", "dark:text-neutral-content");
+                    typeLigne.textContent = ligne.nom;
+
+                    carteLigne.appendChild(imageLigne);
+                    carteLigne.appendChild(nomLigne);
+                    carteLigne.appendChild(typeLigne);
+
+                    ligneCardsContainer.appendChild(carteLigne);
+                }
+            });
+        }
+
+        // Appeler la fonction pour générer les cartes des lignes
+        genererCartesLignes();
+    </script>
+</body>
+
+</html>

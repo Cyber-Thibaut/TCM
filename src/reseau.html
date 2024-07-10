@@ -57,10 +57,10 @@
     </div>
     <footer class="footer footer-center p-10 bg-primary text-primary-content">
         <aside>
-            <img src="\img\TCM.png" width="100" height="100" alt="Logo TCM"
-                class="bg-gray-200 bg-opacity-30 p-2 rounded ">
+            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
+            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
             <p class="font-bold">
-                Transport Clermont Métropole <br />Partenaire de vos déplacements depuis 1989.
+                Partenaire de vos déplacements depuis 1989.
             </p>
             <p>Copyright ©
                 <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
@@ -93,61 +93,63 @@
             const ligneCardsContainer = document.getElementById("ligne-cards");
 
             lignesData.forEach((ligne) => {
-                const carteLigne = document.createElement("a");
-                carteLigne.href = `ligne.html#${ligne.id}`;
-                carteLigne.classList.add("group");
+                if (ligne.type != "JO") {
+                    const carteLigne = document.createElement("a");
+                    carteLigne.href = `ligne.html#${ligne.id}`;
+                    carteLigne.classList.add("group");
 
-                const imageLigne = document.createElement("div");
-                imageLigne.classList.add(
-                    "aspect-h-1",
-                    "aspect-w-1",
-                    "relative", // Pour positionner le span à l'intérieur
-                    "overflow-hidden",
-                    "rounded-lg",
-                    "bg-white",
-                    "dark:bg-base-100",
-                    "xl:aspect-h-8",
-                    "xl:aspect-w-7",
-                    "group-hover:opacity-75", // Ajout de la classe pour l'effet de survol
-                    "cursor-pointer" // Changement du curseur au survol
-                );
+                    const imageLigne = document.createElement("div");
+                    imageLigne.classList.add(
+                        "aspect-h-1",
+                        "aspect-w-1",
+                        "relative", // Pour positionner le span à l'intérieur
+                        "overflow-hidden",
+                        "rounded-lg",
+                        "bg-white",
+                        "dark:bg-base-100",
+                        "xl:aspect-h-8",
+                        "xl:aspect-w-7",
+                        "group-hover:opacity-75", // Ajout de la classe pour l'effet de survol
+                        "cursor-pointer" // Changement du curseur au survol
+                    );
 
-                const image = document.createElement("img");
-                image.src = `../img/${ligne.id}.png`; // Remplacez par le chemin réel de l'image
-                image.alt = `Image de la Ligne ${ligne.id}`;
-                image.classList.add(
-                    "h-full",
-                    "w-full",
-                    "object-cover",
-                    "object-center"
-                );
+                    const image = document.createElement("img");
+                    image.src = `../img/${ligne.id}.png`; // Remplacez par le chemin réel de l'image
+                    image.alt = `Image de la Ligne ${ligne.id}`;
+                    image.classList.add(
+                        "h-full",
+                        "w-full",
+                        "object-cover",
+                        "object-center"
+                    );
 
-                // Création du span pour le badge avec le lien
-                const badge = document.createElement("a");
-                badge.href = `ligne.html#${ligne.id}`;
-                badge.classList.add("badge", "badge-primary", "absolute", "top-2", "right-2", "m-2", "px-2", "py-1");
-                badge.textContent = ligne.type; // Contenu du badge
-                imageLigne.appendChild(badge);
+                    // Création du span pour le badge avec le lien
+                    const badge = document.createElement("a");
+                    badge.href = `ligne.html#${ligne.id}`;
+                    badge.classList.add("badge", "badge-flat", "badge-primary", "absolute", "top", "right-2", "m-2", "px-2", "py-1", "text-xs");
+                    badge.textContent = ligne.type; // Contenu du badge
+                    imageLigne.appendChild(badge);
 
-                imageLigne.appendChild(image);
+                    imageLigne.appendChild(image);
 
-                const nomLigne = document.createElement("h3");
-                nomLigne.classList.add("mt-4", "text-lg", "text-secondary");
-                if (ligne.id === "NS") {
-                    nomLigne.textContent = `Navette Spéciale`;
+                    const nomLigne = document.createElement("h3");
+                    nomLigne.classList.add("mt-4", "text-lg", "text-primary");
+                    if (ligne.id === "NS") {
+                        nomLigne.textContent = `Navette Spéciale`;
+                    }
+                    else {
+                        nomLigne.textContent = `Ligne ${ligne.id}`;
+                    }
+                    const typeLigne = document.createElement("p");
+                    typeLigne.classList.add("mt-1", "text-lg", "font-medium", "text-neutral", "dark:text-neutral-content");
+                    typeLigne.textContent = ligne.nom;
+
+                    carteLigne.appendChild(imageLigne);
+                    carteLigne.appendChild(nomLigne);
+                    carteLigne.appendChild(typeLigne);
+
+                    ligneCardsContainer.appendChild(carteLigne);
                 }
-                else {
-                    nomLigne.textContent = `Ligne ${ligne.id}`;
-                }
-                const typeLigne = document.createElement("p");
-                typeLigne.classList.add("mt-1", "text-lg", "font-medium", "text-secondary-content");
-                typeLigne.textContent = ligne.nom;
-
-                carteLigne.appendChild(imageLigne);
-                carteLigne.appendChild(nomLigne);
-                carteLigne.appendChild(typeLigne);
-
-                ligneCardsContainer.appendChild(carteLigne);
             });
         }
 

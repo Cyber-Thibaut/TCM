@@ -26,7 +26,7 @@
     <!-- Couleur de fond pour l'intégration -->
     <meta name="theme-color" content="#204BFE">
     <!-- Meta Tags Generated with https://metatags.io -->
-    <link href="../dist/output.css" rel="stylesheet">
+    <link href="/dist/output.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="src/menu.js"></script>
     <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
@@ -68,8 +68,8 @@
         <div id="TCM" class="transform: translate(-50%, -50%); position: fixed;"></div>
     </div>
     <div class="md:container md:mx-auto">
-        <div class="flex w-full">
-            <div class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+        <div class="flex w-full flex-col lg:flex-row">
+            <div class="card bg-base-300 rounded-box grid h-32 flex-grow place-items-center">
                 <div class="flex flex-col justify-center items-center h-full card bg-base-300 rounded-box p-4">
                     <h1 class="text-primary text-5xl font-bold text-center">
                         Voyagez facilement à <span class="text-accent text-5xl font-bold"> Clermont-Ferrand</span> !
@@ -78,7 +78,7 @@
             </div>
             <div class="divider lg:divider-horizontal"></div>
 
-            <div class="flex flex-col justify-center items-center h-full card bg-primary rounded-box p-4">
+            <div class="card rounded-box grid h-32 flex-grow place-items-center bg-primary">
                 <h2 class="text-2xl font-bold mb-4 text-primary-content">Info trafic</h2>
                 <div id="lignes" class="grid grid-flow-row auto-rows-max gap-4"></div>
             </div>

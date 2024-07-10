@@ -30,11 +30,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="menu.js"></script>
     <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
+    <style>
+        .jw-album-image img,
+        .jw-element-image img {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+        }
+
+        .pswp__share-tooltip .pswp__share--download {
+            display: none;
+        }
+    </style>
 </head>
 
 
 <body>
-    <div class="bg-white dark:bg-base-100 py-24 sm:py-32">
+    <div class="bg-base-content py-24 sm:py-32">
         <div class="mx-auto max-w-screen-xl py-24 sm:py-32 lg:max-w-7xl lg:px-8">
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Nos Lignes</h2>
 
@@ -44,9 +55,6 @@
             </div>
         </div>
     </div>
-
-
-
     <footer class="footer footer-center p-10 bg-primary text-primary-content">
         <aside>
             <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
@@ -54,7 +62,9 @@
             <p class="font-bold">
                 Partenaire de vos déplacements depuis 1989.
             </p>
-            <p>Copyright © 2023 - Tous droits réservés</p>
+            <p>Copyright ©
+                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
+            </p>
         </aside>
     </footer>
     <script>

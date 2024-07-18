@@ -63,15 +63,13 @@
             <!-- Les informations de la ligne seront affichées ici -->
         </div>
         <div
-            class="container mx-auto items-center justify-center py-8 bg-base-content dark:bg-base-300 rounded-lg grid grid-cols-6 gap-4">
-            <div
-                class="col-start-2 col-span-4 text-5xl, font-bold, text-center, flex, flex-row, items-center, py-8 justify-center">
+            class="m-4 items-center justify-center py-4 bg-base-content dark:bg-base-300 rounded-xl grid grid-cols-6 gap-2">
+            <div class="col-start-2 col-span-4 text-center items-center py-8 justify-center">
                 <div>
 
                     <div class="time text-secondary-content dark:text-secondary" id="current-time"
                         style="text-align: center;"></div>
                 </div>
-
                 <div class="divider divider-neutral"></div>
                 <div style="text-align:center; font: size 48px; color:dc241f;">
                     <div class="destination">
@@ -85,14 +83,11 @@
                 <div class="alert-message" id="alertMessage"></div>
                 <br>
                 <div class="divider divider-neutral"></div>
-                <div class="container">
-                    <div id="lignes" class="container"></div>
+                <div class="grid grid-cols-6 gap-4">
+                    <div id="lignes" class="container col-start-2 col-span-4 flex justify-end"></div>
                 </div>
-                <br>
-
             </div>
         </div>
-
     </div>
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <br>
@@ -240,7 +235,7 @@
 
     <script>
         const urlinfo = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
-
+        // const urlinfo = "test.json"
         // Fonction pour extraire l'ID de la ligne à partir de l'URL
         function getLigneIDFromURL() {
             const url = window.location.href;
@@ -251,7 +246,12 @@
             return null;
         }
 
-        const ligneID = getLigneIDFromURL();
+        let ligneID = getLigneIDFromURL();
+
+        if (ligneID === "navette%20sp%C3%A9ciale") {
+            ligneID = "NS";
+        }
+
 
         // Affichage des informations de trafic
         function afficherInfoTrafic() {
@@ -260,14 +260,10 @@
 
             // Vérifier si l'ID de la ligne est null
             if (ligneID === null) {
-                $("#lignes").html(`<div class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <span class="sr-only">Info</span>
-                        <h3 class="text-lg font-medium">Erreur de sélection</h3>
-                    </div>
-                    <div class="mt-2 mb-4 text-sm">Aucune ligne n'est sélectionnée. Vous êtes peut-être en mode "voyage astral". Merci de <a href="/src/reseau.html" class="text-blue-600 underline">revenir sur Terre</a> et de sélectionner une ligne pour afficher les informations de trafic.</div>
-                </div>`);
+                $("#lignes").html(`<div role="alert" class="alert alert-error"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Aucune ligne n'est sélectionnée. Vous êtes peut-être en mode "voyage astral". Merci de <a href="/src/reseau.html" class="text-blue-600 underline">revenir sur Terre</a> et de sélectionner une ligne pour afficher les informations de trafic.</span>
+            </div>`);
                 return;
             }
 
@@ -285,13 +281,9 @@
                             ligneTrouvee = true;
 
                             const card = $("<div>")
-                                .addClass("p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800")
-                                .attr("role", "button")
-                                .click(function () {
-                                    window.location.href = "details.html#" + ligne.ligne;
-                                });
+                                .addClass("alert alert-error flex items-center justify-between")
+                                .attr("role", "alert");
 
-                            const cardHeader = $("<div>").addClass("flex items-center justify-between");
                             let logoLigne;
 
                             if (ligne.ligne === "TCM") {
@@ -304,29 +296,31 @@
                                     .addClass("w-15 h-12");
                             }
 
-                            cardHeader.append(logoLigne);
-                            cardHeader.append($("<span>").addClass("sr-only").text("Info"));
+                            card.append(logoLigne);
+                            card.append($("<span>").addClass("sr-only").text("Info"));
 
+                            const textContainer = $("<div>").addClass("flex flex-col ml-4");
                             const infosCount = infosTrafic.length;
                             const infosText = infosCount === 1 ? "1 info trafic" : infosCount + " infos trafic";
-                            const infosDiv = $("<div>").addClass("text-sm text-left").text(infosText);
+                            const infosTitre = infosCount === 1 ? "Un incident perturbe la ligne" : "Plusieurs incidents perturbent la ligne";
+                            const title = $("<h3>").addClass("font-bold").text(infosTitre);
+                            const description = $("<div>").addClass("text-xs").text(infosText);
 
-                            cardHeader.append(infosDiv);
+                            textContainer.append(title).append(description);
 
                             const viewButton = $("<button>")
-                                .addClass("")
+                                .addClass("btn btn-sm btn-error flex items-center justify-center")
                                 .html(
-                                    `<svg class="-ml-0.5 mr-2 h-3 w-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
-                                    </svg>`
+                                    `<svg class="h-5 w-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
+                                </svg>`
                                 )
                                 .click(function () {
                                     window.location.href = "details.html#" + ligne.ligne;
                                 });
 
-                            cardHeader.append(viewButton);
-
-                            card.append(cardHeader);
+                            card.append(textContainer);
+                            card.append(viewButton);
 
                             $("#lignes").append(card);
                         }
@@ -334,15 +328,19 @@
                 });
 
                 if (!ligneTrouvee) {
-                    $("#lignes").html(`<div id="alert-additional-content-3" class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
-                        <div class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <span class="sr-only">Info</span>
-                            <h3 class="text-lg font-medium">Tout va bien actuellement</h3>
-                        </div>
-                        <div class="mt-2 mb-4 text-sm">Aucune information de trafic à signaler pour la ligne ${ligneID}. Tout circule normalement.</div>
-                    </div>`);
+                    if (ligneID === "NS") {
+                        $("#lignes").html(`<div role="alert" class="alert alert-info"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Il n'y a pas d'évènement prévu au Zénith prochainement.</div>
+            </div>`);
+                    } else {
+                        $("#lignes").html(`<div role="alert" class="alert alert-success"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Aucune information de trafic à signaler pour la ligne ${ligneID}. Tout circule normalement.</span>
+            </div>`);
+                    }
                 }
+
             });
         }
 

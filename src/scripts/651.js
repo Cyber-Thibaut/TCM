@@ -161,7 +161,7 @@ function updateBusTimes() {
         if (nextBusFreq === 1) {
             nextBus = `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai</div>`;
         } else if (nextBusFreq === 2) {
-            nextBus = `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche</div>`;
+            nextBus = `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche  </div>`;
         } else if (nextBusFreq === -1) {
             nextBus = "";
             divider = "";

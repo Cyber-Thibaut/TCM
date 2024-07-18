@@ -14,13 +14,21 @@
       ]
     },
     {
-      "ligne": "3",
+      "ligne": "1",
       "infos_trafic": [
         {
           "type": "fermeture",
           "annonce": "09/28/2023",
           "debut": "10/15/2023",
-          "fin": "10/27/2023",
+          "fin": "10/27/2075",
+          "titre": "🚧 Info Travaux 🚧",
+          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
+        },
+        {
+          "type": "fermeture",
+          "annonce": "09/28/2023",
+          "debut": "10/15/2023",
+          "fin": "10/27/2075",
           "titre": "🚧 Info Travaux 🚧",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
         }
@@ -28,13 +36,13 @@
     }
     ,
     {
-      "ligne": "4",
+      "ligne": "3",
       "infos_trafic": [
         {
           "type": "attention",
           "annonce": "09/28/2023",
           "debut": "10/15/2023",
-          "fin": "10/27/2023",
+          "fin": "10/27/2052",
           "titre": "attention",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
         },

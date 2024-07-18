@@ -289,9 +289,6 @@ function updateBusTimes() {
     // Sélection de l'icône et de la couleur en fonction de la fréquentation
     const selectedIcon2 = frequentationIcons[randomFrequentation2].icon;
 
-    // Affichage de l'icône et de la couleur
-    const frequentation2 = `<img src="${selectedIcon2}" style="width: 50px; height: auto; margin-top: 25px">`;
-
     if (nextBusFreq === -1) {
         if ((hour === 0 && minute >= 0) || (hour >= 1 && hour < 4)) {
             nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Veuillez noter que le service est actuellement suspendu. Nous reprendrons nos activités à 4h du matin. Merci pour votre compréhension et bonne nuit.</span></div>`;
@@ -304,16 +301,45 @@ function updateBusTimes() {
         document.getElementById("nextBusTime").innerHTML = nextBus + followingBus;
     } else {
         const nextBus = nextBusFreq === 1 ?
-            `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"> </div>` :
+            `<div class="flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
+                A quai 
+                <div class="flex items-center justify-center bg-black bg-opacity-20 dark:bg-opacity-0 p-2 rounded-full ml-2">
+                    <img src="${selectedIcon1}" style="width: 50px; height: auto;">
+                </div>
+            </div>` :
             nextBusFreq === 2 ?
-                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
-                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${nextBusFreq} min  <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>`;
+                `<div class="flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
+                    A l’approche  
+                    <div class="flex items-center justify-center bg-black bg-opacity-20 dark:bg-opacity-0 p-2 rounded-full ml-2">
+                        <img src="${selectedIcon1}" style="width: 50px; height: auto;">
+                    </div>
+                </div>` :
+                `<div class="flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
+            ${nextBusFreq} min<div class="flex items-center justify-center bg-black bg-opacity-20 dark:bg-opacity-0 p-2 rounded-full ml-2">
+                <img src="${selectedIcon1}" style="width: 50px; height: auto;">
+                </div>
+            </div>`;
 
         const followingBus = followingBusFreq === 0 ?
-            `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>Arrivé <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
+            `<div class="flex-grow h-32 card bg-base-300 rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
+                Arrivé 
+                <div class="flex items-center justify-center bg-black bg-opacity-20 dark:bg-opacity-0 p-2 rounded-full ml-2">
+                    <img src="${selectedIcon1}" style="width: 50px; height: auto;">
+                </div>
+            </div>` :
             followingBusFreq === 1 ?
-                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>1 min <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
-                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${followingBusFreq} min <img src="${selectedIcon2}" style="width: 50px; height: auto; margin-top: -35px"></div>`;
+                `<div class="flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
+                    1 min 
+                    <div class="flex items-center justify-center bg-black bg-opacity-20 dark:bg-opacity-0 p-2 rounded-full ml-2">
+                        <img src="${selectedIcon1}" style="width: 50px; height: auto;">
+                    </div>
+                </div>` :
+                `<div class="flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
+                    ${followingBusFreq} min 
+                    <div class="flex items-center justify-center bg-black bg-opacity-20 dark:bg-opacity-0 p-2 rounded-full ml-2">
+                        <img src="${selectedIcon2}" style="width: 50px; height: auto;">
+                    </div>
+                </div>`;
 
         const divider = `<div class="divider lg:divider-horizontal"></div>`;
 

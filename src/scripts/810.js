@@ -9,7 +9,7 @@ const date = formatDate(now); // Convertir la date en chaîne "YYYY-MM-DD"
 const today = new Date();
 
 const vacationDates = [
-    { start: new Date("2024-07-24"), end: new Date("2024-08-11") } 
+    { start: new Date("2024-07-28"), end: new Date("2024-08-11") } 
 ];
 
 

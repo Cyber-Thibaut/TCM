@@ -82,14 +82,15 @@
 
                 $.getJSON(url, function (data) {
                     const ligne = data.lignes.find(l => l.ligne === ligneID);
-
+                    const specialLines = ["805", "809", "810", "816", "713", "817"];
+                    const imageSuffix = specialLines.includes(ligne.ligne) ? '-jo' : '';
                     if (ligne) {
                         const cardHeader = $("<div>").addClass("mb-2");
                         let logoLigne;
 
                         if (ligne.ligne !== "TCM") {
                             logoLigne = $("<img>")
-                                .attr("src", "/img/" + ligne.ligne + ".png")
+                                .attr("src", "/img/" + ligne.ligne + imageSuffix + ".png")
                                 .addClass("w-15 h-12");
                         }
 

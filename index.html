@@ -223,43 +223,47 @@
             if (data.length === 0) {
                 $("#content").html("<p>Aucun résultat.</p>");
             } else {
-
-                $.each(data, function (index, article) {
-                    // Construit l'URL de l'image en utilisant l'URL spécifiée
+                // Use a Promise.all to handle asynchronous image fetching
+                var fetchPromises = data.map(function (article) {
+                    // Construct the image URL using the featured_media ID
                     const apiUrl = "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/media/" + article.featured_media;
 
-                    fetch(apiUrl)
+                    return fetch(apiUrl)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Erreur lors de la récupération des données de l\'article');
                             }
                             return response.json();
                         })
-                        .then(data => {
-                            // Vous pouvez maintenant accéder à guide.rendered à partir des données récupérées
-                            const featuredMediaUrl = data.guid.rendered;
+                        .then(mediaData => {
+                            // Access the guide.rendered from the fetched media data
+                            const featuredMediaUrl = mediaData.guid.rendered;
 
-                            // Construit le contenu HTML de l'article en utilisant la structure de la carte
-                            content += `
-              <div class="card w-96 bg-base-100 shadow-xl">
-                <figure><img src="${featuredMediaUrl}" alt="${article.title.rendered}" /></figure>
-                <div class="card-body">
-                  <h2 class="card-title">${article.title.rendered}</h2>
-                  <p>${article.excerpt.rendered}</p>
-                  <div class="card-actions justify-end">
-                    <a href="${article.link}" class="btn btn-primary">Lire la suite</a>
+                            // Construct the HTML content for the article using the card structure
+                            return `
+                  <div class="card w-96 bg-base-100 shadow-xl">
+                    <figure><img src="${featuredMediaUrl}" alt="${article.title.rendered}" class="h-full w-full object-cover" /></figure>
+                    <div class="card-body">
+                      <h2 class="card-title text-lg font-bold">${article.title.rendered}</h2>
+                      <p class="text-sm text-gray-700">${article.excerpt.rendered}</p>
+                      <div class="card-actions justify-end">
+                        <a href="${article.link}" class="btn btn-primary">Lire la suite</a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <br>
-            `;
-
-                            // Insérer le contenu HTML dans #content après avoir récupéré les données de l'image
-                            $("#content").html(content);
+                  <br>
+                `;
                         })
                         .catch(error => {
                             console.error('Une erreur s\'est produite :', error);
+                            return ''; // Return an empty string in case of an error
                         });
+                });
+
+                // After all fetch promises have been resolved, update the HTML content
+                Promise.all(fetchPromises).then((articlesContent) => {
+                    content = articlesContent.join(''); // Join all article contents into a single string
+                    $("#content").html(content);
                 });
             }
         }).fail(function () {

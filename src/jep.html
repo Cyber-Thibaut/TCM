@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Métadonnées du site -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité">
+    <meta name="author" content="Transport Clermont Métropole">
+    <title>Transport Clermont Métropole</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png">
+    <!-- Intégrations pour réseaux sociaux -->
+    <meta property="og:title" content="Transport Clermont Métropole">
+    <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
+    <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
+    <meta name="twitter:title" content="Transport Clermont Métropole">
+    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Couleur de fond pour l'intégration -->
+    <meta name="theme-color" content="#204BFE">
+    <link href="../dist/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bg-custom {
+            background-color: #331B2C;
+        }
+
+        .text-highlight {
+            color: #FFD700;
+        }
+
+        .btn-custom:hover {
+            background-color: #FF7F00;
+        }
+
+        .hero-image {
+            background-size: cover;
+            background-position: center;
+            border-radius: 0.75rem;
+        }
+
+        #map {
+            height: 300px;
+            margin-top: 20px;
+            display: none;
+            /* Carte masquée par défaut */
+        }
+    </style>
+</head>
+
+<body class="bg-custom">
+    <div class="navbar bg-base-300">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h8m-8 6h16" />
+                    </svg>
+                </label>
+                <ul tabindex="0"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="/src/reseau.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>Notre Réseau</a></li>
+                    <li><a href="/src/jo.html"><img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABl0lEQVR4nGNgGAUM9fX/mTq3fgjv2v4hvWv7BxdYkCSVTpZKrexPB2EQGyb+PSjI5XtgYPq34OCw//X1TAzdOz7kdO56DVbQve2Dade294GZFdME0yp7i+vr65lAOLWiryS+vl/ga1BQ8NfgYBOQ2q9+flLfAwOzGXq2fUhDjohpOx/n9fW1ZWS2twvCxArrZwuV9E/JfJkUm4Ws9ntQUBrYBTCBL4dL4jbuONy3a0lD7Ok1tVNeHynlnXNkDu+EPbMmls+YGnOmvbh35on5sUgG5DB0b3lnB/L/2p0nnE7vWzyrd8cHFQaG/4w5tb01Mye3VfbtnF2bWddfDdLwIyhI9WFOytz38dHO4HAICLABm9S76hHnwb0bnT4fLnNFduKZtfUFk/fOKUEWm7t/psv1ylzH//HxHChp8P9/BsYvh8qq/+8s5gbxPx8oj/p8qERv+om5+jOPz48AiU3ZP4Vnxol5Vf///2fEmoD/n6nn+nK4NOnrwbL0zwfKdWHis4/P1pt5Yl76jONzE2eemck1mvoZUAAAB9+7iU0wbSAAAAAASUVORK5CYII=">Les
+                            JO avec TCM</a></li>
+                    <li><a href="/src/trafic.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Info Trafic
+                        </a></li>
+                    <li><a href="/src/tarifs.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.1"
+                                    d="M16.5 7A2.5 2.5 0 0 1 19 4.5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 1 1 0 5V12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5A2.5 2.5 0 0 1 16.5 7Z" />
+                            </svg> Tarif</a></li>
+                    <li><a href="/src/agences.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
+                                viewBox="0 0 21 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.1"
+                                    d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
+                            </svg> Nos Agences</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-ghost normal-case text-xl hidden dark:block" href="/index.html"><img
+                    src="/img/TCM-Clair.png" width="75" height="75" alt="Logo TCM"></a>
+            <a class="btn btn-ghost normal-case text-xl block dark:hidden" href="/index.html"><img
+                    src="/img/TCM-Sombre.png" width="75" height="75" alt="Logo TCM"></a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="/src/reseau.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>Notre Réseau</a></li>
+                <li><a href="/src/jep.html"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L3 16.5m15-3.379a48.474 48.474 0 0 0-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 0 1 3 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 0 1 6 13.12M12.265 3.11a.375.375 0 1 1-.53 0L12 2.845l.265.265Zm-3 0a.375.375 0 1 1-.53 0L9 2.845l.265.265Zm6 0a.375.375 0 1 1-.53 0L15 2.845l.265.265Z" />
+                        </svg>
+                        Les
+                        JEP avec TCM</a></li>
+                <li><a href="/src/trafic.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Info Trafic
+                    </a></li>
+                <li><a href="/src/tarifs.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.1"
+                                d="M16.5 7A2.5 2.5 0 0 1 19 4.5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 1 1 0 5V12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5A2.5 2.5 0 0 1 16.5 7Z" />
+                        </svg> Tarif</a></li>
+                <li><a href="/src/agences.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
+                            viewBox="0 0 21 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.1"
+                                d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
+                        </svg> Nos Agences</a></li>
+            </ul>
+        </div>
+        <div class="navbar-end">
+        </div>
+    </div>
+
+    <main
+        class="max-w-7xl  text-white mx-auto p-6 flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-6">
+        <div class="lg:w-1/2 space-y-6">
+            <h1 class="text-5xl font-bold">
+                Journées Européennes du Patrimoine
+                <span class="block text-highlight">22 septembre 2024</span>
+            </h1>
+            <p class="text-lg">
+                Découvrez les itinéraires, les réseaux et les connexions qui tissent notre riche patrimoine culturel
+                européen. Rejoignez-nous pour des visites, des expositions, et bien plus encore.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <span class="px-4 py-2 bg-gray-800 rounded-full">Patrimoine</span>
+                <span class="px-4 py-2 bg-gray-800 rounded-full">France</span>
+                <span class="px-4 py-2 bg-gray-800 rounded-full">22 Sept 24</span>
+            </div>
+        </div>
+        <div class="lg:w-1/2 hero-image">
+            <img src="../img/test.png" alt="Grande image du patrimoine">
+            <p class="text-xs text-gray-400 mt-2">Photo by <a class="underline"
+                    href="https://www.flickr.com/photos/194776683@N07/">Mathéo</a></p>
+        </div>
+    </main>
+
+    <section class="max-w-7xl mx-auto p-6 text-center">
+        <!-- Section de décompte -->
+        <div id="countdown" class="text-4xl font-bold text-highlight my-6"></div>
+
+        <!-- Carte pour suivre le défilé -->
+        <div id="map" class="my-6 mx-auto max-w-3xl"></div>
+    </section>
+
+    <!-- Présentation des véhicules -->
+    <div class="max-w-7xl mx-auto p-6  text-white">
+        <h2 class="text-3xl font-bold mb-6">Présentation des véhicules</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-gray-800 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold">Renault Agora S de 2002</h3>
+                <img src="http://transport-manager.net/assets/img/bus/IVECO-renaultagoras.jpg" alt="Renault Agora S"
+                    class="w-full rounded-lg mt-4">
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold">Man NG 272 de 1995</h3>
+                <img src="https://transport-manager.net/assets/img/bus/MAN-NG272.jpg" alt="Man NG 272"
+                    class="w-full rounded-lg mt-4">
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold">Mercedes O 305 de 1987</h3>
+                <img src="https://transport-manager.net/assets/img/bus/EVOBUS-O305.jpg" alt="Mercedes O 305"
+                    class="w-full rounded-lg mt-4">
+            </div>
+        </div>
+    </div>
+
+    <!-- Déroulé de la journée -->
+    <div class="max-w-7xl mx-auto p-6 bg-gray-800 rounded-lg text-white">
+        <h2 class="text-3xl font-bold mb-6">Déroulé de la Journée</h2>
+        <p class="mb-4">Lors des Journées Européennes du Patrimoine, TCM en collaboration avec la ville de Clermont
+            et
+            la métropole vous propose un programme riche et varié :</p>
+        <ul class="list-disc list-inside space-y-2">
+            <li><strong>10h00 : Premier passage du défilé.</strong> Venez découvrir les véhicules historiques de TCM
+                lors de leur premier passage dans le centre-ville de Clermont.</li>
+            <li><strong>12h00 : Atelier découverte du patrimoine Clermontois.</strong> Une exposition interactive
+                sur
+                l'histoire du transport en commun à Clermont, en partenariat avec le musée des transports.</li>
+            <li><strong>14h00 : Deuxième passage du défilé.</strong> Profitez de la deuxième chance pour voir les
+                véhicules historiques défiler dans les rues de la ville.</li>
+            <li><strong>15h30 : Visite des coulisses de TCM.</strong> Une visite guidée des ateliers de maintenance
+                de
+                TCM, pour découvrir comment les bus sont entretenus.</li>
+            <li><strong>18h00 : Troisième passage du défilé.</strong> Clôturez la journée en beauté avec le dernier
+                passage des véhicules dans le centre-ville.</li>
+            <li><strong>20h00 : Projection en plein air.</strong> Terminez la soirée par la projection d'un film sur
+                l'évolution des transports à Clermont, suivi d'un débat animé par des experts TCM et de la métropole sur
+                l'avenir des transports dans la métropole.</li>
+        </ul>
+    </div>
+    <br>
+    <footer class="footer footer-center p-10 bg-primary text-primary-content">
+        <aside>
+            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
+            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
+            <p class="font-bold">
+                Partenaire de vos déplacements depuis 1989.
+            </p>
+            <p>Copyright ©
+                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
+            </p>
+        </aside>
+    </footer>
+
+    <script>
+        const eventDate = new Date("2024-09-22T08:00:00").getTime();
+        const mapElement = document.getElementById("map");
+        let map, busMarker, routeCoordinates;
+
+        const passages = [
+            { time: new Date("2024-09-22T10:00:00").getTime(), desc: "premier passage" },
+            { time: new Date("2024-09-22T14:00:00").getTime(), desc: "deuxième passage" },
+            { time: new Date("2024-09-22T18:00:00").getTime(), desc: "troisième passage" },
+        ];
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = `
+                    ${days}j ${hours}h ${minutes}m ${seconds}s avant le lancement des Journées du Patrimoine
+                `;
+            } else {
+                updatePassageCountdown();
+            }
+        }
+
+        function updatePassageCountdown() {
+            const now = new Date().getTime();
+            const nextPassage = passages.find(p => p.time > now);
+
+            if (nextPassage) {
+                const distance = nextPassage.time - now;
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = `
+                    ${hours}h ${minutes}m ${seconds}s avant le ${nextPassage.desc}
+                `;
+
+                // Afficher la carte 2 minutes avant le départ du défilé
+                if (distance <= 2 * 60 * 1000) {
+                    showMap();
+                    if (!map) { // Vérifier si la carte n'est pas encore initialisée
+                        initMap();
+                    }
+                    moveBusMarker(busMarker, routeCoordinates, 1800);
+                }
+            } else {
+                document.getElementById("countdown").innerHTML = "Le défilé est en cours!";
+                showMap();
+                if (!map) { // Vérifier si la carte n'est pas encore initialisée
+                    initMap();
+                }
+                moveBusMarker(busMarker, routeCoordinates, 1800);
+            }
+        }
+
+        async function initMap() {
+            // Si la carte est déjà initialisée, supprimez-la avant de la réinitialiser
+            if (map !== undefined) {
+                map.remove(); // Supprime l'instance de la carte existante
+            }
+
+            try {
+                const response = await fetch('route.json');
+                if (!response.ok) {
+                    throw new Error('Problème de chargement du fichier JSON');
+                }
+                const data = await response.json();
+
+                // Initialisation de la carte avec les coordonnées du centre de la zone couverte
+                map = L.map('map').setView([45.765, 3.098], 13);
+
+                // Ajout d'une couche de tuiles OpenStreetMap
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                // Décodage de la géométrie de l'itinéraire
+                routeCoordinates = decodeGeometry(data.routes[0].geometry);
+
+                // Affiche l'itinéraire sur la carte
+                const routePolyline = L.polyline(routeCoordinates, { color: 'blue' }).addTo(map);
+
+                // Ajuste la carte pour afficher toute l'étendue de l'itinéraire
+                map.fitBounds(routePolyline.getBounds());
+
+                // Ajout du marqueur mobile
+                busMarker = L.circleMarker(routeCoordinates[0], {
+                    radius: 8,
+                    color: 'red'
+                }).addTo(map);
+
+            } catch (error) {
+                console.error('Erreur :', error);
+            }
+        }
+
+        function moveBusMarker(marker, coordinates, totalTime) {
+            const startTime = new Date().setHours(0, 0, 0, 0); // Début de la journée à 00:00
+            const now = new Date().getTime(); // Heure actuelle
+            const elapsedTime = (now - startTime) % (totalTime * 1000); // Temps écoulé modulo temps total
+            const progress = elapsedTime / (totalTime * 1000); // Progrès entre 0 et 1
+
+            // Position sur la route en fonction du temps
+            const routeIndex = Math.floor(progress * (coordinates.length - 1));
+            marker.setLatLng(coordinates[routeIndex]);
+
+            // Si le marqueur est à la fin de l'itinéraire, masquer la carte et arrêter l'animation
+            if (routeIndex >= coordinates.length - 1) {
+                hideMap();
+                return;
+            }
+
+            // Appelle la fonction toutes les secondes pour animer le marqueur
+            setTimeout(() => {
+                moveBusMarker(marker, coordinates, totalTime);
+            }, 1000);
+        }
+
+        function showMap() {
+            mapElement.style.display = 'block'; // Affiche la carte
+        }
+
+        function hideMap() {
+            mapElement.style.display = 'none'; // Masque la carte
+        }
+
+        setInterval(updateCountdown, 1000); // Met à jour le décompte toutes les secondes
+
+    </script>
+</body>
+
+</html>

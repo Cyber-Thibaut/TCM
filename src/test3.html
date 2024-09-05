@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinéraire OpenRouteService</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id="instructions"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        // Charge le fichier JSON local et initialise la carte
+        async function initMap() {
+            try {
+                const response = await fetch('route.json');
+                if (!response.ok) {
+                    throw new Error('Problème de chargement du fichier JSON');
+                }
+                const data = await response.json();
+
+                // Initialisation de la carte avec les coordonnées du centre de la zone couverte
+                const map = L.map('map').setView([45.765, 3.098], 13);
+
+                // Ajout d'une couche de tuiles OpenStreetMap
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                // Décodage de la géométrie de l'itinéraire
+                const routeCoordinates = decodeGeometry(data.routes[0].geometry);
+
+                // Affiche l'itinéraire sur la carte
+                const routePolyline = L.polyline(routeCoordinates, { color: 'blue' }).addTo(map);
+
+                // Ajuste la carte pour afficher toute l'étendue de l'itinéraire
+                map.fitBounds(routePolyline.getBounds());
+
+                // Affiche les instructions de l'itinéraire
+                displayInstructions(data.routes[0].segments[0].steps);
+
+                // Ajout du marqueur mobile
+                const busMarker = L.circleMarker(routeCoordinates[0], {
+                    radius: 8,
+                    color: 'red'
+                }).addTo(map);
+
+                // Démarre le déplacement du marqueur
+                moveBusMarker(busMarker, routeCoordinates, 1800); // 1800 secondes = 30 minutes
+            } catch (error) {
+                console.error('Erreur :', error);
+            }
+        }
+
+        // Fonction de décodage de la géométrie (polyline)
+        function decodeGeometry(encoded) {
+            let coordinates = [];
+            let index = 0, lat = 0, lng = 0;
+
+            while (index < encoded.length) {
+                let b, shift = 0, result = 0;
+                do {
+                    b = encoded.charCodeAt(index++) - 63;
+                    result |= (b & 0x1f) << shift;
+                    shift += 5;
+                } while (b >= 0x20);
+                const deltaLat = ((result & 1) ? ~(result >> 1) : (result >> 1));
+                lat += deltaLat;
+
+                shift = 0;
+                result = 0;
+                do {
+                    b = encoded.charCodeAt(index++) - 63;
+                    result |= (b & 0x1f) << shift;
+                    shift += 5;
+                } while (b >= 0x20);
+                const deltaLng = ((result & 1) ? ~(result >> 1) : (result >> 1));
+                lng += deltaLng;
+
+                coordinates.push([lat / 1E5, lng / 1E5]);
+            }
+
+            return coordinates;
+        }
+
+        // Fonction pour afficher les instructions de l'itinéraire
+        function displayInstructions(steps) {
+            const instructionsDiv = document.getElementById('instructions');
+            steps.forEach(step => {
+                const instruction = document.createElement('p');
+                instruction.textContent = `${step.instruction} (${step.distance} m, ${Math.round(step.duration)} s)`;
+                instructionsDiv.appendChild(instruction);
+            });
+        }
+
+        function moveBusMarker(marker, coordinates, totalTime) {
+            const startTime = new Date().setHours(0, 0, 0, 0); // Début de la journée à 00:00
+            const now = new Date().getTime(); // Heure actuelle
+            const elapsedTime = (now - startTime) % (totalTime * 1000); // Temps écoulé modulo temps total
+            const progress = elapsedTime / (totalTime * 1000); // Progrès entre 0 et 1
+
+            // Position sur la route en fonction du temps
+            const routeIndex = Math.floor(progress * (coordinates.length - 1));
+            marker.setLatLng(coordinates[routeIndex]);
+
+            // Appelle la fonction toutes les secondes pour animer le marqueur
+            setTimeout(() => {
+                moveBusMarker(marker, coordinates, totalTime);
+            }, 1000);
+        }
+        
+
+        // Appelle la fonction pour initialiser la carte au chargement de la page
+        window.onload = initMap;
+    </script>
+</body>
+
+</html>

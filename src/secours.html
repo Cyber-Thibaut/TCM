@@ -2,21 +2,92 @@
 <html lang="fr">
 
 <head>
+    <!-- Métadonnées du site -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Itinéraire OpenRouteService</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité">
+    <meta name="author" content="Transport Clermont Métropole">
+    <title>Page de Secours - Journée du Patrimoine 2024</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png">
+    <!-- Intégrations pour réseaux sociaux -->
+    <meta property="og:title" content="Transport Clermont Métropole">
+    <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
+    <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
+    <meta name="twitter:title" content="Transport Clermont Métropole">
+    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Couleur de fond pour l'intégration -->
+    <meta name="theme-color" content="#204BFE">
+    <link href="../dist/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="menu.js"></script>
     <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .bg-custom {
+            background-color: #331B2C;
+        }
+
+        .text-highlight {
+            color: #FFD700;
+        }
+
+        .hero-image {
+            background-size: cover;
+            background-position: center;
+            border-radius: 0.75rem;
+        }
+
         #map {
-            height: 600px;
-            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .alert {
+            background-color: #ffcc00;
+            color: #333;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 5px;
+            max-width: 900px;
+            text-align: center;
+            font-weight: bold;
+            border: 2px solid #ffa500;
         }
     </style>
 </head>
 
 <body>
-    <div id="map"></div>
-    <div id="instructions"></div>
+
+    <main class="max-w-7xl text-center mx-auto p-6">
+        <!-- Alerte de secours -->
+        <div class="alert">
+            Page de secours : l'affichage du trajet n'est pas en temps réel. Il est basé sur des horaires théoriques.
+        </div>
+
+        <div class="space-y-6">
+            <h1 class="text-4xl font-bold">
+                Journées Européennes du Patrimoine 2024
+            </h1>
+            <p class="text-lg">
+                Ce trajet est fourni à titre indicatif et pourrait ne pas refléter le mouvement en temps réel.
+            </p>
+
+            <!-- Carte affichant l'itinéraire théorique -->
+            <div id="map"></div>
+        </div>
+    </main>
 
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script>
@@ -46,9 +117,6 @@
 
                 // Ajuste la carte pour afficher toute l'étendue de l'itinéraire
                 map.fitBounds(routePolyline.getBounds());
-
-                // Affiche les instructions de l'itinéraire
-                displayInstructions(data.routes[0].segments[0].steps);
 
                 // Ajout du marqueur mobile
                 const busMarker = L.circleMarker(routeCoordinates[0], {
@@ -94,16 +162,6 @@
             return coordinates;
         }
 
-        // Fonction pour afficher les instructions de l'itinéraire
-        function displayInstructions(steps) {
-            const instructionsDiv = document.getElementById('instructions');
-            steps.forEach(step => {
-                const instruction = document.createElement('p');
-                instruction.textContent = `${step.instruction} (${step.distance} m, ${Math.round(step.duration)} s)`;
-                instructionsDiv.appendChild(instruction);
-            });
-        }
-
         function moveBusMarker(marker, coordinates, totalTime) {
             const startTime = new Date().setHours(0, 0, 0, 0); // Début de la journée à 00:00
             const now = new Date().getTime(); // Heure actuelle
@@ -119,7 +177,6 @@
                 moveBusMarker(marker, coordinates, totalTime);
             }, 1000);
         }
-        
 
         // Appelle la fonction pour initialiser la carte au chargement de la page
         window.onload = initMap;

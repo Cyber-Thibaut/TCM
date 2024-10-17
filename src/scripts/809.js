@@ -33,17 +33,19 @@ function formatDate(date) {
     return `${year}-${month}-${day}`;
 }
 const holidayDates = [
-    "2023-11-01",
-    "2023-11-11",
-    "2023-12-25",
-    "2024-01-01",
-    "2024-04-01",
-    "2024-05-08",
-    "2024-05-09",
-    "2024-05-20",
-    "2024-07-14",
-    "2024-08-15"
+    "2024-11-01", // Toussaint
+    "2024-11-11", // Armistice 1918
+    "2024-12-25", // Noël
+    "2025-01-01", // Jour de l'An
+    "2025-04-21", // Lundi de Pâques
+    "2025-05-01", // Fête du Travail
+    "2025-05-08", // Victoire 1945
+    "2025-05-29", // Ascension
+    "2025-06-09", // Lundi de Pentecôte
+    "2025-07-14", // Fête nationale
+    "2025-08-15"  // Assomption
 ];
+
 // Exemple de dates de jours fériés
 const premierMai = new Date(today.getFullYear(), 4, 1);
 const estFerie = holidayDates.includes(date);
@@ -157,7 +159,7 @@ function updateBusTimes() {
         const nextBus = nextBusFreq === 1 ?
             `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"> </div>` :
             nextBusFreq === 2 ?
-                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
+                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche   <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
                 `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${nextBusFreq} min  <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>`;
 
         const followingBus = followingBusFreq === 0 ?

@@ -9,7 +9,7 @@ const date = formatDate(now); // Convertir la date en chaîne "YYYY-MM-DD"
 const today = new Date();
 
 const vacationDates = [
-    { start: new Date("2024-07-24"), end: new Date("2024-08-11") } 
+    { start: new Date("2024-07-28"), end: new Date("2024-08-11") } 
 ];
 
 
@@ -33,17 +33,19 @@ function formatDate(date) {
     return `${year}-${month}-${day}`;
 }
 const holidayDates = [
-    "2023-11-01",
-    "2023-11-11",
-    "2023-12-25",
-    "2024-01-01",
-    "2024-04-01",
-    "2024-05-08",
-    "2024-05-09",
-    "2024-05-20",
-    "2024-07-14",
-    "2024-08-15"
+    "2024-11-01", // Toussaint
+    "2024-11-11", // Armistice 1918
+    "2024-12-25", // Noël
+    "2025-01-01", // Jour de l'An
+    "2025-04-21", // Lundi de Pâques
+    "2025-05-01", // Fête du Travail
+    "2025-05-08", // Victoire 1945
+    "2025-05-29", // Ascension
+    "2025-06-09", // Lundi de Pentecôte
+    "2025-07-14", // Fête nationale
+    "2025-08-15"  // Assomption
 ];
+
 // Exemple de dates de jours fériés
 const premierMai = new Date(today.getFullYear(), 4, 1);
 const estFerie = holidayDates.includes(date);
@@ -295,7 +297,7 @@ function updateBusTimes() {
         const nextBus = nextBusFreq === 1 ?
             `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"> </div>` :
             nextBusFreq === 2 ?
-                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
+                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche   <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
                 `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${nextBusFreq} min  <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>`;
 
         const followingBus = followingBusFreq === 0 ?
@@ -327,7 +329,7 @@ function updateBusTimes() {
         <div role="alert" class="alert alert-info">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current"><path stroke-linecap="round" stroke-linejoin="round"
       stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path> </svg>
-            <span>En raison des épruves de voile au lac de Pavin, les fréquences de la ligne 810 sont augmentées.</span>
+            <span>En raison des épreuves de voile au lac de Pavin, les fréquences de la ligne 810 sont augmentées.</span>
         </div>
     `;
     } else if (estPremierMai) {

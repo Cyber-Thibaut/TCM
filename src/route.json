@@ -1,0 +1,194 @@
+{
+    "bbox": [
+        3.086999,
+        45.755643,
+        3.110202,
+        45.777476
+    ],
+    "routes": [
+        {
+            "summary": {
+                "distance": 4014.2,
+                "duration": 675.8
+            },
+            "segments": [
+                {
+                    "distance": 4014.2,
+                    "duration": 675.8,
+                    "steps": [
+                        {
+                            "distance": 30.9,
+                            "duration": 7.4,
+                            "type": 11,
+                            "instruction": "Démarrez en direction du Nord sur Rue Abbé Girard",
+                            "name": "Rue Abbé Girard",
+                            "way_points": [
+                                0,
+                                2
+                            ]
+                        },
+                        {
+                            "distance": 201.3,
+                            "duration": 48.3,
+                            "type": 1,
+                            "instruction": "Tournez à droite sur Rue Grégoire de Tours",
+                            "name": "Rue Grégoire de Tours",
+                            "way_points": [
+                                2,
+                                11
+                            ]
+                        },
+                        {
+                            "distance": 89.7,
+                            "duration": 12.9,
+                            "type": 1,
+                            "instruction": "Tournez à droite sur Place Michel de l'Hospital",
+                            "name": "Place Michel de l'Hospital",
+                            "way_points": [
+                                11,
+                                17
+                            ]
+                        },
+                        {
+                            "distance": 78.8,
+                            "duration": 18.9,
+                            "type": 5,
+                            "instruction": "Tournez légèrement à droite sur Place Michel de l'Hospital",
+                            "name": "Place Michel de l'Hospital",
+                            "way_points": [
+                                17,
+                                22
+                            ]
+                        },
+                        {
+                            "distance": 109.3,
+                            "duration": 25.5,
+                            "type": 2,
+                            "instruction": "Tournez franchement à gauche sur Avenue Carnot",
+                            "name": "Avenue Carnot",
+                            "way_points": [
+                                22,
+                                28
+                            ]
+                        },
+                        {
+                            "distance": 504.5,
+                            "duration": 83.8,
+                            "type": 1,
+                            "instruction": "Tournez à droite sur Avenue Carnot",
+                            "name": "Avenue Carnot",
+                            "way_points": [
+                                28,
+                                39
+                            ]
+                        },
+                        {
+                            "distance": 432.8,
+                            "duration": 88.5,
+                            "type": 2,
+                            "instruction": "Tournez franchement à gauche sur Boulevard Gergovia",
+                            "name": "Boulevard Gergovia",
+                            "way_points": [
+                                39,
+                                55
+                            ]
+                        },
+                        {
+                            "distance": 1601.4,
+                            "duration": 226.2,
+                            "type": 6,
+                            "instruction": "Continuez tout droit sur Avenue Léon Blum",
+                            "name": "Avenue Léon Blum",
+                            "way_points": [
+                                55,
+                                102
+                            ]
+                        },
+                        {
+                            "distance": 319.5,
+                            "duration": 44.8,
+                            "type": 7,
+                            "instruction": "Entrez sur le rond-point et prenez la 3ème sortie sur Rue Pasteur, M 69a",
+                            "name": "Rue Pasteur, M 69a",
+                            "exit_number": 3,
+                            "way_points": [
+                                102,
+                                116
+                            ]
+                        },
+                        {
+                            "distance": 386.5,
+                            "duration": 75,
+                            "type": 1,
+                            "instruction": "Tournez à droite sur Rue Pasteur",
+                            "name": "Rue Pasteur",
+                            "way_points": [
+                                116,
+                                127
+                            ]
+                        },
+                        {
+                            "distance": 259.3,
+                            "duration": 44.5,
+                            "type": 0,
+                            "instruction": "Tournez à gauche sur Avenue Blaise Pascal",
+                            "name": "Avenue Blaise Pascal",
+                            "way_points": [
+                                127,
+                                133
+                            ]
+                        },
+                        {
+                            "distance": 0,
+                            "duration": 0,
+                            "type": 10,
+                            "instruction": "Arrivé à Avenue Blaise Pascal, destination sur la gauche",
+                            "name": "-",
+                            "way_points": [
+                                133,
+                                133
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "bbox": [
+                3.086999,
+                45.755643,
+                3.110202,
+                45.777476
+            ],
+            "geometry": "ozkvG{|yQk@BKCDM@OAqB?kABqA?IAeDBMNEHl@P`@NLXPf@LFCRFn@PHLTJ^NC]Wm@K]As@?mA?]d@a@jCBrCDn@?RGvCDtDFbB@NJV@ZGO_@IOiByCUUsAuB[i@W]COAa@BQLa@NS~A}Ar@s@^[h@k@VSHINUn@i@^SXKRGt@YtE{A`@CTBxAf@T?\\GhBwAZWt@k@fAk@n@UhB[xASRG`@Uz@g@h@g@nDwE\\Yj@g@nCaCfAaAJINMTSfA_AvAq@vBy@TKVKl@UJGRKbAa@nAg@pB{@fAa@d@IJAFBF?LEDIDUCWIMC_@NkDD{CB_BBuABsABcA\\[dA_Ad@a@|CqCfA_ATUROx@g@|@Wr@QXMG_@Ga@UeAc@}@}CuFo@mA",
+            "way_points": [
+                0,
+                133
+            ]
+        }
+    ],
+    "metadata": {
+        "attribution": "openrouteservice.org | OpenStreetMap contributors",
+        "service": "routing",
+        "timestamp": 1725473385789,
+        "query": {
+            "coordinates": [
+                [
+                    3.087,
+                    45.7772
+                ],
+                [
+                    3.11,
+                    45.7572
+                ]
+            ],
+            "profile": "driving-car",
+            "format": "json",
+            "language": "fr-fr",
+            "maximum_speed": 80
+        },
+        "engine": {
+            "version": "8.1.2",
+            "build_date": "2024-08-13T07:37:07Z",
+            "graph_date": "2024-09-02T14:35:53Z"
+        }
+    }
+}

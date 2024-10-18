@@ -2,16 +2,46 @@
 <html lang="fr">
 
 <head>
+    <!-- Métadonnées du site -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Découvrez les nouveautés du réseau de transport urbain pour 2025, un projet ambitieux qui transforme la mobilité à Clermont-Ferrand.">
+    <meta name="description"
+        content="Découvrez les nouveautés du réseau de transport urbain pour 2025, un projet ambitieux qui transforme la mobilité à Clermont-Ferrand.">
     <meta name="keywords" content="Transport, Clermont-Ferrand, Tramway, Nouvelles lignes, Mobilité, Projet">
     <meta name="author" content="Transport Clermont Métropole">
-    <title>Nouveautés Réseau Urbain 2025 - Clermont-Ferrand</title>
+    <title>Transport Clermont Métropole</title>
 
-    <!-- Tailwind & DaisyUI CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png">
+
+    <!-- Intégrations pour réseaux sociaux -->
+    <meta property="og:title" content="Transport Clermont Métropole">
+    <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
+    <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
+    <meta name="twitter:title" content="Transport Clermont Métropole">
+    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Couleur de fond pour l'intégration -->
+    <meta name="theme-color" content="#204BFE">
+
+    <link href="/dist/output.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/src/menu.js"></script>
+    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
+    <style>
+        .jw-album-image img,
+        .jw-element-image img {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+        }
+
+        .pswp__share-tooltip .pswp__share--download {
+            display: none;
+        }
+    </style>
 
     <style>
         body {
@@ -73,31 +103,47 @@
 
         // Set progress bars based on dates
         function updateProgressBars() {
-            const bureauEtudeProgress = calculateProgress("2024-01-01", "2024-12-31");
+            const bureauEtudeProgress = calculateProgress("2024-01-01", "2024-12-14");
             document.getElementById("bureau-etude-progress").style.width = bureauEtudeProgress + "%";
             document.getElementById("bureau-etude-text").innerText = bureauEtudeProgress + "%";
 
-            const depotProgress = calculateProgress("2025-09-01", "2025-11-30");
-            document.getElementById("depot-progress").style.width = depotProgress + "%";
-            document.getElementById("depot-text").innerText = depotProgress + "%";
+            // Travaux de voirie : commence après bureau d'étude et dure au minimum 8 mois
+            let voirieProgress = 0; // Initialisation par défaut
+            if (bureauEtudeProgress === 100) {
+                voirieProgress = calculateProgress("2024-12-14", "2025-08-31");  // La date de début est après le bureau d'étude
+                document.getElementById("voirie-progress").style.width = voirieProgress + "%";
+                document.getElementById("voirie-text").innerText = voirieProgress + "%";
+            } else {
+                document.getElementById("voirie-progress").style.width = "0%";
+                document.getElementById("voirie-text").innerText = "En attente de l'étape 1";
+            }
 
-            // For travaux de voirie, keep it at 0% until bureau d'étude is complete
-            const voirieProgress = bureauEtudeProgress === 100 ? "En cours" : "En attente de l'étape 1";
-            document.getElementById("voirie-progress").style.width = bureauEtudeProgress === 100 ? "0%" : "0%";
-            document.getElementById("voirie-text").innerText = voirieProgress;
+            // Liaison : ne commence que lorsque les travaux de voirie sont à 100 %
+            let depotProgress = 0;
+            if (voirieProgress === 100) {
+                const depotProgress = calculateProgress("2026-01-01", "2026-12-31");  // Liaison après la fin des travaux de voirie
+                document.getElementById("depot-progress").style.width = depotProgress + "%";
+                document.getElementById("depot-text").innerText = depotProgress + "%";
+            } else {
+                document.getElementById("depot-progress").style.width = "0%";
+                document.getElementById("depot-text").innerText = "En attente de l'étape 2";
+            }
         }
+
+
 
         window.onload = updateProgressBars;
     </script>
 </head>
 
-<body class="bg-gray-50 text-gray-800">
+<body>
 
     <!-- Header Section -->
     <header class="bg-blue-600 text-white py-8">
         <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold">Nouveautés du Réseau Urbain - 2025</h1>
-            <p class="text-lg mt-4">Découvrez les grands changements à venir pour transformer la mobilité à Clermont-Ferrand</p>
+            <h1 class="text-4xl font-bold text-primary-content">Nouveautés du Réseau Urbain - 2025</h1>
+            <p class="text-lg mt-4">Découvrez les grands changements à venir pour transformer la mobilité à
+                Clermont-Ferrand</p>
         </div>
     </header>
 
@@ -105,31 +151,46 @@
     <section class="container mx-auto mt-12 p-8 bg-white shadow-lg rounded-lg">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6">Un Projet Visionnaire pour la Métropole</h2>
         <p class="text-gray-700 mb-8 leading-relaxed">
-            Le réseau de transport urbain de Clermont-Ferrand va connaître une transformation sans précédent. Avec une vision ambitieuse pour 2025, ce projet englobe de nouvelles lignes de tramway, un réseau de bus renforcé, et une connectivité accrue pour répondre aux besoins d’une population en croissance. 
-            À l’horizon 2025, les habitants de la métropole pourront compter sur un réseau plus moderne, écologique et efficace.
+            Le réseau de transport urbain de Clermont-Ferrand va connaître une transformation sans précédent. Avec une
+            vision ambitieuse pour 2025, ce projet englobe de nouvelles lignes de tramway, un réseau de bus renforcé, et
+            une connectivité accrue pour répondre aux besoins d’une population en croissance.
+            À l’horizon 2025, les habitants de la métropole pourront compter sur un réseau plus moderne, écologique et
+            efficace.
         </p>
 
         <div class="quote">
-            "Ce projet est une véritable révolution pour notre métropole. Il représente notre engagement à offrir une mobilité durable, accessible à tous, et répondant aux enjeux climatiques actuels. Nous construisons aujourd’hui le réseau de transport de demain, pour une ville plus verte et connectée."
+            "Ce projet est une véritable révolution pour notre métropole. Il représente notre engagement à offrir une
+            mobilité durable, accessible à tous, et répondant aux enjeux climatiques actuels. Nous construisons
+            aujourd’hui le réseau de transport de demain, pour une ville plus verte et connectée."
             <span class="quote-author">- Olivier Bianchi, Président de la Métropole de Clermont-Ferrand</span>
         </div>
 
-        <img src="https://placehold.co/800x400" alt="Illustration du projet de tramway à Clermont-Ferrand" class="rounded-lg mb-8">
+        <img src="https://i.imgur.com/ivC8iEO.jpeg" alt="Illustration du projet de tramway à Clermont-Ferrand"
+            class="rounded-lg mb-8">
 
         <p class="text-gray-700 leading-relaxed">
-            Le projet ne se limite pas à quelques ajustements, mais bien à une refonte totale du réseau. La ligne 2, actuelle ligne de bus, deviendra une nouvelle ligne de tramway renommée en ligne 1, marquant une nouvelle ère pour le transport public dans la région. D'autre part, la ligne 5 se transformera en ligne LHNS (Ligne à Haut Niveau de Service), offrant une fréquence renforcée et une fiabilité accrue. Ces innovations permettront de répondre aux besoins croissants des habitants et des entreprises locales.
+            Le projet ne se limite pas à quelques ajustements, mais bien à une <strong>refonte totale du
+                réseau.</strong><br>La ligne 2,
+            actuelle ligne de bus, deviendra une nouvelle ligne de tramway renommée en ligne 1, marquant une nouvelle
+            ère pour le transport public dans la région. D'autre part, la ligne 5 se transformera en ligne LHNS (Ligne à
+            Haut Niveau de Service), offrant une fréquence renforcée et une fiabilité accrue. <br>Ces innovations
+            permettront de répondre aux besoins croissants des habitants et des entreprises locales.
         </p>
     </section>
 
     <!-- Tramway Works Section -->
     <section class="container mx-auto mt-12 p-8 bg-white shadow-lg rounded-lg">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6">Travaux du Tramway : Une Transformation Majeure</h2>
-        <p class="text-gray-700 mb-8">Les travaux pour le développement du tramway de Clermont-Ferrand s'étalent sur plusieurs phases clés, chacune étant cruciale pour la réussite du projet. Voici les détails des étapes à venir :</p>
+        <p class="text-gray-700 mb-8">Les travaux pour le développement du tramway de Clermont-Ferrand s'étalent sur
+            plusieurs phases clés, chacune étant cruciale pour la réussite du projet. Voici les détails des étapes à
+            venir :</p>
 
         <!-- Step 1: Bureau d'Étude -->
         <div class="mb-8">
             <h3 class="text-2xl font-bold text-blue-600">Étape 1 : Bureau d'Étude (Fin : Décembre 2024)</h3>
-            <p class="text-gray-700 mb-2">Le bureau d'étude est chargé de finaliser les plans techniques du projet de tramway. Cette étape est cruciale pour garantir que chaque aspect des travaux soit bien coordonné, des infrastructures aux routes en passant par les systèmes écologiques.</p>
+            <p class="text-gray-700 mb-2">Le bureau d'étude est chargé de finaliser les plans techniques du projet de
+                tramway. Cette étape est cruciale pour garantir que chaque aspect des travaux soit bien coordonné, des
+                infrastructures aux routes en passant par les systèmes écologiques.</p>
             <div class="progress-bar w-full bg-gray-200 rounded">
                 <div id="bureau-etude-progress" class="progress-bar-fill bg-blue-600 rounded-l"></div>
             </div>
@@ -139,7 +200,9 @@
         <!-- Step 2: Travaux de Voirie -->
         <div class="mb-8">
             <h3 class="text-2xl font-bold text-blue-600">Étape 2 : Travaux de Voirie (8 mois de travaux)</h3>
-            <p class="text-gray-700 mb-2">La voirie représente une étape majeure dans le développement des infrastructures du tramway. Ces travaux impliqueront des interventions sur les routes, la signalisation, et des ajustements techniques pour permettre une intégration harmonieuse du tramway dans la ville.</p>
+            <p class="text-gray-700 mb-2">La voirie représente une étape majeure dans le développement des
+                infrastructures du tramway. Ces travaux impliqueront des interventions sur les routes, la signalisation,
+                et des ajustements techniques pour permettre une intégration harmonieuse du tramway dans la ville.</p>
             <div class="progress-bar w-full bg-gray-200 rounded">
                 <div id="voirie-progress" class="progress-bar-fill bg-gray-400 rounded-l"></div>
             </div>
@@ -148,18 +211,24 @@
 
         <!-- Step 3: Travaux du Dépôt de Tramway -->
         <div class="mb-8">
-            <h3 class="text-2xl font-bold text-blue-600">Étape 3 : Travaux du Dépôt de Tramway (Fin : Novembre 2025)</h3>
-            <p class="text-gray-700 mb-2">Les travaux du dépôt seront essentiels pour le bon fonctionnement du réseau de tramway. Ce dépôt moderne servira à la maintenance et au stationnement des rames en dehors des heures de service.</p>
+            <h3 class="text-2xl font-bold text-blue-600">Étape 3 : Travaux du Dépôt de Tramway (Fin : Novembre 2025)
+            </h3>
+            <p class="text-gray-700 mb-2">Les travaux du dépôt seront essentiels pour le bon fonctionnement du réseau de
+                tramway. Ce dépôt moderne servira à la maintenance et au stationnement des rames en dehors des heures de
+                service.</p>
             <div class="progress-bar w-full bg-gray-200 rounded">
                 <div id="depot-progress" class="progress-bar-fill bg-blue-600 rounded-l"></div>
             </div>
             <p class="text-sm mt-2">Progression : <span id="depot-text">0%</span></p>
         </div>
 
-        <img src="https://placehold.co/800x400" alt="Vue aérienne des futurs travaux du dépôt de tramway" class="rounded-lg mb-8">
+        <img src="https://transport-manager.net/assets/img/lignes/N5_L1_trans2.png"
+            alt="Vue aérienne des futurs travaux du dépôt de tramway" class="rounded-lg mb-8">
 
         <div class="quote">
-            "Le tramway est bien plus qu’un simple moyen de transport. C'est une révolution dans la manière dont nous allons structurer nos déplacements, réduire la congestion automobile, et améliorer la qualité de l'air. Nous construisons le futur de notre métropole."
+            "Le tramway est bien plus qu’un simple moyen de transport. C'est une révolution dans la manière dont nous
+            allons structurer nos déplacements, réduire la congestion automobile, et améliorer la qualité de l'air. Nous
+            construisons le futur de notre métropole."
             <span class="quote-author">- Olivier Bianchi, Président de la Métropole de Clermont-Ferrand</span>
         </div>
     </section>
@@ -168,19 +237,30 @@
     <section class="container mx-auto mt-12 p-8 bg-white shadow-lg rounded-lg">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6">Nouvelles Lignes pour le Réseau Urbain</h2>
         <p class="text-gray-700 leading-relaxed mb-8">
-            Pour accompagner l'extension du tramway et offrir plus de mobilité aux usagers, plusieurs nouvelles lignes de bus seront mises en place à partir de 2025. Voici les principales modifications apportées au réseau urbain :
+            Pour accompagner l'extension du tramway et offrir plus de mobilité aux usagers, plusieurs nouvelles lignes
+            de bus seront mises en place à partir de 2025. Voici les principales modifications apportées au réseau
+            urbain :
         </p>
 
         <ul class="list-disc list-inside text-gray-700 mb-8">
-            <li><span class="font-bold">La ligne 5</span> deviendra une <span class="font-bold">ligne LHNS</span>, avec des véhicules à haute fréquence et une capacité accrue.</li>
-            <li>Le réseau comprendra <span class="font-bold">5 nouvelles lignes principales</span>, une ligne secondaire et une ligne TAD (Transport à la Demande) supplémentaire pour desservir les zones moins accessibles.</li>
-            <li>L'<span class="font-bold">autorité organisatrice</span> ajoutera également <span class="font-bold">4 nouvelles lignes urbaines</span>, dont une ligne scolaire dédiée.</li>
+            <li><span class="font-bold">La ligne 5</span> deviendra une <span class="font-bold">ligne LHNS</span>, avec
+                des véhicules à haute fréquence et une capacité accrue.</li>
+            <li>Le réseau comprendra <span class="font-bold">5 nouvelles lignes principales</span>, une ligne secondaire
+                et une ligne TAD (Transport à la Demande) supplémentaire pour desservir les zones moins accessibles.
+            </li>
+            <li>L'<span class="font-bold">autorité organisatrice</span> ajoutera également <span class="font-bold">4
+                    nouvelles lignes urbaines</span>, dont une ligne scolaire dédiée.</li>
         </ul>
 
-        <img src="https://placehold.co/800x400" alt="Carte des nouvelles lignes urbaines et interurbaines" class="rounded-lg mb-8">
+        <img src="https://transport-manager.net/assets/img/lignes/Plan_N5_no_background_trans.png"
+            alt="Carte des nouvelles lignes urbaines et interurbaines" class="rounded-lg mb-8">
 
         <p class="text-gray-700 leading-relaxed">
-            Outre ces ajouts dans le réseau urbain, le réseau interurbain sera également renforcé avec <span class="font-bold">6 nouvelles lignes</span>, incluant une ligne scolaire et une autre TAD, visant à connecter les communes environnantes et les zones périurbaines. Grâce à cette extension, les habitants des alentours de Clermont-Ferrand bénéficieront d'une meilleure accessibilité aux services publics et aux pôles économiques majeurs.
+            Outre ces ajouts dans le réseau urbain, le réseau interurbain sera également renforcé avec <span
+                class="font-bold">6 nouvelles lignes</span>, incluant une ligne scolaire et une autre TAD, visant à
+            connecter les communes environnantes et les zones périurbaines. Grâce à cette extension, les habitants des
+            alentours de Clermont-Ferrand bénéficieront d'une meilleure accessibilité aux services publics et aux pôles
+            économiques majeurs.
         </p>
     </section>
 
@@ -188,28 +268,35 @@
     <section class="container mx-auto mt-12 p-8 bg-white shadow-lg rounded-lg">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6">Les Bus Relais</h2>
         <p class="text-gray-700 leading-relaxed mb-8">
-            En cas de travaux, d’incidents ou d’imprévus rendant certains tronçons de la ligne de tramway inaccessibles, les bus relais entreront en service pour assurer la continuité du transport. Ces bus relais seront également mobilisés pendant la phase de rodage de la ligne de tramway afin de garantir aux usagers un service sans interruption.
+            En cas de travaux, d’incidents ou d’imprévus rendant certains tronçons de la ligne de tramway inaccessibles,
+            les bus relais entreront en service pour assurer la continuité du transport. Ces bus relais seront également
+            mobilisés pendant la phase de rodage de la ligne de tramway afin de garantir aux usagers un service sans
+            interruption.
         </p>
 
         <div class="quote">
-            "Nous avons pensé à chaque détail pour rendre le réseau plus fiable et résilient. Les bus relais seront là pour éviter toute perturbation, notamment lors des premiers mois de mise en service du tramway."
+            "Nous avons pensé à chaque détail pour rendre le réseau plus fiable et résilient. Les bus relais seront là
+            pour éviter toute perturbation, notamment lors des premiers mois de mise en service du tramway."
             <span class="quote-author">- Olivier Bianchi, Président de la Métropole de Clermont-Ferrand</span>
         </div>
 
-        <img src="https://placehold.co/800x400" alt="Bus relais en action sur un tronçon fermé" class="rounded-lg mb-8">
+        <img src="https://live.staticflickr.com/65535/53078555393_2c04af2e69_c.jpg"
+            alt="Bus relais en action sur un tronçon fermé" class="rounded-lg mb-8">
     </section>
 
     <!-- Daily Improvements Section -->
     <section class="container mx-auto mt-12 p-8 bg-white shadow-lg rounded-lg">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6">Améliorations pour votre quotidien</h2>
         <ul class="list-disc list-inside text-gray-700 mb-8">
-            <li>Une <span class="font-bold">application web connectée en temps réel</span> pour suivre les horaires et les perturbations.</li>
-            <li>Des <span class="font-bold">demandes d'horaires par SMS</span> pour vous offrir plus de flexibilité et d'accessibilité.</li>
-            <li>La <span class="font-bold">Gare de l'Ouest</span> deviendra une agence de <span class="font-bold">Gare Routière</span>, centralisant les services pour un accès simplifié au réseau interurbain.</li>
-            <li>La création de <span class="font-bold">3 Parkings Relais</span> supplémentaires, qui permettront de faciliter les déplacements multimodaux entre la voiture et le réseau de transport public.</li>
+            <li>Une <span class="font-bold">application web connectée en temps réel</span> pour suivre les horaires et
+                les perturbations.</li>
+            <li>Des <span class="font-bold">demandes d'horaires par SMS</span> pour vous offrir plus de flexibilité et
+                d'accessibilité.</li>
+            <li>La <span class="font-bold">Gare de l'Ouest</span> deviendra une agence de <span class="font-bold">Gare
+                    Routière</span>, centralisant les services pour un accès simplifié au réseau interurbain.</li>
+            <li>La création de <span class="font-bold">3 Parkings Relais</span> supplémentaires, qui permettront de
+                faciliter les déplacements multimodaux entre la voiture et le réseau de transport public.</li>
         </ul>
-
-        <img src="https://placehold.co/800x400" alt="Interface de l'application web et horaires par SMS" class="rounded-lg mb-8">
     </section>
 
     <!-- Footer Section -->

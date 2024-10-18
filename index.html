@@ -100,6 +100,8 @@
         <aside>
             <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
             <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
+            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
+            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
             <p class="font-bold">
                 Partenaire de vos déplacements depuis 1989.
             </p>
@@ -153,7 +155,7 @@
                     </svg>
                     <span class="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">${info.description}</span>
                 </div>
-                <a href="https://tcm-mobilite.vercel.app/src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
+                <a href="src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
             </div>`;
                                     } else if (dateActuelle >= dateDebut && dateActuelle <= dateFin) {
                                         // Les travaux sont en cours
@@ -165,7 +167,7 @@
                     </svg>
                     <span class="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">${info.description}</span>
                 </div>
-                <a href="https://tcm-mobilite.vercel.app/src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
+                <a href="src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
             </div>`;
                                     }
                                 } else if (info.type.includes("information")) {
@@ -178,7 +180,7 @@
                 </svg>
                 <span class="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">${info.description}</span>
             </div>
-            <a href="https://tcm-mobilite.vercel.app/src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
+            <a href="src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
         </div>`;
                                 } else if (info.type.includes("fermeture")) {
                                     // Fermeture alert
@@ -190,7 +192,7 @@
                 </svg>
                 <span class="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">${info.description}</span>
             </div>
-            <a href="https://tcm-mobilite.vercel.app/src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
+            <a href="src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
         </div>`;
                                 } else if (info.type.includes("attention")) {
                                     // Attention alert
@@ -202,7 +204,7 @@
                 </svg>
                 <span class="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">${info.description}</span>
             </div>
-            <a href="https://tcm-mobilite.vercel.app/src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
+            <a href="src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
         </div>`;
                                 } else if (info.type.includes("perturbation")) {
                                     // Perturbation alert
@@ -214,7 +216,7 @@
                 </svg>
                 <span class="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">${info.description}</span>
             </div>
-            <a href="https://tcm-mobilite.vercel.app/src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
+            <a href="src/details.html#TCM" class="text-blue-500 underline ml-4 flex-shrink-0 whitespace-nowrap">Lire la suite</a>
         </div>`;
                                 } else {
                                     // Thème par défaut
@@ -227,7 +229,8 @@
         </div>`;
                                 }
                                 addedLineLogos.add(ligne.ligne);
-                            } else {
+                            }
+                            else {
                                 logoHtml += `<div class="orange-border"><a href="../src/details.html#${ligne.ligne}"><div class="inner-content"><img id='logo' src='/img/${ligne.ligne}${imageSuffix}.png' width="50" height="50" alt='Logo de la ligne' class="bg-gray-200 p-2 border border-orange-500 rounded-md"></a><img src='/img/assets/warning.png' style='position: relative; width: 20px; height: 20px; top: -10px; left: 35px;'></div>`;
                                 logoHtml += `</div>`;
                                 addedLineLogos.add(ligne.ligne);

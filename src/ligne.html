@@ -395,7 +395,6 @@
     </script>
     <script>
         function generatePDF() {
-
             const ligneNumero = window.location.hash.substr(1);
             fetch('data.json')
                 .then(response => response.json())
@@ -419,17 +418,38 @@
                             background1.onload = function () {
                                 doc.addImage(background1, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la première page
                                 doc.addImage(logo, 'PNG', 201, 20, logoWidth, logoHeight); // Ajoute le logo à la première page
-                                doc.setFontSize(30);
+
+                                // Fonction pour ajuster la taille de la police
+                                function adjustFontSize(text, maxWidth, maxHeight, baseSize) {
+                                    let fontSize = baseSize;
+                                    doc.setFontSize(fontSize);
+                                    let textLines = doc.splitTextToSize(text, maxWidth);
+                                    let totalHeight = textLines.length * (fontSize * 1.5); // Facteur d'espacement des lignes
+
+                                    // Réduire la taille de la police jusqu'à ce que le texte s'adapte
+                                    while (totalHeight > maxHeight && fontSize > 5) { // 5 points comme taille minimum
+                                        fontSize -= 1;
+                                        doc.setFontSize(fontSize);
+                                        textLines = doc.splitTextToSize(text, maxWidth);
+                                        totalHeight = textLines.length * (fontSize * 1.5);
+                                    }
+
+                                    return textLines;
+                                }
+
+                                const maxDestinationWidth = 90; // Ajustez selon vos besoins
+                                const destinationText = ligne.destinations.join('\n<>\n');
+                                const destinationLines = adjustFontSize(destinationText, maxDestinationWidth, 250, 25); // Ajustez maxHeight selon vos besoins
                                 doc.setTextColor(236, 230, 202);
-                                doc.text(205, 70, `${ligne.destinations.join('\n<>\n')}`);
+                                doc.text(205, 70, destinationLines);
+
                                 doc.setFontSize(20);
                                 doc.text(205, 130, `Réseau ${ligne.reseau}`);
-                                doc.setFontSize(40);
-                                doc.setTextColor(236, 230, 202);
-                                doc.setLineHeightFactor(1.5); // Augmente l'espacement interligne pour la ligne suivante
-                                const descriptionText = ligne.description.split(' ').join('\n');
-                                doc.text(10, 160, `${descriptionText}`);
 
+                                const maxDescriptionWidth = 75; // Ajustez selon vos besoins
+                                const descriptionText = ligne.description;
+                                const descriptionLines = adjustFontSize(descriptionText, maxDescriptionWidth, 370, 40); // Ajustez maxHeight selon vos besoins
+                                doc.text(10, 155, descriptionLines);
 
                                 // Charge la deuxième image de fond
                                 const background2 = new Image();
@@ -443,7 +463,6 @@
                                 const planWidth = maxWidth; // La largeur de l'image est égale à la largeur de la page PDF
                                 const planHeight = (maxWidth / 1907) * 458; // Calcul de la hauteur proportionnelle
 
-
                                 background2.onload = function () {
                                     doc.addPage(); // Ajoute une nouvelle page
                                     doc.addImage(background2, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la deuxième page
@@ -453,7 +472,6 @@
                                     doc.text(230, 37.5, `${ligne.stats.duree_parcours}`);
                                     doc.text(230, 52.5, `${ligne.stats.distance}`);
                                     doc.addImage(planLigne, 'PNG', -4, 70, planWidth, planHeight); // Ajoute le plan de ligne à la première page
-                                    //doc.setTextColor(236, 230, 202);
                                     doc.setFontSize(15.3); doc.setTextColor(25, 64, 89);
                                     doc.text(51, 36, `${ligne.horaires.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
                                     doc.text(75, 36, `${ligne.horaires.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
@@ -482,7 +500,7 @@
                                     doc.text(155, 192, `${ligne.horaires.vacances.dimanche.pointe}`); doc.setTextColor(25, 64, 89);
                                     doc.text(219, 192, `${ligne.horaires.vacances.dimanche.creuse}`);
 
-                                    doc.save(`${ligneNumero}_fiche_horaire.pdf`);
+                                    doc.save(`TCM_fiche_horaire_ligne_${ligneNumero}_2024-2025.pdf`);
                                 };
                             };
                         };
@@ -494,6 +512,8 @@
                     console.error('Erreur :', error);
                 });
         }
+
+
 
     </script>
 

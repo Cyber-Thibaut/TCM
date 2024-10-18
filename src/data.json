@@ -3,8 +3,8 @@
         {
             "numéro": "1",
             "destinations": [
-                "Gare Centrale",
-                "Campus Cézeaux"
+                "Campus Alan Turing",
+                "Gare Centrale"
             ],
             "description": "Pratique, Universitaire, Efficace.",
             "reseau": "Volc'Express",
@@ -16,32 +16,32 @@
             "horaires": {
                 "jour_semaine": {
                     "creuse": 8,
-                    "pointe": 4,
+                    "pointe": 5,
                     "soir": 12
                 },
                 "samedi": {
-                    "creuse": 8,
+                    "creuse": 10,
                     "pointe": 6,
                     "soir": 12
                 },
                 "dimanche": {
                     "creuse": 16,
-                    "pointe": 10
+                    "pointe": 12
                 },
                 "vacances": {
                     "jour_semaine": {
                         "creuse": 8,
-                        "pointe": 4,
+                        "pointe": 5,
                         "soir": 12
                     },
                     "samedi": {
-                        "creuse": 8,
+                        "creuse": 10,
                         "pointe": 6,
                         "soir": 12
                     },
                     "dimanche": {
                         "creuse": 16,
-                        "pointe": 10
+                        "pointe": 12
                     }
                 }
             }
@@ -52,42 +52,42 @@
                 "Gare Centrale",
                 "Aéroport"
             ],
-            "description": "Rapide, Pratique, Connecté.",
+            "description": "Connexion rapide vers l'aéroport.",
             "reseau": "Volc'Express",
             "stats": {
-                "nb_arrets": 34,
-                "distance": 10,
-                "duree_parcours": 40
+                "nb_arrets": 10,
+                "distance": 12,
+                "duree_parcours": 25
             },
             "horaires": {
                 "jour_semaine": {
-                    "creuse": 7,
-                    "pointe": 7,
+                    "creuse": 8,
+                    "pointe": 6,
                     "soir": 16
                 },
                 "samedi": {
-                    "creuse": 8,
+                    "creuse": 9,
                     "pointe": 6,
-                    "soir": 11
+                    "soir": 13
                 },
                 "dimanche": {
-                    "creuse": 13,
-                    "pointe": 10
+                    "creuse": 16,
+                    "pointe": 11
                 },
                 "vacances": {
                     "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 7,
+                        "creuse": 8,
+                        "pointe": 6,
                         "soir": 16
                     },
                     "samedi": {
-                        "creuse": 8,
+                        "creuse": 9,
                         "pointe": 6,
-                        "soir": 11
+                        "soir": 13
                     },
                     "dimanche": {
-                        "creuse": 13,
-                        "pointe": 10
+                        "creuse": 16,
+                        "pointe": 11
                     }
                 }
             }
@@ -96,19 +96,19 @@
             "numéro": "3",
             "destinations": [
                 "Gare Centrale",
-                "Campus Montpied"
+                "Campus Marthe Gautier"
             ],
-            "description": "Pratique, Fréquent, Connecté.",
+            "description": "Pour les étudiants en déplacement.",
             "reseau": "Volc'Express",
             "stats": {
-                "nb_arrets": 27,
-                "distance": 8,
-                "duree_parcours": 32
+                "nb_arrets": 12,
+                "distance": 9,
+                "duree_parcours": 20
             },
             "horaires": {
                 "jour_semaine": {
-                    "creuse": 6,
-                    "pointe": 4,
+                    "creuse": 7,
+                    "pointe": 5,
                     "soir": 13
                 },
                 "samedi": {
@@ -122,8 +122,8 @@
                 },
                 "vacances": {
                     "jour_semaine": {
-                        "creuse": 6,
-                        "pointe": 4,
+                        "creuse": 7,
+                        "pointe": 5,
                         "soir": 13
                     },
                     "samedi": {
@@ -144,12 +144,12 @@
                 "Gare Centrale",
                 "Gare de l'Est"
             ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain",
+            "description": "Liaison entre deux gares majeures.",
+            "reseau": "Volc'Express",
             "stats": {
-                "nb_arrets": 24,
-                "distance": 7,
-                "duree_parcours": 28
+                "nb_arrets": 8,
+                "distance": 5,
+                "duree_parcours": 15
             },
             "horaires": {
                 "jour_semaine": {
@@ -187,15 +187,15 @@
         {
             "numéro": "5",
             "destinations": [
-                "MaM",
-                "Pôle L. Pacioli"
+                "Musée d'Art Moderne",
+                "Pôle Luca Pacioli"
             ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain",
+            "description": "Culture et innovation.",
+            "reseau": "Volc'Express",
             "stats": {
-                "nb_arrets": 27,
-                "distance": 8,
-                "duree_parcours": 32
+                "nb_arrets": 10,
+                "distance": 7,
+                "duree_parcours": 20
             },
             "horaires": {
                 "jour_semaine": {
@@ -234,46 +234,504 @@
             "numéro": "6",
             "destinations": [
                 "Grand Palais",
-                "Campus Cézeaux"
+                "Campus Maryse Esterle"
             ],
-            "description": "Pratique, Fréquent, Connecté.",
-            "reseau": "Erupt'Urbain",
+            "description": "Reliant le centre au campus universitaire.",
+            "reseau": "Volc'Express",
             "stats": {
-                "nb_arrets": 17,
-                "distance": 5,
+                "nb_arrets": 14,
+                "distance": 12,
+                "duree_parcours": 25
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 13,
+                    "pointe": 8,
+                    "soir": 20
+                },
+                "samedi": {
+                    "creuse": "-",
+                    "pointe": 10,
+                    "soir": 20
+                },
+                "dimanche": {
+                    "creuse": 20,
+                    "pointe": 20
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 13,
+                        "pointe": 8,
+                        "soir": 20
+                    },
+                    "samedi": {
+                        "creuse": "-",
+                        "pointe": 10,
+                        "soir": 20
+                    },
+                    "dimanche": {
+                        "creuse": 20,
+                        "pointe": 20
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "7",
+            "destinations": [
+                "Grand Palais",
+                "Port Fluvial"
+            ],
+            "description": "Vers le port, avec une vue imprenable.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 12,
+                "distance": 15,
+                "duree_parcours": 35
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 18,
+                    "pointe": 14,
+                    "soir": 36
+                },
+                "samedi": {
+                    "creuse": 36,
+                    "pointe": 24,
+                    "soir": 72
+                },
+                "dimanche": {
+                    "creuse": 72,
+                    "pointe": 36
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 18,
+                        "pointe": 14,
+                        "soir": 36
+                    },
+                    "samedi": {
+                        "creuse": 36,
+                        "pointe": 24,
+                        "soir": 72
+                    },
+                    "dimanche": {
+                        "creuse": 72,
+                        "pointe": 36
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "8",
+            "destinations": [
+                "Campus Marthe Gautier",
+                "Place de l'Europe"
+            ],
+            "description": "De la science & la culture.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 6,
+                "distance": 6,
+                "duree_parcours": 12
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 11,
+                    "pointe": "-",
+                    "soir": 64
+                },
+                "samedi": {
+                    "creuse": 21,
+                    "pointe": 13,
+                    "soir": 32
+                },
+                "dimanche": {
+                    "creuse": "-",
+                    "pointe": 32
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 11,
+                        "pointe": "-",
+                        "soir": 64
+                    },
+                    "samedi": {
+                        "creuse": 21,
+                        "pointe": 13,
+                        "soir": 32
+                    },
+                    "dimanche": {
+                        "creuse": "-",
+                        "pointe": 32
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "9",
+            "destinations": [
+                "Campus Alan Turing",
+                "Haute-Ville"
+            ],
+            "description": "La ligne vers les hauteurs.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 10,
+                "distance": 9,
+                "duree_parcours": 25
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 9,
+                    "pointe": 12,
+                    "soir": 36
+                },
+                "samedi": {
+                    "creuse": 12,
+                    "pointe": 9,
+                    "soir": 36
+                },
+                "dimanche": {
+                    "creuse": 18,
+                    "pointe": 18
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 9,
+                        "pointe": 12,
+                        "soir": 36
+                    },
+                    "samedi": {
+                        "creuse": 12,
+                        "pointe": 9,
+                        "soir": 36
+                    },
+                    "dimanche": {
+                        "creuse": 18,
+                        "pointe": 18
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "10",
+            "destinations": [
+                "Campus Alan Turing",
+                "CRT Est"
+            ],
+            "description": "Accès direct au CRT Est.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 8,
+                "distance": 8,
+                "duree_parcours": 22
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": "-",
+                    "pointe": "-",
+                    "soir": 20
+                },
+                "samedi": {
+                    "creuse": 15,
+                    "pointe": 10,
+                    "soir": 20
+                },
+                "dimanche": {
+                    "creuse": 30,
+                    "pointe": 30
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": "-",
+                        "pointe": "-",
+                        "soir": 20
+                    },
+                    "samedi": {
+                        "creuse": 15,
+                        "pointe": 10,
+                        "soir": 20
+                    },
+                    "dimanche": {
+                        "creuse": 30,
+                        "pointe": 30
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "11",
+            "destinations": [
+                "Campus Marthe Gautier",
+                "Clinique Saint Paul"
+            ],
+            "description": "Transport vers la santé.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 10,
+                "distance": 7,
                 "duree_parcours": 20
             },
             "horaires": {
                 "jour_semaine": {
-                    "creuse": 8,
-                    "pointe": 7,
-                    "soir": 24
+                    "creuse": 14,
+                    "pointe": 8,
+                    "soir": 21
                 },
                 "samedi": {
-                    "creuse": 12,
-                    "pointe": 8,
-                    "soir": 16
+                    "creuse": 21,
+                    "pointe": 14,
+                    "soir": 21
+                },
+                "dimanche": {
+                    "creuse": 21,
+                    "pointe": 21
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 14,
+                        "pointe": 8,
+                        "soir": 21
+                    },
+                    "samedi": {
+                        "creuse": 21,
+                        "pointe": 14,
+                        "soir": 21
+                    },
+                    "dimanche": {
+                        "creuse": 21,
+                        "pointe": 21
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "12",
+            "destinations": [
+                "Gare Centrale",
+                "Parc d'attractions"
+            ],
+            "description": "Pour les amateurs de sensations fortes.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 20,
+                "distance": 18,
+                "duree_parcours": 45
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 27,
+                    "pointe": 18,
+                    "soir": 54
+                },
+                "samedi": {
+                    "creuse": 54,
+                    "pointe": 27,
+                    "soir": 54
+                },
+                "dimanche": {
+                    "creuse": 27,
+                    "pointe": 27
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 27,
+                        "pointe": 18,
+                        "soir": 54
+                    },
+                    "samedi": {
+                        "creuse": 54,
+                        "pointe": 27,
+                        "soir": 54
+                    },
+                    "dimanche": {
+                        "creuse": 27,
+                        "pointe": 27
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "13",
+            "destinations": [
+                "Aéroport",
+                "Haute-Ville"
+            ],
+            "description": "Pour s'envoler ou rejoindre les hauteurs.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 12,
+                "distance": 12,
+                "duree_parcours": 28
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 18,
+                    "pointe": 9,
+                    "soir": "-"
+                },
+                "samedi": {
+                    "creuse": 18,
+                    "pointe": 12,
+                    "soir": 36
                 },
                 "dimanche": {
                     "creuse": "-",
+                    "pointe": 12
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 18,
+                        "pointe": 9,
+                        "soir": "-"
+                    },
+                    "samedi": {
+                        "creuse": 18,
+                        "pointe": 12,
+                        "soir": 36
+                    },
+                    "dimanche": {
+                        "creuse": "-",
+                        "pointe": 12
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "60",
+            "destinations": [
+                "Lycée Karl Marx",
+                "Préfecture"
+            ],
+            "description": "Ligne historique vers les institutions.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 8,
+                "distance": 8,
+                "duree_parcours": 20
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 20,
+                    "pointe": 10,
+                    "soir": "-"
+                },
+                "samedi": {
+                    "creuse": "-",
+                    "pointe": "-",
+                    "soir": "-"
+                },
+                "dimanche": {
+                    "creuse": "-",
+                    "pointe": "-"
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 20,
+                        "pointe": 10,
+                        "soir": "-"
+                    },
+                    "samedi": {
+                        "creuse": "-",
+                        "pointe": "-",
+                        "soir": "-"
+                    },
+                    "dimanche": {
+                        "creuse": "-",
+                        "pointe": "-"
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "61",
+            "destinations": [
+                "Gare de l'Ouest",
+                "Parc Jolimont"
+            ],
+            "description": "Traversée vers le parc.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 10,
+                "distance": 14,
+                "duree_parcours": 32
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 32,
+                    "pointe": 21,
+                    "soir": "-"
+                },
+                "samedi": {
+                    "creuse": "-",
+                    "pointe": "-",
+                    "soir": 64
+                },
+                "dimanche": {
+                    "creuse": "-",
+                    "pointe": "-"
+                },
+                "vacances": {
+                    "jour_semaine": {
+                        "creuse": 32,
+                        "pointe": 21,
+                        "soir": "-"
+                    },
+                    "samedi": {
+                        "creuse": "-",
+                        "pointe": "-",
+                        "soir": 64
+                    },
+                    "dimanche": {
+                        "creuse": "-",
+                        "pointe": "-"
+                    }
+                }
+            }
+        },
+        {
+            "numéro": "101",
+            "destinations": [
+                "Hôtel de Région",
+                "ARRONAY - Etangs"
+            ],
+            "description": "Vers le patrimoine et les étangs.",
+            "reseau": "Volc'Express",
+            "stats": {
+                "nb_arrets": 14,
+                "distance": 16,
+                "duree_parcours": 40
+            },
+            "horaires": {
+                "jour_semaine": {
+                    "creuse": 14,
+                    "pointe": "-",
+                    "soir": 36
+                },
+                "samedi": {
+                    "creuse": 24,
                     "pointe": 10,
                     "soir": 24
                 },
+                "dimanche": {
+                    "creuse": 24,
+                    "pointe": 12
+                },
                 "vacances": {
-                    "samedi": {
-                        "creuse": 10,
-                        "pointe": 7,
-                        "soir": 12
+                    "jour_semaine": {
+                        "creuse": 14,
+                        "pointe": "-",
+                        "soir": 36
                     },
-                    "dimanche": {
-                        "creuse": 12,
+                    "samedi": {
+                        "creuse": 24,
                         "pointe": 10,
                         "soir": 24
                     },
-                    "jour_semaine": {
-                        "creuse": 7,
-                        "pointe": 5,
-                        "soir": 13
+                    "dimanche": {
+                        "creuse": 24,
+                        "pointe": 12
                     }
                 }
             }

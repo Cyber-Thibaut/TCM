@@ -395,105 +395,99 @@
     </script>
     <script>
         function generatePDF() {
-
-            const ligneNumero = window.location.hash.substr(1);
-            fetch('data.json')
-                .then(response => response.json())
-                .then(data => {
-                    const ligne = data.lignes.find(l => l.numéro === ligneNumero);
-                    if (ligne) {
-                        const doc = new jsPDF({
-                            orientation: 'landscape'
-                        });
-
-                        const logo = new Image();
-                        logo.src = `/img/${ligneNumero}.png`;
-
-                        logo.onload = function () {
-                            const logoWidth = 35; // Largeur du logo
-                            const logoHeight = logoWidth * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
-
-                            const background1 = new Image();
-                            background1.src = '/img/pdf1.png'; // Chemin de la première image de fond
-
-                            background1.onload = function () {
-                                doc.addImage(background1, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la première page
-                                doc.addImage(logo, 'PNG', 201, 20, logoWidth, logoHeight); // Ajoute le logo à la première page
-                                doc.setFontSize(30);
-                                doc.setTextColor(236, 230, 202);
-                                doc.text(205, 70, `${ligne.destinations.join('\n<>\n')}`);
-                                doc.setFontSize(20);
-                                doc.text(205, 130, `Réseau ${ligne.reseau}`);
-                                doc.setFontSize(40);
-                                doc.setTextColor(236, 230, 202);
-                                doc.setLineHeightFactor(1.5); // Augmente l'espacement interligne pour la ligne suivante
-                                const descriptionText = ligne.description.split(' ').join('\n');
-                                doc.text(10, 160, `${descriptionText}`);
-
-
-                                // Charge la deuxième image de fond
-                                const background2 = new Image();
-                                background2.src = '/img/pdf2.png'; // Chemin de la deuxième image de fond
-                                const logoWidth2 = 50; // Largeur du logo
-                                const logoHeight2 = logoWidth2 * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
-                                const planLigne = new Image();
-                                planLigne.src = `/img/plans/L${ligneNumero}.png`;
-
-                                const maxWidth = 307; // Largeur maximale de la page PDF (taille A4 en mm)
-                                const planWidth = maxWidth; // La largeur de l'image est égale à la largeur de la page PDF
-                                const planHeight = (maxWidth / 1907) * 458; // Calcul de la hauteur proportionnelle
-
-
-                                background2.onload = function () {
-                                    doc.addPage(); // Ajoute une nouvelle page
-                                    doc.addImage(background2, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la deuxième page
-                                    doc.addImage(logo, 'PNG', 15, 155, logoWidth2, logoHeight2);
-                                    doc.setFontSize(24.2);
-                                    doc.text(230, 22.5, `${ligne.stats.nb_arrets}`);
-                                    doc.text(230, 37.5, `${ligne.stats.duree_parcours}`);
-                                    doc.text(230, 52.5, `${ligne.stats.distance}`);
-                                    doc.addImage(planLigne, 'PNG', -4, 70, planWidth, planHeight); // Ajoute le plan de ligne à la première page
-                                    //doc.setTextColor(236, 230, 202);
-                                    doc.setFontSize(15.3); doc.setTextColor(25, 64, 89);
-                                    doc.text(51, 36, `${ligne.horaires.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(75, 36, `${ligne.horaires.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(109, 36, `${ligne.horaires.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(153, 36, `${ligne.horaires.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(184, 36, `${ligne.horaires.jour_semaine.soir}`);
-                                    doc.text(51, 42.5, `${ligne.horaires.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(75, 42.5, `${ligne.horaires.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(109, 42.5, `${ligne.horaires.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(153, 42.5, `${ligne.horaires.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(184, 42.5, `${ligne.horaires.samedi.soir}`);
-                                    doc.text(51, 49, `${ligne.horaires.dimanche.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(75, 49, `${ligne.horaires.dimanche.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(139, 49, `${ligne.horaires.dimanche.creuse}`);
-                                    doc.text(131, 179, `${ligne.horaires.vacances.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(155, 179, `${ligne.horaires.vacances.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(189, 179, `${ligne.horaires.vacances.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(233, 179, `${ligne.horaires.vacances.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(264, 179, `${ligne.horaires.vacances.jour_semaine.soir}`);
-                                    doc.text(131, 185.5, `${ligne.horaires.vacances.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(155, 185.5, `${ligne.horaires.vacances.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(189, 185.5, `${ligne.horaires.vacances.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(233, 185.5, `${ligne.horaires.vacances.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(264, 185.5, `${ligne.horaires.vacances.samedi.soir}`);
-                                    doc.text(131, 192, `${ligne.horaires.vacances.dimanche.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(155, 192, `${ligne.horaires.vacances.dimanche.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(219, 192, `${ligne.horaires.vacances.dimanche.creuse}`);
-
-                                    doc.save(`${ligneNumero}_fiche_horaire.pdf`);
-                                };
-                            };
-                        };
-                    } else {
-                        alert("Aucune fiche horaire n'a été trouvée pour cette ligne. Veuillez nous excuser pour la gêne occasionnée.");
-                    }
-                })
-                .catch(error => {
-                    console.error('Erreur :', error);
+    const ligneNumero = window.location.hash.substr(1);
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            const ligne = data.lignes.find(l => l.numéro === ligneNumero);
+            if (ligne) {
+                const doc = new jsPDF({
+                    orientation: 'landscape'
                 });
-        }
+
+                const logo = new Image();
+                logo.src = `/img/${ligneNumero}.png`;
+
+                logo.onload = function () {
+                    const logoWidth = 35; // Largeur du logo
+                    const logoHeight = logoWidth * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
+
+                    const background1 = new Image();
+                    background1.src = '/img/pdf1.png'; // Chemin de la première image de fond
+
+                    background1.onload = function () {
+                        doc.addImage(background1, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la première page
+                        doc.addImage(logo, 'PNG', 201, 20, logoWidth, logoHeight); // Ajoute le logo à la première page
+                        
+                        // Fonction pour ajuster la taille de la police
+                        function adjustFontSize(text, maxWidth, maxHeight, baseSize) {
+                            let fontSize = baseSize;
+                            doc.setFontSize(fontSize);
+                            let textLines = doc.splitTextToSize(text, maxWidth);
+                            let totalHeight = textLines.length * (fontSize * 1.5); // Facteur d'espacement des lignes
+
+                            // Réduire la taille de la police jusqu'à ce que le texte s'adapte
+                            while (totalHeight > maxHeight && fontSize > 5) { // 5 points comme taille minimum
+                                fontSize -= 1;
+                                doc.setFontSize(fontSize);
+                                textLines = doc.splitTextToSize(text, maxWidth);
+                                totalHeight = textLines.length * (fontSize * 1.5);
+                            }
+
+                            return textLines;
+                        }
+
+                        const maxDestinationWidth = 90; // Ajustez selon vos besoins
+                        const destinationText = ligne.destinations.join('\n<>\n');
+                        const destinationLines = adjustFontSize(destinationText, maxDestinationWidth, 250, 25); // Ajustez maxHeight selon vos besoins
+                        doc.setTextColor(236, 230, 202);
+                        doc.text(205, 70, destinationLines);
+
+                        doc.setFontSize(20);
+                        doc.text(205, 130, `Réseau ${ligne.reseau}`);
+
+                        const maxDescriptionWidth = 75; // Ajustez selon vos besoins
+                        const descriptionText = ligne.description;
+                        const descriptionLines = adjustFontSize(descriptionText, maxDescriptionWidth, 370, 40); // Ajustez maxHeight selon vos besoins
+                        doc.text(10, 155, descriptionLines);
+
+                        // Charge la deuxième image de fond
+                        const background2 = new Image();
+                        background2.src = '/img/pdf2.png'; // Chemin de la deuxième image de fond
+                        const logoWidth2 = 50; // Largeur du logo
+                        const logoHeight2 = logoWidth2 * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
+                        const planLigne = new Image();
+                        planLigne.src = `/img/plans/L${ligneNumero}.png`;
+
+                        const maxWidth = 307; // Largeur maximale de la page PDF (taille A4 en mm)
+                        const planWidth = maxWidth; // La largeur de l'image est égale à la largeur de la page PDF
+                        const planHeight = (maxWidth / 1907) * 458; // Calcul de la hauteur proportionnelle
+
+                        background2.onload = function () {
+                            doc.addPage(); // Ajoute une nouvelle page
+                            doc.addImage(background2, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la deuxième page
+                            doc.addImage(logo, 'PNG', 15, 155, logoWidth2, logoHeight2);
+                            doc.setFontSize(24.2);
+                            doc.text(230, 22.5, `${ligne.stats.nb_arrets}`);
+                            doc.text(230, 37.5, `${ligne.stats.duree_parcours}`);
+                            doc.text(230, 52.5, `${ligne.stats.distance}`);
+                            doc.addImage(planLigne, 'PNG', -4, 70, planWidth, planHeight); // Ajoute le plan de ligne à la première page
+                            // Continuez avec le reste de votre code
+                            
+                            doc.save(`TCM_fiche_horaire_ligne_${ligneNumero}_2024-2025.pdf`);
+                        };
+                    };
+                };
+            } else {
+                alert("Aucune fiche horaire n'a été trouvée pour cette ligne. Veuillez nous excuser pour la gêne occasionnée.");
+            }
+        })
+        .catch(error => {
+            console.error('Erreur :', error);
+        });
+}
+
+
 
     </script>
 

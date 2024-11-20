@@ -395,6 +395,17 @@
                 "temps_trajet": "7 minutes",
                 "longueur_ligne": "3 km"
             }
+        },
+        {
+            "id": 813,
+            "nom": "La ligne directe pour la maison du Père Noël !",
+            "type": "Spéciale",
+            "description": "Au départ de la Gare SNCF rejoignez le village de Noël installé Place de Jaude ! \nHoraires d'ouverture du village : <ul><li>Du lundi au vendredi : de 12h à 22h (sauf le 24/12, fermeture à 18h)</li><li>Le samedi : de 10h à 1h</li><li>Le dimanche : de 12h à 21h</li></ul>\nVenez nombreux profiter des animations ainsi que de la Grande Roue !\nToute l'équipe de TCM vous souhaite de joyeuses fêtes de fin d'année !",
+            "stats": {
+                "nombre_arrets": 10,
+                "temps_trajet": "13 minutes",
+                "longueur_ligne": "3 km"
+            }
         }
     ]
 }

@@ -270,12 +270,12 @@
 
         // Vérifier s'il y a un fragment
         if (fragment) {
-            async function chargerInfosLigne(numeroLigne) {
+            async function chargerInfosLigne(fragment) {
                 try {
                     const response = await fetch('ligne.json'); // Charge le fichier JSON
                     const data = await response.json(); // Convertit la réponse en objet JavaScript
 
-                    ligne = data.lignes.find(l => l.id === parseInt(numeroLigne));
+                    ligne = data.lignes.find(l => l.id === parseInt(fragment));
 
                     if (ligne.type === "Spéciale") {
                         // Construire le nom du script en fonction du fragment

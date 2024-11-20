@@ -290,7 +290,16 @@
                             const script = document.createElement("script");
                             script.src = scriptName;
                             document.head.appendChild(script);
-                        } else {
+                        } else if (ligne.id === "NS") {
+                            // Construire le nom du script pour les navettes
+                            const scriptName = "/src/scripts/NS.js";
+
+                            // Charger le script
+                            const script = document.createElement("script");
+                            script.src = scriptName;
+                            document.head.appendChild(script);
+                        }
+                        else {
                             // Construire le nom du script pour les autres lignes
                             const scriptName = `/src/scripts/${fragment}.js`;
 

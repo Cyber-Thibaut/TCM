@@ -273,275 +273,284 @@
             async function chargerInfosLigne(fragment) {
                 try {
                     const response = await fetch('ligne.json'); // Charge le fichier JSON
+                    if (!response.ok) {
+                        throw new Error(`Erreur HTTP : ${response.status}`);
+                    }
+
                     const data = await response.json(); // Convertit la réponse en objet JavaScript
 
-                    ligne = data.lignes.find(l => l.id === parseInt(fragment));
+                    const ligne = data.lignes.find(l => l.id === parseInt(fragment));
 
-                    if (ligne.type === "Spéciale") {
-                        // Construire le nom du script en fonction du fragment
-                        const scriptName = "/src/scripts/speciales.js";
+                    if (ligne) {
+                        if (ligne.type === "Spéciale") {
+                            // Construire le nom du script pour les lignes spéciales
+                            const scriptName = "/src/scripts/speciales.js";
 
-                        // Créer un élément de script
-                        const script = document.createElement("script");
+                            // Charger le script
+                            const script = document.createElement("script");
+                            script.src = scriptName;
+                            document.head.appendChild(script);
+                        } else {
+                            // Construire le nom du script pour les autres lignes
+                            const scriptName = `/src/scripts/${fragment}.js`;
 
-                        // Spécifier l'attribut "src" pour charger le script correspondant
-                        script.src = scriptName;
-
-                        // Ajouter le script à la page
-                        document.head.appendChild(script);
-
+                            // Charger le script
+                            const script = document.createElement("script");
+                            script.src = scriptName;
+                            document.head.appendChild(script);
+                        }
                     } else {
-                        // Construire le nom du script en fonction du fragment
-                        const scriptName = "/src/scripts/" + fragment + ".js";
-
-                        // Créer un élément de script
-                        const script = document.createElement("script");
-
-                        // Spécifier l'attribut "src" pour charger le script correspondant
-                        script.src = scriptName;
-
-                        // Ajouter le script à la page
-                        document.head.appendChild(script);
+                        const nextBus = `<div role="alert" class="alert alert-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            <span>Cette ligne n'est pas équipée de balises GPS, fiez vous aux horaires théoriques disponibles aux arrets.</span>
+                        </div>`;
+                        document.getElementById("nextBusTime").innerHTML = nextBus;
                     }
                 } catch (error) {
                     console.error('Erreur lors du chargement des données :', error);
                 }
             }
+
+            // Appeler la fonction avec le fragment
+            chargerInfosLigne(fragment);
         }
     </script>
 
+
     <script>
         const urlinfo = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
-                // const urlinfo = "test.json"
-                // Fonction pour extraire l'ID de la ligne à partir de l'URL
-                function getLigneIDFromURL() {
-                    const url = window.location.href;
-                    const parts = url.split('#');
-                    if (parts.length > 1) {
-                        return parts[1];
-                    }
-                    return null;
-                }
+        // const urlinfo = "test.json"
+        // Fonction pour extraire l'ID de la ligne à partir de l'URL
+        function getLigneIDFromURL() {
+            const url = window.location.href;
+            const parts = url.split('#');
+            if (parts.length > 1) {
+                return parts[1];
+            }
+            return null;
+        }
 
-                let ligneID = getLigneIDFromURL();
+        let ligneID = getLigneIDFromURL();
 
-                if (ligneID === "navette%20sp%C3%A9ciale") {
-                    ligneID = "NS";
-                }
+        if (ligneID === "navette%20sp%C3%A9ciale") {
+            ligneID = "NS";
+        }
 
 
-                // Affichage des informations de trafic
-                function afficherInfoTrafic() {
-                    const dateActuelle = new Date();
-                    let ligneTrouvee = false;
+        // Affichage des informations de trafic
+        function afficherInfoTrafic() {
+            const dateActuelle = new Date();
+            let ligneTrouvee = false;
 
-                    // Vérifier si l'ID de la ligne est null
-                    if (ligneID === null) {
-                        $("#lignes").html(`<div role="alert" class="alert alert-error"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            // Vérifier si l'ID de la ligne est null
+            if (ligneID === null) {
+                $("#lignes").html(`<div role="alert" class="alert alert-error"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>Aucune ligne n'est sélectionnée. Vous êtes peut-être en mode "voyage astral". Merci de <a href="/src/reseau.html" class="text-blue-600 underline">revenir sur Terre</a> et de sélectionner une ligne pour afficher les informations de trafic.</span>
                 </div>`);
-                        return;
-                    }
+                return;
+            }
 
-                    $.getJSON(urlinfo, function (data) {
-                        $.each(data.lignes, function (i, ligne) {
-                            if (ligne.ligne === ligneID) {
-                                const infosTrafic = ligne.infos_trafic.filter(info => {
-                                    const dateDebut = new Date(Date.parse(info.annonce));
-                                    const dateFin = new Date(Date.parse(info.fin));
-                                    dateFin.setDate(dateFin.getDate() + 1);
-                                    return dateActuelle >= dateDebut && dateActuelle <= dateFin;
-                                });
-
-                                if (infosTrafic.length > 0) {
-                                    ligneTrouvee = true;
-
-                                    const card = $("<div>")
-                                        .addClass("alert alert-error flex items-center justify-between")
-                                        .attr("role", "alert");
-
-                                    let logoLigne;
-
-                                    if (ligne.ligne === "TCM") {
-                                        logoLigne = $("<img>")
-                                            .attr("src", "/img/" + ligne.ligne + ".png")
-                                            .addClass("w-15 h-12");
-                                    } else {
-                                        logoLigne = $("<img>")
-                                            .attr("src", "/img/" + ligne.ligne + ".png")
-                                            .addClass("w-15 h-12");
-                                    }
-
-                                    card.append(logoLigne);
-                                    card.append($("<span>").addClass("sr-only").text("Info"));
-
-                                    const textContainer = $("<div>").addClass("flex flex-col ml-4");
-                                    const infosCount = infosTrafic.length;
-                                    const infosText = infosCount === 1 ? "1 info trafic" : infosCount + " infos trafic";
-                                    const infosTitre = infosCount === 1 ? "Un incident perturbe la ligne" : "Plusieurs incidents perturbent la ligne";
-                                    const title = $("<h3>").addClass("font-bold").text(infosTitre);
-                                    const description = $("<div>").addClass("text-xs").text(infosText);
-
-                                    textContainer.append(title).append(description);
-
-                                    const viewButton = $("<button>")
-                                        .addClass("btn btn-sm btn-error flex items-center justify-center")
-                                        .html(
-                                            `<svg class="h-5 w-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
-                                    </svg>`
-                                        )
-                                        .click(function () {
-                                            window.location.href = "details.html#" + ligne.ligne;
-                                        });
-
-                                    card.append(textContainer);
-                                    card.append(viewButton);
-
-                                    $("#lignes").append(card);
-                                }
-                            }
+            $.getJSON(urlinfo, function (data) {
+                $.each(data.lignes, function (i, ligne) {
+                    if (ligne.ligne === ligneID) {
+                        const infosTrafic = ligne.infos_trafic.filter(info => {
+                            const dateDebut = new Date(Date.parse(info.annonce));
+                            const dateFin = new Date(Date.parse(info.fin));
+                            dateFin.setDate(dateFin.getDate() + 1);
+                            return dateActuelle >= dateDebut && dateActuelle <= dateFin;
                         });
 
-                        if (!ligneTrouvee) {
-                            if (ligneID === "NS") {
-                                $("#lignes").html(`<div role="alert" class="alert alert-info"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        if (infosTrafic.length > 0) {
+                            ligneTrouvee = true;
+
+                            const card = $("<div>")
+                                .addClass("alert alert-error flex items-center justify-between")
+                                .attr("role", "alert");
+
+                            let logoLigne;
+
+                            if (ligne.ligne === "TCM") {
+                                logoLigne = $("<img>")
+                                    .attr("src", "/img/" + ligne.ligne + ".png")
+                                    .addClass("w-15 h-12");
+                            } else {
+                                logoLigne = $("<img>")
+                                    .attr("src", "/img/" + ligne.ligne + ".png")
+                                    .addClass("w-15 h-12");
+                            }
+
+                            card.append(logoLigne);
+                            card.append($("<span>").addClass("sr-only").text("Info"));
+
+                            const textContainer = $("<div>").addClass("flex flex-col ml-4");
+                            const infosCount = infosTrafic.length;
+                            const infosText = infosCount === 1 ? "1 info trafic" : infosCount + " infos trafic";
+                            const infosTitre = infosCount === 1 ? "Un incident perturbe la ligne" : "Plusieurs incidents perturbent la ligne";
+                            const title = $("<h3>").addClass("font-bold").text(infosTitre);
+                            const description = $("<div>").addClass("text-xs").text(infosText);
+
+                            textContainer.append(title).append(description);
+
+                            const viewButton = $("<button>")
+                                .addClass("btn btn-sm btn-error flex items-center justify-center")
+                                .html(
+                                    `<svg class="h-5 w-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
+                                    </svg>`
+                                )
+                                .click(function () {
+                                    window.location.href = "details.html#" + ligne.ligne;
+                                });
+
+                            card.append(textContainer);
+                            card.append(viewButton);
+
+                            $("#lignes").append(card);
+                        }
+                    }
+                });
+
+                if (!ligneTrouvee) {
+                    if (ligneID === "NS") {
+                        $("#lignes").html(`<div role="alert" class="alert alert-info"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>Il n'y a pas d'évènement prévu au Zénith prochainement.</div>
         </div>`);
-                            } else {
-                                $("#lignes").html(`<div role="alert" class="alert alert-success"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    } else {
+                        $("#lignes").html(`<div role="alert" class="alert alert-success"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>Aucune information de trafic à signaler pour la ligne ${ligneID}. Tout circule normalement.</span>
                 </div>`);
-                            }
-                        }
-
-                    });
+                    }
                 }
 
-                afficherInfoTrafic();
+            });
+        }
+
+        afficherInfoTrafic();
     </script>
     <script>
-                function generatePDF() {
-                    const ligneNumero = window.location.hash.substr(1);
-                    fetch('data.json')
-                        .then(response => response.json())
-                        .then(data => {
-                            const ligne = data.lignes.find(l => l.numéro === ligneNumero);
-                            if (ligne) {
-                                const doc = new jsPDF({
-                                    orientation: 'landscape'
-                                });
-
-                                const logo = new Image();
-                                logo.src = `/img/${ligneNumero}.png`;
-
-                                logo.onload = function () {
-                                    const logoWidth = 35; // Largeur du logo
-                                    const logoHeight = logoWidth * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
-
-                                    const background1 = new Image();
-                                    background1.src = '/img/pdf1.png'; // Chemin de la première image de fond
-
-                                    background1.onload = function () {
-                                        doc.addImage(background1, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la première page
-                                        doc.addImage(logo, 'PNG', 201, 20, logoWidth, logoHeight); // Ajoute le logo à la première page
-
-                                        // Fonction pour ajuster la taille de la police
-                                        function adjustFontSize(text, maxWidth, maxHeight, baseSize) {
-                                            let fontSize = baseSize;
-                                            doc.setFontSize(fontSize);
-                                            let textLines = doc.splitTextToSize(text, maxWidth);
-                                            let totalHeight = textLines.length * (fontSize * 1.5); // Facteur d'espacement des lignes
-
-                                            // Réduire la taille de la police jusqu'à ce que le texte s'adapte
-                                            while (totalHeight > maxHeight && fontSize > 5) { // 5 points comme taille minimum
-                                                fontSize -= 1;
-                                                doc.setFontSize(fontSize);
-                                                textLines = doc.splitTextToSize(text, maxWidth);
-                                                totalHeight = textLines.length * (fontSize * 1.5);
-                                            }
-
-                                            return textLines;
-                                        }
-
-                                        const maxDestinationWidth = 90; // Ajustez selon vos besoins
-                                        const destinationText = ligne.destinations.join('\n<>\n');
-                                        const destinationLines = adjustFontSize(destinationText, maxDestinationWidth, 250, 25); // Ajustez maxHeight selon vos besoins
-                                        doc.setTextColor(236, 230, 202);
-                                        doc.text(205, 70, destinationLines);
-
-                                        doc.setFontSize(20);
-                                        doc.text(205, 130, `Réseau ${ligne.reseau}`);
-
-                                        const maxDescriptionWidth = 75; // Ajustez selon vos besoins
-                                        const descriptionText = ligne.description;
-                                        const descriptionLines = adjustFontSize(descriptionText, maxDescriptionWidth, 370, 40); // Ajustez maxHeight selon vos besoins
-                                        doc.text(10, 155, descriptionLines);
-
-                                        // Charge la deuxième image de fond
-                                        const background2 = new Image();
-                                        background2.src = '/img/pdf2.png'; // Chemin de la deuxième image de fond
-                                        const logoWidth2 = 50; // Largeur du logo
-                                        const logoHeight2 = logoWidth2 * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
-                                        const planLigne = new Image();
-                                        planLigne.src = `/img/plans/L${ligneNumero}.png`;
-
-                                        const maxWidth = 307; // Largeur maximale de la page PDF (taille A4 en mm)
-                                        const planWidth = maxWidth; // La largeur de l'image est égale à la largeur de la page PDF
-                                        const planHeight = (maxWidth / 1907) * 458; // Calcul de la hauteur proportionnelle
-
-                                        background2.onload = function () {
-                                            doc.addPage(); // Ajoute une nouvelle page
-                                            doc.addImage(background2, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la deuxième page
-                                            doc.addImage(logo, 'PNG', 15, 155, logoWidth2, logoHeight2);
-                                            doc.setFontSize(24.2);
-                                            doc.text(230, 22.5, `${ligne.stats.nb_arrets}`);
-                                            doc.text(230, 37.5, `${ligne.stats.duree_parcours}`);
-                                            doc.text(230, 52.5, `${ligne.stats.distance}`);
-                                            doc.addImage(planLigne, 'PNG', -4, 70, planWidth, planHeight); // Ajoute le plan de ligne à la première page
-                                            doc.setFontSize(15.3); doc.setTextColor(25, 64, 89);
-                                            doc.text(51, 36, `${ligne.horaires.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                            doc.text(75, 36, `${ligne.horaires.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                            doc.text(109, 36, `${ligne.horaires.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                            doc.text(153, 36, `${ligne.horaires.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                            doc.text(184, 36, `${ligne.horaires.jour_semaine.soir}`);
-                                            doc.text(51, 42.5, `${ligne.horaires.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                            doc.text(75, 42.5, `${ligne.horaires.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                            doc.text(109, 42.5, `${ligne.horaires.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                            doc.text(153, 42.5, `${ligne.horaires.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                            doc.text(184, 42.5, `${ligne.horaires.samedi.soir}`);
-                                            doc.text(51, 49, `${ligne.horaires.dimanche.creuse}`); doc.setTextColor(236, 230, 202);
-                                            doc.text(75, 49, `${ligne.horaires.dimanche.pointe}`); doc.setTextColor(25, 64, 89);
-                                            doc.text(139, 49, `${ligne.horaires.dimanche.creuse}`);
-                                            doc.text(131, 179, `${ligne.horaires.vacances.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                            doc.text(155, 179, `${ligne.horaires.vacances.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                            doc.text(189, 179, `${ligne.horaires.vacances.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                            doc.text(233, 179, `${ligne.horaires.vacances.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                            doc.text(264, 179, `${ligne.horaires.vacances.jour_semaine.soir}`);
-                                            doc.text(131, 185.5, `${ligne.horaires.vacances.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                            doc.text(155, 185.5, `${ligne.horaires.vacances.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                            doc.text(189, 185.5, `${ligne.horaires.vacances.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                            doc.text(233, 185.5, `${ligne.horaires.vacances.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                            doc.text(264, 185.5, `${ligne.horaires.vacances.samedi.soir}`);
-                                            doc.text(131, 192, `${ligne.horaires.vacances.dimanche.creuse}`); doc.setTextColor(236, 230, 202);
-                                            doc.text(155, 192, `${ligne.horaires.vacances.dimanche.pointe}`); doc.setTextColor(25, 64, 89);
-                                            doc.text(219, 192, `${ligne.horaires.vacances.dimanche.creuse}`);
-
-                                            doc.save(`TCM_fiche_horaire_ligne_${ligneNumero}_2024-2025.pdf`);
-                                        };
-                                    };
-                                };
-                            } else {
-                                alert("Aucune fiche horaire n'a été trouvée pour cette ligne. Veuillez nous excuser pour la gêne occasionnée.");
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Erreur :', error);
+        function generatePDF() {
+            const ligneNumero = window.location.hash.substr(1);
+            fetch('data.json')
+                .then(response => response.json())
+                .then(data => {
+                    const ligne = data.lignes.find(l => l.numéro === ligneNumero);
+                    if (ligne) {
+                        const doc = new jsPDF({
+                            orientation: 'landscape'
                         });
-                }
+
+                        const logo = new Image();
+                        logo.src = `/img/${ligneNumero}.png`;
+
+                        logo.onload = function () {
+                            const logoWidth = 35; // Largeur du logo
+                            const logoHeight = logoWidth * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
+
+                            const background1 = new Image();
+                            background1.src = '/img/pdf1.png'; // Chemin de la première image de fond
+
+                            background1.onload = function () {
+                                doc.addImage(background1, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la première page
+                                doc.addImage(logo, 'PNG', 201, 20, logoWidth, logoHeight); // Ajoute le logo à la première page
+
+                                // Fonction pour ajuster la taille de la police
+                                function adjustFontSize(text, maxWidth, maxHeight, baseSize) {
+                                    let fontSize = baseSize;
+                                    doc.setFontSize(fontSize);
+                                    let textLines = doc.splitTextToSize(text, maxWidth);
+                                    let totalHeight = textLines.length * (fontSize * 1.5); // Facteur d'espacement des lignes
+
+                                    // Réduire la taille de la police jusqu'à ce que le texte s'adapte
+                                    while (totalHeight > maxHeight && fontSize > 5) { // 5 points comme taille minimum
+                                        fontSize -= 1;
+                                        doc.setFontSize(fontSize);
+                                        textLines = doc.splitTextToSize(text, maxWidth);
+                                        totalHeight = textLines.length * (fontSize * 1.5);
+                                    }
+
+                                    return textLines;
+                                }
+
+                                const maxDestinationWidth = 90; // Ajustez selon vos besoins
+                                const destinationText = ligne.destinations.join('\n<>\n');
+                                const destinationLines = adjustFontSize(destinationText, maxDestinationWidth, 250, 25); // Ajustez maxHeight selon vos besoins
+                                doc.setTextColor(236, 230, 202);
+                                doc.text(205, 70, destinationLines);
+
+                                doc.setFontSize(20);
+                                doc.text(205, 130, `Réseau ${ligne.reseau}`);
+
+                                const maxDescriptionWidth = 75; // Ajustez selon vos besoins
+                                const descriptionText = ligne.description;
+                                const descriptionLines = adjustFontSize(descriptionText, maxDescriptionWidth, 370, 40); // Ajustez maxHeight selon vos besoins
+                                doc.text(10, 155, descriptionLines);
+
+                                // Charge la deuxième image de fond
+                                const background2 = new Image();
+                                background2.src = '/img/pdf2.png'; // Chemin de la deuxième image de fond
+                                const logoWidth2 = 50; // Largeur du logo
+                                const logoHeight2 = logoWidth2 * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
+                                const planLigne = new Image();
+                                planLigne.src = `/img/plans/L${ligneNumero}.png`;
+
+                                const maxWidth = 307; // Largeur maximale de la page PDF (taille A4 en mm)
+                                const planWidth = maxWidth; // La largeur de l'image est égale à la largeur de la page PDF
+                                const planHeight = (maxWidth / 1907) * 458; // Calcul de la hauteur proportionnelle
+
+                                background2.onload = function () {
+                                    doc.addPage(); // Ajoute une nouvelle page
+                                    doc.addImage(background2, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la deuxième page
+                                    doc.addImage(logo, 'PNG', 15, 155, logoWidth2, logoHeight2);
+                                    doc.setFontSize(24.2);
+                                    doc.text(230, 22.5, `${ligne.stats.nb_arrets}`);
+                                    doc.text(230, 37.5, `${ligne.stats.duree_parcours}`);
+                                    doc.text(230, 52.5, `${ligne.stats.distance}`);
+                                    doc.addImage(planLigne, 'PNG', -4, 70, planWidth, planHeight); // Ajoute le plan de ligne à la première page
+                                    doc.setFontSize(15.3); doc.setTextColor(25, 64, 89);
+                                    doc.text(51, 36, `${ligne.horaires.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
+                                    doc.text(75, 36, `${ligne.horaires.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
+                                    doc.text(109, 36, `${ligne.horaires.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
+                                    doc.text(153, 36, `${ligne.horaires.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
+                                    doc.text(184, 36, `${ligne.horaires.jour_semaine.soir}`);
+                                    doc.text(51, 42.5, `${ligne.horaires.samedi.creuse}`); doc.setTextColor(236, 230, 202);
+                                    doc.text(75, 42.5, `${ligne.horaires.samedi.pointe}`); doc.setTextColor(25, 64, 89);
+                                    doc.text(109, 42.5, `${ligne.horaires.samedi.creuse}`); doc.setTextColor(236, 230, 202);
+                                    doc.text(153, 42.5, `${ligne.horaires.samedi.pointe}`); doc.setTextColor(25, 64, 89);
+                                    doc.text(184, 42.5, `${ligne.horaires.samedi.soir}`);
+                                    doc.text(51, 49, `${ligne.horaires.dimanche.creuse}`); doc.setTextColor(236, 230, 202);
+                                    doc.text(75, 49, `${ligne.horaires.dimanche.pointe}`); doc.setTextColor(25, 64, 89);
+                                    doc.text(139, 49, `${ligne.horaires.dimanche.creuse}`);
+                                    doc.text(131, 179, `${ligne.horaires.vacances.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
+                                    doc.text(155, 179, `${ligne.horaires.vacances.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
+                                    doc.text(189, 179, `${ligne.horaires.vacances.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
+                                    doc.text(233, 179, `${ligne.horaires.vacances.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
+                                    doc.text(264, 179, `${ligne.horaires.vacances.jour_semaine.soir}`);
+                                    doc.text(131, 185.5, `${ligne.horaires.vacances.samedi.creuse}`); doc.setTextColor(236, 230, 202);
+                                    doc.text(155, 185.5, `${ligne.horaires.vacances.samedi.pointe}`); doc.setTextColor(25, 64, 89);
+                                    doc.text(189, 185.5, `${ligne.horaires.vacances.samedi.creuse}`); doc.setTextColor(236, 230, 202);
+                                    doc.text(233, 185.5, `${ligne.horaires.vacances.samedi.pointe}`); doc.setTextColor(25, 64, 89);
+                                    doc.text(264, 185.5, `${ligne.horaires.vacances.samedi.soir}`);
+                                    doc.text(131, 192, `${ligne.horaires.vacances.dimanche.creuse}`); doc.setTextColor(236, 230, 202);
+                                    doc.text(155, 192, `${ligne.horaires.vacances.dimanche.pointe}`); doc.setTextColor(25, 64, 89);
+                                    doc.text(219, 192, `${ligne.horaires.vacances.dimanche.creuse}`);
+
+                                    doc.save(`TCM_fiche_horaire_ligne_${ligneNumero}_2024-2025.pdf`);
+                                };
+                            };
+                        };
+                    } else {
+                        alert("Aucune fiche horaire n'a été trouvée pour cette ligne. Veuillez nous excuser pour la gêne occasionnée.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur :', error);
+                });
+        }
 
 
 

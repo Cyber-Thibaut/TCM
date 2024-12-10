@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const menu = `
-        <div class="navbar bg-base-300">
+        <div class="navbar bg-base-300 relative">
         <div class="navbar-start">
             <div class="dropdown">
                 <label tabindex="0" class="btn btn-ghost lg:hidden">

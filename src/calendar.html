@@ -209,8 +209,8 @@
 
             // Déterminer la date actuelle
             const today = new Date();
-            const currentDay = today.getDate();
-
+            //const currentDay = today.getDate();
+            currentDay = 31; // Pour tester le calendrier de l'Avent
             // Charger les surprises depuis le fichier JSON
             fetch('tartopommes.json')
                 .then(response => response.json())
@@ -229,7 +229,7 @@
 
                         dayBox.innerHTML = `
                             <div class="flex flex-col items-center animate-pulse">
-                                <i class="fa ${getIcon(day)} text-primary mb-2"></i>
+                                <i class="fa${getIcon(day)} text-primary mb-2"></i>
                                 <span>${day}</span>
                             </div>
                         `;
@@ -280,9 +280,9 @@
             // Retourne une icône en fonction du jour
             function getIcon(day) {
                 const icons = [
-                    'fa-bus', 'fa-snowflake', 'fa-tree', 'fa-gift',
-                    'fa-train', 'fa-plane', 'fa-sleigh', 'fa-star',
-                    'fa-bell', 'fa-cookie', 'fa-calendar-check', 'fa-glass-cheers'
+                    ' fa-bus', ' fa-snowflake', ' fa-tree', ' fa-gift',
+                    ' fa-train', ' fa-plane', ' fa-sleigh', ' fa-star',
+                    ' fa-bell', '-solid fa-cookie', ' fa-calendar-check', ' fa-glass-cheers'
                 ];
                 return icons[day % icons.length];
             }

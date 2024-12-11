@@ -22,13 +22,12 @@
     <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
     <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
     <meta name="twitter:card" content="summary_large_image">
-
     <!-- Couleur de fond pour l'intégration -->
     <meta name="theme-color" content="#204BFE">
     <!-- Meta Tags Generated with https://metatags.io -->
     <link href="/dist/output.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="src/menu.js"></script>
     <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
     <style>
         .jw-album-image img,
@@ -41,6 +40,93 @@
             display: none;
         }
     </style>
+    <script>
+        const isChristmas = () => {
+            const today = new Date();
+            const startChristmas = new Date(today.getFullYear(), 11, 1); // 1er Décembre
+            const endChristmas = new Date(today.getFullYear(), 11, 31); // 25 Décembre inclus
+            return today >= startChristmas && today < endChristmas;
+        };
+        document.addEventListener('DOMContentLoaded', () => {
+            if (isChristmas()) {
+                const logoContainer = document.getElementById("logo-container");
+
+                // Remplacez les logos par l'image de Noël
+                logoContainer.innerHTML = `
+            <img src="/img/TCM-Noel.png" width="200" height="200" alt="Logo TCM Noël" class="block">
+        `;
+            }
+            if (isChristmas()) {
+                // Fonction pour supprimer toutes les classes commençant par "dark:"
+                const removeDarkClasses = () => {
+                    // Sélectionner tous les éléments avec des classes "dark:"
+                    const elementsWithDark = document.querySelectorAll('[class*="dark:"]');
+
+                    // Parcourir chaque élément
+                    elementsWithDark.forEach(el => {
+                        // Parcourir ses classes
+                        const newClasses = Array.from(el.classList).filter(className => !className.startsWith('dark:'));
+                        // Remplacer l'ensemble des classes
+                        el.className = newClasses.join(' ');
+                    });
+                };
+
+                // Exécuter la suppression des classes `dark:`
+                removeDarkClasses();
+            }
+            if (isChristmas()) {
+
+                document.documentElement.classList.remove('dark');
+                document.documentElement.setAttribute('data-theme', 'cupcake');
+            }
+        });
+        if (isChristmas()) {
+            document.addEventListener('DOMContentLoaded', () => {
+                const snow = document.createElement('div');
+                snow.id = 'snow';
+                document.body.appendChild(snow);
+                const snowStyle = document.createElement('style');
+                snowStyle.innerHTML = `
+                    #snow {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        pointer-events: none;
+                        background: transparent;
+                        overflow: hidden;
+                        z-index: 9999;
+                    }
+                    @keyframes snowfall {
+                        0% { transform: translateY(-10px); opacity: 1; }
+                        100% { transform: translateY(100vh); opacity: 0; }
+                    }
+                    .flake {
+                        position: absolute;
+                        top: -10px;
+                        width: 10px;
+                        height: 10px;
+                        background: white;
+                        border-radius: 50%;
+                        opacity: 0.8;
+                        animation: snowfall 5s linear infinite;
+                    }
+                `;
+                document.head.appendChild(snowStyle);
+
+                for (let i = 0; i < 100; i++) {
+                    const flake = document.createElement('div');
+                    flake.classList.add('flake');
+                    flake.style.left = `${Math.random() * 100}vw`;
+                    flake.style.animationDelay = `${Math.random() * 5}s`;
+                    flake.style.animationDuration = `${2 + Math.random() * 3}s`;
+                    flake.style.opacity = Math.random();
+                    document.getElementById('snow').appendChild(flake);
+                }
+            });
+        }
+    </script>
 </head>
 <style>
     .orange-border {
@@ -60,9 +146,18 @@
     .tcm-details {
         margin-bottom: 20px;
     }
+
+    .christmas-theme .dark.block {
+        display: none;
+    }
+
+    .christmas-theme .dark.hidden {
+        display: block;
+    }
 </style>
 
 <body>
+    <div id="menu"></div>
     <br>
     <div class="md:container md:mx-auto">
         <div id="TCM" class="relative my-4"></div>
@@ -88,18 +183,20 @@
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl lg:mx-0">
                     <h2 class="text-3xl font-bold tracking-tight text-secondary sm:text-4xl">Notre Actualité</h2>
-                    <p class="mt-2 text-lg leading-8 text-secondary-focus">En direct de notre rédaction, toute
+                    <p class="mt-2 text-lg leading-8 text-secondary">En direct de notre rédaction, toute
                         l'actualité TCM.</p>
                 </div>
                 <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-base-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-6"
                     id="content"></div>
             </div>
         </div>
-    </div>
-    <footer class="footer footer-center p-10 bg-primary text-primary-content">
+    </div><br>
+    <footer class="footer footer-center p-10 bg-primary text-primary-content relative">
         <aside>
-            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
-            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
+            <div id="logo-container">
+                <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
+                <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
+            </div>
             <p class="font-bold">
                 Partenaire de vos déplacements depuis 1989.
             </p>
@@ -279,7 +376,6 @@
 
     afficherInfoTrafic();
 </script>
-
 <script>
     $(function () {
         var url = "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts?categories=8&per_page=9";
@@ -336,6 +432,137 @@
         }).fail(function () {
             $("#content").html("<p>Aye Caramba !</p>");
         });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuContainer = document.getElementById("menu");
+        if (isChristmas()) {
+            // Insérer le menu de Noël
+            menuContainer.innerHTML = `
+            <div class="navbar bg-base-300 relative shadow-lg border-b-4 border-primary">
+                <div class="navbar-start">
+                    <div class="dropdown">
+                        <label tabindex="0" class="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-focus" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
+                        </label>
+                        <ul tabindex="0"
+                            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><a href="/src/reseau.html" class="hover:text-accent"><i class="fa-solid fa-gifts"></i> Notre
+                                    Réseau</a></li>
+                            <li><a href="/src/trafic.html" class="hover:text-accent"><i class="fa-solid fa-sleigh"></i> Info
+                                    Trafic</a></li>
+                            <li><a href="/src/tarifs.html" class="hover:text-accent"><i class="fa-solid fa-gift"></i> Tarif</a>
+                            </li>
+                            <li><a href="/src/agences.html" class="hover:text-accent"><i class="fa-solid fa-holly-berry"></i>
+                                    Nos Agences</a></li>
+                            <li><a href="/src/calendar.html" class="hover:text-primary-focus animate-pulse"><i
+                                        class="fa-solid fa-calendar-check"></i> Calendrier de l'Avent</a></li>
+                        </ul>
+                    </div>
+                    <a class="btn btn-ghost normal-case text-xl" href="/index.html">
+                        <img src="/img/TCM-Noel.png" width="75" height="75" alt="Logo TCM"
+                            class="drop-shadow-xl animate-bounce">
+                    </a>
+                </div>
+                <div class="navbar-center hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a href="/src/reseau.html" class="hover:text-accent"><i class="fa-solid fa-gifts"></i> Notre
+                                Réseau</a></li>
+                        <li><a href="/src/trafic.html" class="hover:text-accent"><i class="fa-solid fa-sleigh"></i> Info
+                                Trafic</a></li>
+                        <li><a href="/src/tarifs.html" class="hover:text-accent"><i class="fa-solid fa-gift"></i> Tarif</a></li>
+                        <li><a href="/src/agences.html" class="hover:text-accent"><i class="fa-solid fa-holly-berry"></i> Nos
+                                Agences</a></li>
+                        <li><a href="/src/calendar.html" class="hover:text-primary-focus animate-pulse"><i
+                                    class="fa-solid fa-calendar-check"></i> Calendrier de l'Avent</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-end">
+                    <button class="btn btn-primary btn-sm rounded-full shadow-lg animate-bounce">🎄 Joyeux Noël !</button>
+                </div>
+            </div>
+            `;
+        } else {
+            // Insérer le menu normal
+            menuContainer.innerHTML = `
+            <div class="navbar bg-base-300 relative">
+                <div class="navbar-start">
+                    <div class="dropdown">
+                        <label tabindex="0" class="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
+                        </label>
+                        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><a href="/src/reseau.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                    </svg>Notre Réseau</a></li>
+                            <li><a href="/src/trafic.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Info Trafic
+                                </a></li>
+                            <li><a href="/src/tarifs.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.1"
+                                            d="M16.5 7A2.5 2.5 0 0 1 19 4.5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 1 1 0 5V12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5A2.5 2.5 0 0 1 16.5 7Z" />
+                                    </svg> Tarif</a></li>
+                            <li><a href="/src/agences.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
+                                        viewBox="0 0 21 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.1"
+                                            d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
+                                    </svg> Nos Agences</a></li>
+                        </ul>
+                    </div>
+                    <a class="btn btn-ghost normal-case text-xl hidden dark:block" href="/index.html"><img src="/img/TCM-Clair.png"
+                            width="75" height="75" alt="Logo TCM"></a>
+                    <a class="btn btn-ghost normal-case text-xl block dark:hidden" href="/index.html"><img src="/img/TCM-Sombre.png"
+                            width="75" height="75" alt="Logo TCM"></a>
+                </div>
+                <div class="navbar-center hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a href="/src/reseau.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                </svg>Notre Réseau</a></li>
+                        <li><a href="/src/trafic.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Info Trafic
+                            </a></li>
+                        <li><a href="/src/tarifs.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.1"
+                                        d="M16.5 7A2.5 2.5 0 0 1 19 4.5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 1 1 0 5V12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5A2.5 2.5 0 0 1 16.5 7Z" />
+                                </svg> Tarif</a></li>
+                        <li><a href="/src/agences.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
+                                    viewBox="0 0 21 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.1"
+                                        d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
+                                </svg> Nos Agences</a></li>
+                    </ul>
+                </div>
+                <div class="navbar-end">
+                </div>
+            </div>
+            `;
+        }
     });
 </script>
 

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- Métadonnées du site -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité">
+    <meta name="author" content="Transport Clermont Métropole">
+    <title>Transport Clermont Métropole</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png">
+
+    <!-- Intégrations pour réseaux sociaux -->
+    <meta property="og:title" content="Transport Clermont Métropole">
+    <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
+    <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
+    <meta name="twitter:title" content="Transport Clermont Métropole">
+    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
+    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Couleur de fond pour l'intégration -->
+    <meta name="theme-color" content="#204BFE">
+    <!-- Meta Tags Generated with https://metatags.io -->
+    <link href="/dist/output.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
+    <style>
+        .jw-album-image img,
+        .jw-element-image img {
+            pointer-events: none;
+            -webkit-touch-callout: none;
+        }
+
+        .pswp__share-tooltip .pswp__share--download {
+            display: none;
+        }
+
+        .btn {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        const isChristmas = () => {
+            const today = new Date();
+            const startChristmas = new Date(today.getFullYear(), 11, 1); // 1er Décembre
+            const endChristmas = new Date(today.getFullYear(), 11, 31); // 25 Décembre inclus
+            return today >= startChristmas && today < endChristmas;
+        };
+        document.addEventListener('DOMContentLoaded', () => {
+            if (isChristmas()) {
+                // Fonction pour supprimer toutes les classes commençant par "dark:"
+                const removeDarkClasses = () => {
+                    // Sélectionner tous les éléments avec des classes "dark:"
+                    const elementsWithDark = document.querySelectorAll('[class*="dark:"]');
+
+                    // Parcourir chaque élément
+                    elementsWithDark.forEach(el => {
+                        // Parcourir ses classes
+                        const newClasses = Array.from(el.classList).filter(className => !className.startsWith('dark:'));
+                        // Remplacer l'ensemble des classes
+                        el.className = newClasses.join(' ');
+                    });
+                };
+
+                // Exécuter la suppression des classes `dark:`
+                removeDarkClasses();
+            }
+            if (isChristmas()) {
+
+                document.documentElement.classList.remove('dark');
+                document.documentElement.setAttribute('data-theme', 'cupcake');
+            }
+        });
+        if (isChristmas()) {
+            document.addEventListener('DOMContentLoaded', () => {
+                const snow = document.createElement('div');
+                snow.id = 'snow';
+                document.body.appendChild(snow);
+                const snowStyle = document.createElement('style');
+                snowStyle.innerHTML = `
+                    #snow {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        pointer-events: none;
+                        background: transparent;
+                        overflow: hidden;
+                        z-index: 9999;
+                    }
+                    @keyframes snowfall {
+                        0% { transform: translateY(-10px); opacity: 1; }
+                        100% { transform: translateY(100vh); opacity: 0; }
+                    }
+                    .flake {
+                        position: absolute;
+                        top: -10px;
+                        width: 10px;
+                        height: 10px;
+                        background: white;
+                        border-radius: 50%;
+                        opacity: 0.8;
+                        animation: snowfall 5s linear infinite;
+                    }
+                `;
+                document.head.appendChild(snowStyle);
+
+                for (let i = 0; i < 100; i++) {
+                    const flake = document.createElement('div');
+                    flake.classList.add('flake');
+                    flake.style.left = `${Math.random() * 100}vw`;
+                    flake.style.animationDelay = `${Math.random() * 5}s`;
+                    flake.style.animationDuration = `${2 + Math.random() * 3}s`;
+                    flake.style.opacity = Math.random();
+                    document.getElementById('snow').appendChild(flake);
+                }
+            });
+        }
+    </script>
+</head>
+
+<body class="bg-base-100 text-base-content">
+    <div class="navbar bg-base-300 relative shadow-lg border-b-4 border-primary">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-focus" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h8m-8 6h16" />
+                    </svg>
+                </label>
+                <ul tabindex="0"
+                    class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="/src/reseau.html" class="hover:text-accent"><i class="fa-solid fa-gifts"></i> Notre
+                            Réseau</a></li>
+                    <li><a href="/src/trafic.html" class="hover:text-accent"><i class="fa-solid fa-sleigh"></i> Info
+                            Trafic</a></li>
+                    <li><a href="/src/tarifs.html" class="hover:text-accent"><i class="fa-solid fa-gift"></i> Tarif</a>
+                    </li>
+                    <li><a href="/src/agences.html" class="hover:text-accent"><i class="fa-solid fa-holly-berry"></i>
+                            Nos Agences</a></li>
+                    <li><a href="/src/calendrier.html" class="hover:text-primary-focus animate-pulse"><i
+                                class="fa-solid fa-calendar-check"></i> Calendrier de l'Avent</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-ghost normal-case text-xl" href="/index.html">
+                <img src="/img/TCM-Noel.png" width="75" height="75" alt="Logo TCM"
+                    class="drop-shadow-xl animate-bounce">
+            </a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="/src/reseau.html" class="hover:text-accent"><i class="fa-solid fa-gifts"></i> Notre
+                        Réseau</a></li>
+                <li><a href="/src/trafic.html" class="hover:text-accent"><i class="fa-solid fa-sleigh"></i> Info
+                        Trafic</a></li>
+                <li><a href="/src/tarifs.html" class="hover:text-accent"><i class="fa-solid fa-gift"></i> Tarif</a></li>
+                <li><a href="/src/agences.html" class="hover:text-accent"><i class="fa-solid fa-holly-berry"></i> Nos
+                        Agences</a></li>
+                <li><a href="/src/calendrier.html" class="hover:text-primary-focus animate-pulse"><i
+                            class="fa-solid fa-calendar-check"></i> Calendrier de l'Avent</a></li>
+            </ul>
+        </div>
+        <div class="navbar-end">
+            <button class="btn btn-primary btn-sm rounded-full shadow-lg animate-bounce">🎄 Joyeux Noël !</button>
+        </div>
+    </div>
+
+    <header class="text-center py-6 bg-primary text-primary-content">
+        <h1 class="text-4xl font-bold">Calendrier de l'Avent - Voyage jusqu'en 2025 🎄</h1>
+        <p class="text-xl mt-2">Découvrez une surprise chaque jour !</p>
+    </header>
+    <main>
+        <div id="calendar" class="calendar grid grid-cols-7 gap-4 px-6 py-8"></div>
+
+        <!-- Modal DaisyUI -->
+        <dialog id="surprise-modal" class="modal">
+            <div class="modal-box">
+                <img src="../img/TCM-Noel.png" alt="Logo Noël TCM" class="h-50% w-auto mx-auto mb-4">
+                <h2 class="font-bold text-xl text-primary mb-4">Surprise du jour 🎁</h2>
+                <p id="surprise-content" class="text-lg mb-6"></p>
+                <div class="modal-action">
+                    <button id="close-surprise" class="btn btn-secondary">Fermer</button>
+                </div>
+            </div>
+        </dialog>
+
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const calendar = document.getElementById('calendar');
+            const modal = document.getElementById('surprise-modal');
+            const surpriseContent = document.getElementById('surprise-content');
+            const modalTitle = modal.querySelector("h2");
+            const closeSurprise = document.getElementById('close-surprise');
+            const body = document.body;
+
+            // Déterminer la date actuelle
+            const today = new Date();
+            const currentDay = today.getDate();
+
+            // Charger les surprises depuis le fichier JSON
+            fetch('tartopommes.json')
+                .then(response => response.json())
+                .then(data => {
+                    const days = data.days;
+
+                    // Générer les cases du calendrier
+                    for (let day = 11; day <= 31; day++) {
+                        const dayBox = document.createElement('div');
+                        dayBox.classList.add(
+                            'day-box', 'rounded-lg', 'shadow-lg', 'flex',
+                            'items-center', 'justify-center', 'cursor-pointer',
+                            'font-bold', 'text-lg', 'p-4', 'transition-all',
+                            'hover:scale-105', 'hover:rotate-3', 'hover:shadow-2xl'
+                        );
+
+                        dayBox.innerHTML = `
+                            <div class="flex flex-col items-center animate-pulse">
+                                <i class="fa ${getIcon(day)} text-primary mb-2"></i>
+                                <span>${day}</span>
+                            </div>
+                        `;
+
+                        // Gérer l'état des cases
+                        if (day < currentDay) {
+                            dayBox.classList.add('bg-success', 'text-success-content');
+                        } else if (day === currentDay) {
+                            dayBox.classList.add('bg-warning', 'text-warning-content', 'animate-bounce');
+                        } else {
+                            dayBox.classList.add('bg-base-200', 'text-base-content', 'pointer-events-none', 'opacity-50');
+                        }
+
+                        // Ajouter l'événement de clic pour afficher la surprise
+                        if (day <= currentDay && days[day]) {
+                            dayBox.addEventListener('click', () => {
+                                showSurprise(days[day], day);
+                            });
+                        }
+
+                        // Ajouter la case au calendrier
+                        calendar.appendChild(dayBox);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors du chargement des surprises :', error);
+                    const errorBox = document.createElement('div');
+                    errorBox.classList.add('alert', 'alert-error');
+                    errorBox.textContent = 'Impossible de charger les surprises pour le moment.';
+                    calendar.appendChild(errorBox);
+                });
+
+            // Fonction pour afficher la surprise dans le modal
+            function showSurprise(content, day) {
+                const isPast = day < currentDay;
+                modalTitle.textContent = isPast
+                    ? `Surprise du ${day} décembre 🎁`
+                    : 'Surprise du jour 🎁';
+                surpriseContent.textContent = content;
+                modal.showModal();
+            }
+
+            // Fermer le modal
+            closeSurprise.addEventListener('click', () => {
+                modal.close();
+            });
+
+            // Retourne une icône en fonction du jour
+            function getIcon(day) {
+                const icons = [
+                    'fa-bus', 'fa-snowflake', 'fa-tree', 'fa-gift',
+                    'fa-train', 'fa-plane', 'fa-sleigh', 'fa-star',
+                    'fa-bell', 'fa-cookie', 'fa-calendar-check', 'fa-glass-cheers'
+                ];
+                return icons[day % icons.length];
+            }
+            const lutinImages = [
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Working.gif', // Exemple : mettez des URLs valides ici
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Bored.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Cycling.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Dancing.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Drink-Beer.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Gift.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Happy.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-High-Five.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-ILoveYou.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Kiss.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Laughing.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Offering-Flowers.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Hug.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Playing-Guitar.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Toast.gif',
+                'https://www.anooki.com/wp2019/wp-content/themes/anooki/img/stickers/Anooki-Running.gif'
+            ];
+            // Ajout de lutins Annokis aléatoires
+            setInterval(() => {
+                const lutin = document.createElement('img');
+                const randomImage = lutinImages[Math.floor(Math.random() * lutinImages.length)];
+                lutin.src = randomImage; // Choisir une image aléatoire
+                lutin.classList.add('absolute', 'animate-fade-in', 'pointer-events-none');
+                lutin.style.top = `${Math.random() * 100}vh`;
+                lutin.style.left = `${Math.random() * 100}vw`;
+                lutin.style.width = `${50 + Math.random() * 50}px`; // Taille entre 50px et 100px
+                lutin.style.opacity = 1; // Transparence pour fond discret
+                body.appendChild(lutin);
+
+                // Supprimer le lutin après 5 secondes
+                setTimeout(() => {
+                    lutin.remove();
+                }, 5000);
+            }, 10000); // Ajouter un lutin toutes les 3 secondes
+        });
+    </script>
+
+    <style>
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-in-out;
+        }
+    </style>
+
+</body>
+
+</html>

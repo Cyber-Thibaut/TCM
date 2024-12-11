@@ -209,8 +209,8 @@
 
             // Déterminer la date actuelle
             const today = new Date();
-            //const currentDay = today.getDate();
-            currentDay = 31; // Pour tester le calendrier de l'Avent
+            const currentDay = today.getDate();
+            //currentDay = 31; // Pour tester le calendrier de l'Avent
             // Charger les surprises depuis le fichier JSON
             fetch('tartopommes.json')
                 .then(response => response.json())

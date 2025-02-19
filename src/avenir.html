@@ -91,32 +91,40 @@
             }
         }
 
+        function updateRadialProgress(elementId, value) {
+            const progress = document.getElementById(elementId);
+            progress.style.setProperty("--value", value);
+            progress.innerText = value + "%";
+        }
+
         // Set progress bars based on dates
         function updateProgressBars() {
             const bureauEtudeProgress = calculateProgress("2024-09-14", "2024-12-14");
-            document.getElementById("bureau-etude-progress").style.width = bureauEtudeProgress + "%";
-            document.getElementById("bureau-etude-text").innerText = bureauEtudeProgress + "%";
-
+            //document.getElementById("bureau-etude-progress").style.width = bureauEtudeProgress + "%";
+            //document.getElementById("bureau-etude-text").innerText = bureauEtudeProgress + "%";
+            updateRadialProgress("bureau-etude-progress", bureauEtudeProgress);
             // Travaux de voirie : commence après bureau d'étude et dure au minimum 8 mois
             let voirieProgress = 0; // Initialisation par défaut
             if (bureauEtudeProgress === 100) {
                 voirieProgress = calculateProgress("2024-12-14", "2025-08-31");  // La date de début est après le bureau d'étude
-                document.getElementById("voirie-progress").style.width = voirieProgress + "%";
-                document.getElementById("voirie-text").innerText = voirieProgress + "%";
+                //document.getElementById("voirie-progress").style.width = voirieProgress + "%";
+                //document.getElementById("voirie-text").innerText = voirieProgress + "%";
+                updateRadialProgress("voirie-progress", voirieProgress);
             } else {
                 document.getElementById("voirie-progress").style.width = "0%";
-                document.getElementById("voirie-text").innerText = "En attente de l'étape 1";
+                //document.getElementById("voirie-text").innerText = "En attente de l'étape 1";
             }
 
             // Liaison : ne commence que lorsque les travaux de voirie sont à 100 %
             let depotProgress = 0;
             if (voirieProgress === 100) {
                 const depotProgress = calculateProgress("2026-01-01", "2026-12-31");  // Liaison après la fin des travaux de voirie
-                document.getElementById("depot-progress").style.width = depotProgress + "%";
-                document.getElementById("depot-text").innerText = depotProgress + "%";
+                //document.getElementById("depot-progress").style.width = depotProgress + "%";
+                //document.getElementById("depot-text").innerText = depotProgress + "%";
+                updateRadialProgress("depot-progress", depotProgress);
             } else {
                 document.getElementById("depot-progress").style.width = "0%";
-                document.getElementById("depot-text").innerText = "En attente de l'étape 2";
+                //document.getElementById("depot-text").innerText = "En attente de l'étape 2";
             }
         }
 
@@ -152,7 +160,8 @@
             "Ce projet est une véritable révolution pour notre métropole. Il représente notre engagement à offrir une
             mobilité durable, accessible à tous, et répondant aux enjeux climatiques actuels. Nous construisons
             aujourd’hui le réseau de transport de demain, pour une ville plus verte et connectée."
-            <span class="text-accent not-italic font-bold">- Olivier Bianchi, Président de la Métropole de Clermont-Ferrand</span>
+            <span class="text-accent not-italic font-bold">- Olivier Bianchi, Président de la Métropole de
+                Clermont-Ferrand</span>
         </blockquote>
 
 
@@ -184,37 +193,56 @@
                 projet de
                 tramway. Cette étape est cruciale pour garantir que chaque aspect des travaux soit bien coordonné, des
                 infrastructures aux routes en passant par les systèmes écologiques.</p>
-            <div class="progress-bar w-full bg-gray-200 rounded">
-                <div id="bureau-etude-progress" class="progress-bar-fill bg-blue-600 rounded-l"></div>
-            </div>
-            <p class="text-sm mt-2">Progression : <span id="bureau-etude-text">0%</span></p>
+
         </div>
 
         <!-- Step 2: Travaux de Voirie -->
         <div class="mb-8">
             <h3 class="text-2xl font-bold text-blue-600">Étape 2 : Travaux de Voirie (8 mois de travaux)</h3>
             <p class="text-neutral-content mb-2">La voirie représente une étape majeure dans le développement des
-                infrastructures du tramway. Ces travaux impliqueront des interventions sur les routes, la signalisation,
-                et des ajustements techniques pour permettre une intégration harmonieuse du tramway dans la ville.</p>
-            <div class="progress-bar w-full bg-gray-200 rounded">
-                <div id="voirie-progress" class="progress-bar-fill bg-gray-400 rounded-l"></div>
-            </div>
-            <p class="text-sm mt-2">Progression : <span id="voirie-text">En attente de l'étape 1</span></p>
+                infrastructures du tramway. Ces travaux impliqueront des interventions sur les routes, la
+                signalisation,
+                et des ajustements techniques pour permettre une intégration harmonieuse du tramway dans la ville.
+            </p>
+
         </div>
+
 
         <!-- Step 3: Travaux du Dépôt de Tramway -->
         <div class="mb-8">
-            <h3 class="text-2xl font-bold text-blue-600">Étape 3 : Travaux du Dépôt de Tramway (Fin : Novembre 2025)
+            <h3 class="text-2xl font-bold text-blue-600">Étape 3 : Travaux du Dépôt de Tramway (Fin : Novembre
+                2025)
             </h3>
-            <p class="text-neutral-content mb-2">Les travaux du dépôt seront essentiels pour le bon fonctionnement du
+            <p class="text-neutral-content mb-2">Les travaux du dépôt seront essentiels pour le bon
+                fonctionnement du
                 réseau de
-                tramway. Ce dépôt moderne servira à la maintenance et au stationnement des rames en dehors des heures de
+                tramway. Ce dépôt moderne servira à la maintenance et au stationnement des rames en dehors des
+                heures de
                 service.</p>
-            <div class="progress-bar w-full bg-gray-200 rounded">
-                <div id="depot-progress" class="progress-bar-fill bg-blue-600 rounded-l"></div>
-            </div>
-            <p class="text-sm mt-2">Progression : <span id="depot-text">0%</span></p>
+
         </div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8 mt-8">
+            <div class="text-center">
+                <h3 class="text-lg font-bold text-primary">Bureau d'Étude</h3>
+                <div class="radial-progress text-blue-500" id="bureau-etude-progress" style="--value:0;"
+                    data-progress="0%">
+                    0%
+                </div>
+            </div>
+            <div class="text-center">
+                <h3 class="text-lg font-bold text-primary">Travaux de Voirie</h3>
+                <div class="radial-progress text-yellow-500" id="voirie-progress" style="--value:0;" data-progress="0%">
+                    0%
+                </div>
+            </div>
+            <div class="text-center">
+                <h3 class="text-lg font-bold text-primary">Dépôt de Tramway</h3>
+                <div class="radial-progress text-green-500" id="depot-progress" style="--value:0;" data-progress="0%">
+                    0%
+                </div>
+            </div>
+        </div><br>
 
         <div class="relative mb-8">
             <div class="absolute inset-0 bg-neutral-content bg-opacity-60 rounded-lg"></div>
@@ -226,7 +254,8 @@
         <blockquote class="p-4 my-4 border-s-4 border-accent italic">
             "Le tramway est bien plus qu’un simple moyen de transport. C'est une révolution dans la manière dont
             nous
-            allons structurer nos déplacements, réduire la congestion automobile, et améliorer la qualité de l'air.
+            allons structurer nos déplacements, réduire la congestion automobile, et améliorer la qualité de
+            l'air.
             Nous
             construisons le futur de notre métropole."
             </p>

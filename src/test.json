@@ -7,7 +7,7 @@
           "type": "information",
           "annonce": "09/01/2023",
           "debut": "09/09/2023",
-          "fin": "10/25/2023",
+          "fin": "10/25/2029",
           "titre": "🏉 Annonce Spéciale - Coupe du Monde de Rugby 🏆",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
         }
@@ -31,12 +31,20 @@
           "fin": "10/27/2075",
           "titre": "🚧 Info Travaux 🚧",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
+        },
+        {
+          "type": "travaux",
+          "annonce": "09/28/2023",
+          "debut": "10/15/2023",
+          "fin": "10/27/2075",
+          "titre": "🚧 Info Travaux 🚧",
+          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
         }
       ]
     }
     ,
     {
-      "ligne": "3",
+      "ligne": "NS",
       "infos_trafic": [
         {
           "type": "attention",

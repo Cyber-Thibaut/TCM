@@ -24,7 +24,8 @@ function isDateInVacationRanges(date, ranges) {
     return false;
 }
 
-const isVacation = isDateInVacationRanges(today, vacationDates);
+const isHoliday = holidayDates.includes(date);
+  const vacationDates = await fetchVacationDates(now);
 
 function formatDate(date) {
     const year = date.getFullYear();
@@ -295,16 +296,16 @@ function updateBusTimes() {
         document.getElementById("nextBusTime").innerHTML = nextBus + followingBus;
     } else {
         const nextBus = nextBusFreq === 1 ?
-            `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"> </div>` :
+            `<div class="grid grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"> </div>` :
             nextBusFreq === 2 ?
-                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche   <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
-                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${nextBusFreq} min  <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>`;
+                `<div class="grid grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche   <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>` :
+                `<div class="grid grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${nextBusFreq} min  <img src="${selectedIcon1}" style="width: 50px; height: auto; display: inline-block;"></div>`;
 
         const followingBus = followingBusFreq === 0 ?
-            `<div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>Arrivé <img src="${selectedIcon2}" style="width: 50px; height: auto; display: inline-block;"></div>` :
+            `<div class="grid grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>Arrivé <img src="${selectedIcon2}" style="width: 50px; height: auto; display: inline-block;"></div>` :
             followingBusFreq === 1 ?
-                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>1 min <img src="${selectedIcon2}" style="width: 50px; height: auto; display: inline-block;"></div>` :
-                `<div class="grid flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${followingBusFreq} min <img src="${selectedIcon2}" style="width: 50px; height: auto; margin-top: -35px"></div>`;
+                `<div class="grid grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>1 min <img src="${selectedIcon2}" style="width: 50px; height: auto; display: inline-block;"></div>` :
+                `<div class="grid grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>${followingBusFreq} min <img src="${selectedIcon2}" style="width: 50px; height: auto; margin-top: -35px"></div>`;
 
         const divider = `<div class="divider lg:divider-horizontal"></div>`;
 

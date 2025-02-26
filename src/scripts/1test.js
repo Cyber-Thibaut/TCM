@@ -131,14 +131,14 @@ async function updateBusTimes() {
         </div>`;
         followingBus = "";
     } else {
-        nextBus = `<div class="flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
+        nextBus = `<div class="grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
             ${nextBusFreq === 1 ? 'A quai' : nextBusFreq === 2 ? 'A l’approche' : `${nextBusFreq} min`}
             <div class="flex items-center justify-center bg-black bg-opacity-20 dark:bg-opacity-0 p-2 rounded-full ml-2">
                 <img src="${selectedIcon1}" style="width: 50px; height: auto;">
             </div>
         </div>`;
 
-        followingBus = `<div class="flex-grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
+        followingBus = `<div class="grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
             ${followingBusFreq === 0 ? 'Arrivé' : followingBusFreq === 1 ? '1 min' : `${followingBusFreq} min`}
             <div class="flex items-center justify-center bg-black bg-opacity-20 dark:bg-opacity-0 p-2 rounded-full ml-2">
                 <img src="${selectedIcon2}" style="width: 50px; height: auto;">
@@ -175,7 +175,7 @@ function updateCurrentTime() {
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     currentTimeElement.textContent = `Mis à jour à : ${hours}:${minutes}`;
-    destinationElement.innerHTML = `<h2 class="text-4xl text-primary-content dark:text-primary font-bold">Direction Campus Cézeaux (Sciences) ♿</h2><br>`;
+    destinationElement.innerHTML = `<h2 class="text-4xl text-base-content font-bold">Direction Campus Cézeaux (Sciences) ♿</h2><br>`;
 }
 
 setInterval(updateBusTimes, 30000);

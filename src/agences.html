@@ -1,526 +1,658 @@
 <!DOCTYPE html>
 <html lang="fr">
-
-<head>
+  <head>
     <!-- Métadonnées du site -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité">
-    <meta name="author" content="Transport Clermont Métropole">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
+    />
+    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité" />
+    <meta name="author" content="Transport Clermont Métropole" />
     <title>Transport Clermont Métropole</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png">
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://tcm-mobilite.vercel.app/img/TCM.png"
+    />
 
     <!-- Intégrations pour réseaux sociaux -->
-    <meta property="og:title" content="Transport Clermont Métropole">
-    <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-    <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
-    <meta name="twitter:title" content="Transport Clermont Métropole">
-    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="Transport Clermont Métropole" />
+    <meta
+      property="og:description"
+      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
+    />
+    <meta
+      property="og:image"
+      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
+    />
+    <meta property="og:url" content="https://tcm-mobilite.vercel.app/" />
+    <meta name="twitter:title" content="Transport Clermont Métropole" />
+    <meta
+      name="twitter:description"
+      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
+    />
+    <meta
+      name="twitter:image"
+      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Couleur de fond pour l'intégration -->
-    <meta name="theme-color" content="#204BFE">
+    <meta name="theme-color" content="#204BFE" />
 
-    <link href="/dist/output.css" rel="stylesheet">
+    <link href="/dist/output.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/src/menu.js"></script>
     <script>
-        document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); });
-        document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); });
-        document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+      document.addEventListener("copy", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+      document.addEventListener("cut", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      });
     </script>
     <style>
-        .jw-album-image img,
-        .jw-element-image img {
-            pointer-events: none;
-            -webkit-touch-callout: none;
-        }
+      .jw-album-image img,
+      .jw-element-image img {
+        pointer-events: none;
+        -webkit-touch-callout: none;
+      }
 
-        .pswp__share-tooltip .pswp__share--download {
-            display: none;
-        }
+      .pswp__share-tooltip .pswp__share--download {
+        display: none;
+      }
 
-        .orange-border {
-            display: inline-block;
-        }
+      .orange-border {
+        display: inline-block;
+      }
 
-        .inner-content {
-            padding: 5px;
-        }
+      .inner-content {
+        padding: 5px;
+      }
 
-        .orange-border p {
-            margin: 0;
-        }
+      .orange-border p {
+        margin: 0;
+      }
 
-        .tcm-details {
-            margin-bottom: 20px;
-        }
+      .tcm-details {
+        margin-bottom: 20px;
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-base-100 text-base-content">
+  <body class="bg-base-100 text-base-content">
+    <div
+      class="hero min-h-screen bg-cover bg-center"
+      style="
+        background-image: url(https://cdn.pixabay.com/photo/2019/01/04/14/49/landscape-3913309_1280.jpg);
+      "
+    >
+      <div class="hero-overlay bg-opacity-60 py-24 sm:py-32"></div>
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2
+            class="text-3xl font-bold tracking-tight text-white dark:text-gray-200 sm:text-4xl"
+          >
+            Nos agences, à votre service !
+          </h2>
+          <p class="mt-2 text-lg leading-8 text-gray-200 dark:text-gray-200">
+            Nous avons cinq agences partout dans la métropole Clermontoise.
+            Elles donnent des informations, des conseils, vendent des tickets,
+            des abonnements et facilitent vos déplacements quotidiens. Nos
+            agents vous aident à choisir le transport adapté à vos besoins et
+            budget. Voyagez en toute sécurité avec Transport Clermont Métropole.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div
+        class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+      >
+        <div class="card w-full bg-base-300 shadow-xl">
+          <figure><img src="../img/gc.png" alt="Gare Centrale" /></figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">Gare Centrale</h2>
+            <div id="GC"></div>
+            <div class="card-actions justify-end">
+              <button onclick="GC_modal.showModal()" class="btn btn-primary">
+                Plus d'info
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card w-full bg-base-300 shadow-xl">
+          <figure><img src="../img/GO.png" alt="Gare de l'Ouest" /></figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">Gare de l'Ouest</h2>
+            <div id="GO"></div>
+            <div class="card-actions justify-end">
+              <button onclick="GO_modal.showModal()" class="btn btn-primary">
+                Plus d'info
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card w-full bg-base-300 shadow-xl">
+          <figure><img src="../img/A.png" alt="Aéroport" /></figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">Aéroport</h2>
+            <div id="A"></div>
+            <div class="card-actions justify-end">
+              <button onclick="A_modal.showModal()" class="btn btn-primary">
+                Plus d'info
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card w-full bg-base-300 shadow-xl">
+          <figure>
+            <img src="../img/CMG.png" alt="Campus Marthe Gautier" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">
+              Campus Marthe Gautier (Lettres)
+            </h2>
+            <div id="CMG"></div>
+            <div class="card-actions justify-end">
+              <button onclick="CMG_modal.showModal()" class="btn btn-primary">
+                Plus d'info
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card w-full bg-base-300 shadow-xl">
+          <figure>
+            <img src="../img/CdC.png" alt="Campus des Cézeaux" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">
+              Campus des Cézeaux (Sciences)
+            </h2>
+            <div id="CC"></div>
+            <div class="card-actions justify-end">
+              <button onclick="CdC_modal.showModal()" class="btn btn-primary">
+                Plus d'info
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card w-full bg-base-300 shadow-xl">
+          <figure><img src="../img/PdJ.png" alt="Place de Jaude" /></figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">Place de Jaude</h2>
+            <div id="PdJ"></div>
+            <div class="card-actions justify-end">
+              <button onclick="PdJ_modal.showModal()" class="btn btn-primary">
+                Plus d'info
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card w-full bg-base-300 shadow-xl">
+          <figure>
+            <img src="../img/Riom.png" alt="RIOM Gare Routière" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">RIOM Gare Routière</h2>
+            <div id="Riom"></div>
+            <div class="card-actions justify-end">
+              <button onclick="Riom_modal.showModal()" class="btn btn-primary">
+                Plus d'info
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card w-full bg-base-300 shadow-xl">
+          <figure>
+            <img src="../img/Aubiere.png" alt="Aubière Place du marché" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">Aubière Place du marché</h2>
+            <div id="Aubiere"></div>
+            <div class="card-actions justify-end">
+              <button
+                onclick="Aubiere_modal.showModal()"
+                class="btn btn-primary"
+              >
+                Plus d'info
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <br>
-    <div class="hero min-h-screen bg-cover bg-center"
-        style="background-image: url(https://cdn.pixabay.com/photo/2019/01/04/14/49/landscape-3913309_1280.jpg);">
-        <div class="hero-overlay bg-opacity-60 py-24 sm:py-32"></div>
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl lg:mx-0">
-                <h2 class="text-3xl font-bold tracking-tight text-white dark:text-gray-200 sm:text-4xl">Nos agences,
-                    à votre service !</h2>
-                <p class="mt-2 text-lg leading-8 text-gray-200 dark:text-gray-200">Nous avons cinq agences partout dans
-                    la métropole
-                    Clermontoise. Elles donnent des informations, des conseils, vendent des tickets, des abonnements et
-                    facilitent vos déplacements quotidiens. Nos agents vous aident à choisir le transport adapté à vos
-                    besoins et budget. Voyagez en toute sécurité avec Transport Clermont Métropole.
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="bg-white dark:bg-base-100 py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div
-                class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-                <div class="card w-full bg-base-100 shadow-xl">
-                    <figure><img src="../img/gc.png" alt="Gare Centrale" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">Gare Centrale</h2>
-                        <div id="GC"></div>
-                        <div class="card-actions justify-end">
-                            <button onclick="GC_modal.showModal()" class="btn btn-primary">Plus d'info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card w-full bg-base-100 shadow-xl">
-                    <figure><img src="../img/GO.png" alt="Gare de l'Ouest" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">Gare de l'Ouest</h2>
-                        <div id="GO"></div>
-                        <div class="card-actions justify-end">
-                            <button onclick="GO_modal.showModal()" class="btn btn-primary">Plus d'info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card w-full bg-base-100 shadow-xl">
-                    <figure><img src="../img/A.png" alt="Aéroport" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">Aéroport</h2>
-                        <div id="A"></div>
-                        <div class="card-actions justify-end">
-                            <button onclick="A_modal.showModal()" class="btn btn-primary">Plus d'info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card w-full bg-base-100 shadow-xl">
-                    <figure><img src="../img/CMG.png" alt="Campus Marthe Gautier" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">Campus Marthe Gautier (Lettres)</h2>
-                        <div id="CMG"></div>
-                        <div class="card-actions justify-end">
-                            <button onclick="CMG_modal.showModal()" class="btn btn-primary">Plus d'info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card w-full bg-base-100 shadow-xl">
-                    <figure><img src="../img/CdC.png" alt="Campus des Cézeaux" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">Campus des Cézeaux (Sciences)</h2>
-                        <div id="CC"></div>
-                        <div class="card-actions justify-end">
-                            <button onclick="CdC_modal.showModal()" class="btn btn-primary">Plus d'info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card w-full bg-base-100 shadow-xl">
-                    <figure><img src="../img/PdJ.png" alt="Place de Jaude" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">Place de Jaude</h2>
-                        <div id="PdJ"></div>
-                        <div class="card-actions justify-end">
-                            <button onclick="PdJ_modal.showModal()" class="btn btn-primary">Plus d'info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card w-full bg-base-100 shadow-xl">
-                    <figure><img src="../img/Riom.png" alt="RIOM Gare Routière" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">RIOM Gare Routière</h2>
-                        <div id="Riom"></div>
-                        <div class="card-actions justify-end">
-                            <button onclick="Riom_modal.showModal()" class="btn btn-primary">Plus d'info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card w-full bg-base-100 shadow-xl">
-                    <figure><img src="../img/Aubiere.png" alt="Aubière Place du marché" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">Aubière Place du marché</h2>
-                        <div id="Aubiere"></div>
-                        <div class="card-actions justify-end">
-                            <button onclick="Aubiere_modal.showModal()" class="btn btn-primary">Plus d'info</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <dialog id="GC_modal" class="modal">
-        <div class="modal-box relative">
-            <img src="../img/gc.png" alt="Logo GC" class="absolute right-2 w-15 h-12" />
-            <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Conseils – Ventes – Espace Abonnements</p>
-            <br>
-            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
-            <ul>
-                <li>Du lundi au vendredi de 7h à 21h</li>
-                <li>Samedi de 8h à 20h</li>
-                <li>Dimanche et jours fériés de 10h à 17h</li>
-            </ul>
-            <br>
-            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
-            <div class="flex space-x-4">
-                <a href="/src/ligne.html#1">
-                    <img src="/img/1.png" alt="Ligne 1" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#2">
-                    <img src="/img/2.png" alt="Ligne 2" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#3">
-                    <img src="/img/3.png" alt="Ligne 3" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#4">
-                    <img src="/img/4.png" alt="Ligne 4" class="w-15 h-12" />
-                </a>
-            </div>
-            <div class="author mt-4">
-                <h5><span id="GC"></span></h5>
-            </div>
+      <div class="modal-box relative">
+        <img
+          src="../img/gc.png"
+          alt="Logo GC"
+          class="absolute right-2 w-15 h-12"
+        />
+        <h6 class="text-primary">Services</h6>
+        <p>Information – Conseils – Ventes – Espace Abonnements</p>
+        <br />
+        <h6 class="text-secondary">Heures d’ouvertures</h6>
+        <ul>
+          <li>Du lundi au vendredi de 7h à 21h</li>
+          <li>Samedi de 8h à 20h</li>
+          <li>Dimanche et jours fériés de 10h à 17h</li>
+        </ul>
+        <br />
+        <h6 class="text-accent">Correspondances</h6>
+        <div class="flex space-x-4">
+          <a href="/src/ligne.html#1">
+            <img src="/img/1.png" alt="Ligne 1" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#2">
+            <img src="/img/2.png" alt="Ligne 2" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#3">
+            <img src="/img/3.png" alt="Ligne 3" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#4">
+            <img src="/img/4.png" alt="Ligne 4" class="w-15 h-12" />
+          </a>
         </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
+        <div class="author mt-4">
+          <h5><span id="GC"></span></h5>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
 
     <dialog id="GO_modal" class="modal">
-        <div class="modal-box relative">
-            <img src="../img/GO.png" alt="Logo GO" class="absolute top-2 right-2 w-15 h-12" />
-            <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Conseils – Ventes – Espace Abonnements</p>
-            <br>
-            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
-            <ul>
-                <li>Du lundi au vendredi de 9h à 19h</li>
-                <li>Samedi de 10h à 18h</li>
-                <li>Fermé le dimanche</li>
-                <li>Le 1er jour du mois de 7h à 20h</li>
-            </ul>
-            <br>
-            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
-            <div class="flex space-x-4">
-                <a href="/src/ligne.html#5">
-                    <img src="/img/5.png" alt="Ligne 5" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#7">
-                    <img src="/img/7.png" alt="Ligne 7" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#61">
-                    <img src="/img/61.png" alt="Ligne 61" class="w-15 h-12" />
-                </a>
-            </div>
-            <div class="author mt-4">
-                <h5><span id="GO"></span></h5>
-            </div>
+      <div class="modal-box relative">
+        <img
+          src="../img/GO.png"
+          alt="Logo GO"
+          class="absolute top-2 right-2 w-15 h-12"
+        />
+        <h6 class="text-primary">Services</h6>
+        <p>Information – Conseils – Ventes – Espace Abonnements</p>
+        <br />
+        <h6 class="text-secondary">Heures d’ouvertures</h6>
+        <ul>
+          <li>Du lundi au vendredi de 9h à 19h</li>
+          <li>Samedi de 10h à 18h</li>
+          <li>Fermé le dimanche</li>
+          <li>Le 1er jour du mois de 7h à 20h</li>
+        </ul>
+        <br />
+        <h6 class="text-accent">Correspondances</h6>
+        <div class="flex space-x-4">
+          <a href="/src/ligne.html#5">
+            <img src="/img/5.png" alt="Ligne 5" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#7">
+            <img src="/img/7.png" alt="Ligne 7" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#61">
+            <img src="/img/61.png" alt="Ligne 61" class="w-15 h-12" />
+          </a>
         </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
+        <div class="author mt-4">
+          <h5><span id="GO"></span></h5>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
 
     <dialog id="A_modal" class="modal">
-        <div class="modal-box relative">
-            <img src="../img/A.png" alt="Logo A" class="absolute top-2 right-2 w-15 h-12" />
-            <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Conseils – Ventes</p>
-            <br>
-            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
-            <ul>
-                <li>Du lundi au vendredi de 7h à 21h</li>
-                <li>Samedi de 8h à 20h</li>
-                <li>Dimanche et jours fériés de 10h à 17h</li>
-            </ul>
-            <br>
-            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
-            <div class="flex space-x-4">
-                <a href="/src/ligne.html#2">
-                    <img src="/img/2.png" alt="Ligne 2" class="w-15 h-12" />
-                </a>
-            </div>
-            <div class="author mt-4">
-                <h5><span id="A"></span></h5>
-            </div>
+      <div class="modal-box relative">
+        <img
+          src="../img/A.png"
+          alt="Logo A"
+          class="absolute top-2 right-2 w-15 h-12"
+        />
+        <h6 class="text-primary">Services</h6>
+        <p>Information – Conseils – Ventes</p>
+        <br />
+        <h6 class="text-secondary">Heures d’ouvertures</h6>
+        <ul>
+          <li>Du lundi au vendredi de 7h à 21h</li>
+          <li>Samedi de 8h à 20h</li>
+          <li>Dimanche et jours fériés de 10h à 17h</li>
+        </ul>
+        <br />
+        <h6 class="text-accent">Correspondances</h6>
+        <div class="flex space-x-4">
+          <a href="/src/ligne.html#2">
+            <img src="/img/2.png" alt="Ligne 2" class="w-15 h-12" />
+          </a>
         </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
+        <div class="author mt-4">
+          <h5><span id="A"></span></h5>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
 
     <dialog id="CMG_modal" class="modal">
-        <div class="modal-box relative">
-            <img src="../img/CMG.png" alt="Logo CMG" class="absolute top-2 right-2 w-15 h-12" />
-            <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Conseils – Ventes – Espace Abonnements</p>
-            <br>
-            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
-            <ul>
-                <li>Du lundi au vendredi de 9h à 19h</li>
-                <li>Samedi de 10h à 18h</li>
-                <li>Fermé le dimanche</li>
-                <li>Le 1er jour du mois de 7h à 20h</li>
-            </ul>
-            <br>
-            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
-            <div class="flex space-x-4">
-                <a href="/src/ligne.html#3">
-                    <img src="/img/3.png" alt="Ligne 3" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#8">
-                    <img src="/img/8.png" alt="Ligne 8" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#11">
-                    <img src="/img/11.png" alt="Ligne 11" class="w-15 h-12" />
-                </a>
-            </div>
-            <div class="author mt-4">
-                <h5><span id="CMG"></span></h5>
-            </div>
+      <div class="modal-box relative">
+        <img
+          src="../img/CMG.png"
+          alt="Logo CMG"
+          class="absolute top-2 right-2 w-15 h-12"
+        />
+        <h6 class="text-primary">Services</h6>
+        <p>Information – Conseils – Ventes – Espace Abonnements</p>
+        <br />
+        <h6 class="text-secondary">Heures d’ouvertures</h6>
+        <ul>
+          <li>Du lundi au vendredi de 9h à 19h</li>
+          <li>Samedi de 10h à 18h</li>
+          <li>Fermé le dimanche</li>
+          <li>Le 1er jour du mois de 7h à 20h</li>
+        </ul>
+        <br />
+        <h6 class="text-accent">Correspondances</h6>
+        <div class="flex space-x-4">
+          <a href="/src/ligne.html#3">
+            <img src="/img/3.png" alt="Ligne 3" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#8">
+            <img src="/img/8.png" alt="Ligne 8" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#11">
+            <img src="/img/11.png" alt="Ligne 11" class="w-15 h-12" />
+          </a>
         </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
+        <div class="author mt-4">
+          <h5><span id="CMG"></span></h5>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
 
     <dialog id="CdC_modal" class="modal">
-        <div class="modal-box relative">
-            <img src="../img/CdC.png" alt="Logo CdC" class="absolute top-2 right-2 w-15 h-12" />
-            <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Conseils – Ventes – Espace Abonnements</p>
-            <br>
-            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
-            <ul>
-                <li>Du lundi au vendredi de 9h à 19h</li>
-                <li>Samedi de 10h à 18h</li>
-                <li>Fermé le dimanche</li>
-                <li>Le 1er jour du mois de 7h à 20h</li>
-            </ul>
-            <br>
-            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
-            <div class="flex space-x-4">
-                <a href="/src/ligne.html#1">
-                    <img src="/img/1.png" alt="Ligne 1" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#9">
-                    <img src="/img/9.png" alt="Ligne 9" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#10">
-                    <img src="/img/10.png" alt="Ligne 10" class="w-15 h-12" />
-                </a>
-            </div>
-            <div class="author mt-4">
-                <h5><span id="CdC"></span></h5>
-            </div>
+      <div class="modal-box relative">
+        <img
+          src="../img/CdC.png"
+          alt="Logo CdC"
+          class="absolute top-2 right-2 w-15 h-12"
+        />
+        <h6 class="text-primary">Services</h6>
+        <p>Information – Conseils – Ventes – Espace Abonnements</p>
+        <br />
+        <h6 class="text-secondary">Heures d’ouvertures</h6>
+        <ul>
+          <li>Du lundi au vendredi de 9h à 19h</li>
+          <li>Samedi de 10h à 18h</li>
+          <li>Fermé le dimanche</li>
+          <li>Le 1er jour du mois de 7h à 20h</li>
+        </ul>
+        <br />
+        <h6 class="text-accent">Correspondances</h6>
+        <div class="flex space-x-4">
+          <a href="/src/ligne.html#1">
+            <img src="/img/1.png" alt="Ligne 1" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#9">
+            <img src="/img/9.png" alt="Ligne 9" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#10">
+            <img src="/img/10.png" alt="Ligne 10" class="w-15 h-12" />
+          </a>
         </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
+        <div class="author mt-4">
+          <h5><span id="CdC"></span></h5>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
 
     <dialog id="PdJ_modal" class="modal">
-        <div class="modal-box relative">
-            <img src="../img/PdJ.png" alt="Logo PdJ" class="absolute top-2 right-2 w-15 h-12" />
-            <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Conseils – Ventes – Espace Abonnements</p>
-            <br>
-            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
-            <ul>
-                <li>Du lundi au vendredi de 7h à 21h</li>
-                <li>Samedi de 8h à 20h</li>
-                <li>Dimanche et jours fériés de 10h à 17h</li>
-            </ul>
-            <br>
-            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
-            <div class="flex space-x-4">
-                <a href="/src/ligne.html#8">
-                    <img src="/img/8.png" alt="Ligne 8" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#64">
-                    <img src="/img/64.png" alt="Ligne 64" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#63">
-                    <img src="/img/63.png" alt="Ligne 63" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#103">
-                    <img src="/img/103.png" alt="Ligne 103" class="w-15 h-12" />
-                </a>
-            </div>
-            <div class="author mt-4">
-                <h5><span id="PdJ"></span></h5>
-            </div>
+      <div class="modal-box relative">
+        <img
+          src="../img/PdJ.png"
+          alt="Logo PdJ"
+          class="absolute top-2 right-2 w-15 h-12"
+        />
+        <h6 class="text-primary">Services</h6>
+        <p>Information – Conseils – Ventes – Espace Abonnements</p>
+        <br />
+        <h6 class="text-secondary">Heures d’ouvertures</h6>
+        <ul>
+          <li>Du lundi au vendredi de 7h à 21h</li>
+          <li>Samedi de 8h à 20h</li>
+          <li>Dimanche et jours fériés de 10h à 17h</li>
+        </ul>
+        <br />
+        <h6 class="text-accent">Correspondances</h6>
+        <div class="flex space-x-4">
+          <a href="/src/ligne.html#8">
+            <img src="/img/8.png" alt="Ligne 8" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#64">
+            <img src="/img/64.png" alt="Ligne 64" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#63">
+            <img src="/img/63.png" alt="Ligne 63" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#103">
+            <img src="/img/103.png" alt="Ligne 103" class="w-15 h-12" />
+          </a>
         </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
+        <div class="author mt-4">
+          <h5><span id="PdJ"></span></h5>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
 
     <dialog id="Riom_modal" class="modal">
-        <div class="modal-box relative">
-            <img src="../img/Riom.png" alt="Logo Riom" class="absolute top-2 right-2 w-15 h-12" />
-            <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Ventes</p>
-            <br>
-            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
-            <ul>
-                <li>Du lundi au vendredi de 9h à 19h</li>
-                <li>Samedi de 10h à 18h</li>
-                <li>Fermé le dimanche</li>
-                <li>Le 1er jour du mois de 7h à 20h</li>
-            </ul>
-            <br>
-            <h6 class="text-gray-500 dark:text-gray-200">Correspondance</h6>
-            <div class="flex space-x-4">
-                <a href="/src/ligne.html#201">
-                    <img src="/img/201.png" alt="Ligne 201" class="w-15 h-12" />
-                </a>
-            </div>
-            <div class="author mt-4">
-                <h5><span id="Riom"></span></h5>
-            </div>
+      <div class="modal-box relative">
+        <img
+          src="../img/Riom.png"
+          alt="Logo Riom"
+          class="absolute top-2 right-2 w-15 h-12"
+        />
+        <h6 class="text-primary">Services</h6>
+        <p>Information – Ventes</p>
+        <br />
+        <h6 class="text-secondary">Heures d’ouvertures</h6>
+        <ul>
+          <li>Du lundi au vendredi de 9h à 19h</li>
+          <li>Samedi de 10h à 18h</li>
+          <li>Fermé le dimanche</li>
+          <li>Le 1er jour du mois de 7h à 20h</li>
+        </ul>
+        <br />
+        <h6 class="text-gray-500 dark:text-gray-200">Correspondance</h6>
+        <div class="flex space-x-4">
+          <a href="/src/ligne.html#201">
+            <img src="/img/201.png" alt="Ligne 201" class="w-15 h-12" />
+          </a>
         </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
+        <div class="author mt-4">
+          <h5><span id="Riom"></span></h5>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
 
     <dialog id="Aubiere_modal" class="modal">
-        <div class="modal-box relative">
-            <img src="../img/Aubiere.png" alt="Logo Aubiere" class="absolute top-2 right-2 w-15 h-12" />
-            <h6 class="text-black dark:text-gray-200">Services</h6>
-            <p>Information – Ventes</p>
-            <br>
-            <h6 class="text-black dark:text-gray-200">Heures d’ouvertures</h6>
-            <ul>
-                <li>Du lundi au vendredi de 9h à 19h</li>
-                <li>Samedi de 10h à 18h</li>
-                <li>Fermé le dimanche</li>
-                <li>Le 1er jour du mois de 7h à 20h</li>
-            </ul>
-            <br>
-            <h6 class="text-gray-500 dark:text-gray-200">Correspondances</h6>
-            <div class="flex space-x-4">
-                <a href="/src/ligne.html#103">
-                    <img src="/img/103.png" alt="Ligne 103" class="w-15 h-12" />
-                </a>
-                <a href="/src/ligne.html#602">
-                    <img src="/img/602.png" alt="Ligne 602" class="w-15 h-12" />
-                </a>
-            </div>
-            <div class="author mt-4">
-                <h5><span id="Aubiere"></span></h5>
-            </div>
+      <div class="modal-box relative">
+        <img
+          src="../img/Aubiere.png"
+          alt="Logo Aubiere"
+          class="absolute top-2 right-2 w-15 h-12"
+        />
+        <h6 class="text-primary">Services</h6>
+        <p>Information – Ventes</p>
+        <br />
+        <h6 class="text-secondary">Heures d’ouvertures</h6>
+        <ul>
+          <li>Du lundi au vendredi de 9h à 19h</li>
+          <li>Samedi de 10h à 18h</li>
+          <li>Fermé le dimanche</li>
+          <li>Le 1er jour du mois de 7h à 20h</li>
+        </ul>
+        <br />
+        <h6 class="text-accent">Correspondances</h6>
+        <div class="flex space-x-4">
+          <a href="/src/ligne.html#103">
+            <img src="/img/103.png" alt="Ligne 103" class="w-15 h-12" />
+          </a>
+          <a href="/src/ligne.html#602">
+            <img src="/img/602.png" alt="Ligne 602" class="w-15 h-12" />
+          </a>
         </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
+        <div class="author mt-4">
+          <h5><span id="Aubiere"></span></h5>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
 
     <footer class="footer footer-center p-10 bg-primary text-primary-content">
-        <aside>
-            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
-            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
-            <p class="font-bold">
-                Partenaire de vos déplacements depuis 1989.
-            </p>
-            <p>Copyright ©
-                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
-            </p>
-        </aside>
+      <aside>
+        <img
+          src="/img/TCM-Sombre.png"
+          width="200"
+          height="200"
+          alt="Logo TCM"
+          class="hidden dark:block"
+        />
+        <img
+          src="/img/TCM-Clair.png"
+          width="200"
+          height="200"
+          alt="Logo TCM"
+          class="block dark:hidden"
+        />
+        <p class="font-bold">Partenaire de vos déplacements depuis 1989.</p>
+        <p>
+          Copyright ©
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          - Tous droits réservés
+        </p>
+      </aside>
     </footer>
 
     <script>
-        function pause(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
+      function pause(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
 
-        async function updateStatus(id, openHours, closedHours, closedDays, sundayHours, specialDays) {
-            while (true) {
-                await pause(1000); // Attendre 1 seconde avant de vérifier à nouveau
-                const now = new Date(); // Obtenir la date et l'heure actuelles
-                const day = now.getDay(); // Obtenir le jour de la semaine (0 = dimanche, 6 = samedi)
-                const hour = now.getHours(); // Obtenir l'heure actuelle
-                const date = now.getDate(); // Obtenir le jour du mois
-                const element = document.getElementById(id); // Obtenir l'élément HTML à mettre à jour
-                const options = { weekday: "long", year: "numeric", month: "long", day: "2-digit" };
-                const formattedDate = now.toLocaleDateString("fr-FR", options).replace(/(^\w{1})|(\s+\w{1})/g, lettre => lettre.toUpperCase());
-                const time = `${("0" + now.getHours()).slice(-2)}:${("0" + now.getMinutes()).slice(-2)}:${("0" + now.getSeconds()).slice(-2)}`;
-                const fullDateTime = `${formattedDate} ${time}`;
+      async function updateStatus(
+        id,
+        openHours,
+        closedHours,
+        closedDays,
+        sundayHours,
+        specialDays
+      ) {
+        while (true) {
+          await pause(1000); // Attendre 1 seconde avant de vérifier à nouveau
+          const now = new Date(); // Obtenir la date et l'heure actuelles
+          const day = now.getDay(); // Obtenir le jour de la semaine (0 = dimanche, 6 = samedi)
+          const hour = now.getHours(); // Obtenir l'heure actuelle
+          const date = now.getDate(); // Obtenir le jour du mois
+          const element = document.getElementById(id); // Obtenir l'élément HTML à mettre à jour
+          const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "2-digit",
+          };
+          const formattedDate = now
+            .toLocaleDateString("fr-FR", options)
+            .replace(/(^\w{1})|(\s+\w{1})/g, (lettre) => lettre.toUpperCase());
+          const time = `${("0" + now.getHours()).slice(-2)}:${(
+            "0" + now.getMinutes()
+          ).slice(-2)}:${("0" + now.getSeconds()).slice(-2)}`;
+          const fullDateTime = `${formattedDate} ${time}`;
 
-                let text, className;
+          let text, className;
 
-                // Vérifier si c'est un jour spécial (comme le 1er du mois)
-                if (specialDays.includes(date)) {
-                    text = "L'agence est ouverte (jour spécial)";
-                    className = "badge badge-success";
-                }
-                // Vérifier si c'est dimanche et si des horaires réduits sont définis
-                else if (day === 0 && sundayHours) {
-                    if (sundayHours.some(range => hour >= range[0] && hour < range[1])) {
-                        text = "L'agence est ouverte (horaires réduits)";
-                        className = "badge badge-success";
-                    } else {
-                        text = "L'agence est fermée";
-                        className = "badge badge-error";
-                    }
-                }
-                // Vérifier si c'est un jour de fermeture
-                else if (closedDays.includes(day)) {
-                    text = "L'agence est fermée";
-                    className = "badge badge-error";
-                }
-                // Vérifier si l'agence est ouverte
-                else if (openHours.some(range => hour >= range[0] && hour < range[1])) {
-                    text = "L'agence est ouverte";
-                    className = "badge badge-success";
-                }
-                // Vérifier si l'agence ferme bientôt
-                else if (closedHours.some(range => hour >= range[0] && hour < range[1])) {
-                    text = "L'agence ferme bientôt";
-                    className = "badge badge-warning";
-                }
-                // Sinon, l'agence est fermée
-                else {
-                    text = "L'agence est fermée";
-                    className = "badge badge-error";
-                }
-
-                element.innerHTML = text; // Mettre à jour le contenu de l'élément
-                element.className = className; // Mettre à jour la classe de l'élément
+          // Vérifier si c'est un jour spécial (comme le 1er du mois)
+          if (specialDays.includes(date)) {
+            text = "L'agence est ouverte (jour spécial)";
+            className = "badge badge-success";
+          }
+          // Vérifier si c'est dimanche et si des horaires réduits sont définis
+          else if (day === 0 && sundayHours) {
+            if (
+              sundayHours.some((range) => hour >= range[0] && hour < range[1])
+            ) {
+              text = "L'agence est ouverte (horaires réduits)";
+              className = "badge badge-success";
+            } else {
+              text = "L'agence est fermée";
+              className = "badge badge-error";
             }
+          }
+          // Vérifier si c'est un jour de fermeture
+          else if (closedDays.includes(day)) {
+            text = "L'agence est fermée";
+            className = "badge badge-error";
+          }
+          // Vérifier si l'agence est ouverte
+          else if (
+            openHours.some((range) => hour >= range[0] && hour < range[1])
+          ) {
+            text = "L'agence est ouverte";
+            className = "badge badge-success";
+          }
+          // Vérifier si l'agence ferme bientôt
+          else if (
+            closedHours.some((range) => hour >= range[0] && hour < range[1])
+          ) {
+            text = "L'agence ferme bientôt";
+            className = "badge badge-warning";
+          }
+          // Sinon, l'agence est fermée
+          else {
+            text = "L'agence est fermée";
+            className = "badge badge-error";
+          }
+
+          element.innerHTML = text; // Mettre à jour le contenu de l'élément
+          element.className = className; // Mettre à jour la classe de l'élément
         }
+      }
 
-        // Exemple d'utilisation
-        updateStatus('GC', [[7, 21]], [[20, 21]], [6], [[10, 17]], [1]); // Gare Centrale, ouverte le dimanche de 10h à 17h, ouverte le 1er du mois
-        updateStatus('GO', [[9, 19]], [[18, 19]], [0, 6], null, [1]); // Gare de l'Ouest, fermée le dimanche, ouverte le 1er du mois
-        updateStatus('A', [[7, 21]], [[20, 21]], [0], [[10, 17]], [1]); // Aéroport, ouvert le dimanche de 10h à 17h, ouvert le 1er du mois
-        updateStatus('CMG', [[9, 19]], [[18, 19]], [0, 6], null, [1]); // Campus Marthe Gautier, fermé le dimanche, ouvert le 1er du mois
-        updateStatus('CC', [[9, 19]], [[18, 19]], [0, 6], null, [1]); // Campus des Cézeaux, fermé le dimanche, ouvert le 1er du mois
-        updateStatus('PdJ', [[7, 21]], [[20, 21]], [0], [[10, 17]], [1]); // Place de Jaude, ouvert le dimanche de 10h à 17h, ouvert le 1er du mois
-        updateStatus('Riom', [[9, 19]], [[18, 19]], [0, 6], null, [1]); // RIOM Gare Routière, fermé le dimanche, ouvert le 1er du mois
-        updateStatus('Aubiere', [[9, 19]], [[18, 19]], [0, 6], null, [1]); // Aubière Place du marché, fermé le dimanche, ouvert le 1er du mois
+      // Exemple d'utilisation
+      updateStatus("GC", [[7, 21]], [[20, 21]], [6], [[10, 17]], [1]); // Gare Centrale, ouverte le dimanche de 10h à 17h, ouverte le 1er du mois
+      updateStatus("GO", [[9, 19]], [[18, 19]], [0, 6], null, [1]); // Gare de l'Ouest, fermée le dimanche, ouverte le 1er du mois
+      updateStatus("A", [[7, 21]], [[20, 21]], [0], [[10, 17]], [1]); // Aéroport, ouvert le dimanche de 10h à 17h, ouvert le 1er du mois
+      updateStatus("CMG", [[9, 19]], [[18, 19]], [0, 6], null, [1]); // Campus Marthe Gautier, fermé le dimanche, ouvert le 1er du mois
+      updateStatus("CC", [[9, 19]], [[18, 19]], [0, 6], null, [1]); // Campus des Cézeaux, fermé le dimanche, ouvert le 1er du mois
+      updateStatus("PdJ", [[7, 21]], [[20, 21]], [0], [[10, 17]], [1]); // Place de Jaude, ouvert le dimanche de 10h à 17h, ouvert le 1er du mois
+      updateStatus("Riom", [[9, 19]], [[18, 19]], [0, 6], null, [1]); // RIOM Gare Routière, fermé le dimanche, ouvert le 1er du mois
+      updateStatus("Aubiere", [[9, 19]], [[18, 19]], [0, 6], null, [1]); // Aubière Place du marché, fermé le dimanche, ouvert le 1er du mois
     </script>
-</body>
-
+  </body>
 </html>

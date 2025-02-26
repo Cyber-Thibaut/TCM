@@ -1,16 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components
-{
-    .dark-mode
-    {
-        @apply dark:invert dark:-hue-rotate-180 dark:saturate-100 dark:brightness-90;
-    }
-
-    .dark-image-mode
-    {
-        @apply dark:invert dark:hue-rotate-180 dark:saturate-[1.25];
-    }
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, night --prefersdark;
 }
+
+@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));

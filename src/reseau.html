@@ -47,7 +47,7 @@
 <body class="bg-base-100 text-base-content">
 
     <!-- Hero Section -->
-    <header class="hero min-h-[50vh] bg-cover bg-center relative mt-16"
+    <header class="hero min-h-[50vh] bg-cover bg-center relative"
         style="background-image: url('https://cdn.pixabay.com/photo/2019/01/04/14/49/landscape-3913309_1280.jpg');">
         <div class="hero-overlay bg-opacity-60"></div>
         <div class="hero-content text-center text-neutral-content">
@@ -135,10 +135,10 @@
 
                     const contenu = `
                         <div class="flex items-center gap-4">
-                            <img src="../img/${ligne.id}.png" alt="Ligne ${ligne.id}" class="w-12 h-12">
+                            <img src="../img/${ligne.id}.png" alt="Ligne ${ligne.id}" class="w-12 h-10">
                             <div>
                                 <h3 class="text-lg font-semibold text-primary">${ligne.id === "NS" ? "Navette Spéciale" : `Ligne ${ligne.id}`}</h3>
-                                <p class="text-sm text-neutral-content">${ligne.nom}</p>
+                                <p class="text-sm text-accent)">${ligne.nom}</p>
                             </div>
                         </div>
                     `;

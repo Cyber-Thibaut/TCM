@@ -5,29 +5,42 @@ const minute = now.getMinutes();
 const date = formatDate(now); // Convertir la date en chaîne "YYYY-MM-DD"
 const today = new Date();
 
-const vacationDates = [
-    { start: new Date("2024-07-06"), end: new Date("2024-09-02") }, // Grandes vacances 2024
-    { start: new Date("2024-10-19"), end: new Date("2024-11-03") }, // Vacances de la Toussaint 2024
-    { start: new Date("2024-12-21"), end: new Date("2025-01-05") }, // Vacances de Noël 2024-2025
-    { start: new Date("2025-02-08"), end: new Date("2025-02-23") }, // Vacances d'hiver 2025
-    { start: new Date("2025-04-05"), end: new Date("2025-04-21") }, // Vacances de printemps 2025
-    { start: new Date("2025-07-05"), end: new Date("2025-09-01") }  // Grandes vacances 2025
-];
+async function fetchVacationDates(date) {
+  const year = date.getFullYear();
+  const schoolYears = [`${year - 1}-${year}`, `${year}-${year + 1}`];
+  try {
+    const responses = await Promise.all(
+      schoolYears.map((schoolYear) =>
+        fetch(
+          `https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?limit=20&lang=fr&refine=location%3A%22Clermont-Ferrand%22&refine=population%3A%22-%22&refine=population%3A%22%C3%89l%C3%A8ves%22&refine=annee_scolaire%3A%22${schoolYear}%22`
+        )
+      )
+    );
 
-
-
-function isDateInVacationRanges(date, ranges) {
-    for (const range of ranges) {
-        const startDate = range.start;
-        const endDate = range.end;
-        if (date >= startDate && date <= endDate) {
-            return true;
-        }
-    }
-    return false;
+    const data = await Promise.all(
+      responses.map((response) => response.json())
+    );
+    return data
+      .flatMap((d) =>
+        d.results.map((record) => ({
+          start: new Date(record.start_date),
+          end: new Date(record.end_date),
+          description: record.description, // Ajouter la description ici
+        }))
+      )
+      .sort((a, b) => a.start - b.start); // Trier les périodes de vacances par date de début
+  } catch (error) {
+    console.error("Error fetching vacation dates:", error);
+    return [];
+  }
 }
 
-const isVacation = isDateInVacationRanges(today, vacationDates);
+function isDateInVacationRanges(date, ranges) {
+  return ranges.some((range) => date >= range.start && date <= range.end);
+}
+
+const isHoliday = holidayDates.includes(date);
+  const vacationDates = await fetchVacationDates(now);
 
 function formatDate(date) {
     const year = date.getFullYear();

@@ -48,6 +48,7 @@
     --spacing: 0.25rem;
     --breakpoint-md: 48rem;
     --breakpoint-xl: 80rem;
+    --container-md: 28rem;
     --container-lg: 32rem;
     --container-2xl: 42rem;
     --container-3xl: 48rem;
@@ -2726,9 +2727,6 @@
   .w-full {
     width: 100%;
   }
-  .max-w-\(--breakpoint-md\) {
-    max-width: var(--breakpoint-md);
-  }
   .max-w-\(--breakpoint-xl\) {
     max-width: var(--breakpoint-xl);
   }
@@ -2743,6 +2741,9 @@
   }
   .max-w-lg {
     max-width: var(--container-lg);
+  }
+  .max-w-md {
+    max-width: var(--container-md);
   }
   .flex-shrink {
     flex-shrink: 1;
@@ -3852,11 +3853,6 @@
       border-color: var(--color-yellow-800);
     }
   }
-  .dark\:bg-base-100 {
-    &:where([data-theme=night], [data-theme=night] *) {
-      background-color: var(--color-base-100);
-    }
-  }
   .dark\:bg-base-300 {
     &:where([data-theme=night], [data-theme=night] *) {
       background-color: var(--color-base-300);
@@ -3935,16 +3931,6 @@
   .dark\:text-yellow-300 {
     &:where([data-theme=night], [data-theme=night] *) {
       color: var(--color-yellow-300);
-    }
-  }
-  .\[\[data-theme\=dark\]_\&\]\:hidden {
-    [data-theme=dark] & {
-      display: none;
-    }
-  }
-  .\[\[data-theme\=light\]_\&\]\:hidden {
-    [data-theme=light] & {
-      display: none;
     }
   }
 }

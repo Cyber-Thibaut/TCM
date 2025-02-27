@@ -44,10 +44,17 @@
 </head>
 
 <body class="min-h-screen flex flex-col bg-base-200">
-
+    <header class="hero min-h-[50vh] bg-cover bg-center relative"
+        style="background-image: url('../img/trafic.jpg');">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="hero-content text-center text-neutral-content">
+            <div>
+                <h1 class="text-5xl font-bold">🚌 Info Trafic TCM</h1>
+            </div>
+        </div>
+    </header>
     <!-- Section Infos Trafic -->
     <section class="container mx-auto my-8 p-6">
-        <h1 class="text-4xl font-bold text-center mb-6">🚌 Info Trafic TCM</h1>
         <div id="lignes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </section>
 
@@ -64,8 +71,8 @@
     </footer>
 
     <script>
-        //const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
-        const url = "test.json";
+        const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
+        //const url = "test.json";
         function afficherInfoTrafic() {
             $.getJSON(url, function (data) {
                 let lignesTrouvees = false;

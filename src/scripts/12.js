@@ -2,20 +2,25 @@ const nextBusTime = document.getElementById("nextBusTime");
 const alertMessage = document.getElementById("alertMessage");
 const currentTimeElement = document.getElementById("current-time");
 const destinationElement = document.getElementById("destination");
+const now = new Date();
+const hour = now.getHours();
+const minute = now.getMinutes();
 
-const holidayDates = [
-  "2024-11-01",
-  "2024-11-11",
-  "2024-12-25",
-  "2025-01-01",
-  "2025-04-21",
-  "2025-05-01",
-  "2025-05-08",
-  "2025-05-29",
-  "2025-06-09",
-  "2025-07-14",
-  "2025-08-15",
-];
+let holidayDates = [];
+
+async function fetchHolidayDates(year) {
+  try {
+    const response = await fetch(
+      `https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`
+    );
+    const data = await response.json();
+    holidayDates = Object.values(data).map((date) =>
+      formatDate(new Date(date))
+    );
+  } catch (error) {
+    console.error("Error fetching holiday dates:", error);
+  }
+}
 
 async function fetchVacationDates(date) {
   const year = date.getFullYear();
@@ -59,14 +64,6 @@ function formatDate(date) {
 }
 
 function calculateNextBusTime(weekday, hour, minute, isVacation, isHoliday) {
-  if (isHoliday) {
-    return -1; // Créneau fermé
-  }
-  if (isVacation && (weekday === 6 || weekday === 0)) {
-    if ((hour === 1 && minute >= 0) || (hour >= 2 && hour < 4)) {
-      return -1; // Créneau fermé
-    }
-  }
   const frequencies = {
     weekday: {
       "4-7": 8,
@@ -87,13 +84,42 @@ function calculateNextBusTime(weekday, hour, minute, isVacation, isHoliday) {
       "7-9": 10,
       "9-24": 16,
     },
+    vacationWeekday: {
+      "4-7": 12,
+      "7-9": 10,
+      "9-24": 12,
+    },
+    vacationSaturday: {
+      "4-7": 14,
+      "7-9": 12,
+      "9-24": 14,
+    },
+    vacationSunday: {
+      "4-7": 20,
+      "7-9": 15,
+      "9-24": 20,
+    },
   };
-  const dayFrequencies =
-    weekday === 0
-      ? frequencies.sunday
-      : weekday === 6
-      ? frequencies.saturday
-      : frequencies.weekday;
+
+  let dayFrequencies;
+  if (isHoliday) {
+    dayFrequencies = frequencies.sunday;
+  } else if (isVacation) {
+    dayFrequencies =
+      weekday === 0
+        ? frequencies.vacationSunday
+        : weekday === 6
+        ? frequencies.vacationSaturday
+        : frequencies.vacationWeekday;
+  } else {
+    dayFrequencies =
+      weekday === 0
+        ? frequencies.sunday
+        : weekday === 6
+        ? frequencies.saturday
+        : frequencies.weekday;
+  }
+
   for (const [range, freq] of Object.entries(dayFrequencies)) {
     const [startHour, endHour] = range.split("-").map(Number);
     if (hour >= startHour && hour < endHour) {
@@ -111,14 +137,6 @@ function calculateFollowingBusTime(
   isVacation,
   isHoliday
 ) {
-  if (isHoliday) {
-    return -1; // Créneau fermé
-  }
-  if (isVacation && (weekday === 6 || weekday === 0)) {
-    if ((hour === 1 && minute >= 0) || (hour >= 2 && hour < 4)) {
-      return -1; // Créneau fermé
-    }
-  }
   const followingFrequencies = {
     weekday: {
       "4-7": 7,
@@ -139,13 +157,42 @@ function calculateFollowingBusTime(
       "7-9": 10,
       "9-24": 16,
     },
+    vacationWeekday: {
+      "4-7": 11,
+      "7-9": 10,
+      "9-24": 11,
+    },
+    vacationSaturday: {
+      "4-7": 13,
+      "7-9": 11,
+      "9-24": 13,
+    },
+    vacationSunday: {
+      "4-7": 19,
+      "7-9": 14,
+      "9-24": 19,
+    },
   };
-  const dayFrequencies =
-    weekday === 0
-      ? followingFrequencies.sunday
-      : weekday === 6
-      ? followingFrequencies.saturday
-      : followingFrequencies.weekday;
+
+  let dayFrequencies;
+  if (isHoliday) {
+    dayFrequencies = followingFrequencies.sunday;
+  } else if (isVacation) {
+    dayFrequencies =
+      weekday === 0
+        ? followingFrequencies.vacationSunday
+        : weekday === 6
+        ? followingFrequencies.vacationSaturday
+        : followingFrequencies.vacationWeekday;
+  } else {
+    dayFrequencies =
+      weekday === 0
+        ? followingFrequencies.sunday
+        : weekday === 6
+        ? followingFrequencies.saturday
+        : followingFrequencies.weekday;
+  }
+
   for (const [range, freq] of Object.entries(dayFrequencies)) {
     const [startHour, endHour] = range.split("-").map(Number);
     if (hour >= startHour && hour < endHour) {
@@ -192,13 +239,11 @@ async function updateBusTimes() {
 
   let nextBus, followingBus;
   if (nextBusFreq === -1) {
-    nextBus = `<div role="alert" class="alert alert-info">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span>Pour le moment, aucun bus n'est en service.</span>
-        </div>`;
-    followingBus = "";
+    if ((hour === 0 && minute >= 0) || (hour >= 1 && hour < 4)) {
+      infoMessage.innerHTML = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Veuillez noter que le service est actuellement suspendu. Nous reprendrons nos activités à 4h du matin. Merci pour votre compréhension et bonne nuit.</span></div>`;
+    } else {
+      infoMessage.innerHTML = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Pour le moment, aucun bus n'est en service.</span></div>`;
+    }
   } else {
     nextBus = `<div class="grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
             ${
@@ -225,10 +270,10 @@ async function updateBusTimes() {
                 <img src="${selectedIcon2}" style="width: 50px; height: auto;">
             </div>
         </div>`;
+    infoMessage.textContent = "";
+    const divider = `<div class="divider lg:divider-horizontal"></div>`;
+    nextBusTime.innerHTML = nextBus + divider + followingBus;
   }
-
-  const divider = `<div class="divider lg:divider-horizontal"></div>`;
-  nextBusTime.innerHTML = nextBus + divider + followingBus;
 
   if (isHoliday) {
     alertMessage.innerHTML = `
@@ -259,7 +304,13 @@ function updateCurrentTime() {
   destinationElement.innerHTML = `<h2 class="text-4xl text-base-content font-bold">Direction Campus Cézeaux (Sciences) ♿</h2><br>`;
 }
 
-setInterval(updateBusTimes, 30000);
-updateBusTimes();
-setInterval(updateCurrentTime, 1000);
-updateCurrentTime();
+async function initialize() {
+  const now = new Date();
+  await fetchHolidayDates(now.getFullYear());
+  setInterval(updateBusTimes, 30000);
+  updateBusTimes();
+  setInterval(updateCurrentTime, 1000);
+  updateCurrentTime();
+}
+
+initialize();

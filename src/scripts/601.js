@@ -3,23 +3,19 @@ const alertMessage = document.getElementById("alertMessage");
 const currentTimeElement = document.getElementById("current-time");
 const destinationElement = document.getElementById("destination");
 
-const holidayDates = [
-  "2024-11-01",
-  "2024-11-11",
-  "2024-12-25",
-  "2025-01-01",
-  "2025-04-21",
-  "2025-05-01",
-  "2025-05-08",
-  "2025-05-29",
-  "2025-06-09",
-  "2025-07-14",
-  "2025-08-15",
-];
+let holidayDates = [];
 
-const now = new Date();
-const date = formatDate(now);
-const estFerie = holidayDates.includes(date);
+async function fetchHolidayDates(year) {
+  try {
+    const response = await fetch(
+      `https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`
+    );
+    const data = await response.json();
+    holidayDates = Object.values(data).map((date) => formatDate(new Date(date)));
+  } catch (error) {
+    console.error("Error fetching holiday dates:", error);
+  }
+}
 
 async function fetchVacationDates(date) {
   const year = date.getFullYear();
@@ -148,29 +144,6 @@ async function updateBusTimes() {
     destinationElement.innerHTML = `<h2 class="text-4xl font-bold">Lezoux Hôtel de ville</h2><br>`;
   }
 
-  if (now < new Date("2024-09-02")) {
-    alertMessage.innerHTML = `
-      <div role="alert" class="alert alert-warning">
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
-        <div>
-          <h1 class="font-bold">La ligne n'est pas en service actuellement</h1>
-          <p>Nous nous donnons rendez-vous après les vacances, le 2 septembre !</p>
-          <br>
-          <p>En attendant, les abonnements pour la rentrée de septembre sont disponibles dans nos agences ! 🎒🚌</p>
-          <br>
-          <p>Rendez-vous dès maintenant dans nos agences pour souscrire à votre abonnement scolaire pour l'année 2024-2025. Nos équipes sont à votre disposition pour vous fournir toutes les informations nécessaires et vous aider à choisir l'abonnement qui convient le mieux à vos besoins.</p>
-          <br>
-          <p>Pour plus de détails, consultez notre site web : <a href="https://tcm-mobilite.vercel.app/src/agences.html">Consultez la liste de nos agences ici</a>.</p>
-          <br>
-          <p>Assurez-vous d'être prêt pour la rentrée avec TCM !</p>
-        </div>
-      </div>
-    `;
-    destinationElement.innerHTML = ``;
-    nextBusTime.innerHTML = ``;
-  }
 }
 
 setInterval(updateBusTimes, 30000); // Mettez 30000 pour actualiser toutes les 30 secondes
@@ -256,3 +229,14 @@ function calculateFollowingBusTime(weekday, hour, minute, isVacation) {
     return -1;
   }
 }
+
+async function initialize() {
+  const now = new Date();
+  await fetchHolidayDates(now.getFullYear());
+  setInterval(updateBusTimes, 30000);
+  updateBusTimes();
+  setInterval(updateCurrentTime, 1000);
+  updateCurrentTime();
+}
+
+initialize();

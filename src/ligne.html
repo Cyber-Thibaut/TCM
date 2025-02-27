@@ -79,51 +79,52 @@
       }
     </style>
   </head>
-
-  <body>
-    <br />
-    <div class="container p-6">
-      <h1 id="pageTitle" class="text-5xl font-bold text-center"></h1>
+  <body class="bg-base-100">
+    <div class="container mx-auto p-6">
+      <!-- Titre de la page -->
+      <h1 id="pageTitle" class="text-5xl font-bold text-center text-primary"></h1>
+  
       <div class="divider"></div>
+  
+      <!-- Détails -->
       <div id="details"></div>
-      <!-- Conteneur pour afficher les informations -->
-      <div id="infos-ligne">
-        <!-- Les informations de la ligne seront affichées ici -->
+  
+      <!-- Conteneur des informations -->
+      <div id="infos-ligne"></div>
+
+          <!-- Les informations de la ligne seront affichées ici -->
       </div>
       <div
-        class="m-4 items-center justify-center py-4 bg-base-200 rounded-xl grid grid-cols-6 gap-2"
-      >
-        <div
-          class="col-start-2 col-span-4 text-center items-center py-8 justify-center"
-        >
-          <div>
-            <div
-              class="time text-secondary"
-              id="current-time"
-              style="text-align: center"
-            ></div>
+          class="m-4 items-center justify-center py-4 bg-base-200 rounded-xl grid grid-cols-6 gap-2">
+          <div class="col-start-2 col-span-4 text-center items-center py-8 justify-center">
+              <div>
+
+                  <div class="time text-secondary" id="current-time"
+                      style="text-align: center;"></div>
+              </div>
+              <div class="divider divider-base-content"></div>
+              <div style="text-align:center; font: size 48px; color:dc241f;">
+                  <div class="destination">
+                      <h2 class="title" id="destination"></h2>
+                  </div>
+              </div>
+              <div style="text-align:center; font: size 48px;">
+                  <div class="flex flex-col w-full lg:flex-row" id="nextBusTime"></div>
+              </div>
+              <br>
+              <div class="alert-message" id="infoMessage"></div><br>
+              <div class="alert-message" id="alertMessage"></div>
+              <br>
+              <div class="divider"></div>
+              <div class="grid grid-cols-6 gap-4 w-full">
+                <div id="lignes" class="col-start-2 col-span-4 flex justify-center items-center mx-auto max-w-md w-full">
+                  <!-- Contenu ici -->
+                </div>
+              </div>
+              
           </div>
-          <div class="divider divider-base-content"></div>
-          <div style="text-align: center; font: size 48px">
-            <div class="destination">
-              <h2 class="title" id="destination"></h2>
-            </div>
-          </div>
-          <div style="text-align: center; font: size 48px">
-            <div
-              class=""
-              id="nextBusTime"
-            ></div>
-          </div>
-          <br />
-          <div class="alert-message" id="alertMessage"></div>
-          <br />
-          <div class="divider"></div>
-          <div class="grid grid-cols-6 gap-4"></div>
-          <div id="lignes" class="container mx-auto mt-8"></div>
-        </div>
       </div>
-    </div>
+  </div>
     <script
       src="https://kit.fontawesome.com/d8bf012a3e.js"
       crossorigin="anonymous"

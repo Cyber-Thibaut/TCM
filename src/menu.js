@@ -22,19 +22,25 @@ document.addEventListener("DOMContentLoaded", function () {
                             </svg>
                             Info Trafic
                         </a></li>
-                    <li><a href="/src/tarifs.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
+                    <li><a href="/src/tarifs.html"><svg class="w-[19px] h-[19px]"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="1.1"
                                     d="M16.5 7A2.5 2.5 0 0 1 19 4.5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 1 1 0 5V12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5A2.5 2.5 0 0 1 16.5 7Z" />
                             </svg> Tarif</a></li>
-                    <li><a href="/src/agences.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
+                    <li><a href="/src/agences.html"><svg class="w-[19px] h-[19px]"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
                                 viewBox="0 0 21 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="1.1"
                                     d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
                             </svg> Nos Agences</a></li>
+                    <li><a href="/src/avenir.html">
+                        <svg class="w-[19px] h-[19px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m-3-7a4 4 0 1 1-4 4"/>
+                        </svg>
+                        2026
+                    </a></li>
                 </ul>
             </div>
             <a class="btn btn-ghost normal-case text-xl bg-primary/50 glass" href="/index.html"><img src="/img/TCM-Sombre.png"
@@ -65,6 +71,12 @@ document.addEventListener("DOMContentLoaded", function () {
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.1"
                                 d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
                         </svg> Nos Agences</a></li>
+                <li><a href="/src/avenir.html">
+                    <svg class="w-[19px] h-[19px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m-3-7a4 4 0 1 1-4 4"/>
+                    </svg>
+                    2026
+                </a></li>
             </ul>
         </div>
         <div class="navbar-end">

@@ -120,9 +120,9 @@
       // Fonction pour afficher les détails de la ligne
       function afficherDetailsLigne() {
         if (ligneID !== null) {
-          // const url = "test.json"
+          //const url = "test.json";
           const url =
-            "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
+          ("https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json");
 
           $.getJSON(url, function (data) {
             const ligne = data.lignes.find((l) => l.ligne === ligneID);
@@ -159,98 +159,87 @@
                   dateFin.setDate(dateFin.getDate() + 1);
 
                   if (dateActuelle >= dateDebut && dateActuelle <= dateFin) {
-                    // Vérification de la date
                     const card = $("<div>").addClass(
-                      "p-4 mb-4 border rounded-lg"
+                      "alert shadow-lg p-4 flex flex-col gap-2"
                     );
-                    let theme;
 
-                    let icon;
-                    let currentDate = new Date(); // Obtenez la date actuelle
+                    let theme, icon;
+                    let currentDate = new Date();
 
                     if (info.type.includes("travaux")) {
-                      let startDate = new Date(info.debut); // Convertissez la date de début du format texte en objet Date
-                      let endDate = new Date(info.fin); // Convertissez la date de fin du format texte en objet Date
+                      let startDate = new Date(info.debut);
+                      let endDate = new Date(info.fin);
 
                       if (currentDate < startDate) {
-                        // Les travaux sont à venir
-                        theme =
-                          "p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800";
+                        // Travaux à venir
+                        theme = "alert-warning";
                         icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
                       } else if (
                         currentDate >= startDate &&
                         currentDate <= endDate
                       ) {
-                        // Les travaux sont en cours
-                        theme =
-                          "p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800";
+                        // Travaux en cours
+                        theme = "alert-error";
                         icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
                       } else {
-                        // Les travaux sont terminés
-                        theme =
-                          "p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800";
-                        icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> `;
+                        // Travaux terminés
+                        theme = "alert-success";
+                        icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`;
                       }
                     } else if (info.type.includes("information")) {
-                      theme =
-                        "p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800";
-                      icon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> `;
+                      theme = "alert-info";
+                      icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
                     } else if (info.type.includes("fermeture")) {
-                      theme =
-                        "p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800";
-                      icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
-                    } else if (info.type.includes("attention")) {
-                      theme =
-                        "p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800";
-                      icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
-                    } else if (info.type.includes("perturbation")) {
-                      theme =
-                        "p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800";
-                      icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> `;
+                      theme = "alert-error";
+                      icon = `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+                    } else if (
+                      info.type.includes("attention") ||
+                      info.type.includes("perturbation")
+                    ) {
+                      theme = "alert-warning";
+                      icon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
                     } else {
                       // Thème par défaut
-                      theme =
-                        "p-4 border border-gray-300 rounded-lg bg-gray-50 dark:border-gray-600 dark:bg-gray-800";
+                      theme = "alert";
                       icon = "";
                     }
 
                     card.addClass(theme);
-                    card.attr("role", "alert");
 
                     card.append(
                       $("<div>")
-                        .addClass("flex items-center")
+                        .addClass("flex items-center gap-4")
                         .append(
-                          icon,
+                          $(icon),
                           $("<h3>")
-                            .addClass("text-xl font-big")
-                            .text(" " + info.titre) // Ajoutez un espace ici
+                            .addClass("text-lg font-semibold")
+                            .text(info.titre)
                         )
                     );
 
                     card.append(
-                      $("<h2 class='mt-2 mb-4 texte-sm'>").html(
-                        info.description.replace(/\n/g, "<br><br>")
+                      $("<p class='text-sm'>").html(
+                        info.description.replace(/\n/g, "<br>")
                       )
                     );
 
-                    card.append(
-                      $("<hr>").addClass("border-current opacity-30")
-                    );
-                    const dateDd = new Date(Date.parse(info.debut));
-                    const dateFin = new Date(Date.parse(info.fin));
+                    card.append($("<hr>").addClass("border-opacity-30"));
+
+                    const dateDebutFormatted = new Date(
+                      info.debut
+                    ).toLocaleDateString("fr-FR");
+                    const dateFinFormatted = new Date(
+                      info.fin
+                    ).toLocaleDateString("fr-FR");
+
                     card.append(
                       $("<p>")
-                        .addClass("mb-0 mt-4")
-                        .text(
-                          "Date: " +
-                            dateDd.toLocaleDateString("fr-FR") +
-                            " → " +
-                            dateFinAffichee.toLocaleDateString("fr-FR")
-                        )
+                        .addClass("text-xs text-accent-content")
+                        .text(`📅 ${dateDebutFormatted} → ${dateFinFormatted}`)
                     );
 
                     $("#details").append(card);
+                    $("#details").append($("<br>"));
                   }
                 });
               }

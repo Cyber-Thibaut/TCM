@@ -17,7 +17,7 @@
       "ligne": "1",
       "infos_trafic": [
         {
-          "type": "fermeture",
+          "type": "information",
           "annonce": "09/28/2023",
           "debut": "10/15/2023",
           "fin": "10/27/2075",
@@ -25,9 +25,9 @@
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
         },
         {
-          "type": "fermeture",
+          "type": "attention",
           "annonce": "09/28/2023",
-          "debut": "10/15/2023",
+          "debut": "10/15/2025",
           "fin": "10/27/2075",
           "titre": "🚧 Info Travaux 🚧",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
@@ -35,7 +35,23 @@
         {
           "type": "travaux",
           "annonce": "09/28/2023",
-          "debut": "10/15/2023",
+          "debut": "10/15/2025",
+          "fin": "10/27/2075",
+          "titre": "🚧 Info Travaux 🚧",
+          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
+        },
+        {
+          "type": "fermeture",
+          "annonce": "09/28/2023",
+          "debut": "10/15/2025",
+          "fin": "10/27/2075",
+          "titre": "🚧 Info Travaux 🚧",
+          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
+        },
+        {
+          "type": "perturbation",
+          "annonce": "09/28/2023",
+          "debut": "10/15/2025",
           "fin": "10/27/2075",
           "titre": "🚧 Info Travaux 🚧",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"

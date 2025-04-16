@@ -4,24 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Transport Clermont Métropole</title>
-    <meta name="description" content="Partenaire de vos déplacements à Clermont-Ferrand depuis 1989." />
+    <meta
+      name="description"
+      content="Partenaire de vos déplacements à Clermont-Ferrand depuis 1989."
+    />
     <meta name="theme-color" content="#204BFE" />
     <link rel="icon" href="https://tcm-mobilite.vercel.app/img/TCM.png" />
     <link href="/dist/output.css" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/d8bf012a3e.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="src/menu.js" defer></script>
   </head>
 
   <body class="bg-base-100 text-base-content font-sans">
+    <div class="container p-6 mx-auto">
+      <div id="TCM"></div>
+      <div id="vacation-alert"></div>
+    </div>
 
     <!-- Hero -->
-    <header class="hero min-h-[70vh] bg-cover bg-center relative" style="background-image: url('https://i.imgur.com/ivC8iEO.jpeg')">
+    <header
+      class="hero min-h-[70vh] bg-cover bg-center relative"
+      style="background-image: url('https://i.imgur.com/ivC8iEO.jpeg')"
+    >
       <div class="hero-overlay backdrop-blur-sm"></div>
       <div class="hero-content text-center text-white">
         <div class="max-w-2xl">
-          <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight">
-            Voyagez facilement à <span class="text-accent">Clermont-Ferrand</span>
+          <h1
+            class="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight"
+          >
+            Voyagez facilement à
+            <span class="text-accent">Clermont-Ferrand</span>
           </h1>
           <p class="mt-6 text-lg sm:text-xl text-white/80">
             Partenaire de vos déplacements depuis 1989.
@@ -33,7 +49,6 @@
     <!-- Trafic & Agences -->
     <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
         <!-- Info Trafic -->
         <div class="card shadow-xl bg-primary text-primary-content p-6">
           <h2 class="text-2xl font-bold mb-4">Info Trafic</h2>
@@ -44,9 +59,10 @@
         <div class="card shadow-xl bg-primary text-primary-content p-6">
           <h2 class="text-2xl font-bold mb-4">État des Agences</h2>
           <div id="agences" class="flex flex-wrap gap-4"></div>
-          <a href="/src/agences.html" class="btn btn-accent w-full mt-6">Voir toutes les agences</a>
+          <a href="/src/agences.html" class="btn btn-accent w-full mt-6"
+            >Voir toutes les agences</a
+          >
         </div>
-
       </div>
     </section>
 
@@ -58,16 +74,29 @@
           En direct de notre rédaction, toute l'actualité TCM.
         </p>
       </div>
-      <div id="content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+      <div
+        id="content"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      ></div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer footer-center p-10 bg-primary text-primary-content mt-auto">
+    <footer
+      class="footer footer-center p-10 bg-primary text-primary-content mt-auto"
+    >
       <aside>
-        <img src="/img/TCM-Clair.png" width="180" alt="Logo TCM" class="mx-auto mb-3" />
-        <p class="font-semibold text-lg">Partenaire de vos déplacements depuis 1989</p>
+        <img
+          src="/img/TCM-Clair.png"
+          width="180"
+          alt="Logo TCM"
+          class="mx-auto mb-3"
+        />
+        <p class="font-semibold text-lg">
+          Partenaire de vos déplacements depuis 1989
+        </p>
         <p class="text-sm opacity-80">
-          © <span id="year"></span> Transport Clermont Métropole. Tous droits réservés.
+          © <span id="year"></span> Transport Clermont Métropole. Tous droits
+          réservés.
         </p>
       </aside>
     </footer>
@@ -76,7 +105,6 @@
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
-
 
     <script>
       const agences = [

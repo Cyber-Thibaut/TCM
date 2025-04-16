@@ -48,7 +48,8 @@
       crossorigin="anonymous"
     ></script>
     <link href="../dist/output.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script src="menu.js"></script>
     <script>
       document.addEventListener("contextmenu", function (e) {
@@ -298,11 +299,21 @@
       </section>
     </div>
 
-    <!-- 🟦 Footer -->
+    <!-- Footer -->
     <footer
       class="footer footer-center p-10 bg-primary text-primary-content mt-12"
     >
-      <p>© 2024 Alliance Terres d’Isère - Tous droits réservés</p>
+      <aside>
+        <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" />
+        <p class="font-bold">Partenaire de vos déplacements depuis 1989.</p>
+        <p>
+          ©
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          - Tous droits réservés
+        </p>
+      </aside>
     </footer>
   </body>
 </html>

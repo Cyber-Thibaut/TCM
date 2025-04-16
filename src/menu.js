@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="navbar-end">
         <label class="swap swap-rotate">
             <!-- this hidden checkbox controls the state -->
-            <input type="checkbox" class="theme-controller" value="light" />
+            <input type="checkbox" class="theme-controller" value="night" />
 
             <!-- sun icon -->
             <svg
@@ -110,4 +110,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Insérez le menu dans la page
   document.body.insertAdjacentHTML("afterbegin", menu);
+  setTimeout(() => {
+    // Détecter la préférence système
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    const storedTheme = localStorage.getItem("theme");
+    const themeToggle = document.querySelector(".theme-controller");
+
+    // Définir le thème initial
+    const initialTheme = storedTheme || (prefersDark ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", initialTheme);
+    if (themeToggle) {
+      themeToggle.checked = initialTheme === "dark";
+
+      // Écouter les changements de l'utilisateur
+      themeToggle.addEventListener("change", (e) => {
+        const newTheme = e.target.checked ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      });
+    }
+  }, 0);
 });

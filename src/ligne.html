@@ -45,9 +45,11 @@
     <meta name="theme-color" content="#204BFE" />
 
     <link href="../dist/output.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script src="menu.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+
     <style>
       .bouton-pdf:hover {
         cursor: pointer;
@@ -363,71 +365,37 @@
       chargerInfosLigne(numeroLigne);
     </script>
     <script>
-      // Obtenir le fragment de l'URL
-      const fragment = window.location.hash.substring(1);
-
-      // Vérifier s'il y a un fragment
-      if (fragment) {
-        async function chargerInfosLigne(fragment) {
-          try {
-            const response = await fetch("ligne.json"); // Charge le fichier JSON
-            if (!response.ok) {
-              throw new Error(`Erreur HTTP : ${response.status}`);
-            }
-
-            const data = await response.json(); // Convertit la réponse en objet JavaScript
-
-            if (fragment === "NS") {
-              ligne = data.lignes.find((l) => l.id === "NS");
-            } else {
-              ligne = data.lignes.find((l) => l.id === parseInt(fragment));
-            }
-
-            if (ligne) {
-              if (ligne.type === "Spéciale") {
-                // Construire le nom du script pour les lignes spéciales
-                const scriptName = "/src/scripts/speciales.js";
-
-                // Charger le script
-                const script = document.createElement("script");
-                script.src = scriptName;
-                document.head.appendChild(script);
-              } else if (ligne.id === "NS") {
-                // Construire le nom du script pour les navettes
-                const scriptName = "/src/scripts/NS.js";
-
-                // Charger le script
-                const script = document.createElement("script");
-                script.src = scriptName;
-                document.head.appendChild(script);
-              } else {
-                // Construire le nom du script pour les autres lignes
-                const scriptName = `/src/scripts/${fragment}.js`;
-
-                // Charger le script
-                const script = document.createElement("script");
-                script.src = scriptName;
-                document.head.appendChild(script);
-              }
-            } else {
-              const nextBus = `<div role="alert" class="alert alert-warning">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                            <span>Cette ligne n'est pas équipée de balises GPS, fiez vous aux horaires théoriques disponibles aux arrêts.</span>
-                        </div>`;
-              document.getElementById("nextBusTime").innerHTML = nextBus;
-            }
-          } catch (error) {
-            console.error("Erreur lors du chargement des données :", error);
-          }
-        }
-
-        // Appeler la fonction avec le fragment
-        chargerInfosLigne(fragment);
+      const fragment = window.location.hash.replace("#", "");
+      let scriptName;
+    
+      if (/^NS/.test(fragment)) {
+        scriptName = "/src/scripts/NS.js";
+      } else if (/^6\d{2}/.test(fragment)) {
+        scriptName = `/src/scripts/${fragment}.js`;
+      } else {
+        scriptName = "/src/scripts/bus.js";
       }
+    
+      const script = document.createElement("script");
+      script.src = scriptName;
+      script.onload = () => {
+        console.log("✅ Script chargé :", scriptName);
+    
+        // Lance init() manuellement si présent
+        if (typeof init === "function") {
+          console.log("🚀 Lancement manuel de init()");
+          init();
+        } else {
+          console.warn("⚠️ La fonction init() n'existe pas dans", scriptName);
+        }
+      };
+      script.onerror = () => {
+        console.error("❌ Échec de chargement :", scriptName);
+      };
+      document.body.appendChild(script);
     </script>
-
+    
+    
     <script>
       const urlinfo = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
       //const urlinfo = "test.json";

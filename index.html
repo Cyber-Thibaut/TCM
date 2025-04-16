@@ -48,7 +48,8 @@
       src="https://kit.fontawesome.com/d8bf012a3e.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script src="src/menu.js"></script>
     <script>
       document.addEventListener("contextmenu", function (e) {
@@ -179,8 +180,34 @@
     <script>
       const agences = [
         {
+          id: "GC",
+          nom: "Gare Centrale",
+          horaires: {
+            lundi: ["07:00", "21:00"],
+            mardi: ["07:00", "21:00"],
+            mercredi: ["07:00", "21:00"],
+            jeudi: ["07:00", "21:00"],
+            vendredi: ["07:00", "21:00"],
+            samedi: ["08:00", "20:00"],
+            dimanche: ["10:00", "17:00"],
+          },
+        },
+        {
+          id: "GO",
+          nom: "Gare de l'Ouest",
+          horaires: {
+            lundi: ["09:00", "19:00"],
+            mardi: ["09:00", "19:00"],
+            mercredi: ["09:00", "19:00"],
+            jeudi: ["09:00", "19:00"],
+            vendredi: ["09:00", "19:00"],
+            samedi: ["10:00", "18:00"],
+            "1er": ["07:00", "20:00"],
+          },
+        },
+        {
           id: "A",
-          nom: "Agence A",
+          nom: "Aéroport",
           horaires: {
             lundi: ["07:00", "21:00"],
             mardi: ["07:00", "21:00"],
@@ -194,6 +221,58 @@
         {
           id: "CMG",
           nom: "Agence CMG",
+          horaires: {
+            lundi: ["09:00", "19:00"],
+            mardi: ["09:00", "19:00"],
+            mercredi: ["09:00", "19:00"],
+            jeudi: ["09:00", "19:00"],
+            vendredi: ["09:00", "19:00"],
+            samedi: ["10:00", "18:00"],
+            "1er": ["07:00", "20:00"],
+          },
+        },
+        {
+          id: "CdC",
+          nom: "Campus des Cézeaux",
+          horaires: {
+            lundi: ["09:00", "19:00"],
+            mardi: ["09:00", "19:00"],
+            mercredi: ["09:00", "19:00"],
+            jeudi: ["09:00", "19:00"],
+            vendredi: ["09:00", "19:00"],
+            samedi: ["10:00", "18:00"],
+            "1er": ["07:00", "20:00"],
+          },
+        },
+        {
+          id: "PdJ",
+          nom: "Place de Jaude",
+          horaires: {
+            lundi: ["07:00", "21:00"],
+            mardi: ["07:00", "21:00"],
+            mercredi: ["07:00", "21:00"],
+            jeudi: ["07:00", "21:00"],
+            vendredi: ["07:00", "21:00"],
+            samedi: ["08:00", "20:00"],
+            dimanche: ["10:00", "17:00"],
+          },
+        },
+        {
+          id: "Riom",
+          nom: "Riom Gare Routière",
+          horaires: {
+            lundi: ["09:00", "19:00"],
+            mardi: ["09:00", "19:00"],
+            mercredi: ["09:00", "19:00"],
+            jeudi: ["09:00", "19:00"],
+            vendredi: ["09:00", "19:00"],
+            samedi: ["10:00", "18:00"],
+            "1er": ["07:00", "20:00"],
+          },
+        },
+        {
+          id: "Aubière",
+          nom: "Aubière Place des Ramacles",
           horaires: {
             lundi: ["09:00", "19:00"],
             mardi: ["09:00", "19:00"],
@@ -229,49 +308,22 @@
           [ouverture, fermeture] = horaires[jourSemaine];
         }
 
-        if (!ouverture || !fermeture) {
-          return {
-            statut: "Fermé",
-            icone: "img/assets/error_white.png",
-            bgColor: "border-red-500",
-          };
-        }
+        if (!ouverture || !fermeture) return "Fermé";
 
         const [hOuv, mOuv] = ouverture.split(":").map(Number);
         const [hFerm, mFerm] = fermeture.split(":").map(Number);
         const ouvertureMinutes = hOuv * 60 + mOuv;
         const fermetureMinutes = hFerm * 60 + mFerm;
 
-        if (heureActuelle < ouvertureMinutes) {
-          return {
-            statut: "Fermé",
-            icone: "img/assets/error_white.png",
-            bgColor: "border-red-500",
-          };
-        } else if (
-          heureActuelle >= ouvertureMinutes &&
-          heureActuelle <= fermetureMinutes - 30
+        if (
+          heureActuelle < ouvertureMinutes ||
+          heureActuelle >= fermetureMinutes
         ) {
-          return {
-            statut: "Ouvert",
-            icone: "/img/assets/valid_white.png",
-            bgColor: "border-green-500",
-          };
-        } else if (
-          heureActuelle > fermetureMinutes - 30 &&
-          heureActuelle < fermetureMinutes
-        ) {
-          return {
-            statut: "Bientôt Fermé",
-            icone: "img/assets/alert_white.png",
-            bgColor: "border-yellow-500",
-          };
+          return "Fermé";
+        } else if (heureActuelle >= fermetureMinutes - 30) {
+          return "Bientôt Fermé";
         } else {
-          return {
-            statut: "Fermé",
-            icone: "img/assets/error_white.png",
-            bgColor: "border-red-500",
-          };
+          return "Ouvert";
         }
       }
 
@@ -279,19 +331,45 @@
         const container = $("#agences");
         container.html("");
 
-        agences.forEach((agence) => {
-          const etat = getEtatAgence(agence.horaires);
-          const imagePath = `/img/${agence.id}.png`;
+        const etats = agences.map((agence) => ({
+          ...agence,
+          etat: getEtatAgence(agence.horaires),
+        }));
 
-          const agenceHtml = `
-                <div class="relative inline-block">
-                        <img src="${imagePath}" alt="${agence.nom}" width="75" height="75" class="bg-gray-200 p-2 border ${etat.bgColor} rounded-md">
-                        
-                    <img src="${etat.icone}" style="position: relative; width: 30px; height: 30px; top: -15px; left: 55px;">
-                </div>
-            `;
-          container.append(agenceHtml);
-        });
+        const agencesAffichables = etats.filter(
+          (a) => a.etat === "Ouvert" || a.etat === "Bientôt Fermé"
+        );
+
+        if (agencesAffichables.length === agences.length) {
+          container.append(
+            "<p>Toutes les agences sont actuellement ouvertes.</p>"
+          );
+        } else if (agencesAffichables.length === 0) {
+          container.append(
+            "<p>Toutes les agences sont actuellement fermées.</p>"
+          );
+        } else {
+          agencesAffichables.forEach((agence) => {
+            let couleur = "",
+              icone = "";
+
+            if (agence.etat === "Ouvert") {
+              couleur = "border-green-500";
+              icone = "/img/assets/valid_white.png";
+            } else if (agence.etat === "Bientôt Fermé") {
+              couleur = "border-yellow-500";
+              icone = "/img/assets/alert_white.png";
+            }
+
+            const imagePath = `/img/${agence.id}.png`;
+            const agenceHtml = `
+              <div class="relative inline-block">
+                <img src="${imagePath}" alt="${agence.nom}" width="75" height="75" class="bg-gray-200 p-2 border ${couleur} rounded-md">
+                <img src="${icone}" style="position: relative; width: 30px; height: 30px; top: -15px; left: 55px;">
+              </div>`;
+            container.append(agenceHtml);
+          });
+        }
       }
 
       afficherAgences();
@@ -410,7 +488,7 @@
           });
 
           if (otherLinesContainer.children().length === 0) {
-            let logoHtml = `<div class="green-border"><div class="inner-content"><img id='logo' src='img/TCM.png' width="50" height="50" alt='Logo de la ligne' class="bg-gray-200 p-2 border border-green-500 rounded-md"></a><img src='/img/assets/valid.png' style='position: relative; width: 20px; height: 20px; top: -10px; left: 35px;'></div></div>`;
+            let logoHtml = `<div class="green-border"><div class="inner-content"><img id='logo' src='img/TCM.png' width="75" height="75" alt='Logo de la ligne' class="bg-gray-200 p-2 border border-green-500 rounded-md"></a><img src='/img/assets/valid.png' style='position: relative; width: 30px; height: 30px; top: -15px; left: 55px;'></div></div>`;
             otherLinesContainer.append(logoHtml);
           }
 
@@ -559,25 +637,23 @@
           const responses = await Promise.all(
             schoolYears.map((schoolYear) =>
               fetch(
-                `https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?limit=20&lang=fr&refine=location%3A%22Clermont-Ferrand%22&refine=population%3A%22-%22&refine=population%3A%22%C3%89l%C3%A8ves%22&refine=annee_scolaire%3A%22${schoolYear}%22`
+                `https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?limit=100&lang=fr&refine=location%3A%22Clermont-Ferrand%22&refine=population%3A%22-%22&refine=population%3A%22%C3%89l%C3%A8ves%22&refine=annee_scolaire%3A%22${schoolYear}%22`
               )
             )
           );
 
-          const data = await Promise.all(
-            responses.map((response) => response.json())
-          );
+          const data = await Promise.all(responses.map((r) => r.json()));
           return data
             .flatMap((d) =>
               d.results.map((record) => ({
                 start: new Date(record.start_date),
                 end: new Date(record.end_date),
-                description: record.description, // Ajouter la description ici
+                description: record.description,
               }))
             )
-            .sort((a, b) => a.start - b.start); // Trier les périodes de vacances par date de début
+            .sort((a, b) => a.start - b.start);
         } catch (error) {
-          console.error("Error fetching vacation dates:", error);
+          console.error("Erreur lors du chargement des vacances :", error);
           return [];
         }
       }
@@ -593,42 +669,84 @@
         return `${day}/${month}/${year}`;
       }
 
+      function isWeekendBeforeEnd(endDate, currentDate) {
+        const dayDiff = (endDate - currentDate) / (1000 * 60 * 60 * 24);
+        const day = currentDate.getDay(); // 0 = dimanche, 6 = samedi
+        return (day === 0 || day === 6) && dayDiff <= 2 && dayDiff >= 0;
+      }
+
       async function updateVacationAlert() {
         const now = new Date();
-        const vacationDates = await fetchVacationDates();
-        const isVacation = isDateInVacationRanges(now, vacationDates);
         const vacationAlert = document.getElementById("vacation-alert");
+        const vacationDates = await fetchVacationDates();
 
-        if (isVacation) {
+        const currentVacation = vacationDates.find(
+          (range) => now >= range.start && now <= range.end
+        );
+
+        if (currentVacation) {
+          // Affiche le bandeau pendant les vacances
           vacationAlert.style.display = "block";
           vacationAlert.innerHTML = `
             <div class="alert alert-info">
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                </svg>
-                <span>Remarque : Les horaires sont modifiés en raison des vacances scolaires.</span>
-            </div><br>
-        `;
-        } else {
-          const upcomingVacation = vacationDates.find(
-            (range) => now < range.start
+              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 
+                      1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 
+                      0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+              <span>Remarque : Les horaires sont modifiés en raison des vacances scolaires.</span>
+            </div><br>`;
+          return;
+        }
+
+        const upcomingVacation = vacationDates.find(
+          (range) => now < range.start
+        );
+        const pastVacation = vacationDates.find(
+          (range) => now > range.end && isWeekendBeforeEnd(range.end, now)
+        );
+
+        if (pastVacation) {
+          // Week-end de fin de vacances
+          vacationAlert.style.display = "block";
+          vacationAlert.innerHTML = `
+            <div class="alert alert-success">
+              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2l4 -4m-9 4a9 9 0 1118 0a9 9 0 01-18 0z" />
+              </svg>
+              <span>Bon week-end ! On espère que vous êtes prêts pour la reprise dès lundi !</span>
+            </div><br>`;
+          return;
+        }
+
+        if (upcomingVacation) {
+          const joursAvantVacances = Math.ceil(
+            (upcomingVacation.start - now) / (1000 * 60 * 60 * 24)
           );
-          if (upcomingVacation) {
+
+          if (joursAvantVacances <= 7) {
             vacationAlert.style.display = "block";
             vacationAlert.innerHTML = `
-                <div class="alert alert-warning">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                    <span>Attention : Des changements d'horaires sont à prévoir à partir du ${formatDate(
-                      upcomingVacation.start
-                    )} pour les ${upcomingVacation.description}.</span>
-                </div><br>
-            `;
-          } else {
-            vacationAlert.style.display = "none";
+              <div class="alert alert-warning">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 
+                        1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 
+                        0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <span>Attention : Des changements d'horaires sont à prévoir à partir du 
+                  ${formatDate(upcomingVacation.start)} pour les 
+                  ${upcomingVacation.description}.
+                </span>
+              </div><br>`;
+            return;
           }
         }
+
+        // Sinon, rien à afficher
+        vacationAlert.style.display = "none";
       }
 
       document.addEventListener("DOMContentLoaded", updateVacationAlert);

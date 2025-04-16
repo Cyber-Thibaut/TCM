@@ -1,48 +1,57 @@
 <!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <!-- Métadonnées du site -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité">
-    <meta name="author" content="Transport Clermont Métropole">
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Transport Clermont Métropole</title>
+    <meta
+      name="description"
+      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
+    />
+    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité" />
+    <meta name="author" content="Transport Clermont Métropole" />
+    <meta name="theme-color" content="#204BFE" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png">
+    <!-- Open Graph & Twitter -->
+    <meta property="og:title" content="Transport Clermont Métropole" />
+    <meta
+      property="og:description"
+      content="Partenaire de vos déplacements depuis 1989."
+    />
+    <meta
+      property="og:image"
+      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
+    />
+    <meta property="og:url" content="https://tcm-mobilite.vercel.app/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Transport Clermont Métropole" />
+    <meta
+      name="twitter:description"
+      content="Votre réseau mobilité à Clermont-Ferrand."
+    />
+    <meta
+      name="twitter:image"
+      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
+    />
 
-    <!-- Intégrations pour réseaux sociaux -->
-    <meta property="og:title" content="Transport Clermont Métropole">
-    <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-    <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
-    <meta name="twitter:title" content="Transport Clermont Métropole">
-    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Couleur de fond pour l'intégration -->
-    <meta name="theme-color" content="#204BFE">
-    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
-    <link href="../dist/output.css" rel="stylesheet">
+    <!-- Styles & Scripts -->
+    <link rel="icon" href="https://tcm-mobilite.vercel.app/img/TCM.png" />
+    <link href="../dist/output.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/d8bf012a3e.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="menu.js" defer></script>
 
-    <script src="menu.js"></script>
-    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
     <style>
-        .jw-album-image img,
-        .jw-element-image img {
-            pointer-events: none;
-            -webkit-touch-callout: none;
-        }
-
-        .pswp__share-tooltip .pswp__share--download {
-            display: none;
-        }
+      .jw-album-image img,
+      .jw-element-image img {
+        pointer-events: none;
+        -webkit-touch-callout: none;
+      }
     </style>
-</head>
+  </head>
 
 <body class="min-h-screen flex flex-col bg-base-200">
     <header class="hero min-h-[50vh] bg-cover bg-center relative"
@@ -51,109 +60,122 @@
         <div class="hero-content text-center text-neutral-content">
             <div>
                 <h1 class="text-5xl font-bold">🚌 Info Trafic TCM</h1>
-            </div>
         </div>
+      </div>
     </header>
-    <!-- Section Infos Trafic -->
-    <section class="container mx-auto my-8 p-6">
-        <div id="lignes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+    <!-- SECTION INFOS TRAFIC -->
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-3xl font-bold text-center text-primary mb-10">
+        État du réseau
+      </h2>
+
+      <div
+        id="lignes"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Cartes insérées dynamiquement -->
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer footer-center p-10 bg-primary text-primary-content mt-12">
-        <aside>
-            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
-            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
-            <p class="font-bold">Partenaire de vos déplacements depuis 1989.</p>
-            <p>©
-                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
-            </p>
-        </aside>
+    <!-- FOOTER -->
+    <footer
+      class="footer footer-center p-10 bg-primary text-primary-content mt-auto"
+    >
+      <aside>
+        <img
+          src="/img/TCM-Clair.png"
+          width="160"
+          alt="Logo TCM"
+          class="dark:hidden mx-auto mb-3"
+        />
+        <img
+          src="/img/TCM-Sombre.png"
+          width="160"
+          alt="Logo TCM Dark"
+          class="hidden dark:block mx-auto mb-3"
+        />
+        <p class="font-bold text-lg">
+          Partenaire de vos déplacements depuis 1989
+        </p>
+        <p class="text-sm opacity-80">
+          © <span id="year"></span> - Tous droits réservés
+        </p>
+      </aside>
     </footer>
 
+    <!-- SCRIPT: TRAFIC -->
     <script>
-        const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
-        //const url = "test.json";
-        function afficherInfoTrafic() {
-            $.getJSON(url, function (data) {
-                let lignesTrouvees = false;
-                $("#lignes").html("");
+      document.getElementById("year").textContent = new Date().getFullYear();
 
-                $.each(data.lignes, function (i, ligne) {
-                    const infosTrafic = ligne.infos_trafic.filter(info => {
-                        const now = new Date();
-                        return now >= new Date(info.annonce) && now <= new Date(info.fin);
-                    });
+      const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
+      //const url = "test.json";
 
-                    if (infosTrafic.length > 0) {
-                        lignesTrouvees = true;
-                        if (ligne.ligne === "TCM") {
-                            $("#lignes").append(`
-                            <div class="card bg-primary-content shadow-lg border border-gray-200 p-4 transition hover:scale-105 cursor-pointer" onclick="window.location.href='details.html#${ligne.ligne}'">
-                                <div class="flex items-center gap-4">
-                                    <img src="/img/${ligne.ligne}.png" class="w-15 h-12" alt="${ligne.ligne}">
-                                    <div class="grow">
-                                        <h3 class="text-lg font-bold">Réseau TCM</h3>
-                                        <p class="text-sm text-accent">${infosTrafic.length} info(s) trafic</p>
-                                    </div>
-                                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        `);
-                        } else if (ligne.ligne === "NS") {
-                            $("#lignes").append(`
-                            <div class="card bg-primary-content shadow-lg border border-gray-200 p-4 transition hover:scale-105 cursor-pointer" onclick="window.location.href='details.html#${ligne.ligne}'">
-                                <div class="flex items-center gap-4">
-                                    <img src="/img/${ligne.ligne}.png" class="w-15 h-12" alt="${ligne.ligne}">
-                                    <div class="grow">
-                                        <h3 class="text-lg font-bold">Navette spéciale</h3>
-                                        <p class="text-sm text-accent">${infosTrafic.length} info(s) trafic</p>
-                                    </div>
-                                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        `);
-                        } else {
-                            $("#lignes").append(`
-                            <div class="card bg-primary-content shadow-lg border border-gray-200 p-4 transition hover:scale-105 cursor-pointer" onclick="window.location.href='details.html#${ligne.ligne}'">
-                                <div class="flex items-center gap-4">
-                                    <img src="/img/${ligne.ligne}.png" class="w-15 h-12" alt="${ligne.ligne}">
-                                    <div class="grow">
-                                        <h3 class="text-lg font-bold">Ligne ${ligne.ligne}</h3>
-                                        <p class="text-sm text-accent">${infosTrafic.length} info(s) trafic</p>
-                                    </div>
-                                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        `);
-                        }
-                    };
-                });
+      function afficherInfoTrafic() {
+        $.getJSON(url, function (data) {
+          let lignesTrouvees = false;
+          $("#lignes").html("");
 
-                if (!lignesTrouvees) {
-                    $("#lignes").html(`
-                        <div class="alert alert-success shadow-lg">
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>Aucune perturbation signalée. Tout circule normalement !</span>
-                            </div>
-                        </div>
-                    `);
-                }
-            });
-        }
+          $.each(data.lignes, function (i, ligne) {
+            const now = new Date();
+            const infosActives = ligne.infos_trafic.filter(
+              (info) =>
+                now >= new Date(info.annonce) && now <= new Date(info.fin)
+            );
 
-        afficherInfoTrafic();
+            if (infosActives.length > 0) {
+              lignesTrouvees = true;
+
+              const scolaires = [
+                "601",
+                "602",
+                "651",
+                "652"
+              ];
+
+              let nom = `Ligne ${ligne.ligne}`;
+
+              if (ligne.ligne === "TCM") {
+                nom = "Réseau TCM";
+              } else if (ligne.ligne === "NS") {
+                nom = "Navette spéciale";
+              } else if (scolaires.includes(ligne.ligne)) {
+                nom = `Ligne scolaire ${ligne.ligne}`;
+              }
+
+              $("#lignes").append(`
+                <div class="card bg-base-100 border border-base-300 shadow-md hover:shadow-xl transition-all cursor-pointer hover:scale-[1.02]" onclick="window.location.href='details.html#${ligne.ligne}'">
+                  <div class="p-5 space-y-4">
+                    <div class="flex items-center gap-4">
+                      <img src="/img/${ligne.ligne}.png" class="w-14 h-14 object-contain" alt="${ligne.ligne}" />
+                      <div class="flex-1">
+                        <h3 class="text-lg font-semibold">${nom}</h3>
+                        <p class="text-sm text-accent">${infosActives.length} info(s) trafic</p>
+                      </div>
+                      <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                    </div>
+                  </div>
+                </div>
+              `);
+            }
+          });
+
+          if (!lignesTrouvees) {
+            $("#lignes").html(`
+              <div class="alert alert-success shadow-lg col-span-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+                     viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>✅ Aucune perturbation signalée. Tout circule normalement !</span>
+              </div>
+            `);
+          }
+        });
+      }
+
+      afficherInfoTrafic();
     </script>
-
-</body>
-
+  </body>
 </html>

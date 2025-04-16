@@ -5,161 +5,6 @@ const destinationElement = document.getElementById("destination");
 
 let holidayDates = [];
 
-async function fetchHolidayDates(year) {
-  try {
-    const response = await fetch(
-      `https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`
-    );
-    const data = await response.json();
-    holidayDates = Object.values(data).map((date) => formatDate(new Date(date)));
-  } catch (error) {
-    console.error("Error fetching holiday dates:", error);
-  }
-}
-
-async function fetchVacationDates(date) {
-  const year = date.getFullYear();
-  const schoolYears = [`${year - 1}-${year}`, `${year}-${year + 1}`];
-  try {
-    const responses = await Promise.all(
-      schoolYears.map((schoolYear) =>
-        fetch(
-          `https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?limit=20&lang=fr&refine=location%3A%22Clermont-Ferrand%22&refine=population%3A%22-%22&refine=population%3A%22%C3%89l%C3%A8ves%22&refine=annee_scolaire%3A%22${schoolYear}%22`
-        )
-      )
-    );
-
-    const data = await Promise.all(
-      responses.map((response) => response.json())
-    );
-    return data
-      .flatMap((d) =>
-        d.results.map((record) => ({
-          start: new Date(record.start_date),
-          end: new Date(record.end_date),
-          description: record.description,
-        }))
-      )
-      .sort((a, b) => a.start - b.start);
-  } catch (error) {
-    console.error("Error fetching vacation dates:", error);
-    return [];
-  }
-}
-
-function isDateInVacationRanges(date, ranges) {
-  return ranges.some((range) => date >= range.start && date <= range.end);
-}
-
-async function updateBusTimes() {
-  const now = new Date();
-  const date = formatDate(now);
-  const estFerie = holidayDates.includes(date);
-  const vacationDates = await fetchVacationDates(now);
-  const isVacation = isDateInVacationRanges(now, vacationDates);
-  const nextBusFreq = calculateNextBusTime(now.getDay(), now.getHours(), now.getMinutes(), isVacation);
-  const followingBusFreq = calculateFollowingBusTime(now.getDay(), now.getHours(), now.getMinutes(), isVacation);
-
-  if (nextBusFreq === -1 && followingBusFreq === -1) {
-    let nextBus = "";
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    if ((hour === 0 && minute >= 0) || (hour >= 1 && hour < 4)) {
-      nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Veuillez noter que le service est actuellement suspendu. Nous reprendrons nos activités à 4h du matin. Merci pour votre compréhension et bonne nuit.</span></div>`;
-    } else {
-      nextBus = `<div role="alert" class="alert alert-info"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Aucun car scolaire n'est en service en journée, pour accéder au lycée en dehors des horaires de desserte, reportez vous sur notre réseau.</span></div>`;
-    }
-
-    if (estFerie || isVacation) {
-      nextBus = "";
-    }
-    const followingBus = "";
-    nextBusTime.innerHTML = nextBus + followingBus;
-  } else {
-    let divider = `<div class="divider lg:divider-horizontal"></div>`;
-    let nextBus = "";
-    let followingBus = "";
-
-    if (nextBusFreq === 1) {
-      nextBus = `<div class="grid grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A quai</div>`;
-    } else if (nextBusFreq === 2) {
-      nextBus = `<div class="grid grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>A l’approche</div>`;
-    } else if (nextBusFreq === -1) {
-      nextBus = "";
-      divider = "";
-    } else {
-      nextBus = `<div class="grid grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px;'><h2 class="text-4xl font-bold text-primary">Premier départ :</h2><br><p class="text-accent">${nextBusFreq} min</p></div>`;
-    }
-
-    if (followingBusFreq === 0) {
-      followingBus = `<div class="grid grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>Arrivé</div>`;
-    } else if (followingBusFreq === 1) {
-      followingBus = `<div class="grid grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px; color: #dc241f;'>1 min</div>`;
-    } else if (followingBusFreq === -1) {
-      followingBus = "";
-      divider = "";
-    } else {
-      followingBus = `<div class="grid grow h-32 card bg-base-300 rounded-box place-items-center" style='font-size: 40px;'><h2 class="text-4xl font-bold text-primary">Second départ :</h2><br><p class="text-accent">${followingBusFreq} min</p></div>`;
-    }
-
-    nextBusTime.innerHTML = nextBus + divider + followingBus;
-  }
-
-  if (estFerie) {
-    alertMessage.innerHTML = `
-      <div role="alert" class="alert alert-warning">
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
-        <span>Nous sommes un jour férié, le lycée est fermé donc aucun car ne circule !</span>
-      </div>
-    `;
-  } else if (isVacation) {
-    alertMessage.innerHTML = `
-      <div role="alert" class="alert alert-warning">
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
-        <span>Remarque : Aucun car ne circule, on se retrouve a la rentrée ! Passez de bonnes vacances 😁</span>
-      </div>
-    `;
-  } else if (date === "2025-05-01") {
-    alertMessage.innerHTML = `
-      <div role="alert" class="alert alert-warning">
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
-        <span>Nous sommes le 1er mai, le lycée est fermé donc aucun car ne circule !</span>
-      </div>
-    `;
-  } else {
-    alertMessage.textContent = "";
-  }
-
-  if (estFerie || isVacation) {
-    destinationElement.innerHTML = ``;
-  } else if (now.getHours() >= 6 && now.getHours() < 9) {
-    destinationElement.innerHTML = `<h2 class="text-4xl font-bold text-secondary">Direction Lycée Jeanne d'Arc</h2><br>`;
-  } else if (now.getHours() >= 11 && now.getHours() < 19) {
-    destinationElement.innerHTML = `<h2 class="text-4xl font-bold">Lezoux Hôtel de ville</h2><br>`;
-  }
-
-}
-
-setInterval(updateBusTimes, 30000); // Mettez 30000 pour actualiser toutes les 30 secondes
-updateBusTimes(); // Appel initial pour mettre à jour les données immédiatement
-
-// Update current time every second
-function updateCurrentTime() {
-  const now = new Date();
-  const hours = now.getHours().toString().padStart(2, "0");
-  const minutes = now.getMinutes().toString().padStart(2, "0");
-  currentTimeElement.textContent = `Dernière mise à jour : ${hours}:${minutes}`;
-}
-
-setInterval(updateCurrentTime, 1000);
-updateCurrentTime(); // Update initially
-
 function formatDate(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -172,71 +17,244 @@ function parseTime(timeString) {
   return { hour, minute };
 }
 
-function calculateNextBusTime(weekday, hour, minute, isVacation) {
-  const busTimes = {
-    0: { morning: "07:15", evening: "16:30" }, // Dimanche
-    6: { morning: "07:15", evening: "16:30" }, // Samedi
-    3: { morning: "07:15", evening: "12:15" }, // Mercredi
-    default: { morning: "07:15", evening: "16:45" }, // Lundi, Mardi, Jeudi, Vendredi
-  };
-
-  if (estFerie || isVacation) {
-    return -1;
-  }
-
-  const schedule = busTimes[weekday] || busTimes.default;
-  const morningTime = parseTime(schedule.morning);
-  const eveningTime = parseTime(schedule.evening);
-
-  const currentTime = hour * 60 + minute;
-  const morningBusTime = morningTime.hour * 60 + morningTime.minute;
-  const eveningBusTime = eveningTime.hour * 60 + eveningTime.minute;
-
-  if (currentTime < morningBusTime && morningBusTime - currentTime <= 60) {
-    return morningBusTime - currentTime;
-  } else if (currentTime < eveningBusTime && eveningBusTime - currentTime <= 60) {
-    return eveningBusTime - currentTime;
-  } else {
-    return -1;
+async function fetchHolidayDates(year) {
+  try {
+    const response = await fetch(
+      `https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`
+    );
+    const data = await response.json();
+    holidayDates = Object.values(data).map((date) =>
+      formatDate(new Date(date))
+    );
+  } catch (error) {
+    console.error("Erreur lors du chargement des jours fériés :", error);
   }
 }
 
-function calculateFollowingBusTime(weekday, hour, minute, isVacation) {
-  const busTimes = {
-    0: { morning: "-1", evening: "-1" }, // Dimanche
-    6: { morning: "-1", evening: "-1" }, // Samedi
-    3: { morning: "08:30", evening: "18:00" }, // Mercredi
-    default: { morning: "08:30", evening: "18:00" }, // Lundi, Mardi, Jeudi, Vendredi
+async function fetchVacationDates(date) {
+  const year = date.getFullYear();
+  const schoolYears = [`${year - 1}-${year}`, `${year}-${year + 1}`];
+  try {
+    const responses = await Promise.all(
+      schoolYears.map((schoolYear) =>
+        fetch(
+          `https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?limit=100&lang=fr&refine=location%3A%22Clermont-Ferrand%22&refine=annee_scolaire%3A%22${schoolYear}%22`
+        )
+      )
+    );
+
+    const data = await Promise.all(responses.map((r) => r.json()));
+    return data.flatMap((d) =>
+      d.results.map((record) => ({
+        start: new Date(record.start_date),
+        end: new Date(record.end_date),
+        description: record.description,
+      }))
+    );
+  } catch (error) {
+    console.error("Erreur lors du chargement des vacances scolaires :", error);
+    return [];
+  }
+}
+
+function isDateInVacationRanges(date, ranges) {
+  return ranges.some((range) => date >= range.start && date <= range.end);
+}
+
+function calculateNextBusTime(weekday, hour, minute, isVacation) {
+  if (isVacation || estFerie) return -1;
+
+  const schedules = {
+    3: { morning: "07:15", evening: "12:45" }, // Mercredi
+    default: { morning: "07:15", evening: "16:45" },
   };
 
-  if (estFerie || isVacation) {
-    return -1;
+  const { morning, evening } = schedules[weekday] || schedules.default;
+  const morningMinutes =
+    parseTime(morning).hour * 60 + parseTime(morning).minute;
+  const eveningMinutes =
+    parseTime(evening).hour * 60 + parseTime(evening).minute;
+  const current = hour * 60 + minute;
+
+  if (current < morningMinutes && morningMinutes - current <= 60)
+    return morningMinutes - current;
+  if (current < eveningMinutes && eveningMinutes - current <= 60)
+    return eveningMinutes - current;
+
+  return -1;
+}
+
+function calculateFollowingBusTime(weekday, hour, minute, isVacation) {
+  if (isVacation || estFerie) return -1;
+
+  const schedules = {
+    3: { morning: "08:30", evening: "18:00" }, // Mercredi
+    default: { morning: "08:30", evening: "18:30" },
+  };
+
+  const { morning, evening } = schedules[weekday] || schedules.default;
+  const morningMinutes =
+    parseTime(morning).hour * 60 + parseTime(morning).minute;
+  const eveningMinutes =
+    parseTime(evening).hour * 60 + parseTime(evening).minute;
+  const current = hour * 60 + minute;
+
+  if (current < morningMinutes && morningMinutes - current <= 60)
+    return morningMinutes - current;
+  if (current < eveningMinutes && eveningMinutes - current <= 60)
+    return eveningMinutes - current;
+
+  return -1;
+}
+
+let estFerie = false;
+
+function isInLastWeekBeforeVacation(now, vacationRanges) {
+  return vacationRanges.some(({ start }) => {
+    const oneWeekBefore = new Date(start);
+    oneWeekBefore.setDate(start.getDate() - 7);
+    return now >= oneWeekBefore && now < start;
+  });
+}
+
+async function updateBusTimes() {
+  const now = new Date();
+  const date = formatDate(now);
+  estFerie = holidayDates.includes(date);
+  const vacationDates = await fetchVacationDates(now);
+  const isVacation = isDateInVacationRanges(now, vacationDates);
+  const isLastWeek = isInLastWeekBeforeVacation(now, vacationDates);
+
+  const nextBusFreq = calculateNextBusTime(
+    now.getDay(),
+    now.getHours(),
+    now.getMinutes(),
+    isVacation
+  );
+  const followingBusFreq = calculateFollowingBusTime(
+    now.getDay(),
+    now.getHours(),
+    now.getMinutes(),
+    isVacation
+  );
+
+  // ✨ Messages spéciaux
+  alertMessage.classList.remove("hidden");
+  if (estFerie) {
+    alertMessage.innerHTML = `
+      <div class="alert alert-warning shadow-lg">
+        <span>🎌 Jour férié : Aucun car aujourd’hui. Profitez de votre repos 😴</span>
+      </div>`;
+    destinationElement.innerHTML = "";
+    nextBusTime.innerHTML = "";
+    return;
   }
 
-  const schedule = busTimes[weekday] || busTimes.default;
-  const morningTime = parseTime(schedule.morning);
-  const eveningTime = parseTime(schedule.evening);
+  if (isVacation) {
+    alertMessage.innerHTML = `
+      <div class="alert alert-info shadow-lg">
+        <span>🏖️ C’est les vacances ! Aucun car scolaire en circulation. Bonnes vacances 😎</span>
+      </div>`;
+    destinationElement.innerHTML = "";
+    nextBusTime.innerHTML = "";
+    return;
+  }
 
-  const currentTime = hour * 60 + minute;
-  const morningBusTime = morningTime.hour * 60 + morningTime.minute;
-  const eveningBusTime = eveningTime.hour * 60 + eveningTime.minute;
-
-  if (currentTime < morningBusTime && morningBusTime - currentTime <= 60) {
-    return morningBusTime - currentTime;
-  } else if (currentTime < eveningBusTime && eveningBusTime - currentTime <= 60) {
-    return eveningBusTime - currentTime;
+  if (isLastWeek) {
+    alertMessage.innerHTML = `
+      <div class="alert alert-success shadow-lg text-lg flex flex-col">
+        <span>🔥 Dernière semaine avant les vacances ! 💪</span>
+        <span>Allez, encore quelques trajets et tu pourras chiller ! 🌴</span>
+      </div>`;
   } else {
-    return -1;
+    alertMessage.innerHTML = "";
   }
+
+  // 🧭 Destination
+  if (now.getHours() >= 6 && now.getHours() < 9) {
+    destinationElement.innerHTML = `<div class="w-full flex justify-center py-8">
+    <div class="p-6 w-3/4 lg:w-1/2 bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg text-center">
+      <h2 class="text-5xl font-semibold text-white">🚸 Direction Lycée Anne Frank</h2>
+    </div>
+  </div>`;
+  } else if (now.getHours() >= 11 && now.getHours() < 19) {
+    destinationElement.innerHTML = `<div class="w-full flex justify-center py-8">
+    <div class="p-6 w-3/4 lg:w-1/2 bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg text-center">
+      <h2 class="text-5xl font-semibold text-white">🏠 Retour vers Salanbourg - Eglise Sainte Marie</h2>
+    </div>
+  </div>`;
+  } else {
+    destinationElement.innerHTML = "";
+  }
+
+  // 🎨 Affichage stylé des bus
+  const cards = [];
+
+  const makeCard = (label, delay, theme = "primary") => `
+    <div class="card glass bg-gradient-to-br from-${theme}-200 to-${theme}-400 shadow-xl text-center px-6 py-4 max-w-xs">
+      <div class="card-body items-center">
+        <h3 class="card-title text-2xl font-bold">${label}</h3>
+        <p class="text-5xl font-extrabold text-${theme}-800">${
+    delay === 1 ? "1 min" : delay + " min"
+  }</p>
+        <div class="badge badge-outline badge-lg mt-2 animate-bounce">${
+          delay <= 2 ? "🟢 Monte vite !" : "⏳ T'as encore le temps"
+        }</div>
+      </div>
+    </div>`;
+
+  if (nextBusFreq === 1) {
+    cards.push(makeCard("🚌 À quai", nextBusFreq, "success"));
+  } else if (nextBusFreq === 2) {
+    cards.push(makeCard("🚦 À l’approche", nextBusFreq, "warning"));
+  } else if (nextBusFreq > 0) {
+    cards.push(makeCard("🚍 Prochain départ", nextBusFreq, "info"));
+  }
+
+  if (followingBusFreq > 0) {
+    cards.push(makeCard("🔁 Suivant", followingBusFreq, "secondary"));
+  }
+
+  if (cards.length === 0) {
+    nextBusTime.innerHTML = `
+      <div class="alert alert-info shadow-lg">
+        <span>⏰ Aucun car dans l’heure à venir. Pense à checker les horaires 🕒</span>
+      </div>`;
+  } else {
+    nextBusTime.innerHTML = `
+      <div class="flex flex-col lg:flex-row justify-center items-stretch gap-6">${cards.join(
+        ""
+      )}</div>`;
+  }
+  // 👉 Aucun bus trouvé mais pas vacances/férié = fin de service ?
+  if (cards.length === 0 && !isVacation && !estFerie) {
+    const isWeekend = now.getDay() === 0 || now.getDay() === 6;
+
+    nextBusTime.innerHTML = `
+        <div class="alert alert-info shadow-lg text-lg">
+          ${
+            isWeekend
+              ? "📆 C'est le week-end ! Aucun bus scolaire ne circule. Détends-toi et profite 🎉🎮"
+              : "🌙 Les bus scolaires ne circulent plus pour aujourd'hui. Repose-toi bien, on t'attend demain frais et dispo ! 😴"
+          }
+        </div>`;
+  }
+}
+
+function updateCurrentTime() {
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, "0");
+  const minutes = now.getMinutes().toString().padStart(2, "0");
+  currentTimeElement.textContent = `Dernière mise à jour : ${hours}:${minutes}`;
 }
 
 async function initialize() {
   const now = new Date();
   await fetchHolidayDates(now.getFullYear());
-  setInterval(updateBusTimes, 30000);
   updateBusTimes();
-  setInterval(updateCurrentTime, 1000);
   updateCurrentTime();
+  setInterval(updateBusTimes, 30000);
+  setInterval(updateCurrentTime, 1000);
 }
 
 initialize();

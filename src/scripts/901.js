@@ -1,9 +1,25 @@
-const now = new Date();
-const weekday = now.getDay(); // 0 (Dimanche) à 6 (Samedi)
-const hour = now.getHours();
-const minute = now.getMinutes();
-const date = formatDate(now); // Convertir la date en chaîne "YYYY-MM-DD"
-const today = new Date();
+let holidayDates = [];
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+async function fetchHolidayDates(year) {
+  try {
+    const response = await fetch(
+      `https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`
+    );
+    const data = await response.json();
+    holidayDates = Object.values(data).map((dateStr) =>
+      formatDate(new Date(dateStr))
+    );
+  } catch (error) {
+    console.error("Erreur lors du chargement des jours fériés :", error);
+  }
+}
 
 async function fetchVacationDates(date) {
   const year = date.getFullYear();
@@ -12,25 +28,20 @@ async function fetchVacationDates(date) {
     const responses = await Promise.all(
       schoolYears.map((schoolYear) =>
         fetch(
-          `https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?limit=20&lang=fr&refine=location%3A%22Clermont-Ferrand%22&refine=population%3A%22-%22&refine=population%3A%22%C3%89l%C3%A8ves%22&refine=annee_scolaire%3A%22${schoolYear}%22`
+          `https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?limit=100&lang=fr&refine=location%3A%22Clermont-Ferrand%22&refine=annee_scolaire%3A%22${schoolYear}%22`
         )
       )
     );
-
-    const data = await Promise.all(
-      responses.map((response) => response.json())
+    const data = await Promise.all(responses.map((r) => r.json()));
+    return data.flatMap((d) =>
+      d.results.map((record) => ({
+        start: new Date(record.start_date),
+        end: new Date(record.end_date),
+        description: record.description,
+      }))
     );
-    return data
-      .flatMap((d) =>
-        d.results.map((record) => ({
-          start: new Date(record.start_date),
-          end: new Date(record.end_date),
-          description: record.description, // Ajouter la description ici
-        }))
-      )
-      .sort((a, b) => a.start - b.start); // Trier les périodes de vacances par date de début
   } catch (error) {
-    console.error("Error fetching vacation dates:", error);
+    console.error("Erreur lors du chargement des vacances scolaires :", error);
     return [];
   }
 }
@@ -39,90 +50,79 @@ function isDateInVacationRanges(date, ranges) {
   return ranges.some((range) => date >= range.start && date <= range.end);
 }
 
-const isHoliday = holidayDates.includes(date);
-  const vacationDates = await fetchVacationDates(now);
-
-function formatDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
+function buildAlert(icon, message) {
+  return `
+      <div role="alert" class="alert alert-warning">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${icon}" />
+        </svg>
+        <span>${message}</span>
+      </div>
+    `;
 }
-const holidayDates = [
-    "2024-11-01", // Toussaint
-    "2024-11-11", // Armistice 1918
-    "2024-12-25", // Noël
-    "2025-01-01", // Jour de l'An
-    "2025-04-21", // Lundi de Pâques
-    "2025-05-01", // Fête du Travail
-    "2025-05-08", // Victoire 1945
-    "2025-05-29", // Ascension
-    "2025-06-09", // Lundi de Pentecôte
-    "2025-07-14", // Fête nationale
-    "2025-08-15"  // Assomption
-];
 
-// Exemple de dates de jours fériés
-const premierMai = new Date(today.getFullYear(), 4, 1);
-const estFerie = holidayDates.includes(date);
-const estPremierMai = today.getTime() === premierMai.getTime();
+async function updateBusTimes() {
+  const now = new Date();
+  const todayStr = formatDate(now);
+  const currentYear = now.getFullYear();
+  const premierMai = new Date(currentYear, 4, 1); // Mois 4 = Mai (0-index)
 
-function updateBusTimes() {
-    const nextBus = `<div role="alert" class="alert alert-warning">
-    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-    </svg>
-    <span>Rapprochez-vous d'une de nos agences pour réserver votre trajet en TAD</span>
-</div>`;
-    document.getElementById("nextBusTime").innerHTML = nextBus;
+  // Charger jours fériés & vacances
+  await fetchHolidayDates(currentYear);
+  const vacationRanges = await fetchVacationDates(now);
 
-    const alertMessage = document.getElementById("alertMessage");
+  const isHoliday = holidayDates.includes(todayStr);
+  const isVacation = isDateInVacationRanges(now, vacationRanges);
+  const isPremierMai = now.toDateString() === premierMai.toDateString();
 
-    if (estFerie) {
-        alertMessage.innerHTML = `
-        <div role="alert" class="alert alert-warning">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            <span>Remarque : Horaires ajustés aujourd'hui en raison d'un jour férié.</span>
-        </div>
-    `;
-    } else if (isVacation) {
-        alertMessage.innerHTML = `
-        <div role="alert" class="alert alert-warning">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            <span>Remarque : Horaires modifiés aujourd'hui en raison de période de vacances.</span>
-        </div>
-    `;
-    } else if (estPremierMai) {
-        alertMessage.innerHTML = `
-        <div role="alert" class="alert alert-warning">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            <span>Remarque : Le réseau est fermé en ce 1er Mai.</span>
-        </div>
-    `;
-    } else {
-        alertMessage.textContent = "";
-    }
+  const alertMessage = document.getElementById("alertMessage");
+  const nextBusTime = document.getElementById("nextBusTime");
 
-    console.log(nextBusFreq);
+  // Message TAD générique
+  nextBusTime.innerHTML = buildAlert(
+    "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
+    "Rapprochez-vous d'une de nos agences pour réserver votre trajet en TAD"
+  );
+
+  // Affichage conditionnel selon contexte
+  if (isPremierMai) {
+    alertMessage.innerHTML = buildAlert(
+      "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
+      "Remarque : Le réseau est fermé en ce 1er Mai."
+    );
+  } else if (isHoliday) {
+    alertMessage.innerHTML = buildAlert(
+      "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
+      "Remarque : Horaires ajustés aujourd'hui en raison d'un jour férié."
+    );
+  } else if (isVacation) {
+    alertMessage.innerHTML = buildAlert(
+      "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
+      "Remarque : Horaires modifiés aujourd'hui en raison des vacances scolaires."
+    );
+  } else {
+    alertMessage.innerHTML = ""; // Aucun message si jour normal
+  }
 }
-setInterval(updateBusTimes, 30000); // Mettez 30000 pour actualiser toutes les 30 secondes
-updateBusTimes(); // Appel initial pour mettre à jour les données immédiatement
 
-// Update current time every second
 function updateCurrentTime() {
-    const currentTimeElement = document.getElementById('current-time');
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    currentTimeElement.textContent = `Mis à jour à : ${hours}:${minutes}`;
-    document.getElementById('destination').innerHTML = `<h2 class="text-4xl text-primary-content dark:text-primary font-bold">Direction Haute-ville ♿</h2><br>`;
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
 
+  const currentTimeElement = document.getElementById("current-time");
+  if (currentTimeElement) {
+    currentTimeElement.textContent = `Mis à jour à : ${hours}:${minutes}`;
+  }
+
+  const destination = document.getElementById("destination");
+  if (destination) {
+    destination.innerHTML = `<h2 class="text-4xl text-primary-content dark:text-primary font-bold">Direction Haute-ville ♿</h2><br>`;
+  }
 }
-setInterval(updateCurrentTime, 1000);
-updateCurrentTime(); // Update initially
+
+// Init
+updateBusTimes();
+setInterval(updateBusTimes, 30000); // Toutes les 30 sec
+updateCurrentTime();
+setInterval(updateCurrentTime, 1000); // Toutes les secondes

@@ -1,181 +1,82 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
   <head>
-    <!-- Métadonnées du site -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
-    />
-    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité" />
-    <meta name="author" content="Transport Clermont Métropole" />
     <title>Transport Clermont Métropole</title>
-
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://tcm-mobilite.vercel.app/img/TCM.png"
-    />
-
-    <!-- Intégrations pour réseaux sociaux -->
-    <meta property="og:title" content="Transport Clermont Métropole" />
-    <meta
-      property="og:description"
-      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
-    />
-    <meta
-      property="og:image"
-      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
-    />
-    <meta property="og:url" content="https://tcm-mobilite.vercel.app/" />
-    <meta name="twitter:title" content="Transport Clermont Métropole" />
-    <meta
-      name="twitter:description"
-      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
-    />
-    <meta
-      name="twitter:image"
-      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <!-- Couleur de fond pour l'intégration -->
+    <meta name="description" content="Partenaire de vos déplacements à Clermont-Ferrand depuis 1989." />
     <meta name="theme-color" content="#204BFE" />
-    <!-- Meta Tags Generated with https://metatags.io -->
+    <link rel="icon" href="https://tcm-mobilite.vercel.app/img/TCM.png" />
     <link href="/dist/output.css" rel="stylesheet" />
-    <script
-      src="https://kit.fontawesome.com/d8bf012a3e.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <script src="src/menu.js"></script>
-    <script>
-      document.addEventListener("contextmenu", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      document.addEventListener("copy", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      document.addEventListener("cut", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-    </script>
-    <style>
-      .jw-album-image img,
-      .jw-element-image img {
-        pointer-events: none;
-        -webkit-touch-callout: none;
-      }
-
-      .pswp__share-tooltip .pswp__share--download {
-        display: none;
-      }
-
-      .orange-border {
-        display: inline-block;
-      }
-
-      .inner-content {
-        padding: 5px;
-      }
-
-      .orange-border p {
-        margin: 0;
-      }
-
-      .tcm-details {
-        margin-bottom: 20px;
-      }
-
-      .christmas-theme .dark.block {
-        display: none;
-      }
-
-      .christmas-theme .dark.hidden {
-        display: block;
-      }
-    </style>
+    <script src="src/menu.js" defer></script>
   </head>
 
-  <body class="bg-base-100">
-    <div class="container p-6 mx-auto">
-      <div id="TCM"></div>
-      <div id="vacation-alert"></div>
-    </div>
+  <body class="bg-base-100 text-base-content font-sans">
 
-    <!-- Hero Section -->
-    <header
-      class="hero min-h-screen bg-cover bg-center"
-      style="background-image: url('https://i.imgur.com/ivC8iEO.jpeg')"
-    >
-      <div class="hero-overlay bg-opacity-60"></div>
-      <div class="hero-content text-center text-neutral-content">
-        <div>
-          <h1 class="text-5xl font-bold">
-            Voyagez facilement à
-            <span class="text-accent">Clermont-Ferrand</span> !
+    <!-- Hero -->
+    <header class="hero min-h-[70vh] bg-cover bg-center relative" style="background-image: url('https://i.imgur.com/ivC8iEO.jpeg')">
+      <div class="hero-overlay backdrop-blur-sm"></div>
+      <div class="hero-content text-center text-white">
+        <div class="max-w-2xl">
+          <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+            Voyagez facilement à <span class="text-accent">Clermont-Ferrand</span>
           </h1>
-          <p class="mt-4 text-lg">
+          <p class="mt-6 text-lg sm:text-xl text-white/80">
             Partenaire de vos déplacements depuis 1989.
           </p>
         </div>
       </div>
     </header>
 
-    <!-- Info Trafic et agences -->
-    <section id="info" class="container mx-auto mt-12 p-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Trafic & Agences -->
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
         <!-- Info Trafic -->
-        <div class="card bg-primary shadow-xl p-6">
-          <h2 class="text-2xl font-bold text-primary-content">Info Trafic</h2>
-          <div id="lignes" class="mt-4 grid gap-4"></div>
+        <div class="card shadow-xl bg-primary text-primary-content p-6">
+          <h2 class="text-2xl font-bold mb-4">Info Trafic</h2>
+          <div id="lignes" class="grid gap-4"></div>
         </div>
 
-        <!-- État d'ouverture des agences -->
-        <div class="card bg-primary text-primary-content p-6 shadow-xl">
-          <h2 class="text-2xl font-bold">État des Agences</h2>
-          <div id="agences" class="mt-4 flex flex-wrap gap-4"></div>
-          <a href="/src/agences.html" class="btn btn-accent mt-4 w-full"
-            >Voir toutes les agences</a
-          >
+        <!-- Agences -->
+        <div class="card shadow-xl bg-primary text-primary-content p-6">
+          <h2 class="text-2xl font-bold mb-4">État des Agences</h2>
+          <div id="agences" class="flex flex-wrap gap-4"></div>
+          <a href="/src/agences.html" class="btn btn-accent w-full mt-6">Voir toutes les agences</a>
         </div>
+
       </div>
     </section>
 
     <!-- Actualités -->
-    <section id="actus" class="container mx-auto mt-12 p-6">
-      <h2 class="text-3xl font-bold text-secondary">Notre Actualité</h2>
-      <p class="mt-2 text-lg">
-        En direct de notre rédaction, toute l'actualité TCM.
-      </p>
-      <br />
-      <div
-        id="content"
-        class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6"
-      ></div>
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-secondary">Notre Actualité</h2>
+        <p class="mt-2 text-lg text-base-content/80">
+          En direct de notre rédaction, toute l'actualité TCM.
+        </p>
+      </div>
+      <div id="content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </section>
 
     <!-- Footer -->
-    <footer
-      class="footer footer-center p-10 bg-primary text-primary-content mt-12"
-    >
+    <footer class="footer footer-center p-10 bg-primary text-primary-content mt-auto">
       <aside>
-        <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" />
-        <p class="font-bold">Partenaire de vos déplacements depuis 1989.</p>
-        <p>
-          ©
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          - Tous droits réservés
+        <img src="/img/TCM-Clair.png" width="180" alt="Logo TCM" class="mx-auto mb-3" />
+        <p class="font-semibold text-lg">Partenaire de vos déplacements depuis 1989</p>
+        <p class="text-sm opacity-80">
+          © <span id="year"></span> Transport Clermont Métropole. Tous droits réservés.
         </p>
       </aside>
     </footer>
+
+    <!-- Year dynamic -->
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
 
     <script>
       const agences = [

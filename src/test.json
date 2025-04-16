@@ -20,39 +20,7 @@
           "type": "information",
           "annonce": "09/28/2023",
           "debut": "10/15/2023",
-          "fin": "10/27/2075",
-          "titre": "🚧 Info Travaux 🚧",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
-        },
-        {
-          "type": "attention",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2025",
-          "fin": "10/27/2075",
-          "titre": "🚧 Info Travaux 🚧",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
-        },
-        {
-          "type": "travaux",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2025",
-          "fin": "10/27/2075",
-          "titre": "🚧 Info Travaux 🚧",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
-        },
-        {
-          "type": "fermeture",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2025",
-          "fin": "10/27/2075",
-          "titre": "🚧 Info Travaux 🚧",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
-        },
-        {
-          "type": "perturbation",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2025",
-          "fin": "10/27/2075",
+          "fin": "10/27/2023",
           "titre": "🚧 Info Travaux 🚧",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
         }
@@ -63,9 +31,9 @@
       "ligne": "NS",
       "infos_trafic": [
         {
-          "type": "attention",
+          "type": "information",
           "annonce": "09/28/2023",
-          "debut": "10/15/2025",
+          "debut": "02/15/2025",
           "fin": "10/27/2025",
           "titre": "attention",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
@@ -111,7 +79,20 @@
           "type": "information",
           "annonce": "08/28/2023",
           "debut": "09/15/2023",
-          "fin": "09/27/2023",
+          "fin": "09/27/2029",
+          "titre": "🚧 Info Travaux 🚧",
+          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
+        }
+      ]
+    },
+    {
+      "ligne": "601",
+      "infos_trafic": [
+        {
+          "type": "information",
+          "annonce": "09/28/2023",
+          "debut": "10/15/2023",
+          "fin": "10/27/2029",
           "titre": "🚧 Info Travaux 🚧",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
         }

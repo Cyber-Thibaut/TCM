@@ -131,19 +131,22 @@ async function updateBusTimes() {
   const icon1 = frequentationIcons[Math.floor(Math.random() * 3)].icon;
   const icon2 = frequentationIcons[Math.floor(Math.random() * 3)].icon;
 
-  const nextBusHTML = `<div class="grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
-      ${minutesUntilNext <= 1 ? "A l’approche" : `${minutesUntilNext} min`}
-      <div class="flex items-center justify-center bg-black bg-opacity-20 dark:bg-opacity-0 p-2 rounded-full ml-2">
-          <img src="${icon1}" style="width: 50px;">
-      </div>
-  </div>`;
+  const nextBusHTML = `<div class="card bg-base-300 shadow-md w-full h-36 flex flex-col justify-center items-center text-3xl font-semibold text-primary">
+  <span class="${minutesUntilNext <= 1 ? "animate-pulse text-accent" : ""}">
+  ${minutesUntilNext <= 1 ? "A l’approche" : `${minutesUntilNext} min`}
+</span>
 
-  const followingBusHTML = `<div class="grow h-32 card bg-base-300 dark:bg-primary-content rounded-box place-items-center flex items-center" style='font-size: 40px; color: #dc241f;'>
-      ${minutesUntilFollowing} min
-      <div class="flex items-center justify-center bg-black bg-opacity-20 dark:bg-opacity-0 p-2 rounded-full ml-2">
-          <img src="${icon2}" style="width: 50px;">
-      </div>
-  </div>`;
+  <div class="mt-2 p-2 bg-base-100 rounded-full">
+      <img src="${icon1}" alt="fréquentation" class="w-10 h-10">
+  </div>
+</div>`;
+
+  const followingBusHTML = `<div class="card bg-base-300 shadow-md w-full h-36 flex flex-col justify-center items-center text-3xl font-semibold text-primary">
+  <span>${minutesUntilFollowing} min</span>
+  <div class="mt-2 p-2 bg-base-100 rounded-full">
+      <img src="${icon2}" alt="fréquentation" class="w-10 h-10">
+  </div>
+</div>`;
 
   destinationElement.innerHTML = `
   <div class="w-full flex justify-center py-8">
@@ -152,7 +155,6 @@ async function updateBusTimes() {
     </div>
   </div>
 `;
-
 
   const divider = `<div class="divider lg:divider-horizontal"></div>`;
   nextBusTime.innerHTML = nextBusHTML + divider + followingBusHTML;

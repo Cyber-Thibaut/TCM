@@ -42,6 +42,11 @@ document.addEventListener("DOMContentLoaded", function () {
   <path d="M9.479 14.361c-.48.093-.98.139-1.479.139s-.999-.046-1.479-.139L7.6 15.8a.5.5 0 0 0 .8 0z"/>
 </svg> 2026
                     </a></li>
+                    <li>
+  <a href="/src/terres.html">
+    <img src="https://seal.transport-manager.net/dayayao/wp-content/uploads/sites/349/2024/10/Terres_d_Isere.png" alt="Logo Terres d'Isère" class="mx-auto w-32 drop-shadow-xl" /> Groupement Terres d’Isère
+  </a>
+</li>
                 </ul>
             </div>
             <a class="btn btn-ghost normal-case text-xl bg-primary/50 glass" href="/index.html"><img src="/img/TCM-Sombre.png"
@@ -79,6 +84,12 @@ document.addEventListener("DOMContentLoaded", function () {
   <path d="M9.479 14.361c-.48.093-.98.139-1.479.139s-.999-.046-1.479-.139L7.6 15.8a.5.5 0 0 0 .8 0z"/>
 </svg> 2026
                 </a></li>
+                <li>
+  <a href="/src/terres.html">
+    <img src="https://seal.transport-manager.net/dayayao/wp-content/uploads/sites/349/2024/10/Terres_d_Isere.png" alt="Logo Terres d'Isère" class="mx-auto w-16 drop-shadow-xl" /> Groupement Terres d’Isère
+  </a>
+</li>
+
             </ul>
         </div>
         <div class="navbar-end">

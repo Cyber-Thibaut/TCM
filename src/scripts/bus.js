@@ -189,6 +189,7 @@ async function init() {
   }
 
   updateBusTimes();
+  setInterval(updateBusTimes, 30000);
 }
 
 window.addEventListener("DOMContentLoaded", init);

@@ -235,6 +235,8 @@ async function updateBusTimes() {
           ${
             isWeekend
               ? "📆 C'est le week-end ! Aucun bus scolaire ne circule. Détends-toi et profite 🎉🎮"
+              : isDay
+              ? "⏰ Aucun car scolaire ne circule. Regarde tes cours plutôt que le prochain bus 😝 on sera là à l'heure 🕒"
               : "🌙 Les bus scolaires ne circulent plus pour aujourd'hui. Repose-toi bien, on t'attend demain frais et dispo ! 😴"
           }
         </div>`;

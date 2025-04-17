@@ -26,7 +26,7 @@
       },
       {
         "numero": "2",
-        "destination": "Gare Centrale <> Aéroport",
+        "destination": "Aéroport",
         "frequences": {
           "creuse": "7 minutes",
           "pointe": "5 minutes",
@@ -50,7 +50,7 @@
       },
       {
         "numero": "3",
-        "destination": "Gare Centrale <> Campus Marthe Gautier",
+        "destination": "Campus Marthe Gautier",
         "frequences": {
           "creuse": "6 minutes",
           "pointe": "4 minutes",
@@ -74,7 +74,7 @@
       },
       {
         "numero": "4",
-        "destination": "Gare Centrale <> Gare de l'Est",
+        "destination": "Gare Centrale",
         "frequences": {
           "creuse": "14 minutes",
           "pointe": "9 minutes",
@@ -98,7 +98,7 @@
       },
       {
         "numero": "5",
-        "destination": "Musée d'Art Moderne <> Pôle Luca Pacioli",
+        "destination": "Musée d'Art Moderne",
         "frequences": {
           "creuse": "9 minutes",
           "pointe": "6 minutes",
@@ -122,7 +122,7 @@
       },
       {
         "numero": "6",
-        "destination": "Grand Palais <> Campus Maryse Esterle",
+        "destination": "Campus des Cézeaux",
         "frequences": {
           "creuse": "10 minutes",
           "pointe": "7 minutes",
@@ -146,7 +146,7 @@
       },
       {
         "numero": "7",
-        "destination": "Grand Palais <> Port Fluvial",
+        "destination": "Grand Palais",
         "frequences": {
           "creuse": "18 minutes",
           "pointe": "14 minutes",
@@ -170,7 +170,7 @@
       },
       {
         "numero": "8",
-        "destination": "Campus Marthe Gautier <> Place de l'Europe",
+        "destination": "Place de l'Europe",
         "frequences": {
           "creuse": "11 minutes",
           "pointe": "7 minutes",
@@ -194,7 +194,7 @@
       },
       {
         "numero": "9",
-        "destination": "Campus Alan Turing <> Haute-Ville",
+        "destination": "Campus des Cezeaux",
         "frequences": {
           "creuse": "9 minutes",
           "pointe": "6 minutes",
@@ -218,7 +218,7 @@
       },
       {
         "numero": "10",
-        "destination": "Campus Alan Turing <> CRT Est",
+        "destination": "Campus Alan Turing",
         "frequences": {
           "creuse": "12 minutes",
           "pointe": "8 minutes",
@@ -242,7 +242,7 @@
       },
       {
         "numero": "11",
-        "destination": "Campus Marthe Gautier <> Clinique Saint Paul",
+        "destination": "CHU Estaing",
         "frequences": {
           "creuse": "11 minutes",
           "pointe": "8 minutes",
@@ -266,7 +266,7 @@
       },
       {
         "numero": "12",
-        "destination": "Gare Centrale <> Parc d'attractions",
+        "destination": "Parc d'attractions",
         "frequences": {
           "creuse": "27 minutes",
           "pointe": "18 minutes",
@@ -290,7 +290,7 @@
       },
       {
         "numero": "13",
-        "destination": "Aéroport <> Haute-ville",
+        "destination": "Aéroport",
         "frequences": {
           "creuse": "9 minutes",
           "pointe": "5 minutes",
@@ -314,7 +314,7 @@
       },
       {
         "numero": "60",
-        "destination": "Lycée Karl Marx <> Préfecture",
+        "destination": "Lycée Karl Marx",
         "frequences": {
           "creuse": "13 minutes",
           "pointe": "10 minutes",
@@ -338,7 +338,7 @@
       },
       {
         "numero": "61",
-        "destination": "Gare de l'Ouest <> Parc Jolimont",
+        "destination": "Parc Jolimont",
         "frequences": {
           "creuse": "32 minutes",
           "pointe": "16 minutes",
@@ -362,7 +362,7 @@
       },
       {
         "numero": "62",
-        "destination": "Parc de l'Étang <> Parc de l'Étang",
+        "destination": "Parc de l'Étang",
         "frequences": {
           "creuse": "27 minutes",
           "pointe": "20 minutes",
@@ -386,7 +386,7 @@
       },
       {
         "numero": "63",
-        "destination": "Place de l'Europe <> Parc d'attractions",
+        "destination": "Place de l'Europe",
         "frequences": {
           "creuse": "29 minutes",
           "pointe": "15 minutes",
@@ -410,7 +410,7 @@
       },
       {
         "numero": "64",
-        "destination": "Place de l'Europe <> Hôtel de Région",
+        "destination": "Place de l'Europe",
         "frequences": {
           "creuse": "14 minutes",
           "pointe": "9 minutes",
@@ -434,7 +434,7 @@
       },
       {
         "numero": "101",
-        "destination": "Hôtel de Région <> ARRONAY - Etangs",
+        "destination": "ARRONAY - Etangs",
         "frequences": {
           "creuse": "24 minutes",
           "pointe": "24 minutes",
@@ -458,7 +458,7 @@
       },
       {
         "numero": "102",
-        "destination": "Stade <> BRINTE - Av. de la Liberté",
+        "destination": "Stade",
         "frequences": {
           "creuse": "27 minutes",
           "pointe": "18 minutes",
@@ -482,7 +482,7 @@
       },
       {
         "numero": "103",
-        "destination": "Place de l'Europe <> CLORENT - Centre de recyclage",
+        "destination": "Place de l'Europe",
         "frequences": {
           "creuse": "14 minutes",
           "pointe": "11 minutes",
@@ -506,7 +506,7 @@
       },
       {
         "numero": "104",
-        "destination": "Science Po <> LACANAC - Place du Marché",
+        "destination": "Science Po",
         "frequences": {
           "creuse": "24 minutes",
           "pointe": "16 minutes",
@@ -530,7 +530,7 @@
       },
       {
         "numero": "201",
-        "destination": "Campus Alan Turing <> LUSIGNOL - Gare",
+        "destination": "Campus Alan Turing",
         "frequences": {
           "creuse": "58 minutes",
           "pointe": "39 minutes",
@@ -554,7 +554,7 @@
       },
       {
         "numero": "202",
-        "destination": "Campus Alan Turing <> MINIA - Gare Routière",
+        "destination": "Campus Alan Turing",
         "frequences": {
           "creuse": "74 minutes",
           "pointe": "37 minutes",
@@ -578,7 +578,7 @@
       },
       {
         "numero": "203",
-        "destination": "Gare de l'Ouest <> LUDORGUE - Mont Ludo",
+        "destination": "Gare de l'Ouest",
         "frequences": {
           "creuse": "124 minutes",
           "pointe": "41 minutes",

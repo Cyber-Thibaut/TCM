@@ -1,318 +1,165 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="alpine">
   <head>
-    <!-- Métadonnées du site -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
-    />
+    <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989." />
     <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité" />
     <meta name="author" content="Transport Clermont Métropole" />
     <title>Transport Clermont Métropole</title>
 
     <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://tcm-mobilite.vercel.app/img/TCM.png"
-    />
+    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png" />
 
-    <!-- Intégrations pour réseaux sociaux -->
+    <!-- Réseaux sociaux -->
     <meta property="og:title" content="Transport Clermont Métropole" />
-    <meta
-      property="og:description"
-      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
-    />
-    <meta
-      property="og:image"
-      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
-    />
+    <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989." />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png" />
     <meta property="og:url" content="https://tcm-mobilite.vercel.app/" />
     <meta name="twitter:title" content="Transport Clermont Métropole" />
-    <meta
-      name="twitter:description"
-      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
-    />
-    <meta
-      name="twitter:image"
-      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
-    />
+    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989." />
+    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png" />
     <meta name="twitter:card" content="summary_large_image" />
-
-    <!-- Couleur de fond pour l'intégration -->
     <meta name="theme-color" content="#204BFE" />
-    <script
-      src="https://kit.fontawesome.com/d8bf012a3e.js"
-      crossorigin="anonymous"
-    ></script>
-    <link href="../dist/output.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <script src="menu.js"></script>
+    <!-- FontAwesome + Montserrat -->
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.0/dist/full.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <script>
-      document.addEventListener("contextmenu", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      document.addEventListener("copy", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      document.addEventListener("cut", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      });
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Montserrat", "sans-serif"],
+            },
+          },
+        },
+        daisyui: {
+          themes: [
+            {
+              alpine: {
+                primary: "#2b6cb0",
+                "primary-content": "#ffffff",
+                secondary: "#38a169",
+                accent: "#d69e2e",
+                neutral: "#2d3748",
+                "base-100": "#f7fafc",
+                "base-content": "#1a202c",
+                info: "#63b3ed",
+                success: "#68d391",
+                warning: "#f6ad55",
+                error: "#e53e3e",
+              },
+            },
+          ],
+        },
+      };
     </script>
-    <style>
-      .jw-album-image img,
-      .jw-element-image img {
-        pointer-events: none;
-        -webkit-touch-callout: none;
-      }
+    <script src="/src/menu.js"></script>
 
-      .pswp__share-tooltip .pswp__share--download {
-        display: none;
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
       }
     </style>
   </head>
 
   <body class="bg-base-100 text-base-content">
     <div class="container mx-auto p-6">
-      <!-- 🟦 Header -->
-      <header class="hero bg-blue-600 text-white py-12">
-        <div class="text-center">
-          <img
-            src="https://cdn.discordapp.com/attachments/1071552020781224086/1175835673442402505/Terres_d_Isere.png?ex=67c3364e&is=67c1e4ce&hm=0844b14c2e53b9ab6ef9c5f9e7402be5905c7b9a288cb54ecc90382f3836f663&"
-            alt="Logo Terres d'Isère"
-            class="mx-auto"
-          />
+
+      <!-- ⛰️ HERO -->
+      <header class="hero bg-gradient-to-br from-blue-900 via-blue-700 to-green-500 text-white py-16 rounded-lg shadow-lg relative overflow-hidden">
+        <div class="text-center z-10 relative">
+          <img src="https://seal.transport-manager.net/dayayao/wp-content/uploads/sites/349/2024/10/Terres_d_Isere.png" alt="Logo Terres d'Isère" class="mx-auto w-32 drop-shadow-xl" />
           <h1 class="text-5xl font-bold mt-4">Groupement Terres d’Isère</h1>
-          <p class="text-lg mt-2">
-            Un groupement d’exploitants pour une mobilité optimisée
-          </p>
+          <p class="text-lg mt-4">Un groupement d’exploitants pour une mobilité optimisée</p>
         </div>
       </header>
 
-      <!-- 🟦 Présentation -->
-      <section
-        class="container mx-auto mt-12 p-8 bg-base-200 rounded-lg shadow-lg prose"
-      >
+      <!-- 🏔️ PRÉSENTATION -->
+      <section class="mt-12 p-8 bg-base-200 rounded-lg shadow-lg prose">
         <h2 class="text-3xl font-semibold text-primary">Qui sommes-nous ?</h2>
         <p>
-          Terres d’Isère est un groupement stratégique qui favorise la
-          coopération entre différentes entreprises, notamment dans la gestion
-          du matériel et des ressources. Fondée en
-          <strong>février 2023</strong> par <strong>CityGO!</strong> et la
-          <strong>Régie des Transports du Pays Voironnais (RDTPV)</strong>, elle
-          a rapidement gagné en importance grâce à l'adhésion de plusieurs
-          autres sociétés de transport.
+          Terres d’Isère est un groupement stratégique qui favorise la coopération entre différentes entreprises, notamment dans la gestion du matériel et des ressources.
+          Fondée en <strong>février 2023</strong> par <strong>CityGO!</strong> et la <strong>Régie des Transports du Pays Voironnais (RDTPV)</strong>,
+          elle a rapidement gagné en importance grâce à l'adhésion de plusieurs autres sociétés de transport.
         </p>
         <p>
-          Aujourd’hui, ce groupement regroupe <strong>9 entreprises</strong>,
-          avec un
-          <strong>chiffre d’affaires cumulé de 16 millions d’euros</strong> et
-          <strong>plus de 500 véhicules (hors autocars)</strong>. Nous avons
-          choisi de rejoindre Terres d’Isère pour bénéficier de cette synergie,
-          optimiser nos opérations et renforcer notre position sur le marché des
-          transports.
+          Aujourd’hui, ce groupement regroupe <strong>9 entreprises</strong>, avec un <strong>chiffre d’affaires cumulé de 16 millions d’euros</strong>
+          et <strong>plus de 500 véhicules (hors autocars)</strong>.
         </p>
       </section>
 
-      <!-- 🟦 Statistiques -->
-      <section class="container mx-auto mt-12 self-center">
-        <div
-          class="stats stats-vertical lg:stats-horizontal shadow bg-base-200"
-        >
+      <!-- 📊 STATS -->
+      <section class="mt-12">
+        <div class="stats shadow bg-gradient-to-r from-blue-100 to-green-100 text-primary">
           <div class="stat">
-            <div class="stat-title">Nombre d'entreprises</div>
-            <div class="stat-value text-primary">9</div>
+            <div class="stat-figure text-primary">
+              <i class="fas fa-building text-3xl"></i>
+            </div>
+            <div class="stat-title text-neutral">Entreprises</div>
+            <div class="stat-value">9</div>
           </div>
           <div class="stat">
-            <div class="stat-title">Chiffre d'affaires</div>
-            <div class="stat-value text-primary">175M€</div>
+            <div class="stat-figure text-primary">
+              <i class="fas fa-euro-sign text-3xl"></i>
+            </div>
+            <div class="stat-title text-neutral">Chiffre d'affaires</div>
+            <div class="stat-value">175M€</div>
           </div>
           <div class="stat">
-            <div class="stat-title">Nombre de véhicules</div>
-            <div class="stat-value text-primary">700+</div>
+            <div class="stat-figure text-primary">
+              <i class="fas fa-bus text-3xl"></i>
+            </div>
+            <div class="stat-title text-neutral">Véhicules</div>
+            <div class="stat-value">700+</div>
           </div>
         </div>
       </section>
 
-      <!-- 🟦 Tableau des entreprises -->
-      <section
-        class="container mx-auto mt-12 p-8 bg-base-200 rounded-lg shadow-lg"
-      >
+      <!-- 🧾 TABLEAU ENTREPRISES -->
+      <section class="mt-12 p-8 bg-base-200 rounded-lg shadow-lg">
         <h2 class="text-3xl font-semibold text-primary mb-6">
           Les entreprises du groupement
         </h2>
-
         <div class="overflow-x-auto">
-          <table class="table w-full bg-base-100 shadow-lg">
+          <table class="table w-full bg-base-100 rounded-lg shadow-md">
             <thead>
               <tr class="bg-primary text-primary-content">
                 <th>Entreprise</th>
-                <th>Directeur d'exploitation</th>
+                <th>Directeur</th>
                 <th>Adresse</th>
                 <th>Site Web</th>
-                <th>Arrivée dans le groupement</th>
+                <th>Arrivée</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>CityGO!</td>
-                <td>Citadis - Co-Fondateur</td>
-                <td>4 Rue de l’Oie, 38990 Berny</td>
-                <td>
-                  <a
-                    href="https://transport-manager.net/jeu/company.php?id=4315"
-                    class="btn btn-outline btn-primary btn-sm"
-                    >Site</a
-                  >
-                </td>
-                <td>Février 2023</td>
-              </tr>
-              <tr>
-                <td>Régie Des Transports du Pays Voironnais – RDTPV</td>
-                <td>Fred_Epsilon - Co-Fondateur</td>
-                <td>3115 Rue des Agora, 38500 Voiron</td>
-                <td>
-                  <a
-                    href="https://seal.transport-manager.net/fred_epsilon/"
-                    class="btn btn-outline btn-primary btn-sm"
-                    >Site</a
-                  >
-                </td>
-                <td>Février 2023</td>
-              </tr>
-              <tr>
-                <td>A38 Transport Grenoble</td>
-                <td>BusTram38</td>
-                <td>40 Av de Polesud, 38100 Grenoble</td>
-                <td>
-                  <a
-                    href="https://transport-manager.net/jeu/company.php?id=4683"
-                    class="btn btn-outline btn-primary btn-sm"
-                    >Site</a
-                  >
-                </td>
-                <td>Février 2023</td>
-              </tr>
-              <tr>
-                <td>Deutsche Boing</td>
-                <td>Boingleboeing</td>
-                <td>34 Mainzer Landstraße, 60306 Frankfurt</td>
-                <td>
-                  <a
-                    href="https://transport-manager.net/jeu/company.php?id=4684"
-                    class="btn btn-outline btn-primary btn-sm"
-                    >Site</a
-                  >
-                </td>
-                <td>Février 2023</td>
-              </tr>
-              <tr>
-                <td>UrbanWave</td>
-                <td>DT38</td>
-                <td>12 Chemin du Novarey, 38000 Greville</td>
-                <td>
-                  <a
-                    href="https://seal.transport-manager.net/dt38/"
-                    class="btn btn-outline btn-primary btn-sm"
-                    >Site</a
-                  >
-                </td>
-                <td>Mai 2023</td>
-              </tr>
-              <tr>
-                <td>STUV</td>
-                <td>Dayayao</td>
-                <td>125 Avenue de la Résistance, 38250 Villard de Lans</td>
-                <td>
-                  <a
-                    href="https://transport-manager.net/jeu/company.php?id=5300"
-                    class="btn btn-outline btn-primary btn-sm"
-                    >Site</a
-                  >
-                </td>
-                <td>Août 2023</td>
-              </tr>
-              <tr>
-                <td>Chamdev</td>
-                <td>Uramy</td>
-                <td>7 Avenue Jean Jaurès 1001 Chamburg</td>
-                <td>
-                  <a
-                    href="https://seal.transport-manager.net/uramy/"
-                    class="btn btn-outline btn-primary btn-sm"
-                    >Site</a
-                  >
-                </td>
-                <td>Octobre 2023</td>
-              </tr>
-              <tr>
-                <td>M TAG</td>
-                <td>Theodeluxe</td>
-                <td>(Adresse à communiquer)</td>
-                <td>
-                  <a
-                    href="https://transport-manager.net/jeu/company.php?id=5574"
-                    class="btn btn-outline btn-primary btn-sm"
-                    >Site</a
-                  >
-                </td>
-                <td>Janvier 2024</td>
-              </tr>
-              <tr>
-                <td>Transport Clermont Métropole</td>
-                <td>Tibo_lyon</td>
-                <td>
-                  Dépôt « La Pardieu », 17 Bd Robert Schuman, 63000
-                  Clermont-Ferrand
-                </td>
-                <td>
-                  <a
-                    href="https://tcm-mobilite.vercel.app/"
-                    class="btn btn-outline btn-primary btn-sm"
-                    >Site</a
-                  >
-                </td>
-                <td>Février 2025</td>
-              </tr>
-              <tr>
-                <td>Mobi'</td>
-                <td>Avadea</td>
-                <td>22 avenue du Vallion, 67300 Transvaal</td>
-                <td>
-                  <a
-                    href="https://transport-manager.net/jeu/company.php?id=7123"
-                    class="btn btn-outline btn-primary btn-sm"
-                    >Site</a
-                  >
-                </td>
-                <td>Février 2025</td>
-              </tr>
+              <tr><td>CityGO!</td><td>Citadis</td><td>Berny</td><td><a href="#" class="btn btn-sm btn-primary">Site</a></td><td>02/23</td></tr>
+              <tr><td>RDTPV</td><td>Fred_Epsilon</td><td>Voiron</td><td><a href="#" class="btn btn-sm btn-primary">Site</a></td><td>02/23</td></tr>
+              <tr><td>A38 Transport</td><td>BusTram38</td><td>Grenoble</td><td><a href="#" class="btn btn-sm btn-primary">Site</a></td><td>02/23</td></tr>
+              <tr><td>Deutsche Boing</td><td>Boingleboeing</td><td>Frankfurt</td><td><a href="#" class="btn btn-sm btn-primary">Site</a></td><td>02/23</td></tr>
+              <tr><td>UrbanWave</td><td>DT38</td><td>Greville</td><td><a href="#" class="btn btn-sm btn-primary">Site</a></td><td>05/23</td></tr>
+              <tr><td>STUV</td><td>Dayayao</td><td>Villard de Lans</td><td><a href="#" class="btn btn-sm btn-primary">Site</a></td><td>08/23</td></tr>
+              <tr><td>Chamdev</td><td>Uramy</td><td>Chamburg</td><td><a href="#" class="btn btn-sm btn-primary">Site</a></td><td>10/23</td></tr>
+              <tr><td>M TAG</td><td>Theodeluxe</td><td>(à communiquer)</td><td><a href="#" class="btn btn-sm btn-primary">Site</a></td><td>01/24</td></tr>
+              <tr><td>TCM</td><td>Tibo_lyon</td><td>Clermont-Ferrand</td><td><a href="#" class="btn btn-sm btn-primary">Site</a></td><td>02/25</td></tr>
+              <tr><td>Mobi'</td><td>Avadea</td><td>Transvaal</td><td><a href="#" class="btn btn-sm btn-primary">Site</a></td><td>02/25</td></tr>
             </tbody>
           </table>
         </div>
       </section>
+
     </div>
 
-    <!-- Footer -->
-    <footer
-      class="footer footer-center p-10 bg-primary text-primary-content mt-12"
-    >
+    <!-- 🧊 FOOTER -->
+    <footer class="footer footer-center p-10 bg-primary text-primary-content mt-12">
       <aside>
-        <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" />
+        <i class="fas fa-mountain text-5xl mb-4"></i>
         <p class="font-bold">Partenaire de vos déplacements depuis 1989.</p>
-        <p>
-          ©
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          - Tous droits réservés
-        </p>
+        <p>© <script>document.write(new Date().getFullYear());</script> - Tous droits réservés</p>
       </aside>
     </footer>
   </body>

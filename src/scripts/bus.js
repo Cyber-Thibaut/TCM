@@ -164,6 +164,11 @@ async function updateBusTimes() {
         <div role="alert" class="alert alert-warning">
             <span>⚠️ Aujourd’hui est un jour férié.</span>
         </div>`;
+  } else if (isVacation) {
+    alertMessage.innerHTML = `
+        <div role="alert" class="alert alert-warning">
+            <span>⚠️ Horaires modifiés en raison de vacances scolaires.</span>
+        </div>`;
   } else {
     alertMessage.innerHTML = "";
   }

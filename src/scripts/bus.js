@@ -159,18 +159,18 @@ async function updateBusTimes() {
   const divider = `<div class="divider lg:divider-horizontal"></div>`;
   nextBusTime.innerHTML = nextBusHTML + divider + followingBusHTML;
 
-  if (isVacation) {
+   if (isHoliday) {
+    alertMessage.classList.remove("hidden");
+    alertMessage.innerHTML = `
+        <div role="alert" class="alert alert-warning">
+            <span>⚠️ Aujourd’hui est un jour férié.</span>
+        </div>`;
+  } else if (isVacation) {
     console.log("Vacances scolaires détectées !");
     alertMessage.classList.remove("hidden");
     alertMessage.innerHTML = `
         <div role="alert" class="alert alert-warning">
             <span>⚠️ Horaires modifiés en raison de vacances scolaires.</span>
-        </div>`;
-  } else if (isHoliday) {
-    alertMessage.classList.remove("hidden");
-    alertMessage.innerHTML = `
-        <div role="alert" class="alert alert-warning">
-            <span>⚠️ Aujourd’hui est un jour férié.</span>
         </div>`;
   } else {
     alertMessage.innerHTML = "";

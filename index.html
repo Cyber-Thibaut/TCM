@@ -571,7 +571,6 @@
               )
             )
           );
-
           const data = await Promise.all(responses.map((r) => r.json()));
           return data
             .flatMap((d) =>
@@ -586,10 +585,6 @@
           console.error("Erreur lors du chargement des vacances :", error);
           return [];
         }
-      }
-
-      function isDateInVacationRanges(date, ranges) {
-        return ranges.some((range) => date >= range.start && date <= range.end);
       }
 
       function formatDate(date) {
@@ -610,14 +605,10 @@
         const vacationAlert = document.getElementById("vacation-alert");
         const vacationDates = await fetchVacationDates();
 
-        const currentVacation = vacationDates.find(
-          (range) => now >= range.start && now <= range.end
-        );
-
-        // Vérification spécifique pour le 1er mai
-        const isMay1st = now.getMonth() === 4 && now.getDate() === 1;
+        // Détection spéciale 1er mai
+        const isMay1st = now.getMonth() === 4 && now.getDate() === 1; // Mai = 4
         const isWeekBeforeMay1st =
-          now.getMonth() === 4 && now.getDate() >= 24 && now.getDate() <= 30;
+          now.getMonth() === 3 && now.getDate() >= 24 && now.getDate() <= 30; // Avril = 3
 
         if (isMay1st || isWeekBeforeMay1st) {
           vacationAlert.style.display = "block";
@@ -647,8 +638,12 @@
           return;
         }
 
-        if (currentVacation && !isMay1st && !isWeekBeforeMay1st) {
-          // Affiche le bandeau pendant les vacances
+        // Pas de priorité 1er mai : on vérifie les vacances maintenant
+        const currentVacation = vacationDates.find(
+          (range) => now >= range.start && now <= range.end
+        );
+
+        if (currentVacation) {
           vacationAlert.style.display = "block";
           vacationAlert.innerHTML = `
             <div class="alert alert-info">
@@ -663,28 +658,30 @@
           return;
         }
 
-        const upcomingVacation = vacationDates.find(
-          (range) => now < range.start
-        );
+        // Pas de vacances actuelles : check si week-end juste après vacances
         const pastVacation = vacationDates.find(
           (range) => now > range.end && isWeekendBeforeEnd(range.end, now)
         );
 
-        if (pastVacation && !isMay1st && !isWeekBeforeMay1st) {
-          // Week-end de fin de vacances
+        if (pastVacation) {
           vacationAlert.style.display = "block";
           vacationAlert.innerHTML = `
             <div class="alert alert-success">
               <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M9 12l2 2l4 -4m-9 4a9 9 0 1118 0a9 9 0 01-18 0z" />
+                      d="M9 12l2 2l4-4m-9 4a9 9 0 1118 0a9 9 0 01-18 0z" />
               </svg>
               <span>Bon week-end ! On espère que vous êtes prêts pour la reprise dès lundi !</span>
             </div><br>`;
           return;
         }
 
-        if (upcomingVacation && !isMay1st && !isWeekBeforeMay1st) {
+        // Sinon, est-ce qu'on approche de futures vacances ?
+        const upcomingVacation = vacationDates.find(
+          (range) => now < range.start
+        );
+
+        if (upcomingVacation) {
           const joursAvantVacances = Math.ceil(
             (upcomingVacation.start - now) / (1000 * 60 * 60 * 24)
           );
@@ -708,7 +705,7 @@
           }
         }
 
-        // Sinon, rien à afficher
+        // Sinon : rien à afficher
         vacationAlert.style.display = "none";
       }
 

@@ -63,12 +63,29 @@ function formatDate(date) {
   return `${year}-${month}-${day}`;
 }
 
-function getTimeSlot(hour) {
-  if (hour < 7) return "creuse";
-  if (hour < 9) return "pointe";
-  if (hour < 16) return "creuse";
-  if (hour < 20) return "pointe";
-  return "soir";
+function getTimeSlot(hour, weekday, isHoliday, isVacation) {
+  if (isHoliday || weekday === 0) {
+    // Dimanche et jours fériés
+    if (hour < 9 || hour >= 16) {
+      return "dimanche_creuse";
+    } else {
+      return "dimanche_pointe";
+    }
+  } else if (weekday === 6) {
+    // Samedi
+    if (hour < 7) return "samedi_creuse";
+    if (hour < 9) return "samedi_pointe";
+    if (hour < 16) return "samedi_creuse";
+    if (hour < 20) return "samedi_pointe";
+    return "samedi_soir";
+  } else {
+    // Lundi à Vendredi
+    if (hour < 7) return "creuse";
+    if (hour < 9) return "pointe";
+    if (hour < 16) return "creuse";
+    if (hour < 20) return "pointe";
+    return "soir";
+  }
 }
 
 async function fetchLineData(lineNumber) {
@@ -93,19 +110,31 @@ async function updateBusTimes() {
   const vacationDates = await fetchVacationDates(now);
   const isVacation = isDateInVacationRanges(now, vacationDates);
 
-  const timeSlot = getTimeSlot(hour);
+  const timeSlot = getTimeSlot(hour, weekday, isHoliday, isVacation);
   let freqString;
 
   if (!selectedLine) return;
 
+  // Vérification spécifique pour le 1er mai
+  if (now.getMonth() === 4 && now.getDate() === 1) {
+    nextBusTime.innerHTML =
+      "<div class='alert alert-info'>Ligne fermée en raison du 1er mai</div>";
+    alertMessage.classList.remove("hidden");
+    alertMessage.innerHTML = `
+        <div role="alert" class="alert alert-warning">
+            <span>⚠️ Aujourd’hui est le 1er mai. Le réseau TCM est fermé.</span>
+        </div>`;
+    return;
+  }
+
   if (isHoliday || weekday === 0) {
     freqString = isVacation
-      ? selectedLine.vacances[`dimanche_${timeSlot}`]
-      : selectedLine.frequences[`dimanche_${timeSlot}`];
+      ? selectedLine.vacances[timeSlot]
+      : selectedLine.frequences[timeSlot];
   } else if (weekday === 6) {
     freqString = isVacation
-      ? selectedLine.vacances[`samedi_${timeSlot}`]
-      : selectedLine.frequences[`samedi_${timeSlot}`];
+      ? selectedLine.vacances[timeSlot]
+      : selectedLine.frequences[timeSlot];
   } else {
     freqString = isVacation
       ? selectedLine.vacances[timeSlot]
@@ -159,7 +188,7 @@ async function updateBusTimes() {
   const divider = `<div class="divider lg:divider-horizontal"></div>`;
   nextBusTime.innerHTML = nextBusHTML + divider + followingBusHTML;
 
-   if (isHoliday) {
+  if (isHoliday) {
     alertMessage.classList.remove("hidden");
     alertMessage.innerHTML = `
         <div role="alert" class="alert alert-warning">

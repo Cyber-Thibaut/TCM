@@ -647,7 +647,7 @@
           return;
         }
 
-        if (currentVacation) {
+        if (currentVacation && !isMay1st && !isWeekBeforeMay1st) {
           // Affiche le bandeau pendant les vacances
           vacationAlert.style.display = "block";
           vacationAlert.innerHTML = `
@@ -670,7 +670,7 @@
           (range) => now > range.end && isWeekendBeforeEnd(range.end, now)
         );
 
-        if (pastVacation) {
+        if (pastVacation && !isMay1st && !isWeekBeforeMay1st) {
           // Week-end de fin de vacances
           vacationAlert.style.display = "block";
           vacationAlert.innerHTML = `
@@ -684,7 +684,7 @@
           return;
         }
 
-        if (upcomingVacation) {
+        if (upcomingVacation && !isMay1st && !isWeekBeforeMay1st) {
           const joursAvantVacances = Math.ceil(
             (upcomingVacation.start - now) / (1000 * 60 * 60 * 24)
           );

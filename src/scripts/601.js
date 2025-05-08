@@ -5,13 +5,6 @@ const destinationElement = document.getElementById("destination");
 
 let holidayDates = [];
 
-function formatDate(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
-
 function parseTime(timeString) {
   const [hour, minute] = timeString.split(":").map(Number);
   return { hour, minute };
@@ -23,12 +16,27 @@ async function fetchHolidayDates(year) {
       `https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`
     );
     const data = await response.json();
-    holidayDates = Object.values(data).map((date) =>
-      formatDate(new Date(date))
-    );
+    console.log("Données des jours fériés reçues :", data); // Log de débogage
+    holidayDates = Object.keys(data).map((dateStr) => {
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) {
+        console.error("Date invalide :", dateStr); // Log de débogage
+        return "NaN-NaN-NaN";
+      }
+      const formattedDate = formatDate(date);
+      console.log("Date formatée :", formattedDate); // Log de débogage
+      return formattedDate;
+    });
   } catch (error) {
-    console.error("Erreur lors du chargement des jours fériés :", error);
+    console.error("Erreur de récupération des jours fériés:", error);
   }
+}
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 async function fetchVacationDates(date) {
@@ -124,6 +132,9 @@ async function updateBusTimes() {
   const vacationDates = await fetchVacationDates(now);
   const isVacation = isDateInVacationRanges(now, vacationDates);
   const isLastWeek = isInLastWeekBeforeVacation(now, vacationDates);
+
+  // Définir isDay en fonction de l'heure actuelle
+  const isDay = now.getHours() >= 6 && now.getHours() < 18; // Par exemple, entre 6h et 18h
 
   const nextBusFreq = calculateNextBusTime(
     now.getDay(),

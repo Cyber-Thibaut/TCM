@@ -214,7 +214,40 @@
         },
       ];
 
-      function getEtatAgence(horaires) {
+      // Fonction pour récupérer les jours fériés depuis l'API
+      async function fetchHolidayDates(year) {
+        try {
+          const response = await fetch(
+            `https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`
+          );
+          const data = await response.json();
+          return Object.keys(data).map((date) => date);
+        } catch (error) {
+          console.error("Erreur de récupération des jours fériés:", error);
+          return [];
+        }
+      }
+
+      // Fonction pour vérifier si une date est un jour férié
+      function isHoliday(date, holidayDates) {
+        const formattedDate = formatDate(date);
+        return holidayDates.includes(formattedDate);
+      }
+
+      // Fonction pour vérifier si la date actuelle est le 1er mai
+      function isMay1st(date) {
+        return date.getMonth() === 4 && date.getDate() === 1; // Mai = 4
+      }
+
+      // Fonction pour formater une date en chaîne de caractères
+      function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
+
+      async function getEtatAgence(horaires) {
         const now = new Date();
         const jourSemaine = [
           "dimanche",
@@ -228,42 +261,95 @@
         const jourMois = now.getDate();
         const heureActuelle = now.getHours() * 60 + now.getMinutes();
 
-        let ouverture = null,
-          fermeture = null;
+        const holidayDates = await fetchHolidayDates(now.getFullYear());
 
-        if (horaires["1er"] && jourMois === 1) {
-          [ouverture, fermeture] = horaires["1er"];
-        } else if (horaires[jourSemaine]) {
-          [ouverture, fermeture] = horaires[jourSemaine];
-        }
-
-        if (!ouverture || !fermeture) return "Fermé";
-
-        const [hOuv, mOuv] = ouverture.split(":").map(Number);
-        const [hFerm, mFerm] = fermeture.split(":").map(Number);
-        const ouvertureMinutes = hOuv * 60 + mOuv;
-        const fermetureMinutes = hFerm * 60 + mFerm;
-
-        if (
-          heureActuelle < ouvertureMinutes ||
-          heureActuelle >= fermetureMinutes
-        ) {
+        // Vérifier si c'est le 1er mai
+        if (isMay1st(now)) {
           return "Fermé";
-        } else if (heureActuelle >= fermetureMinutes - 30) {
-          return "Bientôt Fermé";
-        } else {
-          return "Ouvert";
         }
+
+        // Vérifier si c'est un jour férié
+        if (isHoliday(now, holidayDates)) {
+          if (horaires.dimanche) {
+            const [ouverture, fermeture] = horaires.dimanche;
+            const [hOuv, mOuv] = ouverture.split(":").map(Number);
+            const [hFerm, mFerm] = fermeture.split(":").map(Number);
+            const ouvertureMinutes = hOuv * 60 + mOuv;
+            const fermetureMinutes = hFerm * 60 + mFerm;
+
+            if (
+              heureActuelle >= ouvertureMinutes &&
+              heureActuelle < fermetureMinutes
+            ) {
+              return "Ouvert";
+            } else if (
+              heureActuelle >= fermetureMinutes - 30 &&
+              heureActuelle < fermetureMinutes
+            ) {
+              return "Bientôt Fermé";
+            } else {
+              return "Fermé";
+            }
+          } else {
+            return "Fermé";
+          }
+        } else if (horaires["1er"] && jourMois === 1) {
+          const [ouverture, fermeture] = horaires["1er"];
+          const [hOuv, mOuv] = ouverture.split(":").map(Number);
+          const [hFerm, mFerm] = fermeture.split(":").map(Number);
+          const ouvertureMinutes = hOuv * 60 + mOuv;
+          const fermetureMinutes = hFerm * 60 + mFerm;
+
+          if (
+            heureActuelle >= ouvertureMinutes &&
+            heureActuelle < fermetureMinutes
+          ) {
+            return "Ouvert";
+          } else if (
+            heureActuelle >= fermetureMinutes - 30 &&
+            heureActuelle < fermetureMinutes
+          ) {
+            return "Bientôt Fermé";
+          } else {
+            return "Fermé";
+          }
+        } else if (horaires[jourSemaine]) {
+          const [ouverture, fermeture] = horaires[jourSemaine];
+          const [hOuv, mOuv] = ouverture.split(":").map(Number);
+          const [hFerm, mFerm] = fermeture.split(":").map(Number);
+          const ouvertureMinutes = hOuv * 60 + mOuv;
+          const fermetureMinutes = hFerm * 60 + mFerm;
+
+          if (
+            heureActuelle >= ouvertureMinutes &&
+            heureActuelle < fermetureMinutes
+          ) {
+            return "Ouvert";
+          } else if (
+            heureActuelle >= fermetureMinutes - 30 &&
+            heureActuelle < fermetureMinutes
+          ) {
+            return "Bientôt Fermé";
+          } else {
+            return "Fermé";
+          }
+        }
+
+        return "Fermé";
       }
 
-      function afficherAgences() {
+      async function afficherAgences() {
         const container = $("#agences");
         container.html("");
 
-        const etats = agences.map((agence) => ({
-          ...agence,
-          etat: getEtatAgence(agence.horaires),
-        }));
+        const holidayDates = await fetchHolidayDates(new Date().getFullYear());
+
+        const etats = await Promise.all(
+          agences.map(async (agence) => ({
+            ...agence,
+            etat: await getEtatAgence(agence.horaires),
+          }))
+        );
 
         const agencesAffichables = etats.filter(
           (a) => a.etat === "Ouvert" || a.etat === "Bientôt Fermé"
@@ -302,7 +388,7 @@
       }
 
       afficherAgences();
-      setInterval(afficherAgences(), 30000);
+      setInterval(afficherAgences, 30000);
     </script>
 
     <script>
@@ -621,7 +707,7 @@
                         1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464
                         0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                 </svg>
-                <span>⚠️ Aujourd’hui est le 1er mai. Le réseau TCM est fermé. Bonne fête à tous les travailleurs !</span>
+                <span>Aujourd’hui est le 1er mai. Le réseau TCM est fermé. Bonne fête à tous les travailleurs !</span>
               </div><br>`;
           } else {
             vacationAlert.innerHTML = `
@@ -632,7 +718,7 @@
                         1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464
                         0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                 </svg>
-                <span>⚠️ Attention : Le réseau TCM sera fermé le 1er mai. Bonne fête à tous les travailleurs !</span>
+                <span>Attention : Le réseau TCM sera fermé le 1er mai. Bonne fête à tous les travailleurs !</span>
               </div><br>`;
           }
           return;

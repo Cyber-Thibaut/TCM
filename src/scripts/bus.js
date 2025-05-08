@@ -11,18 +11,34 @@ const now = new Date();
 const hour = now.getHours();
 const minute = now.getMinutes();
 
+
 async function fetchHolidayDates(year) {
   try {
     const response = await fetch(
       `https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`
     );
     const data = await response.json();
-    holidayDates = Object.values(data).map((date) =>
-      formatDate(new Date(date))
-    );
+    console.log("Données des jours fériés reçues :", data); // Log de débogage
+    holidayDates = Object.keys(data).map((dateStr) => {
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) {
+        console.error("Date invalide :", dateStr); // Log de débogage
+        return "NaN-NaN-NaN";
+      }
+      const formattedDate = formatDate(date);
+      console.log("Date formatée :", formattedDate); // Log de débogage
+      return formattedDate;
+    });
   } catch (error) {
     console.error("Erreur de récupération des jours fériés:", error);
   }
+}
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 async function fetchVacationDates(date) {
@@ -57,11 +73,16 @@ function isDateInVacationRanges(date, ranges) {
 }
 
 function formatDate(date) {
+  if (isNaN(date.getTime())) {
+    console.error("Date invalide :", date); // Log de débogage
+    return "NaN-NaN-NaN";
+  }
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
+
 
 function getTimeSlot(hour, weekday, isHoliday, isVacation) {
   if (isHoliday || weekday === 0) {
@@ -204,6 +225,13 @@ async function updateBusTimes() {
   } else {
     alertMessage.innerHTML = "";
   }
+
+  // Logs de débogage
+  console.log("Date actuelle :", dateStr);
+  console.log("Jours fériés :", holidayDates);
+  console.log("Est-ce un jour férié ?", isHoliday);
+  console.log("Est-ce en vacances scolaires ?", isVacation);
+  console.log("Créneau horaire :", timeSlot);
 }
 
 async function init() {

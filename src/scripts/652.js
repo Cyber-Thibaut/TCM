@@ -23,11 +23,19 @@ async function fetchHolidayDates(year) {
       `https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`
     );
     const data = await response.json();
-    holidayDates = Object.values(data).map((date) =>
-      formatDate(new Date(date))
-    );
+    console.log("Données des jours fériés reçues :", data); // Log de débogage
+    holidayDates = Object.keys(data).map((dateStr) => {
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) {
+        console.error("Date invalide :", dateStr); // Log de débogage
+        return "NaN-NaN-NaN";
+      }
+      const formattedDate = formatDate(date);
+      console.log("Date formatée :", formattedDate); // Log de débogage
+      return formattedDate;
+    });
   } catch (error) {
-    console.error("Erreur lors du chargement des jours fériés :", error);
+    console.error("Erreur de récupération des jours fériés:", error);
   }
 }
 

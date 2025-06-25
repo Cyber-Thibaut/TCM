@@ -145,7 +145,7 @@
         },
         {
             "id": 13,
-            "nom" : "Haute-Ville <> Aéroport",
+            "nom": "Haute-Ville <> Aéroport",
             "type": "Erupt'Urbain - Puy-de-Dôme",
             "description": "La ligne 13 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie Haute-Ville à l'Aéroport, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à Haute-Ville, un quartier historique animé de Clermont-Ferrand, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont doux et accueillants, offrant aux passagers un voyage agréable dès le départ. Les grandes fenêtres permettent d'admirer les rues pavées et les bâtiments historiques de la ville.\nEn chemin vers l'Aéroport, la ligne 13 traverse plusieurs quartiers dynamiques de Clermont-Ferrand. Les passagers peuvent observer la vie quotidienne de la ville, avec ses commerces locaux, ses cafés animés et ses espaces verts accueillants.\nLe bus s'arrête ensuite à l'Aéroport, offrant aux passagers un accès direct et pratique aux vols nationaux et internationaux. Que ce soit pour les voyageurs arrivant ou partant de Clermont-Ferrand, cette ligne facilite les déplacements vers et depuis l'aéroport, leur permettant de poursuivre leur voyage en toute facilité.\nLa ligne 13 est connue pour sa fréquence élevée et ses horaires réguliers, assurant ainsi une disponibilité constante pour les utilisateurs. Que ce soit pour se rendre à l'aéroport pour un vol ou pour explorer la ville, la ligne 13 offre une solution de transport pratique et fiable.\nEn résumé, la ligne 13 du réseau urbain de Clermont-Ferrand relie Haute-Ville à l'Aéroport, offrant une connexion rapide et pratique pour les passagers. Avec son confort, sa connectivité et son engagement envers la communauté étudiante, la ligne 13 est un choix idéal pour se déplacer entre ces deux destinations clés de la ville. ",
             "stats": {
@@ -427,6 +427,70 @@
                 "nombre_arrets": 10,
                 "temps_trajet": "13 minutes",
                 "longueur_ligne": "3 km"
+            }
+        },
+        {
+            "id": "BEN1",
+            "nom": "Jaude",
+            "type": "Nocturne",
+            "description": "Le Bus de Nuit 1 (BEN1) est une ligne circulaire qui dessert les points clés de la vie nocturne, les résidences universitaires et les quartiers animés. Elle fonctionne en continu pour vous ramener en toute sécurité.",
+            "terminus": ["Ligne circulaire via le campus des Cézeaux"],
+            "circulation": {
+                "startHour": 21,
+                "endHour": 5,
+                "default_days": [4, 5, 6],
+                "default_text": "Circule les jeudis, vendredis et samedis soirs.",
+                "frequency": 30,
+                "special_periods": [
+                    {
+                        "start": "2025-07-05",
+                        "end": "2025-08-31",
+                        "text": "Horaires d'été",
+                        "days": [1, 2, 3, 4, 5, 6, 0],
+                        "frequency": {
+                            "weekday": 15,
+                            "saturday": 17,
+                            "sunday_holiday": 26
+                        }
+                    }
+                ]
+            },
+            "stats": {
+                "nombre_arrets": 17,
+                "temps_trajet": "104 minutes",
+                "longueur_ligne": "42,3 km"
+            }
+        },
+        {
+            "id": "BEN2",
+            "nom": "Montferrand <> Chamalières",
+            "type": "Nocturne",
+            "description": "Le Bus de Nuit 2 (BEN2) relie les zones résidentielles périphériques au centre-ville. Avec ses deux directions, il assure une couverture large pour que chacun puisse rentrer chez soi après une soirée.",
+            "terminus": ["Direction Montferrand (via Gare SNCF de Clermont-Ferrand)", "Direction Chamalières (via Gare SNCF de Clermont-Ferrand)"],
+            "circulation": {
+                "startHour": 21,
+                "endHour": 5,
+                "default_days": [4, 5, 6],
+                "default_text": "Circule les jeudis, vendredis et samedis soirs.",
+                "frequency": 45,
+                "special_periods": [
+                    {
+                        "start": "2025-07-05",
+                        "end": "2025-08-31",
+                        "text": "Horaires d'été",
+                        "days": [1, 2, 3, 4, 5, 6, 0],
+                        "frequency": {
+                            "weekday": 20,
+                            "saturday": 27,
+                            "sunday_holiday": 41
+                        }
+                    }
+                ]
+            },
+            "stats": {
+                "nombre_arrets": 35,
+                "temps_trajet": "45 minutes",
+                "longueur_ligne": "10 km"
             }
         }
     ]

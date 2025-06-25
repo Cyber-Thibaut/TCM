@@ -131,7 +131,14 @@
 
                 groupes[type].forEach(ligne => {
                     const carte = document.createElement("a");
-                    carte.href = `ligne.html#${ligne.id}`;
+
+                    // Définir le lien en fonction du type de ligne
+                    if (ligne.type === "Nocturne") {
+                        carte.href = `nocturne.html#${ligne.id}`;
+                    } else {
+                        carte.href = `ligne.html#${ligne.id}`;
+                    }
+                    
                     carte.classList.add("group", "p-4", "rounded-lg", "shadow-lg", "bg-primary-content", "hover:scale-105", "transition-transform", "duration-300", "cursor-pointer");
 
                     const contenu = `

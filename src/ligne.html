@@ -1,631 +1,475 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <!-- Métadonnées du site -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
-    />
-    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité" />
-    <meta name="author" content="Transport Clermont Métropole" />
-    <title>Transport Clermont Métropole</title>
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://tcm-mobilite.vercel.app/img/TCM.png"
-    />
+<head>
+  <!-- Métadonnées du site -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989." />
+  <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité" />
+  <meta name="author" content="Transport Clermont Métropole" />
+  <title>Transport Clermont Métropole</title>
 
-    <!-- Intégrations pour réseaux sociaux -->
-    <meta property="og:title" content="Transport Clermont Métropole" />
-    <meta
-      property="og:description"
-      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
-    />
-    <meta
-      property="og:image"
-      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
-    />
-    <meta property="og:url" content="https://tcm-mobilite.vercel.app/" />
-    <meta name="twitter:title" content="Transport Clermont Métropole" />
-    <meta
-      name="twitter:description"
-      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
-    />
-    <meta
-      name="twitter:image"
-      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
-    <!-- Couleur de fond pour l'intégration -->
-    <meta name="theme-color" content="#204BFE" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png" />
 
-    <link href="../dist/output.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Intégrations pour réseaux sociaux -->
+  <meta property="og:title" content="Transport Clermont Métropole" />
+  <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989." />
+  <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png" />
+  <meta property="og:url" content="https://tcm-mobilite.vercel.app/" />
+  <meta name="twitter:title" content="Transport Clermont Métropole" />
+  <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989." />
+  <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
+  <!-- Couleur de fond pour l'intégration -->
+  <meta name="theme-color" content="#204BFE" />
 
-    <script src="menu.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+  <link href="../dist/output.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@3.0.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <style>
-      .bouton-pdf:hover {
-        cursor: pointer;
-      }
-    </style>
-    <script>
-      document.addEventListener("contextmenu", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      document.addEventListener("copy", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      document.addEventListener("cut", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-    </script>
-    <style>
-      .jw-album-image img,
-      .jw-element-image img {
-        pointer-events: none;
-        -webkit-touch-callout: none;
-      }
+  <script src="menu.js"></script>
 
-      .pswp__share-tooltip .pswp__share--download {
-        display: none;
-      }
-    </style>
-  </head>
-  <body class="bg-base-100 text-base-content">
+  <style>
+    .bouton-pdf:hover {
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    document.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    document.addEventListener("copy", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    document.addEventListener("cut", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+  </script>
+  <style>
+    .jw-album-image img,
+    .jw-element-image img {
+      pointer-events: none;
+      -webkit-touch-callout: none;
+    }
+
+    .pswp__share-tooltip .pswp__share--download {
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="bg-base-100 text-base-content">
 
 
-    <div class="container mx-auto p-6 max-w-6xl">
-      <!-- Titre -->
-      <h1 id="pageTitle" class="text-5xl font-bold text-center text-primary mb-8 animate-slide-up"></h1>
+  <div class="container mx-auto p-6 max-w-6xl">
+    <!-- Titre -->
+    <h1 id="pageTitle" class="text-5xl font-bold text-center text-primary mb-8 animate-slide-up"></h1>
 
-      <!-- Détails et plan ligne -->
-      <div id="infos-ligne" class="mb-10"></div>
+    <!-- Détails et plan ligne -->
+    <div id="infos-ligne" class="mb-10"></div>
 
-      <!-- HERO Destination -->
-      <!-- Wrapper avec image de fond -->
-<div id="blocc" class="w-full relative rounded-xl shadow-xl overflow-hidden">
+    <!-- HERO Destination -->
+    <!-- Wrapper avec image de fond -->
+    <div id="blocc" class="w-full relative rounded-xl shadow-xl overflow-hidden">
 
-  <!-- Image de fond -->
-  <img
-    src="/img/trafic.jpg"
-    alt="fond transport"
-    class="absolute inset-0 w-full h-full object-cover opacity-50"
-  />
+      <!-- Image de fond -->
+      <img src="/img/trafic.jpg" alt="fond transport" class="absolute inset-0 w-full h-full object-cover opacity-50" />
 
-  <!-- Overlay contenant la destination & infos -->
-  <div class="relative text-white py-8 px-6 text-center backdrop-blur-sm bg-opacity-90" id="base-info">
-    <div class=" items-center">
-      <h2 id="destination" class="text-4xl md:text-5xl font-bold uppercase tracking-wide animate-fade-in"></h2>
-      <div id="lignes" class="   animate-fade-in"></div>
-    </div>
-  </div>
-
-</div>
-
-
-      <!-- Heure actuelle -->
-      <div id="current-time" class="text-center text-2xl text-secondary font-bold mt-6"></div>
-
-      <!-- Horaires -->
-      <div id="nextBusTime" class="flex flex-col lg:flex-row justify-center items-center gap-6 mt-6"></div>
-
-      <!-- Messages -->
-      <div class="space-y-4 mt-6">
-        <div id="infoMessage" class="hidden"></div>
-        <div id="alertMessage" class="hidden"></div>
+      <!-- Overlay contenant la destination & infos -->
+      <div class="relative text-white py-8 px-6 text-center backdrop-blur-sm bg-black bg-opacity-50" id="base-info">
+        <div class="flex flex-col items-center justify-center space-y-4">
+          <h2 id="destination" class="text-4xl md:text-5xl font-bold uppercase tracking-wide animate-fade-in"></h2>
+          <div id="lignes" class="w-full max-w-2xl animate-fade-in"></div>
+        </div>
       </div>
 
     </div>
-    <footer class="footer footer-center p-10 bg-neutral text-neutral-content mt-12">
-      <aside>
-        <img
-          src="/img/TCM-Clair.png"
-          width="160"
-          alt="Logo TCM"
-          class="mx-auto mb-2"
-        />
-        <p class="font-bold text-lg">Partenaire de vos déplacements depuis 1989</p>
-        <p class="text-sm">
-          &copy; <span id="year"></span> Transport Clermont Métropole. Tous droits réservés.
-        </p>
-      </aside>
-    </footer>
-  </body>
-  
-    <script
-      src="https://kit.fontawesome.com/d8bf012a3e.js"
-      crossorigin="anonymous"
-    ></script>
-    <br />
-    
-    <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
-    
-    <!-- Script JavaScript pour charger et afficher les données depuis le JSON -->
-    <script>
-      async function chargerInfosLigne(numeroLigne) {
-        try {
-          const response = await fetch("ligne.json");
-          const data = await response.json();
-    
-          const ligne =
-            numeroLigne === "NS"
-              ? data.lignes.find((l) => l.id === "NS")
-              : data.lignes.find((l) => l.id === parseInt(numeroLigne));
-    
-          if (!ligne) return console.error("Ligne non trouvée.");
-    
-          const container = document.createElement("div");
-          container.className = "max-w-4xl mx-auto my-10 space-y-8 animate-fade-in";
-    
-          // ————————— Titre avec logo
-          const header = document.createElement("div");
-          header.className = "flex items-center justify-center gap-4 text-center";
-    
-          const logo = document.createElement("img");
-          logo.src = `/img/${ligne.id}.png`;
-          logo.alt = `Ligne ${ligne.id}`;
-          logo.className = "w-16 h-16";
-    
-          const title = document.createElement("h2");
-          title.className =
-            "text-4xl lg:text-5xl font-bold text-primary";
-          title.textContent = ligne.nom;
-    
-          header.appendChild(logo);
-          header.appendChild(title);
-    
-          // ————————— Plan de ligne
-          const plan = document.createElement("img");
-          plan.src = `/img/plans/L${ligne.id}.png`;
-          plan.alt = `Plan de la ligne ${ligne.id}`;
-          plan.className =
-            "rounded-xl shadow-md w-full h-auto border border-base-300 dark:border-base-content/10";
-    
-          // ————————— Type de ligne
-          const type = document.createElement("div");
-          type.className = "badge badge-lg badge-outline badge-primary px-4 py-2 text-base";
-          type.textContent =
-            ligne.id === "NS"
-              ? "Navette Spéciale"
-              : ligne.type === "Spéciale"
-              ? "Ligne Spéciale"
-              : `Réseau ${ligne.type}`;
-    
-          // ————————— Stats
-          const stats = document.createElement("div");
-          stats.className =
-            "stats stats-vertical lg:stats-horizontal shadow bg-base-200 dark:bg-base-300 rounded-xl";
-    
-          const makeStat = (titre, valeur, desc = "") => {
-            const stat = document.createElement("div");
-            stat.className = "stat";
-            stat.innerHTML = `
-              <div class="stat-title">${titre}</div>
-              <div class="stat-value text-primary">${valeur}</div>
-              <div class="stat-desc">${desc}</div>`;
-            return stat;
-          };
-    
-          stats.appendChild(
-            makeStat("Nombre d'arrêts", ligne.stats.nombre_arrets)
-          );
-          stats.appendChild(makeStat("Temps de trajet", ligne.stats.temps_trajet));
-          stats.appendChild(
-            makeStat("Longueur de la ligne", ligne.stats.longueur_ligne)
-          );
-    
-          // ————————— Description
-          const description = document.createElement("div");
-          description.className = "prose dark:prose-invert max-w-none";
-          description.innerHTML = ligne.description.replace(/\n/g, "<br><br>");
-    
-          // ————————— Bouton PDF
-          const boutonPDF = document.createElement("button");
-          boutonPDF.className =
-            "btn btn-primary gap-2 text-white dark:text-base-content";
-          boutonPDF.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 16 18">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3" />
-            </svg>
-            Fiche horaire (PDF)
-          `;
-          boutonPDF.onclick = () => generatePDF();
-          boutonPDF.classList.add("bouton-pdf");
-    
-          // ————————— Montage final
-          container.appendChild(header);
-          container.appendChild(type);
-          container.appendChild(plan);
-          container.appendChild(stats);
-          container.appendChild(description);
-          container.appendChild(boutonPDF);
-    
-          document.getElementById("infos-ligne").appendChild(container);
-        } catch (error) {
-          console.error("Erreur lors du chargement des données :", error);
-        }
-      }
-    
-      // Récupération ligne depuis hash
-      const url = new URL(window.location.href);
-      const numeroLigne = url.hash.substring(1);
-      chargerInfosLigne(numeroLigne);
-    </script>
-    
-    <script>
-      const fragment = window.location.hash.replace("#", "");
-      let scriptName;
-    
-      if (/^NS/.test(fragment)) {
-        scriptName = "/src/scripts/NS.js";
-      } else if (/^6\d{2}/.test(fragment)) {
-        scriptName = `/src/scripts/${fragment}.js`;
-      } else if (/^9\d{2}/.test(fragment)) {
-        scriptName = `/src/scripts/${fragment}.js`;
-      } else {
-        scriptName = "/src/scripts/bus.js";
-      }
-    
-      const script = document.createElement("script");
-      script.src = scriptName;
-      script.onload = () => {
-        console.log("✅ Script chargé :", scriptName);
-    
-        // Lance init() manuellement si présent
-        if (typeof init === "function") {
-          console.log("🚀 Lancement manuel de init()");
-          init();
-        } else {
-          console.warn("⚠️ La fonction init() n'existe pas dans", scriptName);
-        }
+
+
+    <!-- Heure actuelle -->
+    <div id="current-time" class="text-center text-2xl text-secondary font-bold mt-6"></div>
+
+    <!-- Horaires -->
+    <div id="nextBusTime" class="flex flex-col lg:flex-row justify-center items-center gap-6 mt-6"></div>
+
+    <!-- Messages -->
+    <div class="space-y-4 mt-6">
+      <div id="infoMessage" class="hidden"></div>
+      <div id="alertMessage" class="hidden"></div>
+    </div>
+
+  </div>
+  <footer class="footer footer-center p-10 bg-neutral text-neutral-content mt-12">
+    <aside>
+      <img src="/img/TCM-Clair.png" width="160" alt="Logo TCM" class="mx-auto mb-2" />
+      <p class="font-bold text-lg">Partenaire de vos déplacements depuis 1989</p>
+      <p class="text-sm">
+        &copy; <span id="year"></span> Transport Clermont Métropole. Tous droits réservés.
+      </p>
+    </aside>
+  </footer>
+</body>
+
+<script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
+<br />
+
+<script>
+  // Fonction pour mettre à jour l'année
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Fonction pour charger et afficher les données depuis le JSON
+  async function chargerInfosLigne(numeroLigne) {
+    try {
+      const response = await fetch("ligne.json");
+      const data = await response.json();
+
+      const ligne = numeroLigne === "NS"
+        ? data.lignes.find((l) => l.id === "NS")
+        : data.lignes.find((l) => l.id === parseInt(numeroLigne));
+
+      if (!ligne) return console.error("Ligne non trouvée.");
+
+      const container = document.createElement("div");
+      container.className = "max-w-4xl mx-auto my-10 space-y-8 animate-fade-in";
+
+      // Titre avec logo
+      const header = document.createElement("div");
+      header.className = "flex items-center justify-center gap-4 text-center";
+
+      const logo = document.createElement("img");
+      logo.src = `/img/${ligne.id}.png`;
+      logo.alt = `Ligne ${ligne.id}`;
+      logo.className = "w-16 h-16";
+
+      const title = document.createElement("h2");
+      title.className = "text-4xl lg:text-5xl font-bold text-primary";
+      title.textContent = ligne.nom;
+
+      header.appendChild(logo);
+      header.appendChild(title);
+
+      // Plan de ligne
+      const plan = document.createElement("img");
+      plan.src = `/img/plans/L${ligne.id}.png`;
+      plan.alt = `Plan de la ligne ${ligne.id}`;
+      plan.className = "rounded-xl shadow-md w-full h-auto border border-base-300 dark:border-base-content/10";
+
+      // Type de ligne
+      const type = document.createElement("div");
+      type.className = "badge badge-lg badge-outline badge-primary px-4 py-2 text-base";
+      type.textContent = ligne.id === "NS" ? "Navette Spéciale" : ligne.type === "Spéciale" ? "Ligne Spéciale" : `Réseau ${ligne.type}`;
+
+      // Stats
+      const stats = document.createElement("div");
+      stats.className = "stats stats-vertical lg:stats-horizontal shadow bg-base-200 dark:bg-base-300 rounded-xl";
+
+      const makeStat = (titre, valeur, desc = "") => {
+        const stat = document.createElement("div");
+        stat.className = "stat";
+        stat.innerHTML = `
+                        <div class="stat-title">${titre}</div>
+                        <div class="stat-value text-primary">${valeur}</div>
+                        <div class="stat-desc">${desc}</div>`;
+        return stat;
       };
-      script.onerror = () => {
-        console.error("❌ Échec de chargement :", scriptName);
-      };
-      document.body.appendChild(script);
-    </script>
-    
-    
-    <script>
-      const urlinfo = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
-      //const urlinfo = "test.json";
-      // Fonction pour extraire l'ID de la ligne à partir de l'URL
-      function getLigneIDFromURL() {
-        const url = window.location.href;
-        const parts = url.split("#");
-        if (parts.length > 1) {
-          return parts[1];
-        }
-        return null;
-      }
 
-      let ligneID = getLigneIDFromURL();
+      stats.appendChild(makeStat("Nombre d'arrêts", ligne.stats.nombre_arrets));
+      stats.appendChild(makeStat("Temps de trajet", ligne.stats.temps_trajet));
+      stats.appendChild(makeStat("Longueur de la ligne", ligne.stats.longueur_ligne));
 
-      if (ligneID === "navette%20sp%C3%A9ciale") {
-        ligneID = "NS";
-      }
+      // Description
+      const description = document.createElement("div");
+      description.className = "prose dark:prose-invert max-w-none";
+      description.innerHTML = ligne.description.replace(/\n/g, "<br><br>");
 
-      // Affichage des informations de trafic
-      function afficherInfoTrafic() {
-        const dateActuelle = new Date();
-        let ligneTrouvee = false;
-
-        // Vérifier si l'ID de la ligne est null
-        if (ligneID === null) {
-          $("#lignes")
-            .html(`<div role="alert" class="alert alert-error"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Aucune ligne n'est sélectionnée. Vous êtes peut-être en mode "voyage astral". Merci de <a href="/src/reseau.html" class="text-blue-600 underline">revenir sur Terre</a> et de sélectionner une ligne pour afficher les informations de trafic.</span>
-                </div>`);
-          return;
-        }
-
-        $.getJSON(urlinfo, function (data) {
-          
-
-          $.each(data.lignes, function (i, ligne) {
-            if (ligne.ligne === ligneID) {
-              console.log("Ligne trouvée:", ligne.ligne, "ID attendu:", ligneID);
-              const infosTrafic = ligne.infos_trafic.filter((info) => {
-                const dateDebut = new Date(Date.parse(info.annonce));
-                const dateFin = new Date(Date.parse(info.fin));
-                dateFin.setDate(dateFin.getDate() + 1);
-                return dateActuelle >= dateDebut && dateActuelle <= dateFin;
-              });
-
-              if (infosTrafic.length > 0) {
-                console.log("infos trafic filtrés :", infosTrafic);
-
-                ligneTrouvee = true;
-
-                const card = $("<div>")
-                  .addClass("alert alert-error shadow-lg flex items-center justify-between gap-4 p-4")
-                  .attr("role", "alert");
-                
-                // Logo ligne
-                const logoLigne = $("<img>")
-                  .attr("src", "/img/" + ligne.ligne + ".png")
-                  .addClass("w-14 h-14 object-contain");
-                
-                // Texte simple
-                const infosCount = infosTrafic.length;
-                const infosText = infosCount === 1
-                  ? "1 info trafic en cours"
-                  : `${infosCount} infos trafic en cours`;
-                
-                const infoText = $("<span>")
-                  .addClass("text-white text-sm sm:text-base font-medium")
-                  .text(infosText);
-                
-                // Bouton vers détails
-                const viewButton = $("<button>")
-                  .addClass("btn btn-sm btn-outline btn-white")
-                  .html(`
-                    Voir les détails
-                    <svg class="ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
+      // Bouton PDF
+      const boutonPDF = document.createElement("button");
+      boutonPDF.className = "btn btn-primary gap-2 text-white dark:text-base-content w-full sm:w-auto";
+      boutonPDF.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 16 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3" />
                     </svg>
-                  `)
-                  .click(() => {
-                    window.location.href = "details.html#" + ligne.ligne;
-                  });
-                
-                // Construction
-                card.append(logoLigne, infoText, viewButton);
-                
-                if (ligneID === "NS") {
-                  $("#lignes").html(``);
-                  $("#blocc").addClass("hidden");
-                } else {
-                  $("#lignes").append(card);
-                }
-              }
-            }
+                    Fiche horaire (PDF)
+                `;
+      boutonPDF.onclick = generatePDF;
+      boutonPDF.classList.add("bouton-pdf");
+
+      // Montage final
+      container.appendChild(header);
+      container.appendChild(type);
+      container.appendChild(plan);
+      container.appendChild(stats);
+      container.appendChild(description);
+      container.appendChild(boutonPDF);
+
+      document.getElementById("infos-ligne").appendChild(container);
+    } catch (error) {
+      console.error("Erreur lors du chargement des données :", error);
+    }
+  }
+
+  // Récupération ligne depuis hash
+  const url = new URL(window.location.href);
+  const numeroLigne = url.hash.substring(1);
+  chargerInfosLigne(numeroLigne);
+
+  // Charger le script approprié en fonction du fragment
+  const fragment = window.location.hash.replace("#", "");
+  let scriptName;
+
+  if (/^NS/.test(fragment)) {
+    scriptName = "/src/scripts/NS.js";
+  } else if (/^6\d{2}/.test(fragment)) {
+    scriptName = `/src/scripts/${fragment}.js`;
+  } else if (/^9\d{2}/.test(fragment)) {
+    scriptName = `/src/scripts/${fragment}.js`;
+  } else {
+    scriptName = "/src/scripts/bus.js";
+  }
+
+  const script = document.createElement("script");
+  script.src = scriptName;
+  script.onload = () => {
+    console.log("Script chargé :", scriptName);
+    if (typeof init === "function") {
+      console.log("Lancement manuel de init()");
+      init();
+    } else {
+      console.warn("La fonction init() n'existe pas dans", scriptName);
+    }
+  };
+  script.onerror = () => {
+    console.error("Échec de chargement :", scriptName);
+  };
+  document.body.appendChild(script);
+
+  // Affichage des informations de trafic
+  const urlinfo = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
+
+  function getLigneIDFromURL() {
+    const url = window.location.href;
+    const parts = url.split("#");
+    if (parts.length > 1) {
+      return parts[1];
+    }
+    return null;
+  }
+
+  let ligneID = getLigneIDFromURL();
+
+  if (ligneID === "navette%20sp%C3%A9ciale") {
+    ligneID = "NS";
+  }
+
+  function afficherInfoTrafic() {
+    const dateActuelle = new Date();
+    let ligneTrouvee = false;
+
+    if (ligneID === null) {
+      $("#lignes").html(`<div role="alert" class="alert alert-error">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Aucune ligne n'est sélectionnée. Vous êtes peut-être en mode "voyage astral". Merci de <a href="/src/reseau.html" class="text-blue-600 underline">revenir sur Terre</a> et de sélectionner une ligne pour afficher les informations de trafic.</span>
+                </div>`);
+      return;
+    }
+
+    $.getJSON(urlinfo, function (data) {
+      $.each(data.lignes, function (i, ligne) {
+        if (ligne.ligne === ligneID) {
+          console.log("Ligne trouvée:", ligne.ligne, "ID attendu:", ligneID);
+          const infosTrafic = ligne.infos_trafic.filter((info) => {
+            const dateDebut = new Date(Date.parse(info.annonce));
+            const dateFin = new Date(Date.parse(info.fin));
+            dateFin.setDate(dateFin.getDate() + 1);
+            return dateActuelle >= dateDebut && dateActuelle <= dateFin;
           });
 
-          if (!ligneTrouvee) {
+          if (infosTrafic.length > 0) {
+            console.log("infos trafic filtrés :", infosTrafic);
+            ligneTrouvee = true;
+
+            const card = $("<div>")
+              .addClass("alert alert-error shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 p-4")
+              .attr("role", "alert");
+
+            const logoLigne = $("<img>")
+              .attr("src", "/img/" + ligne.ligne + ".png")
+              .addClass("w-12 h-12 sm:w-14 sm:h-14 object-contain flex-shrink-0");
+
+            const infosCount = infosTrafic.length;
+            const infosText = infosCount === 1 ? "1 info trafic en cours" : `${infosCount} infos trafic en cours`;
+
+            const infoText = $("<span>")
+              .addClass("text-white text-sm sm:text-base font-medium text-center sm:text-left flex-grow")
+              .text(infosText);
+
+            const viewButton = $("<button>")
+              .addClass("btn btn-sm btn-outline btn-white flex-shrink-0")
+              .html(`Voir les détails
+                                    <svg class="ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
+                                    </svg>`)
+              .click(() => {
+                window.location.href = "details.html#" + ligne.ligne;
+              });
+
+            card.append(logoLigne, infoText, viewButton);
+
             if (ligneID === "NS") {
               $("#lignes").html(``);
+              $("#blocc").addClass("hidden");
             } else {
-              $("#lignes")
-                .html(`<div role="alert" class="alert alert-success"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Aucune information de trafic à signaler pour la ligne ${ligneID}. Tout circule normalement.</span>
-                </div>`);
+              $("#lignes").append(card);
             }
           }
-        });
+        }
+      });
+
+      if (!ligneTrouvee) {
+        if (ligneID === "NS") {
+          $("#lignes").html(``);
+        } else {
+          $("#lignes").html(`<div role="alert" class="alert alert-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>Aucune information de trafic à signaler pour la ligne ${ligneID}. Tout circule normalement.</span>
+                        </div>`);
+        }
       }
+    });
+  }
 
-      afficherInfoTrafic();
-    </script>
-    <script>
-      function generatePDF() {
-        const ligneNumero = window.location.hash.substr(1);
-        fetch("data.json")
-          .then((response) => response.json())
-          .then((data) => {
-            const ligne = data.lignes.find((l) => l.numéro === ligneNumero);
-            if (ligne) {
-              const doc = new jsPDF({
-                orientation: "landscape",
-              });
+  afficherInfoTrafic();
 
-              const logo = new Image();
-              logo.src = `/img/${ligneNumero}.png`;
+  // Fonction pour générer le PDF
+  function generatePDF() {
+    
 
-              logo.onload = function () {
-                const logoWidth = 35; // Largeur du logo
-                const logoHeight = logoWidth * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
-
-                const background1 = new Image();
-                background1.src = "/img/pdf1.png"; // Chemin de la première image de fond
-
-                background1.onload = function () {
-                  doc.addImage(background1, "JPEG", 0, 0, 297, 210); // Ajoute le fond à la première page
-                  doc.addImage(logo, "PNG", 201, 20, logoWidth, logoHeight); // Ajoute le logo à la première page
-
-                  // Fonction pour ajuster la taille de la police
-                  function adjustFontSize(text, maxWidth, maxHeight, baseSize) {
-                    let fontSize = baseSize;
-                    doc.setFontSize(fontSize);
-                    let textLines = doc.splitTextToSize(text, maxWidth);
-                    let totalHeight = textLines.length * (fontSize * 1.5); // Facteur d'espacement des lignes
-
-                    // Réduire la taille de la police jusqu'à ce que le texte s'adapte
-                    while (totalHeight > maxHeight && fontSize > 5) {
-                      // 5 points comme taille minimum
-                      fontSize -= 1;
-                      doc.setFontSize(fontSize);
-                      textLines = doc.splitTextToSize(text, maxWidth);
-                      totalHeight = textLines.length * (fontSize * 1.5);
-                    }
-
-                    return textLines;
-                  }
-
-                  const maxDestinationWidth = 90; // Ajustez selon vos besoins
-                  const destinationText = ligne.destinations.join("\n<>\n");
-                  const destinationLines = adjustFontSize(
-                    destinationText,
-                    maxDestinationWidth,
-                    250,
-                    25
-                  ); // Ajustez maxHeight selon vos besoins
-                  doc.setTextColor(236, 230, 202);
-                  doc.text(205, 70, destinationLines);
-
-                  doc.setFontSize(20);
-                  doc.text(205, 130, `Réseau ${ligne.reseau}`);
-
-                  const maxDescriptionWidth = 75; // Ajustez selon vos besoins
-                  const descriptionText = ligne.description;
-                  const descriptionLines = adjustFontSize(
-                    descriptionText,
-                    maxDescriptionWidth,
-                    370,
-                    40
-                  ); // Ajustez maxHeight selon vos besoins
-                  doc.text(10, 155, descriptionLines);
-
-                  // Charge la deuxième image de fond
-                  const background2 = new Image();
-                  background2.src = "/img/pdf2.png"; // Chemin de la deuxième image de fond
-                  const logoWidth2 = 50; // Largeur du logo
-                  const logoHeight2 = logoWidth2 * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
-                  const planLigne = new Image();
-                  planLigne.src = `/img/plans/L${ligneNumero}.png`;
-
-                  const maxWidth = 307; // Largeur maximale de la page PDF (taille A4 en mm)
-                  const planWidth = maxWidth; // La largeur de l'image est égale à la largeur de la page PDF
-                  const planHeight = (maxWidth / 1907) * 458; // Calcul de la hauteur proportionnelle
-
-                  background2.onload = function () {
-                    doc.addPage(); // Ajoute une nouvelle page
-                    doc.addImage(background2, "JPEG", 0, 0, 297, 210); // Ajoute le fond à la deuxième page
-                    doc.addImage(logo, "PNG", 15, 155, logoWidth2, logoHeight2);
-                    doc.setFontSize(24.2);
-                    doc.text(230, 22.5, `${ligne.stats.nb_arrets}`);
-                    doc.text(230, 37.5, `${ligne.stats.duree_parcours}`);
-                    doc.text(230, 52.5, `${ligne.stats.distance}`);
-                    doc.addImage(
-                      planLigne,
-                      "PNG",
-                      -4,
-                      70,
-                      planWidth,
-                      planHeight
-                    ); // Ajoute le plan de ligne à la première page
-                    doc.setFontSize(15.3);
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(51, 36, `${ligne.horaires.jour_semaine.creuse}`);
-                    doc.setTextColor(236, 230, 202);
-                    doc.text(75, 36, `${ligne.horaires.jour_semaine.pointe}`);
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(109, 36, `${ligne.horaires.jour_semaine.creuse}`);
-                    doc.setTextColor(236, 230, 202);
-                    doc.text(153, 36, `${ligne.horaires.jour_semaine.pointe}`);
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(184, 36, `${ligne.horaires.jour_semaine.soir}`);
-                    doc.text(51, 42.5, `${ligne.horaires.samedi.creuse}`);
-                    doc.setTextColor(236, 230, 202);
-                    doc.text(75, 42.5, `${ligne.horaires.samedi.pointe}`);
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(109, 42.5, `${ligne.horaires.samedi.creuse}`);
-                    doc.setTextColor(236, 230, 202);
-                    doc.text(153, 42.5, `${ligne.horaires.samedi.pointe}`);
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(184, 42.5, `${ligne.horaires.samedi.soir}`);
-                    doc.text(51, 49, `${ligne.horaires.dimanche.creuse}`);
-                    doc.setTextColor(236, 230, 202);
-                    doc.text(75, 49, `${ligne.horaires.dimanche.pointe}`);
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(139, 49, `${ligne.horaires.dimanche.creuse}`);
-                    doc.text(
-                      131,
-                      179,
-                      `${ligne.horaires.vacances.jour_semaine.creuse}`
-                    );
-                    doc.setTextColor(236, 230, 202);
-                    doc.text(
-                      155,
-                      179,
-                      `${ligne.horaires.vacances.jour_semaine.pointe}`
-                    );
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(
-                      189,
-                      179,
-                      `${ligne.horaires.vacances.jour_semaine.creuse}`
-                    );
-                    doc.setTextColor(236, 230, 202);
-                    doc.text(
-                      233,
-                      179,
-                      `${ligne.horaires.vacances.jour_semaine.pointe}`
-                    );
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(
-                      264,
-                      179,
-                      `${ligne.horaires.vacances.jour_semaine.soir}`
-                    );
-                    doc.text(
-                      131,
-                      185.5,
-                      `${ligne.horaires.vacances.samedi.creuse}`
-                    );
-                    doc.setTextColor(236, 230, 202);
-                    doc.text(
-                      155,
-                      185.5,
-                      `${ligne.horaires.vacances.samedi.pointe}`
-                    );
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(
-                      189,
-                      185.5,
-                      `${ligne.horaires.vacances.samedi.creuse}`
-                    );
-                    doc.setTextColor(236, 230, 202);
-                    doc.text(
-                      233,
-                      185.5,
-                      `${ligne.horaires.vacances.samedi.pointe}`
-                    );
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(
-                      264,
-                      185.5,
-                      `${ligne.horaires.vacances.samedi.soir}`
-                    );
-                    doc.text(
-                      131,
-                      192,
-                      `${ligne.horaires.vacances.dimanche.creuse}`
-                    );
-                    doc.setTextColor(236, 230, 202);
-                    doc.text(
-                      155,
-                      192,
-                      `${ligne.horaires.vacances.dimanche.pointe}`
-                    );
-                    doc.setTextColor(25, 64, 89);
-                    doc.text(
-                      219,
-                      192,
-                      `${ligne.horaires.vacances.dimanche.creuse}`
-                    );
-
-                    doc.save(
-                      `TCM_fiche_horaire_ligne_${ligneNumero}_2024-2025.pdf`
-                    );
-                  };
-                };
-              };
-            } else {
-              alert(
-                "Aucune fiche horaire n'a été trouvée pour cette ligne. Veuillez nous excuser pour la gêne occasionnée."
-              );
-            }
-          })
-          .catch((error) => {
-            console.error("Erreur :", error);
+    const ligneNumero = window.location.hash.substr(1);
+    fetch("data.json")
+      .then((response) => response.json())
+      .then((data) => {
+        const ligne = data.lignes.find((l) => l.numéro === ligneNumero);
+        if (ligne) {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF({
+            orientation: "landscape",
           });
-      }
-    </script>
-  </body>
+
+          const logo = new Image();
+          logo.src = `/img/${ligneNumero}.png`;
+
+          logo.onload = function () {
+            const logoWidth = 35;
+            const logoHeight = logoWidth * (logo.height / logo.width);
+
+            const background1 = new Image();
+            background1.src = "/img/pdf1.png";
+
+            background1.onload = function () {
+              doc.addImage(background1, "JPEG", 0, 0, 297, 210);
+              doc.addImage(logo, "PNG", 201, 20, logoWidth, logoHeight);
+
+              function adjustFontSize(text, maxWidth, maxHeight, baseSize) {
+                let fontSize = baseSize;
+                doc.setFontSize(fontSize);
+                let textLines = doc.splitTextToSize(text, maxWidth);
+                let totalHeight = textLines.length * (fontSize * 1.5);
+
+                while (totalHeight > maxHeight && fontSize > 5) {
+                  fontSize -= 1;
+                  doc.setFontSize(fontSize);
+                  textLines = doc.splitTextToSize(text, maxWidth);
+                  totalHeight = textLines.length * (fontSize * 1.5);
+                }
+
+                return textLines;
+              }
+
+              const maxDestinationWidth = 90;
+              const destinationText = ligne.destinations.join("\n<>\n");
+              const destinationLines = adjustFontSize(destinationText, maxDestinationWidth, 250, 25);
+              doc.setTextColor(236, 230, 202);
+              doc.text(205, 70, destinationLines);
+
+              doc.setFontSize(20);
+              doc.text(205, 130, `Réseau ${ligne.reseau}`);
+
+              const maxDescriptionWidth = 75;
+              const descriptionText = ligne.description;
+              const descriptionLines = adjustFontSize(descriptionText, maxDescriptionWidth, 370, 40);
+              doc.text(10, 155, descriptionLines);
+
+              const background2 = new Image();
+              background2.src = "/img/pdf2.png";
+              const logoWidth2 = 50;
+              const logoHeight2 = logoWidth2 * (logo.height / logo.width);
+              const planLigne = new Image();
+              planLigne.src = `/img/plans/L${ligneNumero}.png`;
+
+              const maxWidth = 307;
+              const planWidth = maxWidth;
+              const planHeight = (maxWidth / 1907) * 458;
+
+              background2.onload = function () {
+                doc.addPage();
+                doc.addImage(background2, "JPEG", 0, 0, 297, 210);
+                doc.addImage(logo, "PNG", 15, 155, logoWidth2, logoHeight2);
+                doc.setFontSize(24.2);
+                doc.text(230, 22.5, `${ligne.stats.nb_arrets}`);
+                doc.text(230, 37.5, `${ligne.stats.duree_parcours}`);
+                doc.text(230, 52.5, `${ligne.stats.distance}`);
+                doc.addImage(planLigne, "PNG", -4, 70, planWidth, planHeight);
+                doc.setFontSize(15.3);
+                doc.setTextColor(25, 64, 89);
+                doc.text(51, 36, `${ligne.horaires.jour_semaine.creuse}`);
+                doc.setTextColor(236, 230, 202);
+                doc.text(75, 36, `${ligne.horaires.jour_semaine.pointe}`);
+                doc.setTextColor(25, 64, 89);
+                doc.text(109, 36, `${ligne.horaires.jour_semaine.creuse}`);
+                doc.setTextColor(236, 230, 202);
+                doc.text(153, 36, `${ligne.horaires.jour_semaine.pointe}`);
+                doc.setTextColor(25, 64, 89);
+                doc.text(184, 36, `${ligne.horaires.jour_semaine.soir}`);
+                doc.setTextColor(236, 230, 202);
+                doc.text(51, 42.5, `${ligne.horaires.samedi.creuse}`);
+                doc.setTextColor(25, 64, 89);
+                doc.text(75, 42.5, `${ligne.horaires.samedi.pointe}`);
+                doc.setTextColor(236, 230, 202);
+                doc.text(109, 42.5, `${ligne.horaires.samedi.creuse}`);
+                doc.setTextColor(25, 64, 89);
+                doc.text(153, 42.5, `${ligne.horaires.samedi.pointe}`);
+                doc.setTextColor(236, 230, 202);
+                doc.text(184, 42.5, `${ligne.horaires.samedi.soir}`);
+                doc.text(51, 49, `${ligne.horaires.dimanche.creuse}`);
+                doc.setTextColor(25, 64, 89);
+                doc.text(75, 49, `${ligne.horaires.dimanche.pointe}`);
+                doc.setTextColor(236, 230, 202);
+                doc.text(139, 49, `${ligne.horaires.dimanche.creuse}`);
+                doc.save(`TCM_fiche_horaire_ligne_${ligneNumero}_2024-2025.pdf`);
+              };
+            };
+          };
+        } else {
+          alert("Aucune fiche horaire n'a été trouvée pour cette ligne. Veuillez nous excuser pour la gêne occasionnée.");
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur :", error);
+        alert("Erreur lors du chargement des données pour la génération du PDF.");
+      });
+  }
+</script>
+</body>
+
 </html>

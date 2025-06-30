@@ -4,6 +4,7 @@ const currentTimeElement = document.getElementById("current-time");
 const destinationElement = document.getElementById("destination");
 
 let holidayDates = [];
+let lineDetailsData = null;
 
 function formatDate(date) {
   const year = date.getFullYear();
@@ -123,6 +124,272 @@ function isInLastWeekBeforeVacation(now, vacationRanges) {
     oneWeekBefore.setDate(start.getDate() - 7);
     return now >= oneWeekBefore && now < start;
   });
+}
+
+async function fetchLineDetails(lineNumber) {
+  try {
+    const response = await fetch("ligne.json");
+    const data = await response.json();
+    const line = data.lignes.find((l) => l.id === parseInt(lineNumber));
+    if (!line)
+      throw new Error(`Détails non trouvés pour la ligne ${lineNumber}`);
+    return line;
+  } catch (err) {
+    console.error("Erreur chargement détails ligne:", err);
+    return null;
+  }
+}
+
+function renderLineDetails(ligne) {
+  const container = document.getElementById("infos-ligne");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const header = document.createElement("div");
+  header.className = "flex items-center justify-center gap-4 text-center mb-8";
+  
+  // Logo TCM
+  const logoTCM = document.createElement("img");
+  logoTCM.src = `/img/TCM.png`;
+  logoTCM.alt = `Logo TCM`;
+  logoTCM.className = "w-16 h-16";
+  
+  const logo = document.createElement("img");
+  logo.src = `/img/${ligne.id}.png`;
+  logo.alt = `Ligne ${ligne.id}`;
+  logo.className = "w-20 h-20";
+  
+  const title = document.createElement("h2");
+  title.className = "text-4xl lg:text-5xl font-bold text-primary";
+  title.textContent = ligne.nom;
+  
+  header.appendChild(logoTCM);
+  header.appendChild(logo);
+  header.appendChild(title);
+  container.appendChild(header);
+
+  // Plan de ligne en pleine largeur avec titre amélioré
+  const planContainer = document.createElement("div");
+  planContainer.className = "mb-12";
+  
+  const planTitle = document.createElement("h3");
+  planTitle.className = "text-2xl font-bold mb-6 text-center text-primary flex items-center justify-center gap-3";
+  planTitle.innerHTML = `
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+    </svg>
+    Plan de la ligne
+  `;
+  planContainer.appendChild(planTitle);
+  
+  const plan = document.createElement("img");
+  plan.src = `/img/plans/L${ligne.id}.png`;
+  plan.alt = `Plan de la ligne ${ligne.id}`;
+  plan.className =
+    "rounded-xl shadow-lg w-full h-auto border border-base-300 dark:border-base-content/10 transition-transform hover:scale-105";
+  plan.style.maxHeight = "400px";
+  plan.style.objectFit = "contain";
+  planContainer.appendChild(plan);
+  
+  // Section des horaires scolaires - Extraction dynamique depuis les fonctions
+  const schedulesSection = document.createElement("div");
+  schedulesSection.className = "mb-12";
+  
+  const schedulesContainer = document.createElement("div");
+  schedulesContainer.className = "bg-base-100 dark:bg-base-200 rounded-xl shadow-lg p-6";
+  
+  const schedulesTitle = document.createElement("h3");
+  schedulesTitle.className = "text-2xl font-bold mb-6 text-center text-primary flex items-center justify-center gap-3";
+  schedulesTitle.innerHTML = `
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    Horaires de passage
+  `;
+  schedulesContainer.appendChild(schedulesTitle);
+  
+  // Extraction des horaires depuis les fonctions calculateNextBusTime et calculateFollowingBusTime
+  const getSchedulesData = () => {
+    // Horaires du 1er car (calculateNextBusTime)
+    const firstCarSchedules = {
+      3: { morning: "07:15", evening: "12:45" }, // Mercredi
+      default: { morning: "07:15", evening: "16:45" },
+    };
+    
+    // Horaires du 2e car (calculateFollowingBusTime) 
+    const secondCarSchedules = {
+      3: { morning: "08:30", evening: "18:00" }, // Mercredi
+      default: { morning: "08:30", evening: "18:30" },
+    };
+    
+    return { firstCarSchedules, secondCarSchedules };
+  };
+  
+  const { firstCarSchedules, secondCarSchedules } = getSchedulesData();
+  
+  const scheduleGrid = document.createElement("div");
+  scheduleGrid.className = "grid grid-cols-1 lg:grid-cols-2 gap-6";
+  
+  // Direction Aller
+  const directionAller = document.createElement("div");
+  directionAller.className = "bg-base-200 dark:bg-base-300 rounded-lg p-4";
+  directionAller.innerHTML = `
+    <h4 class="text-lg font-semibold mb-4 text-primary flex items-center gap-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+      </svg>
+      Direction Aller
+    </h4>
+    <div class="space-y-3">
+      <div class="bg-base-100 dark:bg-base-200 rounded-lg p-3">
+        <div class="text-sm font-medium text-base-content/70 mb-2">Lundi - Mardi - Jeudi - Vendredi</div>
+        <div class="flex gap-2 flex-wrap">
+          <span class="badge badge-primary badge-lg">Car 1: ${firstCarSchedules.default.morning}</span>
+          <span class="badge badge-secondary badge-lg">Car 2: ${secondCarSchedules.default.morning}</span>
+        </div>
+        <div class="text-xs text-base-content/60 mt-1">2 cars disponibles le matin</div>
+      </div>
+      <div class="bg-base-100 dark:bg-base-200 rounded-lg p-3">
+        <div class="text-sm font-medium text-base-content/70 mb-2">Mercredi</div>
+        <div class="flex gap-2 flex-wrap">
+          <span class="badge badge-primary badge-lg">Car 1: ${firstCarSchedules[3].morning}</span>
+          <span class="badge badge-secondary badge-lg">Car 2: ${secondCarSchedules[3].morning}</span>
+        </div>
+        <div class="text-xs text-base-content/60 mt-1">2 cars disponibles le matin</div>
+      </div>
+    </div>
+  `;
+  
+  // Direction Retour
+  const directionRetour = document.createElement("div");
+  directionRetour.className = "bg-base-200 dark:bg-base-300 rounded-lg p-4";
+  directionRetour.innerHTML = `
+    <h4 class="text-lg font-semibold mb-4 text-primary flex items-center gap-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+      </svg>
+      Direction Retour
+    </h4>
+    <div class="space-y-3">
+      <div class="bg-base-100 dark:bg-base-200 rounded-lg p-3">
+        <div class="text-sm font-medium text-base-content/70 mb-2">Lundi - Mardi - Jeudi - Vendredi</div>
+        <div class="flex gap-2 flex-wrap">
+          <span class="badge badge-accent badge-lg">Car 1: ${firstCarSchedules.default.evening}</span>
+          <span class="badge badge-info badge-lg">Car 2: ${secondCarSchedules.default.evening}</span>
+        </div>
+        <div class="text-xs text-base-content/60 mt-1">2 cars disponibles le soir</div>
+      </div>
+      <div class="bg-base-100 dark:bg-base-200 rounded-lg p-3">
+        <div class="text-sm font-medium text-base-content/70 mb-2">Mercredi</div>
+        <div class="flex gap-2 flex-wrap">
+          <span class="badge badge-accent badge-lg">Car 1: ${firstCarSchedules[3].evening}</span>
+          <span class="badge badge-info badge-lg">Car 2: ${secondCarSchedules[3].evening}</span>
+        </div>
+        <div class="text-xs text-base-content/60 mt-1">2 cars disponibles le soir</div>
+      </div>
+    </div>
+  `;
+  
+  scheduleGrid.appendChild(directionAller);
+  scheduleGrid.appendChild(directionRetour);
+  schedulesContainer.appendChild(scheduleGrid);
+  
+  // Notice importante
+  const scheduleNotice = document.createElement("div");
+  scheduleNotice.className = "mt-4 p-3 bg-warning/20 text-warning-content rounded-lg text-center";
+  scheduleNotice.innerHTML = `
+    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    Horaires valides uniquement en periode scolaire - 4 cars quotidiens
+  `;
+  schedulesContainer.appendChild(scheduleNotice);
+  
+  schedulesSection.appendChild(schedulesContainer);
+  planContainer.appendChild(schedulesSection);
+  container.appendChild(planContainer);
+
+  // Section des statistiques en cartes
+  const statsSection = document.createElement("div");
+  statsSection.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8";
+
+  // Badge type de ligne
+  const typeCard = document.createElement("div");
+  typeCard.className = "card bg-primary/10 dark:bg-primary/20 border border-primary/20";
+  typeCard.innerHTML = `
+    <div class="card-body p-4 text-center">
+      <div class="badge badge-primary badge-lg px-4 py-3 text-sm font-semibold w-full">
+        Transport Scolaire
+      </div>
+    </div>
+  `;
+  statsSection.appendChild(typeCard);
+
+  // Statistiques de ligne
+  if (ligne.stats) {
+    const stats = [
+      { titre: "Arrêts", valeur: ligne.stats.nombre_arrets || "N/A", icone: "M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M9 10l-4.553-2.276A1 1 0 013 8.618v6.764a1 1 0 001.447.894L9 14" },
+      { titre: "Temps de trajet", valeur: ligne.stats.temps_trajet || "N/A", icone: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
+      { titre: "Distance", valeur: ligne.stats.longueur_ligne || "N/A", icone: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" }
+    ];
+
+    stats.forEach(stat => {
+      const statCard = document.createElement("div");
+      statCard.className = "card bg-base-200 dark:bg-base-300 border border-base-300 dark:border-base-content/10";
+      statCard.innerHTML = `
+        <div class="card-body p-4">
+          <div class="flex items-center gap-3 mb-2">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${stat.icone}"></path>
+            </svg>
+            <div class="text-sm font-medium text-base-content/70">${stat.titre}</div>
+          </div>
+          <div class="text-2xl font-bold text-primary">${stat.valeur}</div>
+        </div>
+      `;
+      statsSection.appendChild(statCard);
+    });
+  }
+
+  container.appendChild(statsSection);
+
+  // Description
+  if (ligne.description) {
+    const description = document.createElement("div");
+    description.className = "prose max-w-none mb-8";
+    description.innerHTML = `<p class="text-lg text-base-content/80 leading-relaxed">${ligne.description}</p>`;
+    container.appendChild(description);
+  }
+
+  // Bouton PDF en bas
+  const pdfButton = document.createElement("div");
+  pdfButton.className = "text-center";
+  pdfButton.innerHTML = `
+    <button id="pdf-button" class="btn btn-primary btn-lg gap-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+      </svg>
+      Télécharger la fiche horaire PDF
+    </button>
+  `;
+  
+  const pdfBtn = pdfButton.querySelector('#pdf-button');
+  pdfBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (typeof generatePDF === "function") {
+      generatePDF(ligne.id);
+    } else {
+      console.error("generatePDF is not defined. Is pdf.js loaded?");
+      alert("La fonction de génération de PDF n'est pas disponible.");
+    }
+  });
+  
+  container.appendChild(pdfButton);
+
+  // Mettre à jour l'élément destination si il existe
+  if (destinationElement) {
+    destinationElement.textContent = ligne.destination || `Ligne ${ligne.id}`;
+  }
 }
 
 async function updateBusTimes() {
@@ -258,11 +525,130 @@ function updateCurrentTime() {
   currentTimeElement.textContent = `Dernière mise à jour : ${hours}:${minutes}`;
 }
 
+async function fetchTrafficData() {
+  try {
+    const response = await fetch("https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json");
+    //const response = await fetch("test.json");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erreur de récupération des informations de trafic:", error);
+    return null;
+  }
+}
+
+function renderTrafficInfo(trafficData) {
+  let container = document.getElementById("traffic-info");
+  if (!container) {
+    // Créer le conteneur s'il n'existe pas
+    container = document.createElement("div");
+    container.id = "traffic-info";
+    container.className = "mb-8";
+
+    // L'insérer après l'élément infos-ligne
+    const infosLigne = document.getElementById("infos-ligne");
+    if (infosLigne && infosLigne.parentNode) {
+      infosLigne.parentNode.insertBefore(container, infosLigne.nextSibling);
+    } else {
+      // Fallback : l'ajouter au body
+      document.body.appendChild(container);
+    }
+  } else {
+    container.innerHTML = "";
+  }
+
+  // Utiliser la même logique que trafic.html
+  if (trafficData && trafficData.lignes) {
+    const now = new Date();
+    let infosActivesCount = 0;
+
+    // Filtrer les lignes 651
+    const lignes651 = trafficData.lignes.filter((ligne) => ligne.ligne === "651");
+
+    lignes651.forEach((ligne) => {
+      if (ligne.infos_trafic) {
+        const infosActives = ligne.infos_trafic.filter(
+          (info) => now >= new Date(info.annonce) && now <= new Date(info.fin)
+        );
+        infosActivesCount += infosActives.length;
+      }
+    });
+
+    // Créer l'encart d'info trafic
+    const trafficCard = document.createElement("div");
+    trafficCard.className = "mb-4";
+
+    if (infosActivesCount > 0) {
+      const incidentText =
+        infosActivesCount === 1
+          ? `${infosActivesCount} incident impacte la ligne`
+          : `${infosActivesCount} incidents impactent la ligne`;
+
+      trafficCard.innerHTML =
+        '<div role="alert" class="alert alert-error shadow-lg">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">' +
+        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />' +
+        "</svg>" +
+        "<div>" +
+        '<h3 class="font-bold">Perturbation sur la ligne 651</h3>' +
+        '<div class="text-xs">' + incidentText + "</div>" +
+        "</div>" +
+        '<div>' +
+        '<a href="details.html#651" class="btn btn-sm btn-error">' +
+        "Plus d'infos" +
+        '</a>' +
+        "</div>" +
+        "</div>";
+    } else {
+      trafficCard.innerHTML =
+        '<div role="alert" class="alert alert-success shadow-lg">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">' +
+        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />' +
+        "</svg>" +
+        "<div>" +
+        '<h3 class="font-bold">Trafic normal sur la ligne 651</h3>' +
+        '<div class="text-xs">Aucune perturbation signalée pour cette ligne</div>' +
+        "</div>" +
+        "</div>";
+    }
+
+    container.appendChild(trafficCard);
+  }
+}
+
 async function initialize() {
   const now = new Date();
   await fetchHolidayDates(now.getFullYear());
+  
+  // Charger les détails de la ligne 651
+  const lineNumber = "651";
+  lineDetailsData = await fetchLineDetails(lineNumber);
+  if (lineDetailsData) {
+    renderLineDetails(lineDetailsData);
+  } else {
+    // Fallback avec données par défaut
+    const defaultLine = {
+      id: 651,
+      nom: "Lycée Blaise Pascal <> NAUBOURG Grand-Place",
+      type: "Édu'Volcan",
+      stats: {
+        nombre_arrets: 8,
+        temps_trajet: "60 minutes",
+        longueur_ligne: "37 km"
+      }
+    };
+    renderLineDetails(defaultLine);
+  }
+  
   updateBusTimes();
   updateCurrentTime();
+  
+  // Charger et afficher les informations de trafic
+  const trafficData = await fetchTrafficData();
+  if (trafficData) {
+    renderTrafficInfo(trafficData);
+  }
+  
   setInterval(updateBusTimes, 30000);
   setInterval(updateCurrentTime, 1000);
 }

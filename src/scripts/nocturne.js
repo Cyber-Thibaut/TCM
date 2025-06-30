@@ -141,52 +141,61 @@ document.addEventListener("DOMContentLoaded", async () => {
             <!-- Les décomptes seront injectés ici -->
         </div>
 
+        <!-- Plan de la ligne -->
+        <div class="card glass shadow-xl p-4 transition-transform hover:scale-105 mb-8 animate-fade-in" style="animation-delay: 0.4s;">
+            <h2 class="text-2xl font-bold mb-4 text-center text-white">Plan de la ligne</h2>
+            <figure><img src="/img/plans/${ligne.id}.png" alt="Plan de la ligne ${ligne.id}" class="w-full h-full object-contain rounded-lg shadow-lg" onerror="this.onerror=null;this.src='/img/plans/LNS.png';"></figure>
+        </div>
+
         <!-- Grille d'informations -->
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-            <!-- Colonne principale (Plan et Description) -->
-            <div class="lg:col-span-3 space-y-8 animate-fade-in" style="animation-delay: 0.4s;">
-                <div class="card glass shadow-xl p-4 transition-transform hover:scale-105 h-full flex flex-col">
-                    <h2 class="text-2xl font-bold mb-4 text-center text-white">Plan de la ligne</h2>
-                    <figure class="flex-grow"><img src="/img/plans/${ligne.id}.png" alt="Plan de la ligne ${ligne.id}" class="w-full h-full object-contain rounded-lg shadow-lg" onerror="this.onerror=null;this.src='/img/plans/LNS.png';"></figure>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in" style="animation-delay: 0.6s;">
+            
+            <!-- À savoir -->
+            <div class="card glass shadow-xl transition-transform hover:scale-105 h-full">
+                <div class="card-body">
+                    <h2 class="card-title text-white"><i class="fa-solid fa-circle-info mr-3 text-info"></i> À savoir</h2>
+                    <p class="text-white/80">${ligne.description}</p>
                 </div>
             </div>
 
-            <!-- Colonne latérale (Infos, Circulation, Stats) -->
-            <div class="lg:col-span-2 space-y-8 animate-fade-in" style="animation-delay: 0.6s;">
-                <div class="card glass shadow-xl transition-transform hover:scale-105">
-                    <div class="card-body">
-                        <h2 class="card-title text-white"><i class="fa-solid fa-circle-info mr-3 text-info"></i> À savoir</h2>
-                        <p class="text-white/80">${ligne.description}</p>
-                    </div>
+            <!-- Jours de circulation -->
+            <div id="circulation-container" class="card glass shadow-xl transition-transform hover:scale-105 h-full">
+                <div class="card-body">
+                    <h2 class="card-title text-white"><i class="fa-solid fa-calendar-days mr-3 text-accent"></i> Jours de circulation</h2>
+                    <p class="text-white/80">${circulationText}</p>
                 </div>
-                <div id="circulation-container" class="card glass shadow-xl transition-transform hover:scale-105">
-                    <div class="card-body">
-                        <h2 class="card-title text-white"><i class="fa-solid fa-calendar-days mr-3 text-accent"></i> Jours de circulation</h2>
-                        <p class="text-white/80">${circulationText}</p>
-                    </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats stats-vertical shadow w-full glass transition-transform hover:scale-105">
+                <div class="stat">
+                    <div class="stat-figure text-primary"><i class="fa-solid fa-signs-post text-3xl"></i></div>
+                    <div class="stat-title text-white/80">Arrêts</div>
+                    <div class="stat-value text-white">${ligne.stats.nombre_arrets}</div>
                 </div>
-                <div class="stats stats-vertical shadow w-full glass transition-transform hover:scale-105">
-                    <div class="stat">
-                        <div class="stat-figure text-primary"><i class="fa-solid fa-signs-post text-3xl"></i></div>
-                        <div class="stat-title text-white/80">Arrêts</div>
-                        <div class="stat-value text-white">${ligne.stats.nombre_arrets}</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-figure text-secondary"><i class="fa-solid fa-clock text-3xl"></i></div>
-                        <div class="stat-title text-white/80">Trajet</div>
-                        <div class="stat-value text-white">${ligne.stats.temps_trajet}</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-figure text-accent"><i class="fa-solid fa-route text-3xl"></i></div>
-                        <div class="stat-title text-white/80">Longueur</div>
-                        <div class="stat-value text-white">${ligne.stats.longueur_ligne}</div>
-                    </div>
+                <div class="stat">
+                    <div class="stat-figure text-secondary"><i class="fa-solid fa-clock text-3xl"></i></div>
+                    <div class="stat-title text-white/80">Trajet</div>
+                    <div class="stat-value text-white">${ligne.stats.temps_trajet}</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-figure text-accent"><i class="fa-solid fa-route text-3xl"></i></div>
+                    <div class="stat-title text-white/80">Longueur</div>
+                    <div class="stat-value text-white">${ligne.stats.longueur_ligne}</div>
                 </div>
             </div>
         </div>
     </div>
     `;
     startCountdown(ligne);
+    
+    // Ajouter le gestionnaire d'événements pour le bouton PDF principal
+    setTimeout(() => {
+      const mainPdfBtn = document.getElementById('main-pdf-btn');
+      if (mainPdfBtn && typeof handleNightPdfGeneration === 'function') {
+        mainPdfBtn.addEventListener('click', handleNightPdfGeneration);
+      }
+    }, 100);
   };
 
   const generateCountdownHTML = (secondsToNextPassage, secondsSinceLastPassage, interval, terminus) => {

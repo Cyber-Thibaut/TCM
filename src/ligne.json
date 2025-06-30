@@ -433,7 +433,7 @@
             "id": "BEN1",
             "nom": "Jaude",
             "type": "Nocturne",
-            "description": "Le Bus de Nuit 1 (BEN1) est une ligne circulaire qui dessert les points clés de la vie nocturne, les résidences universitaires et les quartiers animés. Elle fonctionne en continu pour vous ramener en toute sécurité.",
+            "description": "BEN1 est votre allié pour des nuits sereines. Il relie le cœur vibrant de la Place de Jaude au quartier des Cézeaux, en passant par les principaux lieux de vie nocturne. Profitez de vos soirées sans vous soucier du retour !<br><br><strong>Les arrêts desservis :</strong><ul class=\"list-disc list-inside pl-4\"><li>Place de Jaude</li><li>Pont de la Victoire</li><li>Gare SNCF</li><li>Musée d’Art Roger-Quilliot</li><li>Stade Marcel-Michelin</li><li>Montferrand</li><li>CHU Gabriel-Montpied</li><li>Campus des Cézeaux</li><li>Gare Routière</li><li>Hôtel de Ville</li><li>Parc Montjuzet</li></ul><br>Et n'oublie pas, c'est BEN qui te ramène !",
             "terminus": ["Ligne circulaire via le campus des Cézeaux"],
             "circulation": {
                 "startHour": 21,
@@ -465,7 +465,7 @@
             "id": "BEN2",
             "nom": "Montferrand <> Chamalières",
             "type": "Nocturne",
-            "description": "Le Bus de Nuit 2 (BEN2) relie les zones résidentielles périphériques au centre-ville. Avec ses deux directions, il assure une couverture large pour que chacun puisse rentrer chez soi après une soirée.",
+            "description": "Avec BEN2, déplacez-vous facilement entre Montferrand et Chamalières. Idéal pour les sorties entre amis ou pour rentrer après un dîner, il dessert des zones résidentielles et des lieux de divertissement.<br><br><strong>Les arrêts desservis :</strong><ul class=\"list-disc list-inside pl-4\"><li>Montferrand</li><li>Gare Routière</li><li>Préfecture</li><li>Hôtel de Ville</li><li>Gare SNCF</li><li>Pont de la Victoire</li><li>Cathédrale</li><li>Parc des Sports de Chamalières</li></ul><br>Et n'oublie pas, c'est BEN qui te ramène !",
             "terminus": ["Direction Montferrand (via Gare SNCF de Clermont-Ferrand)", "Direction Chamalières (via Gare SNCF de Clermont-Ferrand)"],
             "circulation": {
                 "startHour": 21,

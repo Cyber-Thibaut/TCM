@@ -448,9 +448,9 @@
                         "text": "Horaires d'été",
                         "days": [1, 2, 3, 4, 5, 6, 0],
                         "frequency": {
-                            "weekday": 15,
-                            "saturday": 17,
-                            "sunday_holiday": 26
+                            "weekday": 35,
+                            "saturday": 26,
+                            "sunday_holiday": 52
                         }
                     }
                 ]
@@ -480,8 +480,8 @@
                         "text": "Horaires d'été",
                         "days": [1, 2, 3, 4, 5, 6, 0],
                         "frequency": {
-                            "weekday": 20,
-                            "saturday": 27,
+                            "weekday": 21,
+                            "saturday": 21,
                             "sunday_holiday": 41
                         }
                     }

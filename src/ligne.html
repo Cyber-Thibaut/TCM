@@ -2,576 +2,169 @@
 <html lang="fr">
 
 <head>
-    <!-- Métadonnées du site -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité">
-    <meta name="author" content="Transport Clermont Métropole">
-    <title>Transport Clermont Métropole</title>
+  <!-- Métadonnées du site -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989." />
+  <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité" />
+  <meta name="author" content="Transport Clermont Métropole" />
+  <title>Transport Clermont Métropole</title>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png" />
 
-    <!-- Intégrations pour réseaux sociaux -->
-    <meta property="og:title" content="Transport Clermont Métropole">
-    <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-    <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
-    <meta name="twitter:title" content="Transport Clermont Métropole">
-    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-    <meta name="twitter:card" content="summary_large_image">
+  <!-- Intégrations pour réseaux sociaux -->
+  <meta property="og:title" content="Transport Clermont Métropole" />
+  <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989." />
+  <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png" />
+  <meta property="og:url" content="https://tcm-mobilite.vercel.app/" />
+  <meta name="twitter:title" content="Transport Clermont Métropole" />
+  <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989." />
+  <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
+  <!-- Couleur de fond pour l'intégration -->
+  <meta name="theme-color" content="#204BFE" />
 
-    <!-- Couleur de fond pour l'intégration -->
-    <meta name="theme-color" content="#204BFE">
+  <link href="../dist/output.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <link href="../dist/output.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="menu.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-    <style>
-        .bouton-pdf:hover {
-            cursor: pointer;
-        }
-    </style>
-    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
-    <style>
-        .jw-album-image img,
-        .jw-element-image img {
-            pointer-events: none;
-            -webkit-touch-callout: none;
-        }
+  <script src="menu.js"></script>
 
-        .pswp__share-tooltip .pswp__share--download {
-            display: none;
-        }
-    </style>
+  <style>
+    /* Styles pour les toasts */
+    .toast {
+      animation: slideInRight 0.3s ease-out;
+    }
+    
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    document.addEventListener("copy", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    document.addEventListener("cut", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+  </script>
+  <style>
+    .jw-album-image img,
+    .jw-element-image img {
+      pointer-events: none;
+      -webkit-touch-callout: none;
+    }
+
+    .pswp__share-tooltip .pswp__share--download {
+      display: none;
+    }
+  </style>
 </head>
 
-<body>
-    <br>
-    <div>
-        <h1 id="pageTitle" class="text-5xl font-bold text-center"></h1>
-        <div class="divider"></div>
-        <div id="details"></div>
-    </div>
-    <div>
-        <!-- Conteneur pour afficher les informations -->
-        <div id="infos-ligne">
+<body class="bg-base-100 text-base-content">
 
-            <!-- Les informations de la ligne seront affichées ici -->
+
+  <div class="container mx-auto p-6 max-w-6xl">
+
+    <!-- HERO Destination & Waiting Times -->
+    <div id="blocc" class="w-full relative rounded-2xl shadow-xl overflow-hidden mb-12 min-h-[250px] bg-black">
+
+      <!-- Background Image -->
+      <img src="/img/trafic.jpg" alt="fond transport"
+        class="absolute inset-0 w-full h-full object-cover opacity-80 pointer-events-none select-none z-0"
+        style="min-height:250px;" />
+
+      <!-- Overlay -->
+      <div class="relative text-white py-12 px-6 text-center backdrop-blur-sm bg-black/40 z-10" id="base-info">
+        <div class="flex flex-col items-center justify-center space-y-6">
+          <h2 id="destination" class="text-4xl md:text-6xl font-bold uppercase tracking-wider animate-fade-in"></h2>
+          <!-- Waiting times will be injected here by bus.js -->
+          <div id="nextBusTime"
+            class="flex flex-col lg:flex-row justify-center items-center gap-6 w-full max-w-3xl animate-fade-in pt-4">
+          </div>
         </div>
-        <div
-            class="m-4 items-center justify-center py-4 bg-base-content dark:bg-base-300 rounded-xl grid grid-cols-6 gap-2">
-            <div class="col-start-2 col-span-4 text-center items-center py-8 justify-center">
-                <div>
+      </div>
 
-                    <div class="time text-secondary-content dark:text-secondary" id="current-time"
-                        style="text-align: center;"></div>
-                </div>
-                <div class="divider divider-base-content"></div>
-                <div style="text-align:center; font: size 48px; color:dc241f;">
-                    <div class="destination">
-                        <h2 class="title" id="destination"></h2>
-                    </div>
-                </div>
-                <div style="text-align:center; font: size 48px;">
-                    <div class="flex flex-col w-full lg:flex-row" id="nextBusTime"></div>
-                </div>
-                <br>
-                <div class="alert-message" id="alertMessage"></div>
-                <br>
-                <div class="divider"></div>
-                <div class="grid grid-cols-6 gap-4">
-                    <div id="lignes" class="container col-start-2 col-span-4 flex justify-end"></div>
-                </div>
-            </div>
-        </div>
     </div>
-    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
-    <br>
-    <footer class="footer footer-center p-10 bg-primary text-primary-content">
-        <aside>
-            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
-            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
-            <p class="font-bold">
-                Partenaire de vos déplacements depuis 1989.
-            </p>
-            <p>Copyright ©
-                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
-            </p>
-        </aside>
-    </footer>
-    <!-- Script JavaScript pour charger et afficher les données depuis le JSON -->
-    <script>
-        // Fonction pour charger et afficher les informations de la ligne
-        async function chargerInfosLigne(numeroLigne) {
-            try {
-                const response = await fetch('ligne.json'); // Charge le fichier JSON
-                const data = await response.json(); // Convertit la réponse en objet JavaScript
 
-                // Recherche la ligne correspondant au numéro de ligne
-                if (numeroLigne === "NS") {
-                    ligne = data.lignes.find(l => l.id === "NS");
-                } else {
-                    ligne = data.lignes.find(l => l.id === parseInt(numeroLigne));
-                }
+    <!-- Line details and plan -->
+    <div id="infos-ligne" class="mb-10"></div>
 
-                if (ligne) {
-                    const ligneContainer = document.createElement('div');
-                    ligneContainer.classList.add('container', 'mx-auto', 'flex', 'flex-col', 'items-center', 'justify-center', 'space-y-4', 'py-4');
+    <!-- Traffic Info -->
+    <div id="lignes" class="mb-10"></div>
 
-                    // Créer le conteneur pour l'image et le texte
-                    const imageEtTexteContainer = document.createElement('div');
-                    imageEtTexteContainer.classList.add('text-5xl', 'font-bold', 'text-center', 'flex', 'flex-row', 'items-center', 'justify-center', 'space-x-4');
-
-                    // Créer l'élément d'image
-                    const numeroLigneElement = document.createElement('img');
-                    numeroLigneElement.src = "/img/" + ligne.id + ".png";
-                    numeroLigneElement.classList.add("w-15", "h-12", "mr-2");
-                    imageEtTexteContainer.appendChild(numeroLigneElement);
-
-                    // Créer l'élément de texte
-                    const texteLigneElement = document.createElement('p');
-                    texteLigneElement.textContent = `${ligne.nom}`;
-                    imageEtTexteContainer.appendChild(texteLigneElement);
-
-                    // Ajouter le conteneur imageEtTexteContainer à #pageTitle
-                    const pageTitle = document.getElementById('pageTitle');
-                    pageTitle.appendChild(imageEtTexteContainer);
-                    // Récupérer le lien du plan de la ligne en fonction de l'ID
-                    const planUrl = `/img/plans/L${ligne.id}.png`;
-
-                    // Plan de la ligne
-                    const planLigne = document.createElement('img');
-                    planLigne.src = planUrl;
-                    planLigne.alt = `Plan de la ligne ${ligne.id}`;
-                    planLigne.classList.add('w-full', 'h-auto'); // Ajoutez des classes de style TailwindCSS pour redimensionner l'image
-                    ligneContainer.appendChild(planLigne);
-
-                    const ligneInfoContainer = document.createElement('div');
-
-                    if (ligne.id === "NS") { }
-                    else if (ligne.type === "Spéciale") {
-                        const typeLigne = document.createElement('p');
-                        typeLigne.classList.add('text-lg', 'text-secondary');
-                        typeLigne.textContent = `Ligne spéciale`;
-                        ligneContainer.appendChild(typeLigne);
-
-                    } else {
-                        const typeLigne = document.createElement('p');
-                        typeLigne.classList.add('text-lg', 'text-secondary');
-                        typeLigne.textContent = `Réseau ${ligne.type}`;
-                        ligneContainer.appendChild(typeLigne);
-                    }
-
-                    // Crée une div pour les statistiques de la ligne
-                    const statsContainer = document.createElement('div');
-                    statsContainer.classList.add('stats', 'stats-vertical', 'lg:stats-horizontal', 'shadow');
-
-                    // Fonction pour ajouter une statistique à la div de statistiques
-                    function ajouterStatistique(titre, valeur, description) {
-                        const stat = document.createElement('div');
-                        stat.classList.add('stat');
-
-                        const statTitre = document.createElement('div');
-                        statTitre.classList.add('stat-title');
-                        statTitre.textContent = titre;
-
-                        const statValeur = document.createElement('div');
-                        statValeur.classList.add('stat-value');
-                        statValeur.textContent = valeur;
-
-                        const statDesc = document.createElement('div');
-                        statDesc.classList.add('stat-desc');
-                        statDesc.textContent = description;
-
-                        stat.appendChild(statTitre);
-                        stat.appendChild(statValeur);
-                        stat.appendChild(statDesc);
-
-                        statsContainer.appendChild(stat);
-                    }
-
-                    // Ajoute les statistiques de la ligne à la div de statistiques
-                    ajouterStatistique('Nombre d\'arrêts', ligne.stats.nombre_arrets, '');
-                    ajouterStatistique('Temps de trajet', ligne.stats.temps_trajet, '');
-                    ajouterStatistique('Longueur de la ligne', ligne.stats.longueur_ligne, '');
-
-                    // Ajoute la div de statistiques au conteneur principal
-                    ligneContainer.appendChild(statsContainer);
-
-                    const descriptionLigne = document.createElement('p');
-                    descriptionLigne.classList.add('text-lg', 'text-gray-500', 'dark:text-gray-400');
-                    descriptionLigne.innerHTML = ligne.description.replace(/\n/g, "<br><br>");
-                    ligneContainer.appendChild(descriptionLigne);
-
-                    const espaceVertical = document.createElement('div');
-                    espaceVertical.classList.add('my-4'); // Ajoutez la classe d'espace vertical
-                    ligneContainer.appendChild(espaceVertical);
+    <!-- Messages -->
+    <div class="space-y-4 mt-6">
+      <div id="infoMessage" class="hidden"></div>
+      <div id="alertMessage" class="hidden"></div>
+    </div>
 
 
-                    const boutonPDF = document.createElement('a');
-                    boutonPDF.classList.add(
-                        'bg-blue-500',
-                        'text-white',
-                        'dark:text-gray-800',
-                        'rounded-full',
-                        'py-2',
-                        'px-4',
-                        'font-semibold',
-                        'hover:bg-blue-600',
-                        'flex',
-                        'items-center'
-                    );
 
-                    // Créer l'icône SVG en tant qu'image
-                    const icon = document.createElement('img');
-                    icon.classList.add('w-6', 'h-6', 'dark:text-gray-800', 'text-white');
-                    icon.setAttribute('src', 'data:image/svg+xml,' + encodeURIComponent(`
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
-    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
-  </svg>
-`));
-
-                    // Texte du bouton
-                    const buttonText = document.createTextNode(" Fiche horaire (PDF)");
-
-                    // Ajouter l'icône et le texte au boutonPDF
-                    boutonPDF.appendChild(icon);
-                    boutonPDF.appendChild(buttonText);
-                    boutonPDF.setAttribute('onclick', 'generatePDF()');
-                    boutonPDF.classList.add('bouton-pdf');
-
-                    ligneContainer.appendChild(boutonPDF);
-
-                    // Ajoute le conteneur de la ligne au conteneur principal
-                    document.getElementById('infos-ligne').appendChild(ligneContainer);
-                } else {
-                    console.error('Ligne non trouvée.');
-                    return "Ligne non trouvée.";
-                }
-            } catch (error) {
-                console.error('Erreur lors du chargement des données :', error);
-            }
+  </div>
+  <footer class="footer footer-center p-10 bg-neutral text-neutral-content mt-12">
+    <aside>
+      <img src="/img/TCM-Clair.png" width="160" alt="Logo TCM" class="mx-auto mb-2" />
+      <p class="font-bold text-lg">Partenaire de vos déplacements depuis 1989</p>
+      <p class="text-sm">
+        &copy; <span id="year"></span> Transport Clermont Métropole. Tous droits réservés.
+      </p>
+    </aside>
+  </footer>
+  <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
+  <script>
+      const fragment = window.location.hash.replace("#", "");
+      let scriptName;
+    
+      if (/^NS/.test(fragment)) {
+        scriptName = "/src/scripts/NS.js";
+      } else if (/^6\d{2}/.test(fragment)) {
+        scriptName = `/src/scripts/${fragment}.js`;
+      } else if (/^9\d{2}/.test(fragment)) {
+        scriptName = `/src/scripts/${fragment}.js`;
+      } else {
+        scriptName = "/src/scripts/bus.js";
+      }
+    
+      const script = document.createElement("script");
+      script.src = scriptName;
+      script.onload = () => {
+        console.log("✅ Script chargé :", scriptName);
+    
+        // Lance init() manuellement si présent
+        if (typeof init === "function") {
+          console.log("🚀 Lancement manuel de init()");
+          init();
+        } else {
+          console.warn("⚠️ La fonction init() n'existe pas dans", scriptName);
+          // Fonction init par défaut pour éviter le warning
+          window.init = function() {
+            console.log("📋 Fonction init() par défaut exécutée");
+          };
         }
-
-        // Obtient le numéro de ligne depuis l'URL
-        const url = new URL(window.location.href);
-        const numeroLigne = url.hash.substring(1); // Extrait le numéro de ligne de la partie de l'URL après le "#" (par exemple, #1)
-
-        // Appelle la fonction pour charger les informations de la ligne
-        chargerInfosLigne(numeroLigne);
+      };
+      script.onerror = () => {
+        console.error("❌ Échec de chargement :", scriptName);
+      };
+      document.body.appendChild(script);
     </script>
-    <script>
-        // Obtenir le fragment de l'URL
-        const fragment = window.location.hash.substring(1);
-
-        // Vérifier s'il y a un fragment
-        if (fragment) {
-            async function chargerInfosLigne(fragment) {
-                try {
-                    const response = await fetch('ligne.json'); // Charge le fichier JSON
-                    if (!response.ok) {
-                        throw new Error(`Erreur HTTP : ${response.status}`);
-                    }
-
-                    const data = await response.json(); // Convertit la réponse en objet JavaScript
-
-                    if (fragment === "NS") {
-                        ligne = data.lignes.find(l => l.id === "NS");
-                    } else {
-                        ligne = data.lignes.find(l => l.id === parseInt(fragment));
-                    }
-
-                    if (ligne) {
-                        if (ligne.type === "Spéciale") {
-                            // Construire le nom du script pour les lignes spéciales
-                            const scriptName = "/src/scripts/speciales.js";
-
-                            // Charger le script
-                            const script = document.createElement("script");
-                            script.src = scriptName;
-                            document.head.appendChild(script);
-                        } else if (ligne.id === "NS") {
-                            // Construire le nom du script pour les navettes
-                            const scriptName = "/src/scripts/NS.js";
-
-                            // Charger le script
-                            const script = document.createElement("script");
-                            script.src = scriptName;
-                            document.head.appendChild(script);
-                        }
-                        else {
-                            // Construire le nom du script pour les autres lignes
-                            const scriptName = `/src/scripts/${fragment}.js`;
-
-                            // Charger le script
-                            const script = document.createElement("script");
-                            script.src = scriptName;
-                            document.head.appendChild(script);
-                        }
-                    } else {
-                        const nextBus = `<div role="alert" class="alert alert-warning">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                            <span>Cette ligne n'est pas équipée de balises GPS, fiez vous aux horaires théoriques disponibles aux arrêts.</span>
-                        </div>`;
-                        document.getElementById("nextBusTime").innerHTML = nextBus;
-                    }
-                } catch (error) {
-                    console.error('Erreur lors du chargement des données :', error);
-                }
-            }
-
-            // Appeler la fonction avec le fragment
-            chargerInfosLigne(fragment);
-        }
-    </script>
-
-
-    <script>
-        const urlinfo = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
-        // const urlinfo = "test.json"
-        // Fonction pour extraire l'ID de la ligne à partir de l'URL
-        function getLigneIDFromURL() {
-            const url = window.location.href;
-            const parts = url.split('#');
-            if (parts.length > 1) {
-                return parts[1];
-            }
-            return null;
-        }
-
-        let ligneID = getLigneIDFromURL();
-
-        if (ligneID === "navette%20sp%C3%A9ciale") {
-            ligneID = "NS";
-        }
-
-
-        // Affichage des informations de trafic
-        function afficherInfoTrafic() {
-            const dateActuelle = new Date();
-            let ligneTrouvee = false;
-
-            // Vérifier si l'ID de la ligne est null
-            if (ligneID === null) {
-                $("#lignes").html(`<div role="alert" class="alert alert-error"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Aucune ligne n'est sélectionnée. Vous êtes peut-être en mode "voyage astral". Merci de <a href="/src/reseau.html" class="text-blue-600 underline">revenir sur Terre</a> et de sélectionner une ligne pour afficher les informations de trafic.</span>
-                </div>`);
-                return;
-            }
-
-            $.getJSON(urlinfo, function (data) {
-                $.each(data.lignes, function (i, ligne) {
-                    if (ligne.ligne === ligneID) {
-                        const infosTrafic = ligne.infos_trafic.filter(info => {
-                            const dateDebut = new Date(Date.parse(info.annonce));
-                            const dateFin = new Date(Date.parse(info.fin));
-                            dateFin.setDate(dateFin.getDate() + 1);
-                            return dateActuelle >= dateDebut && dateActuelle <= dateFin;
-                        });
-
-                        if (infosTrafic.length > 0) {
-                            ligneTrouvee = true;
-
-                            const card = $("<div>")
-                                .addClass("alert alert-error flex items-center justify-between")
-                                .attr("role", "alert");
-
-                            let logoLigne;
-
-                            if (ligne.ligne === "TCM") {
-                                logoLigne = $("<img>")
-                                    .attr("src", "/img/" + ligne.ligne + ".png")
-                                    .addClass("w-15 h-12");
-                            } else {
-                                logoLigne = $("<img>")
-                                    .attr("src", "/img/" + ligne.ligne + ".png")
-                                    .addClass("w-15 h-12");
-                            }
-
-                            card.append(logoLigne);
-                            card.append($("<span>").addClass("sr-only").text("Info"));
-
-                            const textContainer = $("<div>").addClass("flex flex-col ml-4");
-                            const infosCount = infosTrafic.length;
-                            const infosText = infosCount === 1 ? "1 info trafic" : infosCount + " infos trafic";
-                            const infosTitre = infosCount === 1 ? "Un incident perturbe la ligne" : "Plusieurs incidents perturbent la ligne";
-                            const title = $("<h3>").addClass("font-bold").text(infosTitre);
-                            const description = $("<div>").addClass("text-xs").text(infosText);
-
-                            textContainer.append(title).append(description);
-
-                            const viewButton = $("<button>")
-                                .addClass("btn btn-sm btn-error flex items-center justify-center")
-                                .html(
-                                    `<svg class="h-5 w-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
-                                    </svg>`
-                                )
-                                .click(function () {
-                                    window.location.href = "details.html#" + ligne.ligne;
-                                });
-
-                            card.append(textContainer);
-                            card.append(viewButton);
-
-                            $("#lignes").append(card);
-                        }
-                    }
-                });
-
-                if (!ligneTrouvee) {
-                    if (ligneID === "NS") {
-                        $("#lignes").html(`<div role="alert" class="alert alert-info"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Il n'y a pas d'évènement prévu au Zénith prochainement.</div>
-        </div>`);
-                    } else {
-                        $("#lignes").html(`<div role="alert" class="alert alert-success"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>Aucune information de trafic à signaler pour la ligne ${ligneID}. Tout circule normalement.</span>
-                </div>`);
-                    }
-                }
-
-            });
-        }
-
-        afficherInfoTrafic();
-    </script>
-    <script>
-        function generatePDF() {
-            const ligneNumero = window.location.hash.substr(1);
-            fetch('data.json')
-                .then(response => response.json())
-                .then(data => {
-                    const ligne = data.lignes.find(l => l.numéro === ligneNumero);
-                    if (ligne) {
-                        const doc = new jsPDF({
-                            orientation: 'landscape'
-                        });
-
-                        const logo = new Image();
-                        logo.src = `/img/${ligneNumero}.png`;
-
-                        logo.onload = function () {
-                            const logoWidth = 35; // Largeur du logo
-                            const logoHeight = logoWidth * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
-
-                            const background1 = new Image();
-                            background1.src = '/img/pdf1.png'; // Chemin de la première image de fond
-
-                            background1.onload = function () {
-                                doc.addImage(background1, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la première page
-                                doc.addImage(logo, 'PNG', 201, 20, logoWidth, logoHeight); // Ajoute le logo à la première page
-
-                                // Fonction pour ajuster la taille de la police
-                                function adjustFontSize(text, maxWidth, maxHeight, baseSize) {
-                                    let fontSize = baseSize;
-                                    doc.setFontSize(fontSize);
-                                    let textLines = doc.splitTextToSize(text, maxWidth);
-                                    let totalHeight = textLines.length * (fontSize * 1.5); // Facteur d'espacement des lignes
-
-                                    // Réduire la taille de la police jusqu'à ce que le texte s'adapte
-                                    while (totalHeight > maxHeight && fontSize > 5) { // 5 points comme taille minimum
-                                        fontSize -= 1;
-                                        doc.setFontSize(fontSize);
-                                        textLines = doc.splitTextToSize(text, maxWidth);
-                                        totalHeight = textLines.length * (fontSize * 1.5);
-                                    }
-
-                                    return textLines;
-                                }
-
-                                const maxDestinationWidth = 90; // Ajustez selon vos besoins
-                                const destinationText = ligne.destinations.join('\n<>\n');
-                                const destinationLines = adjustFontSize(destinationText, maxDestinationWidth, 250, 25); // Ajustez maxHeight selon vos besoins
-                                doc.setTextColor(236, 230, 202);
-                                doc.text(205, 70, destinationLines);
-
-                                doc.setFontSize(20);
-                                doc.text(205, 130, `Réseau ${ligne.reseau}`);
-
-                                const maxDescriptionWidth = 75; // Ajustez selon vos besoins
-                                const descriptionText = ligne.description;
-                                const descriptionLines = adjustFontSize(descriptionText, maxDescriptionWidth, 370, 40); // Ajustez maxHeight selon vos besoins
-                                doc.text(10, 155, descriptionLines);
-
-                                // Charge la deuxième image de fond
-                                const background2 = new Image();
-                                background2.src = '/img/pdf2.png'; // Chemin de la deuxième image de fond
-                                const logoWidth2 = 50; // Largeur du logo
-                                const logoHeight2 = logoWidth2 * (logo.height / logo.width); // Calcul de la hauteur proportionnelle
-                                const planLigne = new Image();
-                                planLigne.src = `/img/plans/L${ligneNumero}.png`;
-
-                                const maxWidth = 307; // Largeur maximale de la page PDF (taille A4 en mm)
-                                const planWidth = maxWidth; // La largeur de l'image est égale à la largeur de la page PDF
-                                const planHeight = (maxWidth / 1907) * 458; // Calcul de la hauteur proportionnelle
-
-                                background2.onload = function () {
-                                    doc.addPage(); // Ajoute une nouvelle page
-                                    doc.addImage(background2, 'JPEG', 0, 0, 297, 210); // Ajoute le fond à la deuxième page
-                                    doc.addImage(logo, 'PNG', 15, 155, logoWidth2, logoHeight2);
-                                    doc.setFontSize(24.2);
-                                    doc.text(230, 22.5, `${ligne.stats.nb_arrets}`);
-                                    doc.text(230, 37.5, `${ligne.stats.duree_parcours}`);
-                                    doc.text(230, 52.5, `${ligne.stats.distance}`);
-                                    doc.addImage(planLigne, 'PNG', -4, 70, planWidth, planHeight); // Ajoute le plan de ligne à la première page
-                                    doc.setFontSize(15.3); doc.setTextColor(25, 64, 89);
-                                    doc.text(51, 36, `${ligne.horaires.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(75, 36, `${ligne.horaires.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(109, 36, `${ligne.horaires.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(153, 36, `${ligne.horaires.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(184, 36, `${ligne.horaires.jour_semaine.soir}`);
-                                    doc.text(51, 42.5, `${ligne.horaires.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(75, 42.5, `${ligne.horaires.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(109, 42.5, `${ligne.horaires.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(153, 42.5, `${ligne.horaires.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(184, 42.5, `${ligne.horaires.samedi.soir}`);
-                                    doc.text(51, 49, `${ligne.horaires.dimanche.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(75, 49, `${ligne.horaires.dimanche.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(139, 49, `${ligne.horaires.dimanche.creuse}`);
-                                    doc.text(131, 179, `${ligne.horaires.vacances.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(155, 179, `${ligne.horaires.vacances.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(189, 179, `${ligne.horaires.vacances.jour_semaine.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(233, 179, `${ligne.horaires.vacances.jour_semaine.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(264, 179, `${ligne.horaires.vacances.jour_semaine.soir}`);
-                                    doc.text(131, 185.5, `${ligne.horaires.vacances.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(155, 185.5, `${ligne.horaires.vacances.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(189, 185.5, `${ligne.horaires.vacances.samedi.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(233, 185.5, `${ligne.horaires.vacances.samedi.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(264, 185.5, `${ligne.horaires.vacances.samedi.soir}`);
-                                    doc.text(131, 192, `${ligne.horaires.vacances.dimanche.creuse}`); doc.setTextColor(236, 230, 202);
-                                    doc.text(155, 192, `${ligne.horaires.vacances.dimanche.pointe}`); doc.setTextColor(25, 64, 89);
-                                    doc.text(219, 192, `${ligne.horaires.vacances.dimanche.creuse}`);
-
-                                    doc.save(`TCM_fiche_horaire_ligne_${ligneNumero}_2024-2025.pdf`);
-                                };
-                            };
-                        };
-                    } else {
-                        alert("Aucune fiche horaire n'a été trouvée pour cette ligne. Veuillez nous excuser pour la gêne occasionnée.");
-                    }
-                })
-                .catch(error => {
-                    console.error('Erreur :', error);
-                });
-        }
-
-
-
-    </script>
-
-
-
-
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 
 </html>

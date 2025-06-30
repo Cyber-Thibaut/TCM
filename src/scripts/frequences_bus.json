@@ -1,0 +1,604 @@
+{
+    "lignes": [
+      {
+        "numero": "1",
+        "destination": "Campus des Cezeaux",
+        "frequences": {
+          "creuse": "8 minutes",
+          "pointe": "4 minutes",
+          "soir": "12 minutes",
+          "samedi_creuse": "8 minutes",
+          "samedi_pointe": "6 minutes",
+          "samedi_soir": "12 minutes",
+          "dimanche_creuse": "16 minutes",
+          "dimanche_pointe": "10 minutes"
+        },
+        "vacances": {
+          "creuse": "8 minutes",
+          "pointe": "4 minutes",
+          "soir": "12 minutes",
+          "samedi_creuse": "8 minutes",
+          "samedi_pointe": "6 minutes",
+          "samedi_soir": "12 minutes",
+          "dimanche_creuse": "16 minutes",
+          "dimanche_pointe": "10 minutes"
+        }
+      },
+      {
+        "numero": "2",
+        "destination": "Aéroport",
+        "frequences": {
+          "creuse": "7 minutes",
+          "pointe": "5 minutes",
+          "soir": "16 minutes",
+          "samedi_creuse": "8 minutes",
+          "samedi_pointe": "6 minutes",
+          "samedi_soir": "11 minutes",
+          "dimanche_creuse": "13 minutes",
+          "dimanche_pointe": "9 minutes"
+        },
+        "vacances": {
+          "creuse": "7 minutes",
+          "pointe": "5 minutes",
+          "soir": "16 minutes",
+          "samedi_creuse": "8 minutes",
+          "samedi_pointe": "6 minutes",
+          "samedi_soir": "11 minutes",
+          "dimanche_creuse": "13 minutes",
+          "dimanche_pointe": "9 minutes"
+        }
+      },
+      {
+        "numero": "3",
+        "destination": "Campus Marthe Gautier",
+        "frequences": {
+          "creuse": "6 minutes",
+          "pointe": "4 minutes",
+          "soir": "13 minutes",
+          "samedi_creuse": "9 minutes",
+          "samedi_pointe": "7 minutes",
+          "samedi_soir": "11 minutes",
+          "dimanche_creuse": "16 minutes",
+          "dimanche_pointe": "11 minutes"
+        },
+        "vacances": {
+          "creuse": "6 minutes",
+          "pointe": "4 minutes",
+          "soir": "13 minutes",
+          "samedi_creuse": "9 minutes",
+          "samedi_pointe": "7 minutes",
+          "samedi_soir": "11 minutes",
+          "dimanche_creuse": "16 minutes",
+          "dimanche_pointe": "11 minutes"
+        }
+      },
+      {
+        "numero": "4",
+        "destination": "Gare Centrale",
+        "frequences": {
+          "creuse": "14 minutes",
+          "pointe": "9 minutes",
+          "soir": "28 minutes",
+          "samedi_creuse": "19 minutes",
+          "samedi_pointe": "19 minutes",
+          "samedi_soir": "28 minutes",
+          "dimanche_creuse": "28 minutes",
+          "dimanche_pointe": "19 minutes"
+        },
+        "vacances": {
+          "creuse": "14 minutes",
+          "pointe": "9 minutes",
+          "soir": "28 minutes",
+          "samedi_creuse": "19 minutes",
+          "samedi_pointe": "19 minutes",
+          "samedi_soir": "28 minutes",
+          "dimanche_creuse": "28 minutes",
+          "dimanche_pointe": "19 minutes"
+        }
+      },
+      {
+        "numero": "5",
+        "destination": "Musée d'Art Moderne",
+        "frequences": {
+          "creuse": "9 minutes",
+          "pointe": "6 minutes",
+          "soir": "27 minutes",
+          "samedi_creuse": "13 minutes",
+          "samedi_pointe": "8 minutes",
+          "samedi_soir": "20 minutes",
+          "dimanche_creuse": "27 minutes",
+          "dimanche_pointe": "20 minutes"
+        },
+        "vacances": {
+          "creuse": "9 minutes",
+          "pointe": "6 minutes",
+          "soir": "27 minutes",
+          "samedi_creuse": "13 minutes",
+          "samedi_pointe": "8 minutes",
+          "samedi_soir": "20 minutes",
+          "dimanche_creuse": "27 minutes",
+          "dimanche_pointe": "20 minutes"
+        }
+      },
+      {
+        "numero": "6",
+        "destination": "Campus des Cézeaux",
+        "frequences": {
+          "creuse": "10 minutes",
+          "pointe": "7 minutes",
+          "soir": "20 minutes",
+          "samedi_creuse": "13 minutes",
+          "samedi_pointe": "8 minutes",
+          "samedi_soir": "20 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "20 minutes"
+        },
+        "vacances": {
+          "creuse": "10 minutes",
+          "pointe": "7 minutes",
+          "soir": "20 minutes",
+          "samedi_creuse": "13 minutes",
+          "samedi_pointe": "8 minutes",
+          "samedi_soir": "20 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "20 minutes"
+        }
+      },
+      {
+        "numero": "7",
+        "destination": "Grand Palais",
+        "frequences": {
+          "creuse": "18 minutes",
+          "pointe": "14 minutes",
+          "soir": "36 minutes",
+          "samedi_creuse": "36 minutes",
+          "samedi_pointe": "24 minutes",
+          "samedi_soir": "36 minutes",
+          "dimanche_creuse": "72 minutes",
+          "dimanche_pointe": "36 minutes"
+        },
+        "vacances": {
+          "creuse": "18 minutes",
+          "pointe": "14 minutes",
+          "soir": "36 minutes",
+          "samedi_creuse": "36 minutes",
+          "samedi_pointe": "24 minutes",
+          "samedi_soir": "36 minutes",
+          "dimanche_creuse": "72 minutes",
+          "dimanche_pointe": "36 minutes"
+        }
+      },
+      {
+        "numero": "8",
+        "destination": "Place de l'Europe",
+        "frequences": {
+          "creuse": "11 minutes",
+          "pointe": "7 minutes",
+          "soir": "21 minutes",
+          "samedi_creuse": "16 minutes",
+          "samedi_pointe": "13 minutes",
+          "samedi_soir": "21 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "32 minutes"
+        },
+        "vacances": {
+          "creuse": "11 minutes",
+          "pointe": "7 minutes",
+          "soir": "21 minutes",
+          "samedi_creuse": "16 minutes",
+          "samedi_pointe": "13 minutes",
+          "samedi_soir": "21 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "32 minutes"
+        }
+      },
+      {
+        "numero": "9",
+        "destination": "Campus des Cezeaux",
+        "frequences": {
+          "creuse": "9 minutes",
+          "pointe": "6 minutes",
+          "soir": "18 minutes",
+          "samedi_creuse": "12 minutes",
+          "samedi_pointe": "9 minutes",
+          "samedi_soir": "18 minutes",
+          "dimanche_creuse": "18 minutes",
+          "dimanche_pointe": "12 minutes"
+        },
+        "vacances": {
+          "creuse": "9 minutes",
+          "pointe": "6 minutes",
+          "soir": "18 minutes",
+          "samedi_creuse": "12 minutes",
+          "samedi_pointe": "9 minutes",
+          "samedi_soir": "18 minutes",
+          "dimanche_creuse": "18 minutes",
+          "dimanche_pointe": "12 minutes"
+        }
+      },
+      {
+        "numero": "10",
+        "destination": "Campus Alan Turing",
+        "frequences": {
+          "creuse": "12 minutes",
+          "pointe": "8 minutes",
+          "soir": "20 minutes",
+          "samedi_creuse": "20 minutes",
+          "samedi_pointe": "12 minutes",
+          "samedi_soir": "20 minutes",
+          "dimanche_creuse": "30 minutes",
+          "dimanche_pointe": "20 minutes"
+        },
+        "vacances": {
+          "creuse": "12 minutes",
+          "pointe": "8 minutes",
+          "soir": "20 minutes",
+          "samedi_creuse": "20 minutes",
+          "samedi_pointe": "12 minutes",
+          "samedi_soir": "20 minutes",
+          "dimanche_creuse": "30 minutes",
+          "dimanche_pointe": "20 minutes"
+        }
+      },
+      {
+        "numero": "11",
+        "destination": "CHU Estaing",
+        "frequences": {
+          "creuse": "11 minutes",
+          "pointe": "8 minutes",
+          "soir": "21 minutes",
+          "samedi_creuse": "14 minutes",
+          "samedi_pointe": "11 minutes",
+          "samedi_soir": "21 minutes",
+          "dimanche_creuse": "21 minutes",
+          "dimanche_pointe": "14 minutes"
+        },
+        "vacances": {
+          "creuse": "11 minutes",
+          "pointe": "8 minutes",
+          "soir": "21 minutes",
+          "samedi_creuse": "14 minutes",
+          "samedi_pointe": "11 minutes",
+          "samedi_soir": "21 minutes",
+          "dimanche_creuse": "21 minutes",
+          "dimanche_pointe": "14 minutes"
+        }
+      },
+      {
+        "numero": "12",
+        "destination": "Parc d'attractions",
+        "frequences": {
+          "creuse": "27 minutes",
+          "pointe": "18 minutes",
+          "soir": "54 minutes",
+          "samedi_creuse": "27 minutes",
+          "samedi_pointe": "18 minutes",
+          "samedi_soir": "54 minutes",
+          "dimanche_creuse": "27 minutes",
+          "dimanche_pointe": "18 minutes"
+        },
+        "vacances": {
+          "creuse": "27 minutes",
+          "pointe": "18 minutes",
+          "soir": "54 minutes",
+          "samedi_creuse": "27 minutes",
+          "samedi_pointe": "18 minutes",
+          "samedi_soir": "54 minutes",
+          "dimanche_creuse": "27 minutes",
+          "dimanche_pointe": "18 minutes"
+        }
+      },
+      {
+        "numero": "13",
+        "destination": "Aéroport",
+        "frequences": {
+          "creuse": "9 minutes",
+          "pointe": "5 minutes",
+          "soir": "-",
+          "samedi_creuse": "9 minutes",
+          "samedi_pointe": "7 minutes",
+          "samedi_soir": "12 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "9 minutes"
+        },
+        "vacances": {
+          "creuse": "9 minutes",
+          "pointe": "5 minutes",
+          "soir": "-",
+          "samedi_creuse": "9 minutes",
+          "samedi_pointe": "7 minutes",
+          "samedi_soir": "12 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "9 minutes"
+        }
+      },
+      {
+        "numero": "60",
+        "destination": "Lycée Karl Marx",
+        "frequences": {
+          "creuse": "13 minutes",
+          "pointe": "10 minutes",
+          "soir": "-",
+          "samedi_creuse": "-",
+          "samedi_pointe": "20 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "-"
+        },
+        "vacances": {
+          "creuse": "13 minutes",
+          "pointe": "10 minutes",
+          "soir": "-",
+          "samedi_creuse": "-",
+          "samedi_pointe": "20 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "-"
+        }
+      },
+      {
+        "numero": "61",
+        "destination": "Parc Jolimont",
+        "frequences": {
+          "creuse": "32 minutes",
+          "pointe": "16 minutes",
+          "soir": "-",
+          "samedi_creuse": "-",
+          "samedi_pointe": "21 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "-"
+        },
+        "vacances": {
+          "creuse": "32 minutes",
+          "pointe": "16 minutes",
+          "soir": "-",
+          "samedi_creuse": "-",
+          "samedi_pointe": "21 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "-"
+        }
+      },
+      {
+        "numero": "62",
+        "destination": "Parc de l'Étang",
+        "frequences": {
+          "creuse": "27 minutes",
+          "pointe": "20 minutes",
+          "soir": "40 minutes",
+          "samedi_creuse": "40 minutes",
+          "samedi_pointe": "27 minutes",
+          "samedi_soir": "27 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "27 minutes"
+        },
+        "vacances": {
+          "creuse": "27 minutes",
+          "pointe": "20 minutes",
+          "soir": "40 minutes",
+          "samedi_creuse": "40 minutes",
+          "samedi_pointe": "27 minutes",
+          "samedi_soir": "27 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "27 minutes"
+        }
+      },
+      {
+        "numero": "63",
+        "destination": "Place de l'Europe",
+        "frequences": {
+          "creuse": "29 minutes",
+          "pointe": "15 minutes",
+          "soir": "-",
+          "samedi_creuse": "29 minutes",
+          "samedi_pointe": "19 minutes",
+          "samedi_soir": "58 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "19 minutes"
+        },
+        "vacances": {
+          "creuse": "29 minutes",
+          "pointe": "15 minutes",
+          "soir": "-",
+          "samedi_creuse": "29 minutes",
+          "samedi_pointe": "19 minutes",
+          "samedi_soir": "58 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "19 minutes"
+        }
+      },
+      {
+        "numero": "64",
+        "destination": "Place de l'Europe",
+        "frequences": {
+          "creuse": "14 minutes",
+          "pointe": "9 minutes",
+          "soir": "-",
+          "samedi_creuse": "-",
+          "samedi_pointe": "14 minutes",
+          "samedi_soir": "28 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "28 minutes"
+        },
+        "vacances": {
+          "creuse": "14 minutes",
+          "pointe": "9 minutes",
+          "soir": "-",
+          "samedi_creuse": "-",
+          "samedi_pointe": "14 minutes",
+          "samedi_soir": "28 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "28 minutes"
+        }
+      },
+      {
+        "numero": "101",
+        "destination": "ARRONAY - Etangs",
+        "frequences": {
+          "creuse": "24 minutes",
+          "pointe": "24 minutes",
+          "soir": "72 minutes",
+          "samedi_creuse": "36 minutes",
+          "samedi_pointe": "24 minutes",
+          "samedi_soir": "36 minutes",
+          "dimanche_creuse": "36 minutes",
+          "dimanche_pointe": "24 minutes"
+        },
+        "vacances": {
+          "creuse": "24 minutes",
+          "pointe": "24 minutes",
+          "soir": "72 minutes",
+          "samedi_creuse": "36 minutes",
+          "samedi_pointe": "24 minutes",
+          "samedi_soir": "36 minutes",
+          "dimanche_creuse": "36 minutes",
+          "dimanche_pointe": "24 minutes"
+        }
+      },
+      {
+        "numero": "102",
+        "destination": "Stade",
+        "frequences": {
+          "creuse": "27 minutes",
+          "pointe": "18 minutes",
+          "soir": "54 minutes",
+          "samedi_creuse": "54 minutes",
+          "samedi_pointe": "27 minutes",
+          "samedi_soir": "27 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "27 minutes"
+        },
+        "vacances": {
+          "creuse": "27 minutes",
+          "pointe": "18 minutes",
+          "soir": "54 minutes",
+          "samedi_creuse": "54 minutes",
+          "samedi_pointe": "27 minutes",
+          "samedi_soir": "27 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "27 minutes"
+        }
+      },
+      {
+        "numero": "103",
+        "destination": "Place de l'Europe",
+        "frequences": {
+          "creuse": "14 minutes",
+          "pointe": "11 minutes",
+          "soir": "42 minutes",
+          "samedi_creuse": "42 minutes",
+          "samedi_pointe": "21 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "-"
+        },
+        "vacances": {
+          "creuse": "14 minutes",
+          "pointe": "11 minutes",
+          "soir": "42 minutes",
+          "samedi_creuse": "42 minutes",
+          "samedi_pointe": "21 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "-"
+        }
+      },
+      {
+        "numero": "104",
+        "destination": "Science Po",
+        "frequences": {
+          "creuse": "24 minutes",
+          "pointe": "16 minutes",
+          "soir": "-",
+          "samedi_creuse": "48 minutes",
+          "samedi_pointe": "24 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "48 minutes"
+        },
+        "vacances": {
+          "creuse": "24 minutes",
+          "pointe": "16 minutes",
+          "soir": "-",
+          "samedi_creuse": "48 minutes",
+          "samedi_pointe": "24 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "48 minutes"
+        }
+      },
+      {
+        "numero": "201",
+        "destination": "Campus Alan Turing",
+        "frequences": {
+          "creuse": "58 minutes",
+          "pointe": "39 minutes",
+          "soir": "-",
+          "samedi_creuse": "116 minutes",
+          "samedi_pointe": "58 minutes",
+          "samedi_soir": "116 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "58 minutes"
+        },
+        "vacances": {
+          "creuse": "58 minutes",
+          "pointe": "39 minutes",
+          "soir": "-",
+          "samedi_creuse": "116 minutes",
+          "samedi_pointe": "58 minutes",
+          "samedi_soir": "116 minutes",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "58 minutes"
+        }
+      },
+      {
+        "numero": "202",
+        "destination": "Campus Alan Turing",
+        "frequences": {
+          "creuse": "74 minutes",
+          "pointe": "37 minutes",
+          "soir": "-",
+          "samedi_creuse": "-",
+          "samedi_pointe": "74 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "-"
+        },
+        "vacances": {
+          "creuse": "74 minutes",
+          "pointe": "37 minutes",
+          "soir": "-",
+          "samedi_creuse": "-",
+          "samedi_pointe": "74 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "-",
+          "dimanche_pointe": "-"
+        }
+      },
+      {
+        "numero": "203",
+        "destination": "Gare de l'Ouest",
+        "frequences": {
+          "creuse": "124 minutes",
+          "pointe": "41 minutes",
+          "soir": "-",
+          "samedi_creuse": "124 minutes",
+          "samedi_pointe": "62 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "124 minutes",
+          "dimanche_pointe": "62 minutes"
+        },
+        "vacances": {
+          "creuse": "124 minutes",
+          "pointe": "41 minutes",
+          "soir": "-",
+          "samedi_creuse": "124 minutes",
+          "samedi_pointe": "62 minutes",
+          "samedi_soir": "-",
+          "dimanche_creuse": "124 minutes",
+          "dimanche_pointe": "62 minutes"
+        }
+      }
+    ]
+  }

@@ -7,28 +7,20 @@
           "type": "information",
           "annonce": "09/01/2023",
           "debut": "09/09/2023",
-          "fin": "10/25/2023",
+          "fin": "10/25/2029",
           "titre": "🏉 Annonce Spéciale - Coupe du Monde de Rugby 🏆",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
         }
       ]
     },
     {
-      "ligne": "1",
+      "ligne": "601",
       "infos_trafic": [
         {
-          "type": "fermeture",
+          "type": "information",
           "annonce": "09/28/2023",
           "debut": "10/15/2023",
-          "fin": "10/27/2075",
-          "titre": "🚧 Info Travaux 🚧",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
-        },
-        {
-          "type": "fermeture",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2023",
-          "fin": "10/27/2075",
+          "fin": "10/27/2024",
           "titre": "🚧 Info Travaux 🚧",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
         }
@@ -36,25 +28,32 @@
     }
     ,
     {
-      "ligne": "3",
+      "ligne": "NS",
       "infos_trafic": [
         {
-          "type": "attention",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2023",
-          "fin": "10/27/2052",
-          "titre": "attention",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
+          "type": "information",
+          "annonce": "06/01/2025",
+          "debut": "06/28/2025",
+          "fin": "06/29/2025",
+          "titre": "Concert de Caravan Palace au Zenith d'Auvergne",
+          "description": "TCM est partenaire de l'événement et vous propose des navettes spéciales pour l'occasion. Au départ de la Gare SNCF de Clermont-Ferrand, direction le Zenith d'Auvergne. Départ toutes les 30 minutes à partir de 18h00. Retour à partir de 23h00."
         },
         {
-          "type": "fermeture",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2023",
-          "fin": "10/27/2023",
-          "titre": "fermeture",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
-        }
-        ,
+          "type": "information",
+          "annonce": "06/01/2025",
+          "debut": "07/15/2025",
+          "fin": "07/16/2025",
+          "titre": "Concert de Gims au Zenith d'Auvergne",
+          "description": "TCM est partenaire de l'événement et vous propose des navettes spéciales pour l'occasion. Au départ de la Gare SNCF de Clermont-Ferrand, direction le Zenith d'Auvergne. Départ toutes les 30 minutes à partir de 18h00. Retour à partir de 23h00."
+        },
+        {
+          "type": "information",
+          "annonce": "06/01/2025",
+          "debut": "07/25/2025",
+          "fin": "07/26/2025",
+          "titre": "Concert de Charles Aznavour au Zenith d'Auvergne",
+          "description": "TCM est partenaire de l'événement et vous propose des navettes spéciales pour l'occasion. Au départ de la Gare SNCF de Clermont-Ferrand, direction le Zenith d'Auvergne. Départ toutes les 30 minutes à partir de 18h00. Retour à partir de 23h00."
+        },
         {
           "type": "information",
           "annonce": "09/28/2023",
@@ -88,7 +87,20 @@
           "type": "information",
           "annonce": "08/28/2023",
           "debut": "09/15/2023",
-          "fin": "09/27/2023",
+          "fin": "09/27/2029",
+          "titre": "🚧 Info Travaux 🚧",
+          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
+        }
+      ]
+    },
+    {
+      "ligne": "601",
+      "infos_trafic": [
+        {
+          "type": "information",
+          "annonce": "09/28/2023",
+          "debut": "10/15/2023",
+          "fin": "10/27/2029",
           "titre": "🚧 Info Travaux 🚧",
           "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
         }

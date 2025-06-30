@@ -25,9 +25,10 @@
 
     <!-- Couleur de fond pour l'intégration -->
     <meta name="theme-color" content="#204BFE">
-
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
     <link href="../dist/output.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script src="menu.js"></script>
     <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
     <style>
@@ -44,116 +45,126 @@
 </head>
 
 
-<body>
-    <div class="bg-base-200 py-24 sm:py-32">
-        <div class="mx-auto max-w-screen-xl py-24 sm:py-32 lg:max-w-7xl lg:px-8">
-            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Nos Lignes</h2>
+<body class="bg-base-100 text-base-content">
 
-            <div id="ligne-cards"
-                class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                <!-- Les cartes des lignes seront générées ici par JavaScript -->
+    <!-- Hero Section -->
+    <header class="hero min-h-[50vh] bg-cover bg-center relative"
+        style="background-image: url('https://cdn.pixabay.com/photo/2019/01/04/14/49/landscape-3913309_1280.jpg');">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="hero-content text-center text-neutral-content">
+            <div>
+                <h1 class="text-5xl font-bold">Découvrez nos lignes</h1>
+                <p class="mt-4 text-lg">Explorez toutes nos lignes de transport en un seul endroit. Que vous soyez un
+                    habitué ou un nouveau venu, trouvez facilement les horaires, les arrêts et les correspondances pour
+                    planifier vos déplacements sans stress. Nos lignes couvrent l'ensemble de la métropole, vous offrant
+                    une mobilité fluide et efficace. Voyagez en toute sérénité avec Transport Clermont Métropole !</p>
             </div>
         </div>
-    </div>
-    <footer class="footer footer-center p-10 bg-primary text-primary-content">
+    </header>
+
+    <!-- Liste des Lignes -->
+    <section class="container mx-auto mt-12 px-6">
+        <h2 class="text-3xl font-bold text-primary">Nos lignes de transport</h2>
+        <p class="mt-2 text-lg">Sélectionnez une ligne pour plus d'informations.</p>
+
+        <!-- Conteneur des types de lignes -->
+        <div id="ligne-groupes" class="mt-6 space-y-10">
+            <!-- Les groupes de lignes seront générés ici -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-primary text-primary-content mt-12">
         <aside>
-            <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
-            <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
-            <p class="font-bold">
-                Partenaire de vos déplacements depuis 1989.
-            </p>
-            <p>Copyright ©
+            <img src="https://tcm-mobilite.vercel.app/img/TCM-Clair.png" width="150" alt="Logo TCM">
+            <p class="font-bold">Partenaire de vos déplacements depuis 1989.</p>
+            <p>©
                 <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
             </p>
         </aside>
     </footer>
+
     <script>
-        // Fonction pour charger les données des lignes depuis le fichier JSON
+        // Liste des types de lignes à ne PAS afficher
+        const typesExclus = ["JO", "Spéciale"]; // Exclure les lignes "JO" par exemple
+
         async function chargerDonneesLignes() {
             try {
-                const response = await fetch('ligne.json'); // Charge le fichier JSON
-                const data = await response.json(); // Convertit la réponse en objet JavaScript
-
-                // Vérifiez que les données ont été chargées avec succès
-                if (Array.isArray(data.lignes)) {
-                    return data.lignes;
-                } else {
-                    throw new Error("Format de données incorrect dans le fichier JSON");
-                }
-            } catch (erreur) {
-                console.error("Erreur lors du chargement des données des lignes : ", erreur);
-                return []; // Retourne un tableau vide en cas d'erreur
+                const response = await fetch('ligne.json');
+                const data = await response.json();
+                return Array.isArray(data.lignes) ? data.lignes : [];
+            } catch (error) {
+                console.error("Erreur de chargement des lignes : ", error);
+                return [];
             }
         }
 
-        // Fonction pour générer les cartes des lignes
         async function genererCartesLignes() {
-            const lignesData = await chargerDonneesLignes(); // Charge les données des lignes
+            const lignesData = await chargerDonneesLignes();
+            const container = document.getElementById("ligne-groupes");
 
-            const ligneCardsContainer = document.getElementById("ligne-cards");
-
-            lignesData.forEach((ligne) => {
-                if (ligne.type != "JO") {
-                    const carteLigne = document.createElement("a");
-                    carteLigne.href = `ligne.html#${ligne.id}`;
-                    carteLigne.classList.add("group");
-
-                    const imageLigne = document.createElement("div");
-                    imageLigne.classList.add(
-                        "aspect-h-1",
-                        "aspect-w-1",
-                        "relative", // Pour positionner le span à l'intérieur
-                        "overflow-hidden",
-                        "rounded-lg",
-                        "xl:aspect-h-8",
-                        "xl:aspect-w-7",
-                        "group-hover:opacity-75", // Ajout de la classe pour l'effet de survol
-                        "cursor-pointer" // Changement du curseur au survol
-                    );
-
-                    const image = document.createElement("img");
-                    image.src = `../img/${ligne.id}.png`; // Remplacez par le chemin réel de l'image
-                    image.alt = `Image de la Ligne ${ligne.id}`;
-                    image.classList.add(
-                        "h-full",
-                        "w-full",
-                        "object-cover",
-                        "object-center"
-                    );
-
-                    // Création du span pour le badge avec le lien
-                    const badge = document.createElement("a");
-                    badge.href = `ligne.html#${ligne.id}`;
-                    badge.classList.add("badge", "badge-flat", "badge-primary", "absolute", "top", "right-2", "m-2", "px-2", "py-1", "text-xs");
-                    badge.textContent = ligne.type; // Contenu du badge
-                    imageLigne.appendChild(badge);
-
-                    imageLigne.appendChild(image);
-
-                    const nomLigne = document.createElement("h3");
-                    nomLigne.classList.add("mt-4", "text-lg", "text-primary");
-                    if (ligne.id === "NS") {
-                        nomLigne.textContent = `Navette Spéciale`;
+            // Stocker les types de lignes
+            const groupes = {};
+            lignesData.forEach(ligne => {
+                if (!typesExclus.includes(ligne.type)) { // Vérifie si le type de ligne n'est pas exclu
+                    if (!groupes[ligne.type]) {
+                        groupes[ligne.type] = [];
                     }
-                    else {
-                        nomLigne.textContent = `Ligne ${ligne.id}`;
-                    }
-                    const typeLigne = document.createElement("p");
-                    typeLigne.classList.add("mt-1", "text-lg", "font-medium", "text-neutral", "dark:text-neutral-content");
-                    typeLigne.textContent = ligne.nom;
-
-                    carteLigne.appendChild(imageLigne);
-                    carteLigne.appendChild(nomLigne);
-                    carteLigne.appendChild(typeLigne);
-
-                    ligneCardsContainer.appendChild(carteLigne);
+                    groupes[ligne.type].push(ligne);
                 }
+            });
+
+            // Générer les cartes des lignes
+            Object.keys(groupes).forEach(type => {
+                const section = document.createElement("div");
+                section.classList.add("space-y-6");
+
+                const titre = document.createElement("h3");
+                titre.classList.add("text-2xl", "font-bold", "text-accent");
+                titre.textContent = type;
+
+                // Ajout d'un <br> entre chaque type de ligne
+                const espace = document.createElement("br");
+
+                const lignesContainer = document.createElement("div");
+                lignesContainer.classList.add("grid", "grid-cols-1", "sm:grid-cols-2", "md:grid-cols-3", "lg:grid-cols-4", "gap-6");
+
+                groupes[type].forEach(ligne => {
+                    const carte = document.createElement("a");
+
+                    // Définir le lien en fonction du type de ligne
+                    if (ligne.type === "Nocturne") {
+                        carte.href = `nocturne.html#${ligne.id}`;
+                    } else {
+                        carte.href = `ligne.html#${ligne.id}`;
+                    }
+                    
+                    carte.classList.add("group", "p-4", "rounded-lg", "shadow-lg", "bg-primary-content", "hover:scale-105", "transition-transform", "duration-300", "cursor-pointer");
+
+                    const contenu = `
+                        <div class="flex items-center gap-4">
+                            <img src="../img/${ligne.id}.png" alt="Ligne ${ligne.id}" class="w-12 h-10">
+                            <div>
+                                <h3 class="text-lg font-semibold text-primary">${ligne.id === "NS" ? "Navette Spéciale" : `Ligne ${ligne.id}`}</h3>
+                                <p class="text-sm text-accent)">${ligne.nom}</p>
+                            </div>
+                        </div>
+                    `;
+
+                    carte.innerHTML = contenu;
+                    lignesContainer.appendChild(carte);
+                });
+
+                section.appendChild(titre);
+                section.appendChild(lignesContainer);
+                section.appendChild(espace); // Ajout du <br> pour espacer les catégories
+                container.appendChild(section);
             });
         }
 
-        // Appeler la fonction pour générer les cartes des lignes
         genererCartesLignes();
     </script>
+
 </body>
 
 </html>

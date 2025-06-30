@@ -26,9 +26,10 @@
 
     <!-- Couleur de fond pour l'intégration -->
     <meta name="theme-color" content="#204BFE">
-
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
     <link href="/dist/output.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script src="/src/menu.js"></script>
     <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
     <style>
@@ -91,36 +92,42 @@
             }
         }
 
+        function updateRadialProgress(elementId, value) {
+            const progress = document.getElementById(elementId);
+            progress.style.setProperty("--value", value);
+            progress.innerText = value + "%";
+        }
+
         // Set progress bars based on dates
         function updateProgressBars() {
             const bureauEtudeProgress = calculateProgress("2024-09-14", "2024-12-14");
-            document.getElementById("bureau-etude-progress").style.width = bureauEtudeProgress + "%";
-            document.getElementById("bureau-etude-text").innerText = bureauEtudeProgress + "%";
-
+            //document.getElementById("bureau-etude-progress").style.width = bureauEtudeProgress + "%";
+            //document.getElementById("bureau-etude-text").innerText = bureauEtudeProgress + "%";
+            updateRadialProgress("bureau-etude-progress", bureauEtudeProgress);
             // Travaux de voirie : commence après bureau d'étude et dure au minimum 8 mois
             let voirieProgress = 0; // Initialisation par défaut
             if (bureauEtudeProgress === 100) {
                 voirieProgress = calculateProgress("2024-12-14", "2025-08-31");  // La date de début est après le bureau d'étude
-                document.getElementById("voirie-progress").style.width = voirieProgress + "%";
-                document.getElementById("voirie-text").innerText = voirieProgress + "%";
+                //document.getElementById("voirie-progress").style.width = voirieProgress + "%";
+                //document.getElementById("voirie-text").innerText = voirieProgress + "%";
+                updateRadialProgress("voirie-progress", voirieProgress);
             } else {
                 document.getElementById("voirie-progress").style.width = "0%";
-                document.getElementById("voirie-text").innerText = "En attente de l'étape 1";
+                //document.getElementById("voirie-text").innerText = "En attente de l'étape 1";
             }
 
             // Liaison : ne commence que lorsque les travaux de voirie sont à 100 %
             let depotProgress = 0;
             if (voirieProgress === 100) {
                 const depotProgress = calculateProgress("2026-01-01", "2026-12-31");  // Liaison après la fin des travaux de voirie
-                document.getElementById("depot-progress").style.width = depotProgress + "%";
-                document.getElementById("depot-text").innerText = depotProgress + "%";
+                //document.getElementById("depot-progress").style.width = depotProgress + "%";
+                //document.getElementById("depot-text").innerText = depotProgress + "%";
+                updateRadialProgress("depot-progress", depotProgress);
             } else {
                 document.getElementById("depot-progress").style.width = "0%";
-                document.getElementById("depot-text").innerText = "En attente de l'étape 2";
+                //document.getElementById("depot-text").innerText = "En attente de l'étape 2";
             }
         }
-
-
 
         window.onload = updateProgressBars;
     </script>
@@ -139,8 +146,8 @@
 
     <!-- Introduction Section -->
     <section class="container mx-auto mt-12 p-8 bg-primary-content shadow-lg rounded-lg">
-        <h2 class="text-3xl font-semibold text-blue-600 mb-6">Un Projet Visionnaire pour la Métropole</h2>
-        <p class="text-neutral-content mb-8 leading-relaxed">
+        <h2 class="text-3xl font-semibold text-primary mb-6">Un Projet Visionnaire pour la Métropole</h2>
+        <p class="text-base-content mb-8 leading-relaxed">
             Le réseau de transport urbain de Clermont-Ferrand va connaître une transformation sans précédent. Avec une
             vision ambitieuse pour 2025, ce projet englobe de nouvelles lignes de tramway, un réseau de bus renforcé, et
             une connectivité accrue pour répondre aux besoins d’une population en croissance.
@@ -152,14 +159,15 @@
             "Ce projet est une véritable révolution pour notre métropole. Il représente notre engagement à offrir une
             mobilité durable, accessible à tous, et répondant aux enjeux climatiques actuels. Nous construisons
             aujourd’hui le réseau de transport de demain, pour une ville plus verte et connectée."
-            <span class="text-accent not-italic font-bold">- Olivier Bianchi, Président de la Métropole de Clermont-Ferrand</span>
+            <span class="text-accent not-italic font-bold">- Olivier Bianchi, Président de la Métropole de
+                Clermont-Ferrand</span>
         </blockquote>
 
 
         <img src="https://i.imgur.com/ivC8iEO.jpeg" alt="Illustration du projet de tramway à Clermont-Ferrand"
             class="rounded-lg mb-8">
 
-        <p class="text-neutral-content leading-relaxed">
+        <p class="text-base-content leading-relaxed">
             Le projet ne se limite pas à quelques ajustements, mais bien à une <strong>refonte totale du
                 réseau.</strong><br>La ligne 2,
             actuelle ligne de bus, deviendra une nouvelle ligne de tramway renommée en ligne 1, marquant une nouvelle
@@ -172,7 +180,7 @@
     <!-- Tramway Works Section -->
     <section class="container mx-auto mt-12 p-8 bg-primary-content shadow-lg rounded-lg">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6">Travaux du Tramway : Une Transformation Majeure</h2>
-        <p class="text-neutral-content mb-8">Les travaux pour le développement du tramway de Clermont-Ferrand s'étalent
+        <p class="text-base-content mb-8">Les travaux pour le développement du tramway de Clermont-Ferrand s'étalent
             sur
             plusieurs phases clés, chacune étant cruciale pour la réussite du projet. Voici les détails des étapes à
             venir :</p>
@@ -180,41 +188,60 @@
         <!-- Step 1: Bureau d'Étude -->
         <div class="mb-8">
             <h3 class="text-2xl font-bold text-blue-600">Étape 1 : Bureau d'Étude (Fin : Décembre 2024)</h3>
-            <p class="text-neutral-content mb-2">Le bureau d'étude est chargé de finaliser les plans techniques du
+            <p class="text-base-content mb-2">Le bureau d'étude est chargé de finaliser les plans techniques du
                 projet de
                 tramway. Cette étape est cruciale pour garantir que chaque aspect des travaux soit bien coordonné, des
                 infrastructures aux routes en passant par les systèmes écologiques.</p>
-            <div class="progress-bar w-full bg-gray-200 rounded">
-                <div id="bureau-etude-progress" class="progress-bar-fill bg-blue-600 rounded-l"></div>
-            </div>
-            <p class="text-sm mt-2">Progression : <span id="bureau-etude-text">0%</span></p>
+
         </div>
 
         <!-- Step 2: Travaux de Voirie -->
         <div class="mb-8">
             <h3 class="text-2xl font-bold text-blue-600">Étape 2 : Travaux de Voirie (8 mois de travaux)</h3>
-            <p class="text-neutral-content mb-2">La voirie représente une étape majeure dans le développement des
-                infrastructures du tramway. Ces travaux impliqueront des interventions sur les routes, la signalisation,
-                et des ajustements techniques pour permettre une intégration harmonieuse du tramway dans la ville.</p>
-            <div class="progress-bar w-full bg-gray-200 rounded">
-                <div id="voirie-progress" class="progress-bar-fill bg-gray-400 rounded-l"></div>
-            </div>
-            <p class="text-sm mt-2">Progression : <span id="voirie-text">En attente de l'étape 1</span></p>
+            <p class="text-base-content mb-2">La voirie représente une étape majeure dans le développement des
+                infrastructures du tramway. Ces travaux impliqueront des interventions sur les routes, la
+                signalisation,
+                et des ajustements techniques pour permettre une intégration harmonieuse du tramway dans la ville.
+            </p>
+
         </div>
+
 
         <!-- Step 3: Travaux du Dépôt de Tramway -->
         <div class="mb-8">
-            <h3 class="text-2xl font-bold text-blue-600">Étape 3 : Travaux du Dépôt de Tramway (Fin : Novembre 2025)
+            <h3 class="text-2xl font-bold text-blue-600">Étape 3 : Travaux du Dépôt de Tramway (Fin : Novembre
+                2025)
             </h3>
-            <p class="text-neutral-content mb-2">Les travaux du dépôt seront essentiels pour le bon fonctionnement du
+            <p class="text-base-content mb-2">Les travaux du dépôt seront essentiels pour le bon
+                fonctionnement du
                 réseau de
-                tramway. Ce dépôt moderne servira à la maintenance et au stationnement des rames en dehors des heures de
+                tramway. Ce dépôt moderne servira à la maintenance et au stationnement des rames en dehors des
+                heures de
                 service.</p>
-            <div class="progress-bar w-full bg-gray-200 rounded">
-                <div id="depot-progress" class="progress-bar-fill bg-blue-600 rounded-l"></div>
-            </div>
-            <p class="text-sm mt-2">Progression : <span id="depot-text">0%</span></p>
+
         </div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8 mt-8">
+            <div class="text-center">
+                <h3 class="text-lg font-bold text-primary">Bureau d'Étude</h3>
+                <div class="radial-progress text-blue-500" id="bureau-etude-progress" style="--value:0;"
+                    data-progress="0%">
+                    0%
+                </div>
+            </div>
+            <div class="text-center">
+                <h3 class="text-lg font-bold text-primary">Travaux de Voirie</h3>
+                <div class="radial-progress text-yellow-500" id="voirie-progress" style="--value:0;" data-progress="0%">
+                    0%
+                </div>
+            </div>
+            <div class="text-center">
+                <h3 class="text-lg font-bold text-primary">Dépôt de Tramway</h3>
+                <div class="radial-progress text-green-500" id="depot-progress" style="--value:0;" data-progress="0%">
+                    0%
+                </div>
+            </div>
+        </div><br>
 
         <div class="relative mb-8">
             <div class="absolute inset-0 bg-neutral-content bg-opacity-60 rounded-lg"></div>
@@ -226,7 +253,8 @@
         <blockquote class="p-4 my-4 border-s-4 border-accent italic">
             "Le tramway est bien plus qu’un simple moyen de transport. C'est une révolution dans la manière dont
             nous
-            allons structurer nos déplacements, réduire la congestion automobile, et améliorer la qualité de l'air.
+            allons structurer nos déplacements, réduire la congestion automobile, et améliorer la qualité de
+            l'air.
             Nous
             construisons le futur de notre métropole."
             </p>
@@ -240,13 +268,13 @@
     <!-- New Lines Section -->
     <section class="container mx-auto mt-12 p-8 bg-primary-content shadow-lg rounded-lg">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6">Nouvelles Lignes pour le Réseau Urbain</h2>
-        <p class="text-neutral-content leading-relaxed mb-8">
+        <p class="text-base-content leading-relaxed mb-8">
             Pour accompagner l'extension du tramway et offrir plus de mobilité aux usagers, plusieurs nouvelles lignes
             de bus seront mises en place à partir de 2025. Voici les principales modifications apportées au réseau
             urbain :
         </p>
 
-        <ul class="list-disc list-inside text-neutral-content mb-8">
+        <ul class="list-disc list-inside text-base-content mb-8">
             <li><span class="font-bold">La ligne 5</span> deviendra une <span class="font-bold">ligne LHNS</span>, avec
                 des véhicules à haute fréquence et une capacité accrue.</li>
             <li>Le réseau comprendra <span class="font-bold">5 nouvelles lignes principales</span>, une ligne secondaire
@@ -256,7 +284,7 @@
                     nouvelles lignes urbaines</span>, dont une ligne scolaire dédiée.</li>
         </ul>
 
-        <p class="text-neutral-content leading-relaxed">
+        <p class="text-base-content leading-relaxed">
             Outre ces ajouts dans le réseau urbain, le réseau interurbain sera également renforcé avec <span
                 class="font-bold">6 nouvelles lignes</span>, incluant une ligne scolaire et une autre TAD, visant à
             connecter les communes environnantes et les zones périurbaines. Grâce à cette extension, les habitants des
@@ -264,7 +292,7 @@
             économiques majeurs.
         </p><br>
         <div class="relative mb-8">
-            <div class="absolute inset-0 bg-base-content bg-opacity-20 rounded-lg"></div>
+            <div class="absolute inset-0 rounded-lg"></div>
             <img src="https://transport-manager.net/assets/img/lignes/Plan_N5.png"
                 alt="Carte des nouvelles lignes urbaines et interurbaines" class="rounded-lg mb-8">
         </div>
@@ -273,7 +301,7 @@
     <!-- Bus Relais Section -->
     <section class="container mx-auto mt-12 p-8 bg-primary-content shadow-lg rounded-lg">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6">Les Bus Relais</h2>
-        <p class="text-neutral-content leading-relaxed mb-8">
+        <p class="text-base-content leading-relaxed mb-8">
             En cas de travaux, d’incidents ou d’imprévus rendant certains tronçons de la ligne de tramway inaccessibles,
             les bus relais entreront en service pour assurer la continuité du transport. Ces bus relais seront également
             mobilisés pendant la phase de rodage de la ligne de tramway afin de garantir aux usagers un service sans
@@ -287,14 +315,14 @@
                 Clermont-Ferrand</span>
         </blockquote>
 
-        <img src="https://live.staticflickr.com/65535/53078555393_2c04af2e69_c.jpg"
-            alt="Bus relais en action sur un tronçon fermé" class="rounded-lg mb-8">
+        <img src="../img/BRT.jpg"
+            alt="Bus relais en action sur un tronçon fermé" class="rounded-lg mb-8 w-half">
     </section>
 
     <!-- Daily Improvements Section -->
     <section class="container mx-auto mt-12 p-8 bg-primary-content shadow-lg rounded-lg">
         <h2 class="text-3xl font-semibold text-blue-600 mb-6">Améliorations pour votre quotidien</h2>
-        <ul class="list-disc list-inside text-neutral-content mb-8">
+        <ul class="list-disc list-inside text-base-content mb-8">
             <li>Une <span class="font-bold">application web connectée en temps réel</span> pour suivre les horaires et
                 les perturbations.</li>
             <li>Des <span class="font-bold">demandes d'horaires par SMS</span> pour vous offrir plus de flexibilité et

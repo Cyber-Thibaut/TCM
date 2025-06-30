@@ -133,6 +133,28 @@
             }
         },
         {
+            "id": 12,
+            "nom": "Gare centrale <> Parc d'attraction",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "La ligne 12 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie la Gare Centrale au Parc d'attraction, offrant aux passagers un moyen pratique et agréable de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à la Gare Centrale, un point névralgique de transport où convergent les lignes de train, de bus et de tramway. Les passagers peuvent monter à bord d'un bus moderne et confortable, équipé de sièges ergonomiques et de la climatisation pour garantir leur confort tout au long du trajet.\nLa ligne 12 traverse ensuite différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 12 est situé au Parc d'attraction, un lieu prisé par les familles et les amateurs de loisirs. Cette liaison est particulièrement utile pour ceux qui souhaitent profiter des attractions du parc, que ce soit pour une journée en famille ou une sortie entre amis.\nLes horaires de la ligne 12 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 12 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre la Gare Centrale et le Parc d'attraction. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient étudiants, employés ou résidents de la ville. ",
+            "stats": {
+                "nombre_arrets": 21,
+                "temps_trajet": "27 minutes",
+                "longueur_ligne": "7.2 km"
+            }
+        },
+        {
+            "id": 13,
+            "nom": "Haute-Ville <> Aéroport",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "La ligne 13 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie Haute-Ville à l'Aéroport, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à Haute-Ville, un quartier historique animé de Clermont-Ferrand, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont doux et accueillants, offrant aux passagers un voyage agréable dès le départ. Les grandes fenêtres permettent d'admirer les rues pavées et les bâtiments historiques de la ville.\nEn chemin vers l'Aéroport, la ligne 13 traverse plusieurs quartiers dynamiques de Clermont-Ferrand. Les passagers peuvent observer la vie quotidienne de la ville, avec ses commerces locaux, ses cafés animés et ses espaces verts accueillants.\nLe bus s'arrête ensuite à l'Aéroport, offrant aux passagers un accès direct et pratique aux vols nationaux et internationaux. Que ce soit pour les voyageurs arrivant ou partant de Clermont-Ferrand, cette ligne facilite les déplacements vers et depuis l'aéroport, leur permettant de poursuivre leur voyage en toute facilité.\nLa ligne 13 est connue pour sa fréquence élevée et ses horaires réguliers, assurant ainsi une disponibilité constante pour les utilisateurs. Que ce soit pour se rendre à l'aéroport pour un vol ou pour explorer la ville, la ligne 13 offre une solution de transport pratique et fiable.\nEn résumé, la ligne 13 du réseau urbain de Clermont-Ferrand relie Haute-Ville à l'Aéroport, offrant une connexion rapide et pratique pour les passagers. Avec son confort, sa connectivité et son engagement envers la communauté étudiante, la ligne 13 est un choix idéal pour se déplacer entre ces deux destinations clés de la ville. ",
+            "stats": {
+                "nombre_arrets": 15,
+                "temps_trajet": "18 minutes",
+                "longueur_ligne": "6.5 km"
+            }
+        },
+        {
             "id": 60,
             "nom": "Préfecture <> Lycée Jeanne d'Arc",
             "type": "Erupt'Urbain - Puy-de-Pariou",
@@ -405,6 +427,70 @@
                 "nombre_arrets": 10,
                 "temps_trajet": "13 minutes",
                 "longueur_ligne": "3 km"
+            }
+        },
+        {
+            "id": "BEN1",
+            "nom": "Jaude",
+            "type": "Nocturne",
+            "description": "BEN1 est votre allié pour des nuits sereines. Il relie le cœur vibrant de la Place de Jaude au quartier des Cézeaux, en passant par les principaux lieux de vie nocturne. Profitez de vos soirées sans vous soucier du retour !<br><br><strong>Les arrêts desservis :</strong><ul class=\"list-disc list-inside pl-4\"><li>Place de Jaude</li><li>Pont de la Victoire</li><li>Gare SNCF</li><li>Musée d’Art Roger-Quilliot</li><li>Stade Marcel-Michelin</li><li>Montferrand</li><li>CHU Gabriel-Montpied</li><li>Campus des Cézeaux</li><li>Gare Routière</li><li>Hôtel de Ville</li><li>Parc Montjuzet</li></ul><br>Et n'oublie pas, c'est BEN qui te ramène !",
+            "terminus": ["Ligne circulaire via le campus des Cézeaux"],
+            "circulation": {
+                "startHour": 21,
+                "endHour": 5,
+                "default_days": [4, 5, 6],
+                "default_text": "Circule les jeudis, vendredis et samedis soirs.",
+                "frequency": 30,
+                "special_periods": [
+                    {
+                        "start": "2025-07-05",
+                        "end": "2025-08-31",
+                        "text": "Horaires d'été",
+                        "days": [1, 2, 3, 4, 5, 6, 0],
+                        "frequency": {
+                            "weekday": 15,
+                            "saturday": 17,
+                            "sunday_holiday": 26
+                        }
+                    }
+                ]
+            },
+            "stats": {
+                "nombre_arrets": 17,
+                "temps_trajet": "104 minutes",
+                "longueur_ligne": "42,3 km"
+            }
+        },
+        {
+            "id": "BEN2",
+            "nom": "Montferrand <> Chamalières",
+            "type": "Nocturne",
+            "description": "Avec BEN2, déplacez-vous facilement entre Montferrand et Chamalières. Idéal pour les sorties entre amis ou pour rentrer après un dîner, il dessert des zones résidentielles et des lieux de divertissement.<br><br><strong>Les arrêts desservis :</strong><ul class=\"list-disc list-inside pl-4\"><li>Montferrand</li><li>Gare Routière</li><li>Préfecture</li><li>Hôtel de Ville</li><li>Gare SNCF</li><li>Pont de la Victoire</li><li>Cathédrale</li><li>Parc des Sports de Chamalières</li></ul><br>Et n'oublie pas, c'est BEN qui te ramène !",
+            "terminus": ["Direction Montferrand (via Gare SNCF de Clermont-Ferrand)", "Direction Chamalières (via Gare SNCF de Clermont-Ferrand)"],
+            "circulation": {
+                "startHour": 21,
+                "endHour": 5,
+                "default_days": [4, 5, 6],
+                "default_text": "Circule les jeudis, vendredis et samedis soirs.",
+                "frequency": 45,
+                "special_periods": [
+                    {
+                        "start": "2025-07-05",
+                        "end": "2025-08-31",
+                        "text": "Horaires d'été",
+                        "days": [1, 2, 3, 4, 5, 6, 0],
+                        "frequency": {
+                            "weekday": 20,
+                            "saturday": 27,
+                            "sunday_holiday": 41
+                        }
+                    }
+                ]
+            },
+            "stats": {
+                "nombre_arrets": 35,
+                "temps_trajet": "45 minutes",
+                "longueur_ligne": "10 km"
             }
         }
     ]

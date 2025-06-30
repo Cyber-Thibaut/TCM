@@ -1,569 +1,801 @@
 <!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <!-- Métadonnées du site -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité">
-    <meta name="author" content="Transport Clermont Métropole">
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Transport Clermont Métropole</title>
+    <meta
+      name="description"
+      content="Partenaire de vos déplacements à Clermont-Ferrand depuis 1989."
+    />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="https://tcm-mobilite.vercel.app/img/TCM.png" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/d8bf012a3e.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="src/menu.js" defer></script>
+  </head>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png">
-
-    <!-- Intégrations pour réseaux sociaux -->
-    <meta property="og:title" content="Transport Clermont Métropole">
-    <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-    <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
-    <meta name="twitter:title" content="Transport Clermont Métropole">
-    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <!-- Couleur de fond pour l'intégration -->
-    <meta name="theme-color" content="#204BFE">
-    <!-- Meta Tags Generated with https://metatags.io -->
-    <link href="/dist/output.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
-    <style>
-        .jw-album-image img,
-        .jw-element-image img {
-            pointer-events: none;
-            -webkit-touch-callout: none;
-        }
-
-        .pswp__share-tooltip .pswp__share--download {
-            display: none;
-        }
-    </style>
-    <script>
-        const isChristmas = () => {
-            const today = new Date();
-            const startChristmas = new Date(today.getFullYear(), 11, 1); // 1er Décembre
-            const endChristmas = new Date(today.getFullYear(), 11, 31); // 25 Décembre inclus
-            return today >= startChristmas && today < endChristmas;
-        };
-        document.addEventListener('DOMContentLoaded', () => {
-            if (isChristmas()) {
-                const logoContainer = document.getElementById("logo-container");
-
-                // Remplacez les logos par l'image de Noël
-                logoContainer.innerHTML = `
-            <img src="/img/TCM-Noel.png" width="200" height="200" alt="Logo TCM Noël" class="block">
-        `;
-            }
-            if (isChristmas()) {
-                // Fonction pour supprimer toutes les classes commençant par "dark:"
-                const removeDarkClasses = () => {
-                    // Sélectionner tous les éléments avec des classes "dark:"
-                    const elementsWithDark = document.querySelectorAll('[class*="dark:"]');
-
-                    // Parcourir chaque élément
-                    elementsWithDark.forEach(el => {
-                        // Parcourir ses classes
-                        const newClasses = Array.from(el.classList).filter(className => !className.startsWith('dark:'));
-                        // Remplacer l'ensemble des classes
-                        el.className = newClasses.join(' ');
-                    });
-                };
-
-                // Exécuter la suppression des classes `dark:`
-                removeDarkClasses();
-            }
-            if (isChristmas()) {
-
-                document.documentElement.classList.remove('dark');
-                document.documentElement.setAttribute('data-theme', 'cupcake');
-            }
-        });
-        if (isChristmas()) {
-            document.addEventListener('DOMContentLoaded', () => {
-                const snow = document.createElement('div');
-                snow.id = 'snow';
-                document.body.appendChild(snow);
-                const snowStyle = document.createElement('style');
-                snowStyle.innerHTML = `
-                    #snow {
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        pointer-events: none;
-                        background: transparent;
-                        overflow: hidden;
-                        z-index: 9999;
-                    }
-                    @keyframes snowfall {
-                        0% { transform: translateY(-10px); opacity: 1; }
-                        100% { transform: translateY(100vh); opacity: 0; }
-                    }
-                    .flake {
-                        position: absolute;
-                        top: -10px;
-                        width: 10px;
-                        height: 10px;
-                        background: white;
-                        border-radius: 50%;
-                        opacity: 0.8;
-                        animation: snowfall 5s linear infinite;
-                    }
-                `;
-                document.head.appendChild(snowStyle);
-
-                for (let i = 0; i < 100; i++) {
-                    const flake = document.createElement('div');
-                    flake.classList.add('flake');
-                    flake.style.left = `${Math.random() * 100}vw`;
-                    flake.style.animationDelay = `${Math.random() * 5}s`;
-                    flake.style.animationDuration = `${2 + Math.random() * 3}s`;
-                    flake.style.opacity = Math.random();
-                    document.getElementById('snow').appendChild(flake);
-                }
-            });
-        }
-    </script>
-</head>
-<style>
-    .orange-border {
-        display: inline-block;
-    }
-
-    .inner-content {
-        padding: 5px;
-        /* Ajustez la marge interne pour le contenu de chaque indice de ligne */
-    }
-
-    .orange-border p {
-        margin: 0;
-        /* Supprimez les marges internes pour le paragraphe */
-    }
-
-    .tcm-details {
-        margin-bottom: 20px;
-    }
-
-    .christmas-theme .dark.block {
-        display: none;
-    }
-
-    .christmas-theme .dark.hidden {
-        display: block;
-    }
-</style>
-
-<body>
-    <div id="menu"></div>
-    <br>
-    <div class="md:container md:mx-auto">
-        <div id="TCM" class="relative my-4"></div>
+  <body class="bg-base-100 text-base-content font-sans">
+    <div class="container p-6 mx-auto">
+      <div id="TCM"></div>
+      <div id="vacation-alert"></div>
     </div>
-    <div class="md:container md:mx-auto">
-        <div class="flex w-full flex-col lg:flex-row">
-            <div class="card bg-base-300 rounded-box grid h-32 flex-grow place-items-center">
-                <div class="flex flex-col justify-center items-center h-full card bg-base-300 rounded-box p-4">
-                    <h1 class="text-primary text-5xl font-bold text-center">
-                        Voyagez facilement à <span class="text-accent text-5xl font-bold"> Clermont-Ferrand</span> !
-                    </h1>
-                </div>
-            </div>
-            <div class="divider lg:divider-horizontal"></div>
 
-            <div class="card rounded-box grid h-32 flex-grow place-items-center bg-primary">
-                <h2 class="text-2xl font-bold mb-4 text-primary-content">Info trafic</h2>
-                <div id="lignes" class="grid grid-flow-row auto-rows-max gap-4"></div>
-            </div>
+    <!-- Hero -->
+    <header
+      class="hero min-h-[70vh] bg-cover bg-center relative"
+      style="background-image: url('https://i.imgur.com/ivC8iEO.jpeg')"
+    >
+      <div class="hero-overlay backdrop-blur-sm"></div>
+      <div class="hero-content text-center text-white">
+        <div class="max-w-2xl">
+          <h1
+            class="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight"
+          >
+            Voyagez facilement à
+            <span class="text-accent">Clermont-Ferrand</span>
+          </h1>
+          <p class="mt-6 text-lg sm:text-xl text-white/80">
+            Partenaire de vos déplacements depuis 1989.
+          </p>
         </div>
-        <br>
-        <div class="bg-secondary-content dark:bg-base-200 rounded-box py-24 sm:py-32">
-            <div class="mx-auto max-w-7xl px-6 lg:px-8">
-                <div class="mx-auto max-w-2xl lg:mx-0">
-                    <h2 class="text-3xl font-bold tracking-tight text-secondary sm:text-4xl">Notre Actualité</h2>
-                    <p class="mt-2 text-lg leading-8 text-secondary">En direct de notre rédaction, toute
-                        l'actualité TCM.</p>
-                </div>
-                <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-base-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-6"
-                    id="content"></div>
-            </div>
+      </div>
+    </header>
+
+    <!-- Trafic & Agences -->
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Info Trafic -->
+        <div class="card shadow-xl bg-primary text-primary-content p-6">
+          <h2 class="text-2xl font-bold mb-4">Info Trafic</h2>
+          <div id="lignes" class="grid gap-4"></div>
         </div>
-    </div><br>
-    <footer class="footer footer-center p-10 bg-primary text-primary-content relative">
-        <aside>
-            <div id="logo-container">
-                <img src="/img/TCM-Sombre.png" width="200" height="200" alt="Logo TCM" class="hidden dark:block">
-                <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" class="block dark:hidden">
-            </div>
-            <p class="font-bold">
-                Partenaire de vos déplacements depuis 1989.
-            </p>
-            <p>Copyright ©
-                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
-            </p>
-        </aside>
+
+        <!-- Agences -->
+        <div class="card shadow-xl bg-primary text-primary-content p-6">
+          <h2 class="text-2xl font-bold mb-4">État des Agences</h2>
+          <div id="agences" class="flex flex-wrap gap-4"></div>
+          <a href="/src/agences.html" class="btn btn-accent w-full mt-6"
+            >Voir toutes les agences</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Actualités -->
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-secondary">Notre Actualité</h2>
+        <p class="mt-2 text-lg text-base-content/80">
+          En direct de notre rédaction, toute l'actualité TCM.
+        </p>
+      </div>
+      <div
+        id="content"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      ></div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="footer footer-center p-10 bg-primary text-primary-content mt-auto"
+    >
+      <aside>
+        <img
+          src="/img/TCM-Clair.png"
+          width="180"
+          alt="Logo TCM"
+          class="mx-auto mb-3"
+        />
+        <p class="font-semibold text-lg">
+          Partenaire de vos déplacements depuis 1989
+        </p>
+        <p class="text-sm opacity-80">
+          © <span id="year"></span> Transport Clermont Métropole. Tous droits
+          réservés.
+        </p>
+      </aside>
     </footer>
 
-</body>
-<script>
-    //const url = "src/test.json";
-    const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
+    <!-- Year dynamic -->
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 
-    function afficherInfoTrafic() {
-        $.getJSON(url, function (data) {
-            // Créez un conteneur pour les détails de la ligne TCM
-            const tcmDetailsContainer = $("<div>").addClass("tcm-details");
+    <script>
+      const agences = [
+        {
+          id: "GC",
+          nom: "Gare Centrale",
+          horaires: {
+            lundi: ["07:00", "21:00"],
+            mardi: ["07:00", "21:00"],
+            mercredi: ["07:00", "21:00"],
+            jeudi: ["07:00", "21:00"],
+            vendredi: ["07:00", "21:00"],
+            samedi: ["08:00", "20:00"],
+            dimanche: ["10:00", "17:00"],
+          },
+        },
+        {
+          id: "GO",
+          nom: "Gare de l'Ouest",
+          horaires: {
+            lundi: ["09:00", "19:00"],
+            mardi: ["09:00", "19:00"],
+            mercredi: ["09:00", "19:00"],
+            jeudi: ["09:00", "19:00"],
+            vendredi: ["09:00", "19:00"],
+            samedi: ["10:00", "18:00"],
+            "1er": ["07:00", "20:00"],
+          },
+        },
+        {
+          id: "A",
+          nom: "Aéroport",
+          horaires: {
+            lundi: ["07:00", "21:00"],
+            mardi: ["07:00", "21:00"],
+            mercredi: ["07:00", "21:00"],
+            jeudi: ["07:00", "21:00"],
+            vendredi: ["07:00", "21:00"],
+            samedi: ["08:00", "20:00"],
+            dimanche: ["10:00", "17:00"],
+          },
+        },
+        {
+          id: "CMG",
+          nom: "Agence CMG",
+          horaires: {
+            lundi: ["09:00", "19:00"],
+            mardi: ["09:00", "19:00"],
+            mercredi: ["09:00", "19:00"],
+            jeudi: ["09:00", "19:00"],
+            vendredi: ["09:00", "19:00"],
+            samedi: ["10:00", "18:00"],
+            "1er": ["07:00", "20:00"],
+          },
+        },
+        {
+          id: "CdC",
+          nom: "Campus des Cézeaux",
+          horaires: {
+            lundi: ["09:00", "19:00"],
+            mardi: ["09:00", "19:00"],
+            mercredi: ["09:00", "19:00"],
+            jeudi: ["09:00", "19:00"],
+            vendredi: ["09:00", "19:00"],
+            samedi: ["10:00", "18:00"],
+            "1er": ["07:00", "20:00"],
+          },
+        },
+        {
+          id: "PdJ",
+          nom: "Place de Jaude",
+          horaires: {
+            lundi: ["07:00", "21:00"],
+            mardi: ["07:00", "21:00"],
+            mercredi: ["07:00", "21:00"],
+            jeudi: ["07:00", "21:00"],
+            vendredi: ["07:00", "21:00"],
+            samedi: ["08:00", "20:00"],
+            dimanche: ["10:00", "17:00"],
+          },
+        },
+        {
+          id: "Riom",
+          nom: "Riom Gare Routière",
+          horaires: {
+            lundi: ["09:00", "19:00"],
+            mardi: ["09:00", "19:00"],
+            mercredi: ["09:00", "19:00"],
+            jeudi: ["09:00", "19:00"],
+            vendredi: ["09:00", "19:00"],
+            samedi: ["10:00", "18:00"],
+            "1er": ["07:00", "20:00"],
+          },
+        },
+        {
+          id: "Aubière",
+          nom: "Aubière Place des Ramacles",
+          horaires: {
+            lundi: ["09:00", "19:00"],
+            mardi: ["09:00", "19:00"],
+            mercredi: ["09:00", "19:00"],
+            jeudi: ["09:00", "19:00"],
+            vendredi: ["09:00", "19:00"],
+            samedi: ["10:00", "18:00"],
+            "1er": ["07:00", "20:00"],
+          },
+        },
+      ];
 
-            const otherLinesContainer = $("<div>").addClass("other-lines");
+      // Fonction pour récupérer les jours fériés depuis l'API
+      async function fetchHolidayDates(year) {
+        try {
+          const response = await fetch(
+            `https://calendrier.api.gouv.fr/jours-feries/metropole/${year}.json`
+          );
+          const data = await response.json();
+          return Object.keys(data).map((date) => date);
+        } catch (error) {
+          console.error("Erreur de récupération des jours fériés:", error);
+          return [];
+        }
+      }
 
-            // Créez un ensemble pour suivre les lignes auxquelles vous avez déjà ajouté un logo
-            const addedLineLogos = new Set();
-            let nbLogo = 0;
+      // Fonction pour vérifier si une date est un jour férié
+      function isHoliday(date, holidayDates) {
+        const formattedDate = formatDate(date);
+        return holidayDates.includes(formattedDate);
+      }
 
-            $.each(data.lignes, function (i, ligne) {
-                const dateActuelle = new Date();
-                let logoHtml = "";
+      // Fonction pour vérifier si la date actuelle est le 1er mai
+      function isMay1st(date) {
+        return date.getMonth() === 4 && date.getDate() === 1; // Mai = 4
+      }
 
-                $.each(ligne.infos_trafic, function (j, info) {
-                    const dateDebut = new Date(Date.parse(info.annonce));
-                    const dateFin = new Date(Date.parse(info.fin));
-                    const specialLines = ["805", "809", "810", "816", "713", "817"];
-                    const imageSuffix = specialLines.includes(ligne.ligne) ? '-jo' : '';
-                    dateFin.setDate(dateFin.getDate() + 1);
+      // Fonction pour formater une date en chaîne de caractères
+      function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
 
-                    if (dateActuelle >= dateDebut && dateActuelle <= dateFin) {
-                        if (!addedLineLogos.has(ligne.ligne)) {
-                            if (ligne.ligne === "TCM") {
-                                let alertClass = '';
-                                let alertIcon = '';
-                                let alertBgColor = '';
-                                let btnColorClass = '';
+      async function getEtatAgence(horaires) {
+        const now = new Date();
+        const jourSemaine = [
+          "dimanche",
+          "lundi",
+          "mardi",
+          "mercredi",
+          "jeudi",
+          "vendredi",
+          "samedi",
+        ][now.getDay()];
+        const jourMois = now.getDate();
+        const heureActuelle = now.getHours() * 60 + now.getMinutes();
 
-                                if (info.type.includes("travaux")) {
-                                    alertClass = 'alert-warning';
-                                    alertIcon = `
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="h-6 w-6 shrink-0 stroke-current"
-                                            fill="none"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                        </svg>`;
-                                    alertBgColor = 'bg-yellow-50 border-yellow-200';
-                                    btnColorClass = 'btn-warning';
-                                } else if (info.type.includes("information")) {
-                                    alertClass = 'alert-info';
-                                    alertIcon = `
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            class="h-6 w-6 shrink-0 stroke-current">
-                                            <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>`;
-                                    alertBgColor = 'bg-blue-50 border-blue-200';
-                                    btnColorClass = 'btn-info';
-                                } else if (info.type.includes("fermeture")) {
-                                    alertClass = 'alert-error';
-                                    alertIcon = `
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="h-6 w-6 shrink-0 stroke-current"
-                                            fill="none"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>`;
-                                    alertBgColor = 'bg-red-50 border-red-200';
-                                    btnColorClass = 'btn-error';
-                                } else if (info.type.includes("attention") || info.type.includes("perturbation")) {
-                                    alertClass = 'alert-warning';
-                                    alertIcon = `
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="h-6 w-6 shrink-0 stroke-current"
-                                            fill="none"
-                                            viewBox="0 0 24 24">
-                                            <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                        </svg>`;
-                                    alertBgColor = 'bg-orange-50 border-orange-200';
-                                    btnColorClass = 'btn-warning';
-                                } else {
-                                    alertClass = '';
-                                    alertIcon = `
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            class="stroke-info h-6 w-6 shrink-0">
-                                            <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>`;
-                                    alertBgColor = 'bg-blue-50 border-blue-200';
-                                    btnColorClass = 'btn-info';
-                                }
+        const holidayDates = await fetchHolidayDates(now.getFullYear());
 
-                                logoHtml += `
-                                <div class="alert ${alertClass} flex justify-between items-center p-4 rounded-lg shadow-md ${alertBgColor}">
-                                    <div class="flex items-center">
-                                        ${alertIcon}
-                                        <span class="text-lg font-semibold text-gray-700 truncate"> ${info.titre}</span>
-                                    </div>
-                                    <a href="src/details.html#TCM" class="btn ${btnColorClass} text-white ml-4">
-                                        Lire la suite
-                                    </a>
-                                </div>`;
+        // Vérifier si c'est le 1er mai
+        if (isMay1st(now)) {
+          return "Fermé";
+        }
 
-                                addedLineLogos.add(ligne.ligne);
-                            }
-                            else {
-                                logoHtml += `<div class="orange-border"><a href="../src/details.html#${ligne.ligne}"><div class="inner-content"><img id='logo' src='/img/${ligne.ligne}${imageSuffix}.png' width="50" height="50" alt='Logo de la ligne' class="bg-gray-200 p-2 border border-orange-500 rounded-md"></a><img src='/img/assets/warning.png' style='position: relative; width: 20px; height: 20px; top: -10px; left: 35px;'></div>`;
-                                logoHtml += `</div>`;
-                                addedLineLogos.add(ligne.ligne);
-                            }
+        // Vérifier si c'est un jour férié
+        if (isHoliday(now, holidayDates)) {
+          if (horaires.dimanche) {
+            const [ouverture, fermeture] = horaires.dimanche;
+            const [hOuv, mOuv] = ouverture.split(":").map(Number);
+            const [hFerm, mFerm] = fermeture.split(":").map(Number);
+            const ouvertureMinutes = hOuv * 60 + mOuv;
+            const fermetureMinutes = hFerm * 60 + mFerm;
 
-                        }
-                    }
-                });
-
-                // Si un incident est trouvé pour cette ligne, ajoutez le logo à la liste correspondante
-                if (logoHtml !== "") {
-                    if (ligne.ligne === "TCM") {
-                        tcmDetailsContainer.html(logoHtml);
-                    } else {
-                        otherLinesContainer.append(logoHtml);
-                        nbLogo += 1;
-                        // Ajoutez un saut de ligne après chaque groupe de 3 logos
-                        if (nbLogo === 4) {
-                            otherLinesContainer.append("<br>");
-                            nbLogo = 0;  // Remettre à zéro le compteur après 3 logos
-                        }
-                    }
-                }
-            });
-            // Vérifiez si otherLinesContainer est vide et ajoutez le logo si c'est le cas
-            if (otherLinesContainer.children().length === 0) {
-                let logoHtml = "";
-                logoHtml += `<div class="green-border"><div class="inner-content"><img id='logo' src='img/TCM.png' width="50" height="50" alt='Logo de la ligne' class="bg-gray-200 p-2 border border-green-500 rounded-md"></a><img src='/img/assets/valid.png' style='position: relative; width: 20px; height: 20px; top: -10px; left: 35px;'></div>`;
-                logoHtml += `</div>`;
-                otherLinesContainer.append(logoHtml);
+            if (
+              heureActuelle >= ouvertureMinutes &&
+              heureActuelle < fermetureMinutes
+            ) {
+              return "Ouvert";
+            } else if (
+              heureActuelle >= fermetureMinutes - 30 &&
+              heureActuelle < fermetureMinutes
+            ) {
+              return "Bientôt Fermé";
+            } else {
+              return "Fermé";
             }
-            // Ajoutez les conteneurs à la page
-            $("#lignes").append(otherLinesContainer);
-            $("#TCM").append(tcmDetailsContainer);
-        });
-    }
+          } else {
+            return "Fermé";
+          }
+        } else if (horaires["1er"] && jourMois === 1) {
+          const [ouverture, fermeture] = horaires["1er"];
+          const [hOuv, mOuv] = ouverture.split(":").map(Number);
+          const [hFerm, mFerm] = fermeture.split(":").map(Number);
+          const ouvertureMinutes = hOuv * 60 + mOuv;
+          const fermetureMinutes = hFerm * 60 + mFerm;
 
-    afficherInfoTrafic();
-</script>
-<script>
-    $(function () {
-        var url = "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts?categories=8&per_page=9";
+          if (
+            heureActuelle >= ouvertureMinutes &&
+            heureActuelle < fermetureMinutes
+          ) {
+            return "Ouvert";
+          } else if (
+            heureActuelle >= fermetureMinutes - 30 &&
+            heureActuelle < fermetureMinutes
+          ) {
+            return "Bientôt Fermé";
+          } else {
+            return "Fermé";
+          }
+        } else if (horaires[jourSemaine]) {
+          const [ouverture, fermeture] = horaires[jourSemaine];
+          const [hOuv, mOuv] = ouverture.split(":").map(Number);
+          const [hFerm, mFerm] = fermeture.split(":").map(Number);
+          const ouvertureMinutes = hOuv * 60 + mOuv;
+          const fermetureMinutes = hFerm * 60 + mFerm;
+
+          if (
+            heureActuelle >= ouvertureMinutes &&
+            heureActuelle < fermetureMinutes
+          ) {
+            return "Ouvert";
+          } else if (
+            heureActuelle >= fermetureMinutes - 30 &&
+            heureActuelle < fermetureMinutes
+          ) {
+            return "Bientôt Fermé";
+          } else {
+            return "Fermé";
+          }
+        }
+
+        return "Fermé";
+      }
+
+      async function afficherAgences() {
+        const container = $("#agences");
+        container.html("");
+
+        const holidayDates = await fetchHolidayDates(new Date().getFullYear());
+
+        const etats = await Promise.all(
+          agences.map(async (agence) => ({
+            ...agence,
+            etat: await getEtatAgence(agence.horaires),
+          }))
+        );
+
+        const agencesAffichables = etats.filter(
+          (a) => a.etat === "Ouvert" || a.etat === "Bientôt Fermé"
+        );
+
+        if (agencesAffichables.length === agences.length) {
+          container.append(
+            "<p>Toutes les agences sont actuellement ouvertes.</p>"
+          );
+        } else if (agencesAffichables.length === 0) {
+          container.append(
+            "<p>Toutes les agences sont actuellement fermées.</p>"
+          );
+        } else {
+          agencesAffichables.forEach((agence) => {
+            let couleur = "",
+              icone = "";
+
+            if (agence.etat === "Ouvert") {
+              couleur = "border-green-500";
+              icone = "/img/assets/valid_white.png";
+            } else if (agence.etat === "Bientôt Fermé") {
+              couleur = "border-yellow-500";
+              icone = "/img/assets/alert_white.png";
+            }
+
+            const imagePath = `/img/${agence.id}.png`;
+            const agenceHtml = `
+              <div class="relative inline-block">
+                <img src="${imagePath}" alt="${agence.nom}" width="75" height="75" class="bg-gray-200 p-2 border ${couleur} rounded-md">
+                <img src="${icone}" style="position: relative; width: 30px; height: 30px; top: -15px; left: 55px;">
+              </div>`;
+            container.append(agenceHtml);
+          });
+        }
+      }
+
+      afficherAgences();
+      setInterval(afficherAgences, 30000);
+    </script>
+
+    <script>
+      //const url = "src/test.json";
+      const url =
+        "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
+
+      function afficherInfoTrafic() {
+        $.getJSON(url, function (data) {
+          const tcmDetailsContainer = $("<div>").addClass("tcm-details");
+          const otherLinesContainer = $("<div>").addClass("other-lines");
+          const addedLineLogos = new Set();
+          let nbLogo = 0;
+
+          $.each(data.lignes, function (i, ligne) {
+            const dateActuelle = new Date();
+            let logoHtml = "";
+
+            $.each(ligne.infos_trafic, function (j, info) {
+              const dateDebut = new Date(Date.parse(info.annonce));
+              const dateFin = new Date(Date.parse(info.fin));
+              const specialLines = ["805", "809", "810", "816", "713", "817"];
+              const imageSuffix = specialLines.includes(ligne.ligne)
+                ? "-jo"
+                : "";
+              dateFin.setDate(dateFin.getDate() + 1);
+
+              if (dateActuelle >= dateDebut && dateActuelle <= dateFin) {
+                if (!addedLineLogos.has(ligne.ligne)) {
+                  if (ligne.ligne === "TCM") {
+                    let alertClass = "";
+                    let alertIcon = "";
+                    let alertBgColor = "";
+                    let btnColorClass = "";
+
+                    if (info.type.includes("travaux")) {
+                      alertClass = "alert-warning";
+                      alertIcon = `
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                            </svg>`;
+                      alertBgColor = "bg-yellow-50 border-yellow-200";
+                      btnColorClass = "btn-warning";
+                    } else if (info.type.includes("information")) {
+                      alertClass = "alert-info";
+                      alertIcon = `
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>`;
+                      alertBgColor = "bg-blue-50 border-blue-200";
+                      btnColorClass = "btn-info";
+                    } else if (info.type.includes("fermeture")) {
+                      alertClass = "alert-error";
+                      alertIcon = `
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>`;
+                      alertBgColor = "bg-red-50 border-red-200";
+                      btnColorClass = "btn-error";
+                    } else if (
+                      info.type.includes("attention") ||
+                      info.type.includes("perturbation")
+                    ) {
+                      alertClass = "alert-warning";
+                      alertIcon = `
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                            </svg>`;
+                      alertBgColor = "bg-orange-50 border-orange-200";
+                      btnColorClass = "btn-warning";
+                    } else {
+                      alertClass = "";
+                      alertIcon = `
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info h-6 w-6 shrink-0">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>`;
+                      alertBgColor = "bg-blue-50 border-blue-200";
+                      btnColorClass = "btn-info";
+                    }
+
+                    logoHtml += `
+                                    <div role="alert" class="alert alert-vertical sm:alert-horizontal">
+                                        <div class="flex items-center">
+                                            ${alertIcon}
+                                            <span> ${info.titre}</span>
+                                        </div>
+                                        <a href="src/details.html#TCM" class="btn btn-sm btn-primary">
+                                            Lire la suite
+                                        </a>
+                                    </div>`;
+
+                    addedLineLogos.add(ligne.ligne);
+                  } else {
+                    logoHtml += `<div class="orange-border"><a href="../src/details.html#${ligne.ligne}"><div class="inner-content"><img id='logo' src='/img/${ligne.ligne}${imageSuffix}.png' width="75" height="75" alt='Logo de la ligne' class="bg-gray-200 p-2 border border-orange-500 rounded-md"></a><img src='/img/assets/warning.png' style='position: relative; width: 30px; height: 30px; top: -15px; left:55px;'></div></div>`;
+                    addedLineLogos.add(ligne.ligne);
+                  }
+                }
+              }
+            });
+
+            if (logoHtml !== "") {
+              if (ligne.ligne === "TCM") {
+                tcmDetailsContainer.html(logoHtml);
+              } else {
+                otherLinesContainer.append(logoHtml);
+                nbLogo += 1;
+                if (nbLogo === 4) {
+                  otherLinesContainer.append("<br>");
+                  nbLogo = 0;
+                }
+              }
+            }
+          });
+
+          if (otherLinesContainer.children().length === 0) {
+            let logoHtml = `<div class="green-border"><div class="inner-content"><img id='logo' src='img/TCM.png' width="75" height="75" alt='Logo de la ligne' class="bg-gray-200 p-2 border border-green-500 rounded-md"></a><img src='/img/assets/valid.png' style='position: relative; width: 30px; height: 30px; top: -15px; left: 55px;'></div></div>`;
+            otherLinesContainer.append(logoHtml);
+          }
+
+          $("#lignes").append(otherLinesContainer);
+          $("#TCM").append(tcmDetailsContainer);
+        });
+      }
+
+      afficherInfoTrafic();
+    </script>
+
+    <script>
+      $(function () {
+        const url =
+          "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts?categories=8&per_page=9";
 
         $.get(url, function (data) {
-            var content = "";
+          let content = "";
 
-            if (data.length === 0) {
-                $("#content").html("<p>Aucun résultat.</p>");
-            } else {
-                // Use a Promise.all to handle asynchronous image fetching
-                var fetchPromises = data.map(function (article) {
-                    // Construct the image URL using the featured_media ID
-                    const apiUrl = "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/media/" + article.featured_media;
+          if (data.length === 0) {
+            $("#content").html("<p>Aucun résultat.</p>");
+          } else {
+            const fetchPromises = data.map(function (article) {
+              const apiUrl =
+                "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/media/" +
+                article.featured_media;
 
-                    return fetch(apiUrl)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Erreur lors de la récupération des données de l\'article');
-                            }
-                            return response.json();
-                        })
-                        .then(mediaData => {
-                            // Access the guide.rendered from the fetched media data
-                            const featuredMediaUrl = mediaData.guid.rendered;
+              return fetch(apiUrl)
+                .then((response) => response.json())
+                .then((mediaData) => {
+                  const featuredMediaUrl = mediaData.guid.rendered;
 
-                            // Construct the HTML content for the article using the card structure
-                            return `
-                  <div class="card w-96 bg-base-100 shadow-xl">
-                    <figure><img src="${featuredMediaUrl}" alt="${article.title.rendered}" class="h-full w-full object-cover" /></figure>
-                    <div class="card-body">
-                      <h2 class="card-title text-lg font-bold">${article.title.rendered}</h2>
-                      <p class="text-sm text-gray-700">${article.excerpt.rendered}</p>
-                      <div class="card-actions justify-end">
-                        <a href="${article.link}" class="btn btn-primary">Lire la suite</a>
-                      </div>
-                    </div>
-                  </div>
-                  <br>
-                `;
-                        })
-                        .catch(error => {
-                            console.error('Une erreur s\'est produite :', error);
-                            return ''; // Return an empty string in case of an error
-                        });
+                  return `
+                                    <div class="card card-compact bg-base-300 w-full shadow-xl">
+                                        <figure><img src="${featuredMediaUrl}" alt="${article.title.rendered}" class="h-full w-full object-cover" /></figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-lg font-bold">${article.title.rendered}</h2>
+                                            <p class="text-sm text-gray-700">${article.excerpt.rendered}</p>
+                                            <div class="card-actions justify-end">
+                                                <a href="${article.link}" class="btn btn-primary">Lire la suite</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                })
+                .catch((error) => {
+                  console.error("Une erreur s'est produite :", error);
+                  return "";
                 });
+            });
 
-                // After all fetch promises have been resolved, update the HTML content
-                Promise.all(fetchPromises).then((articlesContent) => {
-                    content = articlesContent.join(''); // Join all article contents into a single string
-                    $("#content").html(content);
-                });
-            }
+            Promise.all(fetchPromises).then((articlesContent) => {
+              content = articlesContent.join("");
+              $("#content").html(content);
+            });
+          }
         }).fail(function () {
-            $("#content").html("<p>Aye Caramba !</p>");
+          $("#content").html("<p>Aye Caramba !</p>");
         });
-    });
+      });
+    </script>
+    <script>
+      const isChristmas = () => {
+        const today = new Date();
+        const startChristmas = new Date(today.getFullYear(), 11, 1); // 1er Décembre
+        const endChristmas = new Date(today.getFullYear(), 11, 31); // 31 Décembre inclus
+        return today >= startChristmas && today <= endChristmas;
+      };
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuContainer = document.getElementById("menu");
+      document.addEventListener("DOMContentLoaded", () => {
         if (isChristmas()) {
-            // Insérer le menu de Noël
-            menuContainer.innerHTML = `
-            <div class="navbar bg-base-300 relative shadow-lg border-b-4 border-primary">
-                <div class="navbar-start">
-                    <div class="dropdown">
-                        <label tabindex="0" class="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-focus" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h8m-8 6h16" />
-                            </svg>
-                        </label>
-                        <ul tabindex="0"
-                            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a href="/src/reseau.html" class="hover:text-accent"><i class="fa-solid fa-gifts"></i> Notre
-                                    Réseau</a></li>
-                            <li><a href="/src/trafic.html" class="hover:text-accent"><i class="fa-solid fa-sleigh"></i> Info
-                                    Trafic</a></li>
-                            <li><a href="/src/tarifs.html" class="hover:text-accent"><i class="fa-solid fa-gift"></i> Tarif</a>
-                            </li>
-                            <li><a href="/src/agences.html" class="hover:text-accent"><i class="fa-solid fa-holly-berry"></i>
-                                    Nos Agences</a></li>
-                            <li><a href="/src/calendar.html" class="hover:text-primary-focus animate-pulse"><i
-                                        class="fa-solid fa-calendar-check"></i> Calendrier de l'Avent</a></li>
-                        </ul>
-                    </div>
-                    <a class="btn btn-ghost normal-case text-xl" href="/index.html">
-                        <img src="/img/TCM-Noel.png" width="75" height="75" alt="Logo TCM"
-                            class="drop-shadow-xl animate-bounce">
-                    </a>
-                </div>
-                <div class="navbar-center hidden lg:flex">
-                    <ul class="menu menu-horizontal px-1">
-                        <li><a href="/src/reseau.html" class="hover:text-accent"><i class="fa-solid fa-gifts"></i> Notre
-                                Réseau</a></li>
-                        <li><a href="/src/trafic.html" class="hover:text-accent"><i class="fa-solid fa-sleigh"></i> Info
-                                Trafic</a></li>
-                        <li><a href="/src/tarifs.html" class="hover:text-accent"><i class="fa-solid fa-gift"></i> Tarif</a></li>
-                        <li><a href="/src/agences.html" class="hover:text-accent"><i class="fa-solid fa-holly-berry"></i> Nos
-                                Agences</a></li>
-                        <li><a href="/src/calendar.html" class="hover:text-primary-focus animate-pulse"><i
-                                    class="fa-solid fa-calendar-check"></i> Calendrier de l'Avent</a></li>
-                    </ul>
-                </div>
-                <div class="navbar-end">
-                    <button class="btn btn-primary btn-sm rounded-full shadow-lg animate-bounce">🎄 Joyeux Noël !</button>
-                </div>
-            </div>
+          const logoContainer = document.getElementById("logo-container");
+          logoContainer.innerHTML = `
+                <img src="/img/TCM-Noel.png" width="200" height="200" alt="Logo TCM Noël" class="block">
             `;
-        } else {
-            // Insérer le menu normal
-            menuContainer.innerHTML = `
-            <div class="navbar bg-base-300 relative">
-                <div class="navbar-start">
-                    <div class="dropdown">
-                        <label tabindex="0" class="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
-                            </svg>
-                        </label>
-                        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a href="/src/reseau.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                    </svg>Notre Réseau</a></li>
-                            <li><a href="/src/trafic.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    Info Trafic
-                                </a></li>
-                            <li><a href="/src/tarifs.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
-                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="1.1"
-                                            d="M16.5 7A2.5 2.5 0 0 1 19 4.5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 1 1 0 5V12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5A2.5 2.5 0 0 1 16.5 7Z" />
-                                    </svg> Tarif</a></li>
-                            <li><a href="/src/agences.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
-                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
-                                        viewBox="0 0 21 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="1.1"
-                                            d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
-                                    </svg> Nos Agences</a></li>
-                        </ul>
-                    </div>
-                    <a class="btn btn-ghost normal-case text-xl hidden dark:block" href="/index.html"><img src="/img/TCM-Clair.png"
-                            width="75" height="75" alt="Logo TCM"></a>
-                    <a class="btn btn-ghost normal-case text-xl block dark:hidden" href="/index.html"><img src="/img/TCM-Sombre.png"
-                            width="75" height="75" alt="Logo TCM"></a>
-                </div>
-                <div class="navbar-center hidden lg:flex">
-                    <ul class="menu menu-horizontal px-1">
-                        <li><a href="/src/reseau.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                </svg>Notre Réseau</a></li>
-                        <li><a href="/src/trafic.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Info Trafic
-                            </a></li>
-                        <li><a href="/src/tarifs.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.1"
-                                        d="M16.5 7A2.5 2.5 0 0 1 19 4.5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 1 1 0 5V12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5A2.5 2.5 0 0 1 16.5 7Z" />
-                                </svg> Tarif</a></li>
-                        <li><a href="/src/agences.html"><svg class="w-[19px] h-[19px] text-gray-800 dark:text-white"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
-                                    viewBox="0 0 21 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.1"
-                                        d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
-                                </svg> Nos Agences</a></li>
-                    </ul>
-                </div>
-                <div class="navbar-end">
-                </div>
-            </div>
-            `;
-        }
-    });
-</script>
 
+          const removeDarkClasses = () => {
+            const elementsWithDark =
+              document.querySelectorAll('[class*="dark:"]');
+            elementsWithDark.forEach((el) => {
+              const newClasses = Array.from(el.classList).filter(
+                (className) => !className.startsWith("dark:")
+              );
+              el.className = newClasses.join(" ");
+            });
+          };
+
+          removeDarkClasses();
+
+          document.documentElement.classList.remove("dark");
+          document.documentElement.setAttribute("data-theme", "cupcake");
+        }
+
+        if (isChristmas()) {
+          document.addEventListener("DOMContentLoaded", () => {
+            const snow = document.createElement("div");
+            snow.id = "snow";
+            document.body.appendChild(snow);
+            const snowStyle = document.createElement("style");
+            snowStyle.innerHTML = `
+                        #snow {
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            pointer-events: none;
+                            background: transparent;
+                            overflow: hidden;
+                            z-index: 9999;
+                        }
+                        @keyframes snowfall {
+                            0% { transform: translateY(-10px); opacity: 1; }
+                            100% { transform: translateY(100vh); opacity: 0; }
+                        }
+                        .flake {
+                            position: absolute;
+                            top: -10px;
+                            width: 10px;
+                            height: 10px;
+                            background: white;
+                            border-radius: 50%;
+                            opacity: 0.8;
+                            animation: snowfall 5s linear infinite;
+                        }
+                    `;
+            document.head.appendChild(snowStyle);
+
+            for (let i = 0; i < 100; i++) {
+              const flake = document.createElement("div");
+              flake.classList.add("flake");
+              flake.style.left = `${Math.random() * 100}vw`;
+              flake.style.animationDelay = `${Math.random() * 5}s`;
+              flake.style.animationDuration = `${2 + Math.random() * 3}s`;
+              flake.style.opacity = Math.random();
+              document.getElementById("snow").appendChild(flake);
+            }
+          });
+        }
+      });
+
+      async function fetchVacationDates() {
+        const year = new Date().getFullYear();
+        const schoolYears = [`${year - 1}-${year}`, `${year}-${year + 1}`];
+        try {
+          const responses = await Promise.all(
+            schoolYears.map((schoolYear) =>
+              fetch(
+                `https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?limit=100&lang=fr&refine=location%3A%22Clermont-Ferrand%22&refine=population%3A%22-%22&refine=population%3A%22%C3%89l%C3%A8ves%22&refine=annee_scolaire%3A%22${schoolYear}%22`
+              )
+            )
+          );
+          const data = await Promise.all(responses.map((r) => r.json()));
+          return data
+            .flatMap((d) =>
+              d.results.map((record) => ({
+                start: new Date(record.start_date),
+                end: new Date(record.end_date),
+                description: record.description,
+              }))
+            )
+            .sort((a, b) => a.start - b.start);
+        } catch (error) {
+          console.error("Erreur lors du chargement des vacances :", error);
+          return [];
+        }
+      }
+
+      function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${day}/${month}/${year}`;
+      }
+
+      function isWeekendBeforeEnd(endDate, currentDate) {
+        const dayDiff = (endDate - currentDate) / (1000 * 60 * 60 * 24);
+        const day = currentDate.getDay(); // 0 = dimanche, 6 = samedi
+        return (day === 0 || day === 6) && dayDiff <= 2 && dayDiff >= 0;
+      }
+
+      async function updateVacationAlert() {
+        const now = new Date();
+        const vacationAlert = document.getElementById("vacation-alert");
+        const vacationDates = await fetchVacationDates();
+
+        // Détection spéciale 1er mai
+        const isMay1st = now.getMonth() === 4 && now.getDate() === 1; // Mai = 4
+        const isWeekBeforeMay1st =
+          now.getMonth() === 3 && now.getDate() >= 24 && now.getDate() <= 30; // Avril = 3
+
+        if (isMay1st || isWeekBeforeMay1st) {
+          vacationAlert.style.display = "block";
+          if (isMay1st) {
+            vacationAlert.innerHTML = `
+              <div class="alert alert-warning">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667
+                        1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464
+                        0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <span>Aujourd’hui est le 1er mai. Le réseau TCM est fermé. Bonne fête à tous les travailleurs !</span>
+              </div><br>`;
+          } else {
+            vacationAlert.innerHTML = `
+              <div class="alert alert-warning">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667
+                        1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464
+                        0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <span>Attention : Le réseau TCM sera fermé le 1er mai. Bonne fête à tous les travailleurs !</span>
+              </div><br>`;
+          }
+          return;
+        }
+
+        // Pas de priorité 1er mai : on vérifie les vacances maintenant
+        const currentVacation = vacationDates.find(
+          (range) => now >= range.start && now <= range.end
+        );
+
+        if (currentVacation) {
+          vacationAlert.style.display = "block";
+          vacationAlert.innerHTML = `
+            <div class="alert alert-info">
+              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667
+                      1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464
+                      0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+              <span>Remarque : Les horaires sont modifiés en raison des vacances scolaires.</span>
+            </div><br>`;
+          return;
+        }
+
+        // Pas de vacances actuelles : check si week-end juste après vacances
+        const pastVacation = vacationDates.find(
+          (range) => now > range.end && isWeekendBeforeEnd(range.end, now)
+        );
+
+        if (pastVacation) {
+          vacationAlert.style.display = "block";
+          vacationAlert.innerHTML = `
+            <div class="alert alert-success">
+              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2l4-4m-9 4a9 9 0 1118 0a9 9 0 01-18 0z" />
+              </svg>
+              <span>Bon week-end ! On espère que vous êtes prêts pour la reprise dès lundi !</span>
+            </div><br>`;
+          return;
+        }
+
+        // Sinon, est-ce qu'on approche de futures vacances ?
+        const upcomingVacation = vacationDates.find(
+          (range) => now < range.start
+        );
+
+        if (upcomingVacation) {
+          const joursAvantVacances = Math.ceil(
+            (upcomingVacation.start - now) / (1000 * 60 * 60 * 24)
+          );
+
+          if (joursAvantVacances <= 7) {
+            vacationAlert.style.display = "block";
+            vacationAlert.innerHTML = `
+              <div class="alert alert-warning">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667
+                        1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464
+                        0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                <span>Attention : Des changements d'horaires sont à prévoir à partir du
+                  ${formatDate(upcomingVacation.start)} pour les
+                  ${upcomingVacation.description}.
+                </span>
+              </div><br>`;
+            return;
+          }
+        }
+
+        // Sinon : rien à afficher
+        vacationAlert.style.display = "none";
+      }
+
+      document.addEventListener("DOMContentLoaded", updateVacationAlert);
+    </script>
+  </body>
 </html>

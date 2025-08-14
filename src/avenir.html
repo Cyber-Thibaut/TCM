@@ -107,7 +107,7 @@
             // Travaux de voirie : commence après bureau d'étude et dure au minimum 8 mois
             let voirieProgress = 0; // Initialisation par défaut
             if (bureauEtudeProgress === 100) {
-                voirieProgress = calculateProgress("2024-12-14", "2025-08-31");  // La date de début est après le bureau d'étude
+                voirieProgress = calculateProgress("2024-12-14", "2025-08-15");  // La date de début est après le bureau d'étude
                 //document.getElementById("voirie-progress").style.width = voirieProgress + "%";
                 //document.getElementById("voirie-text").innerText = voirieProgress + "%";
                 updateRadialProgress("voirie-progress", voirieProgress);
@@ -119,7 +119,7 @@
             // Liaison : ne commence que lorsque les travaux de voirie sont à 100 %
             let depotProgress = 0;
             if (voirieProgress === 100) {
-                const depotProgress = calculateProgress("2026-01-01", "2026-12-31");  // Liaison après la fin des travaux de voirie
+                const depotProgress = calculateProgress("2025-08-15", "2025-11-15");  // Liaison après la fin des travaux de voirie
                 //document.getElementById("depot-progress").style.width = depotProgress + "%";
                 //document.getElementById("depot-text").innerText = depotProgress + "%";
                 updateRadialProgress("depot-progress", depotProgress);

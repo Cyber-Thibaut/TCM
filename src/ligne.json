@@ -503,7 +503,7 @@
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "12 minutes",
-                "longueur_ligne": "4 km"
+                "longueur_ligne": "4.1 km"
             }
         },
         {
@@ -514,7 +514,18 @@
             "stats": {
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
-                "longueur_ligne": "5 km"
+                "longueur_ligne": "5.6 km"
+            }
+        },
+        {
+            "id": 903,
+            "nom": "Hôtel de police <> Globe",
+            "type": "Volca'Demande",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 12,
+                "temps_trajet": "17 minutes",
+                "longueur_ligne": "4.9 km"
             }
         },
         {

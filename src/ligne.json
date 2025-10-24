@@ -13,24 +13,24 @@
         },
         {
             "id": 1,
-            "nom": "Gare Centrale <> Campus Cézeaux",
+            "nom": "Aéroport <> Clinique Saint-Paul",
             "type": "Volc'Express",
             "description": "La ligne 1 du réseau urbain de Clermont-Ferrand assure la liaison essentielle entre la Gare Centrale et le Campus Cézeaux, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet débute à la Gare Centrale, un hub de transport majeur où convergent les lignes de train, de bus et de tramway. Les passagers peuvent facilement rejoindre la ligne 1 et monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 1 traverse ensuite différents quartiers de Clermont-Ferrand, offrant aux passagers un aperçu de la vie urbaine de la ville. Ils peuvent admirer l'architecture historique, les rues animées et les commerces locaux qui bordent l'itinéraire.\nLe terminus de la ligne 1 est situé au Campus Cézeaux, un important pôle universitaire et scientifique de Clermont-Ferrand. Les étudiants, les enseignants et le personnel administratif peuvent se rendre facilement au campus grâce à cette ligne. Cela facilite les déplacements quotidiens des étudiants vers leurs cours, leurs laboratoires et leurs activités universitaires.\nLes horaires de la ligne 1 sont réguliers et adaptés aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent à des intervalles fréquents, minimisant ainsi les temps d'attente et offrant une flexibilité de déplacement.\nEn résumé, la ligne 1 du réseau urbain de Clermont-Ferrand relie la Gare Centrale au Campus Cézeaux, fournissant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville. Avec son confort, ses trajets pittoresques et ses horaires réguliers, la ligne 1 est un choix idéal pour les étudiants, les travailleurs et les résidents de Clermont-Ferrand. ",
             "stats": {
-                "nombre_arrets": 20,
-                "temps_trajet": "30 minutes",
-                "longueur_ligne": "10 km"
+                "nombre_arrets": 44,
+                "temps_trajet": "46 minutes",
+                "longueur_ligne": "14.6 km"
             }
         },
         {
             "id": 2,
-            "nom": "Aéroport <> Gare Centrale",
+            "nom": "Campus Cézeaux <> Gare Centrale",
             "type": "Volc'Express",
             "description": "La ligne 2 du réseau urbain de Clermont-Ferrand est une ligne à haut niveau de service qui relie la Gare Centrale à l'Aéroport, offrant aux passagers un moyen rapide et pratique de se déplacer entre ces deux points clés de la ville.\nCette ligne spéciale est conçue pour offrir une expérience de voyage confortable et efficace. Les bus sont modernes, équipés de sièges spacieux et confortables, ainsi que de systèmes de climatisation pour assurer le confort des passagers tout au long du trajet. De plus, la ligne 2 bénéficie d'un service fréquent, garantissant des temps d'attente réduits pour les voyageurs.\nLe trajet de la ligne 2 passe par différents quartiers de Clermont-Ferrand, offrant aux passagers un aperçu de la diversité de la ville. Ils peuvent admirer les sites historiques, les rues animées et les espaces verts qui jalonnent le parcours.\nLe terminus de la ligne 2 est situé à l'Aéroport, offrant aux passagers un accès direct et pratique aux vols nationaux et internationaux. Que ce soit pour les voyageurs arrivant ou partant de Clermont-Ferrand, cette ligne à haut niveau de service facilite les déplacements vers et depuis l'aéroport.\nLes horaires de la ligne 2 sont adaptés aux besoins des passagers, en tenant compte des horaires des vols. Cela permet aux voyageurs d'organiser facilement leurs trajets en fonction de leur horaire de vol, en minimisant les contraintes de temps et en offrant une tranquillité d'esprit lors des déplacements.\nEn résumé, la ligne 2 du réseau urbain de Clermont-Ferrand est une ligne à haut niveau de service reliant la Gare Centrale à l'Aéroport. Avec son confort, sa rapidité et sa fréquence de service, la ligne 2 offre une solution pratique et efficace pour les voyageurs, qu'ils soient en partance ou en arrivée à Clermont-Ferrand. ",
             "stats": {
-                "nombre_arrets": 34,
-                "temps_trajet": "40 minutes",
-                "longueur_ligne": "10 km"
+                "nombre_arrets": 24,
+                "temps_trajet": "20 minutes",
+                "longueur_ligne": "6.1 km"
             }
         },
         {
@@ -41,7 +41,7 @@
             "stats": {
                 "nombre_arrets": 27,
                 "temps_trajet": "32 minutes",
-                "longueur_ligne": "8 km"
+                "longueur_ligne": "7.7 km"
             }
         },
         {
@@ -50,9 +50,9 @@
             "type": "Erupt'Urbain - Puy-de-Dôme",
             "description": "La ligne 4 du réseau urbain de Clermont-Ferrand assure la liaison essentielle entre la Gare Centrale et la Gare de l'Est, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux pôles ferroviaires majeurs de la ville.\nLe trajet de la ligne 4 commence à la Gare Centrale, un point central de transit où convergent les différents modes de transport. Les passagers peuvent monter à bord d'un bus confortable et moderne, équipé de sièges ergonomiques pour assurer leur confort tout au long du trajet.\nLa ligne 4 traverse ensuite plusieurs quartiers de Clermont-Ferrand, permettant aux passagers d'apprécier la diversité et le dynamisme de la ville. En chemin, ils peuvent admirer l'architecture locale, les rues animées et les différents points d'intérêt qui jalonnent l'itinéraire.\nLe terminus de la ligne 4 est situé à la Gare de l'Est, offrant aux passagers un accès direct aux trains régionaux et nationaux. Que ce soit pour les voyageurs en partance ou en arrivée à Clermont-Ferrand, cette ligne facilite les déplacements vers et depuis la Gare de l'Est, leur permettant de poursuivre leur voyage en toute facilité.\nLes horaires de la ligne 4 sont adaptés aux besoins des passagers, avec des fréquences régulières tout au long de la journée. Cela permet aux utilisateurs de planifier leurs déplacements en fonction de leurs horaires de train, minimisant ainsi les temps d'attente et offrant une plus grande flexibilité.\nEn résumé, la ligne 4 du réseau urbain de Clermont-Ferrand relie la Gare Centrale à la Gare de l'Est, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux pôles ferroviaires importants. Avec son confort, ses trajets traversant différents quartiers et ses horaires adaptés, la ligne 4 est un choix idéal pour les voyageurs en quête de commodité et de connectivité ferroviaire. ",
             "stats": {
-                "nombre_arrets": 24,
-                "temps_trajet": "28 minutes",
-                "longueur_ligne": "7 km"
+                "nombre_arrets": 37,
+                "temps_trajet": "47 minutes",
+                "longueur_ligne": "12.4 km"
             }
         },
         {
@@ -62,8 +62,8 @@
             "description": "La ligne 5 de bus de Transport Clermont Métropole offre une connexion pratique et rapide entre le Musée d'Art Moderne et le Pôle Luca Pacioli, traversant la ville en seulement 9 km et 40 minutes. Avec 34 arrêts pour permettre à ses passagers de monter et descendre à volonté, cette ligne de bus offre une variété de destinations et permet aux habitants de Clermont d'explorer la ville en toute simplicité.",
             "stats": {
                 "nombre_arrets": 34,
-                "temps_trajet": "40 minutes",
-                "longueur_ligne": "9 km"
+                "temps_trajet": "37 minutes",
+                "longueur_ligne": "9.3 km"
             }
         },
         {
@@ -85,7 +85,7 @@
             "stats": {
                 "nombre_arrets": 30,
                 "temps_trajet": "36 minutes",
-                "longueur_ligne": "10 km"
+                "longueur_ligne": "10.2 km"
             }
         },
         {
@@ -96,7 +96,7 @@
             "stats": {
                 "nombre_arrets": 27,
                 "temps_trajet": "32 minutes",
-                "longueur_ligne": "8 km"
+                "longueur_ligne": "7.8 km"
             }
         },
         {
@@ -107,7 +107,7 @@
             "stats": {
                 "nombre_arrets": 12,
                 "temps_trajet": "18 minutes",
-                "longueur_ligne": "6 km"
+                "longueur_ligne": "6.2 km"
             }
         },
         {
@@ -116,9 +116,9 @@
             "type": "Erupt'Urbain - Puy-de-Dôme",
             "description": "La ligne 10 du réseau urbain de Clermont-Ferrand assure la liaison entre le Campus des Cézeaux et le CRT Est, offrant un moyen pratique et efficace de se déplacer dans la ville.\nLe trajet commence au Campus des Cézeaux, un pôle universitaire important de Clermont-Ferrand. Les étudiants, les enseignants et le personnel administratif peuvent monter à bord d'un bus confortable, spécialement conçu pour répondre aux besoins des voyageurs. Les sièges sont ergonomiques, offrant un soutien optimal pendant le trajet.\nLa ligne 10 traverse ensuite différents quartiers de la ville, permettant aux passagers de découvrir Clermont-Ferrand sous différents angles. Que ce soit en passant par des zones résidentielles, des zones commerçantes ou des espaces verts, les passagers peuvent profiter de la diversité de la ville tout en se déplaçant vers leur destination.\nLe terminus de la ligne 10 se situe au CRT Est, offrant une connexion pratique avec d'autres lignes de transport en commun. Cela permet aux passagers de se déplacer facilement vers d'autres quartiers, zones d'activités ou centres commerciaux de Clermont-Ferrand.\nLa ligne 10 est réputée pour sa ponctualité et sa régularité, offrant des horaires adaptés aux besoins des passagers. Que ce soit pour se rendre en cours, au travail ou pour des activités de loisirs, les passagers peuvent compter sur la ligne 10 pour un service fiable et efficace.\nEn résumé, la ligne 10 du réseau urbain de Clermont-Ferrand relie le Campus des Cézeaux au CRT Est, offrant aux passagers un moyen pratique et fiable de se déplacer dans la ville. Avec son confort, sa diversité de trajet et sa connectivité avec d'autres lignes, la ligne 10 est un choix idéal pour les étudiants, les travailleurs et les résidents de Clermont-Ferrand. ",
             "stats": {
-                "nombre_arrets": 20,
-                "temps_trajet": "30 minutes",
-                "longueur_ligne": "10 km"
+                "nombre_arrets": 24,
+                "temps_trajet": "33 minutes",
+                "longueur_ligne": "11.1 km"
             }
         },
         {
@@ -129,7 +129,7 @@
             "stats": {
                 "nombre_arrets": 14,
                 "temps_trajet": "21 minutes",
-                "longueur_ligne": "7 km"
+                "longueur_ligne": "6.5 km"
             }
         },
         {
@@ -152,6 +152,61 @@
                 "nombre_arrets": 15,
                 "temps_trajet": "18 minutes",
                 "longueur_ligne": "6.5 km"
+            }
+        },
+        {
+            "id": 14,
+            "nom": "Trinité <> Hôtel de région",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "La ligne 14 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie la Trinité à l'Hôtel de Région, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à la Trinité, un quartier dynamique de Clermont-Ferrand, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 14 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 14 est situé à l'Hôtel de Région, un bâtiment emblématique abritant les institutions régionales. Cette liaison est particulièrement utile pour les employés, les visiteurs et les résidents qui souhaitent se rendre à l'Hôtel de Région en toute facilité.\nLes horaires de la ligne 14 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 14 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre la Trinité et l'Hôtel de Région. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient employés, visiteurs ou résidents de la ville. ",
+            "stats": {
+                "nombre_arrets": 18,
+                "temps_trajet": "24 minutes",
+                "longueur_ligne": "7.2 km"
+            }
+        },
+        {
+            "id": 15,
+            "nom": "Pôle Luca Pacioli <> Cathédrale",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "La ligne 15 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie le Pôle Luca Pacioli à la Cathédrale, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence au Pôle Luca Pacioli, un centre d'affaires dynamique de Clermont-Ferrand, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 15 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 15 est situé à la Cathédrale, un monument emblématique de Clermont-Ferrand. Cette liaison est particulièrement utile pour les touristes, les résidents locaux et les visiteurs qui souhaitent se rendre à la Cathédrale en toute facilité.\nLes horaires de la ligne 15 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 15 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre le Pôle Luca Pacioli et la Cathédrale. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient touristes, résidents ou visiteurs de la ville. ",
+            "stats": {
+                "nombre_arrets": 36,
+                "temps_trajet": "48 minutes",
+                "longueur_ligne": "11.3 km"
+            }
+        },
+        {
+            "id": 16,
+            "nom": "Aéroport <> Gare de l'Ouest",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "La ligne 16 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie l'Aéroport à la Gare de l'Ouest, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à l'Aéroport, un point d'entrée majeur pour les voyageurs arrivant à Clermont-Ferrand. Les passagers peuvent monter à bord d'un bus moderne et confortable, équipé de sièges ergonomiques et de la climatisation pour garantir leur confort tout au long du trajet.\nLa ligne 16 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 16 est situé à la Gare de l'Ouest, un important hub de transport où convergent les lignes de train, de bus et de tramway. Cette liaison est particulièrement utile pour les voyageurs souhaitant se rendre à la gare en toute facilité.\nLes horaires de la ligne 16 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 16 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre l'Aéroport et la Gare de l'Ouest. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient voyageurs, employés ou résidents de la ville. ",
+            "stats": {
+                "nombre_arrets": 20,
+                "temps_trajet": "22 minutes",
+                "longueur_ligne": "6.4 km"
+            }
+        },
+        {
+            "id": 17,
+            "nom": "Gare de l'Ouest <> Moulin à Vent",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "La ligne 17 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie le Moulin à vent à la Gare de l'Ouest, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence au Moulin à vent, un quartier dynamique de Clermont-Ferrand, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 17 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 17 est situé à la Gare de l'Ouest, un important hub de transport où convergent les lignes de train, de bus et de tramway. Cette liaison est particulièrement utile pour les voyageurs souhaitant se rendre à la gare en toute facilité.\nLes horaires de la ligne 17 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 17 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre le Moulin à vent et la Gare de l'Ouest. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient touristes, résidents ou visiteurs de la ville. ",
+            "stats": {
+                "nombre_arrets": 28,
+                "temps_trajet": "33 minutes",
+                "longueur_ligne": "9.3 km"
+            }
+        },
+        {
+            "id": 18,
+            "nom": "Bellevue <> Hôtel de région",
+            "type": "Erupt'Urbain - Puy-de-Dôme",
+            "description": "La ligne 18 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie Bellevue à l'Hôtel de région, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à Bellevue, un quartier résidentiel paisible de Clermont-Ferrand. Les passagers peuvent monter à bord d'un bus moderne et confortable, équipé de sièges ergonomiques et de la climatisation pour garantir leur confort tout au long du trajet.\nLa ligne 18 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 18 est situé à l'Hôtel de région, un bâtiment emblématique de Clermont-Ferrand. Cette liaison est particulièrement utile pour les employés de la région et les visiteurs qui souhaitent se rendre à l'Hôtel de région en toute facilité.\nLes horaires de la ligne 18 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 18 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre Bellevue et l'Hôtel de région. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient employés, résidents ou visiteurs de la ville. ",
+            "stats": {
+                "nombre_arrets": 20,
+                "temps_trajet": "22 minutes",
+                "longueur_ligne": "6.4 km"
             }
         },
         {
@@ -210,6 +265,17 @@
             }
         },
         {
+            "id": 65,
+            "nom": "Préfecture <> Pôle Luca Pacioli",
+            "type": "Erupt'Urbain - Puy-de-Pariou",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 27,
+                "temps_trajet": "25 minutes",
+                "longueur_ligne": "6.4 km"
+            }
+        },
+        {
             "id": 101,
             "nom": "Hôtel de Région <> ARRONAY Etangs",
             "type": "Puy'Périphérique",
@@ -254,14 +320,47 @@
             }
         },
         {
+            "id": 105,
+            "nom": "Place de l'Europe <> Église de Saint-Amant-Tallende",
+            "type": "Puy'Périphérique",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 20,
+                "temps_trajet": "50 minutes",
+                "longueur_ligne": "29.1 km"
+            }
+        },
+        {
+            "id": 106,
+            "nom": "Bureau de poste <> Gare de l'Ouest",
+            "type": "Puy'Périphérique",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 11,
+                "temps_trajet": "26 minutes",
+                "longueur_ligne": "13.4 km"
+            }
+        },
+        {
+            "id": 151,
+            "nom": "Bureau de poste <> Av. de la Liberté",
+            "type": "Puy'Périphérique",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 21,
+                "temps_trajet": "52 minutes",
+                "longueur_ligne": "34.8 km"
+            }
+        },
+        {
             "id": 201,
             "nom": "Campus Cézeaux <> RIOM Gare Routière",
             "type": "Monts'Connection",
             "description": "",
             "stats": {
-                "nombre_arrets": 2,
-                "temps_trajet": "58 minutes",
-                "longueur_ligne": "49 km"
+                "nombre_arrets": 6,
+                "temps_trajet": "67 minutes",
+                "longueur_ligne": "53.8 km"
             }
         },
         {
@@ -270,9 +369,9 @@
             "type": "Monts'Connection",
             "description": "",
             "stats": {
-                "nombre_arrets": 4,
-                "temps_trajet": "37 minutes",
-                "longueur_ligne": "29 km"
+                "nombre_arrets": 5,
+                "temps_trajet": "46 minutes",
+                "longueur_ligne": "32.8 km"
             }
         },
         {
@@ -283,7 +382,51 @@
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "62 minutes",
-                "longueur_ligne": "43 km"
+                "longueur_ligne": "42.1 km"
+            }
+        },
+        {
+            "id": 204,
+            "nom": "Gare de l'Ouest <> Blvd. de l'Humanité",
+            "type": "Monts'Connection",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 8,
+                "temps_trajet": "70 minutes",
+                "longueur_ligne": "44.7 km"
+            }
+        },
+        {
+            "id": 205,
+            "nom": "Gare de l'Ouest <> Blvd. de l'Humanité",
+            "type": "Monts'Connection",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 7,
+                "temps_trajet": "45 minutes",
+                "longueur_ligne": "30.3 km"
+            }
+        },
+        {
+            "id": 206,
+            "nom": "Beffroi <> Gare de l'Ouest",
+            "type": "Monts'Connection",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 5,
+                "temps_trajet": "48 minutes",
+                "longueur_ligne": "34.2 km"
+            }
+        },
+        {
+            "id": 251,
+            "nom": "Lycée Jeanne d'Arc <> Lezoux Hôtel de ville",
+            "type": "Monts'Connection",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 7,
+                "temps_trajet": "56 minutes",
+                "longueur_ligne": "44 km"
             }
         },
         {
@@ -294,7 +437,7 @@
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "25 minutes",
-                "longueur_ligne": "13 km"
+                "longueur_ligne": "13.4 km"
             }
         },
         {
@@ -305,7 +448,18 @@
             "stats": {
                 "nombre_arrets": 7,
                 "temps_trajet": "30 minutes",
-                "longueur_ligne": "18 km"
+                "longueur_ligne": "18.4 km"
+            }
+        },
+        {
+            "id": 603,
+            "nom": "Centre-ville <> Lycée Jean Zay",
+            "type": "Édu'Volcan",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 12,
+                "temps_trajet": "45 minutes",
+                "longueur_ligne": "23.9 km"
             }
         },
         {
@@ -327,7 +481,18 @@
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "40 minutes",
-                "longueur_ligne": "24 km"
+                "longueur_ligne": "23.9 km"
+            }
+        },
+        {
+            "id": 653,
+            "nom": "La Poste <> Lycée Jean Zay",
+            "type": "Édu'Volcan",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 10,
+                "temps_trajet": "75 minutes",
+                "longueur_ligne": "38 km"
             }
         },
         {
@@ -350,6 +515,17 @@
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
                 "longueur_ligne": "5 km"
+            }
+        },
+        {
+            "id": 941,
+            "nom": "Gare de l'Ouest <> Grand-Place",
+            "type": "Volca'Demande",
+            "description": "",
+            "stats": {
+                "nombre_arrets": 7,
+                "temps_trajet": "65 minutes",
+                "longueur_ligne": "38 km"
             }
         },
         {

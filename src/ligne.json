@@ -627,7 +627,11 @@
                 "endHour": 5,
                 "default_days": [4, 5, 6],
                 "default_text": "Circule les jeudis, vendredis et samedis soirs.",
-                "frequency": 30,
+                "frequency": {
+                            "weekday": 52,
+                            "saturday": 42,
+                            "sunday_holiday": 69
+                        },
                 "special_periods": [
                     {
                         "start": "2025-07-05",
@@ -635,9 +639,9 @@
                         "text": "Horaires d'été",
                         "days": [1, 2, 3, 4, 5, 6, 0],
                         "frequency": {
-                            "weekday": 35,
-                            "saturday": 26,
-                            "sunday_holiday": 52
+                            "weekday": 52,
+                            "saturday": 42,
+                            "sunday_holiday": 69
                         }
                     }
                 ]
@@ -659,7 +663,11 @@
                 "endHour": 5,
                 "default_days": [4, 5, 6],
                 "default_text": "Circule les jeudis, vendredis et samedis soirs.",
-                "frequency": 45,
+                "frequency": {
+                            "weekday": 41,
+                            "saturday": 41,
+                            "sunday_holiday": 41
+                        },
                 "special_periods": [
                     {
                         "start": "2025-07-05",
@@ -667,8 +675,8 @@
                         "text": "Horaires d'été",
                         "days": [1, 2, 3, 4, 5, 6, 0],
                         "frequency": {
-                            "weekday": 21,
-                            "saturday": 21,
+                            "weekday": 16,
+                            "saturday": 41,
                             "sunday_holiday": 41
                         }
                     }
@@ -691,7 +699,11 @@
                 "endHour": 5,
                 "default_days": [4, 5, 6],
                 "default_text": "Circule les jeudis, vendredis et samedis soirs.",
-                "frequency": 60,
+                "frequency": {
+                            "weekday": 56,
+                            "saturday": 56,
+                            "sunday_holiday": 56
+                        },
                 "special_periods": [
                     {
                         "start": "2025-07-05",
@@ -699,9 +711,9 @@
                         "text": "Horaires d'été",
                         "days": [1, 2, 3, 4, 5, 6, 0],
                         "frequency": {
-                            "weekday": 30,
-                            "saturday": 30,
-                            "sunday_holiday": 60
+                            "weekday": 56,
+                            "saturday": 56,
+                            "sunday_holiday": 56
                         }
                     }
                 ]

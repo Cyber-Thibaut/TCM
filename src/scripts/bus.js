@@ -212,7 +212,7 @@ async function updateBusTimes() {
   const icon = getFrequentationIcon(timeSlot);
 
   const nextBusHTML = `<div class="card bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl w-full h-48 flex flex-col justify-center items-center text-white p-4">
-    <span class="text-lg font-light uppercase tracking-widest">Prochain bus</span>
+    <span class="text-lg font-light uppercase tracking-widest">${lineNumber == 1 ? "Prochain tram" : "Prochain bus"}</span>
     <span class="text-6xl font-bold ${
       minutesUntilNext <= 1 ? "animate-pulse text-accent" : ""
     }">

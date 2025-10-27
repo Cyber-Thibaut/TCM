@@ -15,7 +15,12 @@
             "id": "A",
             "nom": "Aéroport <> Clinique Saint-Paul",
             "type": "Volc'Express",
-            "description": "La ligne 1 du réseau urbain de Clermont-Ferrand assure la liaison essentielle entre la Gare Centrale et le Campus Cézeaux, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet débute à la Gare Centrale, un hub de transport majeur où convergent les lignes de train, de bus et de tramway. Les passagers peuvent facilement rejoindre la ligne 1 et monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 1 traverse ensuite différents quartiers de Clermont-Ferrand, offrant aux passagers un aperçu de la vie urbaine de la ville. Ils peuvent admirer l'architecture historique, les rues animées et les commerces locaux qui bordent l'itinéraire.\nLe terminus de la ligne 1 est situé au Campus Cézeaux, un important pôle universitaire et scientifique de Clermont-Ferrand. Les étudiants, les enseignants et le personnel administratif peuvent se rendre facilement au campus grâce à cette ligne. Cela facilite les déplacements quotidiens des étudiants vers leurs cours, leurs laboratoires et leurs activités universitaires.\nLes horaires de la ligne 1 sont réguliers et adaptés aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent à des intervalles fréquents, minimisant ainsi les temps d'attente et offrant une flexibilité de déplacement.\nEn résumé, la ligne 1 du réseau urbain de Clermont-Ferrand relie la Gare Centrale au Campus Cézeaux, fournissant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville. Avec son confort, ses trajets pittoresques et ses horaires réguliers, la ligne 1 est un choix idéal pour les étudiants, les travailleurs et les résidents de Clermont-Ferrand. ",
+            "description": "La ligne 1 du réseau urbain de Clermont-Ferrand assure la liaison essentielle entre la Gare Centrale et le Campus Cézeaux, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet débute à la Gare Centrale, un hub de transport majeur où convergent les lignes de train, de bus et de tramway. Les passagers peuvent facilement rejoindre la ligne 1 et monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 1 traverse ensuite différents quartiers de Clermont-Ferrand, offrant aux passagers un aperçu de la vie urbaine de la ville. Ils peuvent admirer l'architecture historique, les rues animées et les commerces locaux qui bordent l'itinéraire.\nLe terminus de la ligne 1 est situé au Campus Cézeaux, un important pôle universitaire et scientifique de Clermont-Ferrand. Les étudiants, les enseignants et le personnel administratif peuvent se rendre facilement au campus grâce à cette ligne. Cela facilite les déplacements quotidiens des étudiants vers leurs cours, leurs laboratoires et leurs activités universitaires.\nLes horaires de la ligne 1 sont réguliers et adaptés aux besoins des passagers. Que ce soit en semaine ou le week-end, les buses circulent à des intervalles fréquents, minimisant ainsi les temps d'attente et offrant une flexibilité de déplacement.\nEn résumé, la ligne 1 du réseau urbain de Clermont-Ferrand relie la Gare Centrale au Campus Cézeaux, fournissant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville. Avec son confort, ses trajets pittoresques et ses horaires réguliers, la ligne 1 est un choix idéal pour les étudiants, les travailleurs et les résidents de Clermont-Ferrand. ",
+            "operation": {
+                "start": "04:30",
+                "end": "01:00"
+            },
+            "parkings": ["clinique"],
             "stats": {
                 "nombre_arrets": 44,
                 "temps_trajet": "46 minutes",
@@ -38,6 +43,7 @@
             "nom": "Gare Centrale <> Campus Marthe Gautier",
             "type": "Volc'Express",
             "description": "La ligne 3 du réseau urbain de Clermont-Ferrand est une ligne à haut niveau de service reliant la Gare Centrale au CHRU Gabriel Montpied, offrant aux passagers un moyen pratique et efficace de se déplacer entre ce pôles ferroviaire et cet ensemble hôspitalier majeur de la ville.\nCette ligne spéciale est conçue pour offrir une expérience de voyage optimale. Les bus modernes et confortables de la ligne 3 sont équipés de sièges ergonomiques et de la climatisation, assurant un confort optimal aux passagers pendant leur trajet. De plus, la ligne 3 bénéficie d'une fréquence élevée, réduisant les temps d'attente et offrant une plus grande flexibilité aux voyageurs.\nLe trajet de la ligne 3 passe par différents quartiers de Clermont-Ferrand, permettant aux passagers de découvrir la diversité de la ville. Ils peuvent admirer l'architecture, les rues animées et les sites touristiques qui jalonnent l'itinéraire.\nLe terminus de la ligne 3 est situé à la Gare Centrale, offrant aux passagers un accès direct aux trains régionaux et nationaux. Que ce soit pour les voyageurs en partance ou en arrivée à Clermont-Ferrand, cette ligne à haut niveau de service facilite les déplacements vers et depuis le CHRU.\nLes horaires de la ligne 3 sont bien adaptés aux besoins des passagers, tenant compte des horaires des trains. Cela permet aux voyageurs de planifier facilement leurs déplacements en fonction de leur horaire de train, en minimisant les contraintes de temps et en offrant une plus grande commodité lors des déplacements.\nEn résumé, la ligne 3 du réseau urbain de Clermont-Ferrand est une ligne à haut niveau de service reliant la Gare Centrale à le CHRU Montpied. Avec son confort, sa fréquence élevée et sa connectivité ferroviaire, la ligne 3 offre une solution pratique et efficace pour les voyageurs, leur permettant de se déplacer facilement entre les deux pôles ferroviaires majeurs de la ville. ",
+            "parkings": ["cezeaux"],
             "stats": {
                 "nombre_arrets": 27,
                 "temps_trajet": "32 minutes",
@@ -60,6 +66,7 @@
             "nom": "Musée d'Art Moderne <> Pôle Luca Pacioli",
             "type": "Volc'Express",
             "description": "La ligne 5 de bus de Transport Clermont Métropole offre une connexion pratique et rapide entre le Musée d'Art Moderne et le Pôle Luca Pacioli, traversant la ville en seulement 9 km et 40 minutes. Avec 34 arrêts pour permettre à ses passagers de monter et descendre à volonté, cette ligne de bus offre une variété de destinations et permet aux habitants de Clermont d'explorer la ville en toute simplicité.",
+            "parkings": ["luca"],
             "stats": {
                 "nombre_arrets": 34,
                 "temps_trajet": "37 minutes",
@@ -258,6 +265,7 @@
             "nom": "Place de Jaude <> Hôtel de région",
             "type": "Erupt'Urbain - Puy-de-Pariou",
             "description": "",
+            "parkings": ["luca"],
             "stats": {
                 "nombre_arrets": 13,
                 "temps_trajet": "14 minutes",

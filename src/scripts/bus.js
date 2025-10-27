@@ -392,6 +392,41 @@ function renderLineDetails(ligne) {
   description.innerHTML = ligne.description;
   container.appendChild(description);
 
+  // Parkings relais proches (si renseignés dans ligne.json)
+  if (ligne.parkings && Array.isArray(ligne.parkings) && ligne.parkings.length) {
+    const parkSection = document.createElement('div');
+    parkSection.className = 'mb-8';
+    const parkTitle = document.createElement('h3');
+    parkTitle.className = 'text-2xl font-bold mb-4 text-primary';
+    parkTitle.textContent = 'Parkings relais à proximité';
+    parkSection.appendChild(parkTitle);
+
+    const parkList = document.createElement('div');
+    parkList.className = 'flex gap-4 flex-wrap items-center';
+    ligne.parkings.forEach(pid => {
+      const a = document.createElement('a');
+      a.href = `/src/parkings.html#${pid}`;
+      a.className = 'inline-flex items-center gap-3 p-3 bg-base-200 rounded-lg shadow hover:scale-105 transition-transform';
+
+      const img = document.createElement('img');
+      img.src = `/img/${pid}.png`;
+      img.alt = `Parking ${pid}`;
+      img.className = 'w-12 h-12 rounded';
+      img.onerror = function(){ this.src = '/img/parking-placeholder.png'; };
+
+      const span = document.createElement('div');
+      span.className = 'text-base-content/80';
+      span.textContent = pid;
+
+      a.appendChild(img);
+      a.appendChild(span);
+      parkList.appendChild(a);
+    });
+
+    parkSection.appendChild(parkList);
+    container.appendChild(parkSection);
+  }
+
   // Bouton PDF principal bien mis en évidence
   const pdfSection = document.createElement("div");
   pdfSection.className = "text-center mt-12 mb-8";

@@ -63,9 +63,9 @@
         },
         {
             "id": 5,
-            "nom": "Musée d'Art Moderne <> Pôle Luca Pacioli",
+            "nom": "Musée d'Art Moderne <> Place de Jaude",
             "type": "Volc'Express",
-            "description": "La ligne 5 de bus de Transport Clermont Métropole offre une connexion pratique et rapide entre le Musée d'Art Moderne et le Pôle Luca Pacioli, traversant la ville en seulement 9 km et 40 minutes. Avec 34 arrêts pour permettre à ses passagers de monter et descendre à volonté, cette ligne de bus offre une variété de destinations et permet aux habitants de Clermont d'explorer la ville en toute simplicité.",
+            "description": "La ligne 5 de bus de Transport Clermont Métropole offre une connexion pratique et rapide entre le Musée d'Art Moderne et la Place de Jaude, traversant la ville en seulement 9 km et 40 minutes. Avec 34 arrêts pour permettre à ses passagers de monter et descendre à volonté, cette ligne de bus offre une variété de destinations et permet aux habitants de Clermont d'explorer la ville en toute simplicité.",
             "parkings": ["luca"],
             "stats": {
                 "nombre_arrets": 34,
@@ -174,9 +174,9 @@
         },
         {
             "id": 15,
-            "nom": "Pôle Luca Pacioli <> Cathédrale",
+            "nom": "Place de Jaude <> Cathédrale",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 15 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie le Pôle Luca Pacioli à la Cathédrale, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence au Pôle Luca Pacioli, un centre d'affaires dynamique de Clermont-Ferrand, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 15 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 15 est situé à la Cathédrale, un monument emblématique de Clermont-Ferrand. Cette liaison est particulièrement utile pour les touristes, les résidents locaux et les visiteurs qui souhaitent se rendre à la Cathédrale en toute facilité.\nLes horaires de la ligne 15 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 15 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre le Pôle Luca Pacioli et la Cathédrale. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient touristes, résidents ou visiteurs de la ville. ",
+            "description": "La ligne 15 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie la Place de Jaude à la Cathédrale, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à la Place de Jaude, un centre dynamique du centre-ville, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 15 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 15 est situé à la Cathédrale, un monument emblématique de Clermont-Ferrand. Cette liaison est particulièrement utile pour les touristes, les résidents locaux et les visiteurs qui souhaitent se rendre à la Cathédrale en toute facilité.\nLes horaires de la ligne 15 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 15 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre la Place de Jaude et la Cathédrale. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient touristes, résidents ou visiteurs de la ville. ",
             "stats": {
                 "nombre_arrets": 36,
                 "temps_trajet": "48 minutes",
@@ -274,7 +274,7 @@
         },
         {
             "id": 65,
-            "nom": "Préfecture <> Pôle Luca Pacioli",
+            "nom": "Préfecture <> Place de Jaude",
             "type": "Erupt'Urbain - Puy-de-Pariou",
             "description": "",
             "stats": {

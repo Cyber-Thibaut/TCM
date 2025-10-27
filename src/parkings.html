@@ -99,12 +99,12 @@
           </div>
         </article>
 
-  <!-- Pôle Luca Pacioli -->
+  <!-- Place de Jaude -->
   <article id="luca" class="card bg-base-300 shadow-xl">
-          <figure><img src="/img/parking_luca.png" alt="Pôle Luca Pacioli" onerror="this.src='/img/parking-placeholder.png'"/></figure>
+          <figure><img src="/img/parking_luca.png" alt="Place de Jaude" onerror="this.src='/img/parking-placeholder.png'"/></figure>
           <div class="card-body">
-            <h2 class="card-title text-primary">Pôle Luca Pacioli</h2>
-            <p class="text-base-content/80">Nouveau pôle multimodal, idéal pour combiner voiture, vélo et transport en commun.</p>
+            <h2 class="card-title text-primary">Place de Jaude</h2>
+            <p class="text-base-content/80">Emplacement central, point névralgique de la ville — idéal pour rayonner à pied dans le centre-ville.</p>
 
             <div class="mt-4">
               <div class="flex justify-between items-center">
@@ -130,7 +130,7 @@
 
               <div class="mt-3 text-sm text-base-content/70">Tarif combiné transport: <span id="luca_tarif_combo">à venir</span></div>
 
-              <div class="mt-4 text-green-500 font-semibold" id="luca_message">Pensé pour votre confort — accès rapide aux lignes principales.</div>
+              <div class="mt-4 text-green-500 font-semibold" id="luca_message">Situation centrale — accès immédiat aux principaux services et correspondances.</div>
               <div class="mt-3 text-sm text-base-content/70" id="luca_lines">Lignes : —</div>
               <div class="mt-3 text-sm text-base-content/70">Sécurité & équipements : <span id="luca_equip"><strong>Vidéosurveillance</strong>, agent TCM, <strong>bornes de recharge électriques</strong></span>.</div>
             </div>
@@ -169,7 +169,7 @@
       const PARKINGS = [
         { id: 'clinique', name: "Clinique Saint-Paul", capacity: 100, lines: ['BEN3','A'], ev: true, surveilled: true },
         { id: 'cezeaux', name: "Campus des Cézeaux", capacity: 100, lines: ['3','8'], ev: true, surveilled: true },
-        { id: 'luca', name: "Pôle Luca Pacioli", capacity: 100, lines: ['5','64'], ev: true, surveilled: true }
+  { id: 'luca', name: "Place de Jaude", capacity: 100, lines: ['5','64'], ev: true, surveilled: true }
       ];
 
       // Date d'ouverture prévue
@@ -243,21 +243,26 @@
       }
 
       function renderParking(p, count) {
-        const countEl = document.getElementById(`${p.id}_count`);
-        const barEl = document.getElementById(`${p.id}_bar`);
-        const statusEl = document.getElementById(`${p.id}_status`);
-        const messageEl = document.getElementById(`${p.id}_message`);
+    const countEl = document.getElementById(`${p.id}_count`);
+    const barEl = document.getElementById(`${p.id}_bar`);
+    const statusEl = document.getElementById(`${p.id}_status`);
+    const messageEl = document.getElementById(`${p.id}_message`);
 
-  const percent = Math.round((count / p.capacity) * 100);
-  if (countEl) countEl.textContent = `${count} / ${p.capacity}`;
+    // override present ? considérer réduction de capacité pour travaux d'agrandissement
+    const override = getParkingOverride(p.id);
+    let effectiveCapacity = p.capacity;
+    if (override && override.status === 'travaux' && override.reason === 'agrandissement') {
+      effectiveCapacity = Math.max(1, Math.ceil(p.capacity * 0.5));
+    }
+
+  const percent = Math.round((count / effectiveCapacity) * 100);
+  if (countEl) countEl.textContent = `${count} / ${effectiveCapacity}`;
   if (barEl) barEl.style.width = `${percent}%`;
-
         // Statut selon la date et les horaires
         const now = new Date();
         const isBeforeOpen = now < OPEN_DATE;
 
-        // Vérifier override manuel (fermé/travaux) si présent
-        const override = getParkingOverride(p.id);
+  // Vérifier override manuel (fermé/travaux) si présent (déjà récupéré ci-dessus)
         function inRange(dStr, now) {
           if (!dStr) return true;
           const d = new Date(dStr + 'T00:00:00');
@@ -302,8 +307,8 @@
 
         if (isBeforeOpen) {
           const days = Math.ceil((OPEN_DATE - now) / (1000 * 60 * 60 * 24));
-          if (statusEl) statusEl.textContent = `En travaux — ouverture prévue le 15 février 2026 (dans ${days} jours)`;
-          if (messageEl) messageEl.textContent = `Prévision d'accueil : ${Math.max(0, p.capacity - count)} places libres à l'ouverture.`;
+          if (statusEl) statusEl.textContent = `Ouverture prévue le 15 février 2026 (dans ${days} jours)`;
+          if (messageEl) messageEl.textContent = `Prévision d'accueil : ${Math.max(0, effectiveCapacity - count)} places libres à l'ouverture.`;
           messageEl.className = 'text-blue-500 font-semibold';
         } else if (!isOpen) {
           if (statusEl) statusEl.textContent = override && override.status === 'travaux' ? `Fermé (travaux)` : `Fermé — Stationnement nocturne non autorisé`;

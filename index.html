@@ -408,7 +408,7 @@
         const HOME_PARKINGS = [
           { id: 'clinique', name: 'Clinique Saint-Paul', capacity: 100, lines: ['BEN3','A'], ev: true, surveilled: true },
           { id: 'cezeaux', name: 'Campus des Cézeaux', capacity: 100, lines: ['3','8'], ev: true, surveilled: true },
-          { id: 'luca', name: 'Pôle Luca Pacioli', capacity: 100, lines: ['5','64'], ev: true, surveilled: true }
+    { id: 'luca', name: 'Place de Jaude', capacity: 100, lines: ['5','64'], ev: true, surveilled: true }
         ];
 
         const HOME_OPEN_DATE = new Date('2026-02-15T08:00:00');
@@ -449,11 +449,16 @@
             const key = `parking_${p.id}_count`;
             let count = parseInt(localStorage.getItem(key));
             if (isNaN(count)) count = Math.floor(Math.random()*40)+20;
-            const percent = Math.round((count / p.capacity) * 100);
+            // si override travaux d'agrandissement, capacité effective réduite à 50%
+            const override = homeGetParkingOverride(p.id);
+            let effectiveCapacity = p.capacity;
+            if (override && override.status === 'travaux' && override.reason === 'agrandissement') {
+              effectiveCapacity = Math.max(1, Math.ceil(p.capacity * 0.5));
+            }
+            const percent = Math.round((count / effectiveCapacity) * 100);
 
             // statut
             const isBeforeOpen = now < HOME_OPEN_DATE;
-            const override = homeGetParkingOverride(p.id);
             let status = 'Ouvert';
             if (isBeforeOpen) status = 'Ouvert prochainement';
             else if (override && override.status && override.status !== 'auto'){
@@ -472,11 +477,13 @@
             // small card
             const card = document.createElement('div');
             card.className = 'p-3 border rounded flex items-center gap-3';
+            // si fermé ou en travaux, ne pas afficher le pourcentage / occupation
+            const occupancyText = (status === 'Fermé' || status === 'Travaux') ? '' : ` • ${percent}% occupé`;
             card.innerHTML = `
               <img src="/img/parking_${p.id}.png" alt="${p.name}" class="w-16 h-12 object-cover rounded" onerror="this.src='/img/parking-placeholder.png'">
               <div class="flex-1 min-w-0">
                 <div class="font-semibold truncate">${p.name}</div>
-                <div class="text-sm text-base-content/70">${status} • ${percent}% occupé</div>
+                <div class="text-sm text-base-content/70">${status}${occupancyText}</div>
               </div>
               <div class="text-right">
                 <a class="btn btn-sm btn-outline" href="/src/parkings.html#${p.id}">Détails</a>

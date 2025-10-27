@@ -107,10 +107,19 @@ async function fetchLineDetails(lineNumber) {
   try {
     const response = await fetch("ligne.json");
     const data = await response.json();
-    const line =
-      lineNumber === "NS"
-        ? data.lignes.find((l) => l.id === "NS")
-        : data.lignes.find((l) => l.id === parseInt(lineNumber));
+    let line = null;
+    if (lineNumber === "NS") {
+      line = data.lignes.find((l) => l.id === "NS");
+    } else {
+      const asNum = parseInt(lineNumber);
+      if (!isNaN(asNum)) {
+        // numeric id match
+        line = data.lignes.find((l) => l.id === asNum || String(l.id) === String(asNum));
+      } else {
+        // non-numeric id (e.g. "A")
+        line = data.lignes.find((l) => String(l.id) === String(lineNumber));
+      }
+    }
     if (!line)
       throw new Error(`Détails non trouvés pour la ligne ${lineNumber}`);
     return line;

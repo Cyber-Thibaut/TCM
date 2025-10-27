@@ -177,13 +177,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
             </div>
 
-            <!-- Jours de circulation -->
-            <div id="circulation-container" class="card glass shadow-xl transition-transform hover:scale-105 h-full">
-                <div class="card-body">
-                    <h2 class="card-title text-white"><i class="fa-solid fa-calendar-days mr-3 text-accent"></i> Jours de circulation</h2>
-                    <p class="text-white/80">${circulationText}</p>
-                </div>
-            </div>
+      <!-- Jours de circulation -->
+      <div id="circulation-container" class="card glass shadow-xl transition-transform hover:scale-105 h-full">
+        <div class="card-body">
+          <h2 class="card-title text-white"><i class="fa-solid fa-calendar-days mr-3 text-accent"></i> Jours de circulation</h2>
+          <p class="text-white/80">${circulationText}</p>
+          <div id="circulation-parks" class="mt-4 flex gap-4 flex-wrap"></div>
+        </div>
+      </div>
 
             <!-- Stats -->
             <div class="stats stats-vertical shadow w-full glass transition-transform hover:scale-105">
@@ -207,60 +208,44 @@ document.addEventListener("DOMContentLoaded", async () => {
     </div>
     `;
     startCountdown(ligne);
-    // Afficher les parkings relais si présents
-    try {
-      if (Array.isArray(ligne.parkings) && ligne.parkings.length) {
-        const parkSection = document.createElement('div');
-        parkSection.className = 'card glass shadow-xl p-4 transition-transform hover:scale-105 mb-8 animate-fade-in';
-        const parkTitle = document.createElement('h3');
-        parkTitle.className = 'text-2xl font-bold mb-4 text-white';
-        parkTitle.textContent = 'Parkings relais à proximité';
-        parkSection.appendChild(parkTitle);
-
-        const parkList = document.createElement('div');
-        parkList.className = 'flex gap-4 flex-wrap items-center';
-
-        // Try to load parkings.json to get images and names
+    // Injecter les parkings dans la case 'Jours de circulation' si présents
+    if (Array.isArray(ligne.parkings) && ligne.parkings.length) {
+      const cirParEl = document.getElementById('circulation-parks');
+      if (cirParEl) {
         fetch('/src/parkings.json').then(r => r.ok ? r.json() : null).then(data => {
           const map = {};
           if (Array.isArray(data)) data.forEach(p => { if (p && p.id) map[p.id] = p; });
           ligne.parkings.forEach(pid => {
             const a = document.createElement('a');
             a.href = `/src/parkings.html#${pid}`;
-            a.className = 'inline-flex items-center gap-3 p-3 bg-base-100 text-base-content rounded-lg shadow hover:scale-105 transition-transform';
+            a.className = 'inline-flex items-center gap-3 p-2 bg-base-100 text-base-content rounded-lg shadow hover:scale-105 transition-transform';
 
             const img = document.createElement('img');
             const meta = map[pid];
             img.src = meta && meta.image ? meta.image : `/img/${pid}.png`;
-            img.alt = `Parking ${pid}`;
-            img.className = 'w-12 h-12 rounded';
+            img.alt = meta && meta.name ? meta.name : pid;
+            img.className = 'w-8 h-8 rounded';
             img.onerror = function(){ this.src = `/img/parking-${pid}.png`; };
 
             const span = document.createElement('div');
-            span.className = 'text-white/80';
+            span.className = 'text-white/80 text-sm';
             span.textContent = meta && meta.name ? meta.name : pid;
 
             a.appendChild(img);
             a.appendChild(span);
-            parkList.appendChild(a);
+            cirParEl.appendChild(a);
           });
         }).catch(() => {
-          // fallback: render minimal links
+          // fallback minimal
           ligne.parkings.forEach(pid => {
-            const a = document.createElement('a');
-            a.href = `/src/parkings.html#${pid}`;
-            a.className = 'inline-flex items-center gap-3 p-3 bg-base-100 text-base-content rounded-lg shadow hover:scale-105 transition-transform';
-            a.textContent = pid;
-            parkList.appendChild(a);
+            const span = document.createElement('span');
+            span.className = 'badge badge-info';
+            span.textContent = pid;
+            const el = document.getElementById('circulation-parks');
+            if (el) el.appendChild(span);
           });
-        }).finally(() => {
-          parkSection.appendChild(parkList);
-          const mainContainerEl = document.getElementById('main-container');
-          if (mainContainerEl) mainContainerEl.appendChild(parkSection);
         });
       }
-    } catch (err) {
-      console.warn('Erreur rendu parkings nocturne', err);
     }
     
     // Ajouter le gestionnaire d'événements pour le bouton PDF principal

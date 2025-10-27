@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Parkings relais - Transport Clermont Métropole" />
+    <title>Parkings relais — Transport Clermont Métropole</title>
+    <link rel="icon" type="image/png" href="/img/TCM.png" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/src/menu.js"></script>
+  </head>
+  <body class="bg-base-100 text-base-content">
+    <header class="hero min-h-64 bg-cover bg-center" style="background-image: url('/img/parkings-hero.jpg')">
+      <div class="hero-overlay bg-opacity-60"></div>
+      <div class="mx-auto max-w-7xl px-6 lg:px-8 py-20">
+        <div class="mx-auto max-w-2xl text-center">
+          <h1 class="text-4xl font-extrabold text-white sm:text-5xl">Parkings relais</h1>
+          <p class="mt-4 text-lg text-gray-200">Garez malin, prenez le réseau — profitez d'un trajet rapide et sans stress pour rejoindre le centre.</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-6 lg:px-8 py-12">
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Clinique Saint-Paul -->
+        <article class="card bg-base-300 shadow-xl">
+          <figure><img src="/img/parking_clinique.png" alt="Clinique Saint-Paul" onerror="this.src='/img/parking-placeholder.png'"/></figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">Clinique Saint-Paul</h2>
+            <p class="text-base-content/80">Parking relais moderne, idéal pour les trajets vers le centre et les lignes de tram à proximité. 100 places prévues.</p>
+
+            <div class="mt-4">
+              <div class="flex justify-between items-center">
+                <div>
+                  <div class="text-sm text-base-content/70">Statut</div>
+                  <div id="clinique_status" class="text-lg font-semibold text-accent">En travaux — ouverture prévue le 15 février 2026</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm text-base-content/70">Places</div>
+                  <div class="text-lg font-bold" id="clinique_count">0 / 100</div>
+                </div>
+              </div>
+
+              <div class="w-full bg-base-200 rounded-full h-4 mt-3 overflow-hidden">
+                <div id="clinique_bar" class="h-4 bg-accent transition-all" style="width:0%"></div>
+              </div>
+
+              <div class="mt-4 flex gap-3 items-center">
+                <button class="btn btn-primary">Itinéraire</button>
+                <button class="btn btn-outline">En savoir plus</button>
+                <div class="ml-auto text-sm text-base-content/70">Tarif normal: <span id="clinique_tarif">à venir</span></div>
+              </div>
+
+              <div class="mt-3 text-sm text-base-content/70">Tarif combiné transport: <span id="clinique_tarif_combo">à venir</span></div>
+
+              <div class="mt-4 text-green-500 font-semibold" id="clinique_message">Places abondantes — un arrêt de tram à deux pas.</div>
+                <div class="mt-3 text-sm text-base-content/70" id="clinique_lines">Lignes : —</div>
+                <div class="mt-3 text-sm text-base-content/70">Sécurité & équipements : <span id="clinique_equip"><strong>Vidéosurveillance</strong>, agent TCM, <strong>bornes de recharge électriques</strong></span>.</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Campus des Cézeaux -->
+        <article class="card bg-base-300 shadow-xl">
+          <figure><img src="/img/parking_cezeaux.png" alt="Campus des Cézeaux" onerror="this.src='/img/parking-placeholder.png'"/></figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">Campus des Cézeaux</h2>
+            <p class="text-base-content/80">Parfait pour les étudiants et les collègues : stationnez facilement puis profitez d'une correspondance directe.</p>
+
+            <div class="mt-4">
+              <div class="flex justify-between items-center">
+                <div>
+                  <div class="text-sm text-base-content/70">Statut</div>
+                  <div id="cezeaux_status" class="text-lg font-semibold text-accent">En travaux — ouverture prévue le 15 février 2026</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm text-base-content/70">Places</div>
+                  <div class="text-lg font-bold" id="cezeaux_count">0 / 100</div>
+                </div>
+              </div>
+
+              <div class="w-full bg-base-200 rounded-full h-4 mt-3 overflow-hidden">
+                <div id="cezeaux_bar" class="h-4 bg-accent transition-all" style="width:0%"></div>
+              </div>
+
+              <div class="mt-4 flex gap-3 items-center">
+                <button class="btn btn-primary">Itinéraire</button>
+                <button class="btn btn-outline">En savoir plus</button>
+                <div class="ml-auto text-sm text-base-content/70">Tarif normal: <span id="cezeaux_tarif">à venir</span></div>
+              </div>
+
+              <div class="mt-3 text-sm text-base-content/70">Tarif combiné transport: <span id="cezeaux_tarif_combo">à venir</span></div>
+
+              <div class="mt-4 text-green-500 font-semibold" id="cezeaux_message">Emplacement stratégique — parking connecté au réseau.</div>
+              <div class="mt-3 text-sm text-base-content/70" id="cezeaux_lines">Lignes : —</div>
+              <div class="mt-3 text-sm text-base-content/70">Sécurité & équipements : <span id="cezeaux_equip"><strong>Vidéosurveillance</strong>, agent TCM, <strong>bornes de recharge électriques</strong></span>.</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pôle Luca Pacioli -->
+        <article class="card bg-base-300 shadow-xl">
+          <figure><img src="/img/parking_luca.png" alt="Pôle Luca Pacioli" onerror="this.src='/img/parking-placeholder.png'"/></figure>
+          <div class="card-body">
+            <h2 class="card-title text-primary">Pôle Luca Pacioli</h2>
+            <p class="text-base-content/80">Nouveau pôle multimodal, idéal pour combiner voiture, vélo et transport en commun.</p>
+
+            <div class="mt-4">
+              <div class="flex justify-between items-center">
+                <div>
+                  <div class="text-sm text-base-content/70">Statut</div>
+                  <div id="luca_status" class="text-lg font-semibold text-accent">En travaux — ouverture prévue le 15 février 2026</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-sm text-base-content/70">Places</div>
+                  <div class="text-lg font-bold" id="luca_count">0 / 100</div>
+                </div>
+              </div>
+
+              <div class="w-full bg-base-200 rounded-full h-4 mt-3 overflow-hidden">
+                <div id="luca_bar" class="h-4 bg-accent transition-all" style="width:0%"></div>
+              </div>
+
+              <div class="mt-4 flex gap-3 items-center">
+                <button class="btn btn-primary">Itinéraire</button>
+                <button class="btn btn-outline">En savoir plus</button>
+                <div class="ml-auto text-sm text-base-content/70">Tarif normal: <span id="luca_tarif">à venir</span></div>
+              </div>
+
+              <div class="mt-3 text-sm text-base-content/70">Tarif combiné transport: <span id="luca_tarif_combo">à venir</span></div>
+
+              <div class="mt-4 text-green-500 font-semibold" id="luca_message">Pensé pour votre confort — accès rapide aux lignes principales.</div>
+              <div class="mt-3 text-sm text-base-content/70" id="luca_lines">Lignes : —</div>
+              <div class="mt-3 text-sm text-base-content/70">Sécurité & équipements : <span id="luca_equip"><strong>Vidéosurveillance</strong>, agent TCM, <strong>bornes de recharge électriques</strong></span>.</div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="mt-12 bg-base-200 p-6 rounded-xl">
+        <h3 class="text-2xl font-bold">Pourquoi utiliser nos parkings relais ?</h3>
+        <ul class="list-disc pl-5 mt-3 text-base-content/80">
+          <li>Garez facilement et rejoignez le réseau en quelques minutes.</li>
+          <li>Tarifs combinés pour un trajet économique et fluide.</li>
+          <li>Des emplacements pensés pour vélos et véhicules partagés.</li>
+        </ul>
+        <p class="mt-4">Ouverture prévue le <strong>15 février 2026</strong>. Restez informés — nous mettrons à jour les tarifs et les services dès qu'ils seront fixés.</p>
+      </section>
+    </main>
+
+    <footer class="footer footer-center p-10 bg-primary text-primary-content">
+      <aside>
+        <img src="/img/TCM-Clair.png" width="200" height="200" alt="Logo TCM" />
+        <p class="font-bold">Partenaire de vos déplacements depuis 1989.</p>
+        <p>Copyright © <script>document.write(new Date().getFullYear());</script> - Tous droits réservés</p>
+      </aside>
+    </footer>
+
+    <script>
+      // Parkings relais data
+      const PARKINGS = [
+        { id: 'clinique', name: "Clinique Saint-Paul", capacity: 100, lines: ['BEN3','1'], ev: true, surveilled: true },
+          { id: 'cezeaux', name: "Campus des Cézeaux", capacity: 100, lines: ['3','8'], ev: true, surveilled: true },
+          { id: 'luca', name: "Pôle Luca Pacioli", capacity: 100, lines: ['5','64'], ev: true, surveilled: true }
+      ];
+
+      // Date d'ouverture prévue
+      const OPEN_DATE = new Date('2026-02-15T08:00:00');
+
+      // Horaires généraux d'ouverture (pour les parkings où le stationnement de nuit n'est pas autorisé)
+      const DEFAULT_OPEN_HOUR = 6; // 06:00
+      const DEFAULT_CLOSE_HOUR = 22; // 22:00
+
+      // La Clinique Saint-Paul est ouverte 24/24 lorsque la ligne BEN3 circule (ex: service nocturne)
+      function ben3IsOperating(now) {
+        // Règle simple : BEN3 circule pendant les horaires nocturnes (0h-5h)
+        const h = now.getHours();
+        return (h >= 0 && h < 5);
+      }
+
+      // Initialise les compteurs (persistés en localStorage pour donner de la continuité)
+      function initParkings() {
+        PARKINGS.forEach(p => {
+          const key = `parking_${p.id}_count`;
+          let stored = parseInt(localStorage.getItem(key));
+          if (isNaN(stored)) {
+            // valeurs de départ attractives pour donner envie (vendu)
+            stored = Math.floor(Math.random() * 40) + 20; // 20-59
+            localStorage.setItem(key, stored);
+          }
+          renderParking(p, stored);
+        });
+
+        // Mise à jour immédiate puis toutes les minutes
+        updateOccupancies();
+        setInterval(updateOccupancies, 60000); // chaque minute
+      }
+
+      function renderParking(p, count) {
+        const countEl = document.getElementById(`${p.id}_count`);
+        const barEl = document.getElementById(`${p.id}_bar`);
+        const statusEl = document.getElementById(`${p.id}_status`);
+        const messageEl = document.getElementById(`${p.id}_message`);
+
+        const percent = Math.round((count / p.capacity) * 100);
+        if (countEl) countEl.textContent = `${count} / ${p.capacity}`;
+        if (barEl) barEl.style.width = `${percent}%`;
+
+        // Statut selon la date et les horaires
+        const now = new Date();
+        const isBeforeOpen = now < OPEN_DATE;
+
+        // Déterminer si le parking est ouvert maintenant
+        let isOpen = true;
+        if (isBeforeOpen) {
+          isOpen = false;
+        } else {
+          if (p.id === 'clinique') {
+            // Clinique : ouverte 24/24 si BEN3 circule
+            if (ben3IsOperating(now)) {
+              isOpen = true;
+            } else {
+              isOpen = (now.getHours() >= DEFAULT_OPEN_HOUR && now.getHours() < DEFAULT_CLOSE_HOUR);
+            }
+          } else {
+            // Autres parkings : pas de stationnement de nuit
+            isOpen = (now.getHours() >= DEFAULT_OPEN_HOUR && now.getHours() < DEFAULT_CLOSE_HOUR);
+          }
+        }
+
+        if (isBeforeOpen) {
+          const days = Math.ceil((OPEN_DATE - now) / (1000 * 60 * 60 * 24));
+          if (statusEl) statusEl.textContent = `En travaux — ouverture prévue le 15 février 2026 (dans ${days} jours)`;
+          if (messageEl) messageEl.textContent = `Prévision d'accueil : ${Math.max(0, p.capacity - count)} places libres à l'ouverture.`;
+          messageEl.className = 'text-blue-500 font-semibold';
+        } else if (!isOpen) {
+          if (statusEl) statusEl.textContent = `Fermé — Stationnement nocturne non autorisé`;
+          if (messageEl) messageEl.textContent = `Retirez votre véhicule avant la fermeture.`;
+          messageEl.className = 'text-red-500 font-semibold';
+        } else {
+          // Ouvert
+          if (p.id === 'clinique' && ben3IsOperating(now)) {
+            if (statusEl) statusEl.textContent = `Ouvert 24/24 (BEN3 en service)`;
+          } else {
+            if (statusEl) statusEl.textContent = `Ouvert — Bienvenue !`;
+          }
+          // message vendeur selon occupation
+          if (percent >= 90) {
+            if (messageEl) messageEl.textContent = `Très fréquenté — il reste rarement des places en journée.`;
+            messageEl.className = 'text-red-500 font-semibold';
+          } else if (percent >= 60) {
+            if (messageEl) messageEl.textContent = `Affluence élevée — pensez au tarif combiné pour économiser.`;
+            messageEl.className = 'text-yellow-500 font-semibold';
+          } else {
+            if (messageEl) messageEl.textContent = `Places abondantes — stationnez vite et gagnez du temps !`;
+            messageEl.className = 'text-green-500 font-semibold';
+          }
+        }
+        // Afficher les lignes desservies
+        const linesEl = document.getElementById(`${p.id}_lines`);
+        if (linesEl) {
+          linesEl.innerHTML = 'Lignes : ' + (p.lines && p.lines.length ? p.lines.map(l => `<span class="badge badge-sm badge-outline mr-2">${l}</span>`).join('') : '—');
+        }
+
+        // Afficher équipements (EV, surveillance)
+        const equipEl = document.getElementById(`${p.id}_equip`);
+        if (equipEl) {
+          const parts = [];
+          if (p.surveilled) parts.push('Vidéosurveillance');
+          if (p.ev) parts.push('Bornes de recharge');
+          equipEl.textContent = parts.join(' • ');
+        }
+
+      }
+
+      function updateOccupancies() {
+        const now = new Date();
+        const hour = now.getHours();
+
+        PARKINGS.forEach(p => {
+          const key = `parking_${p.id}_count`;
+          let count = parseInt(localStorage.getItem(key));
+          if (isNaN(count)) count = 0;
+
+          // Si avant l'ouverture, on simule des chiffres prévisionnels changeant légèrement
+          if (now < OPEN_DATE) {
+            // variation douce : -2..+6
+            const delta = Math.floor(Math.random() * 9) - 2; // -2..6
+            count = Math.max(0, Math.min(p.capacity, count + delta));
+          } else {
+            // Après ouverture : comportement plus réaliste
+            // Si plein en journée, parfois pas de changement
+            if (count >= p.capacity) {
+              if (hour >= 7 && hour <= 20 && Math.random() < 0.7) {
+                // rester plein
+                count = p.capacity;
+              } else {
+                // libère quelques places la nuit ou par petite variation
+                const delta = -Math.floor(Math.random() * 6); // -0..-5
+                count = Math.max(0, Math.min(p.capacity, count + delta));
+              }
+            } else {
+              // variation normale : -3..+5
+              const delta = Math.floor(Math.random() * 9) - 3; // -3..5
+              count = Math.max(0, Math.min(p.capacity, count + delta));
+            }
+          }
+
+          localStorage.setItem(key, count);
+          renderParking(p, count);
+        });
+      }
+
+      // Démarrage
+      document.addEventListener('DOMContentLoaded', initParkings);
+    </script>
+  </body>
+</html>

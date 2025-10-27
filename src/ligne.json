@@ -702,6 +702,7 @@
             "type": "Nocturne",
             "description": "BEN3 vous emmène de la Place de Jaude à Aubière, en passant par les quartiers animés et les zones résidentielles. Parfait pour vos sorties nocturnes ou pour rentrer chez vous en toute sécurité.<br><br><strong>Les arrêts desservis :</strong><ul class=\"list-disc list-inside pl-4\"><li>Place de Jaude</li><li>Gare SNCF</li><li>CHU Gabriel-Montpied</li><li>Campus des Cézeaux</li><li>Aubière Centre</li></ul><br>Et n'oublie pas, c'est BEN qui te ramène !",
             "terminus": ["Direction Jaude (via Gare SNCF de Clermont-Ferrand)", "Direction Aubière (via Gare SNCF de Clermont-Ferrand)"],
+            "parkings": ["clinique"],
             "circulation": {
                 "startHour": 14,
                 "endHour": 5,

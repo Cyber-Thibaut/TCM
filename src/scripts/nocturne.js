@@ -123,8 +123,27 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const renderLigneScreen = (ligne) => {
     const info = getCirculationInfo(ligne.circulation);
-    // Si le service est terminé, on ne peut pas extraire le texte.
-    const circulationText = info ? info.circulationText : "Service terminé pour aujourd'hui.";
+    // Si le service est terminé, afficher un texte plus utile :
+    // - utiliser circulationText si le service est actif,
+    // - sinon utiliser circulation.default_text si fourni,
+    // - sinon afficher les jours/heures prévus à partir de circulation.default_days/startHour,
+    // - sinon un message générique invitant à consulter les horaires.
+    let circulationText;
+    if (info) {
+      circulationText = info.circulationText;
+    } else {
+      const circ = ligne.circulation || {};
+      if (circ.default_text) {
+        circulationText = `${circ.default_text} (service non actif actuellement)`;
+      } else if (Array.isArray(circ.default_days) && circ.default_days.length) {
+        const daysMap = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+        const days = circ.default_days.map(d => daysMap[d]).join(', ');
+        const start = circ.startHour !== undefined ? `à partir de ${circ.startHour}h` : '';
+        circulationText = `Circulation prévue ${days} ${start}. Service non actif actuellement.`;
+      } else {
+        circulationText = 'Service non actif actuellement. Consultez les horaires pour connaître les prochains départs.';
+      }
+    }
 
     mainContainer.innerHTML = `
     <div class="w-full max-w-6xl mx-auto">
@@ -188,6 +207,61 @@ document.addEventListener("DOMContentLoaded", async () => {
     </div>
     `;
     startCountdown(ligne);
+    // Afficher les parkings relais si présents
+    try {
+      if (Array.isArray(ligne.parkings) && ligne.parkings.length) {
+        const parkSection = document.createElement('div');
+        parkSection.className = 'card glass shadow-xl p-4 transition-transform hover:scale-105 mb-8 animate-fade-in';
+        const parkTitle = document.createElement('h3');
+        parkTitle.className = 'text-2xl font-bold mb-4 text-white';
+        parkTitle.textContent = 'Parkings relais à proximité';
+        parkSection.appendChild(parkTitle);
+
+        const parkList = document.createElement('div');
+        parkList.className = 'flex gap-4 flex-wrap items-center';
+
+        // Try to load parkings.json to get images and names
+        fetch('/src/parkings.json').then(r => r.ok ? r.json() : null).then(data => {
+          const map = {};
+          if (Array.isArray(data)) data.forEach(p => { if (p && p.id) map[p.id] = p; });
+          ligne.parkings.forEach(pid => {
+            const a = document.createElement('a');
+            a.href = `/src/parkings.html#${pid}`;
+            a.className = 'inline-flex items-center gap-3 p-3 bg-base-100 text-base-content rounded-lg shadow hover:scale-105 transition-transform';
+
+            const img = document.createElement('img');
+            const meta = map[pid];
+            img.src = meta && meta.image ? meta.image : `/img/${pid}.png`;
+            img.alt = `Parking ${pid}`;
+            img.className = 'w-12 h-12 rounded';
+            img.onerror = function(){ this.src = `/img/parking-${pid}.png`; };
+
+            const span = document.createElement('div');
+            span.className = 'text-white/80';
+            span.textContent = meta && meta.name ? meta.name : pid;
+
+            a.appendChild(img);
+            a.appendChild(span);
+            parkList.appendChild(a);
+          });
+        }).catch(() => {
+          // fallback: render minimal links
+          ligne.parkings.forEach(pid => {
+            const a = document.createElement('a');
+            a.href = `/src/parkings.html#${pid}`;
+            a.className = 'inline-flex items-center gap-3 p-3 bg-base-100 text-base-content rounded-lg shadow hover:scale-105 transition-transform';
+            a.textContent = pid;
+            parkList.appendChild(a);
+          });
+        }).finally(() => {
+          parkSection.appendChild(parkList);
+          const mainContainerEl = document.getElementById('main-container');
+          if (mainContainerEl) mainContainerEl.appendChild(parkSection);
+        });
+      }
+    } catch (err) {
+      console.warn('Erreur rendu parkings nocturne', err);
+    }
     
     // Ajouter le gestionnaire d'événements pour le bouton PDF principal
     setTimeout(() => {

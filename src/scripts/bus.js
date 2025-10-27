@@ -2,6 +2,7 @@ let holidayDates = [];
 let lineDetailsData = null;
 let lineFrequenciesData = null;
 let currentLineNumber = null;
+let parkingImageMap = null;
 
 const nextBusTime = document.getElementById("nextBusTime");
 const alertMessage = document.getElementById("alertMessage");
@@ -142,6 +143,24 @@ async function fetchLineFrequencies(lineNumber) {
   } catch (err) {
     console.error("Erreur chargement fréquences ligne:", err);
     return null;
+  }
+}
+
+async function fetchParkingsJson() {
+  try {
+    const resp = await fetch('/src/parkings.json');
+    if (!resp.ok) throw new Error('parkings.json non accessible');
+    const arr = await resp.json();
+    // Build a simple id->image map for quick lookup
+    parkingImageMap = {};
+    if (Array.isArray(arr)) {
+      arr.forEach(p => {
+        if (p && p.id) parkingImageMap[p.id] = p.image || null;
+      });
+    }
+  } catch (err) {
+    console.warn('Impossible de charger /src/parkings.json :', err);
+    parkingImageMap = null;
   }
 }
 
@@ -418,10 +437,13 @@ function renderLineDetails(ligne) {
       a.className = 'inline-flex items-center gap-3 p-3 bg-base-200 rounded-lg shadow hover:scale-105 transition-transform';
 
       const img = document.createElement('img');
-      img.src = `/img/${pid}.png`;
+      // Try to get image from bus.json mapping first, fallback to convention
+  // Use image from parkings.json mapping if available, otherwise fall back
+  const mapped = parkingImageMap && parkingImageMap[pid];
+  img.src = mapped ? mapped : `/img/${pid}.png`;
       img.alt = `Parking ${pid}`;
       img.className = 'w-12 h-12 rounded';
-      img.onerror = function(){ this.src = '/img/parking-placeholder.png'; };
+      img.onerror = function(){ this.src = `/img/parking-${pid}.png`; };
 
       const span = document.createElement('div');
       span.className = 'text-base-content/80';
@@ -500,6 +522,9 @@ async function init() {
   }
 
   await fetchHolidayDates(now.getFullYear());
+
+  // Charger le mapping d'images (optionnel)
+  await fetchBusJson();
 
   lineDetailsData = await fetchLineDetails(lineNumber);
 

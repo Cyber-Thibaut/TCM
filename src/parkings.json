@@ -1,0 +1,32 @@
+[
+  {
+    "id": "clinique",
+    "name": "Clinique Saint-Paul",
+    "capacity": 100,
+    "lines": ["BEN3","A"],
+    "ev": true,
+    "surveilled": true,
+    "image": "/img/parking_clinique.png",
+    "description": "Parking relais moderne, idéal pour les trajets vers le centre et les lignes de tram à proximité."
+  },
+  {
+    "id": "cezeaux",
+    "name": "Campus des Cézeaux",
+    "capacity": 100,
+    "lines": ["3","8"],
+    "ev": true,
+    "surveilled": true,
+    "image": "/img/parking_cezeaux.png",
+    "description": "Parfait pour les étudiants : stationnez facilement puis profitez d'une correspondance directe."
+  },
+  {
+    "id": "luca",
+    "name": "Place de Jaude",
+    "capacity": 100,
+    "lines": ["5","64"],
+    "ev": true,
+    "surveilled": true,
+    "image": "/img/parking_luca.png",
+    "description": "Emplacement central, point névralgique de la ville — idéal pour rayonner à pied dans le centre-ville."
+  }
+]

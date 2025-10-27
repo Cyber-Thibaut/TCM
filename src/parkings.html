@@ -11,7 +11,7 @@
     <script src="/src/menu.js"></script>
   </head>
   <body class="bg-base-100 text-base-content">
-    <header class="hero min-h-64 bg-cover bg-center" style="background-image: url('/img/parkings-hero.jpg')">
+    <header class="hero min-h-64 bg-cover bg-center" style="background-image: url('/img/parkings-hero-large.jpg')">
       <div class="hero-overlay bg-opacity-60"></div>
       <div class="mx-auto max-w-7xl px-6 lg:px-8 py-20">
         <div class="mx-auto max-w-2xl text-center">
@@ -31,7 +31,7 @@
         <!-- Cards list: image left, info right -->
         <article id="clinique" class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center bg-base-100 rounded-xl p-6 shadow-lg">
           <div class="md:col-span-2">
-            <img src="/img/parking_clinique.png" alt="Clinique Saint-Paul" class="w-full h-48 object-cover rounded-lg" onerror="this.src='/img/parking-placeholder.png'">
+            <img src="/img/parking_clinique.png" alt="Clinique Saint-Paul" class="w-full h-48 object-contain bg-white p-4 rounded-lg" onerror="this.src='/img/parking-placeholder.png'">
           </div>
           <div class="md:col-span-3">
             <h2 class="text-2xl font-bold text-primary">Clinique Saint-Paul</h2>
@@ -69,7 +69,7 @@
 
         <article id="cezeaux" class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center bg-base-100 rounded-xl p-6 shadow-lg">
           <div class="md:col-span-2">
-            <img src="/img/parking_cezeaux.png" alt="Campus des Cézeaux" class="w-full h-48 object-cover rounded-lg" onerror="this.src='/img/parking-placeholder.png'">
+            <img src="/img/parking_cezeaux.png" alt="Campus des Cézeaux" class="w-full h-48 object-contain bg-white p-4 rounded-lg" onerror="this.src='/img/parking-placeholder.png'">
           </div>
           <div class="md:col-span-3">
             <h2 class="text-2xl font-bold text-primary">Campus des Cézeaux</h2>
@@ -107,7 +107,7 @@
 
         <article id="luca" class="grid grid-cols-1 md:grid-cols-5 gap-6 items-center bg-base-100 rounded-xl p-6 shadow-lg">
           <div class="md:col-span-2">
-            <img src="/img/parking_luca.png" alt="Place de Jaude" class="w-full h-48 object-cover rounded-lg" onerror="this.src='/img/parking-placeholder.png'">
+            <img src="/img/parking_luca.png" alt="Place de Jaude" class="w-full h-48 object-contain bg-white p-4 rounded-lg" onerror="this.src='/img/parking-placeholder.png'">
           </div>
           <div class="md:col-span-3">
             <h2 class="text-2xl font-bold text-primary">Place de Jaude</h2>
@@ -172,11 +172,29 @@
         // 'clinique': { status: 'auto' }
       };
 
-      const PARKINGS = [
-        { id: 'clinique', name: "Clinique Saint-Paul", capacity: 100, lines: ['BEN3','A'], ev: true, surveilled: true },
-        { id: 'cezeaux', name: "Campus des Cézeaux", capacity: 100, lines: ['3','8'], ev: true, surveilled: true },
-  { id: 'luca', name: "Place de Jaude", capacity: 100, lines: ['5','64'], ev: true, surveilled: true }
-      ];
+      let PARKINGS = [];
+
+      async function loadParkingsJSON(){
+        try{
+          const res = await fetch('/src/parkings.json');
+          if (res.ok){
+            const data = await res.json();
+            if (Array.isArray(data)) {
+              PARKINGS = data;
+              return;
+            }
+          }
+        }catch(e){
+          console.warn('Impossible de charger /src/parkings.json', e);
+        }
+
+        // fallback si le fetch échoue
+        PARKINGS = [
+          { id: 'clinique', name: 'Clinique Saint-Paul', capacity: 100, lines: ['BEN3','A'], ev: true, surveilled: true, image: '/img/parking_clinique.png' },
+          { id: 'cezeaux', name: 'Campus des Cézeaux', capacity: 100, lines: ['3','8'], ev: true, surveilled: true, image: '/img/parking_cezeaux.png' },
+          { id: 'luca', name: 'Place de Jaude', capacity: 100, lines: ['5','64'], ev: true, surveilled: true, image: '/img/parking_luca.png' }
+        ];
+      }
 
       // Date d'ouverture prévue
       const OPEN_DATE = new Date('2026-02-15T08:00:00');
@@ -229,8 +247,10 @@
 
       // Initialise les compteurs (persistés en localStorage pour donner de la continuité)
       async function initParkings() {
-        // tenter de récupérer les horaires de la ligne A
-        await loadLineAOperation();
+  // tenter de récupérer les horaires de la ligne A
+  await loadLineAOperation();
+  // charger la config des parkings depuis JSON
+  await loadParkingsJSON();
 
         PARKINGS.forEach(p => {
           const key = `parking_${p.id}_count`;
@@ -314,7 +334,8 @@
         if (isBeforeOpen) {
           const days = Math.ceil((OPEN_DATE - now) / (1000 * 60 * 60 * 24));
           if (statusEl) statusEl.textContent = `Ouverture prévue le 15 février 2026 (dans ${days} jours)`;
-          if (messageEl) messageEl.textContent = `Prévision d'accueil : ${Math.max(0, effectiveCapacity - count)} places libres à l'ouverture.`;
+          // A l'ouverture les places seront disponibles (capacité effective)
+          if (messageEl) messageEl.textContent = `Prévision d'accueil : jusqu'à ${effectiveCapacity} places disponibles à l'ouverture.`;
           messageEl.className = 'text-blue-500 font-semibold';
           // masquer occupation tant que le parking n'est pas ouvert
           if (countEl) countEl.style.display = 'none';

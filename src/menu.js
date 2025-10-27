@@ -68,6 +68,12 @@ document.addEventListener("DOMContentLoaded", function () {
             </ul>
         </div>
         <div class="navbar-end">
+            <div class="dropdown dropdown-end mr-2">
+                <label tabindex="0" id="pr-label" class="btn btn-ghost">P+R</label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box pr-dropdown-list">
+                    <li class="opacity-60">Chargement...</li>
+                </ul>
+            </div>
         <label class="swap swap-rotate">
             <!-- this hidden checkbox controls the state -->
             <input type="checkbox" class="theme-controller" value="night" />
@@ -96,6 +102,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Insérez le menu dans la page
   document.body.insertAdjacentHTML("afterbegin", menu);
+  
+    // P+R dropdown: lazy-load parkings.json when opened and populate the dropdown
+    (function attachParkingsDropdown() {
+        const prLabel = document.getElementById("pr-label");
+        const prList = document.querySelector(".pr-dropdown-list");
+        if (!prLabel || !prList) return;
+
+        let loaded = false;
+
+        prLabel.addEventListener("click", async () => {
+            if (loaded) return;
+            loaded = true; // prevent duplicate loads
+            try {
+                const resp = await fetch("/src/parkings.json", { cache: "no-store" });
+                if (!resp.ok) throw new Error("fetch failed");
+                const data = await resp.json();
+                if (!Array.isArray(data) || data.length === 0) throw new Error("no data");
+
+                prList.innerHTML = data
+                    .map((p) => {
+                        const img = p.image || `/img/${p.id}.png`;
+                        const name = p.name || p.id;
+                        return `
+                            <li class="hover:bg-base-200">
+                                <a class="flex gap-3 items-center" href="/src/parkings.html#${p.id}">
+                                    <img src="${img}" alt="${name}" class="w-10 h-10 rounded object-cover" onerror="this.style.display='none'"/>
+                                    <div class="text-sm">${name}</div>
+                                </a>
+                            </li>`;
+                    })
+                    .join("");
+            } catch (err) {
+                // Fallback: simple link to the parkings page
+                prList.innerHTML = `<li><a href="/src/parkings.html">Voir les parkings relais</a></li>`;
+                console.warn("P+R dropdown load failed:", err);
+            }
+        });
+    })();
   setTimeout(() => {
     // Détecter la préférence système
     const prefersDark = window.matchMedia(

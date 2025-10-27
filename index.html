@@ -375,8 +375,11 @@
               couleur = "border-yellow-500";
               icone = "/img/assets/alert_white.png";
             }
-
-            const imagePath = `/img/${agence.id}.png`;
+            if(agence.id === "GC") {
+              const imagePath = `/img/gc.png`;
+            } else {
+              const imagePath = `/img/${agence.id}.png`;
+            }
             const agenceHtml = `
               <div class="relative inline-block">
                 <img src="${imagePath}" alt="${agence.nom}" width="75" height="75" class="bg-gray-200 p-2 border ${couleur} rounded-md">

@@ -524,7 +524,7 @@ async function init() {
   await fetchHolidayDates(now.getFullYear());
 
   // Charger le mapping d'images (optionnel)
-  await fetchBusJson();
+  await fetchParkingsJson();
 
   lineDetailsData = await fetchLineDetails(lineNumber);
 

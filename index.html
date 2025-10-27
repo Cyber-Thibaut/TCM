@@ -477,8 +477,9 @@
             // small card
             const card = document.createElement('div');
             card.className = 'p-3 border rounded flex items-center gap-3';
-            // si fermé ou en travaux, ne pas afficher le pourcentage / occupation
-            const occupancyText = (status === 'Fermé' || status === 'Travaux') ? '' : ` • ${percent}% occupé`;
+            // n'afficher l'occupation que si le parking est réellement ouvert
+            const showOccupancy = (status === 'Ouvert' || status.startsWith('Ouvert 24'));
+            const occupancyText = showOccupancy ? ` • ${percent}% occupé` : '';
             card.innerHTML = `
               <img src="/img/parking_${p.id}.png" alt="${p.name}" class="w-16 h-12 object-cover rounded" onerror="this.src='/img/parking-placeholder.png'">
               <div class="flex-1 min-w-0">

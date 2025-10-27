@@ -1,10 +1,10 @@
 {
     "lignes": [
         {
-            "numéro": "1",
+            "numéro": "A",
             "destinations": [
-                "Campus Alan Turing",
-                "Gare Centrale"
+                "AéroportClinique Saint-Paul",
+                "Clinique Saint-Paul"
             ],
             "description": "Pratique, Universitaire, Efficace.",
             "reseau": "Volc'Express",

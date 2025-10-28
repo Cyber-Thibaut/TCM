@@ -65,15 +65,15 @@ document.addEventListener("DOMContentLoaded", function () {
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.1"
                                 d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
                         </svg> Nos Agences</a></li>
+                    <li><a href="/src/parkings.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline-block mr-2" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM12 11.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+                        </svg>
+                        P+R
+                    </a></li>
             </ul>
         </div>
         <div class="navbar-end">
-            <div class="dropdown dropdown-end mr-2">
-                <label tabindex="0" id="pr-label" class="btn btn-ghost">P+R</label>
-                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box pr-dropdown-list">
-                    <li class="opacity-60">Chargement...</li>
-                </ul>
-            </div>
         <label class="swap swap-rotate">
             <!-- this hidden checkbox controls the state -->
             <input type="checkbox" class="theme-controller" value="night" />
@@ -103,43 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Insérez le menu dans la page
   document.body.insertAdjacentHTML("afterbegin", menu);
   
-    // P+R dropdown: lazy-load parkings.json when opened and populate the dropdown
-    (function attachParkingsDropdown() {
-        const prLabel = document.getElementById("pr-label");
-        const prList = document.querySelector(".pr-dropdown-list");
-        if (!prLabel || !prList) return;
-
-        let loaded = false;
-
-        prLabel.addEventListener("click", async () => {
-            if (loaded) return;
-            loaded = true; // prevent duplicate loads
-            try {
-                const resp = await fetch("/src/parkings.json", { cache: "no-store" });
-                if (!resp.ok) throw new Error("fetch failed");
-                const data = await resp.json();
-                if (!Array.isArray(data) || data.length === 0) throw new Error("no data");
-
-                prList.innerHTML = data
-                    .map((p) => {
-                        const img = p.image || `/img/${p.id}.png`;
-                        const name = p.name || p.id;
-                        return `
-                            <li class="hover:bg-base-200">
-                                <a class="flex gap-3 items-center" href="/src/parkings.html#${p.id}">
-                                    <img src="${img}" alt="${name}" class="w-10 h-10 rounded object-cover" onerror="this.style.display='none'"/>
-                                    <div class="text-sm">${name}</div>
-                                </a>
-                            </li>`;
-                    })
-                    .join("");
-            } catch (err) {
-                // Fallback: simple link to the parkings page
-                prList.innerHTML = `<li><a href="/src/parkings.html">Voir les parkings relais</a></li>`;
-                console.warn("P+R dropdown load failed:", err);
-            }
-        });
-    })();
   setTimeout(() => {
     // Détecter la préférence système
     const prefersDark = window.matchMedia(

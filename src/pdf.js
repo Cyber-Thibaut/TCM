@@ -64,23 +64,73 @@ function hideLoadingSpinner() {
 }
 
 async function loadImageAsBase64(imagePath) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-            resolve(canvas.toDataURL('image/png'));
-        };
-        img.onerror = () => {
-            console.warn(`Image non trouvée: ${imagePath}`);
-            resolve(null); // Ne pas bloquer si l'image manque
-        };
-        img.src = imagePath;
-    });
+    const pathsToTry = [
+        imagePath,
+        `../${imagePath}`,
+        `/${imagePath}`,
+        `src/${imagePath}`
+    ];
+
+    for (const path of pathsToTry) {
+        try {
+            const result = await new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    resolve(canvas.toDataURL('image/png'));
+                };
+                img.onerror = () => resolve(null);
+                img.src = path;
+            });
+            if (result) return result;
+        } catch (e) {
+            continue;
+        }
+    }
+    console.warn(`Image non trouvée après plusieurs tentatives: ${imagePath}`);
+    return null;
+}
+
+// Extraction des données scolaires depuis le script JS
+async function extractScolaireData(lineId) {
+    try {
+        const response = await fetch(`scripts/${lineId}.js`);
+        if (!response.ok) return null;
+        const text = await response.text();
+
+        // Regex pour extraire les objets schedules
+        const firstCarMatch = text.match(/const firstCarSchedules = ({[\s\S]*?});/);
+        const secondCarMatch = text.match(/const secondCarSchedules = ({[\s\S]*?});/);
+
+        if (firstCarMatch && secondCarMatch) {
+            // Nettoyage pour rendre compatible JSON (clés sans quotes, commentaires)
+            const cleanJson = (str) => {
+                return str
+                    .replace(/\/\/.*$/gm, '') // Supprimer commentaires
+                    .replace(/([a-zA-Z0-9_]+):/g, '"$1":') // Ajouter quotes aux clés
+                    .replace(/'/g, '"') // Remplacer simple quotes par double
+                    .replace(/,(\s*})/g, '$1'); // Supprimer virgule finale
+            };
+
+            try {
+                const firstCar = JSON.parse(cleanJson(firstCarMatch[1]));
+                const secondCar = JSON.parse(cleanJson(secondCarMatch[1]));
+                return { firstCar, secondCar };
+            } catch (e) {
+                console.error("Erreur parsing JSON scolaire", e);
+                return null;
+            }
+        }
+        return null;
+    } catch (error) {
+        console.error("Erreur extraction scolaire", error);
+        return null;
+    }
 }
 
 // Chargement des données JSON
@@ -99,7 +149,14 @@ async function loadLineData(lineId) {
 
         // Comparaison souple (string vs number)
         const info = ligneJson.lignes.find(l => l.id == lineId);
+        
+        // Pour les scolaires, on ne trouve pas forcément dans frequences_bus.json
         const freq = freqJson.lignes.find(l => l.numero == lineId);
+        
+        let scolaireData = null;
+        if (!freq && (lineId.toString().startsWith('6') || lineId.toString().startsWith('9'))) {
+            scolaireData = await extractScolaireData(lineId);
+        }
 
         if (!info) throw new Error(`Ligne ${lineId} introuvable dans ligne.json`);
 
@@ -107,6 +164,7 @@ async function loadLineData(lineId) {
             info: info,
             frequences: freq ? freq.frequences : null,
             vacances: freq ? freq.vacances : null,
+            scolaire: scolaireData,
             destination: freq ? freq.destination : info.nom
         };
     } catch (error) {
@@ -310,7 +368,16 @@ async function generatePDF(lineId) {
 
         doc.setFontSize(10);
         doc.setFont(PDF_CONFIG.font, "normal");
-        const descLines = doc.splitTextToSize(data.info.description, 170);
+        
+        // Adaptation dynamique du vocabulaire (Bus vs Tram)
+        let description = data.info.description;
+        if (data.info.mode === 'tram') {
+            description = description.replace(/\bbus\b/gi, 'tram')
+                                   .replace(/\bbuses\b/gi, 'trams')
+                                   .replace(/monter à bord d'un tram/gi, "monter à bord d'une rame");
+        }
+
+        const descLines = doc.splitTextToSize(description, 170);
         doc.text(descLines, 20, yPos);
         yPos += (descLines.length * 5) + 10;
 
@@ -320,7 +387,12 @@ async function generatePDF(lineId) {
             yPos += 10;
         }
 
-        // Fréquences
+        // --- PAGE 2 : HORAIRES & PLAN ---
+        doc.addPage();
+        await createModernHeader(doc, lineId, type, color, "HORAIRES & PLAN", "Détails de circulation");
+        yPos = 70;
+
+        // Fréquences (Régulier)
         if (data.frequences) {
             doc.setFontSize(14);
             doc.setFont(PDF_CONFIG.font, "bold");
@@ -340,12 +412,59 @@ async function generatePDF(lineId) {
                  if (data.vacances.creuse) rows.push(["Vacances Scolaires", data.vacances.creuse, data.vacances.pointe, data.vacances.soir || "-"]);
             }
 
-            createModernTable(doc, 20, yPos, 170, headers, rows, color);
+            yPos = createModernTable(doc, 20, yPos, 170, headers, rows, color);
+            yPos += 15;
         }
 
-        // --- PAGE 2 : PLAN (Si disponible) ---
-        doc.addPage();
-        await createModernHeader(doc, lineId, type, color, "PLAN DE LIGNE", "Itinéraire et arrêts");
+        // Horaires Scolaires (Spécifique)
+        if (data.scolaire) {
+            doc.setFontSize(14);
+            doc.setFont(PDF_CONFIG.font, "bold");
+            doc.setTextColor(...color);
+            doc.text("HORAIRES SCOLAIRES", 20, yPos);
+            yPos += 10;
+
+            const headers = ["Service", "Matin (Aller)", "Soir (Retour)", "Mercredi (Retour)"];
+            const rows = [];
+            
+            // 1er Car
+            if (data.scolaire.firstCar) {
+                const fc = data.scolaire.firstCar;
+                rows.push([
+                    "Car Principal", 
+                    fc.default?.morning || "-", 
+                    fc.default?.evening || "-", 
+                    fc["3"]?.evening || "-"
+                ]);
+            }
+            
+            // 2nd Car
+            if (data.scolaire.secondCar) {
+                const sc = data.scolaire.secondCar;
+                rows.push([
+                    "Car Secondaire", 
+                    sc.default?.morning || "-", 
+                    sc.default?.evening || "-", 
+                    sc["3"]?.evening || "-"
+                ]);
+            }
+
+            yPos = createModernTable(doc, 20, yPos, 170, headers, rows, color);
+            yPos += 15;
+        }
+
+        // Plan de ligne
+        if (yPos > 200) { // Nouvelle page si pas assez de place
+            doc.addPage();
+            await createModernHeader(doc, lineId, type, color, "PLAN DE LIGNE", "Itinéraire");
+            yPos = 70;
+        } else {
+            doc.setFontSize(14);
+            doc.setFont(PDF_CONFIG.font, "bold");
+            doc.setTextColor(...color);
+            doc.text("PLAN DE LIGNE", 20, yPos);
+            yPos += 10;
+        }
         
         // Essayer de charger le plan
         const planPath = `img/plans/L${lineId}.png`;
@@ -358,18 +477,18 @@ async function generatePDF(lineId) {
             const pdfHeight = doc.internal.pageSize.getHeight();
             const margin = 20;
             const maxWidth = pdfWidth - (margin * 2);
-            const maxHeight = pdfHeight - 80; // Moins header et footer
+            const maxHeight = pdfHeight - yPos - 20; // Espace restant
 
             const ratio = Math.min(maxWidth / imgProps.width, maxHeight / imgProps.height);
             const w = imgProps.width * ratio;
             const h = imgProps.height * ratio;
             const x = (pdfWidth - w) / 2;
             
-            doc.addImage(planBase64, 'PNG', x, 70, w, h);
+            doc.addImage(planBase64, 'PNG', x, yPos, w, h);
         } else {
             doc.setFontSize(12);
             doc.setTextColor(...TCM_COLORS.secondary);
-            doc.text("Plan de ligne non disponible pour le moment.", 105, 100, { align: 'center' });
+            doc.text("Plan de ligne non disponible pour le moment.", 105, yPos + 20, { align: 'center' });
         }
 
         // Footer sur toutes les pages

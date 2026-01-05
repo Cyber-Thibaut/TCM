@@ -8,6 +8,7 @@
             ],
             "description": "Pratique, Universitaire, Efficace.",
             "reseau": "Volc'Express",
+            "mode": "tram",
             "stats": {
                 "nb_arrets": 15,
                 "distance": 10,

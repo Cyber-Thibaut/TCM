@@ -68,7 +68,9 @@ async function loadImageAsBase64(imagePath) {
         imagePath,
         `../${imagePath}`,
         `/${imagePath}`,
-        `src/${imagePath}`
+        `src/${imagePath}`,
+        `../img/${imagePath.replace('img/', '')}`, // Cas spécifique pour remonter d'un cran si on est dans src/
+        `../../${imagePath}`
     ];
 
     for (const path of pathsToTry) {
@@ -104,18 +106,20 @@ async function extractScolaireData(lineId) {
         const text = await response.text();
 
         // Regex pour extraire les objets schedules
+        // On cherche "const firstCarSchedules = {" jusqu'à la fermeture "};"
         const firstCarMatch = text.match(/const firstCarSchedules = ({[\s\S]*?});/);
         const secondCarMatch = text.match(/const secondCarSchedules = ({[\s\S]*?});/);
 
         if (firstCarMatch && secondCarMatch) {
-            // Nettoyage pour rendre compatible JSON (clés sans quotes, commentaires)
+            // Nettoyage pour rendre compatible JSON
             const cleanJson = (str) => {
                 return str
-                    .replace(/\/\/.*$/gm, '') // Supprimer commentaires
+                    .replace(/\/\/.*$/gm, '') // Supprimer commentaires //...
+                    .replace(/\s+/g, '') // Supprimer tous les espaces/sauts de ligne pour simplifier
                     .replace(/([a-zA-Z0-9_]+):/g, '"$1":') // Ajouter quotes aux clés
                     .replace(/'/g, '"') // Remplacer simple quotes par double
-                    .replace(/,(\s*})/g, '$1') // Supprimer virgule finale
-                    .replace(/,(\s*})/g, '$1'); // Double check pour virgule finale
+                    .replace(/,}/g, '}') // Supprimer virgule finale avant accolade fermante
+                    .replace(/,]/g, ']'); // Supprimer virgule finale avant crochet fermant
             };
 
             try {
@@ -531,7 +535,8 @@ async function generatePDF(lineId) {
         else if (type.toLowerCase().includes('volc')) color = TCM_COLORS.volcexpress;
 
         // --- PAGE 1 ---
-        await createModernHeader(doc, lineId, type, color, data.info.nom, data.destination, data.info.operation);
+        // On ne passe plus data.destination en sous-titre pour éviter "Campus Cezeaux" redondant
+        await createModernHeader(doc, lineId, type, color, data.info.nom, "", data.info.operation);
 
         let yPos = 70;
 
@@ -555,7 +560,7 @@ async function generatePDF(lineId) {
 
         const descLines = doc.splitTextToSize(description, 170);
         doc.text(descLines, 20, yPos);
-        yPos += (descLines.length * 5) + 10;
+        yPos += (descLines.length * 5) + 5; // Réduit de +10 à +5
 
         // Stats
         if (data.info.stats) {
@@ -583,16 +588,26 @@ async function generatePDF(lineId) {
         let tarifsAdded = false;
         // Infos Tarifs (si place dispo sur Page 1)
         // On augmente un peu la tolérance (255mm max)
+        // MODIF: On force sur la page 2 comme demandé, sauf si on veut vraiment remplir la page 1
+        // L'utilisateur a dit "mets les tarifs en page 2 d'office"
+        /*
         if (yPos < 255) {
             yPos = await createTarifsSection(doc, 20, yPos, 170, color, lineId);
             tarifsAdded = true;
         }
+        */
 
         // --- PAGE 2 : HORAIRES & PLAN ---
         doc.addPage();
         await createModernHeader(doc, lineId, type, color, "HORAIRES & PLAN", "Détails de circulation", data.info.operation);
         yPos = 70;
 
+        // On met les tarifs en haut de la page 2 ou après les fréquences ?
+        // "mets les tarifs en page 2 d'office" -> On va les mettre en bas de page 2 ou avant le plan.
+        // Le plan est souvent gros. Mettons les tarifs juste après le header de la page 2 pour qu'ils soient visibles ?
+        // Ou alors tout en bas de la page 2 ?
+        // Essayons juste après le header pour changer, ou gardons la logique "avant le plan".
+        
         // Fréquences (Régulier)
         if (data.frequences) {
             // ... (code existant) ...
@@ -659,8 +674,8 @@ async function generatePDF(lineId) {
             yPos += 15;
         }
 
-        // Si Tarifs pas ajoutés sur Page 1, on essaie sur Page 2 avant le plan
-        if (!tarifsAdded && yPos < 255) {
+        // Tarifs toujours sur Page 2 maintenant
+        if (!tarifsAdded) {
              yPos = await createTarifsSection(doc, 20, yPos, 170, color, lineId);
              yPos += 10;
              tarifsAdded = true;

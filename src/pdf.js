@@ -65,11 +65,11 @@ function hideLoadingSpinner() {
 
 async function loadImageAsBase64(imagePath) {
     const pathsToTry = [
+        `../img/${imagePath.replace('img/', '')}`, // Priorité 1: Remonter d'un cran (src/ -> root/img/)
         imagePath,
         `../${imagePath}`,
         `/${imagePath}`,
         `src/${imagePath}`,
-        `../img/${imagePath.replace('img/', '')}`, // Cas spécifique pour remonter d'un cran si on est dans src/
         `../../${imagePath}`
     ];
 
@@ -111,24 +111,14 @@ async function extractScolaireData(lineId) {
         const secondCarMatch = text.match(/const secondCarSchedules = ({[\s\S]*?});/);
 
         if (firstCarMatch && secondCarMatch) {
-            // Nettoyage pour rendre compatible JSON
-            const cleanJson = (str) => {
-                return str
-                    .replace(/\/\/.*$/gm, '') // Supprimer commentaires //...
-                    .replace(/\s+/g, '') // Supprimer tous les espaces/sauts de ligne pour simplifier
-                    .replace(/([a-zA-Z0-9_]+):/g, '"$1":') // Ajouter quotes aux clés
-                    .replace(/'/g, '"') // Remplacer simple quotes par double
-                    .replace(/,}/g, '}') // Supprimer virgule finale avant accolade fermante
-                    .replace(/,]/g, ']'); // Supprimer virgule finale avant crochet fermant
-            };
-
             try {
-                const firstCar = JSON.parse(cleanJson(firstCarMatch[1]));
-                const secondCar = JSON.parse(cleanJson(secondCarMatch[1]));
+                // Utilisation de new Function pour évaluer l'objet JS directement
+                // C'est plus robuste que le parsing JSON via regex pour des objets JS avec commentaires/clés sans quotes
+                const firstCar = new Function("return " + firstCarMatch[1])();
+                const secondCar = new Function("return " + secondCarMatch[1])();
                 return { firstCar, secondCar };
             } catch (e) {
-                console.error("Erreur parsing JSON scolaire", e);
-                // Fallback manuel si le parsing échoue
+                console.error("Erreur évaluation JS scolaire", e);
                 return null;
             }
         }
@@ -359,7 +349,7 @@ async function createTarifsSection(doc, x, y, width, accentColor, lineId) {
             // On le place à droite du bloc
             doc.addImage(qrBase64, 'PNG', x + width - 30, y + 10, 20, 20);
             doc.setFontSize(6);
-            doc.text("Temps réel", x + width - 20, y + 32, { align: 'center' });
+            doc.text("Infos trafic Temps réel", x + width - 20, y + 32, { align: 'center' });
         }
     } catch (e) {
         console.warn("Impossible de générer le QR Code");

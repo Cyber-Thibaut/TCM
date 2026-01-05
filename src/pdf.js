@@ -885,6 +885,22 @@ async function generateArenaGlobalPDF() {
         for (const nav of navettes) {
             doc.addPage();
             
+            // --- FOND GRAPHIQUE "ZENITH" (Vivant !) ---
+            
+            // 1. Triangle dynamique Or en bas à droite (Energy)
+            doc.setFillColor(255, 193, 7); // Amber
+            doc.triangle(width, height, width, height - 70, width - 70, height, 'F');
+            
+            // 2. Polygone subtil gris clair en arrière-plan (Structure)
+            doc.setFillColor(249, 249, 249); 
+            doc.triangle(0, 120, 0, height - 40, width * 0.5, height / 2, 'F');
+
+            // 3. Touches graphiques vertes (Identité Navette)
+            doc.setFillColor(0, 121, 65); 
+            doc.circle(10, 35, 3, 'F');
+            doc.circle(width - 10, height - 10, 5, 'F'); // Petit rond dans le coin du triangle or
+
+            
             // Header Page
             doc.setFillColor(0, 121, 65); // Vert Navette
             doc.rect(0, 0, width, 30, 'F');
@@ -915,21 +931,26 @@ async function generateArenaGlobalPDF() {
                 doc.addImage(logoArena, 'PNG', x, y, w, h);
             }
 
-            // Infos Clés (Bandeau gris clair)
-            doc.setFillColor(245, 245, 245);
+            // Infos Clés (Bandeau gris clair avec accent)
+            doc.setFillColor(240, 240, 240);
             doc.rect(0, 30, width, 25, 'F');
             
+            // Petite barre décorative sous le header
+            doc.setFillColor(255, 193, 7); // Or
+            doc.rect(0, 30, width, 2, 'F');
+
             doc.setTextColor(50, 50, 50);
             doc.setFontSize(10);
+            doc.setFont("helvetica", "bold"); // Plus visible
             
             const stats = nav.stats || {};
-            const infoText = `Véhicule: ${stats.vehicule || 'Bus'}   |   Temps: ${stats.temps_trajet}   |   Distance: ${stats.longueur_ligne || '?'}   |   Arrêts: ${stats.nombre_arrets}`;
+            const infoText = `Véhicule : ${stats.vehicule || 'Bus'}     |     Temps : ${stats.temps_trajet}     |     Distance : ${stats.longueur_ligne || '?'}     |     Arrêts : ${stats.nombre_arrets}`;
             doc.text(infoText, width / 2, 45, { align: "center" });
 
             // Plan de la ligne
+            let planBottomY = 70; // Position de départ par défaut si pas de plan
             try {
                 // On essaie de charger le plan spécifique, sinon fallback
-                // On passe le chemin relatif depuis la racine du projet (img/plans/...)
                 let planImg = await loadImageAsBase64(`img/plans/${nav.id}.png`, 1500);
                 if (!planImg) {
                     planImg = await loadImageAsBase64(`img/plans/LNS.png`, 1500); // Fallback
@@ -937,8 +958,8 @@ async function generateArenaGlobalPDF() {
                 
                 if (planImg) {
                     const imgProps = doc.getImageProperties(planImg);
-                    const maxWidth = width - 40;
-                    const maxHeight = 120;
+                    const maxWidth = width - 20; // Plus large
+                    const maxHeight = 100; // Un peu moins haut pour laisser de la place au reste
                     let pWidth = maxWidth;
                     let pHeight = (imgProps.height * pWidth) / imgProps.width;
                     
@@ -947,105 +968,146 @@ async function generateArenaGlobalPDF() {
                         pWidth = (imgProps.width * pHeight) / imgProps.height;
                     }
                     
+                    // Ajout d'une ombre portée simulée sous le plan
+                    doc.setFillColor(220, 220, 220);
+                    doc.roundedRect((width - pWidth) / 2 + 2, 72, pWidth, pHeight, 2, 2, 'F');
+
                     doc.addImage(planImg, 'PNG', (width - pWidth) / 2, 70, pWidth, pHeight);
+                    
+                    planBottomY = 70 + pHeight;
                 } else {
                     doc.setTextColor(150, 150, 150);
-                    doc.text("Plan non disponible", width / 2, 130, { align: "center" });
+                    doc.text("Plan non disponible", width / 2, 100, { align: "center" });
+                    planBottomY = 110;
                 }
             } catch (e) {
                 console.warn("Erreur image plan", e);
+                planBottomY = 110;
             }
 
-            // Description / Détails
-            let descY = 210;
+            // Description / Détails - POSITION DYNAMIQUE (Remontée des infos)
+            // On laisse 15mm de marge après le plan
+            let descY = planBottomY + 15;
+            
+            // Description du service
             doc.setFillColor(0, 121, 65);
             doc.rect(20, descY, 5, 15, 'F'); // Barre verticale déco
             
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(12);
+            doc.setTextColor(33, 33, 33);
+            doc.setFontSize(14);
             doc.setFont("helvetica", "bold");
             doc.text("Description du service", 30, descY + 5);
             
             doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
-            const splitDesc = doc.splitTextToSize(nav.description || "Pas de description.", width - 50);
+            // On split le texte sur une largeur plus courte pour éviter de toucher les graphiques de droite s'il y en a
+            const splitDesc = doc.splitTextToSize(nav.description || "Pas de description.", width - 60);
             doc.text(splitDesc, 30, descY + 12);
 
-            descY += 30; // Move down for new sections
+            descY += 25; // Espace après description
 
-            // --- CONTENU INVENTÉ AJOUTÉ ---
+            // --- CONTENU INVENTÉ ---
             
             // Boite 1: Horaires & Fréquences (Gauche)
-            doc.setFillColor(248, 249, 250); // Gris très clair
-            doc.setDrawColor(220, 220, 220);
-            doc.roundedRect(20, descY, (width - 50) / 2, 45, 3, 3, 'FD');
+            // Design "Card" avec Header coloré
+            const boxWidth = (width - 50) / 2;
+            const boxHeight = 50;
             
-            doc.setTextColor(0, 121, 65);
+            // Header Boite 1
+            doc.setFillColor(0, 121, 65); // Vert
+            doc.roundedRect(20, descY, boxWidth, 10, 2, 2, 'F');
+            doc.rect(20, descY + 5, boxWidth, 5, 'F'); // Hack coins bas droits
+            
+            doc.setTextColor(255, 255, 255);
             doc.setFontSize(11);
             doc.setFont("helvetica", "bold");
-            doc.text("Horaires & Fréquences", 25, descY + 8);
-            
-            doc.setTextColor(60, 60, 60);
-            doc.setFontSize(9);
-            doc.setFont("helvetica", "normal");
-            doc.text("• Avant l'événement :", 25, descY + 16);
-            doc.text("   Toutes les 10 à 15 minutes", 25, descY + 21);
-            doc.text("   Premier départ : 2h avant le show", 25, descY + 26);
-            
-            doc.text("• Après l'événement :", 25, descY + 34);
-            doc.text("   Départs en continu", 25, descY + 39);
+            doc.text("HORAIRES & FRÉQUENCES", 20 + (boxWidth/2), descY + 7, { align: 'center' });
 
-            // Boite 2: Infos Pratiques (Droite)
-            const xRight = 20 + ((width - 50) / 2) + 10;
-            doc.setFillColor(248, 249, 250);
-            doc.roundedRect(xRight, descY, (width - 50) / 2, 45, 3, 3, 'FD');
-            
-            doc.setTextColor(0, 121, 65);
-            doc.setFontSize(11);
-            doc.setFont("helvetica", "bold");
-            doc.text("Infos Pratiques", xRight + 5, descY + 8);
-            
-            doc.setTextColor(60, 60, 60);
-            doc.setFontSize(9);
-            doc.setFont("helvetica", "normal");
-            doc.text("• Capacité : 150 voyageurs", xRight + 5, descY + 16);
-            doc.text("• Accessibilité : 100% PMR", xRight + 5, descY + 23);
-            doc.text("• Climatisation / Chauffage", xRight + 5, descY + 30);
-            doc.text("• Connexion Wi-Fi à bord", xRight + 5, descY + 37);
-            
-            // Petit badge "GRATUIT" ou Tarif
-            doc.setFillColor(255, 193, 7); // Amber
-            doc.roundedRect(xRight + 5, descY + 40, 40, 4, 1, 1, 'F');
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(7);
-            doc.setFont("helvetica", "bold");
-            doc.text("INCLUS DANS LE BILLET", xRight + 25, descY + 43, {align: "center"});
-
-            descY += 55;
-
-            // Boite 3: Correspondances (Bas)
+            // Corps Boite 1
+            doc.setFillColor(255, 255, 255);
             doc.setDrawColor(0, 121, 65);
             doc.setLineWidth(0.5);
-            doc.line(20, descY, width - 20, descY); // Ligne de séparation
+            doc.roundedRect(20, descY + 10, boxWidth, boxHeight - 10, 2, 2, 'S'); // Contour seul
             
-            doc.setTextColor(33, 33, 33);
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "bold");
-            doc.text("Correspondances principales :", 20, descY + 8);
-            
-            doc.setFont("helvetica", "normal");
+            doc.setTextColor(60, 60, 60);
             doc.setFontSize(9);
-            // Génération de correspondances fictives basées sur l'ID
-            const corresp = nav.id === 'NAV1' ? "Tram A, Bus 12, Parking P1" :
-                           nav.id === 'NAV2' ? "Métro B, Bus C4, Parking P2" :
-                           nav.id === 'NAV3' ? "Tram C, Gare SNCF, Parking P3" :
-                           "Réseau urbain, Parking Relais Arena";
-            doc.text(corresp, 80, descY + 8);
+            doc.setFont("helvetica", "bold");
+            doc.text("• Avant l'événement :", 25, descY + 20);
+            doc.setFont("helvetica", "normal");
+            doc.text("   Toutes les 10 à 15 minutes", 25, descY + 25);
+            doc.text("   Départ : H-2 avant le show", 25, descY + 30);
+            
+            doc.setFont("helvetica", "bold");
+            doc.text("• Après l'événement :", 25, descY + 40);
+            doc.setFont("helvetica", "normal");
+            doc.text("   Retours en continu (1h)", 25, descY + 45);
 
+
+            // Boite 2: Infos Pratiques (Droite)
+            const xRight = 20 + boxWidth + 10;
+            
+            // Header Boite 2
+            doc.setFillColor(33, 33, 33); // Gris sombre
+            doc.roundedRect(xRight, descY, boxWidth, 10, 2, 2, 'F');
+            doc.rect(xRight, descY + 5, boxWidth, 5, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "bold");
+            doc.text("INFOS PRATIQUES", xRight + (boxWidth/2), descY + 7, { align: 'center' });
+
+            // Corps Boite 2
+            doc.setDrawColor(33, 33, 33);
+            doc.roundedRect(xRight, descY + 10, boxWidth, boxHeight - 10, 2, 2, 'S');
+            
+            doc.setTextColor(60, 60, 60);
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "normal");
+            doc.text("• Capacité : 150 voyageurs", xRight + 5, descY + 20);
+            doc.text("• Accessibilité : 100% PMR", xRight + 5, descY + 27);
+            doc.text("• Climatisation / Chauffage", xRight + 5, descY + 34);
+            doc.text("• Connexion Wi-Fi à bord", xRight + 5, descY + 41);
+            
+            // Badge "INCLUS"
+            doc.setFillColor(255, 193, 7); // Amber
+            doc.roundedRect(xRight + 15, descY + 45, boxWidth - 30, 6, 3, 3, 'F');
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(8);
+            doc.setFont("helvetica", "bold");
+            doc.text("INCLUS DANS LE BILLET", xRight + (boxWidth/2), descY + 49, {align: "center"});
+
+            descY += boxHeight + 15;
+
+            // Boite 3: Correspondances (Bas)
+            // Ligne pointillée
+            doc.setDrawColor(200, 200, 200);
+            doc.setLineWidth(1);
+            doc.setLineDash([2, 2], 0);
+            doc.line(20, descY, width - 20, descY);
+            doc.setLineDash([]); // Reset
+            
+            doc.setTextColor(0, 121, 65);
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "bold");
+            doc.text("CORRESPONDANCES AUX TERMINUS", 20, descY + 8);
+            
+            doc.setTextColor(50, 50, 50);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
+            const corresp = nav.id === 'NAV1' ? "Tram A • Bus 12 • Parking P1 (Relais)" :
+                           nav.id === 'NAV2' ? "Métro B • Bus C4 • Parking P2" :
+                           nav.id === 'NAV3' ? "Tram C • Gare SNCF • Parking P3" :
+                           "Réseau urbain • Parking Relais Arena";
+            doc.text(corresp, 20, descY + 16);
+            
             // Footer Page
+            // On le dessine par dessus les formes de fond du bas
+             doc.setFillColor(255, 255, 255, 0.8); // Fond blanc semi transparent pour lisibilité sur le triangle or
+             doc.roundedRect((width/2) - 80, height - 12, 160, 8, 2, 2, 'F');
+             
             doc.setFontSize(8);
             doc.setTextColor(100, 100, 100);
-            doc.text("Caramel Arena - Dispositif de transport événementiel - TCM", width / 2, height - 10, { align: "center" });
+            doc.text("Caramel Arena - Dispositif de transport événementiel - TCM", width / 2, height - 8, { align: "center" });
         }
 
         doc.save('Guide_Caramel_Arena.pdf');

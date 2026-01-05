@@ -915,6 +915,9 @@
       }
     }
   }
+  .visible {
+    visibility: visible;
+  }
   .radial-progress {
     @layer daisyui.component {
       position: relative;
@@ -2358,6 +2361,13 @@
       box-shadow: oklch(0% 0 0/ 0.25) 0px 25px 50px -12px;
       overflow-y: auto;
       overscroll-behavior: contain;
+    }
+  }
+  .drawer-content {
+    @layer daisyui.component {
+      grid-column-start: 2;
+      grid-row-start: 1;
+      min-width: calc(0.25rem * 0);
     }
   }
   .stat-value {

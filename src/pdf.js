@@ -455,58 +455,7 @@ function createStatsSection(doc, x, y, stats, accentColor) {
     return y + cardHeight + 10;
 }
 
-function createTarifsSection(doc, x, y, width, accentColor) {
-    const height = 35;
-    
-    // Fond
-    doc.setFillColor(250, 250, 250);
-    doc.setDrawColor(230, 230, 230);
-    doc.roundedRect(x, y, width, height, 3, 3, 'FD');
-    
-    // Titre
-    doc.setFillColor(...accentColor);
-    doc.roundedRect(x, y, width, 8, 3, 3, 'F');
-    // Hack pour coins carrés en bas du header
-    doc.rect(x, y+5, width, 3, 'F'); 
-    
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(10);
-    doc.setFont(PDF_CONFIG.font, "bold");
-    doc.text("INFOS TARIFS", x + (width/2), y + 5.5, { align: 'center' });
 
-    // Contenu
-    doc.setTextColor(...TCM_COLORS.dark);
-    doc.setFontSize(9);
-    doc.setFont(PDF_CONFIG.font, "normal");
-    
-    const col1X = x + 10;
-    const col2X = x + (width/2) + 10;
-    const row1Y = y + 18;
-    const row2Y = y + 28;
-
-    // Ticket 1h
-    doc.setFont(PDF_CONFIG.font, "bold");
-    doc.text("Ticket 1h", col1X, row1Y);
-    doc.setFont(PDF_CONFIG.font, "normal");
-    doc.text("1,70 €", col1X + 30, row1Y);
-
-    // Ticket 24h
-    doc.setFont(PDF_CONFIG.font, "bold");
-    doc.text("Ticket 24h", col1X, row2Y);
-    doc.setFont(PDF_CONFIG.font, "normal");
-    doc.text("5,00 €", col1X + 30, row2Y);
-
-    // Infos
-    doc.setFontSize(8);
-    doc.setTextColor(...TCM_COLORS.secondary);
-    doc.text("SMS au 93000", col2X, row1Y);
-    doc.text("Appli TCM", col2X, row2Y);
-    
-    doc.setFontSize(7);
-    doc.text("Plus d'infos sur tcm-mobilite.fr", x + (width/2), y + 32, { align: 'center' });
-
-    return y + height + 10;
-}
 
 // --- GÉNÉRATEURS SPÉCIFIQUES ---
 
@@ -577,11 +526,53 @@ async function generatePDF(lineId) {
             yPos += 10;
 
             for (const parking of data.parkings) {
-                // ... (code parking existant) ...
-                // Pour économiser des tokens je ne réécris pas tout le bloc parking s'il n'a pas changé, 
-                // mais ici je dois englober le bloc pour le contexte.
-                // Je vais utiliser replace_string_in_file sur la partie Tarifs uniquement.
+                doc.setFillColor(245, 245, 245);
+                doc.roundedRect(20, yPos, 170, 25, 2, 2, 'F');
+                
+                let textX = 25;
+
+                // Image du parking
+                if (parking.image) {
+                    const parkingImgBase64 = await loadImageAsBase64(parking.image);
+                    if (parkingImgBase64) {
+                        // Calcul du ratio pour ne pas déformer le logo
+                        const imgProps = doc.getImageProperties(parkingImgBase64);
+                        const maxWidth = 30;
+                        const maxHeight = 21;
+                        const ratio = Math.min(maxWidth / imgProps.width, maxHeight / imgProps.height);
+                        const w = imgProps.width * ratio;
+                        const h = imgProps.height * ratio;
+                        
+                        // Centrage dans la zone
+                        const xImg = 22 + (maxWidth - w) / 2;
+                        const yImg = yPos + 2 + (maxHeight - h) / 2;
+
+                        doc.addImage(parkingImgBase64, 'PNG', xImg, yImg, w, h);
+                        textX = 55; // Décaler le texte si image présente
+                    }
+                }
+                
+                doc.setFontSize(12);
+                doc.setTextColor(...TCM_COLORS.dark);
+                doc.setFont(PDF_CONFIG.font, "bold");
+                doc.text(`P+R ${parking.name}`, textX, yPos + 8);
+                
+                doc.setFontSize(9);
+                doc.setFont(PDF_CONFIG.font, "normal");
+                doc.setTextColor(...TCM_COLORS.secondary);
+                doc.text(`${parking.capacity} places • ${parking.surveilled ? 'Surveillé' : 'Non surveillé'}`, textX, yPos + 15);
+                
+                // Description si disponible
+                if (parking.description) {
+                     doc.setFontSize(8);
+                     doc.setTextColor(100);
+                     const desc = doc.splitTextToSize(parking.description, 170 - (textX - 20) - 5);
+                     doc.text(desc, textX, yPos + 20);
+                }
+                
+                yPos += 30;
             }
+            yPos += 5;
         }
 
 
@@ -682,7 +673,7 @@ async function generatePDF(lineId) {
         }
 
         // Plan de ligne
-        if (yPos > 200) { // Nouvelle page si pas assez de place
+        if (yPos > 240) { // Nouvelle page si vraiment pas assez de place (seuil augmenté)
             doc.addPage();
             await createModernHeader(doc, lineId, type, color, "PLAN DE LIGNE", "Itinéraire");
             yPos = 70;

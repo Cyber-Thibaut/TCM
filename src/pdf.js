@@ -1008,6 +1008,27 @@ async function generateArenaGlobalPDF() {
 
             // --- CONTENU INVENTÉ ---
             
+            // Logique de distinction des types de véhicules pour les infos
+            let freqAvant = "Toutes les 10 à 15 minutes";
+            let freqApres = "Retours en continu (1h)";
+            let capa = "150 voyageurs";
+            let typeVehicule = "";
+
+            if (nav.id === 'NAV1') { // Tram
+                freqAvant = "Toutes les 4 à 6 minutes";
+                freqApres = "Trafic intense - Départ immédiat";
+                capa = "300 voyageurs (Tramway)";
+            } else if (nav.id === 'NAV6') { // Autocar (Longue distance)
+                freqAvant = "Départ fixe : H-2 et H-1";
+                freqApres = "Départ unique 30min après fin";
+                capa = "55 voyageurs (Autocar)";
+                typeVehicule = "Réservation recommandée";
+            } else { // Bus / Articule
+                freqAvant = "Toutes les 10 à 15 minutes";
+                capa = "156 voyageurs (Bus)";
+            }
+
+
             // Boite 1: Horaires & Fréquences (Gauche)
             // Design "Card" avec Header coloré
             const boxWidth = (width - 50) / 2;
@@ -1034,13 +1055,13 @@ async function generateArenaGlobalPDF() {
             doc.setFont("helvetica", "bold");
             doc.text("• Avant l'événement :", 25, descY + 20);
             doc.setFont("helvetica", "normal");
-            doc.text("   Toutes les 10 à 15 minutes", 25, descY + 25);
+            doc.text(`   ${freqAvant}`, 25, descY + 25);
             doc.text("   Départ : H-2 avant le show", 25, descY + 30);
             
             doc.setFont("helvetica", "bold");
             doc.text("• Après l'événement :", 25, descY + 40);
             doc.setFont("helvetica", "normal");
-            doc.text("   Retours en continu (1h)", 25, descY + 45);
+            doc.text(`   ${freqApres}`, 25, descY + 45);
 
 
             // Boite 2: Infos Pratiques (Droite)
@@ -1063,7 +1084,7 @@ async function generateArenaGlobalPDF() {
             doc.setTextColor(60, 60, 60);
             doc.setFontSize(9);
             doc.setFont("helvetica", "normal");
-            doc.text("• Capacité : 150 voyageurs", xRight + 5, descY + 20);
+            doc.text(`• Capacité : ${capa}`, xRight + 5, descY + 20);
             doc.text("• Accessibilité : 100% PMR", xRight + 5, descY + 27);
             doc.text("• Climatisation / Chauffage", xRight + 5, descY + 34);
             doc.text("• Connexion Wi-Fi à bord", xRight + 5, descY + 41);
@@ -1094,19 +1115,29 @@ async function generateArenaGlobalPDF() {
             doc.setTextColor(50, 50, 50);
             doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
-            const corresp = nav.id === 'NAV1' ? "Tram A • Bus 12 • Parking P1 (Relais)" :
-                           nav.id === 'NAV2' ? "Métro B • Bus C4 • Parking P2" :
-                           nav.id === 'NAV3' ? "Tram C • Gare SNCF • Parking P3" :
-                           "Réseau urbain • Parking Relais Arena";
-            doc.text(corresp, 20, descY + 16);
+            
+            let correspText = "Réseau urbain • Parking Relais Arena";
+            if (nav.id === 'NAV1') {
+                correspText = "Tram A • Bus 12 • Correspondance NAV3 (Hôtel de Police)";
+            } else if (nav.id === 'NAV2') {
+                correspText = "Métro B • Bus C4 • Parking P2";
+            } else if (nav.id === 'NAV3') {
+                correspText = "Tram C • Gare SNCF • Parking P3";
+            } else if (nav.id === 'NAV4') {
+                 correspText = "Bus 9 • Parking P4";
+            } else if (nav.id === 'NAV5') {
+                 correspText = "Tram B • Bus 16 • Parking P5";
+            }
+
+            doc.text(correspText, 20, descY + 16);
             
             // Footer Page
             // On le dessine par dessus les formes de fond du bas
-             doc.setFillColor(255, 255, 255, 0.8); // Fond blanc semi transparent pour lisibilité sur le triangle or
-             doc.roundedRect((width/2) - 80, height - 12, 160, 8, 2, 2, 'F');
+             // doc.setFillColor(255, 255, 255, 0.8); // Fond blanc semi transparent -> SUPPRIMÉ
+             // doc.roundedRect((width/2) - 80, height - 12, 160, 8, 2, 2, 'F'); -> SUPPRIMÉ
              
             doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
+            doc.setTextColor(255, 255, 255); // BLANC
             doc.text("Caramel Arena - Dispositif de transport événementiel - TCM", width / 2, height - 8, { align: "center" });
         }
 

@@ -343,7 +343,7 @@ async function createTarifsSection(doc, x, y, width, accentColor, lineId) {
 
     // QR Code Temps Réel (via API)
     try {
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tcm-mobilite.fr/lignes/${lineId}`;
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tcm-mobilite.vercel.app/src/ligne.html#${lineId}`;
         const qrBase64 = await loadImageAsBase64(qrUrl);
         if (qrBase64) {
             // On le place à droite du bloc
@@ -706,7 +706,7 @@ async function generatePDF(lineId) {
             doc.setPage(i);
             doc.setFontSize(8);
             doc.setTextColor(150);
-            doc.text(`Page ${i} / ${pageCount} - Transport Clermont Métropole - www.tcm-mobilite.fr`, 105, 290, { align: 'center' });
+            doc.text(`Page ${i} / ${pageCount} - Transport Clermont Métropole - https://tcm-mobilite.vercel.app/`, 105, 290, { align: 'center' });
         }
 
         // Sauvegarde

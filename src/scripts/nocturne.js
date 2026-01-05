@@ -123,11 +123,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const renderLigneScreen = (ligne) => {
     const info = getCirculationInfo(ligne.circulation);
-    // Si le service est terminé, afficher un texte plus utile :
-    // - utiliser circulationText si le service est actif,
-    // - sinon utiliser circulation.default_text si fourni,
-    // - sinon afficher les jours/heures prévus à partir de circulation.default_days/startHour,
-    // - sinon un message générique invitant à consulter les horaires.
+    
+    // Détection Tramway (PL3)
+    const isTram = ligne.id === 'PL3';
+    const typeLabel = isTram ? 'Tramway de Nuit' : 'Bus de Nuit';
+    const typeIcon = isTram ? 'fa-train-tram' : 'fa-bus';
+    const themeColor = isTram ? 'warning' : 'primary';
+
+    // Texte de circulation
     let circulationText;
     if (info) {
       circulationText = info.circulationText;
@@ -146,62 +149,123 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     mainContainer.innerHTML = `
-    <div class="w-full max-w-6xl mx-auto">
-        <!-- Titre -->
-        <div class="text-center mb-12 animate-fade-in">
-            <div class="inline-block bg-primary/20 rounded-full px-6 py-2 mb-4 shadow-lg">
-                <h1 class="text-5xl font-bold text-white tracking-widest">${ligne.id}</h1>
+    <div class="w-full max-w-6xl mx-auto px-4">
+        <!-- Header Amélioré -->
+        <div class="text-center mb-16 animate-fade-in relative">
+            <!-- Badge Ligne -->
+            <div class="inline-flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
+                 <div class="flex items-center gap-4 bg-base-100/10 backdrop-blur-md border border-white/10 rounded-3xl px-8 py-4 shadow-2xl">
+                    <div class="w-16 h-16 rounded-2xl bg-${themeColor} flex items-center justify-center shadow-lg shadow-${themeColor}/50">
+                        <i class="fa-solid ${typeIcon} text-3xl text-white"></i>
+                    </div>
+                    <h1 class="text-6xl font-black text-white tracking-wider" style="text-shadow: 0 0 20px rgba(255,255,255,0.3);">${ligne.id}</h1>
+                </div>
             </div>
-            <p class="text-3xl font-light text-white/90">${ligne.nom}</p>
+            
+            <!-- Nom et Type -->
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">${ligne.nom}</h2>
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <span class="badge badge-lg badge-${themeColor} gap-2 shadow-lg shadow-${themeColor}/20 border-none text-white">
+                    <i class="fa-solid fa-moon"></i> ${typeLabel}
+                </span>
+                ${ligne.accessibilite ? '<span class="badge badge-lg badge-ghost gap-2 bg-white/10 border-white/10 text-white"><i class="fa-solid fa-wheelchair"></i> Accessible</span>' : ''}
+            </div>
+
+            <!-- Bouton PDF -->
+            <button onclick="generateNocturnePDF('${ligne.id}')" class="btn btn-lg btn-outline text-white border-white/30 hover:bg-white hover:text-black hover:border-white gap-3 shadow-xl backdrop-blur-sm group transition-all duration-300">
+                <i class="fa-solid fa-file-pdf text-xl group-hover:scale-110 transition-transform text-error"></i> 
+                Télécharger la fiche horaire
+            </button>
         </div>
 
         <!-- Zone des décomptes -->
-        <div id="countdown-container" class="flex flex-wrap justify-center items-stretch gap-8 mb-12 animate-fade-in" style="animation-delay: 0.2s;">
+        <div id="countdown-container" class="flex flex-wrap justify-center items-stretch gap-8 mb-16 animate-fade-in" style="animation-delay: 0.2s;">
             <!-- Les décomptes seront injectés ici -->
         </div>
 
         <!-- Plan de la ligne -->
-        <div class="card glass shadow-xl p-4 transition-transform hover:scale-105 mb-8 animate-fade-in" style="animation-delay: 0.4s;">
-            <h2 class="text-2xl font-bold mb-4 text-center text-white">Plan de la ligne</h2>
-            <figure><img src="/img/plans/${ligne.id}.png" alt="Plan de la ligne ${ligne.id}" class="w-full h-full object-contain rounded-lg shadow-lg" onerror="this.onerror=null;this.src='/img/plans/LNS.png';"></figure>
+        <div class="card glass shadow-2xl overflow-hidden mb-12 animate-fade-in group" style="animation-delay: 0.4s;">
+            <div class="card-body p-0 relative">
+                <div class="absolute top-4 left-4 z-10">
+                    <span class="badge badge-lg badge-neutral gap-2 shadow-lg">
+                        <i class="fa-solid fa-map"></i> Plan de ligne
+                    </span>
+                </div>
+                <figure class="bg-white/5 p-4 md:p-8 transition-colors group-hover:bg-white/10">
+                    <img src="/img/plans/${ligne.id}.png" 
+                         alt="Plan de la ligne ${ligne.id}" 
+                         class="w-full h-auto max-h-[500px] object-contain rounded-xl shadow-lg transform transition-transform duration-500 group-hover:scale-[1.02]" 
+                         onerror="this.onerror=null;this.src='/img/plans/LNS.png';">
+                </figure>
+            </div>
         </div>
 
         <!-- Grille d'informations -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in" style="animation-delay: 0.6s;">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in" style="animation-delay: 0.6s;">
             
             <!-- À savoir -->
-            <div class="card glass shadow-xl transition-transform hover:scale-105 h-full">
+            <div class="card glass shadow-xl hover:bg-white/5 transition-colors duration-300">
                 <div class="card-body">
-                    <h2 class="card-title text-white"><i class="fa-solid fa-circle-info mr-3 text-info"></i> À savoir</h2>
-                    <p class="text-white/80">${ligne.description}</p>
+                    <h2 class="card-title text-white mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-info/20 flex items-center justify-center text-info">
+                            <i class="fa-solid fa-circle-info text-xl"></i>
+                        </div>
+                        À savoir
+                    </h2>
+                    <p class="text-white/80 leading-relaxed">${ligne.description}</p>
                 </div>
             </div>
 
-      <!-- Jours de circulation -->
-      <div id="circulation-container" class="card glass shadow-xl transition-transform hover:scale-105 h-full">
-        <div class="card-body">
-          <h2 class="card-title text-white"><i class="fa-solid fa-calendar-days mr-3 text-accent"></i> Jours de circulation</h2>
-          <p class="text-white/80">${circulationText}</p>
-          <div id="circulation-parks" class="mt-4 flex gap-4 flex-wrap"></div>
-        </div>
-      </div>
+            <!-- Jours de circulation -->
+            <div id="circulation-container" class="card glass shadow-xl hover:bg-white/5 transition-colors duration-300">
+                <div class="card-body">
+                    <h2 class="card-title text-white mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent">
+                            <i class="fa-solid fa-calendar-days text-xl"></i>
+                        </div>
+                        Circulation
+                    </h2>
+                    <p class="text-white/80 mb-4">${circulationText}</p>
+                    <div class="divider before:bg-white/10 after:bg-white/10 text-white/50 text-sm">Parkings Relais</div>
+                    <div id="circulation-parks" class="flex gap-3 flex-wrap"></div>
+                </div>
+            </div>
 
             <!-- Stats -->
-            <div class="stats stats-vertical shadow w-full glass transition-transform hover:scale-105">
-                <div class="stat">
-                    <div class="stat-figure text-primary"><i class="fa-solid fa-signs-post text-3xl"></i></div>
-                    <div class="stat-title text-white/80">Arrêts</div>
-                    <div class="stat-value text-white">${ligne.stats.nombre_arrets}</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-figure text-secondary"><i class="fa-solid fa-clock text-3xl"></i></div>
-                    <div class="stat-title text-white/80">Trajet</div>
-                    <div class="stat-value text-white">${ligne.stats.temps_trajet}</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-figure text-accent"><i class="fa-solid fa-route text-3xl"></i></div>
-                    <div class="stat-title text-white/80">Longueur</div>
-                    <div class="stat-value text-white">${ligne.stats.longueur_ligne}</div>
+            <div class="card glass shadow-xl hover:bg-white/5 transition-colors duration-300">
+                <div class="card-body">
+                    <h2 class="card-title text-white mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-success/20 flex items-center justify-center text-success">
+                            <i class="fa-solid fa-chart-simple text-xl"></i>
+                        </div>
+                        Chiffres clés
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between group">
+                            <div class="flex items-center gap-3 text-white/70">
+                                <i class="fa-solid fa-signs-post w-6 text-center group-hover:text-primary transition-colors"></i>
+                                <span>Arrêts desservis</span>
+                            </div>
+                            <span class="text-xl font-bold text-white">${ligne.stats.nombre_arrets}</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between group">
+                            <div class="flex items-center gap-3 text-white/70">
+                                <i class="fa-solid fa-clock w-6 text-center group-hover:text-secondary transition-colors"></i>
+                                <span>Temps de trajet</span>
+                            </div>
+                            <span class="text-xl font-bold text-white">${ligne.stats.temps_trajet}</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between group">
+                            <div class="flex items-center gap-3 text-white/70">
+                                <i class="fa-solid fa-route w-6 text-center group-hover:text-accent transition-colors"></i>
+                                <span>Longueur</span>
+                            </div>
+                            <span class="text-xl font-bold text-white">${ligne.stats.longueur_ligne}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

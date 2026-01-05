@@ -114,7 +114,8 @@ async function extractScolaireData(lineId) {
                     .replace(/\/\/.*$/gm, '') // Supprimer commentaires
                     .replace(/([a-zA-Z0-9_]+):/g, '"$1":') // Ajouter quotes aux clés
                     .replace(/'/g, '"') // Remplacer simple quotes par double
-                    .replace(/,(\s*})/g, '$1'); // Supprimer virgule finale
+                    .replace(/,(\s*})/g, '$1') // Supprimer virgule finale
+                    .replace(/,(\s*})/g, '$1'); // Double check pour virgule finale
             };
 
             try {
@@ -123,6 +124,7 @@ async function extractScolaireData(lineId) {
                 return { firstCar, secondCar };
             } catch (e) {
                 console.error("Erreur parsing JSON scolaire", e);
+                // Fallback manuel si le parsing échoue
                 return null;
             }
         }
@@ -137,15 +139,22 @@ async function extractScolaireData(lineId) {
 async function loadLineData(lineId) {
     try {
         console.log(`Chargement des données pour la ligne ${lineId}...`);
-        const [ligneRes, freqRes] = await Promise.all([
+        const [ligneRes, freqRes, parkingsRes] = await Promise.all([
             fetch('ligne.json'),
-            fetch('scripts/frequences_bus.json')
+            fetch('scripts/frequences_bus.json'),
+            fetch('parkings.json')
         ]);
 
         if (!ligneRes.ok || !freqRes.ok) throw new Error('Erreur réseau lors du chargement des données');
 
         const ligneJson = await ligneRes.json();
         const freqJson = await freqRes.json();
+        let parkingsJson = [];
+        try {
+            parkingsJson = await parkingsRes.json();
+        } catch (e) {
+            console.warn("Impossible de charger parkings.json");
+        }
 
         // Comparaison souple (string vs number)
         const info = ligneJson.lignes.find(l => l.id == lineId);
@@ -160,12 +169,19 @@ async function loadLineData(lineId) {
 
         if (!info) throw new Error(`Ligne ${lineId} introuvable dans ligne.json`);
 
+        // Enrichir les infos parkings
+        let parkingsDetails = [];
+        if (info.parkings && Array.isArray(info.parkings)) {
+            parkingsDetails = info.parkings.map(pid => parkingsJson.find(p => p.id === pid)).filter(Boolean);
+        }
+
         return {
             info: info,
             frequences: freq ? freq.frequences : null,
             vacances: freq ? freq.vacances : null,
             scolaire: scolaireData,
-            destination: freq ? freq.destination : info.nom
+            destination: freq ? freq.destination : info.nom,
+            parkings: parkingsDetails
         };
     } catch (error) {
         console.error('Erreur chargement données:', error);
@@ -196,7 +212,9 @@ async function createModernHeader(doc, lineId, lineType, accentColor, title, sub
     const logoPath = 'img/TCM-Clair.png'; // Assurez-vous que ce chemin est correct
     const logoBase64 = await loadImageAsBase64(logoPath);
     if (logoBase64) {
-        doc.addImage(logoBase64, 'PNG', 15, 10, 30, 30); // Ajustez dimensions
+        // Ratio original : 426x263 (~1.62)
+        // Largeur fixée à 30 => Hauteur = 30 * (263/426) = 18.5
+        doc.addImage(logoBase64, 'PNG', 15, 10, 30, 18.5); 
     } else {
         // Fallback texte
         doc.setTextColor(255, 255, 255);
@@ -387,6 +405,64 @@ async function generatePDF(lineId) {
             yPos += 10;
         }
 
+        // Parkings Relais
+        if (data.parkings && data.parkings.length > 0) {
+            doc.setFontSize(14);
+            doc.setFont(PDF_CONFIG.font, "bold");
+            doc.setTextColor(...color);
+            doc.text("PARKINGS RELAIS", 20, yPos);
+            yPos += 10;
+
+            for (const parking of data.parkings) {
+                doc.setFillColor(245, 245, 245);
+                doc.roundedRect(20, yPos, 170, 25, 2, 2, 'F');
+                
+                let textX = 25;
+
+                // Image du parking
+                if (parking.image) {
+                    const parkingImgBase64 = await loadImageAsBase64(parking.image);
+                    if (parkingImgBase64) {
+                        // Calcul du ratio pour ne pas déformer le logo
+                        const imgProps = doc.getImageProperties(parkingImgBase64);
+                        const maxWidth = 30;
+                        const maxHeight = 21;
+                        const ratio = Math.min(maxWidth / imgProps.width, maxHeight / imgProps.height);
+                        const w = imgProps.width * ratio;
+                        const h = imgProps.height * ratio;
+                        
+                        // Centrage dans la zone
+                        const xImg = 22 + (maxWidth - w) / 2;
+                        const yImg = yPos + 2 + (maxHeight - h) / 2;
+
+                        doc.addImage(parkingImgBase64, 'PNG', xImg, yImg, w, h);
+                        textX = 55; // Décaler le texte si image présente
+                    }
+                }
+                
+                doc.setFontSize(12);
+                doc.setTextColor(...TCM_COLORS.dark);
+                doc.setFont(PDF_CONFIG.font, "bold");
+                doc.text(`P+R ${parking.name}`, textX, yPos + 8);
+                
+                doc.setFontSize(9);
+                doc.setFont(PDF_CONFIG.font, "normal");
+                doc.setTextColor(...TCM_COLORS.secondary);
+                doc.text(`${parking.capacity} places • ${parking.surveilled ? 'Surveillé' : 'Non surveillé'}`, textX, yPos + 15);
+                
+                // Description si disponible
+                if (parking.description) {
+                     doc.setFontSize(8);
+                     doc.setTextColor(100);
+                     const desc = doc.splitTextToSize(parking.description, 170 - (textX - 20) - 5);
+                     doc.text(desc, textX, yPos + 20);
+                }
+                
+                yPos += 30;
+            }
+            yPos += 5;
+        }
+
         // --- PAGE 2 : HORAIRES & PLAN ---
         doc.addPage();
         await createModernHeader(doc, lineId, type, color, "HORAIRES & PLAN", "Détails de circulation");
@@ -409,7 +485,8 @@ async function generatePDF(lineId) {
             if (data.frequences.dimanche_creuse) rows.push(["Dimanche & Fériés", data.frequences.dimanche_creuse, data.frequences.dimanche_pointe, "-"]);
 
             if (data.vacances) {
-                 if (data.vacances.creuse) rows.push(["Vacances Scolaires", data.vacances.creuse, data.vacances.pointe, data.vacances.soir || "-"]);
+                 if (data.vacances.creuse) rows.push(["Vacances Scolaires (Semaine)", data.vacances.creuse, data.vacances.pointe, data.vacances.soir || "-"]);
+                 if (data.vacances.samedi_creuse) rows.push(["Vacances Scolaires (Week-end)", data.vacances.samedi_creuse, data.vacances.samedi_pointe, data.vacances.samedi_soir || "-"]);
             }
 
             yPos = createModernTable(doc, 20, yPos, 170, headers, rows, color);

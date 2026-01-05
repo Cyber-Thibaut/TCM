@@ -343,7 +343,13 @@ async function createTarifsSection(doc, x, y, width, accentColor, lineId) {
 
     // QR Code Temps Réel (via API)
     try {
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tcm-mobilite.vercel.app/src/ligne.html#${lineId}`;
+        let targetUrl = `https://tcm-mobilite.vercel.app/src/ligne.html#${lineId}`;
+        // Si c'est une ligne nocturne (BEN ou PL), on pointe vers nocturne.html
+        if (String(lineId).startsWith('BEN') || String(lineId).startsWith('PL')) {
+            targetUrl = `https://tcm-mobilite.vercel.app/src/nocturne.html#${lineId}`;
+        }
+
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(targetUrl)}`;
         const qrBase64 = await loadImageAsBase64(qrUrl);
         if (qrBase64) {
             // On le place à droite du bloc

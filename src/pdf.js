@@ -490,7 +490,16 @@ async function generatePDF(lineId) {
         doc.setFont(PDF_CONFIG.font, "normal");
         
         // Adaptation dynamique du vocabulaire (Bus vs Tram)
-        let description = data.info.description;
+        let description = data.info.description || "";
+        
+        // Nettoyage HTML pour le PDF (suppression des balises)
+        description = description
+            .replace(/<br\s*\/?>/gi, "\n") // <br> -> saut de ligne
+            .replace(/<\/p>/gi, "\n\n")    // </p> -> double saut de ligne
+            .replace(/<li>/gi, "• ")       // <li> -> puce
+            .replace(/<\/li>/gi, "\n")     // </li> -> saut de ligne
+            .replace(/<[^>]+>/g, "");      // Supprime toutes les autres balises HTML
+
         if (data.info.mode === 'tram') {
             description = description.replace(/\bbus\b/gi, 'tram')
                                    .replace(/\bbuses\b/gi, 'trams')
@@ -589,8 +598,26 @@ async function generatePDF(lineId) {
         // Ou alors tout en bas de la page 2 ?
         // Essayons juste après le header pour changer, ou gardons la logique "avant le plan".
         
-        // Fréquences (Régulier)
-        if (data.frequences) {
+        // Fréquences (Régulier ou Nocturne)
+        let frequencesData = data.frequences;
+
+        // Si pas de fréquences standard mais des fréquences de circulation (Nocturne)
+        if (!frequencesData && data.info.circulation && data.info.circulation.frequency) {
+            const freq = data.info.circulation.frequency;
+            // On adapte la structure pour qu'elle colle à celle attendue
+            frequencesData = {
+                creuse: (freq.weekday || "-") + " min",
+                pointe: (freq.weekday || "-") + " min", 
+                soir: (freq.weekday || "-") + " min",
+                samedi_creuse: (freq.saturday || "-") + " min",
+                samedi_pointe: (freq.saturday || "-") + " min",
+                samedi_soir: (freq.saturday || "-") + " min",
+                dimanche_creuse: (freq.sunday_holiday || "-") + " min",
+                dimanche_pointe: (freq.sunday_holiday || "-") + " min"
+            };
+        }
+
+        if (frequencesData) {
             // ... (code existant) ...
             doc.setFontSize(14);
             doc.setFont(PDF_CONFIG.font, "bold");
@@ -602,9 +629,9 @@ async function generatePDF(lineId) {
             const rows = [];
 
             // Mapping des clés JSON vers affichage
-            if (data.frequences.creuse) rows.push(["Semaine (Scolaire)", data.frequences.creuse, data.frequences.pointe, data.frequences.soir || "-"]);
-            if (data.frequences.samedi_creuse) rows.push(["Samedi", data.frequences.samedi_creuse, data.frequences.samedi_pointe, data.frequences.samedi_soir || "-"]);
-            if (data.frequences.dimanche_creuse) rows.push(["Dimanche & Fériés", data.frequences.dimanche_creuse, data.frequences.dimanche_pointe, "-"]);
+            if (frequencesData.creuse) rows.push(["Semaine", frequencesData.creuse, frequencesData.pointe, frequencesData.soir || "-"]);
+            if (frequencesData.samedi_creuse) rows.push(["Samedi", frequencesData.samedi_creuse, frequencesData.samedi_pointe, frequencesData.samedi_soir || "-"]);
+            if (frequencesData.dimanche_creuse) rows.push(["Dimanche & Fériés", frequencesData.dimanche_creuse, frequencesData.dimanche_pointe, "-"]);
 
             if (data.vacances) {
                  if (data.vacances.creuse) rows.push(["Vacances (Semaine)", data.vacances.creuse, data.vacances.pointe, data.vacances.soir || "-"]);
@@ -676,7 +703,12 @@ async function generatePDF(lineId) {
         }
         
         // Essayer de charger le plan
-        const planPath = `img/plans/L${lineId}.png`;
+        let planPath = `img/plans/L${lineId}.png`;
+        // Exception pour les lignes Nocturnes (BEN/PL) qui n'ont pas le préfixe L dans le nom de fichier
+        if (lineId.startsWith('BEN') || lineId.startsWith('PL')) {
+            planPath = `img/plans/${lineId}.png`;
+        }
+        
         const planBase64 = await loadImageAsBase64(planPath);
         
         if (planBase64) {

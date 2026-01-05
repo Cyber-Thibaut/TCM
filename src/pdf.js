@@ -777,7 +777,7 @@ async function generateArenaGlobalPDF() {
         const height = doc.internal.pageSize.getHeight();
 
         // 1. Chargement des données
-        const response = await fetch('../ligne.json');
+        const response = await fetch('ligne.json');
         const data = await response.json();
         const navettes = data.lignes.filter(l => l.id.startsWith('NAV'));
 

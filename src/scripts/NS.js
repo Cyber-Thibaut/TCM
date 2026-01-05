@@ -56,7 +56,7 @@ function setupArenaHeader() {
 
 async function fetchAllNavettesData() {
     try {
-        const response = await fetch('../ligne.json');
+        const response = await fetch('ligne.json');
         const data = await response.json();
         return data.lignes.filter(l => l.id.startsWith('NAV'));
     } catch (error) {

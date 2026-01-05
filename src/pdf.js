@@ -767,4 +767,161 @@ window.generateRegularLinePDF = (id) => generatePDF(id);
 window.generateNocturnePDF = (id) => generatePDF(id);
 window.generateNavetteSpecialePDF = () => generatePDF('NS');
 
+// --- GÉNÉRATEUR SPÉCIAL CARAMEL ARENA ---
+async function generateArenaGlobalPDF() {
+    showLoadingSpinner();
+    try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const width = doc.internal.pageSize.getWidth();
+        const height = doc.internal.pageSize.getHeight();
+
+        // 1. Chargement des données
+        const response = await fetch('../ligne.json');
+        const data = await response.json();
+        const navettes = data.lignes.filter(l => l.id.startsWith('NAV'));
+
+        // 2. Chargement des assets graphiques
+        const logoArena = await loadImageAsBase64('../img/Caramel Arena.png');
+        const logoTCM = await loadImageAsBase64('../img/TCM.png');
+
+        // --- PAGE DE COUVERTURE ---
+        // Fond dégradé sombre (simulé par un rect noir)
+        doc.setFillColor(20, 20, 20);
+        doc.rect(0, 0, width, height, 'F');
+
+        // Logo Arena (Centré, Grand)
+        if (logoArena) {
+            const imgProps = doc.getImageProperties(logoArena);
+            const imgWidth = 120;
+            const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+            doc.addImage(logoArena, 'PNG', (width - imgWidth) / 2, 40, imgWidth, imgHeight);
+        }
+
+        // Titre
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(28);
+        doc.setFont("helvetica", "bold");
+        doc.text("GUIDE DES NAVETTES", width / 2, 110, { align: "center" });
+        
+        doc.setTextColor(255, 193, 7); // Or / Jaune
+        doc.setFontSize(16);
+        doc.text("DISPOSITIF ÉVÉNEMENTIEL", width / 2, 120, { align: "center" });
+
+        // Liste sommaire des lignes
+        let yPos = 150;
+        doc.setFontSize(12);
+        navettes.forEach(nav => {
+            doc.setFillColor(0, 121, 65); // Vert #007941
+            doc.roundedRect(40, yPos - 5, 15, 8, 2, 2, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFont("helvetica", "bold");
+            doc.text(nav.id, 47.5, yPos, { align: "center" });
+            
+            doc.setTextColor(200, 200, 200);
+            doc.setFont("helvetica", "normal");
+            doc.text(nav.nom, 65, yPos);
+            
+            yPos += 12;
+        });
+
+        // Footer Couverture
+        if (logoTCM) {
+            doc.addImage(logoTCM, 'PNG', (width - 30) / 2, height - 30, 30, 30);
+        }
+
+        // --- PAGES NAVETTES ---
+        for (const nav of navettes) {
+            doc.addPage();
+            
+            // Header Page
+            doc.setFillColor(0, 121, 65); // Vert Navette
+            doc.rect(0, 0, width, 30, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(24);
+            doc.setFont("helvetica", "bold");
+            doc.text(nav.id, 15, 20);
+            
+            doc.setFontSize(14);
+            doc.text(nav.nom, 50, 20);
+
+            // Logo Arena en petit en haut à droite
+            if (logoArena) {
+                doc.addImage(logoArena, 'PNG', width - 40, 5, 30, 20);
+            }
+
+            // Infos Clés (Bandeau gris clair)
+            doc.setFillColor(245, 245, 245);
+            doc.rect(0, 30, width, 25, 'F');
+            
+            doc.setTextColor(50, 50, 50);
+            doc.setFontSize(10);
+            
+            const stats = nav.stats || {};
+            const infoText = `Véhicule: ${stats.vehicule || 'Bus'}   |   Temps: ${stats.temps_trajet}   |   Distance: ${stats.longueur_ligne || '?'}   |   Arrêts: ${stats.nombre_arrets}`;
+            doc.text(infoText, width / 2, 45, { align: "center" });
+
+            // Plan de la ligne
+            try {
+                // On essaie de charger le plan spécifique, sinon fallback
+                let planImg = await loadImageAsBase64(`../img/plans/${nav.id}.png`, 1500);
+                if (!planImg) {
+                    planImg = await loadImageAsBase64(`../img/plans/LNS.png`, 1500); // Fallback
+                }
+                
+                if (planImg) {
+                    const imgProps = doc.getImageProperties(planImg);
+                    const maxWidth = width - 40;
+                    const maxHeight = 120;
+                    let pWidth = maxWidth;
+                    let pHeight = (imgProps.height * pWidth) / imgProps.width;
+                    
+                    if (pHeight > maxHeight) {
+                        pHeight = maxHeight;
+                        pWidth = (imgProps.width * pHeight) / imgProps.height;
+                    }
+                    
+                    doc.addImage(planImg, 'PNG', (width - pWidth) / 2, 70, pWidth, pHeight);
+                } else {
+                    doc.setTextColor(150, 150, 150);
+                    doc.text("Plan non disponible", width / 2, 130, { align: "center" });
+                }
+            } catch (e) {
+                console.warn("Erreur image plan", e);
+            }
+
+            // Description / Détails
+            const descY = 210;
+            doc.setFillColor(0, 121, 65);
+            doc.rect(20, descY, 5, 20, 'F'); // Barre verticale déco
+            
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("Description du service", 30, descY + 5);
+            
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
+            const splitDesc = doc.splitTextToSize(nav.description || "Pas de description.", width - 50);
+            doc.text(splitDesc, 30, descY + 12);
+
+            // Footer Page
+            doc.setFontSize(8);
+            doc.setTextColor(100, 100, 100);
+            doc.text("Caramel Arena - Dispositif de transport événementiel - TCM", width / 2, height - 10, { align: "center" });
+        }
+
+        doc.save('Guide_Caramel_Arena.pdf');
+
+    } catch (error) {
+        console.error("Erreur génération PDF Arena:", error);
+        alert("Une erreur est survenue lors de la génération du guide.");
+    } finally {
+        hideLoadingSpinner();
+    }
+}
+window.generateArenaGlobalPDF = generateArenaGlobalPDF;
+
 console.info('✅ TCM PDF System v3.0 - Loaded & Ready');

@@ -213,8 +213,17 @@ async function createModernHeader(doc, lineId, lineType, accentColor, title, sub
     const logoBase64 = await loadImageAsBase64(logoPath);
     if (logoBase64) {
         // Ratio original : 426x263 (~1.62)
-        // Largeur fixée à 30 => Hauteur = 30 * (263/426) = 18.5
-        doc.addImage(logoBase64, 'PNG', 15, 10, 30, 18.5); 
+        // On essaie de le faire rentrer dans une boite de 40x25 à la position 15,10
+        const imgProps = doc.getImageProperties(logoBase64);
+        const maxWidth = 40;
+        const maxHeight = 25;
+        const ratio = Math.min(maxWidth / imgProps.width, maxHeight / imgProps.height);
+        const w = imgProps.width * ratio;
+        const h = imgProps.height * ratio;
+        
+        // Centrage vertical dans la zone du header (qui fait 60 de haut, on vise le haut gauche)
+        // On le place à x=15, et on centre y autour de 20 (milieu de la zone haute ?) ou juste padding 10
+        doc.addImage(logoBase64, 'PNG', 15, 10, w, h); 
     } else {
         // Fallback texte
         doc.setTextColor(255, 255, 255);
@@ -229,7 +238,19 @@ async function createModernHeader(doc, lineId, lineType, accentColor, title, sub
     
     let titleX = 60;
     if (iconBase64) {
-        doc.addImage(iconBase64, 'PNG', 160, 10, 35, 35);
+        // Gestion du ratio pour l'icône de ligne aussi
+        const imgProps = doc.getImageProperties(iconBase64);
+        const maxWidth = 35;
+        const maxHeight = 35;
+        const ratio = Math.min(maxWidth / imgProps.width, maxHeight / imgProps.height);
+        const w = imgProps.width * ratio;
+        const h = imgProps.height * ratio;
+        
+        // On la place à droite (x=160), centrée dans sa boite 35x35
+        const x = 160 + (maxWidth - w) / 2;
+        const y = 10 + (maxHeight - h) / 2;
+        
+        doc.addImage(iconBase64, 'PNG', x, y, w, h);
     } else {
         // Fallback cercle ligne
         doc.setFillColor(255, 255, 255);
@@ -275,7 +296,7 @@ function createModernTable(doc, x, y, width, headers, rows, accentColor) {
     doc.setFillColor(...accentColor);
     doc.roundedRect(x, y, width, headerHeight, 2, 2, 'F');
     doc.setTextColor(255, 255, 255);
-    doc.setFontSize(10);
+    doc.setFontSize(9); // Réduit de 10 à 9 pour éviter le débordement
     doc.setFont(PDF_CONFIG.font, "bold");
 
     headers.forEach((header, i) => {
@@ -294,7 +315,14 @@ function createModernTable(doc, x, y, width, headers, rows, accentColor) {
         }
         
         row.forEach((cell, j) => {
-            doc.text(String(cell), x + (j * colWidth) + (colWidth / 2), currentY + 7, { align: 'center' });
+            // Gestion basique du texte trop long
+            let cellText = String(cell);
+            if (doc.getTextWidth(cellText) > colWidth - 2) {
+                doc.setFontSize(8); // Réduire encore si ça dépasse
+            } else {
+                doc.setFontSize(9);
+            }
+            doc.text(cellText, x + (j * colWidth) + (colWidth / 2), currentY + 7, { align: 'center' });
         });
         currentY += rowHeight;
     });
@@ -485,8 +513,10 @@ async function generatePDF(lineId) {
             if (data.frequences.dimanche_creuse) rows.push(["Dimanche & Fériés", data.frequences.dimanche_creuse, data.frequences.dimanche_pointe, "-"]);
 
             if (data.vacances) {
-                 if (data.vacances.creuse) rows.push(["Vacances Scolaires (Semaine)", data.vacances.creuse, data.vacances.pointe, data.vacances.soir || "-"]);
-                 if (data.vacances.samedi_creuse) rows.push(["Vacances Scolaires (Week-end)", data.vacances.samedi_creuse, data.vacances.samedi_pointe, data.vacances.samedi_soir || "-"]);
+                 if (data.vacances.creuse) rows.push(["Vacances (Semaine)", data.vacances.creuse, data.vacances.pointe, data.vacances.soir || "-"]);
+                 // Séparation Samedi / Dimanche pour les vacances
+                 if (data.vacances.samedi_creuse) rows.push(["Vacances (Samedi)", data.vacances.samedi_creuse, data.vacances.samedi_pointe, data.vacances.samedi_soir || "-"]);
+                 if (data.vacances.dimanche_creuse) rows.push(["Vacances (Dimanche)", data.vacances.dimanche_creuse, data.vacances.dimanche_pointe, "-"]);
             }
 
             yPos = createModernTable(doc, 20, yPos, 170, headers, rows, color);

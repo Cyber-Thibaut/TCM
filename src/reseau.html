@@ -86,7 +86,7 @@
 
     <script>
         // Liste des types de lignes à ne PAS afficher
-        const typesExclus = ["JO", "Spéciale"]; // Exclure les lignes "JO" par exemple
+        const typesExclus = ["JO", "Spéciale", "Navette Arena"]; // Exclure les lignes "JO" et "Navette Arena" (gérées à part)
 
         async function chargerDonneesLignes() {
             try {
@@ -102,6 +102,52 @@
         async function genererCartesLignes() {
             const lignesData = await chargerDonneesLignes();
             const container = document.getElementById("ligne-groupes");
+
+            // --- AJOUT DU BOUTON CARAMEL ARENA (Dispositif Exceptionnel) ---
+            const arenaSection = document.createElement("div");
+            arenaSection.classList.add("space-y-6");
+
+            const arenaTitle = document.createElement("h3");
+            arenaTitle.classList.add("text-2xl", "font-bold", "text-accent");
+            arenaTitle.textContent = "Dispositif Événementiel";
+
+            const arenaContainer = document.createElement("div");
+            arenaContainer.classList.add("w-full"); 
+
+            const arenaCard = document.createElement("a");
+            arenaCard.href = "ligne.html#NS";
+            // Style distinctif : Fond sombre (neutral), bordure Or (warning)
+            arenaCard.classList.add("group", "block", "p-6", "rounded-xl", "shadow-xl", "bg-neutral", "text-neutral-content", "hover:scale-[1.01]", "transition-transform", "duration-300", "cursor-pointer", "border-l-8", "border-warning", "relative", "overflow-hidden");
+
+            arenaCard.innerHTML = `
+                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-warning opacity-20 rounded-full blur-xl"></div>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+                    <div class="flex items-center gap-6">
+                        <div class="bg-white p-2 rounded-lg h-20 w-20 flex items-center justify-center shadow-md shrink-0">
+                            <img src="img/Caramel Arena.png" alt="Logo Arena" class="w-full h-auto object-contain"> 
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl md:text-3xl font-bold text-warning mb-1">Caramel Arena</h3>
+                            <p class="text-base md:text-lg opacity-90">Accédez au Hub des Navettes, Plans & Infos Concerts</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-base-100/10 px-4 py-2 rounded-full border border-white/10">
+                        <span class="font-bold text-warning">VOIR LE DISPOSITIF</span>
+                        <i class="fa-solid fa-arrow-right text-warning group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+            `;
+
+            arenaContainer.appendChild(arenaCard);
+            arenaSection.appendChild(arenaTitle);
+            arenaSection.appendChild(arenaContainer);
+            
+            // Ajout d'un séparateur
+            const separator = document.createElement("br");
+            arenaSection.appendChild(separator);
+            
+            container.appendChild(arenaSection);
+
 
             // Stocker les types de lignes
             const groupes = {};

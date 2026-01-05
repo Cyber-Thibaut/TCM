@@ -805,44 +805,75 @@ async function generateArenaGlobalPDF() {
         const logoTCM = await loadImageAsBase64('img/TCM.png');
 
         // --- PAGE DE COUVERTURE ---
-        // Fond dégradé sombre (simulé par un rect noir)
-        doc.setFillColor(20, 20, 20);
+        // Fond Blanc
+        doc.setFillColor(255, 255, 255);
         doc.rect(0, 0, width, height, 'F');
+
+        // --- DESIGN GÉOMÉTRIQUE "ZENITH" ---
+        // Forme 1: Grand triangle Or en haut à gauche
+        doc.setFillColor(255, 193, 7); // Amber 500
+        doc.triangle(0, 0, width * 0.6, 0, 0, height * 0.4, 'F');
+        
+        // Forme 2: Triangle sombre en bas à droite
+        doc.setFillColor(33, 33, 33); // Gris très sombre
+        doc.triangle(width, height, width, height * 0.5, width * 0.4, height, 'F');
+
+        // Forme 3: Bande oblique dynamique
+        doc.setFillColor(0, 121, 65); // Vert Navette
+        doc.setDrawColor(0, 121, 65);
+        doc.setLineWidth(0);
+        // Dessin d'un polygone pour faire une bande traversante
+        doc.triangle(width * 0.7, 0, width * 0.8, 0, width, height * 0.2, 'F');
+
+        // Cercles décoratifs
+        doc.setDrawColor(255, 255, 255);
+        doc.setLineWidth(2);
+        doc.circle(width * 0.1, height * 0.1, 15, 'S');
+        doc.circle(width * 0.9, height * 0.9, 25, 'S');
 
         // Logo Arena (Centré, Grand)
         if (logoArena) {
             const imgProps = doc.getImageProperties(logoArena);
-            const imgWidth = 120;
+            const imgWidth = 100;
             const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
-            doc.addImage(logoArena, 'PNG', (width - imgWidth) / 2, 40, imgWidth, imgHeight);
+            // Ajout d'un fond blanc derrière le logo pour la lisibilité si sur forme
+            doc.setFillColor(255, 255, 255);
+            doc.roundedRect((width - imgWidth) / 2 - 10, 50 - 5, imgWidth + 20, imgHeight + 10, 5, 5, 'F');
+            doc.addImage(logoArena, 'PNG', (width - imgWidth) / 2, 50, imgWidth, imgHeight);
         }
 
         // Titre
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(28);
+        doc.setTextColor(33, 33, 33); // Noir
+        doc.setFontSize(32);
         doc.setFont("helvetica", "bold");
-        doc.text("GUIDE DES NAVETTES", width / 2, 110, { align: "center" });
+        doc.text("GUIDE DES NAVETTES", width / 2, 120, { align: "center" });
         
-        doc.setTextColor(255, 193, 7); // Or / Jaune
-        doc.setFontSize(16);
-        doc.text("DISPOSITIF ÉVÉNEMENTIEL", width / 2, 120, { align: "center" });
+        doc.setTextColor(0, 121, 65); // Vert Navette
+        doc.setFontSize(18);
+        doc.text("DISPOSITIF ÉVÉNEMENTIEL", width / 2, 135, { align: "center" });
 
         // Liste sommaire des lignes
-        let yPos = 150;
+        let yPos = 160;
         doc.setFontSize(12);
         navettes.forEach(nav => {
+            // Fond de la ligne du sommaire
+            doc.setFillColor(245, 245, 245);
+            doc.roundedRect(35, yPos - 7, width - 70, 12, 2, 2, 'F');
+
+            // Badge ID
             doc.setFillColor(0, 121, 65); // Vert #007941
-            doc.roundedRect(40, yPos - 5, 15, 8, 2, 2, 'F');
+            doc.roundedRect(40, yPos - 5, 18, 8, 2, 2, 'F');
             
             doc.setTextColor(255, 255, 255);
             doc.setFont("helvetica", "bold");
-            doc.text(nav.id, 47.5, yPos, { align: "center" });
+            doc.text(nav.id, 49, yPos, { align: "center" });
             
-            doc.setTextColor(200, 200, 200);
+            // Nom
+            doc.setTextColor(50, 50, 50);
             doc.setFont("helvetica", "normal");
             doc.text(nav.nom, 65, yPos);
             
-            yPos += 12;
+            yPos += 16;
         });
 
         // Footer Couverture
@@ -913,9 +944,9 @@ async function generateArenaGlobalPDF() {
             }
 
             // Description / Détails
-            const descY = 210;
+            let descY = 210;
             doc.setFillColor(0, 121, 65);
-            doc.rect(20, descY, 5, 20, 'F'); // Barre verticale déco
+            doc.rect(20, descY, 5, 15, 'F'); // Barre verticale déco
             
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(12);
@@ -926,6 +957,77 @@ async function generateArenaGlobalPDF() {
             doc.setFontSize(10);
             const splitDesc = doc.splitTextToSize(nav.description || "Pas de description.", width - 50);
             doc.text(splitDesc, 30, descY + 12);
+
+            descY += 30; // Move down for new sections
+
+            // --- CONTENU INVENTÉ AJOUTÉ ---
+            
+            // Boite 1: Horaires & Fréquences (Gauche)
+            doc.setFillColor(248, 249, 250); // Gris très clair
+            doc.setDrawColor(220, 220, 220);
+            doc.roundedRect(20, descY, (width - 50) / 2, 45, 3, 3, 'FD');
+            
+            doc.setTextColor(0, 121, 65);
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "bold");
+            doc.text("Horaires & Fréquences", 25, descY + 8);
+            
+            doc.setTextColor(60, 60, 60);
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "normal");
+            doc.text("• Avant l'événement :", 25, descY + 16);
+            doc.text("   Toutes les 10 à 15 minutes", 25, descY + 21);
+            doc.text("   Premier départ : 2h avant le show", 25, descY + 26);
+            
+            doc.text("• Après l'événement :", 25, descY + 34);
+            doc.text("   Départs en continu", 25, descY + 39);
+
+            // Boite 2: Infos Pratiques (Droite)
+            const xRight = 20 + ((width - 50) / 2) + 10;
+            doc.setFillColor(248, 249, 250);
+            doc.roundedRect(xRight, descY, (width - 50) / 2, 45, 3, 3, 'FD');
+            
+            doc.setTextColor(0, 121, 65);
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "bold");
+            doc.text("Infos Pratiques", xRight + 5, descY + 8);
+            
+            doc.setTextColor(60, 60, 60);
+            doc.setFontSize(9);
+            doc.setFont("helvetica", "normal");
+            doc.text("• Capacité : 150 voyageurs", xRight + 5, descY + 16);
+            doc.text("• Accessibilité : 100% PMR", xRight + 5, descY + 23);
+            doc.text("• Climatisation / Chauffage", xRight + 5, descY + 30);
+            doc.text("• Connexion Wi-Fi à bord", xRight + 5, descY + 37);
+            
+            // Petit badge "GRATUIT" ou Tarif
+            doc.setFillColor(255, 193, 7); // Amber
+            doc.roundedRect(xRight + 5, descY + 40, 40, 4, 1, 1, 'F');
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(7);
+            doc.setFont("helvetica", "bold");
+            doc.text("INCLUS DANS LE BILLET", xRight + 25, descY + 43, {align: "center"});
+
+            descY += 55;
+
+            // Boite 3: Correspondances (Bas)
+            doc.setDrawColor(0, 121, 65);
+            doc.setLineWidth(0.5);
+            doc.line(20, descY, width - 20, descY); // Ligne de séparation
+            
+            doc.setTextColor(33, 33, 33);
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "bold");
+            doc.text("Correspondances principales :", 20, descY + 8);
+            
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9);
+            // Génération de correspondances fictives basées sur l'ID
+            const corresp = nav.id === 'NAV1' ? "Tram A, Bus 12, Parking P1" :
+                           nav.id === 'NAV2' ? "Métro B, Bus C4, Parking P2" :
+                           nav.id === 'NAV3' ? "Tram C, Gare SNCF, Parking P3" :
+                           "Réseau urbain, Parking Relais Arena";
+            doc.text(corresp, 80, descY + 8);
 
             // Footer Page
             doc.setFontSize(8);

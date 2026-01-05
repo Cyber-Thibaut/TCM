@@ -899,7 +899,20 @@ async function generateArenaGlobalPDF() {
 
             // Logo Arena en petit en haut à droite
             if (logoArena) {
-                doc.addImage(logoArena, 'PNG', width - 40, 5, 30, 20);
+                // Gestion proportionnelle du logo
+                const imgProps = doc.getImageProperties(logoArena);
+                const maxWidth = 35;
+                const maxHeight = 24;
+                // Calcul du ratio pour faire tenir dans la boite 35x24
+                const ratio = Math.min(maxWidth / imgProps.width, maxHeight / imgProps.height);
+                const w = imgProps.width * ratio;
+                const h = imgProps.height * ratio;
+                
+                // Centrage
+                const x = width - 10 - maxWidth + (maxWidth - w)/2; // À 10px du bord droit, centré dans sa zone
+                const y = 3 + (maxHeight - h)/2;
+
+                doc.addImage(logoArena, 'PNG', x, y, w, h);
             }
 
             // Infos Clés (Bandeau gris clair)

@@ -35,8 +35,10 @@ function setupArenaHeader() {
     if (destination) {
         destination.innerHTML = `
             <div class="flex flex-col items-center gap-4">
-                <img src="../img/Caramel Arena.png" alt="Caramel Arena" class="h-32 object-contain drop-shadow-lg animate-fade-in-up" onerror="this.style.display='none'">
-                <span class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-600 drop-shadow-sm">
+                <div class="bg-white/90 p-4 rounded-xl shadow-lg backdrop-blur-sm transform hover:scale-105 transition-transform duration-300">
+                    <img src="../img/Caramel Arena.png" alt="Caramel Arena" class="h-32 object-contain drop-shadow-md" onerror="this.style.display='none'">
+                </div>
+                <span class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-600 drop-shadow-sm mt-4">
                     DISPOSITIF ÉVÉNEMENTIEL
                 </span>
             </div>

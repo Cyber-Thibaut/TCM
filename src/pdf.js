@@ -1133,8 +1133,8 @@ async function generateArenaGlobalPDF() {
             
             // Footer Page
             // On le dessine par dessus les formes de fond du bas
-             // doc.setFillColor(255, 255, 255, 0.8); // Fond blanc semi transparent -> SUPPRIMÉ
-             // doc.roundedRect((width/2) - 80, height - 12, 160, 8, 2, 2, 'F'); -> SUPPRIMÉ
+            doc.setFillColor(255, 255, 255, 0.8);
+            doc.roundedRect((width/2) - 80, height - 12, 160, 8, 2, 2, 'F'); 
              
             doc.setFontSize(8);
             doc.setTextColor(255, 255, 255); // BLANC

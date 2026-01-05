@@ -779,7 +779,7 @@ async function generateArenaGlobalPDF() {
         // 1. Chargement des données
         const response = await fetch('ligne.json');
         const data = await response.json();
-        const navettes = data.lignes.filter(l => l.id.startsWith('NAV'));
+        const navettes = data.lignes.filter(l => String(l.id).startsWith('NAV'));
 
         // 2. Chargement des assets graphiques
         const logoArena = await loadImageAsBase64('../img/Caramel Arena.png');

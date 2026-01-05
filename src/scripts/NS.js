@@ -58,7 +58,7 @@ async function fetchAllNavettesData() {
     try {
         const response = await fetch('ligne.json');
         const data = await response.json();
-        return data.lignes.filter(l => l.id.startsWith('NAV'));
+        return data.lignes.filter(l => String(l.id).startsWith('NAV'));
     } catch (error) {
         console.error("Erreur chargement lignes", error);
         return [];

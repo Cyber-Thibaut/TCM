@@ -63,14 +63,18 @@ function hideLoadingSpinner() {
     if (spinner) spinner.style.display = 'none';
 }
 
-async function loadImageAsBase64(imagePath) {
+async function loadImageAsBase64(imagePath, maxDim = 0) {
+    // Normalisation du chemin pour éviter les erreurs de chemin relatif
+    // Si on est dans src/ligne.html, les images sont dans ../img/
+    
+    // Liste des chemins potentiels à tester
     const pathsToTry = [
-        `../img/${imagePath.replace('img/', '')}`, // Priorité 1: Remonter d'un cran (src/ -> root/img/)
-        imagePath,
-        `../${imagePath}`,
-        `/${imagePath}`,
-        `src/${imagePath}`,
-        `../../${imagePath}`
+        imagePath, // Chemin tel quel
+        `../${imagePath}`, // Remonter d'un niveau
+        imagePath.replace('../', ''), // Enlever le ../ si présent
+        `/${imagePath}`, // Chemin absolu
+        `../img/${imagePath.replace('../img/', '').replace('img/', '')}`, // Forcer le dossier img
+        `img/${imagePath.replace('../img/', '').replace('img/', '')}` // Dossier img relatif
     ];
 
     for (const path of pathsToTry) {
@@ -80,10 +84,24 @@ async function loadImageAsBase64(imagePath) {
                 img.crossOrigin = 'Anonymous';
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
+                    let width = img.width;
+                    let height = img.height;
+
+                    // Redimensionnement si nécessaire
+                    if (maxDim > 0 && (width > maxDim || height > maxDim)) {
+                        if (width > height) {
+                            height = (height * maxDim) / width;
+                            width = maxDim;
+                        } else {
+                            width = (width * maxDim) / height;
+                            height = maxDim;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
                     const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0);
+                    ctx.drawImage(img, 0, 0, width, height);
                     resolve(canvas.toDataURL('image/png'));
                 };
                 img.onerror = () => resolve(null);
@@ -782,8 +800,9 @@ async function generateArenaGlobalPDF() {
         const navettes = data.lignes.filter(l => String(l.id).startsWith('NAV'));
 
         // 2. Chargement des assets graphiques
-        const logoArena = await loadImageAsBase64('../img/Caramel Arena.png');
-        const logoTCM = await loadImageAsBase64('../img/TCM.png');
+        // On utilise des chemins relatifs simples qui seront résolus par loadImageAsBase64
+        const logoArena = await loadImageAsBase64('img/Caramel Arena.png');
+        const logoTCM = await loadImageAsBase64('img/TCM.png');
 
         // --- PAGE DE COUVERTURE ---
         // Fond dégradé sombre (simulé par un rect noir)
@@ -866,9 +885,10 @@ async function generateArenaGlobalPDF() {
             // Plan de la ligne
             try {
                 // On essaie de charger le plan spécifique, sinon fallback
-                let planImg = await loadImageAsBase64(`../img/plans/${nav.id}.png`, 1500);
+                // On passe le chemin relatif depuis la racine du projet (img/plans/...)
+                let planImg = await loadImageAsBase64(`img/plans/${nav.id}.png`, 1500);
                 if (!planImg) {
-                    planImg = await loadImageAsBase64(`../img/plans/LNS.png`, 1500); // Fallback
+                    planImg = await loadImageAsBase64(`img/plans/LNS.png`, 1500); // Fallback
                 }
                 
                 if (planImg) {

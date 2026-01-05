@@ -204,7 +204,7 @@ function createGradientEffect(doc, x, y, width, height, color1, color2, steps = 
     }
 }
 
-async function createModernHeader(doc, lineId, lineType, accentColor, title, subtitle) {
+async function createModernHeader(doc, lineId, lineType, accentColor, title, subtitle, operation = null) {
     // Fond dégradé
     createGradientEffect(doc, 0, 0, 210, 60, accentColor, [accentColor[0]+40, accentColor[1]+40, accentColor[2]+40]);
 
@@ -282,9 +282,85 @@ async function createModernHeader(doc, lineId, lineType, accentColor, title, sub
     doc.setTextColor(255, 255, 255);
     doc.text(lineType.toUpperCase(), 35, 50, { align: 'center' });
 
+    // Amplitude Horaire (si dispo)
+    if (operation && operation.start && operation.end) {
+        doc.setFillColor(255, 255, 255, 0.2);
+        doc.roundedRect(60, 45, 50, 8, 2, 2, 'F');
+        doc.setFontSize(8);
+        doc.setTextColor(255, 255, 255);
+        // Icône horloge unicode ou juste texte
+        doc.text(`Circule de ${operation.start.replace(':', 'h')} à ${operation.end.replace(':', 'h')}`, 85, 50, { align: 'center' });
+    }
+
     // Date génération
     doc.setFontSize(8);
     doc.text(`Généré le ${new Date().toLocaleDateString('fr-FR')}`, 195, 58, { align: 'right' });
+
+    // QR Code Temps Réel (via API)
+    try {
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tcm-mobilite.fr/lignes/${lineId}`;
+        const qrBase64 = await loadImageAsBase64(qrUrl);
+        if (qrBase64) {
+            doc.addImage(qrBase64, 'PNG', 185, 10, 20, 20);
+            doc.setFontSize(6);
+            doc.text("Temps réel", 195, 32, { align: 'center' });
+        }
+    } catch (e) {
+        console.warn("Impossible de générer le QR Code");
+    }
+}
+
+function createTarifsSection(doc, x, y, width, accentColor) {
+    const height = 35;
+    
+    // Fond
+    doc.setFillColor(250, 250, 250);
+    doc.setDrawColor(230, 230, 230);
+    doc.roundedRect(x, y, width, height, 3, 3, 'FD');
+    
+    // Titre
+    doc.setFillColor(...accentColor);
+    doc.roundedRect(x, y, width, 8, 3, 3, 'F');
+    // Hack pour coins carrés en bas du header
+    doc.rect(x, y+5, width, 3, 'F'); 
+    
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(10);
+    doc.setFont(PDF_CONFIG.font, "bold");
+    doc.text("INFOS TARIFS", x + (width/2), y + 5.5, { align: 'center' });
+
+    // Contenu
+    doc.setTextColor(...TCM_COLORS.dark);
+    doc.setFontSize(9);
+    doc.setFont(PDF_CONFIG.font, "normal");
+    
+    const col1X = x + 5;
+    const col2X = x + (width/2) + 5;
+    const row1Y = y + 15;
+    const row2Y = y + 25;
+
+    // Ticket 1h
+    doc.setFont(PDF_CONFIG.font, "bold");
+    doc.text("Ticket 1h", col1X, row1Y);
+    doc.setFont(PDF_CONFIG.font, "normal");
+    doc.text("1,70 €", col1X + 25, row1Y);
+
+    // Ticket 24h
+    doc.setFont(PDF_CONFIG.font, "bold");
+    doc.text("Ticket 24h", col1X, row2Y);
+    doc.setFont(PDF_CONFIG.font, "normal");
+    doc.text("5,00 €", col1X + 25, row2Y);
+
+    // Infos
+    doc.setFontSize(8);
+    doc.setTextColor(...TCM_COLORS.secondary);
+    doc.text("SMS au 93000", col2X, row1Y);
+    doc.text("Appli TCM", col2X, row2Y);
+    
+    doc.setFontSize(7);
+    doc.text("Plus d'infos sur tcm-mobilite.fr", x + (width/2), y + 32, { align: 'center' });
+
+    return y + height + 10;
 }
 
 function createModernTable(doc, x, y, width, headers, rows, accentColor) {
@@ -374,6 +450,59 @@ function createStatsSection(doc, x, y, stats, accentColor) {
     return y + cardHeight + 10;
 }
 
+function createTarifsSection(doc, x, y, width, accentColor) {
+    const height = 35;
+    
+    // Fond
+    doc.setFillColor(250, 250, 250);
+    doc.setDrawColor(230, 230, 230);
+    doc.roundedRect(x, y, width, height, 3, 3, 'FD');
+    
+    // Titre
+    doc.setFillColor(...accentColor);
+    doc.roundedRect(x, y, width, 8, 3, 3, 'F');
+    // Hack pour coins carrés en bas du header
+    doc.rect(x, y+5, width, 3, 'F'); 
+    
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(10);
+    doc.setFont(PDF_CONFIG.font, "bold");
+    doc.text("INFOS TARIFS", x + (width/2), y + 5.5, { align: 'center' });
+
+    // Contenu
+    doc.setTextColor(...TCM_COLORS.dark);
+    doc.setFontSize(9);
+    doc.setFont(PDF_CONFIG.font, "normal");
+    
+    const col1X = x + 10;
+    const col2X = x + (width/2) + 10;
+    const row1Y = y + 18;
+    const row2Y = y + 28;
+
+    // Ticket 1h
+    doc.setFont(PDF_CONFIG.font, "bold");
+    doc.text("Ticket 1h", col1X, row1Y);
+    doc.setFont(PDF_CONFIG.font, "normal");
+    doc.text("1,70 €", col1X + 30, row1Y);
+
+    // Ticket 24h
+    doc.setFont(PDF_CONFIG.font, "bold");
+    doc.text("Ticket 24h", col1X, row2Y);
+    doc.setFont(PDF_CONFIG.font, "normal");
+    doc.text("5,00 €", col1X + 30, row2Y);
+
+    // Infos
+    doc.setFontSize(8);
+    doc.setTextColor(...TCM_COLORS.secondary);
+    doc.text("SMS au 93000", col2X, row1Y);
+    doc.text("Appli TCM", col2X, row2Y);
+    
+    doc.setFontSize(7);
+    doc.text("Plus d'infos sur tcm-mobilite.fr", x + (width/2), y + 32, { align: 'center' });
+
+    return y + height + 10;
+}
+
 // --- GÉNÉRATEURS SPÉCIFIQUES ---
 
 async function generatePDF(lineId) {
@@ -401,7 +530,7 @@ async function generatePDF(lineId) {
         else if (type.toLowerCase().includes('volc')) color = TCM_COLORS.volcexpress;
 
         // --- PAGE 1 ---
-        await createModernHeader(doc, lineId, type, color, data.info.nom, data.destination);
+        await createModernHeader(doc, lineId, type, color, data.info.nom, data.destination, data.info.operation);
 
         let yPos = 70;
 
@@ -491,9 +620,14 @@ async function generatePDF(lineId) {
             yPos += 5;
         }
 
+        // Infos Tarifs (si place dispo)
+        if (yPos < 240) {
+            yPos = createTarifsSection(doc, 20, yPos, 170, color);
+        }
+
         // --- PAGE 2 : HORAIRES & PLAN ---
         doc.addPage();
-        await createModernHeader(doc, lineId, type, color, "HORAIRES & PLAN", "Détails de circulation");
+        await createModernHeader(doc, lineId, type, color, "HORAIRES & PLAN", "Détails de circulation", data.info.operation);
         yPos = 70;
 
         // Fréquences (Régulier)

@@ -4389,6 +4389,9 @@
   .pt-20 {
     padding-top: calc(var(--spacing) * 20);
   }
+  .pt-32 {
+    padding-top: calc(var(--spacing) * 32);
+  }
   .pb-1 {
     padding-bottom: calc(var(--spacing) * 1);
   }

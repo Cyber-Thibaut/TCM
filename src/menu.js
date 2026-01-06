@@ -12,6 +12,17 @@ document.addEventListener("DOMContentLoaded", function () {
           --glass-bg: rgba(10, 10, 12, 0.85);
           --tcm-blue: #3b82f6;
       }
+      
+      /* Global Dark BACKGROUND Fix */
+      [data-theme="dark"] body {
+          background-color: #111827 !important; /* gray-900 */
+          color: #f3f4f6 !important;
+      }
+      
+      [data-theme="dark"] .bg-base-100,
+      [data-theme="dark"] .bg-base-200 {
+          background-color: #111827 !important; /* consistency */
+      }
 
       /* Floating & Absolute Positioning (Not Fixed) */
       .navbar-glass {

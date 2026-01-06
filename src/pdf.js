@@ -1011,8 +1011,8 @@ async function generateArenaGlobalPDF() {
             // Calcul dynamique de l'espace nécessaire pour la description
             const lineHeight = 5; // hauteur approx par ligne (font size 10)
             const textHeight = splitDesc.length * lineHeight;
-            // Offset initial (12) + Hauteur texte + Marge de sécurité (10)
-            const heightIncrement = 12 + textHeight + 10;
+            // Offset initial (12) + Hauteur texte + Marge de sécurité (5)
+            const heightIncrement = 12 + textHeight + 5;
             
             descY += Math.max(25, heightIncrement); // Minimum 25 pour garder l'espacement original si court
 

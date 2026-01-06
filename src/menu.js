@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="hidden md:flex items-center gap-1">
             <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/reseau.html"><i class="fa-solid fa-map mr-1"></i>Notre Réseau</a>
             <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/parkings.html"><i class="fa-solid fa-square-parking mr-1"></i>Parkings</a>
-            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/parkings.html#relais"><i class="fa-solid fa-car mr-1"></i>Parkings Relais</a>
             <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/trafic.html"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Info Trafic</a>
             <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/tarifs.html"><i class="fa-solid fa-ticket mr-1"></i>Tarif</a>
             <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/agences.html"><i class="fa-solid fa-store mr-1"></i>Nos Agences</a>
@@ -73,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
               <ul tabindex="0" class="menu dropdown-content mt-3 p-2 shadow-2xl bg-base-100/95 backdrop-blur-xl rounded-box w-52 z-[100] border border-base-200">
                 <li><a href="/src/reseau.html"><i class="fa-solid fa-map w-5"></i> Notre Réseau</a></li>
                 <li><a href="/src/parkings.html"><i class="fa-solid fa-square-parking w-5"></i> Parkings</a></li>
-                <li><a href="/src/parkings.html#relais"><i class="fa-solid fa-car w-5"></i> Parkings Relais</a></li>
                 <li><a href="/src/trafic.html"><i class="fa-solid fa-triangle-exclamation w-5"></i> Info Trafic</a></li>
                 <li><a href="/src/tarifs.html"><i class="fa-solid fa-ticket w-5"></i> Tarif</a></li>
                 <li><a href="/src/agences.html"><i class="fa-solid fa-store w-5"></i> Nos Agences</a></li>

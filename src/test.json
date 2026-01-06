@@ -25,7 +25,7 @@
             ]
         },
         {
-            "ligne": "B",
+            "ligne": "2",
             "infos_trafic": [
                 {
                     "type": "travaux",
@@ -37,7 +37,7 @@
             ]
         },
         {
-            "ligne": "C",
+            "ligne": "5",
             "infos_trafic": [
                 {
                     "type": "déviation",

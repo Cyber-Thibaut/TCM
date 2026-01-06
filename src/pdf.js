@@ -1005,7 +1005,8 @@ async function generateArenaGlobalPDF() {
             doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
             // On split le texte sur une largeur plus courte pour éviter de toucher les graphiques de droite s'il y en a
-            const splitDesc = doc.splitTextToSize(nav.description || "Pas de description.", width - 60);
+            const cleanDescription = (nav.description || "Pas de description.").replace(/\*\*/g, ""); 
+            const splitDesc = doc.splitTextToSize(cleanDescription, width - 60);
             doc.text(splitDesc, 30, descY + 12);
 
             // Calcul dynamique de l'espace nécessaire pour la description

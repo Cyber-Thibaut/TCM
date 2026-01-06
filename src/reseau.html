@@ -18,75 +18,107 @@
     <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
     <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
     <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
-    <meta name="twitter:title" content="Transport Clermont Métropole">
-    <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-    <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Couleur de fond pour l'intégration -->
-    <meta name="theme-color" content="#204BFE">
+    
     <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
     <link href="../dist/output.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
     <script src="menu.js"></script>
-    <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <style>
-        .jw-album-image img,
-        .jw-element-image img {
-            pointer-events: none;
-            -webkit-touch-callout: none;
+        /* Modern Glass Theme Variables */
+        :root {
+            --card-glass: rgba(255, 255, 255, 0.65);
+            --card-border: rgba(255, 255, 255, 0.5);
+            --card-hover-bg: rgba(255, 255, 255, 0.85);
+            --card-hover-shadow: rgba(0, 119, 230, 0.2);
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+        }
+        
+        [data-theme="dark"] {
+            --card-glass: rgba(30, 41, 59, 0.4);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-hover-bg: rgba(30, 41, 59, 0.7);
+            --card-hover-shadow: rgba(0, 198, 255, 0.15);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
         }
 
-        .pswp__share-tooltip .pswp__share--download {
-            display: none;
+        .glass-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            color: var(--text-main);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px var(--card-hover-shadow);
+            background: var(--card-hover-bg);
+            border-color: var(--card-border);
+        }
+
+        body {
+            background-color: transparent; /* Let DaisyUI or base bg handle it, but variables help */
         }
     </style>
 </head>
 
 
-<body class="bg-base-100 text-base-content">
+<body class="bg-base-200 min-h-screen flex flex-col font-sans">
+
+    <!-- DECORATION BACKGROUND (Matching other pages) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute top-[40%] -left-[10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[120px] animate-pulse" style="animation-duration: 4s;"></div>
+    </div>
 
     <!-- Hero Section -->
-    <header class="hero min-h-[50vh] bg-cover bg-center relative"
-        style="background-image: url('https://cdn.pixabay.com/photo/2019/01/04/14/49/landscape-3913309_1280.jpg');">
-        <div class="hero-overlay bg-opacity-60"></div>
-        <div class="hero-content text-center text-neutral-content">
-            <div>
-                <h1 class="text-5xl font-bold">Découvrez nos lignes</h1>
-                <p class="mt-4 text-lg">Explorez toutes nos lignes de transport en un seul endroit. Que vous soyez un
-                    habitué ou un nouveau venu, trouvez facilement les horaires, les arrêts et les correspondances pour
-                    planifier vos déplacements sans stress. Nos lignes couvrent l'ensemble de la métropole, vous offrant
-                    une mobilité fluide et efficace. Voyagez en toute sérénité avec Transport Clermont Métropole !</p>
-            </div>
+    <header class="relative min-h-[40vh] flex items-center justify-center mb-12 overflow-hidden animate__animated animate__fadeIn">
+        <!-- Bg Image -->
+        <div class="absolute inset-0">
+             <img src="https://cdn.pixabay.com/photo/2019/01/04/14/49/landscape-3913309_1280.jpg" class="w-full h-full object-cover opacity-60 dark:opacity-40">
+             <div class="absolute inset-0 bg-gradient-to-b from-base-200/50 via-transparent to-base-200"></div>
+        </div>
+
+        <div class="text-center relative z-10 px-6 max-w-4xl pt-20">
+            <h1 class="text-5xl md:text-6xl font-black mb-4 tracking-tight drop-shadow-sm">
+                Découvrez nos <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Lignes</span>
+            </h1>
+            <p class="text-xl opacity-90 leading-relaxed font-medium">
+                Explorez le réseau TCM. Horaires, arrêts et correspondances pour une mobilité fluide dans toute la métropole.
+            </p>
         </div>
     </header>
 
     <!-- Liste des Lignes -->
-    <section class="container mx-auto mt-12 px-6">
-        <h2 class="text-3xl font-bold text-primary">Nos lignes de transport</h2>
-        <p class="mt-2 text-lg">Sélectionnez une ligne pour plus d'informations.</p>
-
+    <section class="container mx-auto px-6 pb-20">
+        
         <!-- Conteneur des types de lignes -->
-        <div id="ligne-groupes" class="mt-6 space-y-10">
+        <div id="ligne-groupes" class="space-y-16">
             <!-- Les groupes de lignes seront générés ici -->
+            <div class="flex justify-center w-full py-10"><span class="loading loading-dots loading-lg text-primary"></span></div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer footer-center p-10 bg-primary text-primary-content mt-12">
+    <footer class="footer footer-center p-10 text-base-content/50 mt-auto">
         <aside>
-            <img src="https://tcm-mobilite.vercel.app/img/TCM-Clair.png" width="150" alt="Logo TCM">
-            <p class="font-bold">Partenaire de vos déplacements depuis 1989.</p>
-            <p>©
-                <script>document.write(new Date().getFullYear())</script> - Tous droits réservés
-            </p>
+            <div class="opacity-50">
+                 <img src="https://tcm-mobilite.vercel.app/img/TCM-Clair.png" width="120" alt="Logo TCM">
+            </div>
+            <p class="font-bold mt-2">Partenaire de vos déplacements depuis 1989.</p>
+            <p>© <script>document.write(new Date().getFullYear())</script> - TCM Mobilité</p>
         </aside>
     </footer>
 
     <script>
         // Liste des types de lignes à ne PAS afficher
-        const typesExclus = ["JO", "Spéciale", "Navette Arena"]; // Exclure les lignes "JO" et "Navette Arena" (gérées à part)
+        const typesExclus = ["JO", "Spéciale", "Navette Arena"]; 
 
         async function chargerDonneesLignes() {
             try {
@@ -100,112 +132,104 @@
         }
 
         async function genererCartesLignes() {
-            const lignesData = await chargerDonneesLignes();
-            const container = document.getElementById("ligne-groupes");
-
-            // --- AJOUT DU BOUTON CARAMEL ARENA (Dispositif Exceptionnel) ---
-            const arenaSection = document.createElement("div");
-            arenaSection.classList.add("space-y-6");
-
-            const arenaTitle = document.createElement("h3");
-            arenaTitle.classList.add("text-2xl", "font-bold", "text-accent");
-            arenaTitle.textContent = "Dispositif Événementiel";
-
-            const arenaContainer = document.createElement("div");
-            arenaContainer.classList.add("w-full"); 
-
-            const arenaCard = document.createElement("a");
-            arenaCard.href = "ligne.html#NS";
-            // Style distinctif : Fond sombre (neutral), bordure Or (warning)
-            arenaCard.classList.add("group", "block", "p-6", "rounded-xl", "shadow-xl", "bg-neutral", "text-neutral-content", "hover:scale-[1.01]", "transition-transform", "duration-300", "cursor-pointer", "border-l-8", "border-warning", "relative", "overflow-hidden");
-
-            arenaCard.innerHTML = `
-                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-warning opacity-20 rounded-full blur-xl"></div>
-                <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-                    <div class="flex items-center gap-6">
-                        <div class="bg-white p-2 rounded-lg h-20 w-20 flex items-center justify-center shadow-md shrink-0">
-                            <img src="img/Caramel Arena.png" alt="Logo Arena" class="w-full h-auto object-contain"> 
-                        </div>
-                        <div class="text-center md:text-left">
-                            <h3 class="text-2xl md:text-3xl font-bold text-warning mb-1">Caramel Arena</h3>
-                            <p class="text-base md:text-lg opacity-90">Accédez au Hub des Navettes, Plans & Infos Concerts</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3 bg-base-100/10 px-4 py-2 rounded-full border border-white/10">
-                        <span class="font-bold text-warning">VOIR LE DISPOSITIF</span>
-                        <i class="fa-solid fa-arrow-right text-warning group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </div>
-            `;
-
-            arenaContainer.appendChild(arenaCard);
-            arenaSection.appendChild(arenaTitle);
-            arenaSection.appendChild(arenaContainer);
-            
-            // Ajout d'un séparateur
-            const separator = document.createElement("br");
-            arenaSection.appendChild(separator);
-            
-            container.appendChild(arenaSection);
-
-
-            // Stocker les types de lignes
-            const groupes = {};
-            lignesData.forEach(ligne => {
-                if (!typesExclus.includes(ligne.type)) { // Vérifie si le type de ligne n'est pas exclu
-                    if (!groupes[ligne.type]) {
-                        groupes[ligne.type] = [];
-                    }
-                    groupes[ligne.type].push(ligne);
-                }
-            });
-
-            // Générer les cartes des lignes
-            Object.keys(groupes).forEach(type => {
-                const section = document.createElement("div");
-                section.classList.add("space-y-6");
-
-                const titre = document.createElement("h3");
-                titre.classList.add("text-2xl", "font-bold", "text-accent");
-                titre.textContent = type;
-
-                // Ajout d'un <br> entre chaque type de ligne
-                const espace = document.createElement("br");
-
-                const lignesContainer = document.createElement("div");
-                lignesContainer.classList.add("grid", "grid-cols-1", "sm:grid-cols-2", "md:grid-cols-3", "lg:grid-cols-4", "gap-6");
-
-                groupes[type].forEach(ligne => {
-                    const carte = document.createElement("a");
-
-                    // Définir le lien en fonction du type de ligne
-                    if (ligne.type === "Nocturne") {
-                        carte.href = `nocturne.html#${ligne.id}`;
-                    } else {
-                        carte.href = `ligne.html#${ligne.id}`;
-                    }
+            try {
+                const lignesData = await chargerDonneesLignes();
+                const container = document.getElementById("ligne-groupes");
+                container.innerHTML = ""; // Clear loader
+    
+                // --- 1. BOUTON CARAMEL ARENA (Dispositif Exceptionnel) ---
+                const arenaSection = document.createElement("div");
+                arenaSection.classList.add("animate__animated", "animate__fadeInUp");
+    
+                const arenaTitle = document.createElement("div");
+                arenaTitle.className = "flex items-center gap-3 mb-6";
+                arenaTitle.innerHTML = `<span class="h-8 w-1 bg-warning rounded-full"></span><h3 class="text-2xl font-bold uppercase tracking-wide">Dispositif Événementiel</h3>`;
+    
+                const arenaCard = document.createElement("a");
+                arenaCard.href = "ligne.html#NS";
+                // Custom Glass for Special Events
+                arenaCard.className = "glass-card block p-6 rounded-2xl relative overflow-hidden group border-l-4 border-l-warning";
+                
+                arenaCard.innerHTML = `
+                    <div class="absolute -right-10 -top-10 w-64 h-64 bg-warning/10 rounded-full blur-3xl group-hover:bg-warning/20 transition-all"></div>
                     
-                    carte.classList.add("group", "p-4", "rounded-lg", "shadow-lg", "bg-primary-content", "hover:scale-105", "transition-transform", "duration-300", "cursor-pointer");
-
-                    const contenu = `
-                        <div class="flex items-center gap-4">
-                            <img src="../img/${ligne.id}.png" alt="Ligne ${ligne.id}" class="w-12 h-10">
-                            <div>
-                                <h3 class="text-lg font-semibold text-primary">${ligne.id === "NS" ? "Navette Spéciale" : `Ligne ${ligne.id}`}</h3>
-                                <p class="text-sm text-accent)">${ligne.nom}</p>
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+                        <div class="flex items-center gap-6">
+                            <div class="bg-base-100 p-3 rounded-xl shadow-inner shrink-0">
+                                <img src="img/Caramel Arena.png" alt="Logo Arena" class="w-16 h-16 object-contain"> 
+                            </div>
+                            <div class="text-center md:text-left">
+                                <h3 class="text-3xl font-black text-warning mb-1">Caramel Arena</h3>
+                                <p class="opacity-70 font-medium">Hub des Navettes & Infos Concerts</p>
                             </div>
                         </div>
-                    `;
-
-                    carte.innerHTML = contenu;
-                    lignesContainer.appendChild(carte);
+                        
+                        <button class="btn btn-warning btn-outline rounded-full px-8 group-hover:bg-warning group-hover:text-black transition-all">
+                            Voir le dispositif <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                `;
+    
+                arenaSection.appendChild(arenaTitle);
+                arenaSection.appendChild(arenaCard);
+                container.appendChild(arenaSection);
+    
+                // --- 2. GROUPES DE LIGNES ---
+                const groupes = {};
+                lignesData.forEach(ligne => {
+                    if (!typesExclus.includes(ligne.type)) {
+                        if (!groupes[ligne.type]) { groupes[ligne.type] = []; }
+                        groupes[ligne.type].push(ligne);
+                    }
                 });
-
-                section.appendChild(titre);
-                section.appendChild(lignesContainer);
-                section.appendChild(espace); // Ajout du <br> pour espacer les catégories
-                container.appendChild(section);
-            });
+    
+                const typeColors = {
+                    "Tram": "text-error",
+                    "Bus": "text-info",
+                    "Nocturne": "text-purple-400"
+                };
+    
+                Object.keys(groupes).forEach((type, idx) => {
+                    const section = document.createElement("div");
+                    section.className = "animate__animated animate__fadeInUp";
+                    section.style.animationDelay = (0.2 + idx * 0.1) + 's';
+    
+                    const colorClass = typeColors[type] || "text-primary";
+                    
+                    const header = document.createElement("div");
+                    header.className = "flex items-center gap-3 mb-6";
+                    header.innerHTML = `<span class="h-8 w-1 bg-current opacity-50 rounded-full ${colorClass}"></span><h3 class="text-2xl font-bold uppercase tracking-wide ${colorClass}">${type}</h3>`;
+    
+                    const grid = document.createElement("div");
+                    grid.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5";
+    
+                    groupes[type].forEach(ligne => {
+                        const carte = document.createElement("a");
+                        carte.href = (ligne.type === "Nocturne") ? `nocturne.html#${ligne.id}` : `ligne.html#${ligne.id}`;
+                        carte.className = "glass-card p-4 rounded-xl flex items-center gap-4 group cursor-pointer hover:border-primary/50";
+    
+                        carte.innerHTML = `
+                            <div class="w-14 h-12 flex items-center justify-center bg-base-100/50 rounded-lg shadow-sm group-hover:scale-110 transition-transform">
+                                <img src="../img/${ligne.id}.png" alt="${ligne.id}" class="max-w-full max-h-full object-contain" onerror="this.style.display='none';this.parentElement.innerHTML='${ligne.id}'">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">${ligne.id === "NS" ? "Navette" : "Ligne " + ligne.id}</h4>
+                                <p class="text-xs opacity-60 font-medium line-clamp-1">${ligne.nom}</p>
+                            </div>
+                            <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0 duration-300">
+                                <i class="fa-solid fa-chevron-right text-primary text-sm"></i>
+                            </div>
+                        `;
+                        grid.appendChild(carte);
+                    });
+    
+                    section.appendChild(header);
+                    section.appendChild(grid);
+                    container.appendChild(section);
+                });
+            } catch(e) {
+                console.error("Error generating cards:", e);
+            }
         }
 
         genererCartesLignes();

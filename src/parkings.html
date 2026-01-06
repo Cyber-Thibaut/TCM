@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,20 +19,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
-        /* Glassmorphism Base (Matching Agences page) */
+        /* Theme Variables */
+        :root {
+            --card-glass: rgba(255, 255, 255, 0.65);
+            --card-border: rgba(255, 255, 255, 0.5);
+            --card-hover-bg: rgba(255, 255, 255, 0.85);
+            --card-shadow: rgba(0,0,0,0.1);
+        }
+        
+        [data-theme="dark"] {
+            --card-glass: rgba(30, 41, 59, 0.4);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-hover-bg: rgba(30, 41, 59, 0.6);
+            --card-shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Glassmorphism Base */
         .glass-card {
-            background: rgba(30, 41, 59, 0.4);
+            background: var(--card-glass);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px 0 var(--card-shadow);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: currentColor;
         }
         
         .glass-card:hover {
             transform: translateY(-5px) scale(1.01);
-            background: rgba(30, 41, 59, 0.6);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: var(--card-hover-bg);
+            border-color: var(--card-border);
             box-shadow: 0 20px 40px -10px rgba(0, 198, 255, 0.15);
         }
 

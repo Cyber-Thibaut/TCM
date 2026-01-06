@@ -504,6 +504,89 @@ function renderLineDetails(ligne) {
   }
 }
 
+// -- NOUVEAU : GESTION INFO TRAFIC (Test.json / Info.json) --
+async function fetchTrafficAlertsForLine(lineId) {
+    try {
+        const response = await fetch('test.json'); 
+        if (!response.ok) return [];
+        const data = await response.json();
+        const lineData = data.lignes.find(l => l.ligne === lineId);
+        return lineData ? lineData.infos_trafic : [];
+    } catch (e) {
+        console.warn("Erreur chargement trafic:", e);
+        return [];
+    }
+}
+
+function renderTrafficAlerts(alerts) {
+    const container = document.getElementById('lignes');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (!alerts || alerts.length === 0) return;
+
+    // Date de simulation pour cohérence avec le reste
+    const simNow = new Date("2026-01-06T12:00:00");
+
+    const activeAlerts = alerts.filter(info => {
+        const fin = new Date(info.fin);
+        return simNow <= fin;
+    });
+
+    if (activeAlerts.length === 0) return;
+
+    // Titre de section
+    const title = document.createElement('h3');
+    title.className = "text-2xl font-bold mb-6 flex items-center gap-3";
+    title.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-warning"></i> Info Trafic en cours';
+    container.appendChild(title);
+
+    const list = document.createElement('div');
+    list.className = "flex flex-col gap-4";
+
+    activeAlerts.forEach(info => {
+        const debut = new Date(info.annonce);
+        const isFuture = simNow < debut;
+        
+        const card = document.createElement('div');
+        let themeClass = isFuture ? "alert-warning" : "alert-error";
+        let iconHtml = isFuture ? '<i class="fa-solid fa-hard-hat fa-xl"></i>' : '<i class="fa-solid fa-road-barrier fa-xl"></i>';
+        
+        if (info.type.toLowerCase().includes("info")) {
+            themeClass = "alert-info";
+            iconHtml = '<i class="fa-solid fa-circle-info fa-xl"></i>';
+        }
+
+        // Style "Future" un peu différent
+        if (isFuture) {
+             card.className = `alert ${themeClass} shadow-lg border-2 border-dashed opacity-90`;
+        } else {
+             card.className = `alert ${themeClass} shadow-lg border-l-8`;
+        }
+
+        card.innerHTML = `
+            <div class="flex items-start gap-4 w-full">
+                <div class="mt-1">${iconHtml}</div>
+                <div class="flex-1">
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="font-bold text-lg">${info.titre}</h4>
+                        ${isFuture ? '<div class="badge badge-sm badge-outline uppercase font-bold">À venir</div>' : '<div class="badge badge-sm badge-error text-white uppercase font-bold">En cours</div>'}
+                    </div>
+                    <p class="text-sm opacity-90 leading-relaxed">${info.detail || info.description}</p>
+                    <div class="text-xs font-mono mt-3 opacity-75 border-t border-current/20 pt-2 flex justify-end gap-2 items-center">
+                        <i class="fa-regular fa-calendar"></i>
+                        ${new Date(info.annonce).toLocaleDateString()} → ${new Date(info.fin).toLocaleDateString()}
+                    </div>
+                </div>
+            </div>
+        `;
+        list.appendChild(card);
+    });
+
+    container.appendChild(list);
+    container.classList.remove('hidden'); // S'assurer qu'il est visible
+}
+
 async function init() {
   const lineNumber = window.location.hash.replace("#", "");
 
@@ -562,6 +645,12 @@ async function init() {
   }
 
   renderLineDetails(lineDetailsData);
+  
+  // -- CHARGEMENT INFO TRAFIC --
+  try {
+      const trafficAlerts = await fetchTrafficAlertsForLine(lineNumber);
+      renderTrafficAlerts(trafficAlerts);
+  } catch(e) { console.warn("Erreur init trafic", e); }
 
   if (lineNumber === "NS") {
     const bloccElement = document.getElementById("blocc");

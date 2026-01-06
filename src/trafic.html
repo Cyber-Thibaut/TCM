@@ -29,8 +29,8 @@
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
         [data-theme="dark"] .glass-panel {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
@@ -232,11 +232,9 @@
             
             grid.innerHTML = '';
             
-            // 1. Process Data
             const now = new Date();
-            let activeAlerts = [];
-            let affectedLines = 0;
-            let criticalCount = 0;
+            let processedLines = [];
+            let affectedLinesCount = 0;
 
             allData.lignes.forEach(line => {
                 const visibleInfos = line.infos_trafic.filter(info => {
@@ -244,30 +242,58 @@
                     const end = new Date(info.fin);
                     return now >= start && now <= end;
                 });
+                
+                // Determine severity for icon/sorting
+                let statusPriority = 0; // 0=OK, 1=Info, 2=Work, 3=Stop
+                let assetIcon = 'valid.png';
+                let alertLabel = 'Fluide';
+                let alertColor = 'success';
+                let faIcon = 'fa-check';
 
                 if (visibleInfos.length > 0) {
-                    // Check search
-                    const searchQuery = document.getElementById('line-search').value.toLowerCase();
-                    if (searchQuery && !line.ligne.toLowerCase().includes(searchQuery)) return;
-                    
-                    // Check filter
-                    if (!isLineType(line.ligne, activeFilter)) return;
+                     affectedLinesCount++;
+                     const types = visibleInfos.map(i => i.type.toLowerCase()).join(' ');
+                     
+                     if (types.includes('grève') || types.includes('fermeture')) {
+                         statusPriority = 3; assetIcon = 'error.png'; alertLabel = 'Interruption'; alertColor = 'error'; faIcon = 'fa-ban';
+                     } else if (types.includes('travaux') || types.includes('déviation')) {
+                         statusPriority = 2; assetIcon = 'work.png'; alertLabel = 'Travaux'; alertColor = 'warning'; faIcon = 'fa-cone';
+                     } else {
+                         statusPriority = 1; assetIcon = 'information.png'; alertLabel = 'Information'; alertColor = 'info'; faIcon = 'fa-info-circle';
+                     }
+                }
 
-                    activeAlerts.push({ line: line.ligne, infos: visibleInfos });
-                    if (line.ligne !== 'TCM') affectedLines++;
+                // Check search & filter
+                const searchQuery = document.getElementById('line-search').value.toLowerCase();
+                const matchesSearch = !searchQuery || line.ligne.toLowerCase().includes(searchQuery);
+                const matchesFilter = isLineType(line.ligne, activeFilter);
+
+                if (matchesSearch && matchesFilter) {
+                    if (line.ligne !== 'TCM') { 
+                        processedLines.push({ 
+                            line: line.ligne, 
+                            infos: visibleInfos, 
+                            priority: statusPriority,
+                            asset: assetIcon,
+                            label: alertLabel,
+                            color: alertColor,
+                            fa: faIcon,
+                            iconType: statusPriority === 3 ? 'error' : (statusPriority === 2 ? 'work' : (statusPriority === 1 ? 'information' : 'valid'))
+                        });
+                    }
                 }
             });
 
-            // 2. Render Health Monitor (Global)
-            const globalAlerts = activeAlerts.find(a => a.line === 'TCM');
-            
-            // Filter out TCM from main grid unless explicit search, as it is displayed in the main billboard usually
-            // However, implementing logic: if filtered by 'All' and NO general alerts, and dashboard is green, that's fine.
-            // If general alert exists, it goes to Dashboard.
-            // If line alert exists, it goes to Grid.
+            // Sort: Priority DESC, then Line Name Numeric
+            processedLines.sort((a,b) => {
+                if (b.priority !== a.priority) return b.priority - a.priority;
+                return a.line.localeCompare(b.line, undefined, {numeric: true});
+            });
 
-            if (affectedLines === 0 && !globalAlerts) {
-                 // All Clear State
+            // 2. Dashboard Logic
+            const globalAlerts = allData.lignes.find(l => l.ligne === 'TCM')?.infos_trafic.filter(i => new Date() >= new Date(i.annonce) && new Date() <= new Date(i.fin));
+            
+            if (affectedLinesCount === 0 && (!globalAlerts || globalAlerts.length === 0)) {
                 statusContent.className = "relative z-10 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12 text-center md:text-left transition-all duration-500 bg-success/5 text-success-content";
                 statusContent.innerHTML = `
                     <div class="relative w-32 h-32 flex items-center justify-center shrink-0">
@@ -278,22 +304,19 @@
                     </div>
                     <div>
                         <h2 class="text-3xl font-bold mb-2">Réseau fluide</h2>
-                        <p class="text-lg opacity-80">Aucune perturbation majeure signalée actuellement sur l'ensemble du réseau TCM. Bonne route !</p>
+                        <p class="text-lg opacity-80">Le réseau circule normalement. Toutes les lignes sont au vert !</p>
                     </div>
                 `;
             } else {
-                // Issues State
-                const severity = globalAlerts ? 'error' : (affectedLines > 3 ? 'warning' : 'info'); 
+                const severity = (globalAlerts && globalAlerts.length > 0) ? 'error' : (affectedLinesCount > 3 ? 'warning' : 'info'); 
                 const colorClass = severity === 'error' ? 'text-error' : (severity === 'warning' ? 'text-warning' : 'text-info');
                 const bgClass = severity === 'error' ? 'bg-error/5' : (severity === 'warning' ? 'bg-warning/5' : 'bg-info/5');
                 const icon = severity === 'error' ? 'fa-triangle-exclamation' : 'fa-info-circle';
                 
                 let message = "";
-                if (globalAlerts) message = "Alerte Réseau Générale";
-                else if (affectedLines > 0) message = `${affectedLines} ligne(s) actuellement perturbée(s)`;
+                if (globalAlerts && globalAlerts.length > 0) message = "Alerte Réseau Générale";
+                else if (affectedLinesCount > 0) message = `${affectedLinesCount} ligne(s) perturbée(s)`;
                 
-                let subMessage = globalAlerts ? globalAlerts.infos[0].titre : "Veuillez consulter les détails ci-dessous.";
-
                 statusContent.className = `relative z-10 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12 text-center md:text-left transition-all duration-500 ${bgClass} ${colorClass}`;
                 statusContent.innerHTML = `
                     <div class="relative w-32 h-32 flex items-center justify-center shrink-0">
@@ -305,40 +328,53 @@
                     <div>
                         <h2 class="text-3xl font-bold mb-2">${message}</h2>
                         <p class="text-lg opacity-80 text-base-content">
-                            ${subMessage}
+                            ${(globalAlerts && globalAlerts.length > 0) ? globalAlerts[0].titre : "Certaines lignes rencontrent des difficultés. Voir ci-dessous."}
                         </p>
                     </div>
                 `;
             }
 
-            // 3. Render Cards
-            // Exclude 'TCM' from grid if it's already shown as the main alert, OR if we want to show it in grid too?
-            // Let's hide 'TCM' from grid as it is usually global.
-            const gridAlerts = activeAlerts.filter(a => a.line !== 'TCM');
-            
-            if (gridAlerts.length === 0) {
-                 if (globalAlerts) {
-                     grid.innerHTML = `<div class="col-span-full h-40 flex items-center justify-center text-base-content/30 italic">Seul le message général s'applique.</div>`;
-                 } else {
-                     grid.innerHTML = `<div class="col-span-full h-40 flex items-center justify-center text-base-content/30 italic">Aucune perturbation sur les lignes sélectionnées.</div>`;
-                 }
+            // 3. Grid Render
+            if (processedLines.length === 0) {
+                 grid.innerHTML = `<div class="col-span-full h-40 flex items-center justify-center text-base-content/30 italic">Aucune ligne trouvée.</div>`;
             } else {
-                gridAlerts.forEach(item => {
+                processedLines.forEach(item => {
                     const isSchool = /^\d{3}$/.test(item.line);
                     const isTram = item.line === 'A';
                     
-                    // Card Template
                     const card = document.createElement('div');
                     card.className = "glass-panel p-0 rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer h-full flex flex-col animate__animated animate__fadeInUp";
-                    card.onclick = () => openModal(item);
+                    if (item.infos.length > 0) card.onclick = () => openModal(item);
+                    else card.style.cursor = 'default';
 
-                    // Header Color Stripe
-                    const mainInfo = item.infos[0];
-                    const sev = getSeverity(mainInfo.type);
-                    const stripeColor = sev.color === 'error' ? 'bg-error' : (sev.color === 'warning' ? 'bg-warning' : 'bg-info');
-
+                    const stripeColor = `bg-${item.color}`;
                     let iconHTML = `<img src="/img/${item.line}.png" class="w-12 h-12 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
                     let fallbackIcon = `<div class="w-12 h-12 rounded-lg bg-base-300 items-center justify-center font-bold text-xl hidden">${item.line}</div>`;
+
+                    let contentHTML = '';
+                    if (item.infos.length === 0) {
+                        contentHTML = `
+                            <div class="bg-base-200/30 rounded-lg p-4 text-center border border-base-content/5 mt-4">
+                                <span class="text-success text-sm font-bold opacity-80">✅ Aucune perturbation</span>
+                                <div class="text-xs opacity-50 mt-1">Le trafic est normal</div>
+                            </div>
+                        `;
+                    } else {
+                        contentHTML = `
+                             <div class="space-y-3">
+                                 ${item.infos.slice(0, 2).map(info => `
+                                     <div class="bg-base-200/50 rounded-lg p-3 text-sm border-l-2 border-${getSeverity(info.type).color}">
+                                         <div class="font-bold truncate mb-1">${info.titre}</div>
+                                         <div class="opacity-70 line-clamp-2 text-xs">${info.detail || 'Voir détails.'}</div>
+                                     </div>
+                                 `).join('')}
+                                 ${item.infos.length > 2 ? `<div class="text-center text-xs opacity-50 italic">+ ${item.infos.length - 2} autre(s)</div>` : ''}
+                             </div>
+                        `;
+                    }
+
+                    // Bottom Asset
+                    const bottomAsset = `<img src="/img/assets/${item.asset}" class="h-8 w-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity drop-shadow-sm filter drop-shadow" alt="${item.label}">`;
 
                     card.innerHTML = `
                          <div class="h-1.5 w-full ${stripeColor}"></div>
@@ -348,27 +384,23 @@
                                      ${iconHTML}
                                      ${fallbackIcon}
                                      <div>
-                                         <h3 class="font-bold text-lg leading-none">${isSchool ? 'Scolaire' : (isTram ? 'Tram' : 'Ligne')} <span class="text-xl">${item.line}</span></h3>
-                                         <div class="text-xs opacity-50 mt-1 uppercase tracking-in-expand">${item.infos.length} alerte(s)</div>
+                                         <h3 class="font-bold text-lg leading-none group-hover:text-primary transition-colors">${isSchool ? 'Scolaire' : (isTram ? 'Tram' : 'Ligne')} <span class="text-xl">${item.line}</span></h3>
+                                         <div class="text-xs opacity-50 mt-1 uppercase tracking-in-expand font-semibold">${item.infos.length ? item.infos.length + ' alerte(s)' : 'Trafic normal'}</div>
                                      </div>
                                  </div>
-                                 <div class="badge badge-${sev.color} gap-1 shadow-sm">
-                                    <i class="fa-solid ${sev.icon} text-[10px]"></i> ${sev.label}
+                                 <div class="badge badge-${item.color} gap-1 shadow-sm font-bold">
+                                    <i class="fa-solid ${item.fa} text-[10px]"></i> ${item.label}
                                  </div>
                              </div>
                              
-                             <div class="space-y-3">
-                                 ${item.infos.slice(0, 2).map(info => `
-                                     <div class="bg-base-200/50 rounded-lg p-3 text-sm border-l-2 border-${getSeverity(info.type).color}">
-                                         <div class="font-bold truncate mb-1">${info.titre}</div>
-                                         <div class="opacity-70 line-clamp-2 text-xs">${info.detail || 'Cliquez pour voir les détails.'}</div>
-                                     </div>
-                                 `).join('')}
-                                 ${item.infos.length > 2 ? `<div class="text-center text-xs opacity-50 italic">+ ${item.infos.length - 2} autre(s)</div>` : ''}
-                             </div>
+                             ${contentHTML}
 
-                             <div class="mt-auto pt-4 flex justify-end">
-                                 <button class="btn btn-ghost btn-xs gap-1 group-hover:text-primary transition-colors">Détails <i class="fa-solid fa-arrow-right"></i></button>
+                             <div class="mt-auto pt-6 flex items-center justify-between border-t border-base-content/5">
+                                 ${bottomAsset}
+                                 ${item.infos.length > 0 
+                                    ? `<button class="btn btn-ghost btn-xs gap-1 group-hover:text-primary transition-colors">Détails <i class="fa-solid fa-arrow-right"></i></button>`
+                                    : `<button class="btn btn-ghost btn-xs gap-1 opacity-20 cursor-default pointer-events-none">Circule normal <i class="fa-solid fa-check"></i></button>`
+                                 }
                              </div>
                          </div>
                     `;

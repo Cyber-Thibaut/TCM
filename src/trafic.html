@@ -342,14 +342,21 @@
                     </div>
                 `;
             } else {
-                const severity = (globalAlerts && globalAlerts.length > 0) ? 'error' : (affectedLinesCount > 3 ? 'warning' : 'info'); 
+                let severity = 'info';
+                let message = "";
+                
+                if (globalAlerts && globalAlerts.length > 0) {
+                    const s = getSeverity(globalAlerts[0].type);
+                    severity = s.color;
+                    message = severity === 'error' ? "Alerte Réseau Générale" : (severity === 'warning' ? "Info Travaux / Déviation" : "Information Réseau");
+                } else {
+                     if (affectedLinesCount > 3) severity = 'warning';
+                     message = `${affectedLinesCount} ligne(s) perturbée(s)`;
+                }
+
                 const colorClass = severity === 'error' ? 'text-error' : (severity === 'warning' ? 'text-warning' : 'text-info');
                 const bgClass = severity === 'error' ? 'bg-error/5' : (severity === 'warning' ? 'bg-warning/5' : 'bg-info/5');
-                const icon = severity === 'error' ? 'fa-triangle-exclamation' : 'fa-info-circle';
-                
-                let message = "";
-                if (globalAlerts && globalAlerts.length > 0) message = "Alerte Réseau Générale";
-                else if (affectedLinesCount > 0) message = `${affectedLinesCount} ligne(s) perturbée(s)`;
+                const icon = severity === 'error' ? 'fa-triangle-exclamation' : (severity === 'warning' ? 'fa-triangle-exclamation' : 'fa-info-circle');
                 
                 statusContent.className = `relative z-10 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12 text-center md:text-left transition-all duration-500 ${bgClass} ${colorClass}`;
                 statusContent.innerHTML = `

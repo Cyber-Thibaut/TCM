@@ -409,7 +409,7 @@
                              ${fallbackIcon}
                              ${badgeHTML}
                          </div>
-                         ${item.infos.length > 0 ? `<div class="absolute inset-0 rounded-full bg-${item.color}/20 scale-125 opacity-0 group-hover:opacity-100 transition-all rounded-xl -z-10 blur-xl"></div>` : ''}
+                         ${item.infos.length > 0 ? `<div class="absolute inset-0 scale-125 rounded-xl bg-${item.color} opacity-0 group-hover:opacity-40 transition-all duration-300 -z-10 blur-lg"></div>` : ''}
                     `;
                     grid.appendChild(card);
                 });

@@ -196,7 +196,8 @@ function setupGlobalPDFButton() {
 async function fetchEventData() {
     try {
         // Simulation ou fetch réel
-        const response = await fetch("https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json");
+        //const response = await fetch("https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json");
+        const response = await fetch("../src/test.json");
         if (!response.ok) return [];
         const data = await response.json();
         const ligne = data.lignes.find(l => l.ligne === "NS");

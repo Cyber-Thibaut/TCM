@@ -404,50 +404,107 @@
                 `;
             }
 
-            // 3. Grid Render (Grid of Icons style)
-            // Change container class to behave like a flex grid of icons
-            grid.className = "flex flex-wrap gap-6 justify-center content-start py-8 animate__animated animate__fadeIn";
+            // 3. Render (Grouped by Sections like reseau.html)
+            grid.innerHTML = '';
+            grid.className = "flex flex-col gap-12 py-8 animate__animated animate__fadeIn"; 
             
             if (processedLines.length === 0) {
                  grid.innerHTML = `<div class="w-full h-40 flex items-center justify-center text-base-content/30 italic">Aucune ligne trouvée.</div>`;
             } else {
+                
+                // Group by type
+                const groups = {};
+                // Order of keys matters for display if we iterate them. 
+                // We want to preserve the order from ligne.json ideally, but we have processedLines which is sorted by ID/Weight only.
+                // processedLines contains {line, type: '...'} so we need to add type there first.
+                // Wait, processedLines currently doesn't have 'type'. I need to add it in the first loop.
+                
+                // Oops, I need to modify the first loop to include 'lineType'.
+                // And then here, I will group by that type.
+                
+                // Re-map processedLines to add 'type' from linesRef
+                processedLines.forEach(p => {
+                    const ref = linesRef.lignes.find(l => String(l.id) === p.line);
+                    p.type = ref ? (ref.type || 'Autre') : 'Autre';
+                });
+
+                // Grouping
+                const orderedTypes = []; // To keep order found in json
                 processedLines.forEach(item => {
-                    const isSchool = /^\d{3}$/.test(item.line);
-                    const isTram = item.line === 'A';
-                    
-                    // Card Template - Compact Icon Style
-                    const card = document.createElement('div');
-                    card.className = "relative group w-24 h-24 md:w-32 md:h-32 flex items-center justify-center transition-all duration-300";
-                    if (item.infos.length > 0) {
-                         card.style.cursor = 'pointer';
-                         card.onclick = () => openModal(item);
-                         card.classList.add('hover:scale-110');
-                    } else {
-                        // Hover subtle if no alert
-                        card.classList.add('hover:scale-105');
+                    if (!groups[item.type]) {
+                        groups[item.type] = [];
+                        orderedTypes.push(item.type);
                     }
+                    groups[item.type].push(item);
+                });
 
-                    // Main Icon
-                    let iconHTML = `<img src="../img/${item.line}.png" class="w-full h-full object-contain filter drop-shadow-lg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
-                    let fallbackIcon = `<div class="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-base-100 border-2 border-base-content/10 flex items-center justify-center font-black text-2xl shadow-sm hidden">${item.line}</div>`;
+                // Special handling for "Caramel Arena" (or similar special types) -> put at top?
+                // reseau.html puts 'Navette Arena' top. Traffic view should probably respect that if present.
+                // But reseau.html separates "Dispositif Événementiel" (NS) from "Navette Arena" (NAVx).
+                // Let's iterate by the original JSON order of types (or the order they appeared in processedLines which follows JSON traversal).
+                
+                orderedTypes.forEach(typeName => {
+                    const groupItems = groups[typeName];
+                    
+                    // Section Container
+                    const section = document.createElement('div');
+                    section.className = "w-full";
+                    
+                    // Header
+                    // Coloring logic from reseau.html
+                    let colorClass = "text-primary";
+                    if(typeName.includes('Tram')) colorClass = "text-error";
+                    else if(typeName.includes('Bus')) colorClass = "text-info";
+                    else if(typeName.includes('Nocturne')) colorClass = "text-purple-400";
+                    else if(typeName.includes('Scolaire') || typeName.includes('Edu')) colorClass = "text-success";
+                    else if(typeName.includes('Arena') || typeName.includes('Spécial')) colorClass = "text-warning";
 
-                    // Status Badge
-                    // Always visible (Valid/Warning/Error)
-                    const badgeHTML = `
-                        <div class="absolute -bottom-2 -right-2 w-9 h-9 bg-base-100 rounded-full shadow-md flex items-center justify-center border-2 border-${item.color} z-10 animate__animated animate__bounceIn" title="${item.label}">
-                            <img src="../img/assets/${item.asset}" class="w-5 h-5 object-contain">
+                    section.innerHTML = `
+                        <div class="flex items-center gap-3 mb-6 border-b border-base-content/10 pb-2">
+                            <span class="h-6 w-1 rounded-full ${colorClass.replace('text-', 'bg-')}"></span>
+                            <h3 class="text-xl font-bold uppercase tracking-wide ${colorClass}">${typeName}</h3>
+                            <span class="text-xs opacity-50 font-normal normal-case ml-auto">${groupItems.length} ligne${groupItems.length > 1 ? 's' : ''}</span>
                         </div>
                     `;
 
-                    card.innerHTML = `
-                         <div class="relative w-20 h-20 md:w-24 md:h-24">
-                             ${iconHTML}
-                             ${fallbackIcon}
-                             ${badgeHTML}
-                         </div>
-                         ${item.infos.length > 0 ? `<div class="absolute inset-0 scale-125 rounded-xl bg-${item.color} opacity-0 group-hover:opacity-40 transition-all duration-300 -z-10 blur-lg"></div>` : ''}
-                    `;
-                    grid.appendChild(card);
+                    // Grid for this section
+                    const sectionGrid = document.createElement('div');
+                    sectionGrid.className = "flex flex-wrap gap-6 justify-start content-start";
+                    
+                    groupItems.forEach(item => {
+                        // Card Generation (Same as before)
+                        const card = document.createElement('div');
+                        card.className = "relative group w-24 h-24 md:w-32 md:h-32 flex items-center justify-center transition-all duration-300";
+                        if (item.infos.length > 0) {
+                             card.style.cursor = 'pointer';
+                             card.onclick = () => openModal(item);
+                             card.classList.add('hover:scale-110');
+                        } else {
+                            card.classList.add('hover:scale-105');
+                        }
+
+                        let iconHTML = `<img src="../img/${item.line}.png" class="w-full h-full object-contain filter drop-shadow-lg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
+                        let fallbackIcon = `<div class="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-base-100 border-2 border-base-content/10 flex items-center justify-center font-black text-2xl shadow-sm hidden">${item.line}</div>`;
+
+                        const badgeHTML = `
+                            <div class="absolute -bottom-2 -right-2 w-7 h-7 md:w-9 md:h-9 bg-base-100 rounded-full shadow-md flex items-center justify-center border-2 border-${item.color} z-10 animate__animated animate__bounceIn" title="${item.label}">
+                                <img src="../img/assets/${item.asset}" class="w-4 h-4 md:w-5 md:h-5 object-contain">
+                            </div>
+                        `;
+
+                        card.innerHTML = `
+                             <div class="relative w-20 h-20 md:w-24 md:h-24">
+                                 ${iconHTML}
+                                 ${fallbackIcon}
+                                 ${badgeHTML}
+                             </div>
+                             ${item.infos.length > 0 ? `<div class="absolute inset-0 scale-125 rounded-xl bg-${item.color} opacity-0 group-hover:opacity-40 transition-all duration-300 -z-10 blur-lg"></div>` : ''}
+                        `;
+                        sectionGrid.appendChild(card);
+                    });
+
+                    section.appendChild(sectionGrid);
+                    grid.appendChild(section);
                 });
             }
         }

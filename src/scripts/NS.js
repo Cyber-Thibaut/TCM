@@ -208,19 +208,85 @@ function renderEventInfo(events) {
     const container = document.getElementById('alertMessage');
     if (!container) return;
     
-    // Logique d'affichage simplifiée pour l'exemple
-    if (events.length > 0) {
-        container.innerHTML = `
-            <div class="alert alert-info shadow-lg">
-                <i class="fa-solid fa-calendar-days"></i>
-                <div>
-                    <h3 class="font-bold">Prochains événements</h3>
-                    <div class="text-xs">${events.length} événement(s) programmé(s)</div>
+    // On vide le conteneur
+    container.innerHTML = '';
+    container.classList.add("flex", "flex-col", "gap-4");
+
+    // Simulation Date (pour matcher le scénario)
+    // const now = new Date(); 
+    const now = new Date("2026-01-06T12:00:00");
+
+    if (events.length === 0) {
+        // Optionnel : Message si aucun événement
+        return;
+    }
+
+    container.classList.remove('hidden');
+
+    events.forEach(event => {
+        const dateDebut = new Date(event.annonce);
+        const dateFin = new Date(event.fin);
+
+        // On n'affiche que ce qui est pertinent (En cours ou Futur)
+        // Si fini, on ignore
+        if (now > dateFin) return;
+
+        const isFuture = now < dateDebut;
+        const isToday = !isFuture && now <= dateFin; // C'est en cours
+
+        // Couleurs / Badges
+        let badge = '';
+        let cardClass = "alert shadow-lg relative overflow-hidden transition-all hover:scale-[1.01] border-l-8";
+        let iconClass = "fa-calendar-days";
+
+        if (isToday) {
+            // C'est LE jour J (ou en cours)
+            cardClass += " bg-gradient-to-br from-neutral to-neutral-focus text-neutral-content border-[#d4af37]"; // Or / Noir
+            badge = '<span class="badge badge-success gap-2 animate-pulse font-bold">CE SOIR</span>';
+            iconClass = "fa-ticket";
+        } else {
+            // C'est bientot
+            cardClass += " bg-base-100 border-base-300 text-base-content border-l-warning";
+            badge = '<span class="badge badge-warning badge-outline gap-2">À VENIR</span>';
+        }
+
+        // Construction du HTML de l'Event
+        const dateFormatted = new Date(event.fin).toLocaleDateString("fr-FR", {
+            weekday: 'long', 
+            day: 'numeric', 
+            month: 'long',
+            year: 'numeric'
+        });
+
+        const html = `
+            <div class="${cardClass}">
+                <div class="flex flex-col w-full gap-2">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <div class="p-3 bg-white/10 rounded-full">
+                                <i class="fa-solid ${iconClass} fa-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold uppercase tracking-wide">${event.titre}</h3>
+                        </div>
+                        ${badge}
+                    </div>
+                    
+                    <div class="pl-14">
+                        <p class="text-lg opacity-90 font-medium mb-2">${event.detail}</p>
+                        <div class="flex items-center gap-2 text-sm opacity-75 font-mono bg-black/20 w-fit px-3 py-1 rounded-lg">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>${dateFormatted}</span>
+                        </div>
+                    </div>
                 </div>
+                
+                <!-- Décoration de fond (Optionnel) -->
+                <i class="fa-solid ${iconClass} absolute -bottom-4 -right-4 text-9xl opacity-5 rotate-12 pointer-events-none"></i>
             </div>
         `;
-        container.classList.remove('hidden');
-    }
+
+        container.innerHTML += html;
+    });
 }
 
 // Expose init globally

@@ -37,6 +37,30 @@
             ]
         },
         {
+            "ligne": "4",
+            "infos_trafic": [
+                {
+                    "type": "travaux",
+                    "annonce": "2026-05-20T08:00:00",
+                    "fin": "2026-06-10T18:00:00",
+                    "titre": "Travaux Avenue de la République",
+                    "detail": "Circulation alternée et arrêts déplacés en raison de travaux de voirie."
+                }
+            ]
+        },
+        {
+            "ligne": "B",
+            "infos_trafic": [
+                {
+                    "type": "travaux",
+                    "annonce": "2026-06-15T08:00:00",
+                    "fin": "2026-08-01T20:00:00",
+                    "titre": "Rénovation Pôle d'Échange",
+                    "detail": "Grands travaux d'été. La ligne B ne desservira pas la gare."
+                }
+            ]
+        },
+        {
             "ligne": "5",
             "infos_trafic": [
                 {

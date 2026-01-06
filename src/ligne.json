@@ -4,7 +4,7 @@
             "id": "NS",
             "nom": "Hub Caramel Arena",
             "type": "Spéciale",
-            "description": "Service de transport événementiel pour la Caramel Arena.",
+            "description": "Service de transport événementiel direct pour la Caramel Arena, le nouveau pôle culturel majeur de l'agglomération clermontoise.",
             "stats": {
                 "nombre_arrets": 6,
                 "temps_trajet": "Variable",
@@ -16,8 +16,8 @@
             "nom": "Clinique Saint Paul <> Hotel police",
             "type": "Navette Arena",
             "mode": "tram",
-            "color": "#007941",
-            "description": "Liaison Tramway directe pour la Caramel Arena.",
+             "color": "#007941",
+            "description": "Liaison Tramway à haute fréquence dédiée aux soirs d'événements à l'Arena, connectant les principaux parkings relais au site.",
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "94 min",
@@ -30,8 +30,8 @@
             "nom": "Quartier résidentiel <> Arena",
             "type": "Navette Arena",
             "mode": "bus",
-            "color": "#007941",
-            "description": "Desserte des quartiers résidentiels en bus articulé.",
+             "color": "#007941",
+            "description": "Desserte fine des quartiers résidentiels nord (Croix de Neyrat, Vergnes) vers la Caramel Arena en bus articulé.",
             "stats": {
                 "nombre_arrets": 11,
                 "temps_trajet": "94 min",
@@ -42,10 +42,10 @@
         {
             "id": "NAV3",
             "nom": "Campus Maryse Esterie <> Arena",
-            "type": "Navette Arena",
+             "type": "Navette Arena",
             "mode": "bus",
-            "color": "#007941",
-            "description": "Liaison étudiante vers la Caramel Arena.",
+             "color": "#007941",
+            "description": "Liaison étudiante directe reliant le pôle universitaire des Cézeaux à la Caramel Arena pour les événements majeurs.",
             "stats": {
                 "nombre_arrets": 7,
                 "temps_trajet": "94 min",
@@ -56,10 +56,10 @@
         {
             "id": "NAV4",
             "nom": "Chatonmeow La poste <> Gare de l'Ouest",
-            "type": "Navette Arena",
+             "type": "Navette Arena",
             "mode": "car",
-            "color": "#007941",
-            "description": "Liaison longue distance en autocar confort.",
+             "color": "#007941",
+            "description": "Liaison longue distance en autocar confort connectant l'ouest de l'agglomération et les zones périurbaines.",
             "stats": {
                 "nombre_arrets": 4,
                 "temps_trajet": "94 min",
@@ -72,8 +72,8 @@
             "nom": "Ludorgue Mont Ludorgue <> Arena",
             "type": "Navette Arena",
             "mode": "car",
-            "color": "#007941",
-            "description": "Liaison montagne vers la plaine.",
+             "color": "#007941",
+            "description": "Navette montagne reliant les hauteurs du plateau de Gergovie et Ludorgue directement à la plaine et l'Arena.",
             "stats": {
                 "nombre_arrets": 4,
                 "temps_trajet": "94 min",
@@ -86,8 +86,8 @@
             "nom": "Asquillay Blvd de l'Humanité <> Gare de l'Ouest",
             "type": "Navette Arena",
             "mode": "car",
-            "color": "#007941",
-            "description": "Liaison rapide ouest.",
+             "color": "#007941",
+            "description": "Liaison rapide ouest via les voies rapides, permettant un accès fluide depuis les communes dortoirs.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "70 min",
@@ -97,10 +97,10 @@
         },
         {
             "id": "A",
-            "nom": "Aéroport <> Clinique Saint-Paul",
+            "nom": "Les Vergnes <> La Pardieu Gare",
             "type": "Volc'Express",
             "mode": "tram",
-            "description": "La ligne 1 du réseau urbain de Clermont-Ferrand assure la liaison essentielle entre la Gare Centrale et le Campus Cézeaux, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet débute à la Gare Centrale, un hub de transport majeur où convergent les lignes de train, de bus et de tramway. Les passagers peuvent facilement rejoindre la ligne 1 et monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 1 traverse ensuite différents quartiers de Clermont-Ferrand, offrant aux passagers un aperçu de la vie urbaine de la ville. Ils peuvent admirer l'architecture historique, les rues animées et les commerces locaux qui bordent l'itinéraire.\nLe terminus de la ligne 1 est situé au Campus Cézeaux, un important pôle universitaire et scientifique de Clermont-Ferrand. Les étudiants, les enseignants et le personnel administratif peuvent se rendre facilement au campus grâce à cette ligne. Cela facilite les déplacements quotidiens des étudiants vers leurs cours, leurs laboratoires et leurs activités universitaires.\nLes horaires de la ligne 1 sont réguliers et adaptés aux besoins des passagers. Que ce soit en semaine ou le week-end, les buses circulent à des intervalles fréquents, minimisant ainsi les temps d'attente et offrant une flexibilité de déplacement.\nEn résumé, la ligne 1 du réseau urbain de Clermont-Ferrand relie la Gare Centrale au Campus Cézeaux, fournissant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville. Avec son confort, ses trajets pittoresques et ses horaires réguliers, la ligne 1 est un choix idéal pour les étudiants, les travailleurs et les résidents de Clermont-Ferrand. ",
+            "description": "La colonne vertébrale du réseau clermontois. Cette ligne de tramway sur pneus relie le nord (Champratel/Les Vergnes) au sud (La Pardieu), en traversant les points névralgiques : Stade Marcel Michelin, Place de Jaude, Maison de la Culture et le Campus des Cézeaux. Indispensable pour traverser la métropole.",
             "operation": {
                 "start": "04:30",
                 "end": "01:00"
@@ -114,9 +114,9 @@
         },
         {
             "id": 2,
-            "nom": "Campus Cézeaux <> Gare Centrale",
+            "nom": "Royat Place Allard <> Aulnat Aéroport",
             "type": "Volc'Express",
-            "description": "La ligne 2 du réseau urbain de Clermont-Ferrand est une ligne à haut niveau de service qui relie la Gare Centrale à l'Aéroport, offrant aux passagers un moyen rapide et pratique de se déplacer entre ces deux points clés de la ville.\nCette ligne spéciale est conçue pour offrir une expérience de voyage confortable et efficace. Les bus sont modernes, équipés de sièges spacieux et confortables, ainsi que de systèmes de climatisation pour assurer le confort des passagers tout au long du trajet. De plus, la ligne 2 bénéficie d'un service fréquent, garantissant des temps d'attente réduits pour les voyageurs.\nLe trajet de la ligne 2 passe par différents quartiers de Clermont-Ferrand, offrant aux passagers un aperçu de la diversité de la ville. Ils peuvent admirer les sites historiques, les rues animées et les espaces verts qui jalonnent le parcours.\nLe terminus de la ligne 2 est situé à l'Aéroport, offrant aux passagers un accès direct et pratique aux vols nationaux et internationaux. Que ce soit pour les voyageurs arrivant ou partant de Clermont-Ferrand, cette ligne à haut niveau de service facilite les déplacements vers et depuis l'aéroport.\nLes horaires de la ligne 2 sont adaptés aux besoins des passagers, en tenant compte des horaires des vols. Cela permet aux voyageurs d'organiser facilement leurs trajets en fonction de leur horaire de vol, en minimisant les contraintes de temps et en offrant une tranquillité d'esprit lors des déplacements.\nEn résumé, la ligne 2 du réseau urbain de Clermont-Ferrand est une ligne à haut niveau de service reliant la Gare Centrale à l'Aéroport. Avec son confort, sa rapidité et sa fréquence de service, la ligne 2 offre une solution pratique et efficace pour les voyageurs, qu'ils soient en partance ou en arrivée à Clermont-Ferrand. ",
+            "description": "Ligne structurante Est-Ouest (équivalent Ligne B). Elle connecte la station thermale de Royat, passe par la Place de Jaude, la Gare SNCF, et dessert l'Aéroport d'Aulnat. C'est le lien direct entre le centre historique et l'ouverture aérienne de la ville.",
             "stats": {
                 "nombre_arrets": 24,
                 "temps_trajet": "20 minutes",
@@ -125,9 +125,9 @@
         },
         {
             "id": 3,
-            "nom": "Gare Centrale <> Campus Marthe Gautier",
+            "nom": "Tamaris <> Cournon Lycée Descartes",
             "type": "Volc'Express",
-            "description": "La ligne 3 du réseau urbain de Clermont-Ferrand est une ligne à haut niveau de service reliant la Gare Centrale au CHRU Gabriel Montpied, offrant aux passagers un moyen pratique et efficace de se déplacer entre ce pôles ferroviaire et cet ensemble hôspitalier majeur de la ville.\nCette ligne spéciale est conçue pour offrir une expérience de voyage optimale. Les bus modernes et confortables de la ligne 3 sont équipés de sièges ergonomiques et de la climatisation, assurant un confort optimal aux passagers pendant leur trajet. De plus, la ligne 3 bénéficie d'une fréquence élevée, réduisant les temps d'attente et offrant une plus grande flexibilité aux voyageurs.\nLe trajet de la ligne 3 passe par différents quartiers de Clermont-Ferrand, permettant aux passagers de découvrir la diversité de la ville. Ils peuvent admirer l'architecture, les rues animées et les sites touristiques qui jalonnent l'itinéraire.\nLe terminus de la ligne 3 est situé à la Gare Centrale, offrant aux passagers un accès direct aux trains régionaux et nationaux. Que ce soit pour les voyageurs en partance ou en arrivée à Clermont-Ferrand, cette ligne à haut niveau de service facilite les déplacements vers et depuis le CHRU.\nLes horaires de la ligne 3 sont bien adaptés aux besoins des passagers, tenant compte des horaires des trains. Cela permet aux voyageurs de planifier facilement leurs déplacements en fonction de leur horaire de train, en minimisant les contraintes de temps et en offrant une plus grande commodité lors des déplacements.\nEn résumé, la ligne 3 du réseau urbain de Clermont-Ferrand est une ligne à haut niveau de service reliant la Gare Centrale à le CHRU Montpied. Avec son confort, sa fréquence élevée et sa connectivité ferroviaire, la ligne 3 offre une solution pratique et efficace pour les voyageurs, leur permettant de se déplacer facilement entre les deux pôles ferroviaires majeurs de la ville. ",
+            "description": "Ligne majeure (Ligne C) traversant l'agglomération du Nord-Ouest au Sud-Est. Elle dessert les quartiers densément peuplés de Tamaris, passe par Jaude et l'Université, pour rejoindre la grande ville de Cournon d'Auvergne et son plan d'eau.",
             "parkings": ["cezeaux"],
             "stats": {
                 "nombre_arrets": 27,
@@ -137,9 +137,9 @@
         },
         {
             "id": 4,
-            "nom": "Gare Centrale <> Gare de l'Est (marchandises)",
+            "nom": "Ceyrat Pradeaux <> Trémonteix Charcot",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 4 du réseau urbain de Clermont-Ferrand assure la liaison essentielle entre la Gare Centrale et la Gare de l'Est, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux pôles ferroviaires majeurs de la ville.\nLe trajet de la ligne 4 commence à la Gare Centrale, un point central de transit où convergent les différents modes de transport. Les passagers peuvent monter à bord d'un bus confortable et moderne, équipé de sièges ergonomiques pour assurer leur confort tout au long du trajet.\nLa ligne 4 traverse ensuite plusieurs quartiers de Clermont-Ferrand, permettant aux passagers d'apprécier la diversité et le dynamisme de la ville. En chemin, ils peuvent admirer l'architecture locale, les rues animées et les différents points d'intérêt qui jalonnent l'itinéraire.\nLe terminus de la ligne 4 est situé à la Gare de l'Est, offrant aux passagers un accès direct aux trains régionaux et nationaux. Que ce soit pour les voyageurs en partance ou en arrivée à Clermont-Ferrand, cette ligne facilite les déplacements vers et depuis la Gare de l'Est, leur permettant de poursuivre leur voyage en toute facilité.\nLes horaires de la ligne 4 sont adaptés aux besoins des passagers, avec des fréquences régulières tout au long de la journée. Cela permet aux utilisateurs de planifier leurs déplacements en fonction de leurs horaires de train, minimisant ainsi les temps d'attente et offrant une plus grande flexibilité.\nEn résumé, la ligne 4 du réseau urbain de Clermont-Ferrand relie la Gare Centrale à la Gare de l'Est, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux pôles ferroviaires importants. Avec son confort, ses trajets traversant différents quartiers et ses horaires adaptés, la ligne 4 est un choix idéal pour les voyageurs en quête de commodité et de connectivité ferroviaire. ",
+            "description": "Une ligne au profil topographique marqué ! Elle relie les hauteurs résidentielles de Trémonteix aux portes des gorges de Ceyrat, en passant par le centre de Clermont-Ferrand (Ballainvilliers, Salins).",
             "stats": {
                 "nombre_arrets": 37,
                 "temps_trajet": "47 minutes",
@@ -148,9 +148,9 @@
         },
         {
             "id": 5,
-            "nom": "Musée d'Art Moderne <> Place de Jaude",
+            "nom": "Royat Pépinière <> Gaillard",
             "type": "Volc'Express",
-            "description": "La ligne 5 de bus de Transport Clermont Métropole offre une connexion pratique et rapide entre le Musée d'Art Moderne et la Place de Jaude, traversant la ville en seulement 9 km et 40 minutes. Avec 34 arrêts pour permettre à ses passagers de monter et descendre à volonté, cette ligne de bus offre une variété de destinations et permet aux habitants de Clermont d'explorer la ville en toute simplicité.",
+            "description": "Ligne sinueuse desservant les quartiers résidentiels aisés de Royat et Chamalières, descendant vers le carrefour Europe et la Gare Routière. Idéale pour rejoindre les thermes ou le Casino.",
             "parkings": ["luca"],
             "stats": {
                 "nombre_arrets": 34,
@@ -160,9 +160,9 @@
         },
         {
             "id": 6,
-            "nom": "Grand Palais <> Campus Cézeaux",
+            "nom": "Durtol <> Lycée Lafayette",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 6 de bus de Transport Clermont Métropole offre un moyen pratique de voyager entre le Grand Palais et le Campus Maryse Esterle en seulement 5 km et 20 minutes. Avec 17 arrêts, cette ligne de bus permet aux habitants de Clermont de se déplacer facilement entre les deux points, sans devoir se soucier des embouteillages. La ligne 6 est un moyen efficace et rapide pour explorer la ville.",
+            "description": "Liaison Nord-Sud alternative, connectant la commune de Durtol (porte du Parc des Volcans) au quartier étudiant et technologique de Lafayette, via le boulevard Lavoisier.",
             "stats": {
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
@@ -171,9 +171,9 @@
         },
         {
             "id": 7,
-            "nom": "Port fluvial <> Grand Palais",
+            "nom": "Les Côtes de Clermont <> Tilène",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 7 de bus de Transport Clermont Métropole relie le Port fluvial et le Grand Palais à travers 10 km et 36 minutes. Avec 30 arrêts pour permettre aux passagers de monter et descendre à volonté, cette ligne de bus offre aux habitants de Clermont l'opportunité de découvrir la ville. La ligne 7 est un moyen facile et pratique de voyager entre le port et le centre-ville, sans devoir se soucier des embouteillages.",
+            "description": "Ligne de desserte fine des quartiers de 'La Plaine' et des coteaux nord. Elle permet aux résidents de rejoindre rapidement les correspondances tramway à Montferrand.",
             "stats": {
                 "nombre_arrets": 30,
                 "temps_trajet": "36 minutes",
@@ -182,9 +182,9 @@
         },
         {
             "id": 8,
-            "nom": "Place de l'Europe <> Campus Marthe Gautier",
+            "nom": "Vallières <> Matussat",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 8 du réseau urbain de Clermont-Ferrand est un moyen pratique et fiable de se déplacer entre la Place de l'Europe et le Campus Marthe Gautier. Cette ligne est très appréciée des étudiants, des résidents locaux et des voyageurs qui souhaitent se rendre au campus universitaire.\nLe trajet débute à la Place de l'Europe, un lieu animé où se trouvent de nombreux commerces, restaurants et points d'intérêt. Les passagers peuvent monter à bord d'un bus moderne et confortable, équipé de sièges ergonomiques et de climatisation pour assurer leur confort tout au long du trajet.\nLa ligne 8 traverse différents quartiers de la ville, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture historique du centre-ville, les rues animées, ainsi que les parcs et espaces verts qui jalonnent le parcours.\nLe bus fait des arrêts stratégiques tout au long de l'itinéraire, permettant aux passagers de descendre à des endroits clés tels que les campus universitaires, les résidences étudiantes, les centres commerciaux et les lieux de loisirs. Cela rend la ligne 8 idéale pour les étudiants se rendant en cours, les employés se rendant au travail ou les résidents cherchant à profiter des installations du campus.\nLes horaires de la ligne 8 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 8 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre la Place de l'Europe et le Campus Marthe Gautier. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient étudiants, résidents ou visiteurs de la ville. ",
+            "description": "Ligne traversant le centre par l'axe des boulevards. Elle relie le quartier étudiant de Vallières (Faculté des Lettres) au secteur sud de Beaumont-Matussat.",
             "stats": {
                 "nombre_arrets": 27,
                 "temps_trajet": "32 minutes",
@@ -193,9 +193,9 @@
         },
         {
             "id": 9,
-            "nom": "Haute-Ville <> Campus Alan Turing",
+            "nom": "Trémonteix <> Brézet",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 9 du réseau urbain de Clermont-Ferrand est une liaison essentielle entre Haute-Ville et le Campus des Cézeaux, offrant une solution de transport pratique pour les étudiants, les résidents et les visiteurs.\nCe trajet débute à Haute-Ville, un quartier historique animé de Clermont-Ferrand, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont doux et accueillants, offrant aux passagers un voyage agréable dès le départ. Les grandes fenêtres permettent d'admirer les rues pavées et les bâtiments historiques de la ville.\nEn chemin vers le Campus des Cézeaux, la ligne 9 traverse plusieurs quartiers dynamiques de Clermont-Ferrand. Les passagers peuvent observer la vie quotidienne de la ville, avec ses commerces locaux, ses cafés animés et ses espaces verts accueillants.\nLe bus s'arrête ensuite au Campus des Cézeaux, une plaque tournante de l'enseignement supérieur à Clermont-Ferrand. Le campus abrite de nombreuses universités, écoles et centres de recherche, attirant de nombreux étudiants et chercheurs. La ligne 9 offre une connectivité directe au campus, facilitant les déplacements pour les étudiants et le personnel académique.\nLa ligne 9 est connue pour sa fréquence élevée et ses horaires réguliers, assurant ainsi une disponibilité constante pour les utilisateurs. Que ce soit pour se rendre en cours, accéder aux installations du campus ou explorer les environs, la ligne 9 offre une solution de transport pratique et fiable.\nEn résumé, la ligne 9 du réseau urbain de Clermont-Ferrand relie Haute-Ville au Campus des Cézeaux, offrant une connexion rapide et pratique pour les étudiants et les résidents. Avec son confort, sa connectivité et son engagement envers la communauté étudiante, la ligne 9 est un choix idéal pour se déplacer entre ces deux destinations clés de la ville. ",
+            "description": "Ligne clé pour l'emploi, reliant les zones d'habitat de Trémonteix à l'immense zone industrielle et commerciale du Brézet. Très fréquentée aux heures de pointe.",
             "stats": {
                 "nombre_arrets": 12,
                 "temps_trajet": "18 minutes",
@@ -204,9 +204,9 @@
         },
         {
             "id": 10,
-            "nom": "Campus Cézeaux <> CRT Est",
+            "nom": "Durtol <> Aulnat",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 10 du réseau urbain de Clermont-Ferrand assure la liaison entre le Campus des Cézeaux et le CRT Est, offrant un moyen pratique et efficace de se déplacer dans la ville.\nLe trajet commence au Campus des Cézeaux, un pôle universitaire important de Clermont-Ferrand. Les étudiants, les enseignants et le personnel administratif peuvent monter à bord d'un bus confortable, spécialement conçu pour répondre aux besoins des voyageurs. Les sièges sont ergonomiques, offrant un soutien optimal pendant le trajet.\nLa ligne 10 traverse ensuite différents quartiers de la ville, permettant aux passagers de découvrir Clermont-Ferrand sous différents angles. Que ce soit en passant par des zones résidentielles, des zones commerçantes ou des espaces verts, les passagers peuvent profiter de la diversité de la ville tout en se déplaçant vers leur destination.\nLe terminus de la ligne 10 se situe au CRT Est, offrant une connexion pratique avec d'autres lignes de transport en commun. Cela permet aux passagers de se déplacer facilement vers d'autres quartiers, zones d'activités ou centres commerciaux de Clermont-Ferrand.\nLa ligne 10 est réputée pour sa ponctualité et sa régularité, offrant des horaires adaptés aux besoins des passagers. Que ce soit pour se rendre en cours, au travail ou pour des activités de loisirs, les passagers peuvent compter sur la ligne 10 pour un service fiable et efficace.\nEn résumé, la ligne 10 du réseau urbain de Clermont-Ferrand relie le Campus des Cézeaux au CRT Est, offrant aux passagers un moyen pratique et fiable de se déplacer dans la ville. Avec son confort, sa diversité de trajet et sa connectivité avec d'autres lignes, la ligne 10 est un choix idéal pour les étudiants, les travailleurs et les résidents de Clermont-Ferrand. ",
+            "description": "Longue ligne transversale reliant l'extrême ouest (Durtol) à l'extrême est (Aulnat), traversant tout le centre-ville et desservant la Gare SNCF.",
             "stats": {
                 "nombre_arrets": 24,
                 "temps_trajet": "33 minutes",
@@ -215,9 +215,9 @@
         },
         {
             "id": 11,
-            "nom": "Campus Marthe Gautier <> CHU Estaing",
+            "nom": "Aubière Place des Ramacles <> Montferrand",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 11 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie le Campus Marthe Gautier, comprenant la faculté de médecine/pharmacie et le CHU Gabriel Montpied, au CHU Estaing, en passant par la faculté d'endodontie avec ses urgences.\nLe trajet commence au Campus Marthe Gautier, un important centre universitaire abritant la faculté de médecine/pharmacie. Les étudiants, le personnel enseignant et les visiteurs peuvent facilement se rendre à leurs cours, conférences ou événements grâce à la ligne 11. Les bus sont spécialement aménagés pour offrir un confort optimal aux passagers pendant leur voyage.\nEnsuite, la ligne 11 se dirige vers le CHU Estaing, un centre hospitalier majeur à Clermont-Ferrand. Cette liaison est cruciale pour les patients, le personnel médical et les visiteurs qui ont besoin d'accéder aux services médicaux et aux urgences de la faculté d'endodontie. La ligne 11 facilite ainsi les déplacements vers ces installations de soins de santé essentielles.\nLa ligne 11 est réputée pour son efficacité et sa ponctualité, avec des horaires bien adaptés aux besoins des passagers. Que ce soit pour se rendre à des rendez-vous médicaux, assister à des cours ou recevoir des soins d'urgence, les passagers peuvent compter sur la ligne 11 pour un service fiable et pratique.\nEn résumé, la ligne 11 du réseau urbain de Clermont-Ferrand relie le Campus Marthe Gautier (faculté de médecine/pharmacie et CHU Gabriel Montpied) au CHU Estaing, en passant par la faculté d'endodontie avec ses urgences. Cette ligne assure une liaison indispensable entre les établissements universitaires et les services médicaux, offrant aux étudiants, au personnel médical et aux patients un moyen pratique de se déplacer dans la ville. ",
+            "description": "Ligne de rocade sud-est, évitant le centre-ville pour relier directement le bourg d'Aubière au quartier historique de Montferrand.",
             "stats": {
                 "nombre_arrets": 14,
                 "temps_trajet": "21 minutes",
@@ -226,9 +226,9 @@
         },
         {
             "id": 12,
-            "nom": "Gare centrale <> Parc d'attraction",
+            "nom": "Delille <> Quartier Chambon",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 12 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie la Gare Centrale au Parc d'attraction, offrant aux passagers un moyen pratique et agréable de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à la Gare Centrale, un point névralgique de transport où convergent les lignes de train, de bus et de tramway. Les passagers peuvent monter à bord d'un bus moderne et confortable, équipé de sièges ergonomiques et de la climatisation pour garantir leur confort tout au long du trajet.\nLa ligne 12 traverse ensuite différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 12 est situé au Parc d'attraction, un lieu prisé par les familles et les amateurs de loisirs. Cette liaison est particulièrement utile pour ceux qui souhaitent profiter des attractions du parc, que ce soit pour une journée en famille ou une sortie entre amis.\nLes horaires de la ligne 12 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 12 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre la Gare Centrale et le Parc d'attraction. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient étudiants, employés ou résidents de la ville. ",
+            "description": "Au départ de la Place Delille, cette ligne dessert les quartiers est vers le secteur Chambon. Pratique pour les lycéens de Blaise Pascal.",
             "stats": {
                 "nombre_arrets": 21,
                 "temps_trajet": "27 minutes",
@@ -237,9 +237,9 @@
         },
         {
             "id": 13,
-            "nom": "Haute-Ville <> Aéroport",
+            "nom": "Haut-de-Chanturgue <> Quartier Neyrat",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 13 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie Haute-Ville à l'Aéroport, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à Haute-Ville, un quartier historique animé de Clermont-Ferrand, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont doux et accueillants, offrant aux passagers un voyage agréable dès le départ. Les grandes fenêtres permettent d'admirer les rues pavées et les bâtiments historiques de la ville.\nEn chemin vers l'Aéroport, la ligne 13 traverse plusieurs quartiers dynamiques de Clermont-Ferrand. Les passagers peuvent observer la vie quotidienne de la ville, avec ses commerces locaux, ses cafés animés et ses espaces verts accueillants.\nLe bus s'arrête ensuite à l'Aéroport, offrant aux passagers un accès direct et pratique aux vols nationaux et internationaux. Que ce soit pour les voyageurs arrivant ou partant de Clermont-Ferrand, cette ligne facilite les déplacements vers et depuis l'aéroport, leur permettant de poursuivre leur voyage en toute facilité.\nLa ligne 13 est connue pour sa fréquence élevée et ses horaires réguliers, assurant ainsi une disponibilité constante pour les utilisateurs. Que ce soit pour se rendre à l'aéroport pour un vol ou pour explorer la ville, la ligne 13 offre une solution de transport pratique et fiable.\nEn résumé, la ligne 13 du réseau urbain de Clermont-Ferrand relie Haute-Ville à l'Aéroport, offrant une connexion rapide et pratique pour les passagers. Avec son confort, sa connectivité et son engagement envers la communauté étudiante, la ligne 13 est un choix idéal pour se déplacer entre ces deux destinations clés de la ville. ",
+            "description": "Navette de quartier desservant les zones d'habitat dense du Nord de Clermont, facilitant l'accès au centre commercial Auchan Nord.",
             "stats": {
                 "nombre_arrets": 15,
                 "temps_trajet": "18 minutes",
@@ -248,9 +248,9 @@
         },
         {
             "id": 14,
-            "nom": "Trinité <> Hôtel de région",
+            "nom": "Gare SNCF <> Cébazat",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 14 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie la Trinité à l'Hôtel de Région, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à la Trinité, un quartier dynamique de Clermont-Ferrand, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 14 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 14 est situé à l'Hôtel de Région, un bâtiment emblématique abritant les institutions régionales. Cette liaison est particulièrement utile pour les employés, les visiteurs et les résidents qui souhaitent se rendre à l'Hôtel de Région en toute facilité.\nLes horaires de la ligne 14 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 14 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre la Trinité et l'Hôtel de Région. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient employés, visiteurs ou résidents de la ville. ",
+            "description": "Ligne suburbaine importante connectant la ville de Cébazat et son hôpital Nord au pôle d'échanges de la Gare SNCF.",
             "stats": {
                 "nombre_arrets": 18,
                 "temps_trajet": "24 minutes",
@@ -259,9 +259,9 @@
         },
         {
             "id": 15,
-            "nom": "Place de Jaude <> Cathédrale",
+            "nom": "Clermont Place de Jaude <> Puy de Dôme",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 15 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie la Place de Jaude à la Cathédrale, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à la Place de Jaude, un centre dynamique du centre-ville, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 15 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 15 est situé à la Cathédrale, un monument emblématique de Clermont-Ferrand. Cette liaison est particulièrement utile pour les touristes, les résidents locaux et les visiteurs qui souhaitent se rendre à la Cathédrale en toute facilité.\nLes horaires de la ligne 15 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 15 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre la Place de Jaude et la Cathédrale. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient touristes, résidents ou visiteurs de la ville. ",
+            "description": "La ligne touristique par excellence ! (Navette Panoramique). Au départ de Jaude, elle vous emmène au pied du Géant des Dômes pour prendre le train à crémaillère.",
             "stats": {
                 "nombre_arrets": 36,
                 "temps_trajet": "48 minutes",
@@ -270,9 +270,9 @@
         },
         {
             "id": 16,
-            "nom": "Aéroport <> Gare de l'Ouest",
+            "nom": "Delille <> Le Cendre",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 16 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie l'Aéroport à la Gare de l'Ouest, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à l'Aéroport, un point d'entrée majeur pour les voyageurs arrivant à Clermont-Ferrand. Les passagers peuvent monter à bord d'un bus moderne et confortable, équipé de sièges ergonomiques et de la climatisation pour garantir leur confort tout au long du trajet.\nLa ligne 16 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 16 est situé à la Gare de l'Ouest, un important hub de transport où convergent les lignes de train, de bus et de tramway. Cette liaison est particulièrement utile pour les voyageurs souhaitant se rendre à la gare en toute facilité.\nLes horaires de la ligne 16 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 16 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre l'Aéroport et la Gare de l'Ouest. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient voyageurs, employés ou résidents de la ville. ",
+            "description": "Ligne périurbaine desservant le sud-est de l'agglomération, reliant la commune du Cendre au centre-ville via Cournon.",
             "stats": {
                 "nombre_arrets": 20,
                 "temps_trajet": "22 minutes",
@@ -281,9 +281,9 @@
         },
         {
             "id": 17,
-            "nom": "Gare de l'Ouest <> Moulin à Vent",
+            "nom": "CHU G. Montpied <> Romagnat",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 17 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie le Moulin à vent à la Gare de l'Ouest, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence au Moulin à vent, un quartier dynamique de Clermont-Ferrand, où les passagers peuvent monter à bord d'un bus moderne et confortable. Les sièges sont ergonomiques et l'intérieur est climatisé, garantissant un voyage agréable à tout moment de l'année.\nLa ligne 17 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 17 est situé à la Gare de l'Ouest, un important hub de transport où convergent les lignes de train, de bus et de tramway. Cette liaison est particulièrement utile pour les voyageurs souhaitant se rendre à la gare en toute facilité.\nLes horaires de la ligne 17 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 17 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre le Moulin à vent et la Gare de l'Ouest. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient touristes, résidents ou visiteurs de la ville. ",
+            "description": "Ligne de proximité reliant la commune de Romagnat au grand pôle hospitalier Gabriel Montpied et au campus des Cézeaux.",
             "stats": {
                 "nombre_arrets": 28,
                 "temps_trajet": "33 minutes",
@@ -292,9 +292,9 @@
         },
         {
             "id": 18,
-            "nom": "Bellevue <> Hôtel de région",
+            "nom": "Mezel <> Jaude",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne 18 du réseau urbain de Clermont-Ferrand est une liaison essentielle qui relie Bellevue à l'Hôtel de région, offrant aux passagers un moyen pratique et efficace de se déplacer entre ces deux points clés de la ville.\nLe trajet commence à Bellevue, un quartier résidentiel paisible de Clermont-Ferrand. Les passagers peuvent monter à bord d'un bus moderne et confortable, équipé de sièges ergonomiques et de la climatisation pour garantir leur confort tout au long du trajet.\nLa ligne 18 traverse différents quartiers de Clermont-Ferrand, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les espaces verts qui jalonnent l'itinéraire.\nLe terminus de la ligne 18 est situé à l'Hôtel de région, un bâtiment emblématique de Clermont-Ferrand. Cette liaison est particulièrement utile pour les employés de la région et les visiteurs qui souhaitent se rendre à l'Hôtel de région en toute facilité.\nLes horaires de la ligne 18 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 18 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre Bellevue et l'Hôtel de région. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient employés, résidents ou visiteurs de la ville. ",
+            "description": "Desserte de la vallée du Bedat, reliant la petite commune de Mezel directement au cœur de Clermont-Ferrand.",
             "stats": {
                 "nombre_arrets": 20,
                 "temps_trajet": "22 minutes",
@@ -305,7 +305,7 @@
             "id": 60,
             "nom": "Préfecture <> Lycée Jeanne d'Arc",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "La ligne 60 du réseau urbain de Clermont-Ferrand assure la liaison entre la Préfecture et le Lycée Jeanne d'Arc, offrant un moyen pratique et fiable de se déplacer entre ces deux points clés de la ville.\nCe trajet débute à la Préfecture, un lieu central de Clermont-Ferrand où convergent de nombreuses activités administratives et professionnelles. Les passagers peuvent monter à bord d'un bus moderne et confortable, équipé de sièges ergonomiques et de la climatisation pour garantir leur confort tout au long du trajet.\nLa ligne 60 parcourt différents quartiers de la ville, offrant aux passagers une variété de vues et d'expériences. Ils peuvent admirer l'architecture urbaine, les rues animées et les zones commerçantes qui jalonnent l'itinéraire.\nLe terminus de la ligne 60 est situé au Lycée Jeanne d'Arc, un établissement scolaire réputé de Clermont-Ferrand. Cette liaison est particulièrement utile pour les élèves et le personnel éducatif qui souhaitent se rendre au lycée en toute facilité.\nLes horaires de la ligne 60 sont bien adaptés pour répondre aux besoins des passagers. Que ce soit en semaine ou le week-end, les bus circulent régulièrement, assurant une fréquence suffisante pour minimiser les temps d'attente.\nEn somme, la ligne 60 du réseau urbain de Clermont-Ferrand est un moyen pratique et efficace de se déplacer entre la Préfecture et le Lycée Jeanne d'Arc. Avec des bus confortables, des arrêts stratégiques et des horaires adaptés, elle facilite les déplacements quotidiens des passagers, qu'ils soient étudiants, employés ou résidents de la ville. ",
+            "description": "Ligne scolaire et administrative courte distance, très fréquentée aux heures de sortie des bureaux et des classes.",
             "stats": {
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
@@ -314,9 +314,9 @@
         },
         {
             "id": 61,
-            "nom": "Gare de l'Ouest <> Parc Jolimont",
+            "nom": "Gare de l'Ouest <> Parc Montjuzet",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "La ligne 61 du réseau urbain de Clermont-Ferrand relie la Gare de l'Ouest au Puy de Montaudoux, offrant aux passagers un moyen pratique et agréable de se déplacer dans la ville.\nLe trajet commence à la Gare de l'Ouest, un important point d'entrée et de sortie de la ville. Les passagers peuvent monter à bord d'un bus confortable et moderne, avec des sièges spacieux et des commodités pour assurer un voyage agréable dès le départ.\nLa ligne 61 traverse ensuite différents quartiers de Clermont-Ferrand, offrant aux passagers un aperçu de la diversité de la ville. En chemin, ils peuvent admirer les sites historiques, les rues animées et les parcs verdoyants, créant ainsi une expérience visuelle intéressante pendant le trajet.\nLe terminus de la ligne 61 se situe au Puy de Montaudoux, offrant aux passagers un accès pratique à cette destination prisée. Que ce soit pour se promener dans la nature, faire de la randonnée ou profiter des vues panoramiques sur la ville, le Puy de Montaudoux offre une escapade paisible loin de l'agitation urbaine.\nLes horaires de la ligne 61 sont bien planifiés pour répondre aux besoins des passagers, avec des fréquences régulières tout au long de la journée. Cela permet aux utilisateurs de planifier leurs déplacements en toute confiance, que ce soit pour des rendez-vous, des visites touristiques ou des moments de détente.\nEn résumé, la ligne 61 du réseau urbain de Clermont-Ferrand relie la Gare de l'Ouest au Puy de Montaudoux, offrant aux passagers un moyen pratique et agréable de se déplacer dans la ville. Avec son confort, sa diversité de trajet et ses horaires bien pensés, la ligne 61 est un choix idéal pour les résidents et les visiteurs souhaitant explorer Clermont-Ferrand et profiter de ses attractions. ",
+            "description": "Ligne verte menant au plus célèbre parc de la ville. Ça grimpe ! Offre une vue imprenable sur la ville durant le trajet.",
             "stats": {
                 "nombre_arrets": 27,
                 "temps_trajet": "32 minutes",
@@ -325,9 +325,9 @@
         },
         {
             "id": 62,
-            "nom": "Parc de l'Étang <> Parc de l'Étang",
+            "nom": "Stade Michelin <> Gravanches",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "",
+            "description": "Ligne desservant les zones sportives (Rugby, Tennis) et le parc d'activité des Gravanches au nord-est.",
             "stats": {
                 "nombre_arrets": 30,
                 "temps_trajet": "40 minutes",
@@ -338,7 +338,7 @@
             "id": 63,
             "nom": "Place de Jaude <> L'Aventure Michelin",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "",
+            "description": "La ligne culturelle ! Voyagez de la statue de Vercingétorix jusqu'au temple du pneu à Cataroux. Incontournable pour les visiteurs.",
             "stats": {
                 "nombre_arrets": 26,
                 "temps_trajet": "29 minutes",
@@ -349,7 +349,7 @@
             "id": 64,
             "nom": "Place de Jaude <> Hôtel de région",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "",
+            "description": "Navette express reliant le pouvoir économique et politique de la ville à Montferrand.",
             "parkings": ["luca"],
             "stats": {
                 "nombre_arrets": 13,
@@ -361,7 +361,7 @@
             "id": 65,
             "nom": "Préfecture <> Place de Jaude",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "",
+            "description": "Micro-navette de centre-ville pour les déplacements rapides entre les administrations.",
             "stats": {
                 "nombre_arrets": 27,
                 "temps_trajet": "25 minutes",
@@ -370,9 +370,9 @@
         },
         {
             "id": 101,
-            "nom": "Hôtel de Région <> ARRONAY Etangs",
+            "nom": "Hôtel de Région <> Lempdes",
             "type": "Puy'Périphérique",
-            "description": "",
+            "description": "Ligne périurbaine reliant Montferrand à la commune de Lempdes, via les zones commerciales.",
             "stats": {
                 "nombre_arrets": 16,
                 "temps_trajet": "36 minutes",
@@ -381,9 +381,9 @@
         },
         {
             "id": 102,
-            "nom": "Stade <> BRINTE Avenue de la Liberté",
+            "nom": "Stade <> Gerzat",
             "type": "Puy'Périphérique",
-            "description": "",
+            "description": "Liaison nord connectant le Stade Gabriel Montpied à la ville de Gerzat.",
             "stats": {
                 "nombre_arrets": 12,
                 "temps_trajet": "27 minutes",
@@ -392,9 +392,9 @@
         },
         {
             "id": 103,
-            "nom": "Place de l'Europe <> CLORENT Centre de recyclage",
+            "nom": "Place de l'Europe <> Chateaugay",
             "type": "Puy'Périphérique",
-            "description": "",
+            "description": "Ligne desservant les coteaux viticoles de Chateaugay depuis le carrefour de Chamalières.",
             "stats": {
                 "nombre_arrets": 8,
                 "temps_trajet": "21 minutes",
@@ -403,9 +403,9 @@
         },
         {
             "id": 104,
-            "nom": "Science Po <> LACANAC Place du marché",
+            "nom": "Science Po <> Pont-du-Château",
             "type": "Puy'Périphérique",
-            "description": "",
+            "description": "Ligne longue distance vers l'Est, suivant le cours de l'Allier jusqu'à Pont-du-Château.",
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "24 minutes",
@@ -414,9 +414,9 @@
         },
         {
             "id": 105,
-            "nom": "Place de l'Europe <> Église de Saint-Amant-Tallende",
+            "nom": "Place de l'Europe <> Saint-Amant-Tallende",
             "type": "Puy'Périphérique",
-            "description": "",
+            "description": "Ligne du sud, traversant la vallée de la Veyre pour rejoindre les villages historiques.",
             "stats": {
                 "nombre_arrets": 20,
                 "temps_trajet": "50 minutes",
@@ -425,9 +425,9 @@
         },
         {
             "id": 106,
-            "nom": "Bureau de poste <> Gare de l'Ouest",
+            "nom": "Bureau de poste <> Volvic",
             "type": "Puy'Périphérique",
-            "description": "",
+            "description": "Direction la ville de la pierre et de l'eau ! Desserte de Volvic depuis Clermont.",
             "stats": {
                 "nombre_arrets": 11,
                 "temps_trajet": "26 minutes",
@@ -436,9 +436,9 @@
         },
         {
             "id": 151,
-            "nom": "Bureau de poste <> Av. de la Liberté",
+            "nom": "Gare Routière <> Orcines",
             "type": "Puy'Périphérique",
-            "description": "",
+            "description": "Ligne de montagne desservant Orcines et les hameaux au pied du Puy de Dôme.",
             "stats": {
                 "nombre_arrets": 21,
                 "temps_trajet": "52 minutes",
@@ -449,7 +449,7 @@
             "id": 201,
             "nom": "Campus Cézeaux <> RIOM Gare Routière",
             "type": "Monts'Connection",
-            "description": "",
+            "description": "Ligne Express Régionale : La connexion rapide entre le pôle universitaire clermontois et la sous-préfecture de Riom.",
             "stats": {
                 "nombre_arrets": 6,
                 "temps_trajet": "67 minutes",
@@ -458,9 +458,9 @@
         },
         {
             "id": 202,
-            "nom": "Campus Cézeaux <> MINIA Gare Routière",
+            "nom": "Campus Cézeaux <> Issoire",
             "type": "Monts'Connection",
-            "description": "",
+            "description": "Ligne Express Sud : Relie le campus aux industries et zones d'habitat d'Issoire via l'A75.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "46 minutes",
@@ -469,9 +469,9 @@
         },
         {
             "id": 203,
-            "nom": "Gare de l'Ouest <> Montjuzet",
+            "nom": "Gare de l'Ouest <> Thiers",
             "type": "Monts'Connection",
-            "description": "",
+            "description": "Ligne de la coutellerie ! Une liaison transversale vers la montagne thiernoise.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "62 minutes",
@@ -480,9 +480,9 @@
         },
         {
             "id": 204,
-            "nom": "Gare de l'Ouest <> Blvd. de l'Humanité",
+            "nom": "Gare de l'Ouest <> Billom",
             "type": "Monts'Connection",
-            "description": "",
+            "description": "Desserte de la Toscane auvergnate et de la ville médiévale de Billom.",
             "stats": {
                 "nombre_arrets": 8,
                 "temps_trajet": "70 minutes",
@@ -491,9 +491,9 @@
         },
         {
             "id": 205,
-            "nom": "Gare de l'Ouest <> Blvd. de l'Humanité",
+            "nom": "Gare de l'Ouest <> Veyre-Monton",
             "type": "Monts'Connection",
-            "description": "",
+            "description": "Desserte des zones résidentielles du Val d'Allier sud.",
             "stats": {
                 "nombre_arrets": 7,
                 "temps_trajet": "45 minutes",
@@ -502,9 +502,9 @@
         },
         {
             "id": 206,
-            "nom": "Beffroi <> Gare de l'Ouest",
+            "nom": "Beffroi <> Enval",
             "type": "Monts'Connection",
-            "description": "",
+            "description": "Pour rejoindre les gorges d'Enval depuis le centre historique.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "48 minutes",
@@ -513,9 +513,9 @@
         },
         {
             "id": 251,
-            "nom": "Lycée Jeanne d'Arc <> Lezoux Hôtel de ville",
+            "nom": "Lycée Jeanne d'Arc <> Lezoux",
             "type": "Monts'Connection",
-            "description": "",
+            "description": "Ligne scolaire longue distance pour les élèves venant de Lezoux.",
             "stats": {
                 "nombre_arrets": 7,
                 "temps_trajet": "56 minutes",
@@ -524,9 +524,9 @@
         },
         {
             "id": 601,
-            "nom": "Lycée Jeanne d'Arc <> Lezoux Hôtel de ville",
+            "nom": "Lycée Jeanne d'Arc <> Beaumont",
             "type": "Édu'Volcan",
-            "description": "",
+            "description": "Circuit scolaire desservant les quartiers de Beaumont pour le Lycée Jeanne d'Arc.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "25 minutes",
@@ -535,9 +535,9 @@
         },
         {
             "id": 602,
-            "nom": "Collège Victor Hugo <> LE ROTO Avenue du Parc",
+            "nom": "Collège Victor Hugo <> Ceyrat",
             "type": "Édu'Volcan",
-            "description": "",
+            "description": "Ramassage scolaire depuis Ceyrat vers le Collège Victor Hugo.",
             "stats": {
                 "nombre_arrets": 7,
                 "temps_trajet": "30 minutes",
@@ -548,7 +548,7 @@
             "id": 603,
             "nom": "Centre-ville <> Lycée Jean Zay",
             "type": "Édu'Volcan",
-            "description": "",
+            "description": "Liaison directe pour les étudiants de Jean Zay (Thiers) depuis Clermont (fictif/adapté).",
             "stats": {
                 "nombre_arrets": 12,
                 "temps_trajet": "45 minutes",
@@ -557,9 +557,9 @@
         },
         {
             "id": 651,
-            "nom": "Lycée Blaise Pascal <> NAUBOURG Grand-Place",
+            "nom": "Lycée Blaise Pascal <> Aubière",
             "type": "Édu'Volcan",
-            "description": "",
+            "description": "Desserte du Lycée Blaise Pascal pour les résidents d'Aubière.",
             "stats": {
                 "nombre_arrets": 8,
                 "temps_trajet": "60 minutes",
@@ -568,9 +568,9 @@
         },
         {
             "id": 652,
-            "nom": "Lycée Jeanne d'Arc <> SALANBOURG Eglise Sainte Marie",
+            "nom": "Lycée Jeanne d'Arc <> Romagnat",
             "type": "Édu'Volcan",
-            "description": "",
+            "description": "Ramassage scolaire Romagnat -> Jeanne d'Arc.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "40 minutes",
@@ -579,9 +579,9 @@
         },
         {
             "id": 653,
-            "nom": "La Poste <> Lycée Jean Zay",
+            "nom": "La Poste <> Lycée Fénelon",
             "type": "Édu'Volcan",
-            "description": "",
+            "description": "Desserte de l'institution Fénelon depuis le centre.",
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "75 minutes",
@@ -592,7 +592,7 @@
             "id": 901,
             "nom": "Bellevue <> Haute-Ville",
             "type": "Volca'Demande",
-            "description": "",
+            "description": "Transport à la demande pour le quartier escarpé de Bellevue.",
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "12 minutes",
@@ -603,7 +603,7 @@
             "id": 902,
             "nom": "Parc de l'Étang <> Observatoire",
             "type": "Volca'Demande",
-            "description": "",
+            "description": "Navette à la demande desservant l'Observatoire des Cézeaux.",
             "stats": {
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
@@ -614,8 +614,8 @@
             "id": 903,
             "nom": "Hôtel de police <> Globe",
             "type": "Volca'Demande",
-            "description": "",
-            "stats": {
+            "description": "Liaison TAD de quartier.",
+             "stats": {
                 "nombre_arrets": 12,
                 "temps_trajet": "17 minutes",
                 "longueur_ligne": "4.9 km"
@@ -625,7 +625,7 @@
             "id": 941,
             "nom": "Gare de l'Ouest <> Grand-Place",
             "type": "Volca'Demande",
-            "description": "",
+            "description": "Service à la demande zone Ouest.",
             "stats": {
                 "nombre_arrets": 7,
                 "temps_trajet": "65 minutes",
@@ -634,9 +634,9 @@
         },
         {
             "id": 805,
-            "nom": "Direction le Marcel Michelin pour les matchs de foot !",
+            "nom": "Navette Stade Michelin",
             "type": "JO",
-            "description": "",
+            "description": "Direction le Marcel Michelin pour les matchs de foot ! Service renforcé les jours de match de l'ASM (rugby) ou du Clermont Foot.",
             "stats": {
                 "nombre_arrets": 3,
                 "temps_trajet": "21 minutes",
@@ -645,9 +645,9 @@
         },
         {
             "id": 809,
-            "nom": "Vous cherchez la fan zone ? Direction le parc Montjuzet !",
+            "nom": "Navette Fan Zone Montjuzet",
             "type": "JO",
-            "description": "",
+            "description": "Vous cherchez la fan zone ? Direction le parc Montjuzet ! Ambiance garantie avec vue sur toute la ville.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "15 minutes",
@@ -656,9 +656,9 @@
         },
         {
             "id": 810,
-            "nom": "Pour les épreuves de voile, on vous emmène au lac de Pavin !",
+            "nom": "Lac Pavin - Voile",
             "type": "JO",
-            "description": "",
+            "description": "Pour les épreuves aquatiques, on vous emmène au lac Pavin ! Attention, c'est un lac de cratère !",
             "stats": {
                 "nombre_arrets": 9,
                 "temps_trajet": "65 minutes",
@@ -667,9 +667,9 @@
         },
         {
             "id": 816,
-            "nom": "Pour le triathlon direction le Lac Chambon !",
+            "nom": "Lac Chambon - Triathlon",
             "type": "JO",
-            "description": "",
+            "description": "Pour le triathlon direction le Lac Chambon ! Baignade et course au pied du Sancy.",
             "stats": {
                 "nombre_arrets": 2,
                 "temps_trajet": "7 minutes",
@@ -678,9 +678,9 @@
         },
         {
             "id": 713,
-            "nom": "Direction la Maison des Sports pour les épreuves en intérieur (Trampoline, Handball et Badminton) !",
+            "nom": "Maison des Sports - Indoor",
             "type": "JO",
-            "description": "",
+            "description": "Direction la Maison des Sports Place des Bughes pour les épreuves en intérieur (Trampoline, Handball et Badminton) !",
             "stats": {
                 "nombre_arrets": 15,
                 "temps_trajet": "17 minutes",
@@ -689,9 +689,9 @@
         },
         {
             "id": 817,
-            "nom": "Pour les épreuves d'equi handi, direction l'hippodrome de Vichy-Bellerive !",
+            "nom": "Hippodrome de Vichy",
             "type": "JO",
-            "description": "",
+            "description": "Pour les épreuves d'equi handi, direction l'hippodrome de Vichy-Bellerive ! Navette interurbaine spéciale JO.",
             "stats": {
                 "nombre_arrets": 2,
                 "temps_trajet": "7 minutes",
@@ -700,9 +700,9 @@
         },
         {
             "id": 813,
-            "nom": "La ligne directe pour la maison du Père Noël !",
+            "nom": "Navette Père Noël",
             "type": "Spéciale",
-            "description": "Au départ de la Gare SNCF rejoignez le village de Noël installé Place de Jaude ! \nHoraires d'ouverture du village : <ul><li>Du lundi au vendredi : de 12h à 22h (sauf le 24/12, fermeture à 18h)</li><li>Le samedi : de 10h à 1h</li><li>Le dimanche : de 12h à 21h</li></ul>\nVenez nombreux profiter des animations ainsi que de la Grande Roue !\nToute l'équipe de TCM vous souhaite de joyeuses fêtes de fin d'année !",
+            "description": "La ligne directe pour la maison du Père Noël ! Au départ de la Gare SNCF rejoignez le village de Noël installé Place de Jaude !",
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "13 minutes",
@@ -711,10 +711,10 @@
         },
         {
             "id": "BEN1",
-            "nom": "Jaude",
+            "nom": "Jaude - Cézeaux - Circulaire",
             "type": "Nocturne",
-            "description": "BEN1 est votre allié pour des nuits sereines. Il relie le cœur vibrant de la Place de Jaude au quartier des Cézeaux, en passant par les principaux lieux de vie nocturne. Profitez de vos soirées sans vous soucier du retour !<br><br><strong>Les arrêts desservis :</strong><ul class=\"list-disc list-inside pl-4\"><li>Place de Jaude</li><li>Pont de la Victoire</li><li>Gare SNCF</li><li>Musée d’Art Roger-Quilliot</li><li>Stade Marcel-Michelin</li><li>Montferrand</li><li>CHU Gabriel-Montpied</li><li>Campus des Cézeaux</li><li>Gare Routière</li><li>Hôtel de Ville</li><li>Parc Montjuzet</li></ul><br>Et n'oublie pas, c'est BEN qui te ramène !",
-            "terminus": ["Ligne circulaire via le campus des Cézeaux"],
+            "description": "BEN1 est votre allié pour des nuits sereines. Il relie le cœur vibrant de la Place de Jaude au quartier des Cézeaux, en passant par les principaux lieux de vie nocturne (rue de l'Ange, Gare). Profitez de vos soirées sans vous soucier du retour !",
+             "terminus": ["Ligne circulaire via le campus des Cézeaux"],
             "circulation": {
                 "startHour": 14,
                 "endHour": 5,
@@ -749,8 +749,8 @@
             "id": "BEN2",
             "nom": "Montferrand <> Chamalières",
             "type": "Nocturne",
-            "description": "Avec BEN2, déplacez-vous facilement entre Montferrand et Chamalières. Idéal pour les sorties entre amis ou pour rentrer après un dîner, il dessert des zones résidentielles et des lieux de divertissement.<br><br><strong>Les arrêts desservis :</strong><ul class=\"list-disc list-inside pl-4\"><li>Montferrand</li><li>Gare Routière</li><li>Préfecture</li><li>Hôtel de Ville</li><li>Gare SNCF</li><li>Pont de la Victoire</li><li>Cathédrale</li><li>Parc des Sports de Chamalières</li></ul><br>Et n'oublie pas, c'est BEN qui te ramène !",
-            "terminus": ["Direction Montferrand (via Gare SNCF de Clermont-Ferrand)", "Direction Chamalières (via Gare SNCF de Clermont-Ferrand)"],
+            "description": "Avec BEN2, déplacez-vous facilement entre le quartier historique de Montferrand et le quartier chic de Chamalières.",
+             "terminus": ["Direction Montferrand (via Gare SNCF de Clermont-Ferrand)", "Direction Chamalières (via Gare SNCF de Clermont-Ferrand)"],
             "circulation": {
                 "startHour": 14,
                 "endHour": 5,
@@ -785,8 +785,8 @@
             "id": "BEN3",
             "nom": "Jaude <> Aubière",
             "type": "Nocturne",
-            "description": "BEN3 vous emmène de la Place de Jaude à Aubière, en passant par les quartiers animés et les zones résidentielles. Parfait pour vos sorties nocturnes ou pour rentrer chez vous en toute sécurité.<br><br><strong>Les arrêts desservis :</strong><ul class=\"list-disc list-inside pl-4\"><li>Place de Jaude</li><li>Gare SNCF</li><li>CHU Gabriel-Montpied</li><li>Campus des Cézeaux</li><li>Aubière Centre</li></ul><br>Et n'oublie pas, c'est BEN qui te ramène !",
-            "terminus": ["Direction Jaude (via Gare SNCF de Clermont-Ferrand)", "Direction Aubière (via Gare SNCF de Clermont-Ferrand)"],
+            "description": "BEN3 vous emmène de la Place de Jaude à Aubière, en passant par les quartiers animés et les zones résidentielles. Parfait pour vos sorties nocturnes ou pour rentrer chez vous à Aubière lezoux !",
+             "terminus": ["Direction Jaude (via Gare SNCF de Clermont-Ferrand)", "Direction Aubière (via Gare SNCF de Clermont-Ferrand)"],
             "parkings": ["clinique"],
             "circulation": {
                 "startHour": 14,

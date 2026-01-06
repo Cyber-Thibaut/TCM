@@ -247,13 +247,10 @@
             // 0. Pre-process Live Data Map
             const liveDataMap = new Map();
             allData.lignes.forEach(l => {
-                const visible = l.infos_trafic.filter(info => {
-                    const start = new Date(info.annonce);
-                    const end = new Date(info.fin);
-                    return now >= start && now <= end;
-                });
-                if (visible.length > 0) {
-                     liveDataMap.set(String(l.ligne).toUpperCase(), visible);
+                // Keep relevant alerts (End date in future)
+                const relevant = l.infos_trafic.filter(info => new Date(info.fin) >= now);
+                if (relevant.length > 0) {
+                     liveDataMap.set(String(l.ligne).toUpperCase(), relevant);
                 }
             });
 
@@ -267,18 +264,21 @@
                 if (idUpper === 'NS' || idUpper === 'TCM' || idUpper.startsWith('NAV') || typeUpper.includes('NAVETTE') || typeUpper.includes('SPÉCIALE')) return;
 
                 // Check Live Data
-                const visibleInfos = liveDataMap.get(idUpper) || [];
+                const allInfos = liveDataMap.get(idUpper) || [];
                 
-                // Determine severity for icon/sorting
+                // Split Current vs Future for status calculation
+                const currentInfos = allInfos.filter(i => new Date(i.annonce) <= now);
+                
+                // Determine severity for icon/sorting using CURRENT infos only
                 let statusPriority = 0; // 0=OK, 1=Info, 2=Work, 3=Stop
                 let assetIcon = 'valid.png';
                 let alertLabel = 'Fluide';
                 let alertColor = 'success';
                 let faIcon = 'fa-check';
 
-                if (visibleInfos.length > 0) {
+                if (currentInfos.length > 0) {
                      affectedLinesCount++;
-                     const types = visibleInfos.map(i => i.type.toLowerCase()).join(' ');
+                     const types = currentInfos.map(i => i.type.toLowerCase()).join(' ');
                      
                      if (types.includes('grève') || types.includes('fermeture')) {
                          statusPriority = 3; assetIcon = 'error.png'; alertLabel = 'Interruption'; alertColor = 'error'; faIcon = 'fa-ban';
@@ -287,6 +287,12 @@
                      } else {
                          statusPriority = 1; assetIcon = 'information.png'; alertLabel = 'Information'; alertColor = 'info'; faIcon = 'fa-info-circle';
                      }
+                } else if (allInfos.length > 0) {
+                     // Only future infos? Show 'Information' priority but neutral icon?
+                     // Let's keep it 'valid' visually but clickable
+                     statusPriority = 0.5; 
+                     // assetIcon = 'information.png'; // Optional: show info icon for upcoming?
+                     // alertLabel = 'A venir';
                 }
 
                 // Check search & filter
@@ -297,7 +303,7 @@
                 if (matchesSearch && matchesFilter) {
                     processedLines.push({ 
                         line: lineId, 
-                        infos: visibleInfos, 
+                        infos: allInfos, // Pass ALL infos (current + future)
                         priority: statusPriority,
                         asset: assetIcon,
                         label: alertLabel,
@@ -418,30 +424,61 @@
             const count = document.getElementById('modal-alert-count');
             
             title.textContent = `Ligne ${item.line}`;
-            iconContainer.innerHTML = `<img src="/img/${item.line}.png" class="w-full h-full object-contain p-1" onerror="this.style.display='none';this.innerHTML='${item.line}'">`;
-            count.textContent = `${item.infos.length} perturbation(s)`;
+            iconContainer.innerHTML = `<img src="../img/${item.line}.png" class="w-full h-full object-contain p-1" onerror="this.style.display='none';this.innerHTML='${item.line}'">`;
+            
+            // Count logic based on current/future
+            const now = new Date();
+            const currentInfos = item.infos.filter(i => new Date(i.annonce) <= now);
+            const futureInfos = item.infos.filter(i => new Date(i.annonce) > now);
+            
+            count.textContent = `${currentInfos.length} en cours, ${futureInfos.length} à venir`;
             
             document.getElementById('modal-full-details').href = `details.html#${item.line}`;
             
-            content.innerHTML = item.infos.map(info => {
-                 const sev = getSeverity(info.type);
-                 return `
-                    <div class="card bg-base-100 shadow-sm border border-base-content/5">
-                        <div class="card-body p-4">
-                            <h4 class="card-title text-sm flex items-start gap-2">
-                                <i class="fa-solid ${sev.icon} text-${sev.color} mt-1"></i>
-                                ${info.titre}
-                            </h4>
-                            <p class="text-sm opacity-80 whitespace-pre-line">${info.detail || 'Aucun détail supplémentaire.'}</p>
-                            <div class="text-xs opacity-50 mt-2 flex items-center gap-2">
-                                <i class="fa-regular fa-calendar"></i> Fin prévue : ${new Date(info.fin).toLocaleDateString()}
-                            </div>
-                        </div>
-                    </div>
-                 `;
-            }).join('');
+            let html = '';
+            
+            if (currentInfos.length > 0) {
+                html += `<h4 class="font-bold mb-3 uppercase tracking-wider text-xs opacity-50 sticky top-0 bg-base-100 p-2 z-10 border-b border-base-content/10">En cours</h4>`;
+                html += currentInfos.map(info => renderCard(info)).join('');
+            }
+            
+            if (futureInfos.length > 0) {
+                 html += `<h4 class="font-bold mb-3 mt-6 uppercase tracking-wider text-xs opacity-50 sticky top-0 bg-base-100 p-2 z-10 border-b border-base-content/10">À venir</h4>`;
+                 html += futureInfos.map(info => renderCard(info, true)).join('');
+            }
+            
+            if (!html) html = '<div class="p-4 text-center opacity-50 italic">Aucune information détaillée disponible.</div>';
+            
+            content.innerHTML = html;
             
             modal.showModal();
+        }
+        
+        function renderCard(info, isFuture = false) {
+             const sev = getSeverity(info.type);
+             const opacityClass = isFuture ? 'opacity-80' : '';
+             const badgeClass = isFuture ? 'badge-ghost' : (sev.color === 'error' ? 'badge-error' : (sev.color === 'warning' ? 'badge-warning' : 'badge-info'));
+             
+             return `
+                <div class="card bg-base-100 shadow-sm border border-base-content/5 ${opacityClass} mb-4">
+                    <div class="card-body p-4">
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                             <h4 class="font-bold text-sm leading-tight flex-1">
+                                ${info.titre}
+                             </h4>
+                             <div class="badge ${badgeClass} badge-sm shrink-0 gap-1">
+                                ${isFuture ? '<i class="fa-regular fa-clock"></i>' : `<i class="fa-solid ${sev.icon}"></i>`}
+                                ${isFuture ? 'Prévu' : sev.label}
+                             </div>
+                        </div>
+                        <p class="text-sm opacity-80 whitespace-pre-line leading-relaxed">${info.detail || 'Aucun détail supplémentaire.'}</p>
+                        <div class="text-xs opacity-50 mt-3 pt-3 border-t border-base-content/5 flex items-center gap-4">
+                            <span class="flex items-center gap-1" title="Début"><i class="fa-solid fa-hourglass-start"></i> ${new Date(info.annonce).toLocaleDateString()}</span>
+                            <span class="flex items-center gap-1" title="Fin"><i class="fa-solid fa-hourglass-end"></i> ${new Date(info.fin).toLocaleDateString()}</span>
+                        </div>
+                    </div>
+                </div>
+             `;
         }
 
         // Filter Logic

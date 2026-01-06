@@ -105,8 +105,14 @@
     <!-- Assuming menu.js might inject footer or we need a standard one. 
          menu.js in context seemed to only handle navbar. 
          Index.html has a footer. I will add a simple matching footer here. -->
-    <footer class="mt-auto pt-10 text-center text-sm opacity-50 pb-4">
-        <p>&copy; <span id="year"></span> TCM - Tous droits réservés</p>
+    <footer class="footer footer-center p-10 text-base-content/50 mt-auto">
+        <aside>
+            <div class="opacity-50">
+                 <img src="https://tcm-mobilite.vercel.app/img/TCM-Clair.png" width="120" alt="Logo TCM">
+            </div>
+            <p class="font-bold mt-2">Partenaire de vos déplacements depuis 1989.</p>
+            <p>© <script>document.write(new Date().getFullYear())</script> - TCM Mobilité</p>
+        </aside>
     </footer>
     <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 

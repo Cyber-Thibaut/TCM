@@ -102,11 +102,9 @@
 
         <!-- Controls: Filters & Search -->
         <section class="flex flex-col sm:flex-row gap-4 justify-between items-center sticky top-24 z-30 transition-all duration-300" id="controls-bar">
-            <div class="join shadow-sm glass-panel rounded-lg p-1">
+            <!-- Filter buttons will be injected here -->
+            <div id="filter-container" class="join shadow-sm glass-panel rounded-lg p-1 flex-wrap justify-center sm:justify-start">
                 <button class="join-item btn btn-sm btn-ghost bg-base-100/50 hover:bg-white/50 active" onclick="filterType('all', this)">Tous</button>
-                <button class="join-item btn btn-sm btn-ghost hover:bg-white/50" onclick="filterType('tram', this)">Tram</button>
-                <button class="join-item btn btn-sm btn-ghost hover:bg-white/50" onclick="filterType('bus', this)">Bus</button>
-                <button class="join-item btn btn-sm btn-ghost hover:bg-white/50" onclick="filterType('scolaire', this)">Scolaire</button>
             </div>
              <div class="relative w-full sm:w-auto">
                 <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-base-content/40"></i>
@@ -175,10 +173,13 @@
         <form method="dialog" class="modal-backdrop bg-black/50 backdrop-blur-sm"><button>Fermer</button></form>
     </dialog>
 
-    <footer class="footer footer-center p-10 bg-base-300 text-base-content rounded-t-3xl mt-auto">
+    <footer class="footer footer-center p-10 text-base-content/50 mt-auto">
         <aside>
-            <p class="font-bold text-lg opacity-50">TCM info trafic v2.0</p>
-            <p>Copyright © <span id="year">2026</span> - Tous droits réservés</p>
+            <div class="opacity-50">
+                 <img src="https://tcm-mobilite.vercel.app/img/TCM-Clair.png" width="120" alt="Logo TCM">
+            </div>
+            <p class="font-bold mt-2">Partenaire de vos déplacements depuis 1989.</p>
+            <p>© <script>document.write(new Date().getFullYear())</script> - TCM Mobilité</p>
         </aside>
     </footer>
 
@@ -202,12 +203,44 @@
                 allData = await trafficRes.json();
                 linesRef = await linesRes.json();
                 
+                // Generate Dynamic Filters if not already done
+                if (document.getElementById('filter-container').children.length <= 1) {
+                    generateFilters();
+                }
+
                 render();
                 updateTime();
             } catch (e) {
                 console.error(e);
                 $('#health-monitor').html('<div class="alert alert-error">Impossible de charger les données trafic.</div>');
             }
+        }
+        
+        function generateFilters() {
+            const container = document.getElementById('filter-container');
+            // Keep the first button (Tous)
+            while (container.children.length > 1) {
+                container.removeChild(container.lastChild);
+            }
+            
+            // Extract distinct types
+            const types = new Set();
+            linesRef.lignes.forEach(l => {
+                if (l.type && l.type.trim() !== '') {
+                    types.add(l.type);
+                }
+            });
+            
+            // Sort types alphabetically
+            const sortedTypes = Array.from(types).sort();
+            
+            sortedTypes.forEach(type => {
+                const btn = document.createElement('button');
+                btn.className = 'join-item btn btn-sm btn-ghost hover:bg-white/50';
+                btn.textContent = type;
+                btn.onclick = function() { filterType(type, this); };
+                container.appendChild(btn);
+            });
         }
 
         function updateTime() {
@@ -223,13 +256,9 @@
             return { color: 'info', icon: 'fa-info-circle', label: 'Information' };
         }
 
-        function isLineType(lineCode, type) {
-            lineCode = lineCode.toUpperCase();
+        function isLineType(lineDef, type) {
             if (type === 'all') return true;
-            if (type === 'tram') return lineCode === 'A'; // Assuming A is tram
-            if (type === 'scolaire') return /^\d{3}$/.test(lineCode); // 3 digits usually school
-            if (type === 'bus') return lineCode !== 'A' && !/^\d{3}$/.test(lineCode) && lineCode !== 'TCM' && lineCode !== 'NS';
-            return false;
+            return (lineDef.type && lineDef.type === type);
         }
 
         function render() {
@@ -298,7 +327,7 @@
                 // Check search & filter
                 const searchQuery = document.getElementById('line-search').value.toLowerCase();
                 const matchesSearch = !searchQuery || lineId.toLowerCase().includes(searchQuery);
-                const matchesFilter = isLineType(lineId, activeFilter);
+                const matchesFilter = isLineType(lineDef, activeFilter);
 
                 if (matchesSearch && matchesFilter) {
                     processedLines.push({ 

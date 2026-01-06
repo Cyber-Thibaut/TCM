@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualités - Transport Clermont Métropole</title>
+    <meta name="description" content="Toutes les actualités du réseau TCM.">
+    <link rel="icon" href="/img/TCM.png" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="menu.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        /* TCM Glass System */
+        :root {
+            --card-glass: rgba(255, 255, 255, 0.65);
+            --card-border: rgba(255, 255, 255, 0.5);
+            --card-shadow: rgba(0,0,0,0.1);
+        }
+        [data-theme="dark"] {
+            --card-glass: rgba(30, 41, 59, 0.4);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-shadow: rgba(0, 0, 0, 0.3);
+        }
+        .glass-panel {
+            background: var(--card-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px 0 var(--card-shadow);
+        }
+
+        /* WordPress Content Styles */
+        .wp-content img { @apply rounded-xl shadow-md my-6 w-full object-cover; }
+        .wp-content h2 { @apply text-2xl font-bold mt-8 mb-4 text-primary; }
+        .wp-content h3 { @apply text-xl font-bold mt-6 mb-3; }
+        .wp-content p { @apply mb-4 leading-relaxed opacity-90; }
+        .wp-content ul { @apply list-disc list-inside mb-4 pl-4; }
+        .wp-content a { @apply link link-primary; }
+        .wp-content blockquote { @apply border-l-4 border-primary pl-4 italic my-6 opacity-80; }
+    </style>
+</head>
+
+<body class="bg-base-200 text-base-content font-sans min-h-screen flex flex-col pt-24 pb-12">
+    
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="absolute top-[10%] right-[5%] w-[400px] h-[400px] bg-primary/10 rounded-full blur-[80px]"></div>
+        <div class="absolute bottom-[10%] left-[5%] w-[300px] h-[300px] bg-secondary/10 rounded-full blur-[60px]"></div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="container mx-auto px-4 max-w-6xl">
+        
+        <!-- Post View (Hidden by default) -->
+        <section id="article-section" class="hidden animate__animated animate__fadeIn">
+            <div class="glass-panel p-6 sm:p-10 rounded-3xl relative">
+                <button onclick="showList()" class="btn btn-sm btn-ghost absolute top-6 left-6 gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Retour
+                </button>
+                <div id="article-loader" class="flex justify-center py-20">
+                    <span class="loading loading-spinner loading-lg text-primary"></span>
+                </div>
+                <div id="article-container" class="hidden">
+                    <!-- Content injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- List View -->
+        <section id="list-section" class="animate__animated animate__fadeIn">
+            <!-- Header & Search -->
+            <div class="text-center mb-10">
+                <div class="inline-block px-3 py-1 mb-2 text-xs font-bold tracking-wider text-primary uppercase bg-primary/10 rounded-full">Actualités</div>
+                <h1 class="text-4xl md:text-5xl font-black mb-4">Le Magazine TCM</h1>
+                <p class="text-lg opacity-70 max-w-2xl mx-auto mb-8">Découvrez les dernières nouveautés, les travaux en cours et la vie du réseau.</p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-between items-center bg-base-100/50 p-2 rounded-2xl backdrop-blur-md border border-base-content/5 max-w-4xl mx-auto">
+                    <div class="relative w-full">
+                        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 opacity-50"></i>
+                        <input id="search-input" type="text" placeholder="Rechercher un article..." class="input input-ghost w-full pl-10 focus:bg-transparent" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid -->
+            <div id="actus-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Skeletons initially -->
+                <div class="glass-panel h-96 rounded-2xl animate-pulse"></div>
+                <div class="glass-panel h-96 rounded-2xl animate-pulse"></div>
+                <div class="glass-panel h-96 rounded-2xl animate-pulse"></div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center">
+                <div id="pagination" class="join bg-base-100/50 backdrop-blur-md shadow-sm"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer managed by menu.js usually, or standard footer -->
+    <!-- Assuming menu.js might inject footer or we need a standard one. 
+         menu.js in context seemed to only handle navbar. 
+         Index.html has a footer. I will add a simple matching footer here. -->
+    <footer class="mt-auto pt-10 text-center text-sm opacity-50 pb-4">
+        <p>&copy; <span id="year"></span> TCM - Tous droits réservés</p>
+    </footer>
+    <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+
+    <!-- Logic -->
+    <script>
+        // API Configuration - Using 'tibo_lyon' account as found in index.html
+        const API_URL = "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts?_embed&per_page=100&categories=8"; // categories=8 matches index.html "Actu"
+        
+        let allPosts = [];
+        let filteredPosts = [];
+        let currentPage = 1;
+        const postsPerPage = 9;
+
+        // --- Routing Logic ---
+        function checkUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            if (postId) showArticle(postId);
+            else showList();
+        }
+
+        function showList() {
+            history.pushState({}, '', 'actualites.html');
+            $('#article-section').addClass('hidden');
+            $('#list-section').removeClass('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- Fetching & List Logic ---
+        async function init() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                
+                if (Array.isArray(data)) {
+                    // Process data
+                    allPosts = data.map(post => ({
+                        id: post.id,
+                        title: post.title.rendered,
+                        date: new Date(post.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
+                        excerpt: post.excerpt.rendered.replace(/<[^>]+>/g, '').slice(0, 110) + '...',
+                        content: post.content.rendered,
+                        image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/img/TCM.png',
+                        author: post._embedded?.['author']?.[0]?.name || 'TCM',
+                        link: post.link
+                    }));
+                    
+                    filteredPosts = allPosts;
+                    renderList();
+                }
+            } catch (error) {
+                console.error("Error fetching news:", error);
+                $('#actus-list').html(`<div class="col-span-full text-center p-10 glass-panel rounded-2xl"><i class="fa-solid fa-triangle-exclamation text-warning text-4xl mb-4"></i><br>Impossible de charger les actualités.</div>`);
+            }
+        }
+
+        function renderList() {
+            const container = $('#actus-list');
+            container.empty();
+            
+            if (filteredPosts.length === 0) {
+                container.html(`<div class="col-span-full text-center opacity-50 py-10">Aucun article trouvé.</div>`);
+                $('#pagination').empty();
+                return;
+            }
+
+            const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+            const start = (currentPage - 1) * postsPerPage;
+            const currentPosts = filteredPosts.slice(start, start + postsPerPage);
+
+            currentPosts.forEach((post, index) => {
+                const html = `
+                <div class="glass-panel rounded-2xl overflow-hidden flex flex-col group hover:-translate-y-1 transition-transform duration-300">
+                    <figure class="h-52 overflow-hidden relative">
+                        <img src="${post.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${post.title}">
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                        <div class="absolute bottom-3 left-3 badge badge-neutral shadow-md backdrop-blur-md bg-opacity-80 border-none text-xs">
+                           ${post.date}
+                        </div>
+                    </figure>
+                    <div class="p-6 flex flex-col flex-1">
+                        <h2 class="text-xl font-bold mb-3 leading-tight group-hover:text-primary transition-colors line-clamp-2">${post.title}</h2>
+                        <p class="text-sm opacity-70 mb-4 flex-1 line-clamp-3">${post.excerpt}</p>
+                        <div class="mt-auto pt-4 border-t border-base-content/10 flex justify-between items-center">
+                            <span class="text-xs font-bold opacity-50 uppercase tracking-widest">${post.author}</span>
+                            <button onclick="openArticle(${post.id})" class="btn btn-sm btn-ghost gap-2 text-primary hover:bg-primary/10">
+                                Lire <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `;
+                container.append(html);
+            });
+
+            // Pagination
+            const pagContainer = $('#pagination');
+            pagContainer.empty();
+            if (totalPages > 1) {
+                for (let i = 1; i <= totalPages; i++) {
+                    pagContainer.append(`<button class="join-item btn ${i === currentPage ? 'btn-active btn-primary' : 'btn-ghost'}" onclick="goToPage(${i})">${i}</button>`);
+                }
+            }
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderList();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- Search Logic ---
+        $('#search-input').on('input', function(e) {
+            const term = e.target.value.toLowerCase();
+            filteredPosts = allPosts.filter(p => p.title.toLowerCase().includes(term) || p.excerpt.toLowerCase().includes(term));
+            currentPage = 1;
+            renderList();
+        });
+
+        // --- Article Viewer Logic ---
+        window.openArticle = function(id) {
+            history.pushState({id: id}, '', `?id=${id}`);
+            showArticle(id);
+        }
+
+        function showArticle(id) {
+            const post = allPosts.find(p => p.id == id);
+            
+            // If post not found in loaded list (e.g. direct link to old post not in first 100), define fallback or fetch
+            // For now assuming it is in list since we fetched 100
+            if (!post) {
+                // Fallback fetch if deep linking
+                fetchSinglePost(id);
+                return;
+            }
+
+            renderArticleContent(post);
+        }
+
+        async function fetchSinglePost(id) {
+            $('#list-section').addClass('hidden');
+            $('#article-section').removeClass('hidden');
+            $('#article-loader').removeClass('hidden');
+            $('#article-container').addClass('hidden');
+
+            try {
+                const response = await fetch(`https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts/${id}?_embed`);
+                const data = await response.json();
+                
+                const post = {
+                    title: data.title.rendered,
+                    date: new Date(data.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }),
+                    content: data.content.rendered,
+                    image: data._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/img/TCM.png',
+                    author: data._embedded?.['author']?.[0]?.name || 'TCM',
+                    link: data.link
+                };
+                renderArticleContent(post);
+            } catch (e) {
+                $('#article-container').html('<div class="alert alert-error">Impossible de charger cet article.</div>').removeClass('hidden');
+                $('#article-loader').addClass('hidden');
+            }
+        }
+
+        function renderArticleContent(post) {
+            $('#list-section').addClass('hidden');
+            $('#article-section').removeClass('hidden');
+            $('#article-loader').addClass('hidden');
+            $('#article-container').removeClass('hidden');
+
+            // Clean Content (WordPress classes to Tailwind)
+            const cleanContent = cleanWordPressHTML(post.content);
+
+            const html = `
+                <div class="max-w-4xl mx-auto">
+                    <img src="${post.image}" class="w-full h-64 md:h-96 object-cover rounded-2xl shadow-lg mb-8" alt="${post.title}">
+                    
+                    <div class="text-center mb-10 border-b border-base-content/10 pb-8">
+                        <div class="inline-flex items-center gap-2 text-sm opacity-60 mb-4">
+                            <i class="fa-regular fa-calendar"></i> ${post.date}
+                            <span class="mx-2">•</span>
+                            <i class="fa-regular fa-user"></i> ${post.author}
+                        </div>
+                        <h1 class="text-3xl md:text-5xl font-black leading-tight mb-4">${post.title}</h1>
+                    </div>
+
+                    <article class="wp-content prose prose-lg max-w-none text-base-content">
+                        ${cleanContent}
+                    </article>
+
+                    <div class="mt-12 pt-8 border-t border-base-content/10 text-center">
+                        <button onclick="showList()" class="btn btn-primary rounded-full px-8">Voir les autres articles</button>
+                    </div>
+                </div>
+            `;
+            $('#article-container').html(html);
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+
+        // Ported from attachment: Helper to clean WP HTML
+        function cleanWordPressHTML(html) {
+            // Simple mapping approach
+            let div = document.createElement('div');
+            div.innerHTML = html;
+            
+            // Map useful WP classes to generic or Tailwind ones
+            // Note: We use global .wp-content styles in <head> for basics (p, h2, ul, img)
+            
+            // Specific block fixes
+            const buttons = div.querySelectorAll('.wp-block-button__link');
+            buttons.forEach(b => b.className = 'btn btn-primary no-underline');
+
+            const tables = div.querySelectorAll('table');
+            tables.forEach(t => t.className = 'table table-zebra w-full my-6 border border-base-content/10');
+            
+            // Return cleaned HTML
+            return div.innerHTML;
+        }
+
+        // Initialize
+        checkUrlParams();
+        init();
+        
+        // Handle Back Button
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.id) showArticle(event.state.id);
+            else showList();
+        });
+
+    </script>
+</body>
+</html>

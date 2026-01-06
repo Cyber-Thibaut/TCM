@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/reseau.html"><i class="fa-solid fa-map mr-1"></i>Notre Réseau</a>
             <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/parkings.html"><i class="fa-solid fa-square-parking mr-1"></i>Parkings</a>
             <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/trafic.html"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Info Trafic</a>
+            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/actualites.html"><i class="fa-solid fa-newspaper mr-1"></i>Actualités</a>
             <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/tarifs.html"><i class="fa-solid fa-ticket mr-1"></i>Tarif</a>
             <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/agences.html"><i class="fa-solid fa-store mr-1"></i>Nos Agences</a>
           </div>
@@ -73,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <li><a href="/src/reseau.html"><i class="fa-solid fa-map w-5"></i> Notre Réseau</a></li>
                 <li><a href="/src/parkings.html"><i class="fa-solid fa-square-parking w-5"></i> Parkings</a></li>
                 <li><a href="/src/trafic.html"><i class="fa-solid fa-triangle-exclamation w-5"></i> Info Trafic</a></li>
+                <li><a href="/src/actualites.html"><i class="fa-solid fa-newspaper w-5"></i> Actualités</a></li>
                 <li><a href="/src/tarifs.html"><i class="fa-solid fa-ticket w-5"></i> Tarif</a></li>
                 <li><a href="/src/agences.html"><i class="fa-solid fa-store w-5"></i> Nos Agences</a></li>
               </ul>

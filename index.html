@@ -184,7 +184,7 @@
                     <h2 class="text-4xl font-bold">Notre Actualité</h2>
                     <p class="mt-2 text-lg text-base-content/60">Restez informés des dernières nouveautés du réseau.</p>
                 </div>
-                <a href="#" class="btn btn-ghost hover:bg-base-100/50">Voir toutes les news</a>
+                <button onclick="window.location.href='/src/actualites.html'" class="btn btn-ghost hover:bg-base-100/50">Voir toutes les actualités</button>
             </div>
             
             <div id="content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -477,18 +477,23 @@
     <script>
       $(function () {
         const wpUrl = "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts?categories=8&per_page=3"; 
+        const container = $("#content");
+        
         $.get(wpUrl, function (data) {
-          const container = $("#content");
           if (!data.length) { container.html("<p class='text-center w-full col-span-full opacity-50'>Aucune actualité récente.</p>"); return; }
           container.empty();
-          data.forEach(article => {
+          
+          data.forEach((article, index) => {
              const featMedia = article.featured_media; 
              const mediaUrl = `https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/media/${featMedia}`;
+             const articleUrl = `/src/actualites.html?id=${article.id}`;
              
              fetch(mediaUrl).then(r=>r.json()).then(media=>{
                 const img = media.guid.rendered;
+                const delayClass = index < 3 ? 'animate__fadeInUp' : 'animate__fadeIn';
+                
                 const card = `
-                    <div class="glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col h-full animate__animated animate__fadeInUp group">
+                    <div class="glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col h-full animate__animated ${delayClass} group">
                         <figure class="h-48 overflow-hidden relative">
                             <img src="${img}" alt="${article.title.rendered}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
@@ -499,7 +504,7 @@
                                 ${article.excerpt.rendered.replace(/<[^>]*>?/g, '').replace('[&hellip;]', '...')}
                             </div>
                             <div class="card-actions justify-end mt-auto pt-4 border-t border-base-content/5">
-                                <a href="${article.link}" class="btn btn-ghost btn-sm gap-2 text-primary hover:bg-primary hover:text-white transition-colors">Lire l'article <i class="fa-solid fa-arrow-right-long"></i></a>
+                                <a href="${articleUrl}" class="btn btn-ghost btn-sm gap-2 text-primary hover:bg-primary hover:text-white transition-colors">Lire l'article <i class="fa-solid fa-arrow-right-long"></i></a>
                             </div>
                         </div>
                     </div>
@@ -507,7 +512,7 @@
                 container.append(card);
              }).catch(()=>{});
           });
-        }).fail(()=> $("#content").html("<div class='alert alert-error'>Erreur chargement actus</div>"));
+        }).fail(()=> container.html("<div class='alert alert-error'>Erreur chargement actus</div>"));
       });
     </script>
     

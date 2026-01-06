@@ -1,181 +1,121 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Inject CSS for Glass Menu & Variables
-    const style = document.createElement('style');
-    style.innerHTML = `
-      :root {
-          --tcm-blue: #0077E6; 
-          --glass-bg: rgba(22, 22, 24, 0.7);
-          --glass-border: rgba(255, 255, 255, 0.08);
-      }
-      
-      [data-theme="dark"] {
-          --glass-bg: rgba(10, 10, 12, 0.85);
-          --tcm-blue: #3b82f6;
-      }
-
-      /* Global Dark BACKGROUND Fix */
-      [data-theme="dark"] body {
-          background-color: #0b1020 !important; /* deep gray */
-          color: #f3f4f6 !important;
-      }
-
-      /* Force common bg utilities to dark equivalents when data-theme=dark */
-      [data-theme="dark"] .bg-white,
-      [data-theme="dark"] .bg-base-100,
-      [data-theme="dark"] .bg-base-200,
-      [data-theme="dark"] .bg-neutral {
-          background-color: #0b1020 !important;
-      }
-
-      /* Force Text Colors for Dark Mode - broad overrides for common utility classes */
-      [data-theme="dark"] .text-base-content { color: #f3f4f6 !important; }
-      [data-theme="dark"] .text-base-content { color: #f3f4f6 !important; }
-      [data-theme="dark"] .text-black,
-      [data-theme="dark"] .text-gray-900,
-      [data-theme="dark"] .text-gray-800,
-      [data-theme="dark"] .text-gray-700,
-      [data-theme="dark"] .text-gray-600 {
-          color: #f3f4f6 !important;
-      }
-      [data-theme="dark"] .text-gray-300,
-      [data-theme="dark"] .text-gray-400 {
-          color: rgba(243,244,246,0.75) !important;
-      }
-
-      [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, 
-      [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6 {
-          color: #f3f4f6 !important;
-      }
-
-      /* Floating & Absolute Positioning (Not Fixed) */
-      .navbar-glass {
-          position: absolute; 
-          top: 1rem;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 95%;
-          max-width: 1280px;
-          border-radius: 1rem !important;
-          
-          background: var(--glass-bg);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid var(--glass-border);
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-          z-index: 9999; /* Ensure strictly on top */
-      }
-      
-      .text-tcm { color: var(--tcm-blue) !important; }
-      
-      .nav-link {
-          font-weight: 600;
-          transition: all 0.2s;
-          border-radius: 0.5rem;
-          color: inherit;
-      }
-      .nav-link:hover {
-         background: rgba(255, 255, 255, 0.1);
-         color: var(--tcm-blue);
-      }
-
-      /* Dropdown transparency */
-      .dropdown-content.glass-menu {
-          background: var(--glass-bg);
-          backdrop-filter: blur(20px);
-          border: 1px solid var(--glass-border);
-      }
-    `;
-    document.head.appendChild(style);
-  
-    // 2. Insert Menu HTML
-    const menuContent = `
-      <div class="navbar navbar-glass text-base-content">
-          <div class="navbar-start">
-              <div class="dropdown">
-                  <label tabindex="0" class="btn btn-ghost lg:hidden">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
-                      </svg>
-                  </label>
-                  <ul tabindex="0" class="menu menu-lg dropdown-content mt-3 z-[1] p-3 shadow-2xl glass-menu rounded-2xl w-64 text-base-content">
-                      <li><a href="/src/reseau.html"><i class="fa-solid fa-map w-6"></i> Réseau</a></li>
-                      <li><a href="/src/trafic.html"><i class="fa-solid fa-triangle-exclamation w-6"></i> Info Trafic</a></li>
-                      <li><a href="/src/tarifs.html"><i class="fa-solid fa-ticket w-6"></i> Tarifs</a></li>
-                      <li><a href="/src/agences.html"><i class="fa-solid fa-store w-6"></i> Agences</a></li>
-                      <li><a href="/src/parkings.html"><i class="fa-solid fa-square-parking w-6"></i> P+R</a></li>
-                      <div class="divider my-1 border-white/10"></div>
-                      <li><a href="/index.html"><i class="fa-solid fa-home w-6"></i> Accueil</a></li>
-                  </ul>
-              </div>
-              <a class="btn btn-ghost normal-case text-xl hover:bg-white/10 gap-2" href="/index.html">
-                  <img src="/img/TCM-Clair.png" class="h-8 w-auto opacity-90 drop-shadow-md" alt="TCM" onerror="this.src='/img/TCM-Sombre.png'">
-                  <span class="hidden sm:inline font-black tracking-tight"><span class="text-tcm">TCM</span> Mobililité</span>
-              </a>
-          </div>
-  
-          <div class="navbar-center hidden lg:flex">
-              <ul class="menu menu-horizontal px-1 gap-1">
-                  <li><a href="/src/reseau.html" class="nav-link"><i class="fa-solid fa-map mr-1"></i> Réseau</a></li>
-                  <li><a href="/src/trafic.html" class="nav-link"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Infos</a></li>
-                  <li><a href="/src/tarifs.html" class="nav-link"><i class="fa-solid fa-ticket mr-1"></i> Tarifs</a></li>
-                  <li><a href="/src/agences.html" class="nav-link"><i class="fa-solid fa-store mr-1"></i> Agences</a></li>
-                  <li><a href="/src/parkings.html" class="nav-link"><i class="fa-solid fa-square-parking mr-1"></i> P+R</a></li>
-              </ul>
-          </div>
-  
-          <div class="navbar-end">
-                <!-- Theme Toggle -->
-                <label class="swap swap-rotate btn btn-ghost btn-circle hover:bg-white/10 text-tcm">
-                    <!-- class 'theme-controller' ensures compatibility if using standard daisyUI logic, but we handle via JS too -->
-                    <input type="checkbox" class="theme-controller" value="dark" id="theme-toggle" />
-                    
-                    <!-- Sun Icon (Visible when Unchecked = Light) -->
-                    <svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
-                    
-                    <!-- Moon Icon (Visible when Checked = Dark) -->
-                    <svg class="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
+  const menu = `
+    <div class="navbar bg-base-300 relative">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                    </svg>
                 </label>
-          </div>
-      </div>
-      `;
-    
-    document.body.insertAdjacentHTML("afterbegin", menuContent);
-    
-    // 3. Theme Initialization & Event Listener
-    const themeCheckbox = document.getElementById('theme-toggle');
-    const root = document.documentElement;
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow-sm bg-base-100 rounded-box w-52">
+                    <li><a href="/src/reseau.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>Notre Réseau</a></li>
+                    <li><a href="/src/trafic.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Info Trafic
+                        </a></li>
+                    <li><a href="/src/tarifs.html"><svg class="w-[19px] h-[19px]"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.1"
+                                    d="M16.5 7A2.5 2.5 0 0 1 19 4.5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 1 1 0 5V12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5A2.5 2.5 0 0 1 16.5 7Z" />
+                            </svg> Tarif</a></li>
+                    <li><a href="/src/agences.html"><svg class="w-[19px] h-[19px]"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
+                                viewBox="0 0 21 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.1"
+                                    d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
+                            </svg> Nos Agences</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-ghost normal-case text-xl bg-primary/50 glass" href="/index.html"><img src="/img/TCM-Sombre.png"
+                    width="70" height="70" alt="Logo TCM"></a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="/src/reseau.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>Notre Réseau</a></li>
+                <li><a href="/src/trafic.html"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Info Trafic
+                    </a></li>
+                <li><a href="/src/tarifs.html"><svg class="w-[19px] h-[19px]"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.1"
+                                d="M16.5 7A2.5 2.5 0 0 1 19 4.5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 1 1 0 5V12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9.5A2.5 2.5 0 0 1 16.5 7Z" />
+                        </svg> Tarif</a></li>
+                <li><a href="/src/agences.html"><svg class="w-[19px] h-[19px]"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
+                            viewBox="0 0 21 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.1"
+                                d="M3.308 9a2.257 2.257 0 0 0 2.25-2.264 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 0 0 4.5 0 2.25 2.25 0 1 0 4.5 0C19.058 5.471 16.956 1 16.956 1H3.045S1.058 5.654 1.058 6.736A2.373 2.373 0 0 0 3.308 9Zm0 0a2.243 2.243 0 0 0 1.866-1h.767a2.242 2.242 0 0 0 3.733 0h.767a2.242 2.242 0 0 0 3.733 0h.767a2.247 2.247 0 0 0 1.867 1A2.22 2.22 0 0 0 18 8.649V19H9v-7H5v7H2V8.524c.37.301.83.469 1.308.476ZM12 12h3v3h-3v-3Z" />
+                        </svg> Nos Agences</a></li>
+            </ul>
+        </div>
+        <div class="navbar-end">
+        <label class="swap swap-rotate">
+            <!-- this hidden checkbox controls the state -->
+            <input type="checkbox" class="theme-controller" value="night" />
 
-    function initTheme() {
-        const localTheme = localStorage.getItem('theme');
-        const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        let theme = localTheme;
-        if (!theme) {
-             theme = sysDark ? 'dark' : 'light';
-        }
+            <!-- sun icon -->
+            <svg
+                class="swap-off h-10 w-10 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24">
+                <path
+                d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+            </svg>
 
-        // Apply
-        root.setAttribute('data-theme', theme);
-        // Also keep a 'dark' class for frameworks or utilities that watch for .dark
-        if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
-        
-        // Sync Checkbox (Checked = Dark)
-        if (themeCheckbox) {
-            themeCheckbox.checked = (theme === 'dark');
-        }
+            <!-- moon icon -->
+            <svg
+                class="swap-on h-10 w-10 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24">
+                <path
+                d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+            </svg>
+            </label>
+        </div>
+    </div>
+    `;
+
+  // Insérez le menu dans la page
+  document.body.insertAdjacentHTML("afterbegin", menu);
+  setTimeout(() => {
+    // Détecter la préférence système
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    const storedTheme = localStorage.getItem("theme");
+    const themeToggle = document.querySelector(".theme-controller");
+
+    // Définir le thème initial
+    const initialTheme = storedTheme || (prefersDark ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", initialTheme);
+    if (themeToggle) {
+      themeToggle.checked = initialTheme === "dark";
+
+      // Écouter les changements de l'utilisateur
+      themeToggle.addEventListener("change", (e) => {
+        const newTheme = e.target.checked ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      });
     }
-
-    // Run immediately
-    initTheme();
-
-    // Listen for toggle
-    if (themeCheckbox) {
-        themeCheckbox.addEventListener('change', function(e) {
-            const newTheme = e.target.checked ? 'dark' : 'light';
-            root.setAttribute('data-theme', newTheme);
-            if (newTheme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
-            localStorage.setItem('theme', newTheme);
-            console.log("Theme changed to:", newTheme);
-        });
-    }
+  }, 0);
 });

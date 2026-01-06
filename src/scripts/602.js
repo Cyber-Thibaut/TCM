@@ -429,7 +429,9 @@ function renderLineDetails(ligne) {
     const description = document.createElement("p");
     description.className =
       "text-lg text-base-content/80 leading-relaxed text-justify mt-8 mb-8";
-    description.innerHTML = ligne.description;
+    description.innerHTML = ligne.description
+      .replace(/\n/g, '<br>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary">$1</strong>');
     container.appendChild(description);
   }
 

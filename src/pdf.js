@@ -474,6 +474,9 @@ function createStatsSection(doc, x, y, stats, accentColor) {
 // --- GÉNÉRATEURS SPÉCIFIQUES ---
 
 async function generatePDF(lineId) {
+    // Conversion explicite en string pour éviter les erreurs de type (ex: lineId.startsWith not a function)
+    lineId = String(lineId);
+
     if (typeof window.jspdf === 'undefined') {
         alert("Erreur: La librairie jsPDF n'est pas chargée.");
         return;
@@ -518,6 +521,7 @@ async function generatePDF(lineId) {
         
         // Nettoyage HTML pour le PDF (suppression des balises)
         description = description
+            .replace(/\*\*/g, "")          // Supprime les ** 
             .replace(/<br\s*\/?>/gi, "\n") // <br> -> saut de ligne
             .replace(/<\/p>/gi, "\n\n")    // </p> -> double saut de ligne
             .replace(/<li>/gi, "• ")       // <li> -> puce

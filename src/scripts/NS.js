@@ -134,7 +134,7 @@ async function showNavetteDetails(id) {
                     <div class="p-8 space-y-6">
                         <div>
                             <h4 class="font-bold text-lg mb-2 text-[#007941]">Informations Ligne</h4>
-                            <p class="text-base-content/80">${data.description}</p>
+                            <p class="text-base-content/80">${(data.description || "").replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary">$1</strong>')}</p>
                         </div>
                         
                         <div class="grid grid-cols-2 gap-4">

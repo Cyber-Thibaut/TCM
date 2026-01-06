@@ -351,7 +351,9 @@ function renderLineDetails(lineData) {
     const description = document.createElement("p");
     description.className =
       "text-lg text-base-content/80 leading-relaxed text-justify mb-6";
-    description.innerHTML = lineData.description;
+    description.innerHTML = lineData.description
+      .replace(/\n/g, '<br>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary">$1</strong>');
     lineContainer.appendChild(description);
   }
 }

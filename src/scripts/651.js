@@ -357,7 +357,9 @@ function renderLineDetails(ligne) {
   if (ligne.description) {
     const description = document.createElement("div");
     description.className = "prose max-w-none mb-8";
-    description.innerHTML = `<p class="text-lg text-base-content/80 leading-relaxed">${ligne.description}</p>`;
+    description.innerHTML = `<p class="text-lg text-base-content/80 leading-relaxed">${ligne.description
+      .replace(/\n/g, '<br>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary">$1</strong>')}</p>`;
     container.appendChild(description);
   }
 

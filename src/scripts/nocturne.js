@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         </div>
                         À savoir
                     </h2>
-                    <p class="text-base-content/80 leading-relaxed">${ligne.description}</p>
+                    <p class="text-base-content/80 leading-relaxed">${(ligne.description || "").replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary">$1</strong>')}</p>
                 </div>
             </div>
 

@@ -437,7 +437,7 @@
 
           if (alerts.length === 0) {
              lignesContainer.append(`
-                <div class="flex items-center gap-4 p-4 rounded-xl bg-success/10 border border-success/20 text-success-content animate__animated animate__fadeIn">
+                <div class="flex items-center gap-4 p-4 rounded-xl bg-success/10 border border-success/20 text-base-content animate__animated animate__fadeIn">
                     <div class="w-10 h-10 rounded-full bg-success flex items-center justify-center text-white shrink-0 shadow-lg shadow-success/30"><i class="fa-solid fa-check"></i></div>
                     <div>
                         <div class="font-bold">Aucune perturbation</div>
@@ -494,9 +494,9 @@
                 
                 const card = `
                     <div class="glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col h-full animate__animated ${delayClass} group">
-                        <figure class="h-48 overflow-hidden relative">
-                            <img src="${img}" alt="${article.title.rendered}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                        <figure class="overflow-hidden relative bg-base-300/10">
+                            <img src="${img}" alt="${article.title.rendered}" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors"></div>
                         </figure>
                         <div class="p-6 flex flex-col flex-1">
                             <h2 class="text-lg font-bold mb-3 leading-tight group-hover:text-primary transition-colors">${article.title.rendered}</h2>

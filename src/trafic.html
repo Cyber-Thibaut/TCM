@@ -1,181 +1,436 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Transport Clermont Métropole</title>
-    <meta
-      name="description"
-      content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989."
-    />
-    <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité" />
-    <meta name="author" content="Transport Clermont Métropole" />
-    <meta name="theme-color" content="#204BFE" />
-
-    <!-- Open Graph & Twitter -->
-    <meta property="og:title" content="Transport Clermont Métropole" />
-    <meta
-      property="og:description"
-      content="Partenaire de vos déplacements depuis 1989."
-    />
-    <meta
-      property="og:image"
-      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
-    />
-    <meta property="og:url" content="https://tcm-mobilite.vercel.app/" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Transport Clermont Métropole" />
-    <meta
-      name="twitter:description"
-      content="Votre réseau mobilité à Clermont-Ferrand."
-    />
-    <meta
-      name="twitter:image"
-      content="https://tcm-mobilite.vercel.app/img/TCM Clair.png"
-    />
-
-    <!-- Styles & Scripts -->
-    <link rel="icon" href="https://tcm-mobilite.vercel.app/img/TCM.png" />
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info Trafic Live - TCM</title>
+    <meta name="description" content="État du réseau TCM en temps réel. Perturbations, travaux et infos voyageurs.">
+    
+    <!-- CSS & Resources -->
     <link href="../dist/output.css" rel="stylesheet" />
-    <script
-      src="https://kit.fontawesome.com/d8bf012a3e.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="menu.js" defer></script>
-
+    
     <style>
-      .jw-album-image img,
-      .jw-element-image img {
-        pointer-events: none;
-        -webkit-touch-callout: none;
-      }
+        /* CustomScrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.5); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(156, 163, 175, 0.8); }
+        
+        /* Glass Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        [data-theme="dark"] .glass-panel {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .line-badge {
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .line-badge:hover { transform: scale(1.1) rotate(3deg); }
+        
+        /* Status Pulse */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.33); opacity: 1; }
+            80%, 100% { transform: scale(2); opacity: 0; }
+        }
+        .pulse-ring::before {
+            content: '';
+            position: absolute;
+            height: 100%; width: 100%;
+            border-radius: 50%;
+            background-color: currentColor;
+            opacity: 0.4;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
     </style>
-  </head>
+</head>
+<body class="bg-base-200 min-h-screen flex flex-col font-sans selection:bg-primary selection:text-white pt-20">
 
-<body class="min-h-screen flex flex-col bg-base-200">
-    <header class="hero min-h-[50vh] bg-cover bg-center relative"
-        style="background-image: url('../img/trafic.jpg');">
-        <div class="hero-overlay bg-opacity-60"></div>
-        <div class="hero-content text-center text-neutral-content">
+    <!-- Ambient Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-secondary/15 rounded-full blur-[120px]" style="animation-duration: 6s;"></div>
+    </div>
+
+    <main class="container mx-auto px-4 flex-grow mb-16 space-y-10">
+        
+        <!-- Dashboard Header -->
+        <header class="flex flex-col lg:flex-row justify-between items-end gap-6 pb-6 border-b border-base-content/10 animate__animated animate__fadeInDown">
             <div>
-                <h1 class="text-5xl font-bold">🚌 Info Trafic TCM</h1>
+                <div class="badge badge-primary badge-outline mb-2 font-bold tracking-widest text-xs uppercase">Live Monitor</div>
+                <h1 class="text-4xl md:text-6xl font-black text-base-content tracking-tight">
+                    Info<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Trafic</span>
+                </h1>
+                <p class="mt-2 text-lg text-base-content/60 max-w-2xl">
+                    Surveillance en temps réel de l'état du réseau TCM. Les données sont mises à jour automatiquement.
+                </p>
+            </div>
+            
+            <div class="glass-panel px-6 py-3 rounded-2xl flex items-center gap-4 min-w-[200px] justify-between shadow-sm">
+                <div class="text-right">
+                    <div class="text-xs uppercase font-bold text-base-content/40 tracking-wider">Mise à jour</div>
+                    <div id="last-update" class="font-mono font-bold text-xl">--:--</div>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-base-100 flex items-center justify-center text-primary relative">
+                    <i class="fa-solid fa-rotate animate-spin-slow" style="animation-duration: 3s;"></i>
+                    <div class="absolute top-0 right-0 w-3 h-3 bg-success rounded-full border-2 border-base-100"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Network Health Status -->
+        <section id="health-monitor" class="animate__animated animate__fadeIn animate__delay-1s">
+            <div class="glass-panel rounded-3xl p-1 relative overflow-hidden shadow-xl">
+                 <div class="absolute inset-0 bg-base-100/40"></div>
+                 <div id="status-content" class="relative z-10 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12 text-center md:text-left transition-all duration-500">
+                      <!-- JS Injected -->
+                      <span class="loading loading-dots loading-lg opacity-50"></span>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Controls: Filters & Search -->
+        <section class="flex flex-col sm:flex-row gap-4 justify-between items-center sticky top-24 z-30 transition-all duration-300" id="controls-bar">
+            <div class="join shadow-sm glass-panel rounded-lg p-1">
+                <button class="join-item btn btn-sm btn-ghost bg-base-100/50 hover:bg-white/50 active" onclick="filterType('all', this)">Tous</button>
+                <button class="join-item btn btn-sm btn-ghost hover:bg-white/50" onclick="filterType('tram', this)">Tram</button>
+                <button class="join-item btn btn-sm btn-ghost hover:bg-white/50" onclick="filterType('bus', this)">Bus</button>
+                <button class="join-item btn btn-sm btn-ghost hover:bg-white/50" onclick="filterType('scolaire', this)">Scolaire</button>
+            </div>
+             <div class="relative w-full sm:w-auto">
+                <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-base-content/40"></i>
+                <input type="text" id="line-search" placeholder="Rechercher une ligne..." class="input input-sm glass-panel w-full sm:w-64 pl-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" />
+            </div>
+        </section>
+
+        <!-- Disruptions Grid -->
+        <section id="alerts-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 min-h-[300px]">
+             <!-- Cards injected here -->
+        </section>
+
+        <!-- Network Map / Links -->
+        <section class="grid md:grid-cols-2 gap-6 pt-8 border-t border-base-content/5">
+            <div class="glass-panel rounded-2xl p-8 flex flex-col items-start justify-center gap-4 hover:shadow-lg transition-all group cursor-pointer" onclick="window.location.href='reseau.html'">
+                <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-map"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-xl">Plan du réseau</h3>
+                    <p class="opacity-60 text-sm mt-1">Consultez et téléchargez les plans PDF.</p>
+                </div>
+                <i class="fa-solid fa-arrow-right absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity translate-x-4 group-hover:translate-x-0"></i>
+            </div>
+             <div class="glass-panel rounded-2xl p-8 flex flex-col items-start justify-center gap-4 hover:shadow-lg transition-all group cursor-pointer" onclick="window.open('https://twitter.com', '_blank')">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-twitter"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-xl">Info Trafic Twitter</h3>
+                    <p class="opacity-60 text-sm mt-1">Suivez @TCM_Trafic pour l'actualité en direct.</p>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square absolute right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity translate-x-4 group-hover:translate-x-0"></i>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Detailed Modal -->
+    <dialog id="detail_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box glass-panel p-0 overflow-hidden relative border-none shadow-2xl">
+             <!-- Header -->
+             <div class="bg-base-100/80 backdrop-blur-md p-6 border-b border-base-content/10 flex items-center justify-between sticky top-0 z-20">
+                 <div class="flex items-center gap-4">
+                     <div id="modal-icon" class="w-12 h-12 rounded-xl bg-base-200 flex items-center justify-center shadow-inner">
+                         <!-- Icon/Img injected -->
+                     </div>
+                     <div>
+                         <h3 id="modal-line-name" class="font-bold text-lg leading-tight">Ligne XX</h3>
+                         <div id="modal-alert-count" class="badge badge-warning badge-xs mt-1">X Perturbations</div>
+                     </div>
+                 </div>
+                 <form method="dialog"><button class="btn btn-circle btn-ghost btn-sm"><i class="fa-solid fa-times"></i></button></form>
+             </div>
+             
+             <!-- Body -->
+             <div id="modal-content" class="p-6 space-y-4 max-h-[60vh] overflow-y-auto bg-base-100/40">
+                 <!-- Alerts -->
+             </div>
+             
+             <!-- Footer -->
+             <div class="p-4 bg-base-100/50 border-t border-base-content/10 flex justify-end gap-2">
+                 <a id="modal-full-details" href="#" class="btn btn-primary btn-sm">Voir fiche horaire</a>
+             </div>
         </div>
-      </div>
-    </header>
+        <form method="dialog" class="modal-backdrop bg-black/50 backdrop-blur-sm"><button>Fermer</button></form>
+    </dialog>
 
-    <!-- SECTION INFOS TRAFIC -->
-    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h2 class="text-3xl font-bold text-center text-primary mb-10">
-        État du réseau
-      </h2>
-
-      <div
-        id="lignes"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-      >
-        <!-- Cartes insérées dynamiquement -->
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer
-      class="footer footer-center p-10 bg-primary text-primary-content mt-auto"
-    >
-      <aside>
-        <img
-          src="/img/TCM-Clair.png"
-          width="160"
-          alt="Logo TCM"
-          class="dark:hidden mx-auto mb-3"
-        />
-        <img
-          src="/img/TCM-Sombre.png"
-          width="160"
-          alt="Logo TCM Dark"
-          class="hidden dark:block mx-auto mb-3"
-        />
-        <p class="font-bold text-lg">
-          Partenaire de vos déplacements depuis 1989
-        </p>
-        <p class="text-sm opacity-80">
-          © <span id="year"></span> - Tous droits réservés
-        </p>
-      </aside>
+    <footer class="footer footer-center p-10 bg-base-300 text-base-content rounded-t-3xl mt-auto">
+        <aside>
+            <p class="font-bold text-lg opacity-50">TCM info trafic v2.0</p>
+            <p>Copyright © <span id="year">2026</span> - Tous droits réservés</p>
+        </aside>
     </footer>
 
-    <!-- SCRIPT: TRAFIC -->
     <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
+        // Init
+        document.getElementById("year").textContent = new Date().getFullYear();
+        const API_URL = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
+        
+        let allData = null;
+        let activeFilter = 'all';
 
-      const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
-      //const url = "test.json";
-
-      function afficherInfoTrafic() {
-        $.getJSON(url, function (data) {
-          let lignesTrouvees = false;
-          $("#lignes").html("");
-
-          $.each(data.lignes, function (i, ligne) {
-            const now = new Date();
-            const infosActives = ligne.infos_trafic.filter(
-              (info) =>
-                now >= new Date(info.annonce) && now <= new Date(info.fin)
-            );
-
-            if (infosActives.length > 0) {
-              lignesTrouvees = true;
-
-              const scolaires = [
-                "601",
-                "602",
-                "651",
-                "652"
-              ];
-
-              let nom = `Ligne ${ligne.ligne}`;
-
-              if (ligne.ligne === "TCM") {
-                nom = "Réseau TCM";
-              } else if (ligne.ligne === "NS") {
-                nom = "Navette spéciale";
-              } else if (scolaires.includes(ligne.ligne)) {
-                nom = `Ligne scolaire ${ligne.ligne}`;
-              }
-
-              $("#lignes").append(`
-                <div class="card bg-base-100 border border-base-300 shadow-md hover:shadow-xl transition-all cursor-pointer hover:scale-[1.02]" onclick="window.location.href='details.html#${ligne.ligne}'">
-                  <div class="p-5 space-y-4">
-                    <div class="flex items-center gap-4">
-                      <img src="/img/${ligne.ligne}.png" class="w-14 h-14 object-contain" alt="${ligne.ligne}" />
-                      <div class="flex-1">
-                        <h3 class="text-lg font-semibold">${nom}</h3>
-                        <p class="text-sm text-accent">${infosActives.length} info(s) trafic</p>
-                      </div>
-                      <i class="fa-solid fa-chevron-right text-gray-400"></i>
-                    </div>
-                  </div>
-                </div>
-              `);
+        async function init() {
+            try {
+                const response = await fetch(API_URL);
+                allData = await response.json();
+                render();
+                updateTime();
+            } catch (e) {
+                console.error(e);
+                $('#health-monitor').html('<div class="alert alert-error">Impossible de charger les données trafic.</div>');
             }
-          });
+        }
 
-          if (!lignesTrouvees) {
-            $("#lignes").html(`
-              <div class="alert alert-success shadow-lg col-span-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
-                     viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>✅ Aucune perturbation signalée. Tout circule normalement !</span>
-              </div>
-            `);
-          }
-        });
-      }
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('last-update').textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
 
-      afficherInfoTrafic();
+        function getSeverity(typeRaw) {
+            const t = typeRaw.toLowerCase();
+            if (t.includes('grève') || t.includes('fermeture')) return { color: 'error', icon: 'fa-ban', label: 'Interruption' };
+            if (t.includes('travaux')) return { color: 'warning', icon: 'fa-cone', label: 'Travaux' };
+            if (t.includes('déviation')) return { color: 'warning', icon: 'fa-route', label: 'Déviation' };
+            return { color: 'info', icon: 'fa-info-circle', label: 'Information' };
+        }
+
+        function isLineType(lineCode, type) {
+            lineCode = lineCode.toUpperCase();
+            if (type === 'all') return true;
+            if (type === 'tram') return lineCode === 'A'; // Assuming A is tram
+            if (type === 'scolaire') return /^\d{3}$/.test(lineCode); // 3 digits usually school
+            if (type === 'bus') return lineCode !== 'A' && !/^\d{3}$/.test(lineCode) && lineCode !== 'TCM' && lineCode !== 'NS';
+            return false;
+        }
+
+        function render() {
+            if (!allData) return;
+            
+            const grid = document.getElementById('alerts-grid');
+            const statusContent = document.getElementById('status-content');
+            
+            grid.innerHTML = '';
+            
+            // 1. Process Data
+            const now = new Date();
+            let activeAlerts = [];
+            let affectedLines = 0;
+            let criticalCount = 0;
+
+            allData.lignes.forEach(line => {
+                const visibleInfos = line.infos_trafic.filter(info => {
+                    const start = new Date(info.annonce);
+                    const end = new Date(info.fin);
+                    return now >= start && now <= end;
+                });
+
+                if (visibleInfos.length > 0) {
+                    // Check search
+                    const searchQuery = document.getElementById('line-search').value.toLowerCase();
+                    if (searchQuery && !line.ligne.toLowerCase().includes(searchQuery)) return;
+                    
+                    // Check filter
+                    if (!isLineType(line.ligne, activeFilter)) return;
+
+                    activeAlerts.push({ line: line.ligne, infos: visibleInfos });
+                    if (line.ligne !== 'TCM') affectedLines++;
+                }
+            });
+
+            // 2. Render Health Monitor (Global)
+            const globalAlerts = activeAlerts.find(a => a.line === 'TCM');
+            
+            // Filter out TCM from main grid unless explicit search, as it is displayed in the main billboard usually
+            // However, implementing logic: if filtered by 'All' and NO general alerts, and dashboard is green, that's fine.
+            // If general alert exists, it goes to Dashboard.
+            // If line alert exists, it goes to Grid.
+
+            if (affectedLines === 0 && !globalAlerts) {
+                 // All Clear State
+                statusContent.className = "relative z-10 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12 text-center md:text-left transition-all duration-500 bg-success/5 text-success-content";
+                statusContent.innerHTML = `
+                    <div class="relative w-32 h-32 flex items-center justify-center shrink-0">
+                         <div class="absolute inset-0 bg-success rounded-full opacity-20 animate-ping"></div>
+                         <div class="w-full h-full bg-success/10 rounded-full flex items-center justify-center text-6xl text-success shadow-[0_0_40px_rgba(34,197,94,0.3)]">
+                             <i class="fa-solid fa-check"></i>
+                         </div>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">Réseau fluide</h2>
+                        <p class="text-lg opacity-80">Aucune perturbation majeure signalée actuellement sur l'ensemble du réseau TCM. Bonne route !</p>
+                    </div>
+                `;
+            } else {
+                // Issues State
+                const severity = globalAlerts ? 'error' : (affectedLines > 3 ? 'warning' : 'info'); 
+                const colorClass = severity === 'error' ? 'text-error' : (severity === 'warning' ? 'text-warning' : 'text-info');
+                const bgClass = severity === 'error' ? 'bg-error/5' : (severity === 'warning' ? 'bg-warning/5' : 'bg-info/5');
+                const icon = severity === 'error' ? 'fa-triangle-exclamation' : 'fa-info-circle';
+                
+                let message = "";
+                if (globalAlerts) message = "Alerte Réseau Générale";
+                else if (affectedLines > 0) message = `${affectedLines} ligne(s) actuellement perturbée(s)`;
+                
+                let subMessage = globalAlerts ? globalAlerts.infos[0].titre : "Veuillez consulter les détails ci-dessous.";
+
+                statusContent.className = `relative z-10 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12 text-center md:text-left transition-all duration-500 ${bgClass} ${colorClass}`;
+                statusContent.innerHTML = `
+                    <div class="relative w-32 h-32 flex items-center justify-center shrink-0">
+                         <div class="absolute inset-0 bg-current rounded-full opacity-20 animate-ping"></div>
+                         <div class="w-full h-full bg-current/10 rounded-full flex items-center justify-center text-6xl shadow-[0_0_40px_currentColor]">
+                             <i class="fa-solid ${icon}"></i>
+                         </div>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">${message}</h2>
+                        <p class="text-lg opacity-80 text-base-content">
+                            ${subMessage}
+                        </p>
+                    </div>
+                `;
+            }
+
+            // 3. Render Cards
+            // Exclude 'TCM' from grid if it's already shown as the main alert, OR if we want to show it in grid too?
+            // Let's hide 'TCM' from grid as it is usually global.
+            const gridAlerts = activeAlerts.filter(a => a.line !== 'TCM');
+            
+            if (gridAlerts.length === 0) {
+                 if (globalAlerts) {
+                     grid.innerHTML = `<div class="col-span-full h-40 flex items-center justify-center text-base-content/30 italic">Seul le message général s'applique.</div>`;
+                 } else {
+                     grid.innerHTML = `<div class="col-span-full h-40 flex items-center justify-center text-base-content/30 italic">Aucune perturbation sur les lignes sélectionnées.</div>`;
+                 }
+            } else {
+                gridAlerts.forEach(item => {
+                    const isSchool = /^\d{3}$/.test(item.line);
+                    const isTram = item.line === 'A';
+                    
+                    // Card Template
+                    const card = document.createElement('div');
+                    card.className = "glass-panel p-0 rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer h-full flex flex-col animate__animated animate__fadeInUp";
+                    card.onclick = () => openModal(item);
+
+                    // Header Color Stripe
+                    const mainInfo = item.infos[0];
+                    const sev = getSeverity(mainInfo.type);
+                    const stripeColor = sev.color === 'error' ? 'bg-error' : (sev.color === 'warning' ? 'bg-warning' : 'bg-info');
+
+                    let iconHTML = `<img src="/img/${item.line}.png" class="w-12 h-12 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
+                    let fallbackIcon = `<div class="w-12 h-12 rounded-lg bg-base-300 items-center justify-center font-bold text-xl hidden">${item.line}</div>`;
+
+                    card.innerHTML = `
+                         <div class="h-1.5 w-full ${stripeColor}"></div>
+                         <div class="p-6 flex-grow flex flex-col">
+                             <div class="flex items-start justify-between mb-4">
+                                 <div class="flex items-center gap-3">
+                                     ${iconHTML}
+                                     ${fallbackIcon}
+                                     <div>
+                                         <h3 class="font-bold text-lg leading-none">${isSchool ? 'Scolaire' : (isTram ? 'Tram' : 'Ligne')} <span class="text-xl">${item.line}</span></h3>
+                                         <div class="text-xs opacity-50 mt-1 uppercase tracking-in-expand">${item.infos.length} alerte(s)</div>
+                                     </div>
+                                 </div>
+                                 <div class="badge badge-${sev.color} gap-1 shadow-sm">
+                                    <i class="fa-solid ${sev.icon} text-[10px]"></i> ${sev.label}
+                                 </div>
+                             </div>
+                             
+                             <div class="space-y-3">
+                                 ${item.infos.slice(0, 2).map(info => `
+                                     <div class="bg-base-200/50 rounded-lg p-3 text-sm border-l-2 border-${getSeverity(info.type).color}">
+                                         <div class="font-bold truncate mb-1">${info.titre}</div>
+                                         <div class="opacity-70 line-clamp-2 text-xs">${info.detail || 'Cliquez pour voir les détails.'}</div>
+                                     </div>
+                                 `).join('')}
+                                 ${item.infos.length > 2 ? `<div class="text-center text-xs opacity-50 italic">+ ${item.infos.length - 2} autre(s)</div>` : ''}
+                             </div>
+
+                             <div class="mt-auto pt-4 flex justify-end">
+                                 <button class="btn btn-ghost btn-xs gap-1 group-hover:text-primary transition-colors">Détails <i class="fa-solid fa-arrow-right"></i></button>
+                             </div>
+                         </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        }
+
+        function openModal(item) {
+            const modal = document.getElementById('detail_modal');
+            const title = document.getElementById('modal-line-name');
+            const iconContainer = document.getElementById('modal-icon');
+            const content = document.getElementById('modal-content');
+            const count = document.getElementById('modal-alert-count');
+            
+            title.textContent = `Ligne ${item.line}`;
+            iconContainer.innerHTML = `<img src="/img/${item.line}.png" class="w-full h-full object-contain p-1" onerror="this.style.display='none';this.innerHTML='${item.line}'">`;
+            count.textContent = `${item.infos.length} perturbation(s)`;
+            
+            document.getElementById('modal-full-details').href = `details.html#${item.line}`;
+            
+            content.innerHTML = item.infos.map(info => {
+                 const sev = getSeverity(info.type);
+                 return `
+                    <div class="card bg-base-100 shadow-sm border border-base-content/5">
+                        <div class="card-body p-4">
+                            <h4 class="card-title text-sm flex items-start gap-2">
+                                <i class="fa-solid ${sev.icon} text-${sev.color} mt-1"></i>
+                                ${info.titre}
+                            </h4>
+                            <p class="text-sm opacity-80 whitespace-pre-line">${info.detail || 'Aucun détail supplémentaire.'}</p>
+                            <div class="text-xs opacity-50 mt-2 flex items-center gap-2">
+                                <i class="fa-regular fa-calendar"></i> Fin prévue : ${new Date(info.fin).toLocaleDateString()}
+                            </div>
+                        </div>
+                    </div>
+                 `;
+            }).join('');
+            
+            modal.showModal();
+        }
+
+        // Filter Logic
+        window.filterType = function(type, btn) {
+            activeFilter = type;
+            document.querySelectorAll('.join-item').forEach(b => {
+                b.classList.remove('active', 'bg-base-100/50');
+                b.classList.add('hover:bg-white/50');
+            });
+            btn.classList.add('active', 'bg-base-100/50');
+            btn.classList.remove('hover:bg-white/50');
+            render();
+        }
+
+        // Search Logic
+        document.getElementById('line-search').addEventListener('input', () => render());
+
+        // Start
+        init();
+        setInterval(init, 60000); // Auto refresh
+        setInterval(updateTime, 1000);
+
     </script>
-  </body>
+</body>
 </html>

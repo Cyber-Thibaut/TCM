@@ -84,7 +84,7 @@ function renderNavetteGrid(linesData) {
                  onclick="showNavetteDetails('${nav.id}')">
                 <div class="card-body p-6">
                     <div class="flex justify-between items-start mb-4">
-                        <div class="badge badge-lg font-bold text-white" style="background-color: ${nav.color}">${nav.id}</div>
+                        <div class="badge badge-lg font-bold text-base-content" style="background-color: ${nav.color}">${nav.id}</div>
                         <i class="fa-solid ${nav.icon} text-2xl text-[#007941] group-hover:scale-110 transition-transform"></i>
                     </div>
                     <h3 class="card-title text-lg mb-2 min-h-[3.5rem]">${nav.desc}</h3>
@@ -118,12 +118,12 @@ async function showNavetteDetails(id) {
     
     detailContainer.innerHTML = `
         <div class="card bg-base-100 shadow-2xl overflow-hidden border border-base-200">
-            <div class="bg-[#007941] text-white p-4 flex justify-between items-center">
+            <div class="bg-[#007941] text-base-content p-4 flex justify-between items-center">
                 <h3 class="text-2xl font-bold flex items-center gap-3">
                     <span class="badge badge-lg bg-white text-[#007941] border-none">${id}</span>
                     ${data.nom}
                 </h3>
-                <button onclick="document.getElementById('navette-detail-view').classList.add('hidden')" class="btn btn-circle btn-ghost btn-sm text-white">
+                <button onclick="document.getElementById('navette-detail-view').classList.add('hidden')" class="btn btn-circle btn-ghost btn-sm text-base-content">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -180,7 +180,7 @@ function setupGlobalPDFButton() {
     if (!container) return;
 
     container.innerHTML = `
-        <button onclick="generateArenaGlobalPDF()" class="btn btn-lg bg-gradient-to-r from-[#007941] to-[#005c32] text-white border-none shadow-lg hover:scale-105 transition-transform gap-3">
+        <button onclick="generateArenaGlobalPDF()" class="btn btn-lg bg-gradient-to-r from-[#007941] to-[#005c32] text-base-content border-none shadow-lg hover:scale-105 transition-transform gap-3">
             <i class="fa-solid fa-file-pdf fa-xl"></i>
             <div>
                 <div class="font-bold">Télécharger le Guide Complet</div>

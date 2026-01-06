@@ -117,7 +117,7 @@
     </style>
 </head>
 
-<body class="bg-base-200 min-h-screen flex flex-col font-sans selection:bg-primary selection:text-white">
+<body class="bg-base-200 min-h-screen flex flex-col font-sans selection:bg-primary selection:text-base-content">
 
     <!-- DECORATION BACKGROUND -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
@@ -374,7 +374,7 @@
 
                     <!-- Content -->
                     <div class="px-6 pb-6 flex flex-col flex-grow">
-                        <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-primary transition-colors">${p.name}</h2>
+                        <h2 class="text-2xl font-bold mb-2 text-base-content group-hover:text-primary transition-colors">${p.name}</h2>
                         <p class="text-base-content/60 text-sm mb-6 min-h-[40px]">${p.description || "Parking relais surveillé et sécurisé pour vos correspondances."}</p>
 
                         <!-- LED Counter for Availability -->
@@ -394,7 +394,7 @@
                             <div class="flex gap-3 text-base-content/50 text-lg">
                                 ${p.ev ? '<i class="fa-solid fa-charging-station hover:text-green-400 transition-colors" title="Recharge Électrique"></i>' : ''}
                                 ${p.surveilled ? '<i class="fa-solid fa-video hover:text-blue-400 transition-colors" title="Vidéosurveillance"></i>' : ''}
-                                <i class="fa-solid fa-wheelchair hover:text-white transition-colors" title="Accès PMR"></i>
+                                <i class="fa-solid fa-wheelchair hover:text-base-content transition-colors" title="Accès PMR"></i>
                             </div>
                             <div class="flex items-center gap-2">
                                 <span class="text-xs font-bold uppercase text-base-content/40 mr-1">Lignes</span>

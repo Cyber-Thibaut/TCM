@@ -449,13 +449,13 @@ async function updateBusTimes() {
   if (now.getHours() >= 6 && now.getHours() < 9) {
     destinationElement.innerHTML = `<div class="w-full flex justify-center py-8">
     <div class="p-6 w-3/4 lg:w-1/2 bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg text-center">
-      <h2 class="text-5xl font-semibold text-white">🚸 Direction Lycée Karl Marx</h2>
+      <h2 class="text-5xl font-semibold text-base-content">🚸 Direction Lycée Karl Marx</h2>
     </div>
   </div>`;
   } else if (now.getHours() >= 11 && now.getHours() < 19) {
     destinationElement.innerHTML = `<div class="w-full flex justify-center py-8">
     <div class="p-6 w-3/4 lg:w-1/2 bg-gradient-to-r from-primary to-secondary rounded-xl shadow-lg text-center">
-      <h2 class="text-5xl font-semibold text-white">🏠 Retour vers Naubourg Grand-Place</h2>
+      <h2 class="text-5xl font-semibold text-base-content">🏠 Retour vers Naubourg Grand-Place</h2>
     </div>
   </div>`;
   } else {

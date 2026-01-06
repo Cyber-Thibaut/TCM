@@ -12,29 +12,39 @@ document.addEventListener("DOMContentLoaded", function () {
           --glass-bg: rgba(10, 10, 12, 0.85);
           --tcm-blue: #3b82f6;
       }
-      
+
       /* Global Dark BACKGROUND Fix */
       [data-theme="dark"] body {
-          background-color: #111827 !important; /* gray-900 */
+          background-color: #0b1020 !important; /* deep gray */
           color: #f3f4f6 !important;
       }
-      
+
+      /* Force common bg utilities to dark equivalents when data-theme=dark */
+      [data-theme="dark"] .bg-white,
       [data-theme="dark"] .bg-base-100,
-      [data-theme="dark"] .bg-base-200 {
-          background-color: #111827 !important; /* consistency */
+      [data-theme="dark"] .bg-base-200,
+      [data-theme="dark"] .bg-neutral {
+          background-color: #0b1020 !important;
       }
 
-      /* Force Text Colors for Dark Mode - Fixes "text-base-content" not flipping */
+      /* Force Text Colors for Dark Mode - broad overrides for common utility classes */
       [data-theme="dark"] .text-base-content { color: #f3f4f6 !important; }
-      [data-theme="dark"] .text-base-content\/90 { color: rgba(243, 244, 246, 0.9) !important; }
-      [data-theme="dark"] .text-base-content\/80 { color: rgba(243, 244, 246, 0.8) !important; }
-      [data-theme="dark"] .text-base-content\/70 { color: rgba(243, 244, 246, 0.7) !important; }
-      [data-theme="dark"] .text-base-content\/60 { color: rgba(243, 244, 246, 0.6) !important; }
-      [data-theme="dark"] .text-base-content\/50 { color: rgba(243, 244, 246, 0.5) !important; }
-      
+      [data-theme="dark"] .text-base-content { color: #f3f4f6 !important; }
+      [data-theme="dark"] .text-black,
+      [data-theme="dark"] .text-gray-900,
+      [data-theme="dark"] .text-gray-800,
+      [data-theme="dark"] .text-gray-700,
+      [data-theme="dark"] .text-gray-600 {
+          color: #f3f4f6 !important;
+      }
+      [data-theme="dark"] .text-gray-300,
+      [data-theme="dark"] .text-gray-400 {
+          color: rgba(243,244,246,0.75) !important;
+      }
+
       [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, 
       [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6 {
-          color: #f3f4f6;
+          color: #f3f4f6 !important;
       }
 
       /* Floating & Absolute Positioning (Not Fixed) */
@@ -146,6 +156,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Apply
         root.setAttribute('data-theme', theme);
+        // Also keep a 'dark' class for frameworks or utilities that watch for .dark
+        if (theme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
         
         // Sync Checkbox (Checked = Dark)
         if (themeCheckbox) {
@@ -161,6 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
         themeCheckbox.addEventListener('change', function(e) {
             const newTheme = e.target.checked ? 'dark' : 'light';
             root.setAttribute('data-theme', newTheme);
+            if (newTheme === 'dark') root.classList.add('dark'); else root.classList.remove('dark');
             localStorage.setItem('theme', newTheme);
             console.log("Theme changed to:", newTheme);
         });

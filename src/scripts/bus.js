@@ -214,7 +214,7 @@ async function updateBusTimes() {
     }
 
     const noServiceHTML = `
-    <div class="card bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl w-full h-48 flex flex-col justify-center items-center text-white p-4 text-center">
+    <div class="card bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl w-full h-48 flex flex-col justify-center items-center text-base-content p-4 text-center">
         <span class="text-2xl font-bold">Pas de service actuellement</span>
         <span class="text-lg font-light mt-2">${message}</span>
     </div>`;
@@ -240,7 +240,7 @@ async function updateBusTimes() {
 
   const icon = getFrequentationIcon(timeSlot);
 
-  const nextBusHTML = `<div class="card bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl w-full h-48 flex flex-col justify-center items-center text-white p-4">
+  const nextBusHTML = `<div class="card bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl w-full h-48 flex flex-col justify-center items-center text-base-content p-4">
     <span class="text-lg font-light uppercase tracking-widest">${currentLineNumber == 1 ? "Prochain tram" : "Prochain bus"}</span>
     <span class="text-6xl font-bold ${
       minutesUntilNext <= 1 ? "animate-pulse text-accent" : ""
@@ -257,7 +257,7 @@ async function updateBusTimes() {
     </div>
   </div>`;
 
-  const followingBusHTML = `<div class="card bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl w-full h-48 flex flex-col justify-center items-center text-white p-4">
+  const followingBusHTML = `<div class="card bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl w-full h-48 flex flex-col justify-center items-center text-base-content p-4">
     <span class="text-lg font-light uppercase tracking-widest">Bus suivant</span>
     <span class="text-6xl font-bold">
       ${minutesUntilFollowing}<span class="text-4xl font-normal ml-2">min</span>

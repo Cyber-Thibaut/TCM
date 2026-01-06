@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Inject FontAwesome if missing
+    if (!document.querySelector('link[href*="fontawesome"], script[src*="fontawesome"]')) {
+       const fa = document.createElement('script');
+       fa.src = "https://kit.fontawesome.com/d8bf012a3e.js";
+       fa.crossOrigin = "anonymous";
+       document.head.appendChild(fa);
+    }
+
     const menu = `
     <style>
     :root {
@@ -17,6 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
         box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1);
         transition: all 0.3s ease;
     }
+    /* Logo switching */
+    .logo-light { display: block; }
+    .logo-dark { display: none; }
+    [data-theme="dark"] .logo-light { display: none; }
+    [data-theme="dark"] .logo-dark { display: block; }
     </style>
     <nav class="w-full sticky top-4 z-50 mb-8" style="pointer-events: none;">
       <div class="mx-auto max-w-5xl px-4" style="pointer-events: auto;">
@@ -25,19 +38,20 @@ document.addEventListener("DOMContentLoaded", function () {
           <!-- Logo & Brand -->
           <a href="/index.html" class="flex items-center gap-3 shrink-0 group">
             <div class="relative overflow-hidden rounded-full w-[48px] h-[48px] shadow-sm group-hover:scale-105 transition-transform">
-                <img src="/img/TCM-Sombre.png" alt="Logo TCM" class="object-cover w-full h-full" />
+                <img src="/img/TCM-Sombre.png" alt="Logo TCM" class="logo-light object-cover w-full h-full" />
+                <img src="/img/TCM-Clair.png" alt="Logo TCM" class="logo-dark object-cover w-full h-full" />
             </div>
             <span class="hidden sm:inline font-bold text-lg text-base-content group-hover:text-primary transition-colors">TCM</span>
           </a>
 
           <!-- Desktop Menu -->
           <div class="hidden md:flex items-center gap-1">
-            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/reseau.html">Notre Réseau</a>
-            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/parkings.html">Parkings</a>
-            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/parkings.html#relais">Parkings Relais</a>
-            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/trafic.html">Info Trafic</a>
-            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/tarifs.html">Tarif</a>
-            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/agences.html">Nos Agences</a>
+            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/reseau.html"><i class="fa-solid fa-map mr-1"></i>Notre Réseau</a>
+            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/parkings.html"><i class="fa-solid fa-square-parking mr-1"></i>Parkings</a>
+            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/parkings.html#relais"><i class="fa-solid fa-car mr-1"></i>Parkings Relais</a>
+            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/trafic.html"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Info Trafic</a>
+            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/tarifs.html"><i class="fa-solid fa-ticket mr-1"></i>Tarif</a>
+            <a class="btn btn-ghost btn-sm rounded-full font-medium" href="/src/agences.html"><i class="fa-solid fa-store mr-1"></i>Nos Agences</a>
           </div>
 
           <!-- Actions -->
@@ -57,18 +71,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
               </label>
               <ul tabindex="0" class="menu dropdown-content mt-3 p-2 shadow-2xl bg-base-100/95 backdrop-blur-xl rounded-box w-52 z-[100] border border-base-200">
-                                <li><a href="/src/parkings.html">Parkings</a></li>
-                                <li><a href="/src/parkings.html#relais">Parkings Relais</a></li>
-                                <li><a href="/src/trafic.html">Info Trafic</a></li>
-                                <li><a href="/src/tarifs.html">Tarif</a></li>
-                                <li><a href="/src/agences.html">Nos Agences</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <li><a href="/src/reseau.html"><i class="fa-solid fa-map w-5"></i> Notre Réseau</a></li>
+                <li><a href="/src/parkings.html"><i class="fa-solid fa-square-parking w-5"></i> Parkings</a></li>
+                <li><a href="/src/parkings.html#relais"><i class="fa-solid fa-car w-5"></i> Parkings Relais</a></li>
+                <li><a href="/src/trafic.html"><i class="fa-solid fa-triangle-exclamation w-5"></i> Info Trafic</a></li>
+                <li><a href="/src/tarifs.html"><i class="fa-solid fa-ticket w-5"></i> Tarif</a></li>
+                <li><a href="/src/agences.html"><i class="fa-solid fa-store w-5"></i> Nos Agences</a></li>
+              </ul>
             </div>
-        </nav>
-        `;
+          </div>
+        </div>
+      </div>
+    </nav>
+    `;
 
   // Insérez le menu dans la page
   document.body.insertAdjacentHTML("afterbegin", menu);

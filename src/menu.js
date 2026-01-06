@@ -37,9 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
           
           <!-- Logo & Brand -->
           <a href="/index.html" class="flex items-center gap-3 shrink-0 group">
-            <div class="relative overflow-hidden rounded-full w-[48px] h-[48px] shadow-sm group-hover:scale-105 transition-transform">
-                <img src="/img/TCM-Sombre.png" alt="Logo TCM" class="logo-light object-cover w-full h-full" />
-                <img src="/img/TCM-Clair.png" alt="Logo TCM" class="logo-dark object-cover w-full h-full" />
+            <div class="relative w-[48px] h-[48px] group-hover:scale-105 transition-transform">
+                <img src="/img/TCM-Sombre.png" alt="Logo TCM" class="logo-light object-contain w-full h-full" />
+                <img src="/img/TCM-Clair.png" alt="Logo TCM" class="logo-dark object-contain w-full h-full" />
             </div>
             <span class="hidden sm:inline font-bold text-lg text-base-content group-hover:text-primary transition-colors">TCM</span>
           </a>

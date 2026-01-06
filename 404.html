@@ -1,108 +1,109 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="fr" data-theme="light">
 <head>
-  <!-- Métadonnées du site -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-  <meta name="keywords" content="Transport, Clermont-Ferrand, Mobilité">
-  <meta name="author" content="Transport Clermont Métropole">
-  <title>Transport Clermont Métropole</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Introuvable | TCM</title>
+    <meta name="description" content="Page introuvable." />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link href="/dist/output.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="src/menu.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png">
+    <style>
+        /* Shared Glassmorphism Variables */
+        :root {
+            --card-glass: rgba(255, 255, 255, 0.65);
+            --card-border: rgba(255, 255, 255, 0.5);
+            --card-shadow: rgba(0,0,0,0.1);
+        }
+        
+        [data-theme="dark"] {
+            --card-glass: rgba(30, 41, 59, 0.4);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-shadow: rgba(0, 0, 0, 0.3);
+        }
 
-  <!-- Intégrations pour réseaux sociaux -->
-  <meta property="og:title" content="Transport Clermont Métropole">
-  <meta property="og:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-  <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-  <meta property="og:url" content="https://tcm-mobilite.vercel.app/">
-  <meta name="twitter:title" content="Transport Clermont Métropole">
-  <meta name="twitter:description" content="Partenaire de vos déplacements dans Clermont-Ferrand depuis 1989.">
-  <meta name="twitter:image" content="https://tcm-mobilite.vercel.app/img/TCM Clair.png">
-  <meta name="twitter:card" content="summary_large_image">
+        .glass-panel {
+            background: var(--card-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px 0 var(--card-shadow);
+        }
 
-  <!-- Couleur de fond pour l'intégration -->
-  <meta name="theme-color" content="#204BFE">
-
-  <link href="../dist/output.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-  <script src="src/menu.js"></script>
-  <link rel="stylesheet" href="/404.css">
-  <script>document.addEventListener('contextmenu', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('copy', function (e) { e.preventDefault(); e.stopPropagation(); }); document.addEventListener('cut', function (e) { e.preventDefault(); e.stopPropagation(); });</script>
-  <style>
-    .jw-album-image img,
-    .jw-element-image img {
-      pointer-events: none;
-      -webkit-touch-callout: none;
-    }
-
-    .pswp__share-tooltip .pswp__share--download {
-      display: none;
-    }
-  </style>
+        /* 404 Specific Animations */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element-delay {
+            animation: float 8s ease-in-out infinite reverse;
+        }
+    </style>
 </head>
 
-<body>
-
-
-  <section class="wrapper">
-
-    <div class="container">
-
-      <div id="scene" class="scene" data-hover-only="false">
-
-
-        <div class="circle" data-depth="1.2"></div>
-
-        <div class="one" data-depth="0.9">
-          <div class="content">
-            <span class="piece"></span>
-            <span class="piece"></span>
-            <span class="piece"></span>
-          </div>
-        </div>
-
-        <div class="two" data-depth="0.60">
-          <div class="content">
-            <span class="piece"></span>
-            <span class="piece"></span>
-            <span class="piece"></span>
-          </div>
-        </div>
-
-        <div class="three" data-depth="0.40">
-          <div class="content">
-            <span class="piece"></span>
-            <span class="piece"></span>
-            <span class="piece"></span>
-          </div>
-        </div>
-
-        <p class="p404" data-depth="0.50">404</p>
-        <p class="p404" data-depth="0.10">404</p>
-
-      </div>
-
-      <div class="text">
-        <article>
-          <p>Uh oh! On dirait que tu t'es perdu. <br>Retournez à la page d'accueil si vous l'osez !</p>
-          <a href="/index.html">
-            <button type="button" class="btn bg-gradient-info w-auto me-2">J'ose !</button>
-          </a>
-
-        </article>
-      </div>
-
+<body class="bg-base-200 text-base-content font-sans min-h-screen flex flex-col relative overflow-hidden">
+    
+    <!-- Animated Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="absolute top-[20%] left-[20%] w-[60vh] h-[60vh] bg-primary/20 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute bottom-[20%] right-[20%] w-[50vh] h-[50vh] bg-secondary/20 rounded-full blur-[100px] animate-pulse" style="animation-duration: 6s;"></div>
     </div>
-  </section>
-  <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script src="./404.js"></script>
 
+    <!-- Main Content Centered -->
+    <main class="flex-grow flex items-center justify-center p-4 relative z-10 w-full h-[100vh]">
+        
+        <div class="glass-panel p-8 sm:p-16 rounded-3xl max-w-2xl w-full text-center relative overflow-hidden group">
+            
+            <!-- Deco Element Behind -->
+            <div class="absolute -top-20 -left-20 w-64 h-64 bg-accent/10 rounded-full blur-3xl group-hover:bg-accent/20 transition-colors duration-700"></div>
+
+            <!-- 404 Big Text -->
+            <div class="relative mb-6">
+                <h1 class="text-[10rem] sm:text-[12rem] font-black leading-none text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent opacity-20 select-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -z-10">
+                    404
+                </h1>
+                
+                <!-- Floating Icons -->
+                <div class="flex justify-center items-center gap-8 mb-4">
+                    <i class="fa-solid fa-bus text-6xl sm:text-7xl text-primary floating-element drop-shadow-lg"></i>
+                    <i class="fa-solid fa-question text-4xl sm:text-5xl text-secondary floating-element-delay opacity-80"></i>
+                </div>
+            </div>
+
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4 animate__animated animate__fadeInUp">
+                Terminus, tout le monde descend !
+            </h2>
+            
+            <p class="text-lg text-base-content/70 mb-8 max-w-md mx-auto animate__animated animate__fadeInUp animate__delay-1s">
+                Oups ! La page que vous cherchez a sans doute manqué son arrêt ou n'existe pas.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate__animated animate__fadeInUp animate__delay-1s">
+                <a href="/index.html" class="btn btn-primary btn-lg shadow-lg shadow-primary/30 rounded-full px-8">
+                    <i class="fa-solid fa-house"></i> Retour à l'accueil
+                </a>
+                <a href="/src/reseau.html" class="btn btn-outline btn-lg rounded-full px-8 hover:bg-base-content/10">
+                    <i class="fa-solid fa-map"></i> Plan du réseau
+                </a>
+            </div>
+
+            <!-- Footer decoration -->
+            <div class="mt-12 pt-8 border-t border-base-content/5 text-sm opacity-50">
+                Code erreur : 404 (Perdu dans la métropole)
+            </div>
+
+        </div>
+    </main>
 </body>
-
 </html>

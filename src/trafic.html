@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="menu.js" defer></script>
-    
+    <link rel="icon" type="image/png" href="https://tcm-mobilite.vercel.app/img/TCM.png" />
     <style>
         /* CustomScrollbar */
         ::-webkit-scrollbar { width: 8px; }
@@ -188,12 +188,19 @@
         const API_URL = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
         
         let allData = null;
+        let linesRef = null;
         let activeFilter = 'all';
 
         async function init() {
             try {
-                const response = await fetch(API_URL);
-                allData = await response.json();
+                const [trafficRes, linesRes] = await Promise.all([
+                    fetch(API_URL),
+                    fetch('ligne.json')
+                ]);
+                
+                allData = await trafficRes.json();
+                linesRef = await linesRes.json();
+                
                 render();
                 updateTime();
             } catch (e) {
@@ -225,7 +232,7 @@
         }
 
         function render() {
-            if (!allData) return;
+            if (!allData || !linesRef) return;
             
             const grid = document.getElementById('alerts-grid');
             const statusContent = document.getElementById('status-content');
@@ -236,12 +243,30 @@
             let processedLines = [];
             let affectedLinesCount = 0;
 
-            allData.lignes.forEach(line => {
-                const visibleInfos = line.infos_trafic.filter(info => {
+            // 0. Pre-process Live Data Map
+            const liveDataMap = new Map();
+            allData.lignes.forEach(l => {
+                const visible = l.infos_trafic.filter(info => {
                     const start = new Date(info.annonce);
                     const end = new Date(info.fin);
                     return now >= start && now <= end;
                 });
+                if (visible.length > 0) {
+                     liveDataMap.set(String(l.ligne).toUpperCase(), visible);
+                }
+            });
+
+            // 1. Iterate ALL canonical lines (Filtering out specials)
+            linesRef.lignes.forEach(lineDef => {
+                const lineId = String(lineDef.id);
+                const typeUpper = (lineDef.type || "").toUpperCase();
+                const idUpper = lineId.toUpperCase();
+
+                // Exclude Specials/Navettes
+                if (idUpper === 'NS' || idUpper === 'TCM' || idUpper.startsWith('NAV') || typeUpper.includes('NAVETTE') || typeUpper.includes('SPÉCIALE')) return;
+
+                // Check Live Data
+                const visibleInfos = liveDataMap.get(idUpper) || [];
                 
                 // Determine severity for icon/sorting
                 let statusPriority = 0; // 0=OK, 1=Info, 2=Work, 3=Stop
@@ -265,22 +290,20 @@
 
                 // Check search & filter
                 const searchQuery = document.getElementById('line-search').value.toLowerCase();
-                const matchesSearch = !searchQuery || line.ligne.toLowerCase().includes(searchQuery);
-                const matchesFilter = isLineType(line.ligne, activeFilter);
+                const matchesSearch = !searchQuery || lineId.toLowerCase().includes(searchQuery);
+                const matchesFilter = isLineType(lineId, activeFilter);
 
                 if (matchesSearch && matchesFilter) {
-                    if (line.ligne !== 'TCM') { 
-                        processedLines.push({ 
-                            line: line.ligne, 
-                            infos: visibleInfos, 
-                            priority: statusPriority,
-                            asset: assetIcon,
-                            label: alertLabel,
-                            color: alertColor,
-                            fa: faIcon,
-                            iconType: statusPriority === 3 ? 'error' : (statusPriority === 2 ? 'work' : (statusPriority === 1 ? 'information' : 'valid'))
-                        });
-                    }
+                    processedLines.push({ 
+                        line: lineId, 
+                        infos: visibleInfos, 
+                        priority: statusPriority,
+                        asset: assetIcon,
+                        label: alertLabel,
+                        color: alertColor,
+                        fa: faIcon,
+                        iconType: statusPriority === 3 ? 'error' : (statusPriority === 2 ? 'work' : (statusPriority === 1 ? 'information' : 'valid'))
+                    });
                 }
             });
 

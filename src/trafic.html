@@ -185,7 +185,8 @@
     <script>
         // Init
         document.getElementById("year").textContent = new Date().getFullYear();
-        const API_URL = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
+        const API_URL = "test.json";  
+        //const API_URL = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
         
         let allData = null;
         let linesRef = null;
@@ -385,22 +386,16 @@
                     }
 
                     // Main Icon
-                    let iconHTML = `<img src="/img/${item.line}.png" class="w-full h-full object-contain filter drop-shadow-lg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
+                    let iconHTML = `<img src="../img/${item.line}.png" class="w-full h-full object-contain filter drop-shadow-lg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
                     let fallbackIcon = `<div class="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-base-100 border-2 border-base-content/10 flex items-center justify-center font-black text-2xl shadow-sm hidden">${item.line}</div>`;
 
-                    // Status Badge (Only if alert OR specific design request to show valid tick? Image shows alert icons)
-                    // Image shows badge only for issues. Clean for OK.
-                    let badgeHTML = '';
-                    if (item.infos.length > 0) {
-                        badgeHTML = `
-                            <div class="absolute -bottom-2 -right-2 w-10 h-10 bg-base-100 rounded-full shadow-lg flex items-center justify-center border-2 border-${item.color} z-10 animate__animated animate__bounceIn">
-                                <img src="/img/assets/${item.asset}" class="w-6 h-6 object-contain">
-                            </div>
-                        `;
-                    } else {
-                         // Optional: Add simple checkmark for valid lines if desired, or keep clean. 
-                         // User said "Start like this image" -> Image has no badge for clean lines.
-                    }
+                    // Status Badge
+                    // Always visible (Valid/Warning/Error)
+                    const badgeHTML = `
+                        <div class="absolute -bottom-2 -right-2 w-9 h-9 bg-base-100 rounded-full shadow-md flex items-center justify-center border-2 border-${item.color} z-10 animate__animated animate__bounceIn" title="${item.label}">
+                            <img src="../img/assets/${item.asset}" class="w-5 h-5 object-contain">
+                        </div>
+                    `;
 
                     card.innerHTML = `
                          <div class="relative w-20 h-20 md:w-24 md:h-24">

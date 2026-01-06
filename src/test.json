@@ -1,110 +1,132 @@
 {
-  "lignes": [
-    {
-      "ligne": "TCM",
-      "infos_trafic": [
+    "lignes": [
         {
-          "type": "information",
-          "annonce": "09/01/2023",
-          "debut": "09/09/2023",
-          "fin": "10/25/2029",
-          "titre": "🏉 Annonce Spéciale - Coupe du Monde de Rugby 🏆",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
-        }
-      ]
-    },
-    {
-      "ligne": "601",
-      "infos_trafic": [
-        {
-          "type": "information",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2023",
-          "fin": "10/27/2024",
-          "titre": "🚧 Info Travaux 🚧",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
-        }
-      ]
-    }
-    ,
-    {
-      "ligne": "NS",
-      "infos_trafic": [
-        {
-          "type": "information",
-          "annonce": "06/01/2025",
-          "debut": "06/28/2025",
-          "fin": "06/29/2025",
-          "titre": "Concert de Caravan Palace au Zenith d'Auvergne",
-          "description": "TCM est partenaire de l'événement et vous propose des navettes spéciales pour l'occasion. Au départ de la Gare SNCF de Clermont-Ferrand, direction le Zenith d'Auvergne. Départ toutes les 30 minutes à partir de 18h00. Retour à partir de 23h00."
+            "ligne": "TCM",
+            "infos_trafic": [
+                {
+                    "type": "information",
+                    "annonce": "2026-01-01",
+                    "fin": "2026-01-10",
+                    "titre": "Bonne année 2026 !",
+                    "detail": "Tout le réseau TCM vous souhaite une excellente année 2026 remplie de voyages."
+                }
+            ]
         },
         {
-          "type": "information",
-          "annonce": "06/01/2025",
-          "debut": "07/15/2025",
-          "fin": "07/16/2025",
-          "titre": "Concert de Gims au Zenith d'Auvergne",
-          "description": "TCM est partenaire de l'événement et vous propose des navettes spéciales pour l'occasion. Au départ de la Gare SNCF de Clermont-Ferrand, direction le Zenith d'Auvergne. Départ toutes les 30 minutes à partir de 18h00. Retour à partir de 23h00."
+            "ligne": "A",
+            "infos_trafic": [
+                {
+                    "type": "fermeture",
+                    "annonce": "2026-01-06T08:00:00",
+                    "fin": "2026-01-06T18:00:00",
+                    "titre": "Arrêt momentané - Colis suspect",
+                    "detail": "Tram A interrompu entre Jaude et Lagarlaye. Intervention de police en cours."
+                }
+            ]
         },
         {
-          "type": "information",
-          "annonce": "06/01/2025",
-          "debut": "07/25/2025",
-          "fin": "07/26/2025",
-          "titre": "Concert de Charles Aznavour au Zenith d'Auvergne",
-          "description": "TCM est partenaire de l'événement et vous propose des navettes spéciales pour l'occasion. Au départ de la Gare SNCF de Clermont-Ferrand, direction le Zenith d'Auvergne. Départ toutes les 30 minutes à partir de 18h00. Retour à partir de 23h00."
+            "ligne": "B",
+            "infos_trafic": [
+                {
+                    "type": "travaux",
+                    "annonce": "2026-01-05",
+                    "fin": "2026-02-15",
+                    "titre": "Travaux de voirie - Secteur Royat",
+                    "detail": "En raison de travaux, l'arrêt Place Allard est reporté 50m plus bas. Prévoir +5 min de trajet."
+                }
+            ]
         },
         {
-          "type": "information",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2023",
-          "fin": "10/27/2023",
-          "titre": " information",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
+            "ligne": "C",
+            "infos_trafic": [
+                {
+                    "type": "déviation",
+                    "annonce": "2026-01-06",
+                    "fin": "2026-01-07",
+                    "titre": "Déviation Centre-Ville",
+                    "detail": "Manifestation en cours. Ligne déviée par les Boulevards."
+                }
+            ]
         },
         {
-          "type": "travaux",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2023",
-          "fin": "10/27/2023",
-          "titre": "travaux",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
+            "ligne": "3",
+            "infos_trafic": [
+                {
+                    "type": "information",
+                    "annonce": "2026-01-01",
+                    "fin": "2026-01-30",
+                    "titre": "Déplacement d'arrêt provisoire",
+                    "detail": "L'arrêt Gare SNCF est déplacé quai 4 pendant la durée des travaux du parvis."
+                }
+            ]
         },
         {
-          "type": "travaux",
-          "annonce": "09/28/2023",
-          "debut": "10/05/2023",
-          "fin": "10/27/2023",
-          "titre": "travaux en cours",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
+            "ligne": "10",
+            "infos_trafic": [
+                {
+                    "type": "grève",
+                    "annonce": "2026-01-06T00:00:00",
+                    "fin": "2026-01-06T23:59:59",
+                    "titre": "Mouvement social local",
+                    "detail": "Aucun bus ne circule sur la ligne 10 aujourd'hui."
+                }
+            ]
+        },
+        {
+            "ligne": "20",
+            "infos_trafic": [
+                {
+                    "type": "panne",
+                    "annonce": "2026-01-06T12:00:00",
+                    "fin": "2026-01-06T16:00:00",
+                    "titre": "Incident technique bus",
+                    "detail": "Retards importants à prévoir suite à une panne véhicule rue de l'Oradou."
+                }
+            ]
+        },
+        {
+            "ligne": "NS",
+            "infos_trafic": [
+                {
+                    "type": "Information",
+                    "annonce": "2026-01-06",
+                    "fin": "2026-01-06T23:59:59",
+                    "titre": "🏀 Match d'Inauguration - Arena",
+                    "detail": "Navettes spéciales Tramway + Bus pour le match de ce soir. Gratuit sur présentation du billet."
+                },
+                {
+                    "type": "Information",
+                    "annonce": "2026-01-10",
+                    "fin": "2026-01-10T23:59:59",
+                    "titre": "🎤 Concert : Stromae",
+                    "detail": "La navette NS circule pour le concert de Stromae à la Caramel Arena."
+                },
+                {
+                    "type": "Information",
+                    "annonce": "2026-01-15",
+                    "fin": "2026-01-17",
+                    "titre": "🏐 Tournoi International de Volley",
+                    "detail": "Navettes renforcées pendant les 3 jours de compétition."
+                },
+                {
+                    "type": "Information",
+                    "annonce": "2026-01-24",
+                    "fin": "2026-01-24",
+                    "titre": "🏎️ Monster Truck Show",
+                    "detail": "Attention, forte affluence prévue. Privilégiez le Tramway ligne A jusqu'à Montferrand puis la Navette 1."
+                },
+                {
+                    "type": "Information",
+                    "annonce": "2026-02-14",
+                    "fin": "2026-02-14",
+                    "titre": "💖 Soirée St Valentin On Ice",
+                    "detail": "Patinoire géante à l'Arena. Navettes nocturnes jusqu'à 01h00."
+                }
+            ]
+        },
+        {
+            "ligne": "36",
+            "infos_trafic": []
         }
-      ]
-    },
-    {
-      "ligne": "7",
-      "infos_trafic": [
-        {
-          "type": "information",
-          "annonce": "08/28/2023",
-          "debut": "09/15/2023",
-          "fin": "09/27/2029",
-          "titre": "🚧 Info Travaux 🚧",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
-        }
-      ]
-    },
-    {
-      "ligne": "601",
-      "infos_trafic": [
-        {
-          "type": "information",
-          "annonce": "09/28/2023",
-          "debut": "10/15/2023",
-          "fin": "10/27/2029",
-          "titre": "🚧 Info Travaux 🚧",
-          "description": "Lorem ipsum dolor sit amet, conscrectuor amelis esti"
-        }
-      ]
-    }
-  ]
+    ]
 }

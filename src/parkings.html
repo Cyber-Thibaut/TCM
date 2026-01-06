@@ -342,17 +342,22 @@
                 return `
                 <div class="glass-card rounded-3xl overflow-hidden flex flex-col group animate__animated animate__fadeInUp" style="animation-duration: 0.6s; animation-delay: ${idx * 0.1}s">
                     
-                    <!-- Image Area -->
-                    <div class="relative h-48 bg-black/50 overflow-hidden">
-                        <img src="${imgSrc}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80" onerror="this.src='https://placehold.co/600x400/1e293b/FFF?text=TCM'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-base-300 via-transparent to-transparent"></div>
-                        <div class="absolute top-4 right-4 shadow-lg">
+                    <!-- Image Area (Adapted for P+R Logos) -->
+                    <div class="relative bg-base-100/30 m-4 rounded-xl h-48 flex items-center justify-center overflow-hidden border border-white/5">
+                         <!-- Background Glow -->
+                         <div class="absolute inset-0 bg-primary/5 blur-xl group-hover:bg-primary/10 transition-colors duration-500"></div>
+                         
+                         <!-- Image -->
+                         <img src="${imgSrc}" alt="${p.name}" class="relative w-full h-full object-contain p-4 filter drop-shadow-xl transition-transform duration-500 group-hover:scale-105" onerror="this.src='/img/logo_tcm_default.png'">
+                         
+                         <!-- Badge Status -->
+                         <div class="absolute top-2 right-2 shadow-lg z-10">
                             ${statusBadge}
-                        </div>
+                         </div>
                     </div>
 
                     <!-- Content -->
-                    <div class="p-6 flex flex-col flex-grow">
+                    <div class="px-6 pb-6 flex flex-col flex-grow">
                         <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-primary transition-colors">${p.name}</h2>
                         <p class="text-base-content/60 text-sm mb-6 min-h-[40px]">${p.description || "Parking relais surveillé et sécurisé pour vos correspondances."}</p>
 

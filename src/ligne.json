@@ -4,7 +4,7 @@
             "id": "NS",
             "nom": "Hub Caramel Arena",
             "type": "Spéciale",
-            "description": "Service de transport événementiel direct pour la Caramel Arena, le nouveau pôle culturel majeur de l'agglomération clermontoise.",
+            "description": "Bienvenue à bord du vaisseau amiral de la culture ! La Navette Arena n'est pas un simple bus, c'est le préambule de votre soirée. Conçue spécialement pour desservir la Caramel Arena, cette ligne unique s'active uniquement les soirs de spectacle.\n\n**L'Expérience à bord :**\nDès la montée, l'ambiance est là. Éclairage LED tamisé aux couleurs de l'événement, playlists thématiques diffusées via un système audio haute fidélité... Si vous allez voir un concert de Rock, attendez-vous à ce que le chauffeur monte le son !\n\n**Le Tracé Express :**\nPour éviter les bouchons légendaires des soirs de match, la ligne NS emprunte le 'Couloir Doré', une voie réservée secrète (enfin, plus maintenant) qui longe la voie ferrée et contourne le trafic du boulevard pour vous déposer au pied des gradins en un temps record.\n\n**Anecdote :**\nLors de l'inauguration de l'Arena, le groupe en tête d'affiche a pris cette navette incognito avec les fans pour se rendre à son propre concert. Depuis, une rumeur court : scannez bien les visages sous les capuches, votre voisin de siège est peut-être la star de la soirée !",
             "stats": {
                 "nombre_arrets": 6,
                 "temps_trajet": "Variable",
@@ -17,10 +17,10 @@
             "type": "Navette Arena",
             "mode": "tram",
              "color": "#007941",
-            "description": "Liaison Tramway à haute fréquence dédiée aux soirs d'événements à l'Arena, connectant les principaux parkings relais au site.",
+            "description": "**La Ligne Verte.**\nNon, pas celle du film, mais celle de l'espérance d'arriver à l'heure ! Cette liaison Tramway dédiée connecte les parkings nord à l'Arena.\n\n**Le Parcours :**\nElle file droit comme une flèche à travers les nouveaux éco-quartiers. C'est la ligne la plus écologique du réseau, alimentée à 100% par l'énergie solaire des panneaux du toit de l'Arena (les jours de beau temps, sinon on a des batteries).\n\n**Secret de ligne :**\nL'arrêt 'Hôtel de Police' n'était pas prévu à l'origine. Il a été ajouté après que le Préfet se soit plaint de ne pas pouvoir aller voir les matchs de basket assez vite depuis son bureau.",
             "stats": {
                 "nombre_arrets": 10,
-                "temps_trajet": "94 min",
+                "temps_trajet": "15 min",
                 "longueur_ligne": "10.9 km",
                 "vehicule": "Tramway"
             }
@@ -31,10 +31,10 @@
             "type": "Navette Arena",
             "mode": "bus",
              "color": "#007941",
-            "description": "Desserte fine des quartiers résidentiels nord (Croix de Neyrat, Vergnes) vers la Caramel Arena en bus articulé.",
+            "description": "**Le 'Ramasse-Miettes' (Affectueusement).**\nCette ligne a la lourde tâche de récupérer tous les fans dispersés dans les quartiers labyrinthiques de la Croix de Neyrat et des Vergnes. C'est un bus articulé double, surnommé 'Le Boa' par les riverains à cause de sa capacité à se faufiler dans des ronds-points impossibles.\n\n**Anecdote du chauffeur :**\n'Un soir de victoire, tout le bus chantait tellement fort que les vibrations ont déclenché l'alarme d'une voiture garée au feu rouge. Un grand moment de communion !'",
             "stats": {
                 "nombre_arrets": 11,
-                "temps_trajet": "94 min",
+                "temps_trajet": "22 min",
                 "longueur_ligne": "21.4 km",
                 "vehicule": "Articulé"
             }
@@ -45,10 +45,10 @@
              "type": "Navette Arena",
             "mode": "bus",
              "color": "#007941",
-            "description": "Liaison étudiante directe reliant le pôle universitaire des Cézeaux à la Caramel Arena pour les événements majeurs.",
+            "description": "**L'Express Étudiant.**\nDirecte, bruyante, vivante. La NAV3 relie le campus des Cézeaux à l'Arena. C'est officiellement la ligne avec la moyenne d'âge la plus basse et le volume sonore le plus élevé.\n\n**Le Tracé :**\nElle coupe par le boulevard périphérique sud pour éviter le centre-ville. C'est un 'Shot' de transport : court, intense, efficace.\n\n**Info utile :**\nLe dernier départ après le concert attend toujours 10 minutes de plus. On sait que vous traînez pour acheter du merch.",
             "stats": {
                 "nombre_arrets": 7,
-                "temps_trajet": "94 min",
+                "temps_trajet": "18 min",
                 "longueur_ligne": "23.7 km",
                 "vehicule": "Articulé"
             }
@@ -59,10 +59,10 @@
              "type": "Navette Arena",
             "mode": "car",
              "color": "#007941",
-            "description": "Liaison longue distance en autocar confort connectant l'ouest de l'agglomération et les zones périurbaines.",
+            "description": "**La Croisière de l'Ouest.**\nVous venez de loin ? La NAV4 est faite pour vous. Équipée de sièges inclinables (presque) et de Wi-Fi (quand il marche), elle ramène les spectateurs vers les contrées lointaines de l'ouest clermontois.\n\n**Légende locale :**\nIl paraît que le village de 'Chatonmeow' n'existait pas avant la création de cette ligne. Il se serait formé autour de l'arrêt de bus. (C'est faux, mais c'est une belle histoire).",
             "stats": {
                 "nombre_arrets": 4,
-                "temps_trajet": "94 min",
+                "temps_trajet": "45 min",
                 "longueur_ligne": "65.6 km",
                 "vehicule": "Autocar"
             }
@@ -73,10 +73,10 @@
             "type": "Navette Arena",
             "mode": "car",
              "color": "#007941",
-            "description": "Navette montagne reliant les hauteurs du plateau de Gergovie et Ludorgue directement à la plaine et l'Arena.",
+            "description": "**L'Alpiniste.**\nDépart des neiges éternelles (ou au moins du plateau venteux) de Ludorgue pour plonger vers la fournaise de l'Arena. Le dénivelé est tel que le bus recharge 40% de sa batterie juste en freinant à la descente.\n\n**Point de vue :**\nEssayez de vous asseoir à droite à l'aller. La vue sur la plaine illuminée de Clermont la nuit est la plus belle de tout le réseau.",
             "stats": {
                 "nombre_arrets": 4,
-                "temps_trajet": "94 min",
+                "temps_trajet": "35 min",
                 "longueur_ligne": "66.3 km",
                 "vehicule": "Autocar"
             }
@@ -87,10 +87,10 @@
             "type": "Navette Arena",
             "mode": "car",
              "color": "#007941",
-            "description": "Liaison rapide ouest via les voies rapides, permettant un accès fluide depuis les communes dortoirs.",
+            "description": "**La Flèche d'Argent.**\nUtilisant les voies rapides, la NAV6 est la solution pour ceux qui habitent en banlieue dortoir et veulent une injection de culture sans le stress du parking.\n\n**Anecdote :**\nLe Boulevard de l'Humanité est si long que le chauffeur a le temps d'écouter l'album entier de l'artiste du soir avant d'arriver au premier arrêt.",
             "stats": {
                 "nombre_arrets": 5,
-                "temps_trajet": "70 min",
+                "temps_trajet": "28 min",
                 "longueur_ligne": "44.7 km",
                 "vehicule": "Autocar"
             }
@@ -100,14 +100,14 @@
             "nom": "Les Vergnes <> La Pardieu Gare",
             "type": "Volc'Express",
             "mode": "tram",
-            "description": "La colonne vertébrale du réseau clermontois. Cette ligne de tramway sur pneus relie le nord (Champratel/Les Vergnes) au sud (La Pardieu), en traversant les points névralgiques : Stade Marcel Michelin, Place de Jaude, Maison de la Culture et le Campus des Cézeaux. Indispensable pour traverser la métropole.",
+            "description": "**La Colonne Vertébrale.**\nLa Ligne A ! C'est le cœur battant de Clermont-Ferrand. Unique au monde (ou presque) avec son système sur pneus guidé par un rail central, elle grimpe les pentes que les trams classiques regardent avec effroi.\n\n**Le Tracé Mythique :**\nPartant du Nord aux Vergnes, elle traverse le quartier mythique de Montferrand, passe devant le temple du Rugby (Stade Michelin), fend la Place de Jaude en deux (attention aux piétons distraits !), et s'envole littéralement sur le Viaduc Saint-Jacques. De là-haut, on voit tout : la Cathédrale noire, le Puy de Dôme, et les bouchons en bas.\n\n**Le Saviez-vous ?**\nLe crissement caractéristique des pneus du tram dans le virage de la Maison de la Culture est utilisé par les riverains pour régler leur montre. 'Ah, le tram de 8h12 qui couine, je suis en retard !'\n\n**Conseil :**\nAux heures de pointe, la section Jaude <> Universités est surnommée 'La boîte de sardines'. Si vous êtes claustrophobe, attendez le suivant (qui sera plein aussi, désolé).",
             "operation": {
                 "start": "04:30",
                 "end": "01:00"
             },
             "parkings": ["clinique"],
             "stats": {
-                "nombre_arrets": 44,
+                "nombre_arrets": 34,
                 "temps_trajet": "46 minutes",
                 "longueur_ligne": "14.6 km"
             }
@@ -116,30 +116,30 @@
             "id": 2,
             "nom": "Royat Place Allard <> Aulnat Aéroport",
             "type": "Volc'Express",
-            "description": "Ligne structurante Est-Ouest (équivalent Ligne B). Elle connecte la station thermale de Royat, passe par la Place de Jaude, la Gare SNCF, et dessert l'Aéroport d'Aulnat. C'est le lien direct entre le centre historique et l'ouverture aérienne de la ville.",
+            "description": "**La Ligne des Contrastes.**\nElle relie le luxe feutré des Thermes de Royat à l'efficacité industrielle de la zone aéroportuaire. C'est un voyage temporel en 40 minutes.\n\n**L'Expérience :**\nVous commencez votre trajet entouré de villas Belle Époque et de dames aux chapeaux élégants. Vous traversez Chamalières (le 'Neuilly' local), longez le parc de la Tiretaine. Puis, brutale transition : le centre-ville vibrant, la Gare SNCF et son flot de voyageurs, pour finir au milieu des hangars d'avions et des valises à roulettes.\n\n**Anecdote historique :**\nC'est sur cette ligne qu'a été testé le premier bus électrique de la ville. Il est tombé en panne sèche place de Jaude le jour de l'inauguration, obligeant le Maire à pousser (légende urbaine têtue).",
             "stats": {
                 "nombre_arrets": 24,
-                "temps_trajet": "20 minutes",
-                "longueur_ligne": "6.1 km"
+                "temps_trajet": "38 minutes",
+                "longueur_ligne": "12.1 km"
             }
         },
         {
             "id": 3,
             "nom": "Tamaris <> Cournon Lycée Descartes",
             "type": "Volc'Express",
-            "description": "Ligne majeure (Ligne C) traversant l'agglomération du Nord-Ouest au Sud-Est. Elle dessert les quartiers densément peuplés de Tamaris, passe par Jaude et l'Université, pour rejoindre la grande ville de Cournon d'Auvergne et son plan d'eau.",
+            "description": "**L'Orient-Express Clermontois.**\nBon, sans le luxe et les wagons-lits, mais c'est l'axe majeur Est-Ouest du sud de l'agglo. Elle relie les quartiers denses de Tamaris à la deuxième ville du département, Cournon.\n\n**Le Point Fort :**\nElle dessert le Plan d'Eau de Cournon en été. C'est officiellement la 'Ligne de la Plage' dès que le thermomètre dépasse 25°C. Attendez-vous à voir des bouées flamant rose et des parasols encombrer l'allée centrale.\n\n**Secret d'usager :**\nEntre l'arrêt 'Léon Blum' et 'Lycée Descartes', le bus longe l'Allier. Si vous avez de la chance (et de bons yeux), vous pouvez apercevoir des castors au petit matin. (Non, ce ne sont pas des gros rats).",
             "parkings": ["cezeaux"],
             "stats": {
                 "nombre_arrets": 27,
                 "temps_trajet": "32 minutes",
-                "longueur_ligne": "7.7 km"
+                "longueur_ligne": "13.7 km"
             }
         },
         {
             "id": 4,
             "nom": "Ceyrat Pradeaux <> Trémonteix Charcot",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Une ligne au profil topographique marqué ! Elle relie les hauteurs résidentielles de Trémonteix aux portes des gorges de Ceyrat, en passant par le centre de Clermont-Ferrand (Ballainvilliers, Salins).",
+            "description": "**Le Sherpa Urbain.**\nCette ligne ne connaît pas le plat. Elle passe son temps à grimper ou à descendre. Elle relie le point culminant habitable de Trémonteix (Nord) aux gorges sauvages de Ceyrat (Sud).\n\n**Sensations fortes :**\nLa descente de Ceyrat vers le centre-ville offre des virages en épingle dignes d'une étape du Tour de France. Les chauffeurs de la ligne 4 sont sélectionnés parmi l'élite, capables de manœuvrer un bus standard dans des rues où deux vélos se croisent à peine.\n\n**Le spot photo :**\nArrêt 'Charcot'. Situé tout en haut de la ville, il offre une vue imprenable sur la Cathédrale émergeant de la brume urbaine.",
             "stats": {
                 "nombre_arrets": 37,
                 "temps_trajet": "47 minutes",
@@ -150,30 +150,30 @@
             "id": 5,
             "nom": "Royat Pépinière <> Gaillard",
             "type": "Volc'Express",
-            "description": "Ligne sinueuse desservant les quartiers résidentiels aisés de Royat et Chamalières, descendant vers le carrefour Europe et la Gare Routière. Idéale pour rejoindre les thermes ou le Casino.",
+            "description": "**La Navette des Curistes.**\nCourte mais essentielle. Elle serpente dans les petites rues de Royat que les gros bus de la ligne 2 ne peuvent pas emprunter. \n\n**Ambiance :**\nTrès calme le matin, elle s'anime à l'heure du marché. C'est la ligne où tout le monde se connaît. Si vous êtes nouveau, on vous regardera, mais on finira par vous dire bonjour.\n\n**Utile :**\nElle dépose pile devant le départ des sentiers de randonnée de la Pépinière. Passez du bitume à la forêt en 30 secondes chrono.",
             "parkings": ["luca"],
             "stats": {
-                "nombre_arrets": 34,
-                "temps_trajet": "37 minutes",
-                "longueur_ligne": "9.3 km"
+                "nombre_arrets": 15,
+                "temps_trajet": "22 minutes",
+                "longueur_ligne": "5.3 km"
             }
         },
         {
             "id": 6,
             "nom": "Durtol <> Lycée Lafayette",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Liaison Nord-Sud alternative, connectant la commune de Durtol (porte du Parc des Volcans) au quartier étudiant et technologique de Lafayette, via le boulevard Lavoisier.",
+            "description": "**Le Trait d'Union.**\nElle connecte la commune de Durtol, véritable porte d'entrée du Parc des Volcans, au Lycée Lafayette et ses milliers d'étudiants.\n\n**Le Choc des Mondes :**\nLe matin, le bus transporte un mélange hétéroclite de randonneurs matinaux équipés de bâtons de marche et d'étudiants en informatique à moitié endormis. \n\n**Info Trafic récurrente :**\nLa ligne est parfois déviée les jours de grand marché à Durtol, ou quand un troupeau de moutons décide de traverser la route (c'est arrivé deux fois en 10 ans, mais ça marque).",
             "stats": {
                 "nombre_arrets": 17,
-                "temps_trajet": "20 minutes",
-                "longueur_ligne": "5 km"
+                "temps_trajet": "25 minutes",
+                "longueur_ligne": "7.5 km"
             }
         },
         {
             "id": 7,
             "nom": "Les Côtes de Clermont <> Tilène",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Ligne de desserte fine des quartiers de 'La Plaine' et des coteaux nord. Elle permet aux résidents de rejoindre rapidement les correspondances tramway à Montferrand.",
+            "description": "**L'Escaladeuse.**\nDesserte fine des quartiers nord de Clermont. Son nom 'Les Côtes' n'est pas usurpé. Le moteur du bus grogne en montant vers Chanturgue, mais la redescende vers Tilène offre une respiration bienvenue.\n\n**L'anecdote botanique :**\nLa ligne traverse plusieurs zones vertes et jardins ouvriers. Au printemps, l'intérieur du bus sent le lilas et la glycine grâce aux branches qui frôlent les fenêtres ouvertes.",
             "stats": {
                 "nombre_arrets": 30,
                 "temps_trajet": "36 minutes",
@@ -184,7 +184,7 @@
             "id": 8,
             "nom": "Vallières <> Matussat",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Ligne traversant le centre par l'axe des boulevards. Elle relie le quartier étudiant de Vallières (Faculté des Lettres) au secteur sud de Beaumont-Matussat.",
+            "description": "**La Ligne des Boulevards.**\nElle évite l'hypercentre piéton pour ceinture la ville par l'Muest. Pratique pour contourner Jaude sans changer de bus.\n\n**Public :**\nTrès prisée des étudiants en Lettres (Vallières) qui vont voir leurs amis en Droit (Centre). C'est un lieu d'échange intellectuel intense... ou de sieste, selon l'heure.",
             "stats": {
                 "nombre_arrets": 27,
                 "temps_trajet": "32 minutes",
@@ -195,29 +195,29 @@
             "id": 9,
             "nom": "Trémonteix <> Brézet",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Ligne clé pour l'emploi, reliant les zones d'habitat de Trémonteix à l'immense zone industrielle et commerciale du Brézet. Très fréquentée aux heures de pointe.",
+            "description": "**La Ligne du Boulot.**\nElle relie les zones d'habitation paisibles de Trémonteix à la ruche industrielle du Brézet. \n\n**Rythme :**\nLe matin à 7h30, c'est le silence absolu : tout le monde finit sa nuit ou lit ses mails. Le soir à 17h30, c'est la libération, l'ambiance est nettement plus détendue. \n\n**Le piège :**\nAttention à ne pas la confondre avec la ligne 10 au Brézet, sinon vous finirez à Aulnat au lieu de Trémonteix. (Astuce : La 9 est bleue sur le plan, la 10 est violette, mais la nuit, tous les chats sont gris).",
             "stats": {
-                "nombre_arrets": 12,
-                "temps_trajet": "18 minutes",
-                "longueur_ligne": "6.2 km"
+                "nombre_arrets": 22,
+                "temps_trajet": "28 minutes",
+                "longueur_ligne": "9.2 km"
             }
         },
         {
             "id": 10,
             "nom": "Durtol <> Aulnat",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Longue ligne transversale reliant l'extrême ouest (Durtol) à l'extrême est (Aulnat), traversant tout le centre-ville et desservant la Gare SNCF.",
+            "description": "**La Transversale Absolue.**\nDe l'extrême Ouest (Durtol) à l'extrême Est (Aulnat). Elle traverse TOUT via la Gare SNCF.\n\n**Le Voyage :**\nPrendre la 10 de bout en bout, c'est un documentaire sociologique sur Clermont. Vous passez des villas cossues des hauteurs, au centre commerçant, aux quartiers populaires près de la gare, pour finir dans la plaine agricole et aéroportuaire d'Aulnat.\n\n**Record :**\nC'est la ligne avec le plus grand nombre de feux rouges sur son parcours. Les chauffeurs de la 10 ont une patience de moine tibétain.",
             "stats": {
-                "nombre_arrets": 24,
-                "temps_trajet": "33 minutes",
-                "longueur_ligne": "11.1 km"
+                "nombre_arrets": 35,
+                "temps_trajet": "45 minutes",
+                "longueur_ligne": "14.1 km"
             }
         },
         {
             "id": 11,
             "nom": "Aubière Place des Ramacles <> Montferrand",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Ligne de rocade sud-est, évitant le centre-ville pour relier directement le bourg d'Aubière au quartier historique de Montferrand.",
+            "description": "**La Ligne des Bourgs.**\nPlutôt que de passer par le centre moderne, elle relie les deux cœurs historiques périphériques : le vieux bourg d'Aubière et la cité médiévale de Montferrand.\n\n**Ambiance Médiévale :**\nEn passant par Montferrand, le bus frôle des remparts du 13ème siècle. C'est la seule ligne où vous pouvez voir une gargouille vous tirer la langue depuis la fenêtre du bus.",
             "stats": {
                 "nombre_arrets": 14,
                 "temps_trajet": "21 minutes",
@@ -228,7 +228,7 @@
             "id": 12,
             "nom": "Delille <> Quartier Chambon",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Au départ de la Place Delille, cette ligne dessert les quartiers est vers le secteur Chambon. Pratique pour les lycéens de Blaise Pascal.",
+            "description": "**L'Express Lycéen.**\nAu départ de la Place Delille (Mecque des coiffeurs clermontois), elle file vers l'Est. \n\n**Alerte Horaire :**\nÀ 8h00 et 17h00, c'est la propriété exclusive des élèves de Blaise Pascal et Jeanne d'Arc. Le niveau sonore atteint 80 décibels. En dehors de ces heures, c'est une ligne paisible qui dessert des quartiers tranquilles.",
             "stats": {
                 "nombre_arrets": 21,
                 "temps_trajet": "27 minutes",
@@ -239,7 +239,7 @@
             "id": 13,
             "nom": "Haut-de-Chanturgue <> Quartier Neyrat",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Navette de quartier desservant les zones d'habitat dense du Nord de Clermont, facilitant l'accès au centre commercial Auchan Nord.",
+            "description": "**La Navette du Plateau.**\nElle tourne sur le plateau nord de la ville. C'est le lien vital pour les habitants de Chanturgue vers le tramway et le centre commercial Auchan.\n\n**Héritage :**\nElle passe près des anciennes pistes d'essais Michelin de Cataroux. On dit que le fantôme de Bibendum hante parfois le terminus (c'est faux, mais ça fait peur aux enfants sages).",
             "stats": {
                 "nombre_arrets": 15,
                 "temps_trajet": "18 minutes",
@@ -250,7 +250,7 @@
             "id": 14,
             "nom": "Gare SNCF <> Cébazat",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Ligne suburbaine importante connectant la ville de Cébazat et son hôpital Nord au pôle d'échanges de la Gare SNCF.",
+            "description": "**La Nordiste.**\nConnecte Cébazat à la Gare. C'est la ligne préférée du personnel de l'Hôpital Nord (CHUM) qui vit en ville.\n\n**Particularité :**\nElle traverse la zone de Ladoux. Si vous voyez des voitures camouflées avec des motifs zébrés noir et blanc, c'est normal, ce sont les prototypes Michelin qui sortent en essai.",
             "stats": {
                 "nombre_arrets": 18,
                 "temps_trajet": "24 minutes",
@@ -261,10 +261,10 @@
             "id": 15,
             "nom": "Clermont Place de Jaude <> Puy de Dôme",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "La ligne touristique par excellence ! (Navette Panoramique). Au départ de Jaude, elle vous emmène au pied du Géant des Dômes pour prendre le train à crémaillère.",
+            "description": "**L'Ascension.**\nAussi appelée 'Panoramique des Dômes Express'. Elle vous prend au pied de la statue de Vercingétorix et vous dépose au pied du volcan.\n\n**Tourisme :**\n90% des passagers ont un appareil photo autour du cou et cherchent la Chaîne des Puys par la fenêtre. Le chauffeur joue souvent le guide touristique improvisé : 'À votre droite, un champ de vaches salers bio'.",
             "stats": {
-                "nombre_arrets": 36,
-                "temps_trajet": "48 minutes",
+                "nombre_arrets": 10,
+                "temps_trajet": "25 minutes",
                 "longueur_ligne": "11.3 km"
             }
         },
@@ -272,7 +272,7 @@
             "id": 16,
             "nom": "Delille <> Le Cendre",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Ligne périurbaine desservant le sud-est de l'agglomération, reliant la commune du Cendre au centre-ville via Cournon.",
+            "description": "**Le Train de Banlieue (sur pneus).**\nLigne rapide vers le Sud-Est. Elle dessert Cournon et finit sa course au Cendre, la ville verte.\n\n**Conseil :**\nTrès pratique pour aller à la Grande Halle d'Auvergne lors de la Foire Internationale si vous voulez éviter les bouchons monstrueux du parking.",
             "stats": {
                 "nombre_arrets": 20,
                 "temps_trajet": "22 minutes",
@@ -283,7 +283,7 @@
             "id": 17,
             "nom": "CHU G. Montpied <> Romagnat",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Ligne de proximité reliant la commune de Romagnat au grand pôle hospitalier Gabriel Montpied et au campus des Cézeaux.",
+            "description": "**La Ligne Santé.**\nTerminus au CHU. C'est la ligne des infirmières et des médecins de Romagnat.\n\n**Ambiance Zen :**\nTraversant des zones pavillonnaires calmes et finissant près de l'hôpital, c'est sans doute la ligne la plus silencieuse du réseau. On y respecte le repos des gardes de nuit.",
             "stats": {
                 "nombre_arrets": 28,
                 "temps_trajet": "33 minutes",
@@ -294,18 +294,18 @@
             "id": 18,
             "nom": "Mezel <> Jaude",
             "type": "Erupt'Urbain - Puy-de-Dôme",
-            "description": "Desserte de la vallée du Bedat, reliant la petite commune de Mezel directement au cœur de Clermont-Ferrand.",
+            "description": "**La Campagnarde.**\nMezel, c'est déjà un peu la campagne. Cette ligne permet aux habitants de la vallée du Bedat de venir travailler en ville sans prendre la voiture.\n\n**Trajet :**\nLa route entre Mezel et Clermont est magnifique au lever du soleil, avec la brume sur la rivière.",
             "stats": {
                 "nombre_arrets": 20,
                 "temps_trajet": "22 minutes",
-                "longueur_ligne": "6.4 km"
+                "longueur_ligne": "8.4 km"
             }
         },
         {
             "id": 60,
             "nom": "Préfecture <> Lycée Jeanne d'Arc",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "Ligne scolaire et administrative courte distance, très fréquentée aux heures de sortie des bureaux et des classes.",
+            "description": "**Le Circuit Administratif.**\nElle relie la Préfecture aux grands lycées. C'est la ligne des dossiers et des cartables.\n\n**Horaire :**\nElle ne circule qu'aux heures de pointe. Inutile de l'attendre à 14h, elle fait la sieste.",
             "stats": {
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
@@ -316,18 +316,18 @@
             "id": 61,
             "nom": "Gare de l'Ouest <> Parc Montjuzet",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "Ligne verte menant au plus célèbre parc de la ville. Ça grimpe ! Offre une vue imprenable sur la ville durant le trajet.",
+            "description": "**L'Oxygène.**\nDirection le poumon vert de la ville, le Parc Montjuzet.\n\n**Défi Mécanique :**\nLa côte pour monter au parc est redoutable. Le bus passe la seconde et le moteur hurle, mais il arrive toujours en haut. La récompense ? La vue panoramique à l'arrivée.",
             "stats": {
-                "nombre_arrets": 27,
-                "temps_trajet": "32 minutes",
-                "longueur_ligne": "8 km"
+                "nombre_arrets": 15,
+                "temps_trajet": "18 minutes",
+                "longueur_ligne": "4.5 km"
             }
         },
         {
             "id": 62,
             "nom": "Stade Michelin <> Gravanches",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "Ligne desservant les zones sportives (Rugby, Tennis) et le parc d'activité des Gravanches au nord-est.",
+            "description": "**La Sportive.**\nElle connecte le rugby (Michelin) au centre d'entraînement (Gravanches). C'est la ligne où vous avez le plus de chance de croiser un joueur de l'ASM (ou au moins un espoir du centre de formation).",
             "stats": {
                 "nombre_arrets": 30,
                 "temps_trajet": "40 minutes",
@@ -338,7 +338,7 @@
             "id": 63,
             "nom": "Place de Jaude <> L'Aventure Michelin",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "La ligne culturelle ! Voyagez de la statue de Vercingétorix jusqu'au temple du pneu à Cataroux. Incontournable pour les visiteurs.",
+            "description": "**La Ligne Bibendum.**\nElle relie le coeur historique à l'histoire industrielle. Terminus devant le musée Michelin.\n\n**Design :**\nPendant un temps, les bus de cette ligne avaient des sièges en forme de pneus (c'était inconfortable, ils ont été changés, mais l'intention était là).",
             "stats": {
                 "nombre_arrets": 26,
                 "temps_trajet": "29 minutes",
@@ -349,7 +349,7 @@
             "id": 64,
             "nom": "Place de Jaude <> Hôtel de région",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "Navette express reliant le pouvoir économique et politique de la ville à Montferrand.",
+            "description": "**L'Institutionnelle.**\nNavette rapide pour les décideurs. Elle va vite, elle est propre, et elle est souvent en avance. C'est la bonne élève du réseau.",
             "parkings": ["luca"],
             "stats": {
                 "nombre_arrets": 13,
@@ -361,18 +361,18 @@
             "id": 65,
             "nom": "Préfecture <> Place de Jaude",
             "type": "Erupt'Urbain - Puy-de-Pariou",
-            "description": "Micro-navette de centre-ville pour les déplacements rapides entre les administrations.",
+            "description": "**Le Saut de Puce.**\nLa ligne la plus courte du monde ? Peut-être pas, mais elle ne sert qu'à éviter de marcher 10 minutes sous la pluie entre la Pref' et Jaude. Très appréciée les jours d'averse.",
             "stats": {
-                "nombre_arrets": 27,
-                "temps_trajet": "25 minutes",
-                "longueur_ligne": "6.4 km"
+                "nombre_arrets": 6,
+                "temps_trajet": "8 minutes",
+                "longueur_ligne": "2.1 km"
             }
         },
         {
             "id": 101,
             "nom": "Hôtel de Région <> Lempdes",
             "type": "Puy'Périphérique",
-            "description": "Ligne périurbaine reliant Montferrand à la commune de Lempdes, via les zones commerciales.",
+            "description": "**L'Est Lointain.**\nDirection Lempdes. Une ligne calme qui traverse des kilomètres de zones commerciales colorées avant de retrouver le calme du bourg.",
             "stats": {
                 "nombre_arrets": 16,
                 "temps_trajet": "36 minutes",
@@ -383,7 +383,7 @@
             "id": 102,
             "nom": "Stade <> Gerzat",
             "type": "Puy'Périphérique",
-            "description": "Liaison nord connectant le Stade Gabriel Montpied à la ville de Gerzat.",
+            "description": "**La Banlieue Nord.**\nGerzat, la ville du pantalon (c'est faux, c'est une blague locale). Ligne efficace pour les navetteurs.",
             "stats": {
                 "nombre_arrets": 12,
                 "temps_trajet": "27 minutes",
@@ -394,7 +394,7 @@
             "id": 103,
             "nom": "Place de l'Europe <> Chateaugay",
             "type": "Puy'Périphérique",
-            "description": "Ligne desservant les coteaux viticoles de Chateaugay depuis le carrefour de Chamalières.",
+            "description": "**La Route des Vins.**\nChateaugay et son vin (à consommer avec modération). La ligne offre de belles vues sur le vignoble auvergnat.",
             "stats": {
                 "nombre_arrets": 8,
                 "temps_trajet": "21 minutes",
@@ -405,7 +405,7 @@
             "id": 104,
             "nom": "Science Po <> Pont-du-Château",
             "type": "Puy'Périphérique",
-            "description": "Ligne longue distance vers l'Est, suivant le cours de l'Allier jusqu'à Pont-du-Château.",
+            "description": "**La Castelpontine.**\nElle longe la rivière Allier jusqu'au château. Très bucolique en fin de journée.",
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "24 minutes",
@@ -416,7 +416,7 @@
             "id": 105,
             "nom": "Place de l'Europe <> Saint-Amant-Tallende",
             "type": "Puy'Périphérique",
-            "description": "Ligne du sud, traversant la vallée de la Veyre pour rejoindre les villages historiques.",
+            "description": "**La Sudiste.**\nElle s'enfonce dans la vallée de la Veyre. C'est le début du Sancy. Les passagers ont souvent des chaussures de rando le week-end.",
             "stats": {
                 "nombre_arrets": 20,
                 "temps_trajet": "50 minutes",
@@ -427,7 +427,7 @@
             "id": 106,
             "nom": "Bureau de poste <> Volvic",
             "type": "Puy'Périphérique",
-            "description": "Direction la ville de la pierre et de l'eau ! Desserte de Volvic depuis Clermont.",
+            "description": "**La Source.**\nDestination Volvic ! La ville de l'eau. N'oubliez pas votre bouteille, vous pouvez la remplir à la source gratuitement (si vous la trouvez).",
             "stats": {
                 "nombre_arrets": 11,
                 "temps_trajet": "26 minutes",
@@ -438,7 +438,7 @@
             "id": 151,
             "nom": "Gare Routière <> Orcines",
             "type": "Puy'Périphérique",
-            "description": "Ligne de montagne desservant Orcines et les hameaux au pied du Puy de Dôme.",
+            "description": "**L'Alpage.**\nOrcines, au pied du Puy de Dôme. C'est la ligne qui a le plus de dénivelé positif cumulé. En hiver, elle est parfois la première à être bloquée par la neige, ce qui donne une bonne excuse aux habitants pour ne pas aller travailler.",
             "stats": {
                 "nombre_arrets": 21,
                 "temps_trajet": "52 minutes",
@@ -449,7 +449,7 @@
             "id": 201,
             "nom": "Campus Cézeaux <> RIOM Gare Routière",
             "type": "Monts'Connection",
-            "description": "Ligne Express Régionale : La connexion rapide entre le pôle universitaire clermontois et la sous-préfecture de Riom.",
+            "description": "**L'Intercités express.**\nElle relie les deux plus grandes villes de l'agglo élargie. Pas d'arrêt intermédiaire inutile, on file sur l'autoroute.",
             "stats": {
                 "nombre_arrets": 6,
                 "temps_trajet": "67 minutes",
@@ -460,7 +460,7 @@
             "id": 202,
             "nom": "Campus Cézeaux <> Issoire",
             "type": "Monts'Connection",
-            "description": "Ligne Express Sud : Relie le campus aux industries et zones d'habitat d'Issoire via l'A75.",
+            "description": "**L'A75 Express.**\nCap au Sud ! Issoire, son abbatiale, son aluminium. Ligne vitale pour les étudiants qui habitent le sud du département.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "46 minutes",
@@ -471,7 +471,7 @@
             "id": 203,
             "nom": "Gare de l'Ouest <> Thiers",
             "type": "Monts'Connection",
-            "description": "Ligne de la coutellerie ! Une liaison transversale vers la montagne thiernoise.",
+            "description": "**Le Couteau Suisse.**\nThiers, capitale de la coutellerie. La route est longue et sinueuse, surnommée 'La route de la mort' par les anciens, mais le bus est sûr !",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "62 minutes",
@@ -482,7 +482,7 @@
             "id": 204,
             "nom": "Gare de l'Ouest <> Billom",
             "type": "Monts'Connection",
-            "description": "Desserte de la Toscane auvergnate et de la ville médiévale de Billom.",
+            "description": "**La Médiévale.**\nBillom et ses maisons à colombages. Le bus traverse des champs d'ail (l'ail de Billom est réputé). Ouvrez les fenêtres pour sentir le terroir.",
             "stats": {
                 "nombre_arrets": 8,
                 "temps_trajet": "70 minutes",
@@ -493,7 +493,7 @@
             "id": 205,
             "nom": "Gare de l'Ouest <> Veyre-Monton",
             "type": "Monts'Connection",
-            "description": "Desserte des zones résidentielles du Val d'Allier sud.",
+            "description": "**La Vierge.**\nDirection Monton et sa statue de la Vierge géante qui surveille la vallée. Un pèlerinage quotidien pour certains.",
             "stats": {
                 "nombre_arrets": 7,
                 "temps_trajet": "45 minutes",
@@ -504,7 +504,7 @@
             "id": 206,
             "nom": "Beffroi <> Enval",
             "type": "Monts'Connection",
-            "description": "Pour rejoindre les gorges d'Enval depuis le centre historique.",
+            "description": "**Les Gorges.**\nEnval, c'est le point de départ de magnifiques balades le long de la rivière. Le bus vous dépose au frais.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "48 minutes",
@@ -515,7 +515,7 @@
             "id": 251,
             "nom": "Lycée Jeanne d'Arc <> Lezoux",
             "type": "Monts'Connection",
-            "description": "Ligne scolaire longue distance pour les élèves venant de Lezoux.",
+            "description": "**Le Bus des Potiers.**\nLezoux, ville de la céramique romaine. Aujourd'hui, on transporte surtout des ados avec des sacs à dos trop lourds.",
             "stats": {
                 "nombre_arrets": 7,
                 "temps_trajet": "56 minutes",
@@ -526,7 +526,7 @@
             "id": 601,
             "nom": "Lycée Jeanne d'Arc <> Beaumont",
             "type": "Édu'Volcan",
-            "description": "Circuit scolaire desservant les quartiers de Beaumont pour le Lycée Jeanne d'Arc.",
+            "description": "**Le Ramassage.**\nLigne scolaire classique. Ambiance survoltée à 17h, endormie à 7h.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "25 minutes",
@@ -537,7 +537,7 @@
             "id": 602,
             "nom": "Collège Victor Hugo <> Ceyrat",
             "type": "Édu'Volcan",
-            "description": "Ramassage scolaire depuis Ceyrat vers le Collège Victor Hugo.",
+            "description": "**La Récré Mobile.**\nMoins de 10km, mais c'est là que se nouent les amitiés et les premiers amours de collège.",
             "stats": {
                 "nombre_arrets": 7,
                 "temps_trajet": "30 minutes",
@@ -548,7 +548,7 @@
             "id": 603,
             "nom": "Centre-ville <> Lycée Jean Zay",
             "type": "Édu'Volcan",
-            "description": "Liaison directe pour les étudiants de Jean Zay (Thiers) depuis Clermont (fictif/adapté).",
+            "description": "**La Navette Prépa.**\nJean Zay est réputé pour ses classes prépa. Dans ce bus, on révise les maths de dernière minute.",
             "stats": {
                 "nombre_arrets": 12,
                 "temps_trajet": "45 minutes",
@@ -559,7 +559,7 @@
             "id": 651,
             "nom": "Lycée Blaise Pascal <> Aubière",
             "type": "Édu'Volcan",
-            "description": "Desserte du Lycée Blaise Pascal pour les résidents d'Aubière.",
+            "description": "**Le Blaise Express.**\nDirect Aubière -> Centre. Pas le temps de niaiser, le bac approche.",
             "stats": {
                 "nombre_arrets": 8,
                 "temps_trajet": "60 minutes",
@@ -570,7 +570,7 @@
             "id": 652,
             "nom": "Lycée Jeanne d'Arc <> Romagnat",
             "type": "Édu'Volcan",
-            "description": "Ramassage scolaire Romagnat -> Jeanne d'Arc.",
+            "description": "**La Ligne des Littéraires.**\nJeanne d'Arc a une forte teinte littéraire. Ça lit du Baudelaire sur la banquette arrière (ou ça scrolle sur TikTok).",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "40 minutes",
@@ -581,7 +581,7 @@
             "id": 653,
             "nom": "La Poste <> Lycée Fénelon",
             "type": "Édu'Volcan",
-            "description": "Desserte de l'institution Fénelon depuis le centre.",
+            "description": "**La Privée.**\nDesserte de l'institution Fénelon. Uniformes non obligatoires, mais style soigné recommandé.",
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "75 minutes",
@@ -592,7 +592,7 @@
             "id": 901,
             "nom": "Bellevue <> Haute-Ville",
             "type": "Volca'Demande",
-            "description": "Transport à la demande pour le quartier escarpé de Bellevue.",
+            "description": "**Le Petit Grimpeur.**\nBellevue porte bien son nom, mais ça monte dur. Ce minibus passe là où les autres ne peuvent pas.",
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "12 minutes",
@@ -603,7 +603,7 @@
             "id": 902,
             "nom": "Parc de l'Étang <> Observatoire",
             "type": "Volca'Demande",
-            "description": "Navette à la demande desservant l'Observatoire des Cézeaux.",
+            "description": "**La Scientifique.**\nDesserte de l'Observatoire météo. C'est ici qu'on sait s'il va neiger demain. Le chauffeur a toujours la météo en avant-première.",
             "stats": {
                 "nombre_arrets": 17,
                 "temps_trajet": "20 minutes",
@@ -614,7 +614,7 @@
             "id": 903,
             "nom": "Hôtel de police <> Globe",
             "type": "Volca'Demande",
-            "description": "Liaison TAD de quartier.",
+            "description": "**La Discrète.**\nMicro-ligne de quartier. Elle sert surtout aux mamies pour aller au marché.",
              "stats": {
                 "nombre_arrets": 12,
                 "temps_trajet": "17 minutes",
@@ -625,7 +625,7 @@
             "id": 941,
             "nom": "Gare de l'Ouest <> Grand-Place",
             "type": "Volca'Demande",
-            "description": "Service à la demande zone Ouest.",
+            "description": "**L'Ouest Sauvage.**\nZone périurbaine peu dense. Vous réservez, il vient. C'est le Uber du service public.",
             "stats": {
                 "nombre_arrets": 7,
                 "temps_trajet": "65 minutes",
@@ -636,7 +636,7 @@
             "id": 805,
             "nom": "Navette Stade Michelin",
             "type": "JO",
-            "description": "Direction le Marcel Michelin pour les matchs de foot ! Service renforcé les jours de match de l'ASM (rugby) ou du Clermont Foot.",
+            "description": "**La Jaune et Bleu.**\nAttention, code vestimentaire implicite : portez du Jaune et Bleu les jours de match de l'ASM sinon vous allez détonner. Ambiance 'Allez les Jaunards' garantie. Ça chante, ça rit, ça vit rugby.",
             "stats": {
                 "nombre_arrets": 3,
                 "temps_trajet": "21 minutes",
@@ -647,7 +647,7 @@
             "id": 809,
             "nom": "Navette Fan Zone Montjuzet",
             "type": "JO",
-            "description": "Vous cherchez la fan zone ? Direction le parc Montjuzet ! Ambiance garantie avec vue sur toute la ville.",
+            "description": "**La Panoramique.**\nMontjuzet domine la ville. Cette navette monte les fans là-haut pour suivre les épreuves sur écran géant avec la Cathédrale en toile de fond. Magique au coucher du soleil.",
             "stats": {
                 "nombre_arrets": 5,
                 "temps_trajet": "15 minutes",
@@ -658,7 +658,7 @@
             "id": 810,
             "nom": "Lac Pavin - Voile",
             "type": "JO",
-            "description": "Pour les épreuves aquatiques, on vous emmène au lac Pavin ! Attention, c'est un lac de cratère !",
+            "description": "**La Mystique.**\nLe Lac Pavin est un lac de cratère profond et mystérieux. Certains disent qu'une cité engloutie dort au fond. Aujourd'hui, ce sont les voiliers olympiques qui voguent sur ses eaux sombres.",
             "stats": {
                 "nombre_arrets": 9,
                 "temps_trajet": "65 minutes",
@@ -669,7 +669,7 @@
             "id": 816,
             "nom": "Lac Chambon - Triathlon",
             "type": "JO",
-            "description": "Pour le triathlon direction le Lac Chambon ! Baignade et course au pied du Sancy.",
+            "description": "**La Plage des Volcans.**\nLe Chambon, c'est la station balnéaire de l'Auvergne. La navette vous dépose les pieds dans le sable (et la vase). Parfait pour encourager les triathlètes.",
             "stats": {
                 "nombre_arrets": 2,
                 "temps_trajet": "7 minutes",
@@ -680,7 +680,7 @@
             "id": 713,
             "nom": "Maison des Sports - Indoor",
             "type": "JO",
-            "description": "Direction la Maison des Sports Place des Bughes pour les épreuves en intérieur (Trampoline, Handball et Badminton) !",
+            "description": "**Le Chaudron.**\nLa Maison des Sports vibre pour le basket et le hand. Cette navette courte distance fait la rotation incessante depuis le centre-ville. C'est le métronome des JO.",
             "stats": {
                 "nombre_arrets": 15,
                 "temps_trajet": "17 minutes",
@@ -691,7 +691,7 @@
             "id": 817,
             "nom": "Hippodrome de Vichy",
             "type": "JO",
-            "description": "Pour les épreuves d'equi handi, direction l'hippodrome de Vichy-Bellerive ! Navette interurbaine spéciale JO.",
+            "description": "**L'Élégante.**\nDirection Vichy, la reine des villes d'eaux. Chapeaux et tenues correctes exigées (non, on rigole, venez comme vous êtes). C'est la ligne la plus chic des JO.",
             "stats": {
                 "nombre_arrets": 2,
                 "temps_trajet": "7 minutes",
@@ -702,7 +702,7 @@
             "id": 813,
             "nom": "Navette Père Noël",
             "type": "Spéciale",
-            "description": "La ligne directe pour la maison du Père Noël ! Au départ de la Gare SNCF rejoignez le village de Noël installé Place de Jaude !",
+            "description": "**Le Traîneau sur Roues.**\nUniquement en décembre ! Décorée de guirlandes, conduite par un lutin (ou un chauffeur avec un bonnet rouge). Distribution de papillotes autorisée à bord. C'est la magie de Noël version TCM.",
             "stats": {
                 "nombre_arrets": 10,
                 "temps_trajet": "13 minutes",
@@ -713,7 +713,7 @@
             "id": "BEN1",
             "nom": "Jaude - Cézeaux - Circulaire",
             "type": "Nocturne",
-            "description": "BEN1 est votre allié pour des nuits sereines. Il relie le cœur vibrant de la Place de Jaude au quartier des Cézeaux, en passant par les principaux lieux de vie nocturne (rue de l'Ange, Gare). Profitez de vos soirées sans vous soucier du retour !",
+            "description": "**Le Hibou.**\nBEN1 veille sur vos nuits. C'est la ligne de la fête étudiante. Elle tourne en boucle entre les bars de Jaude et les résidences des Cézeaux.\n\n**Ambiance :**\nEntre 2h et 4h du matin, c'est le karaoké géant. Tout le monde chante (faux), tout le monde est copain. C'est l'esprit BEN.",
              "terminus": ["Ligne circulaire via le campus des Cézeaux"],
             "circulation": {
                 "startHour": 14,
@@ -749,7 +749,7 @@
             "id": "BEN2",
             "nom": "Montferrand <> Chamalières",
             "type": "Nocturne",
-            "description": "Avec BEN2, déplacez-vous facilement entre le quartier historique de Montferrand et le quartier chic de Chamalières.",
+            "description": "**La Traversée Nocturne.**\nElle ramène les fêtards de la banlieue chic de Chamalières. Plus calme que sa cousine BEN1, c'est la ligne des discussions philosophiques de fin de soirée.",
              "terminus": ["Direction Montferrand (via Gare SNCF de Clermont-Ferrand)", "Direction Chamalières (via Gare SNCF de Clermont-Ferrand)"],
             "circulation": {
                 "startHour": 14,
@@ -785,7 +785,7 @@
             "id": "BEN3",
             "nom": "Jaude <> Aubière",
             "type": "Nocturne",
-            "description": "BEN3 vous emmène de la Place de Jaude à Aubière, en passant par les quartiers animés et les zones résidentielles. Parfait pour vos sorties nocturnes ou pour rentrer chez vous à Aubière lezoux !",
+            "description": "**La Sudiste de Nuit.**\nPour ceux qui habitent Aubière et ont raté le dernier tram A. BEN3 est votre sauveur. \n\n**Héros :**\nLe chauffeur de BEN3 mérite une médaille. Il connaît tous ses passagers réguliers et attend parfois 30 secondes si il voit quelqu'un courir en sortant du bar 'Le Verlaine'.",
              "terminus": ["Direction Jaude (via Gare SNCF de Clermont-Ferrand)", "Direction Aubière (via Gare SNCF de Clermont-Ferrand)"],
             "parkings": ["clinique"],
             "circulation": {

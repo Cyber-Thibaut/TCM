@@ -414,10 +414,16 @@ function renderLineDetails(ligne) {
   container.appendChild(infoContainer);
 
   // Description
-  const description = document.createElement("p");
+  const description = document.createElement("div");
   description.className =
     "text-lg text-base-content/80 leading-relaxed text-justify mt-8 mb-8";
-  description.innerHTML = ligne.description;
+  
+  let formattedDesc = ligne.description || "";
+  formattedDesc = formattedDesc
+    .replace(/\n/g, '<br>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary">$1</strong>');
+
+  description.innerHTML = formattedDesc;
   container.appendChild(description);
 
   // Parkings relais proches (si renseignés dans ligne.json)

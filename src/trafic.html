@@ -289,8 +289,8 @@
                 const typeUpper = (lineDef.type || "").toUpperCase();
                 const idUpper = lineId.toUpperCase();
 
-                // Exclude Specials/Navettes
-                if (idUpper === 'NS' || idUpper === 'TCM' || idUpper.startsWith('NAV') || typeUpper.includes('NAVETTE') || typeUpper.includes('SPÉCIALE')) return;
+                // Exclude Specials/Navettes/JO
+                if (idUpper === 'NS' || idUpper === 'TCM' || idUpper.startsWith('NAV') || typeUpper.includes('NAVETTE') || typeUpper.includes('SPÉCIALE') || typeUpper === 'JO') return;
 
                 // Check Live Data
                 const allInfos = liveDataMap.get(idUpper) || [];
@@ -487,7 +487,7 @@
                         let fallbackIcon = `<div class="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-base-100 border-2 border-base-content/10 flex items-center justify-center font-black text-2xl shadow-sm hidden">${item.line}</div>`;
 
                         const badgeHTML = `
-                            <div class="absolute -bottom-2 -right-2 w-7 h-7 md:w-9 md:h-9 bg-base-100 rounded-full shadow-md flex items-center justify-center border-2 border-${item.color} z-10 animate__animated animate__bounceIn" title="${item.label}">
+                            <div class="absolute -top-2 -left-2 w-7 h-7 md:w-9 md:h-9 bg-base-100 rounded-full shadow-md flex items-center justify-center border-2 border-${item.color} z-10 animate__animated animate__bounceIn" title="${item.label}">
                                 <img src="../img/assets/${item.asset}" class="w-4 h-4 md:w-5 md:h-5 object-contain">
                             </div>
                         `;

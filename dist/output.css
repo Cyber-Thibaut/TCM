@@ -1309,6 +1309,23 @@
       }
     }
   }
+  .indicator {
+    @layer daisyui.component {
+      position: relative;
+      display: inline-flex;
+      width: max-content;
+      :where(.indicator-item) {
+        z-index: 1;
+        position: absolute;
+        white-space: nowrap;
+        top: var(--indicator-t, 0);
+        bottom: var(--indicator-b, auto);
+        left: var(--indicator-s, auto);
+        right: var(--indicator-e, 0);
+        translate: var(--indicator-x, 50%) var(--indicator-y, -50%);
+      }
+    }
+  }
   .table {
     @layer daisyui.component {
       font-size: 0.875rem;
@@ -2349,6 +2366,9 @@
   .z-50 {
     z-index: 50;
   }
+  .z-\[1\] {
+    z-index: 1;
+  }
   .col-span-3 {
     grid-column: span 3 / span 3;
   }
@@ -2551,6 +2571,9 @@
   }
   .mx-auto {
     margin-inline: auto;
+  }
+  .my-1 {
+    margin-block: calc(var(--spacing) * 1);
   }
   .my-4 {
     margin-block: calc(var(--spacing) * 4);
@@ -3148,6 +3171,9 @@
   .w-60 {
     width: calc(var(--spacing) * 60);
   }
+  .w-64 {
+    width: calc(var(--spacing) * 64);
+  }
   .w-80 {
     width: calc(var(--spacing) * 80);
   }
@@ -3276,6 +3302,24 @@
   }
   .animate-spin {
     animation: var(--animate-spin);
+  }
+  .link {
+    @layer daisyui.component {
+      cursor: pointer;
+      text-decoration-line: underline;
+      &:focus {
+        --tw-outline-style: none;
+        outline-style: none;
+        @media (forced-colors: active) {
+          outline: 2px solid transparent;
+          outline-offset: 2px;
+        }
+      }
+      &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+      }
+    }
   }
   .cursor-pointer {
     cursor: pointer;
@@ -3465,6 +3509,20 @@
   }
   .overflow-x-auto {
     overflow-x: auto;
+  }
+  .menu-lg {
+    @layer daisyui.modifier {
+      :where(li:not(.menu-title) > *:not(ul, details, .menu-title)), :where(li:not(.menu-title) > details > summary:not(.menu-title)) {
+        border-radius: var(--radius-field);
+        padding-inline: calc(0.25rem * 4);
+        padding-block: calc(0.25rem * 1.5);
+        font-size: 1.125rem;
+      }
+      .menu-title {
+        padding-inline: calc(0.25rem * 6);
+        padding-block: calc(0.25rem * 3);
+      }
+    }
   }
   .menu-sm {
     @layer daisyui.modifier {
@@ -3814,6 +3872,12 @@
   }
   .bg-primary-content {
     background-color: var(--color-primary-content);
+  }
+  .bg-primary\/5 {
+    background-color: var(--color-primary);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-primary) 5%, transparent);
+    }
   }
   .bg-primary\/10 {
     background-color: var(--color-primary);
@@ -4260,6 +4324,9 @@
   }
   .pb-2 {
     padding-bottom: calc(var(--spacing) * 2);
+  }
+  .pb-6 {
+    padding-bottom: calc(var(--spacing) * 6);
   }
   .pb-12 {
     padding-bottom: calc(var(--spacing) * 12);
@@ -5050,6 +5117,16 @@
       }
     }
   }
+  .group-hover\:bg-primary\/10 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        background-color: var(--color-primary);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+        }
+      }
+    }
+  }
   .group-hover\:bg-white\/10 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -5236,6 +5313,16 @@
       }
     }
   }
+  .hover\:bg-white\/10 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, #fff 10%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
+        }
+      }
+    }
+  }
   .hover\:text-accent {
     &:hover {
       @media (hover: hover) {
@@ -5297,9 +5384,22 @@
       }
     }
   }
+  .active\:bg-primary\/20 {
+    &:active {
+      background-color: var(--color-primary);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
+      }
+    }
+  }
   .sm\:mt-16 {
     @media (width >= 40rem) {
       margin-top: calc(var(--spacing) * 16);
+    }
+  }
+  .sm\:inline {
+    @media (width >= 40rem) {
+      display: inline;
     }
   }
   .sm\:alert-horizontal {

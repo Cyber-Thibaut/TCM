@@ -24,6 +24,19 @@ document.addEventListener("DOMContentLoaded", function () {
           background-color: #111827 !important; /* consistency */
       }
 
+      /* Force Text Colors for Dark Mode - Fixes "text-base-content" not flipping */
+      [data-theme="dark"] .text-base-content { color: #f3f4f6 !important; }
+      [data-theme="dark"] .text-base-content\/90 { color: rgba(243, 244, 246, 0.9) !important; }
+      [data-theme="dark"] .text-base-content\/80 { color: rgba(243, 244, 246, 0.8) !important; }
+      [data-theme="dark"] .text-base-content\/70 { color: rgba(243, 244, 246, 0.7) !important; }
+      [data-theme="dark"] .text-base-content\/60 { color: rgba(243, 244, 246, 0.6) !important; }
+      [data-theme="dark"] .text-base-content\/50 { color: rgba(243, 244, 246, 0.5) !important; }
+      
+      [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, 
+      [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6 {
+          color: #f3f4f6;
+      }
+
       /* Floating & Absolute Positioning (Not Fixed) */
       .navbar-glass {
           position: absolute; 

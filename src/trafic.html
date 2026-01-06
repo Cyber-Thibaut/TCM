@@ -307,10 +307,14 @@
                 }
             });
 
-            // Sort: Priority DESC, then Line Name Numeric
+            // Sort: Tram A First, then Numeric, then Others
             processedLines.sort((a,b) => {
-                if (b.priority !== a.priority) return b.priority - a.priority;
-                return a.line.localeCompare(b.line, undefined, {numeric: true});
+                const getWeight = (l) => {
+                    if (l === 'A') return -100;
+                    if (/^\d+$/.test(l)) return parseInt(l);
+                    return 999;
+                };
+                return getWeight(a.line) - getWeight(b.line);
             });
 
             // 2. Dashboard Logic
@@ -357,75 +361,54 @@
                 `;
             }
 
-            // 3. Grid Render
+            // 3. Grid Render (Grid of Icons style)
+            // Change container class to behave like a flex grid of icons
+            grid.className = "flex flex-wrap gap-6 justify-center content-start py-8 animate__animated animate__fadeIn";
+            
             if (processedLines.length === 0) {
-                 grid.innerHTML = `<div class="col-span-full h-40 flex items-center justify-center text-base-content/30 italic">Aucune ligne trouvée.</div>`;
+                 grid.innerHTML = `<div class="w-full h-40 flex items-center justify-center text-base-content/30 italic">Aucune ligne trouvée.</div>`;
             } else {
                 processedLines.forEach(item => {
                     const isSchool = /^\d{3}$/.test(item.line);
                     const isTram = item.line === 'A';
                     
+                    // Card Template - Compact Icon Style
                     const card = document.createElement('div');
-                    card.className = "glass-panel p-0 rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer h-full flex flex-col animate__animated animate__fadeInUp";
-                    if (item.infos.length > 0) card.onclick = () => openModal(item);
-                    else card.style.cursor = 'default';
+                    card.className = "relative group w-24 h-24 md:w-32 md:h-32 flex items-center justify-center transition-all duration-300";
+                    if (item.infos.length > 0) {
+                         card.style.cursor = 'pointer';
+                         card.onclick = () => openModal(item);
+                         card.classList.add('hover:scale-110');
+                    } else {
+                        // Hover subtle if no alert
+                        card.classList.add('hover:scale-105');
+                    }
 
-                    const stripeColor = `bg-${item.color}`;
-                    let iconHTML = `<img src="/img/${item.line}.png" class="w-12 h-12 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
-                    let fallbackIcon = `<div class="w-12 h-12 rounded-lg bg-base-300 items-center justify-center font-bold text-xl hidden">${item.line}</div>`;
+                    // Main Icon
+                    let iconHTML = `<img src="/img/${item.line}.png" class="w-full h-full object-contain filter drop-shadow-lg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
+                    let fallbackIcon = `<div class="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-base-100 border-2 border-base-content/10 flex items-center justify-center font-black text-2xl shadow-sm hidden">${item.line}</div>`;
 
-                    let contentHTML = '';
-                    if (item.infos.length === 0) {
-                        contentHTML = `
-                            <div class="bg-base-200/30 rounded-lg p-4 text-center border border-base-content/5 mt-4">
-                                <span class="text-success text-sm font-bold opacity-80">✅ Aucune perturbation</span>
-                                <div class="text-xs opacity-50 mt-1">Le trafic est normal</div>
+                    // Status Badge (Only if alert OR specific design request to show valid tick? Image shows alert icons)
+                    // Image shows badge only for issues. Clean for OK.
+                    let badgeHTML = '';
+                    if (item.infos.length > 0) {
+                        badgeHTML = `
+                            <div class="absolute -bottom-2 -right-2 w-10 h-10 bg-base-100 rounded-full shadow-lg flex items-center justify-center border-2 border-${item.color} z-10 animate__animated animate__bounceIn">
+                                <img src="/img/assets/${item.asset}" class="w-6 h-6 object-contain">
                             </div>
                         `;
                     } else {
-                        contentHTML = `
-                             <div class="space-y-3">
-                                 ${item.infos.slice(0, 2).map(info => `
-                                     <div class="bg-base-200/50 rounded-lg p-3 text-sm border-l-2 border-${getSeverity(info.type).color}">
-                                         <div class="font-bold truncate mb-1">${info.titre}</div>
-                                         <div class="opacity-70 line-clamp-2 text-xs">${info.detail || 'Voir détails.'}</div>
-                                     </div>
-                                 `).join('')}
-                                 ${item.infos.length > 2 ? `<div class="text-center text-xs opacity-50 italic">+ ${item.infos.length - 2} autre(s)</div>` : ''}
-                             </div>
-                        `;
+                         // Optional: Add simple checkmark for valid lines if desired, or keep clean. 
+                         // User said "Start like this image" -> Image has no badge for clean lines.
                     }
 
-                    // Bottom Asset
-                    const bottomAsset = `<img src="/img/assets/${item.asset}" class="h-8 w-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity drop-shadow-sm filter drop-shadow" alt="${item.label}">`;
-
                     card.innerHTML = `
-                         <div class="h-1.5 w-full ${stripeColor}"></div>
-                         <div class="p-6 flex-grow flex flex-col">
-                             <div class="flex items-start justify-between mb-4">
-                                 <div class="flex items-center gap-3">
-                                     ${iconHTML}
-                                     ${fallbackIcon}
-                                     <div>
-                                         <h3 class="font-bold text-lg leading-none group-hover:text-primary transition-colors">${isSchool ? 'Scolaire' : (isTram ? 'Tram' : 'Ligne')} <span class="text-xl">${item.line}</span></h3>
-                                         <div class="text-xs opacity-50 mt-1 uppercase tracking-in-expand font-semibold">${item.infos.length ? item.infos.length + ' alerte(s)' : 'Trafic normal'}</div>
-                                     </div>
-                                 </div>
-                                 <div class="badge badge-${item.color} gap-1 shadow-sm font-bold">
-                                    <i class="fa-solid ${item.fa} text-[10px]"></i> ${item.label}
-                                 </div>
-                             </div>
-                             
-                             ${contentHTML}
-
-                             <div class="mt-auto pt-6 flex items-center justify-between border-t border-base-content/5">
-                                 ${bottomAsset}
-                                 ${item.infos.length > 0 
-                                    ? `<button class="btn btn-ghost btn-xs gap-1 group-hover:text-primary transition-colors">Détails <i class="fa-solid fa-arrow-right"></i></button>`
-                                    : `<button class="btn btn-ghost btn-xs gap-1 opacity-20 cursor-default pointer-events-none">Circule normal <i class="fa-solid fa-check"></i></button>`
-                                 }
-                             </div>
+                         <div class="relative w-20 h-20 md:w-24 md:h-24">
+                             ${iconHTML}
+                             ${fallbackIcon}
+                             ${badgeHTML}
                          </div>
+                         ${item.infos.length > 0 ? `<div class="absolute inset-0 rounded-full bg-${item.color}/20 scale-125 opacity-0 group-hover:opacity-100 transition-all rounded-xl -z-10 blur-xl"></div>` : ''}
                     `;
                     grid.appendChild(card);
                 });

@@ -416,61 +416,99 @@
     <!-- Logic Script: Info Trafic -->
     <script>
       const url = "https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json";
-      function afficherInfoTrafic() {
-        $.getJSON(url, function (data) {
-          const tcmContainer = $("#TCM").empty();
-          const lignesContainer = $("#lignes").empty();
-          
-          let hasAlert = false;
-          const alerts = [];
+            async function afficherInfoTrafic() {
+                try {
+                    const data = await $.getJSON(url);
+                    const tcmContainer = $("#TCM").empty();
+                    const lignesContainer = $("#lignes").empty();
 
-          $.each(data.lignes, function (i, ligne) {
-            const now = new Date();
-            $.each(ligne.infos_trafic, function (j, info) {
-              const start = new Date(Date.parse(info.annonce));
-              const end = new Date(Date.parse(info.fin)); end.setDate(end.getDate() + 1);
-              if (now >= start && now <= end) {
-                 alerts.push({ ligne: ligne.ligne, info: info });
-              }
-            });
-          });
+                    const alerts = [];
+                    const now = new Date();
 
-          if (alerts.length === 0) {
-             lignesContainer.append(`
-                <div class="flex items-center gap-4 p-4 rounded-xl bg-success/10 border border-success/20 text-base-content animate__animated animate__fadeIn">
-                    <div class="w-10 h-10 rounded-full bg-success flex items-center justify-center text-white shrink-0 shadow-lg shadow-success/30"><i class="fa-solid fa-check"></i></div>
-                    <div>
-                        <div class="font-bold">Aucune perturbation</div>
-                        <div class="text-xs sm:text-sm opacity-80">Le réseau circule normalement.</div>
-                    </div>
-                </div>
-             `);
-          } else {
-             alerts.slice(0, 4).forEach(item => { 
-                const isTCM = item.ligne === "TCM";
-                const type = item.info.type.toLowerCase();
-                let colorClass = "alert-info";
-                if(type.includes("travaux")) colorClass = "alert-warning";
-                else if(type.includes("fermeture")) colorClass = "alert-error";
+                    // Récupérer jours fériés (si possible)
+                    let holidayDates = [];
+                    try { if (typeof fetchHolidayDates === 'function') holidayDates = await fetchHolidayDates(now.getFullYear()); } catch(e){ holidayDates = []; }
+                    const isHoliday = holidayDates && holidayDates.includes && holidayDates.includes((now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0')));
+
+                    // Récupérer vacances scolaires (si disponible)
+                    let isVacation = false;
+                    try {
+                        if (typeof fetchVacationDates === 'function') {
+                            const ranges = await fetchVacationDates(now);
+                            if (Array.isArray(ranges) && ranges.length) {
+                                isVacation = ranges.some(r => {
+                                    const start = new Date(r.start || r.start_date || r.debut || r.from);
+                                    const end = new Date(r.end || r.end_date || r.fin || r.to);
+                                    return now >= start && now <= end;
+                                });
+                            }
+                        }
+                    } catch(e){ isVacation = false; }
+
+                    // Banniere contextuelle pour jours fériés / vacances
+                    if (isHoliday) {
+                        lignesContainer.append(`
+                            <div class="alert alert-warning mb-4">
+                                <span>⚠️ Aujourd’hui est un jour férié. Les horaires et services peuvent être modifiés.</span>
+                            </div>
+                        `);
+                    } else if (isVacation) {
+                        lignesContainer.append(`
+                            <div class="alert alert-warning mb-4">
+                                <span>⚠️ Horaires modifiés en raison des vacances scolaires.</span>
+                            </div>
+                        `);
+                    }
+
+                    $.each(data.lignes, function (i, ligne) {
+                        $.each(ligne.infos_trafic, function (j, info) {
+                            const start = new Date(Date.parse(info.annonce));
+                            const end = new Date(Date.parse(info.fin)); end.setDate(end.getDate() + 1);
+                            if (now >= start && now <= end) {
+                                 alerts.push({ ligne: ligne.ligne, info: info });
+                            }
+                        });
+                    });
+
+                    if (alerts.length === 0) {
+                         lignesContainer.append(`
+                                <div class="flex items-center gap-4 p-4 rounded-xl bg-success/10 border border-success/20 text-base-content animate__animated animate__fadeIn">
+                                        <div class="w-10 h-10 rounded-full bg-success flex items-center justify-center text-white shrink-0 shadow-lg shadow-success/30"><i class="fa-solid fa-check"></i></div>
+                                        <div>
+                                                <div class="font-bold">Aucune perturbation</div>
+                                                <div class="text-xs sm:text-sm opacity-80">Le réseau circule normalement.</div>
+                                        </div>
+                                </div>
+                         `);
+                    } else {
+                         alerts.slice(0, 4).forEach(item => { 
+                                const isTCM = item.ligne === "TCM";
+                                const type = item.info.type ? item.info.type.toLowerCase() : '';
+                                let colorClass = "alert-info";
+                                if(type.includes("travaux")) colorClass = "alert-warning";
+                                else if(type.includes("fermeture")) colorClass = "alert-error";
                 
-                // Styling that fits the glass theme but keeps high alert visibility
-                const cardHtml = `
-                    <div class="alert ${colorClass} shadow-md border-none relative flex-col items-start gap-1 p-3 mb-2 animate__animated animate__fadeInLeft">
-                         <div class="flex items-center gap-2 w-full font-bold text-sm">
-                            ${isTCM ? '<i class="fa-solid fa-bullhorn shrink-0"></i> Info Réseau' : `<span class="badge badge-neutral badge-xs sm:badge-sm text-neutral-content font-mono">${item.ligne}</span>`}
-                            <span class="truncate">${item.info.titre}</span>
-                         </div>
-                         <div class="text-xs w-full opacity-90 truncate pr-6">${item.info.detail || "Cliquez pour plus de détails"}</div>
-                         <a href="src/details.html#${item.ligne}" class="btn btn-xs btn-ghost btn-circle absolute top-2 right-2"><i class="fa-solid fa-chevron-right"></i></a>
-                    </div>
-                `;
-                if(isTCM) tcmContainer.append(cardHtml);
-                else lignesContainer.append(cardHtml);
-             });
-          }
-        });
-      }
-      afficherInfoTrafic();
+                                // Image de ligne à la place du badge texte
+                                const lineImg = isTCM ? '<i class="fa-solid fa-bullhorn shrink-0"></i> Info Réseau' : `<img src="/img/${item.ligne}.png" onerror="this.onerror=null;this.src='/img/L${item.ligne}.png';" alt="${item.ligne}" class="w-8 h-8 object-contain rounded-md mr-2">`;
+                                const cardHtml = `
+                                        <div class="alert ${colorClass} shadow-md border-none relative flex-col items-start gap-1 p-3 mb-2 animate__animated animate__fadeInLeft">
+                                                 <div class="flex items-center gap-2 w-full font-bold text-sm">
+                                                        ${lineImg}
+                                                        <span class="truncate">${item.info.titre}</span>
+                                                 </div>
+                                                 <div class="text-xs w-full opacity-90 truncate pr-6">${item.info.detail || "Cliquez pour plus de détails"}</div>
+                                                 <a href="src/details.html#${item.ligne}" class="btn btn-xs btn-ghost btn-circle absolute top-2 right-2"><i class="fa-solid fa-chevron-right"></i></a>
+                                        </div>
+                                `;
+                                if(isTCM) tcmContainer.append(cardHtml);
+                                else lignesContainer.append(cardHtml);
+                         });
+                    }
+                } catch (e) {
+                    console.warn('Erreur afficherInfoTrafic:', e);
+                }
+            }
+            afficherInfoTrafic();
     </script>
 
     <!-- Logic Script: News -->

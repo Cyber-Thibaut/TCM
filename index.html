@@ -468,40 +468,43 @@
                         });
                     });
 
-                    if (alerts.length === 0) {
+                        if (alerts.length === 0) {
                          lignesContainer.append(`
-                                <div class="flex items-center gap-4 p-4 rounded-xl bg-success/10 border border-success/20 text-base-content animate__animated animate__fadeIn">
-                                        <div class="w-10 h-10 rounded-full bg-success flex items-center justify-center text-white shrink-0 shadow-lg shadow-success/30"><i class="fa-solid fa-check"></i></div>
-                                        <div>
-                                                <div class="font-bold">Aucune perturbation</div>
-                                                <div class="text-xs sm:text-sm opacity-80">Le réseau circule normalement.</div>
-                                        </div>
+                            <div class="flex items-center gap-4 p-4 rounded-xl bg-success/10 border border-success/20 text-base-content animate__animated animate__fadeIn">
+                                <div class="w-10 h-10 rounded-full bg-success flex items-center justify-center text-white shrink-0 shadow-lg shadow-success/30"><i class="fa-solid fa-check"></i></div>
+                                <div>
+                                    <div class="font-bold">Aucune perturbation</div>
+                                    <div class="text-xs sm:text-sm opacity-80">Le réseau circule normalement.</div>
                                 </div>
+                            </div>
                          `);
-                    } else {
+                        } else {
                          alerts.slice(0, 4).forEach(item => { 
-                                const isTCM = item.ligne === "TCM";
-                                const type = item.info.type ? item.info.type.toLowerCase() : '';
-                                let colorClass = "alert-info";
-                                if(type.includes("travaux")) colorClass = "alert-warning";
-                                else if(type.includes("fermeture")) colorClass = "alert-error";
-                
-                                // Image de ligne à la place du badge texte
-                                const lineImg = isTCM ? '<i class="fa-solid fa-bullhorn shrink-0"></i> Info Réseau' : `<div class="w-10 h-10 rounded-md bg-base-100 flex items-center justify-center mr-3 overflow-hidden"><img src="/img/${item.ligne}.png" onerror="this.onerror=null;this.src='/img/L${item.ligne}.png';" alt="${item.ligne}" class="max-w-full max-h-full object-contain"></div>`;
-                                const cardHtml = `
-                                        <div class="alert ${colorClass} shadow-md border-none relative flex-col items-start gap-1 p-3 mb-2 animate__animated animate__fadeInLeft">
-                                                 <div class="flex items-center gap-2 w-full font-bold text-sm">
-                                                        ${lineImg}
-                                                        <span class="truncate">${item.info.titre}</span>
-                                                 </div>
-                                                 <div class="text-xs w-full opacity-90 truncate pr-6">${item.info.detail || "Cliquez pour plus de détails"}</div>
-                                                 <a href="src/details.html#${item.ligne}" class="btn btn-xs btn-ghost btn-circle absolute top-2 right-2"><i class="fa-solid fa-chevron-right"></i></a>
-                                        </div>
-                                `;
-                                if(isTCM) tcmContainer.append(cardHtml);
-                                else lignesContainer.append(cardHtml);
+                            const isTCM = item.ligne === "TCM";
+                            const type = item.info.type ? item.info.type.toLowerCase() : '';
+                            let colorClass = "alert-info";
+                            if(type.includes("travaux")) colorClass = "alert-warning";
+                            else if(type.includes("fermeture")) colorClass = "alert-error";
+
+                            // Image de ligne to the left, content with truncation
+                            const lineImg = isTCM ? '<i class="fa-solid fa-bullhorn shrink-0"></i> Info Réseau' : `<div class="w-10 h-10 rounded-md bg-base-100 flex items-center justify-center mr-3 overflow-hidden flex-shrink-0"><img src="/img/${item.ligne}.png" onerror="this.onerror=null;this.src='/img/${item.ligne}.png';" alt="${item.ligne}" class="max-w-full max-h-full object-contain"></div>`;
+
+                            const cardHtml = `
+                                <div class="alert ${colorClass} shadow-md border-none relative p-3 mb-2 animate__animated animate__fadeInLeft">
+                                <div class="flex items-center gap-3 w-full">
+                                    ${lineImg}
+                                    <div class="flex-1 min-w-0">
+                                    <div class="font-bold text-sm truncate">${item.info.titre}</div>
+                                    <div class="text-xs opacity-90 truncate">${item.info.detail || "Cliquez pour plus de détails"}</div>
+                                    </div>
+                                    <a href="src/details.html#${item.ligne}" class="btn btn-xs btn-ghost btn-circle ml-3"><i class="fa-solid fa-chevron-right"></i></a>
+                                </div>
+                                </div>
+                            `;
+                            if(isTCM) tcmContainer.append(cardHtml);
+                            else lignesContainer.append(cardHtml);
                          });
-                    }
+                        }
                 } catch (e) {
                     console.warn('Erreur afficherInfoTrafic:', e);
                 }
@@ -561,27 +564,42 @@
         return data.results;
       } catch (error) { return []; }
     }
-    function isVacation(date, vacationDates) {
-      const currentDate = new Date(date);
-      for (const vacation of vacationDates) {
-        const startDate = new Date(vacation.start_date);
-        const endDate = new Date(vacation.end_date);
-        if (currentDate >= startDate && currentDate <= endDate) return vacation.description;
-      }
-      return null;
-    }
+        function normalizeVacationRecord(rec) {
+            // Accept various shapes returned by the API
+            const fields = rec.fields || rec.record?.fields || rec;
+            const start = fields.start_date || fields.start || fields.debut || (fields.period && fields.period.from) || null;
+            const end = fields.end_date || fields.end || fields.fin || (fields.period && fields.period.to) || null;
+            const desc = fields.description || fields.description_fr || fields.nom || fields.title || fields.label || fields.vacances || null;
+            return { start, end, desc };
+        }
+
+        function isVacation(date, vacationDates) {
+            const currentDate = new Date(date);
+            for (const vacation of vacationDates) {
+                const v = normalizeVacationRecord(vacation);
+                if (!v.start || !v.end) continue;
+                const startDate = new Date(v.start);
+                const endDate = new Date(v.end);
+                if (isNaN(startDate) || isNaN(endDate)) continue;
+                if (currentDate >= startDate && currentDate <= endDate) return v.desc || 'vacances';
+            }
+            return null;
+        }
     async function displayVacationAlert() {
       const now = new Date();
       const year = now.getFullYear();
       const vacationDates = await fetchVacationDates(year);
       const vacationName = isVacation(now, vacationDates);
-      if (vacationName) {
-        document.getElementById("vacation-alert").innerHTML = `
-          <div role="alert" class="alert alert-info shadow-md mb-4 glass border-info/30 text-info-content">
-            <i class="fa-solid fa-calendar-check text-xl"></i>
-            <span>Attention, nous sommes en période de <strong>vacances scolaires</strong> (${vacationName}).</span>
-          </div>`;
-      }
+            if (vacationName) {
+                document.getElementById("vacation-alert").innerHTML = `
+                    <div role="alert" class="alert alert-info shadow-md mb-4 glass border-info/30 text-info-content">
+                        <i class="fa-solid fa-calendar-check text-xl"></i>
+                        <span>Attention, nous sommes en période de <strong>vacances scolaires</strong> (${vacationName}).</span>
+                    </div>`;
+            } else {
+                // Clear if none
+                const el = document.getElementById("vacation-alert"); if (el) el.innerHTML = '';
+            }
     }
     displayVacationAlert();
     </script>

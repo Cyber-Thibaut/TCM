@@ -213,9 +213,8 @@ function renderEventInfo(events) {
     container.innerHTML = '';
     container.classList.add("flex", "flex-col", "gap-4");
 
-    // Simulation Date (pour matcher le scénario)
-    // const now = new Date(); 
-    const now = new Date("2026-01-06T12:00:00");
+    // Utiliser la date courante (ne pas simuler une date fixe)
+    const now = new Date();
 
     if (events.length === 0) {
         // Optionnel : Message si aucun événement

@@ -531,8 +531,8 @@ function renderTrafficAlerts(alerts) {
 
     if (!alerts || alerts.length === 0) return;
 
-    // Date de simulation pour cohérence avec le reste
-    const simNow = new Date("2026-01-06T12:00:00");
+    // Utiliser la date courante (ne pas simuler une date fixe)
+    const simNow = new Date();
 
     const activeAlerts = alerts.filter(info => {
         const fin = new Date(info.fin);

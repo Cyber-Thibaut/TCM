@@ -513,7 +513,7 @@ function renderLineDetails(ligne) {
 // -- NOUVEAU : GESTION INFO TRAFIC (Test.json / Info.json) --
 async function fetchTrafficAlertsForLine(lineId) {
     try {
-        const response = await fetch('test.json'); 
+        const response = await fetch("https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json");
         if (!response.ok) return [];
         const data = await response.json();
         const lineData = data.lignes.find(l => l.ligne === lineId);

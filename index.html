@@ -428,36 +428,34 @@
                     // Récupérer jours fériés (si possible)
                     let holidayDates = [];
                     try { if (typeof fetchHolidayDates === 'function') holidayDates = await fetchHolidayDates(now.getFullYear()); } catch(e){ holidayDates = []; }
-                    const isHoliday = holidayDates && holidayDates.includes && holidayDates.includes((now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0')));
+                    const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+                    const isHoliday = Array.isArray(holidayDates) && holidayDates.includes && holidayDates.includes(todayStr);
 
-                    // Récupérer vacances scolaires (si disponible)
+                    // Récupérer vacances scolaires (si disponible via la méthode existante)
                     let isVacation = false;
                     try {
                         if (typeof fetchVacationDates === 'function') {
-                            const ranges = await fetchVacationDates(now);
-                            if (Array.isArray(ranges) && ranges.length) {
-                                isVacation = ranges.some(r => {
-                                    const start = new Date(r.start || r.start_date || r.debut || r.from);
-                                    const end = new Date(r.end || r.end_date || r.fin || r.to);
+                            const vac = await fetchVacationDates(now.getFullYear());
+                            if (Array.isArray(vac) && vac.length) {
+                                isVacation = vac.some(v => {
+                                    const s = v.start_date || v.start || (v.fields && v.fields.start_date) || null;
+                                    const e = v.end_date || v.end || (v.fields && v.fields.end_date) || null;
+                                    if (!s || !e) return false;
+                                    const start = new Date(s);
+                                    const end = new Date(e);
                                     return now >= start && now <= end;
                                 });
                             }
                         }
                     } catch(e){ isVacation = false; }
 
-                    // Banniere contextuelle pour jours fériés / vacances
+                    // Afficher bannière de vacances/jours fériés dans le conteneur dédié
+                    const vacEl = document.getElementById('vacation-alert');
+                    if (vacEl) vacEl.innerHTML = '';
                     if (isHoliday) {
-                        lignesContainer.append(`
-                            <div class="alert alert-warning mb-4">
-                                <span>⚠️ Aujourd’hui est un jour férié. Les horaires et services peuvent être modifiés.</span>
-                            </div>
-                        `);
+                        if (vacEl) vacEl.innerHTML = `<div class="alert alert-warning mb-4"><span>⚠️ Aujourd’hui est un jour férié. Les horaires et services peuvent être modifiés.</span></div>`;
                     } else if (isVacation) {
-                        lignesContainer.append(`
-                            <div class="alert alert-warning mb-4">
-                                <span>⚠️ Horaires modifiés en raison des vacances scolaires.</span>
-                            </div>
-                        `);
+                        if (vacEl) vacEl.innerHTML = `<div class="alert alert-warning mb-4"><span>⚠️ Horaires modifiés en raison des vacances scolaires.</span></div>`;
                     }
 
                     $.each(data.lignes, function (i, ligne) {
@@ -489,7 +487,7 @@
                                 else if(type.includes("fermeture")) colorClass = "alert-error";
                 
                                 // Image de ligne à la place du badge texte
-                                const lineImg = isTCM ? '<i class="fa-solid fa-bullhorn shrink-0"></i> Info Réseau' : `<img src="/img/${item.ligne}.png" onerror="this.onerror=null;this.src='/img/L${item.ligne}.png';" alt="${item.ligne}" class="w-8 h-8 object-contain rounded-md mr-2">`;
+                                const lineImg = isTCM ? '<i class="fa-solid fa-bullhorn shrink-0"></i> Info Réseau' : `<div class="w-10 h-10 rounded-md bg-base-100 flex items-center justify-center mr-3 overflow-hidden"><img src="/img/${item.ligne}.png" onerror="this.onerror=null;this.src='/img/L${item.ligne}.png';" alt="${item.ligne}" class="max-w-full max-h-full object-contain"></div>`;
                                 const cardHtml = `
                                         <div class="alert ${colorClass} shadow-md border-none relative flex-col items-start gap-1 p-3 mb-2 animate__animated animate__fadeInLeft">
                                                  <div class="flex items-center gap-2 w-full font-bold text-sm">

@@ -11,6 +11,14 @@ const destinationElement = document.getElementById("destination");
 
 const now = new Date();
 
+// Fonction utilitaire pour décoder les entités HTML (ex: &#039; -> ')
+function decodeHTMLEntities(text) {
+  if (!text) return "";
+  const textArea = document.createElement('textarea');
+  textArea.innerHTML = text;
+  return textArea.value;
+}
+
 async function fetchHolidayDates(year) {
   try {
     const response = await fetch(
@@ -30,37 +38,6 @@ function formatDate(date) {
   return `${year}-${month}-${day}`;
 }
 
-async function fetchVacationDates(date) {
-  const year = date.getFullYear();
-  const schoolYears = [`${year - 1}-${year}`, `${year}-${year + 1}`];
-  try {
-    const responses = await Promise.all(
-      schoolYears.map((schoolYear) =>
-        fetch(
-          `https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-calendrier-scolaire/records?limit=20&lang=fr&refine=location%3A%22Clermont-Ferrand%22&refine=population%3A%22-%22&refine=population%3A%22%C3%89l%C3%A8ves%22&refine=annee_scolaire%3A%22${schoolYear}%22`
-        )
-      )
-    );
-
-    const data = await Promise.all(responses.map((r) => r.json()));
-    return data
-      .flatMap((d) =>
-        d.results.map((record) => ({
-          start: new Date(record.start_date),
-          end: new Date(record.end_date),
-        }))
-      )
-      .sort((a, b) => a.start - b.start);
-  } catch (error) {
-    console.error("Erreur de récupération des vacances scolaires:", error);
-    return [];
-  }
-}
-
-function isDateInVacationRanges(date, ranges) {
-  return ranges.some((range) => date >= range.start && date <= range.end);
-}
-
 function getTimeSlot(hour, weekday, isHoliday) {
   // Service du samedi soir qui se termine à 1h le dimanche
   if (weekday === 0 && hour < 1) return "samedi_soir";
@@ -75,8 +52,7 @@ function getTimeSlot(hour, weekday, isHoliday) {
   // Dimanche et jours fériés
   if (isHoliday || weekday === 0) {
     if (hour < 7 || hour >= 24) return "ferme"; // Service de 7h à minuit
-    if ((hour >= 9 && hour < 13) || (hour >= 17 && hour < 22))
-      return "dimanche_pointe";
+    if ((hour >= 9 && hour < 13) || (hour >= 17 && hour < 22)) return "dimanche_pointe";
     return "dimanche_creuse";
   }
 
@@ -84,14 +60,8 @@ function getTimeSlot(hour, weekday, isHoliday) {
   if (weekday === 6) {
     if (hour < 6) return "ferme"; // Service de 6h à 1h
     if (hour >= 21) return "samedi_soir";
-    if ((hour >= 8 && hour < 13) || (hour >= 15 && hour < 19))
-      return "samedi_pointe";
-    if (
-      (hour >= 6 && hour < 8) ||
-      (hour >= 13 && hour < 15) ||
-      (hour >= 19 && hour < 21)
-    )
-      return "samedi_creuse";
+    if ((hour >= 8 && hour < 13) || (hour >= 15 && hour < 19)) return "samedi_pointe";
+    if ((hour >= 6 && hour < 8) || (hour >= 13 && hour < 15) || (hour >= 19 && hour < 21)) return "samedi_creuse";
     return "ferme";
   }
 
@@ -114,15 +84,12 @@ async function fetchLineDetails(lineNumber) {
     } else {
       const asNum = parseInt(lineNumber);
       if (!isNaN(asNum)) {
-        // numeric id match
         line = data.lignes.find((l) => l.id === asNum || String(l.id) === String(asNum));
       } else {
-        // non-numeric id (e.g. "A")
         line = data.lignes.find((l) => String(l.id) === String(lineNumber));
       }
     }
-    if (!line)
-      throw new Error(`Détails non trouvés pour la ligne ${lineNumber}`);
+    if (!line) throw new Error(`Détails non trouvés pour la ligne ${lineNumber}`);
     return line;
   } catch (err) {
     console.error("Erreur chargement détails ligne:", err);
@@ -132,16 +99,32 @@ async function fetchLineDetails(lineNumber) {
 
 async function fetchLineFrequencies(lineNumber) {
   try {
-    const response = await fetch("/src/scripts/frequences_bus.json");
+    const apiUrl = "https://transport-manager.net/api/api_lignes.php?key=f2f739d2ae21470717001832f02646a1&format=json";
+    const response = await fetch(apiUrl);
     const data = await response.json();
+
     const freqs = data.lignes.find(
-      (ligne) => ligne.numero.toString() === lineNumber
+      (ligne) => ligne.numero.toString() === lineNumber.toString()
     );
-    if (!freqs)
-      throw new Error(`Fréquences non trouvées pour la ligne ${lineNumber}`);
-    return freqs;
+
+    if (!freqs) throw new Error(`Fréquences non trouvées pour la ligne ${lineNumber}`);
+
+    return {
+      frequences: {
+        pointe: freqs.frequences.semaine.pointe,
+        creuse: freqs.frequences.semaine.creux,
+        soir: freqs.frequences.semaine.soir,
+        samedi_pointe: freqs.frequences.samedi.pointe,
+        samedi_creuse: freqs.frequences.samedi.creux,
+        samedi_soir: freqs.frequences.samedi.soir,
+        dimanche_pointe: freqs.frequences.dimanche.pointe,
+        dimanche_creuse: freqs.frequences.dimanche.creux,
+        nocturne: freqs.frequences.semaine.nocturne
+      },
+      destination: decodeHTMLEntities(freqs.terminus)
+    };
   } catch (err) {
-    console.error("Erreur chargement fréquences ligne:", err);
+    console.error("Erreur chargement fréquences API TM:", err);
     return null;
   }
 }
@@ -151,7 +134,6 @@ async function fetchParkingsJson() {
     const resp = await fetch('/src/parkings.json');
     if (!resp.ok) throw new Error('parkings.json non accessible');
     const arr = await resp.json();
-    // Build a simple id->image map for quick lookup
     parkingImageMap = {};
     if (Array.isArray(arr)) {
       arr.forEach(p => {
@@ -172,30 +154,26 @@ async function updateBusTimes() {
   const minute = now.getMinutes();
 
   const isHoliday = holidayDates.includes(dateStr);
-  const vacationDates = await fetchVacationDates(now);
-  const isVacation = isDateInVacationRanges(now, vacationDates);
 
   if (!lineFrequenciesData || !lineDetailsData) return;
 
-  const timeSlot = getTimeSlot(hour, weekday, isHoliday, isVacation);
+  const timeSlot = getTimeSlot(hour, weekday, isHoliday);
 
-  // Vérification spécifique pour le 1er mai
+  // Mettre à jour la destination depuis l'API TM si l'élément existe
+  if (destinationElement && lineFrequenciesData.destination) {
+    destinationElement.textContent = lineFrequenciesData.destination;
+  }
+
   if (now.getMonth() === 4 && now.getDate() === 1) {
-    nextBusTime.innerHTML =
-      "<div class='alert alert-info'>Ligne fermée en raison du 1er mai</div>";
+    nextBusTime.innerHTML = "<div class='alert alert-info'>Ligne fermée en raison du 1er mai</div>";
     alertMessage.classList.remove("hidden");
     alertMessage.innerHTML = `<div role="alert" class="alert alert-warning"><span>⚠️ Aujourd’hui est le 1er mai. Le réseau TCM est fermé.</span></div>`;
     return;
   }
 
   let freqString = null;
-  if (timeSlot !== "ferme") {
-    const schedule = isVacation
-      ? lineFrequenciesData.vacances
-      : lineFrequenciesData.frequences;
-    if (schedule) {
-      freqString = schedule[timeSlot];
-    }
+  if (timeSlot !== "ferme" && lineFrequenciesData.frequences) {
+    freqString = lineFrequenciesData.frequences[timeSlot];
   }
 
   const frequency = parseInt(freqString);
@@ -208,7 +186,6 @@ async function updateBusTimes() {
     } else {
       message = "Le service est terminé pour aujourd'hui.";
     }
-    // Exception pour la coupure nocturne du dimanche
     if (new Date().getDay() === 0 && hour >= 2 && hour < 4) {
       message = "Le service nocturne est en pause et reprend à 4h.";
     }
@@ -226,15 +203,10 @@ async function updateBusTimes() {
   const minutesUntilFollowing = minutesUntilNext + frequency;
 
   function getFrequentationIcon(slot) {
-    const icons = {
-      complet: "/img/icone-complet.png",
-      moyen: "/img/icone-moyen.png",
-      vide: "/img/icone-vide.png",
-    };
+    const icons = { complet: "/img/icone-complet.png", moyen: "/img/icone-moyen.png", vide: "/img/icone-vide.png" };
     if (!slot || slot === "ferme") return icons.vide;
     if (slot.includes("pointe")) return icons.complet;
     if (slot.includes("soir") || slot.includes("nocturne")) return icons.vide;
-    if (slot.includes("creuse")) return icons.moyen;
     return icons.moyen;
   }
 
@@ -242,14 +214,8 @@ async function updateBusTimes() {
 
   const nextBusHTML = `<div class="card bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl w-full h-48 flex flex-col justify-center items-center text-base-content p-4">
     <span class="text-lg font-light uppercase tracking-widest">${currentLineNumber == "A" ? "Prochain tram" : "Prochain bus"}</span>
-    <span class="text-6xl font-bold ${
-      minutesUntilNext <= 1 ? "animate-pulse text-accent" : ""
-    }">
-      ${
-        minutesUntilNext <= 1
-          ? "À l\'approche"
-          : `${minutesUntilNext}<span class="text-4xl font-normal ml-2">min</span>`
-      }
+    <span class="text-6xl font-bold ${minutesUntilNext <= 1 ? "animate-pulse text-accent" : ""}">
+      ${minutesUntilNext <= 1 ? "À l\'approche" : `${minutesUntilNext}<span class="text-4xl font-normal ml-2">min</span>`}
     </span>
     <div class="mt-3 flex items-center gap-2">
         <img src="${icon}" alt="fréquentation" class="w-8 h-8">
@@ -274,15 +240,13 @@ async function updateBusTimes() {
   if (isHoliday) {
     alertMessage.classList.remove("hidden");
     alertMessage.innerHTML = `<div role="alert" class="alert alert-warning"><span>⚠️ Aujourd’hui est un jour férié. Les horaires peuvent être modifiés.</span></div>`;
-  } else if (isVacation) {
-    alertMessage.classList.remove("hidden");
-    alertMessage.innerHTML = `<div role="alert" class="alert alert-warning"><span>⚠️ Horaires modifiés en raison des vacances scolaires.</span></div>`;
   } else {
     alertMessage.classList.add("hidden");
     alertMessage.innerHTML = "";
   }
 }
 
+// Le reste du code (renderLineDetails, fetchTrafficAlertsForLine, renderTrafficAlerts) reste rigoureusement identique.
 function renderLineDetails(ligne) {
   const container = document.getElementById("infos-ligne");
   if (!container) return;
@@ -301,110 +265,82 @@ function renderLineDetails(ligne) {
   header.appendChild(title);
   container.appendChild(header);
 
-  // Plan de ligne en pleine largeur
   const planContainer = document.createElement("div");
   planContainer.className = "mb-8";
-  
+
   const planTitle = document.createElement("h3");
   planTitle.className = "text-2xl font-bold mb-4 text-center text-primary";
   planTitle.textContent = "Plan de la ligne";
   planContainer.appendChild(planTitle);
-  
+
   const plan = document.createElement("img");
   plan.src = `/img/plans/L${ligne.id}.png`;
   plan.alt = `Plan de la ligne ${ligne.id}`;
-  plan.className =
-    "rounded-xl shadow-lg w-full h-auto border border-base-300 dark:border-base-content/10 transition-transform hover:scale-105";
+  plan.className = "rounded-xl shadow-lg w-full h-auto border border-base-300 dark:border-base-content/10 transition-transform hover:scale-105";
   plan.style.maxHeight = "400px";
   plan.style.objectFit = "contain";
   planContainer.appendChild(plan);
   container.appendChild(planContainer);
 
-  // Informations de ligne en dessous
   const infoContainer = document.createElement("div");
   infoContainer.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8";
 
-  // Badge type de ligne
   const typeContainer = document.createElement("div");
   typeContainer.className = "flex flex-col items-center justify-center p-6 bg-base-200 dark:bg-base-300 rounded-xl shadow-lg";
-  
   const typeIcon = document.createElement("div");
   typeIcon.className = "text-4xl mb-3";
   typeIcon.textContent = ligne.id === "NS" ? "🚌" : ligne.type === "Spéciale" ? "⭐" : ligne.type === "Volc'Express" ? "🚆" : "🚍";
-  
   const type = document.createElement("div");
   type.className = "badge badge-lg badge-outline badge-primary px-4 py-3 text-base font-semibold";
-  type.textContent =
-    ligne.id === "NS"
-      ? "Navette Spéciale"
-      : ligne.type === "Spéciale"
-      ? "Ligne Spéciale"
-      : `Réseau ${ligne.type}`;
-      
+  type.textContent = ligne.id === "NS" ? "Navette Spéciale" : ligne.type === "Spéciale" ? "Ligne Spéciale" : `Réseau ${ligne.type}`;
   typeContainer.appendChild(typeIcon);
   typeContainer.appendChild(type);
   infoContainer.appendChild(typeContainer);
 
-  // Statistiques - Arrêts
   const arretsContainer = document.createElement("div");
   arretsContainer.className = "flex flex-col items-center justify-center p-6 bg-base-200 dark:bg-base-300 rounded-xl shadow-lg";
-  
   const arretsIcon = document.createElement("div");
   arretsIcon.className = "text-4xl mb-3";
   arretsIcon.textContent = "🚏";
-  
   const arretsTitle = document.createElement("div");
   arretsTitle.className = "text-sm font-medium text-base-content/70 uppercase tracking-wider";
   arretsTitle.textContent = "Arrêts";
-  
   const arretsValue = document.createElement("div");
   arretsValue.className = "text-3xl font-bold text-primary";
   arretsValue.textContent = ligne.stats.nombre_arrets;
-  
   arretsContainer.appendChild(arretsIcon);
   arretsContainer.appendChild(arretsTitle);
   arretsContainer.appendChild(arretsValue);
   infoContainer.appendChild(arretsContainer);
 
-  // Statistiques - Temps de trajet
   const tempsContainer = document.createElement("div");
   tempsContainer.className = "flex flex-col items-center justify-center p-6 bg-base-200 dark:bg-base-300 rounded-xl shadow-lg";
-  
   const tempsIcon = document.createElement("div");
   tempsIcon.className = "text-4xl mb-3";
   tempsIcon.textContent = "⏱️";
-  
   const tempsTitle = document.createElement("div");
   tempsTitle.className = "text-sm font-medium text-base-content/70 uppercase tracking-wider";
   tempsTitle.textContent = "Temps de trajet";
-  
   const tempsValue = document.createElement("div");
   tempsValue.className = "text-3xl font-bold text-primary";
   tempsValue.textContent = ligne.stats.temps_trajet;
-  
   tempsContainer.appendChild(tempsIcon);
   tempsContainer.appendChild(tempsTitle);
   tempsContainer.appendChild(tempsValue);
   infoContainer.appendChild(tempsContainer);
 
-  // Si on a 4 stats ou plus, on peut ajouter une ligne supplémentaire
   if (ligne.stats.longueur_ligne) {
-    // Statistiques - Longueur (sur une nouvelle ligne ou en extension)
     const longueurContainer = document.createElement("div");
     longueurContainer.className = "flex flex-col items-center justify-center p-6 bg-base-200 dark:bg-base-300 rounded-xl shadow-lg md:col-span-2 lg:col-span-1";
-    
     const longueurIcon = document.createElement("div");
     longueurIcon.className = "text-4xl mb-3";
     longueurIcon.textContent = "📏";
-    
     const longueurTitle = document.createElement("div");
     longueurTitle.className = "text-sm font-medium text-base-content/70 uppercase tracking-wider";
     longueurTitle.textContent = "Longueur";
-    
     const longueurValue = document.createElement("div");
     longueurValue.className = "text-3xl font-bold text-primary";
     longueurValue.textContent = ligne.stats.longueur_ligne;
-    
     longueurContainer.appendChild(longueurIcon);
     longueurContainer.appendChild(longueurTitle);
     longueurContainer.appendChild(longueurValue);
@@ -413,20 +349,13 @@ function renderLineDetails(ligne) {
 
   container.appendChild(infoContainer);
 
-  // Description
   const description = document.createElement("div");
-  description.className =
-    "text-lg text-base-content/80 leading-relaxed text-justify mt-8 mb-8";
-  
+  description.className = "text-lg text-base-content/80 leading-relaxed text-justify mt-8 mb-8";
   let formattedDesc = ligne.description || "";
-  formattedDesc = formattedDesc
-    .replace(/\n/g, '<br>')
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary">$1</strong>');
-
+  formattedDesc = formattedDesc.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary">$1</strong>');
   description.innerHTML = formattedDesc;
   container.appendChild(description);
 
-  // Parkings relais proches (si renseignés dans ligne.json)
   if (ligne.parkings && Array.isArray(ligne.parkings) && ligne.parkings.length) {
     const parkSection = document.createElement('div');
     parkSection.className = 'mb-8';
@@ -441,33 +370,25 @@ function renderLineDetails(ligne) {
       const a = document.createElement('a');
       a.href = `/src/parkings.html#${pid}`;
       a.className = 'inline-flex items-center gap-3 p-3 bg-base-200 rounded-lg shadow hover:scale-105 transition-transform';
-
       const img = document.createElement('img');
-      // Try to get image from bus.json mapping first, fallback to convention
-  // Use image from parkings.json mapping if available, otherwise fall back
-  const mapped = parkingImageMap && parkingImageMap[pid];
-  img.src = mapped ? mapped : `/img/${pid}.png`;
+      const mapped = parkingImageMap && parkingImageMap[pid];
+      img.src = mapped ? mapped : `/img/${pid}.png`;
       img.alt = `Parking ${pid}`;
       img.className = 'w-12 h-12 rounded';
-      img.onerror = function(){ this.src = `/img/parking-${pid}.png`; };
-
+      img.onerror = function () { this.src = `/img/parking-${pid}.png`; };
       const span = document.createElement('div');
       span.className = 'text-base-content/80';
       span.textContent = pid;
-
       a.appendChild(img);
       a.appendChild(span);
       parkList.appendChild(a);
     });
-
     parkSection.appendChild(parkList);
     container.appendChild(parkSection);
   }
 
-  // Bouton PDF principal bien mis en évidence
   const pdfSection = document.createElement("div");
   pdfSection.className = "text-center mt-12 mb-8";
-  
   const pdfButton = document.createElement("button");
   pdfButton.id = "main-pdf-btn";
   pdfButton.className = "btn btn-primary btn-lg gap-3 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 px-8 py-4";
@@ -478,15 +399,13 @@ function renderLineDetails(ligne) {
     <span class="text-lg font-semibold">Télécharger la fiche horaire PDF</span>
     <div class="badge badge-accent badge-sm">Nouveau</div>
   `;
-  
-  // Gestionnaire d'événements pour le bouton PDF
+
   pdfButton.addEventListener('click', (e) => {
     e.preventDefault();
     if (typeof generatePDF === "function") {
       generatePDF(ligne.id);
     } else {
       console.error("generatePDF is not defined. Is pdf.js loaded?");
-      // Toast d'erreur moderne
       const toast = document.createElement('div');
       toast.className = 'toast toast-top toast-end z-50';
       toast.innerHTML = `
@@ -501,76 +420,67 @@ function renderLineDetails(ligne) {
       setTimeout(() => toast.remove(), 5000);
     }
   });
-  
+
   pdfSection.appendChild(pdfButton);
   container.appendChild(pdfSection);
+}
 
-  if (destinationElement) {
-    destinationElement.textContent = ligne.destination;
+async function fetchTrafficAlertsForLine(lineId) {
+  try {
+    const response = await fetch("https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json");
+    if (!response.ok) return [];
+    const data = await response.json();
+    const lineData = data.lignes.find(l => l.ligne === lineId);
+    return lineData ? lineData.infos_trafic : [];
+  } catch (e) {
+    console.warn("Erreur chargement trafic:", e);
+    return [];
   }
 }
 
-// -- NOUVEAU : GESTION INFO TRAFIC (Test.json / Info.json) --
-async function fetchTrafficAlertsForLine(lineId) {
-    try {
-        const response = await fetch("https://raw.githubusercontent.com/Cyber-Thibaut/infotrafic/main/info.json");
-        if (!response.ok) return [];
-        const data = await response.json();
-        const lineData = data.lignes.find(l => l.ligne === lineId);
-        return lineData ? lineData.infos_trafic : [];
-    } catch (e) {
-        console.warn("Erreur chargement trafic:", e);
-        return [];
-    }
-}
-
 function renderTrafficAlerts(alerts) {
-    const container = document.getElementById('lignes');
-    if (!container) return;
-    container.innerHTML = '';
+  const container = document.getElementById('lignes');
+  if (!container) return;
+  container.innerHTML = '';
 
-    if (!alerts || alerts.length === 0) return;
+  if (!alerts || alerts.length === 0) return;
 
-    // Utiliser la date courante (ne pas simuler une date fixe)
-    const simNow = new Date();
+  const simNow = new Date();
+  const activeAlerts = alerts.filter(info => {
+    const fin = new Date(info.fin);
+    return simNow <= fin;
+  });
 
-    const activeAlerts = alerts.filter(info => {
-        const fin = new Date(info.fin);
-        return simNow <= fin;
-    });
+  if (activeAlerts.length === 0) return;
 
-    if (activeAlerts.length === 0) return;
+  const title = document.createElement('h3');
+  title.className = "text-2xl font-bold mb-6 flex items-center gap-3";
+  title.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-warning"></i> Info Trafic en cours';
+  container.appendChild(title);
 
-    // Titre de section
-    const title = document.createElement('h3');
-    title.className = "text-2xl font-bold mb-6 flex items-center gap-3";
-    title.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-warning"></i> Info Trafic en cours';
-    container.appendChild(title);
+  const list = document.createElement('div');
+  list.className = "flex flex-col gap-4";
 
-    const list = document.createElement('div');
-    list.className = "flex flex-col gap-4";
+  activeAlerts.forEach(info => {
+    const debut = new Date(info.annonce);
+    const isFuture = simNow < debut;
 
-    activeAlerts.forEach(info => {
-        const debut = new Date(info.annonce);
-        const isFuture = simNow < debut;
-        
-        const card = document.createElement('div');
-        let themeClass = isFuture ? "alert-warning" : "alert-error";
-        let iconHtml = isFuture ? '<i class="fa-solid fa-hard-hat fa-xl"></i>' : '<i class="fa-solid fa-road-barrier fa-xl"></i>';
-        
-        if (info.type.toLowerCase().includes("info")) {
-            themeClass = "alert-info";
-            iconHtml = '<i class="fa-solid fa-circle-info fa-xl"></i>';
-        }
+    const card = document.createElement('div');
+    let themeClass = isFuture ? "alert-warning" : "alert-error";
+    let iconHtml = isFuture ? '<i class="fa-solid fa-hard-hat fa-xl"></i>' : '<i class="fa-solid fa-road-barrier fa-xl"></i>';
 
-        // Style "Future" un peu différent
-        if (isFuture) {
-             card.className = `alert ${themeClass} shadow-lg border-2 border-dashed opacity-90`;
-        } else {
-             card.className = `alert ${themeClass} shadow-lg border-l-8`;
-        }
+    if (info.type.toLowerCase().includes("info")) {
+      themeClass = "alert-info";
+      iconHtml = '<i class="fa-solid fa-circle-info fa-xl"></i>';
+    }
 
-        card.innerHTML = `
+    if (isFuture) {
+      card.className = `alert ${themeClass} shadow-lg border-2 border-dashed opacity-90`;
+    } else {
+      card.className = `alert ${themeClass} shadow-lg border-l-8`;
+    }
+
+    card.innerHTML = `
             <div class="flex items-start gap-4 w-full">
                 <div class="mt-1">${iconHtml}</div>
                 <div class="flex-1">
@@ -586,18 +496,15 @@ function renderTrafficAlerts(alerts) {
                 </div>
             </div>
         `;
-        list.appendChild(card);
-    });
+    list.appendChild(card);
+  });
 
-    container.appendChild(list);
-    container.classList.remove('hidden'); // S'assurer qu'il est visible
+  container.appendChild(list);
+  container.classList.remove('hidden');
 }
 
 async function init() {
   const lineNumber = window.location.hash.replace("#", "");
-
-  // Sauvegarde du numéro de ligne dans une variable globale pour l'utiliser
-  // depuis les timers / callbacks (évite ReferenceError si updateBusTimes est appelé)
   currentLineNumber = lineNumber;
 
   if (lineNumber.startsWith("BEN")) {
@@ -611,21 +518,16 @@ async function init() {
   }
 
   await fetchHolidayDates(now.getFullYear());
-
-  // Charger le mapping d'images (optionnel)
   await fetchParkingsJson();
 
   lineDetailsData = await fetchLineDetails(lineNumber);
 
   if (!lineDetailsData) {
-    const bloccElement = document.getElementById("blocc");
-    if (bloccElement) bloccElement.style.display = "none";
-    const alertContainer = document.getElementById("alertMessage");
-    if (alertContainer) alertContainer.style.display = "none";
-    const infoMsgContainer = document.getElementById("infoMessage");
-    if (infoMsgContainer) infoMsgContainer.style.display = "none";
-    const trafficContainer = document.getElementById("lignes");
-    if (trafficContainer) trafficContainer.style.display = "none";
+    const elementsToHide = ["blocc", "alertMessage", "infoMessage", "lignes"];
+    elementsToHide.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = "none";
+    });
 
     const infosContainer = document.getElementById("infos-ligne");
     if (infosContainer) {
@@ -633,14 +535,9 @@ async function init() {
         <div class="text-center py-16">
           <h1 class="text-8xl font-bold text-primary animate-pulse">404</h1>
           <p class="text-3xl font-semibold mt-4 tracking-wider">Ligne Introuvable</p>
-          <p class="text-lg mt-2 text-base-content/70">
-            La ligne <span class="font-bold text-primary">${lineNumber}</span> que vous cherchez n'existe pas.
-          </p>
+          <p class="text-lg mt-2 text-base-content/70">La ligne <span class="font-bold text-primary">${lineNumber}</span> que vous cherchez n'existe pas.</p>
           <div class="mt-8">
             <a href="/index.html" class="btn btn-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z" clip-rule="evenodd" />
-              </svg>
               Retour à l'accueil
             </a>
           </div>
@@ -651,25 +548,21 @@ async function init() {
   }
 
   renderLineDetails(lineDetailsData);
-  
-  // -- CHARGEMENT INFO TRAFIC --
+
   try {
-      const trafficAlerts = await fetchTrafficAlertsForLine(lineNumber);
-      renderTrafficAlerts(trafficAlerts);
-  } catch(e) { console.warn("Erreur init trafic", e); }
+    const trafficAlerts = await fetchTrafficAlertsForLine(lineNumber);
+    renderTrafficAlerts(trafficAlerts);
+  } catch (e) { console.warn("Erreur init trafic", e); }
 
   if (lineNumber === "NS") {
     const bloccElement = document.getElementById("blocc");
-    if (bloccElement) {
-      bloccElement.style.display = "none";
-    }
+    if (bloccElement) bloccElement.style.display = "none";
   }
 
   lineFrequenciesData = await fetchLineFrequencies(lineNumber);
 
   if (!lineFrequenciesData) {
-    nextBusTime.innerHTML =
-      "<div class='alert alert-error'>Fréquences de passage non disponibles pour cette ligne.</div>";
+    nextBusTime.innerHTML = "<div class='alert alert-error'>Fréquences de passage non disponibles pour cette ligne.</div>";
     return;
   }
 

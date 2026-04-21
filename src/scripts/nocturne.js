@@ -43,45 +43,45 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Check special periods first
     if (circulation.special_periods) {
-        activePeriod = circulation.special_periods.find(period => {
-            const startPeriod = new Date(period.start);
-            startPeriod.setHours(0, 0, 0, 0);
-            
-            const endPeriod = new Date(period.end);
-            endPeriod.setHours(23, 59, 59, 999);
+      activePeriod = circulation.special_periods.find(period => {
+        const startPeriod = new Date(period.start);
+        startPeriod.setHours(0, 0, 0, 0);
 
-            const startHour = period.startHour || 21;
-            const endHour = period.endHour || 5;
+        const endPeriod = new Date(period.end);
+        endPeriod.setHours(23, 59, 59, 999);
 
-            // Check if we are in the morning part of a service from the previous day
-            if (nowHour < endHour) {
-                const yesterday = new Date(now);
-                yesterday.setDate(now.getDate() - 1);
-                if (yesterday >= startPeriod && yesterday <= endPeriod && period.days.includes(yesterdayDay)) {
-                    return true;
-                }
-            }
-            
-            // Check if we are in the evening part of a service for the current day
-            if (nowHour >= startHour) {
-                if (now >= startPeriod && now <= endPeriod && period.days.includes(nowDay)) {
-                    return true;
-                }
-            }
-            
-            return false;
-        });
+        const startHour = period.startHour || 21;
+        const endHour = period.endHour || 5;
+
+        // Check if we are in the morning part of a service from the previous day
+        if (nowHour < endHour) {
+          const yesterday = new Date(now);
+          yesterday.setDate(now.getDate() - 1);
+          if (yesterday >= startPeriod && yesterday <= endPeriod && period.days.includes(yesterdayDay)) {
+            return true;
+          }
+        }
+
+        // Check if we are in the evening part of a service for the current day
+        if (nowHour >= startHour) {
+          if (now >= startPeriod && now <= endPeriod && period.days.includes(nowDay)) {
+            return true;
+          }
+        }
+
+        return false;
+      });
     }
 
     // If an active special period is found, return its config
     if (activePeriod) {
-        return {
-            circulationText: activePeriod.text,
-            serviceDays: activePeriod.days,
-            frequency: activePeriod.frequency,
-            startHour: activePeriod.startHour || 21,
-            endHour: activePeriod.endHour || 5
-        };
+      return {
+        circulationText: activePeriod.text,
+        serviceDays: activePeriod.days,
+        frequency: activePeriod.frequency,
+        startHour: activePeriod.startHour || 21,
+        endHour: activePeriod.endHour || 5
+      };
     }
 
     // Otherwise, check default circulation
@@ -93,13 +93,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const isMorningService = serviceDays.includes(yesterdayDay) && nowHour < endHour;
 
     if (isEveningService || isMorningService) {
-        return {
-            circulationText: circulation.default_text,
-            serviceDays: serviceDays,
-            frequency: circulation.frequency,
-            startHour: startHour,
-            endHour: endHour
-        };
+      return {
+        circulationText: circulation.default_text,
+        serviceDays: serviceDays,
+        frequency: circulation.frequency,
+        startHour: startHour,
+        endHour: endHour
+      };
     }
 
     // If no service is active
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const renderLigneScreen = (ligne) => {
     const info = getCirculationInfo(ligne.circulation);
-    
+
     // Détection Tramway (PL3)
     const isTram = ligne.id === 'PL3';
     const typeLabel = isTram ? 'Tramway de Nuit' : 'Bus de Nuit';
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (circ.default_text) {
         circulationText = `${circ.default_text} (service non actif actuellement)`;
       } else if (Array.isArray(circ.default_days) && circ.default_days.length) {
-        const daysMap = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+        const daysMap = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
         const days = circ.default_days.map(d => daysMap[d]).join(', ');
         const start = circ.startHour !== undefined ? `à partir de ${circ.startHour}h` : '';
         circulationText = `Circulation prévue ${days} ${start}. Service non actif actuellement.`;
@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             img.src = meta && meta.image ? meta.image : `/img/${pid}.png`;
             img.alt = meta && meta.name ? meta.name : pid;
             img.className = 'w-8 h-8 rounded';
-            img.onerror = function(){ this.src = `/img/parking-${pid}.png`; };
+            img.onerror = function () { this.src = `/img/parking-${pid}.png`; };
 
             const span = document.createElement('div');
             span.className = 'text-base-content/80 text-sm';
@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
       }
     }
-    
+
     // Ajouter le gestionnaire d'événements pour le bouton PDF principal
     setTimeout(() => {
       const mainPdfBtn = document.getElementById('main-pdf-btn');
@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Cas 1: Le bus est au départ ou vient de passer (pendant 60s)
     if (secondsSinceLastPassage < 60) {
-        content = `
+      content = `
             <div class="relative w-48 h-48 flex items-center justify-center my-4">
                 <div class="radial-progress text-success" style="--value:100; --size:12rem; --thickness: 0.5rem;"></div>
                 <div class="absolute text-4xl font-bold text-base-content text-center">Ben est là,<br/>monte !</div>
@@ -336,7 +336,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     // Cas 2: Le bus approche (moins d'une minute)
     else if (secondsToNextPassage <= 60) {
-        content = `
+      content = `
             <div class="relative w-48 h-48 flex items-center justify-center my-4">
                 <div class="radial-progress text-warning animate-pulse" style="--value:100; --size:12rem; --thickness: 0.5rem;"></div>
                 <div class="absolute text-4xl font-bold text-base-content text-center">Ben approche !</div>
@@ -345,10 +345,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     // Cas 3: Décompte normal
     else {
-        const mins = Math.floor(secondsToNextPassage / 60);
-        const secs = secondsToNextPassage % 60;
-        const progress = (secondsSinceLastPassage / intervalInSeconds) * 100;
-        content = `
+      const mins = Math.floor(secondsToNextPassage / 60);
+      const secs = secondsToNextPassage % 60;
+      const progress = (secondsSinceLastPassage / intervalInSeconds) * 100;
+      content = `
             <div class="relative w-48 h-48 flex items-center justify-center my-4">
                 <div class="radial-progress text-primary" style="--value:${progress}; --size:12rem; --thickness: 0.5rem;"></div>
                 <div class="absolute text-5xl font-mono font-bold text-base-content">${String(mins).padStart(2, '0')}:${String(Math.floor(secs)).padStart(2, '0')}</div>
@@ -374,10 +374,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (countdownInterval) clearInterval(countdownInterval);
 
     const update = () => {
-        const circulationInfo = getCirculationInfo(ligne.circulation);
+      const circulationInfo = getCirculationInfo(ligne.circulation);
 
-        if (!circulationInfo) {
-            countdownContainer.innerHTML = `
+      if (!circulationInfo) {
+        countdownContainer.innerHTML = `
               <div class="card glass w-full">
                 <div class="card-body items-center justify-center text-center h-full p-8">
                   <i class="fa-solid fa-bed text-8xl text-info/70 mb-6"></i>
@@ -386,38 +386,38 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
               </div>
             `;
-            if (countdownInterval) clearInterval(countdownInterval);
-            return;
+        if (countdownInterval) clearInterval(countdownInterval);
+        return;
+      }
+
+      const now = new Date();
+      const { frequency, startHour, endHour } = circulationInfo;
+
+      let interval;
+      if (typeof frequency === 'object' && frequency !== null) {
+        const effectiveDate = new Date(now);
+        // If it's early morning, the service day is yesterday
+        if (now.getHours() < endHour) {
+          effectiveDate.setDate(effectiveDate.getDate() - 1);
         }
 
-        const now = new Date();
-        const { frequency, startHour, endHour } = circulationInfo;
+        const dayOfWeek = effectiveDate.getDay(); // 0 for Sunday
+        const dateStr = formatDate(effectiveDate);
+        const isHoliday = holidayDates.includes(dateStr);
 
-        let interval;
-        if (typeof frequency === 'object' && frequency !== null) {
-            const effectiveDate = new Date(now);
-            // If it's early morning, the service day is yesterday
-            if (now.getHours() < endHour) {
-                effectiveDate.setDate(effectiveDate.getDate() - 1);
-            }
-            
-            const dayOfWeek = effectiveDate.getDay(); // 0 for Sunday
-            const dateStr = formatDate(effectiveDate);
-            const isHoliday = holidayDates.includes(dateStr);
-
-            if (isHoliday || dayOfWeek === 0) {
-                interval = frequency.sunday_holiday;
-            } else if (dayOfWeek === 6) {
-                interval = frequency.saturday;
-            } else {
-                interval = frequency.weekday;
-            }
+        if (isHoliday || dayOfWeek === 0) {
+          interval = frequency.sunday_holiday;
+        } else if (dayOfWeek === 6) {
+          interval = frequency.saturday;
         } else {
-            interval = frequency;
+          interval = frequency.weekday;
         }
+      } else {
+        interval = frequency;
+      }
 
-        if (!interval) {
-            countdownContainer.innerHTML = `
+      if (!interval) {
+        countdownContainer.innerHTML = `
               <div class="card glass w-full">
                 <div class="card-body items-center justify-center text-center h-full p-8">
                   <i class="fa-solid fa-calendar-xmark text-8xl text-warning/70 mb-6"></i>
@@ -426,25 +426,25 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
               </div>
             `;
-            if (countdownInterval) clearInterval(countdownInterval);
-            return;
-        }
-        
-        const intervalInSeconds = interval * 60;
-        
-        let serviceStartTime = new Date(now);
-        if (now.getHours() < endHour) {
-            serviceStartTime.setDate(serviceStartTime.getDate() - 1);
-        }
-        serviceStartTime.setHours(startHour, 0, 0, 0);
+        if (countdownInterval) clearInterval(countdownInterval);
+        return;
+      }
 
-        const secondsSinceServiceStart = Math.floor((now - serviceStartTime) / 1000);
+      const intervalInSeconds = interval * 60;
 
-        let html = '';
-        const terminusList = ligne.terminus || [];
+      let serviceStartTime = new Date(now);
+      if (now.getHours() < endHour) {
+        serviceStartTime.setDate(serviceStartTime.getDate() - 1);
+      }
+      serviceStartTime.setHours(startHour, 0, 0, 0);
 
-        if (terminusList.length === 0) {
-            countdownContainer.innerHTML = `
+      const secondsSinceServiceStart = Math.floor((now - serviceStartTime) / 1000);
+
+      let html = '';
+      const terminusList = ligne.terminus || [];
+
+      if (terminusList.length === 0) {
+        countdownContainer.innerHTML = `
              <div class="card glass w-full">
                 <div class="card-body items-center justify-center text-center h-full p-8">
                   <i class="fa-solid fa-compass-drafting text-8xl text-warning/70 mb-6"></i>
@@ -453,22 +453,22 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
               </div>
             `;
-            return;
-        }
+        return;
+      }
 
-        terminusList.forEach((terminus, index) => {
-            const offset = terminusList.length > 1 && index > 0 ? (interval * 60) / 2 : 0;
-            const effectiveSeconds = secondsSinceServiceStart + offset;
-            
-            const secondsSinceLastPassage = effectiveSeconds % (interval * 60);
-            const secondsToNextPassage = (interval * 60) - secondsSinceLastPassage;
+      terminusList.forEach((terminus, index) => {
+        const offset = terminusList.length > 1 && index > 0 ? (interval * 60) / 2 : 0;
+        const effectiveSeconds = secondsSinceServiceStart + offset;
 
-            html += generateCountdownHTML(secondsToNextPassage, secondsSinceLastPassage, interval, terminus);
-        });
+        const secondsSinceLastPassage = effectiveSeconds % (interval * 60);
+        const secondsToNextPassage = (interval * 60) - secondsSinceLastPassage;
 
-        countdownContainer.innerHTML = html;
+        html += generateCountdownHTML(secondsToNextPassage, secondsSinceLastPassage, interval, terminus);
+      });
+
+      countdownContainer.innerHTML = html;
     };
-    
+
     update();
     countdownInterval = setInterval(update, 1000);
   };
@@ -483,6 +483,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
+      // 1. Charger les données locales pour les images, descriptions, etc.
       const response = await fetch("./ligne.json");
       const data = await response.json();
       const ligne = data.lignes.find((l) => l.id === ligneId);
@@ -490,6 +491,40 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!ligne) {
         throw new Error("Ligne non trouvée.");
       }
+
+      // 2. Charger les données de l'API Transport Manager
+      try {
+        const apiResponse = await fetch("https://transport-manager.net/api/api_lignes.php?key=f2f739d2ae21470717001832f02646a1&format=json");
+        const apiData = await apiResponse.json();
+
+        // On cherche la ligne correspondant à ligneId (ex: "BEN1" ou "1")
+        const apiLine = apiData.lignes.find(l => l.numero === ligneId);
+
+        if (apiLine) {
+          const freqNocturneSemaine = apiLine.frequences.semaine.nocturne;
+          const freqNocturneSamedi = apiLine.frequences.samedi.nocturne;
+          const freqNocturneDimanche = apiLine.frequences.dimanche.nocturne;
+
+          // S'il y a des fréquences valides, on écrase les données locales
+          if (freqNocturneSemaine !== "-" || freqNocturneSamedi !== "-" || freqNocturneDimanche !== "-") {
+            if (!ligne.circulation) ligne.circulation = {};
+
+            // On crée un objet de fréquence complexe pour gérer les différents jours
+            ligne.circulation.frequency = {
+              weekday: freqNocturneSemaine !== "-" ? parseInt(freqNocturneSemaine) : null,
+              saturday: freqNocturneSamedi !== "-" ? parseInt(freqNocturneSamedi) : null,
+              sunday_holiday: freqNocturneDimanche !== "-" ? parseInt(freqNocturneDimanche) : null
+            };
+          } else {
+            // Si tout est "-", on force la fréquence à null pour déclencher l'affichage "Service non disponible"
+            if (!ligne.circulation) ligne.circulation = {};
+            ligne.circulation.frequency = null;
+          }
+        }
+      } catch (apiError) {
+        console.warn("Erreur lors de la récupération de l'API de nuit, utilisation des données locales.", apiError);
+      }
+
       renderLigneScreen(ligne);
 
     } catch (error) {

@@ -103,8 +103,13 @@ async function fetchLineFrequencies(lineNumber) {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
+    let searchNumber = lineNumber.toString();
+
+    if (searchNumber === "A") {
+      searchNumber = "1";
+    }
     const freqs = data.lignes.find(
-      (ligne) => ligne.numero.toString() === lineNumber.toString()
+      (ligne) => ligne.numero.toString() === searchNumber
     );
 
     if (!freqs) throw new Error(`Fréquences non trouvées pour la ligne ${lineNumber}`);

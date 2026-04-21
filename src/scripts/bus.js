@@ -186,7 +186,7 @@ async function updateBusTimes() {
     const hour = new Date().getHours();
     let message;
 
-    if (hour >= 2 && hour < 5) {
+    if (hour >= 0 && hour < 5) {
       message = "Le service de jour n'a pas encore commencé.";
     } else {
       message = "Le service est terminé pour aujourd'hui.";

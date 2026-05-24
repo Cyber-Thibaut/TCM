@@ -99,8 +99,21 @@ async function fetchLineDetails(lineNumber) {
 
 async function fetchLineFrequencies(lineNumber) {
   try {
-    const apiUrl = "https://transport-manager.net/api/api_lignes.php?key=f2f739d2ae21470717001832f02646a1&format=json";
-    const response = await fetch(apiUrl);
+    const apiUrl = "https://transport-manager.net/api/v1/lignes?format=json";
+    const apiKey = "pk_875f6bc19747002b37f5ea361ca2"; // ⚠️ À remplacer par une clé valide
+
+    const response = await fetch(apiUrl, {
+      headers: {
+        'Authorization': `Bearer ${apiKey}`
+      }
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      console.error("Erreur API:", error.message || error);
+      throw new Error(error.message || `HTTP ${response.status}`);
+    }
+
     const data = await response.json();
 
     let searchNumber = lineNumber.toString();

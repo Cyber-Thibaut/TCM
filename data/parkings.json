@@ -1,0 +1,35 @@
+{
+  "_aide": "Parkings relais. arret : nom de l'arrêt (tel qu'il figure dans le réseau) qui sert à trouver les lignes en correspondance. La disponibilité affichée est une estimation selon l'heure et le jour.",
+  "parkings": [
+    {
+      "id": "clinique",
+      "nom": "Clinique Saint-Paul",
+      "arret": "Clinique Saint-Paul",
+      "places": 100,
+      "recharge": true,
+      "surveille": true,
+      "image": "/img/parking_clinique.png",
+      "description": "Au terminus du tram A et des lignes 10 et 11 : garez-vous et rejoignez le centre sans chercher de place."
+    },
+    {
+      "id": "cezeaux",
+      "nom": "Campus des Cézeaux",
+      "arret": "UCA Campus Cézeaux",
+      "places": 100,
+      "recharge": true,
+      "surveille": true,
+      "image": "/img/parking_cezeaux.png",
+      "description": "Le parking des étudiants et des chercheurs du campus, au départ du futur tram B."
+    },
+    {
+      "id": "jaude",
+      "nom": "Place de Jaude",
+      "arret": "Place de Jaude",
+      "places": 100,
+      "recharge": true,
+      "surveille": true,
+      "image": "/img/parking_luca.png",
+      "description": "En plein centre, au départ des lignes 5, 15 et 65."
+    }
+  ]
+}

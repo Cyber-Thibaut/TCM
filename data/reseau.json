@@ -1,0 +1,3667 @@
+{
+  "genere": "2026-11-17",
+  "mise_en_service": "2026-12-05",
+  "familles": [
+    {
+      "nom": "Volc'Express",
+      "accroche": "Tramway, tram-train et bus à haut niveau de service",
+      "icone": "fa-train-tram",
+      "couleur": "#204BFE",
+      "cle": "volc_express",
+      "lignes": ["A", "B", "ET", "5", "7", "8", "10"]
+    },
+    {
+      "nom": "Erupt'Urbain · Puy-de-Dôme",
+      "accroche": "Le réseau urbain principal",
+      "icone": "fa-bus",
+      "couleur": "#0F8B8D",
+      "cle": "urbain_dome",
+      "lignes": ["3", "4", "6", "9", "11", "12", "13", "14", "15", "16", "17", "18"]
+    },
+    {
+      "nom": "Erupt'Urbain · Puy-de-Pariou",
+      "accroche": "Le réseau urbain de proximité",
+      "icone": "fa-bus-simple",
+      "couleur": "#7A4FD0",
+      "cle": "urbain_pariou",
+      "lignes": ["60", "61", "62", "63", "64", "65"]
+    },
+    {
+      "nom": "Puy'Périphérique",
+      "accroche": "Les communes de la première couronne",
+      "icone": "fa-route",
+      "couleur": "#D9480F",
+      "cle": "peripherique",
+      "lignes": ["101", "102", "103", "104", "105", "106", "107", "151"]
+    },
+    {
+      "nom": "Monts'Connection",
+      "accroche": "Les lignes interurbaines",
+      "icone": "fa-mountain-sun",
+      "couleur": "#7C4A1E",
+      "cle": "monts",
+      "lignes": ["201", "202", "203", "204", "205", "206", "251"]
+    },
+    {
+      "nom": "TRE",
+      "accroche": "Transport régional express",
+      "icone": "fa-bolt",
+      "couleur": "#3C78D8",
+      "cle": "tre",
+      "lignes": ["E1"]
+    },
+    {
+      "nom": "Noctambus",
+      "accroche": "Le réseau de nuit, BEN1 à BEN4",
+      "icone": "fa-moon",
+      "couleur": "#203EC0",
+      "cle": "nocturne",
+      "lignes": ["BEN1", "BEN2", "BEN3", "BEN4"]
+    },
+    {
+      "nom": "Édu'Volcan",
+      "accroche": "Les services scolaires",
+      "icone": "fa-graduation-cap",
+      "couleur": "#B7791F",
+      "cle": "edu",
+      "lignes": ["601", "602", "603", "604", "651", "652", "653"]
+    },
+    {
+      "nom": "Volca'Demande",
+      "accroche": "Le transport à la demande",
+      "icone": "fa-phone-volume",
+      "couleur": "#C026D3",
+      "cle": "demande",
+      "lignes": ["901", "902", "903", "941"]
+    }
+  ],
+  "lignes": {
+    "A": {
+      "id": "A",
+      "code": "A",
+      "nom": "Tram A",
+      "mode": "tram",
+      "famille": "volc_express",
+      "depart": "Les Vergnes",
+      "terminus": "Clinique Saint-Paul",
+      "couleur": "#dc241f",
+      "km": 14.6,
+      "temps": 44.0,
+      "arrets": 26,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": true,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 7,
+            "pointe": 6,
+            "soir": 13
+          },
+          "samedi": {
+            "creuse": 9,
+            "pointe": 7,
+            "soir": 13
+          },
+          "dimanche": {
+            "creuse": 13,
+            "pointe": 9
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 10,
+            "pointe": 7,
+            "soir": 15
+          },
+          "samedi": {
+            "creuse": 10,
+            "pointe": 8,
+            "soir": 15
+          },
+          "dimanche": {
+            "creuse": 15,
+            "pointe": 10
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Alstom Citadis 402",
+          "nombre": 16,
+          "energie": "Electrique"
+        }
+      ],
+      "electrique": "dès l'ouverture",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/A.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": ["temps 46 → 44 min", "arrêts 44 → 26"],
+      "ancien_terminus": ["Aéroport", "Clinique Saint-Paul"],
+      "frequentation_pointe": 4538,
+      "correspondances": {
+        "Les Vergnes": ["13", "16", "BEN3"],
+        "Clinique Saint-Paul": ["10", "11", "BEN3"]
+      }
+    },
+    "B": {
+      "id": "B",
+      "code": "B",
+      "nom": "Tram B",
+      "mode": "tram",
+      "famille": "volc_express",
+      "depart": "UCA Campus Cézeaux",
+      "terminus": "UCA Campus Centre",
+      "couleur": "#f1ab00",
+      "km": 13.8,
+      "temps": 40.0,
+      "arrets": 23,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": true,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 8,
+            "pointe": 5,
+            "soir": 13
+          },
+          "samedi": {
+            "creuse": 10,
+            "pointe": 7,
+            "soir": 11
+          },
+          "dimanche": {
+            "creuse": 13,
+            "pointe": 11
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 10,
+            "pointe": 6,
+            "soir": 13
+          },
+          "samedi": {
+            "creuse": 11,
+            "pointe": 8,
+            "soir": 13
+          },
+          "dimanche": {
+            "creuse": 13,
+            "pointe": 11
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Alstom Citadis 402",
+          "nombre": 17,
+          "energie": "Electrique"
+        }
+      ],
+      "electrique": "dès l'ouverture",
+      "troncons": [
+        {
+          "de": "UCA Campus Cézeaux",
+          "a": "Hôtel de Région Auvergne-Rhône-Alpes",
+          "minutes": 11
+        },
+        {
+          "de": "Hôtel de Région Auvergne-Rhône-Alpes",
+          "a": "Gare de Clermont-Ferrand",
+          "minutes": 10
+        },
+        {
+          "de": "Gare de Clermont-Ferrand",
+          "a": "Lycée Sidoine-Apollinaire",
+          "minutes": 9
+        },
+        {
+          "de": "Lycée Sidoine-Apollinaire",
+          "a": "UCA Campus Centre",
+          "minutes": 11
+        }
+      ],
+      "statut": {
+        "etat": "ouverture",
+        "date": "2028-01-15"
+      },
+      "logo": "/img/lignes/B.png",
+      "nouvelle": false,
+      "origines": ["3", "2"],
+      "changements": ["km 7.7 → 13.8", "temps 32 → 40 min", "arrêts 27 → 23"],
+      "ancien_terminus": null,
+      "frequentation_pointe": 4763,
+      "correspondances": {
+        "Hôtel de Région Auvergne-Rhône-Alpes": ["14", "18", "64", "101"],
+        "Lycée Sidoine-Apollinaire": ["9", "604"],
+        "Gare de Clermont-Ferrand": ["ET", "12", "E1", "BEN1", "BEN4"],
+        "UCA Campus Centre": ["8", "11"]
+      }
+    },
+    "ET": {
+      "id": "ET",
+      "code": "ET",
+      "nom": "Tram-train ET",
+      "mode": "tramtrain",
+      "famille": "volc_express",
+      "depart": "Gare de Clermont-Ferrand",
+      "terminus": "Aéroport Clermont-Ferrand Auvergne",
+      "couleur": "#204BFE",
+      "km": 22.0,
+      "temps": 28.0,
+      "arrets": 3,
+      "aeroport": true,
+      "gratuite": false,
+      "hns": true,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 11,
+            "pointe": 6,
+            "soir": 11,
+            "nuit": 19
+          },
+          "samedi": {
+            "creuse": 7,
+            "pointe": 6,
+            "soir": 8,
+            "nuit": 19
+          },
+          "dimanche": {
+            "creuse": 6,
+            "pointe": 6,
+            "nuit": 19
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 7,
+            "pointe": 5,
+            "soir": 14,
+            "nuit": 28
+          },
+          "samedi": {
+            "creuse": 6,
+            "pointe": 4,
+            "soir": 5,
+            "nuit": 19
+          },
+          "dimanche": {
+            "creuse": 7,
+            "pointe": 6,
+            "nuit": 28
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Alstom Citadis Dualis",
+          "nombre": 9,
+          "energie": "Electrique"
+        }
+      ],
+      "electrique": "dès l'ouverture",
+      "troncons": [
+        {
+          "de": "Gare de Clermont-Ferrand",
+          "a": "Gare routière de Clermont-Ferrand",
+          "minutes": 10
+        },
+        {
+          "de": "Gare routière de Clermont-Ferrand",
+          "a": "Pôle d'activité du Circuit de Charade",
+          "minutes": 8
+        },
+        {
+          "de": "Pôle d'activité du Circuit de Charade",
+          "a": "Aéroport Clermont-Ferrand Auvergne",
+          "minutes": 10
+        }
+      ],
+      "statut": {
+        "etat": "ouverture",
+        "date": "2027-01-20"
+      },
+      "logo": "/img/lignes/ET.png",
+      "nouvelle": true,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 2000,
+      "correspondances": {
+        "Gare routière de Clermont-Ferrand": ["16", "17", "61", "106", "201", "202", "203", "204", "205", "206"],
+        "Gare de Clermont-Ferrand": ["B", "12", "E1", "BEN1", "BEN4"],
+        "Aéroport Clermont-Ferrand Auvergne": ["106"]
+      }
+    },
+    "3": {
+      "id": "3",
+      "code": "3",
+      "nom": "Ligne 3",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Montaudou",
+      "terminus": "Parc de Montjuzet",
+      "couleur": "#3c78d8",
+      "km": 11.8,
+      "temps": 31.0,
+      "arrets": 32,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 9,
+            "pointe": 6,
+            "soir": 16
+          },
+          "samedi": {
+            "creuse": 12,
+            "pointe": 9,
+            "soir": 16
+          },
+          "dimanche": {
+            "creuse": 21,
+            "pointe": 12
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 10,
+            "pointe": 7,
+            "soir": 21
+          },
+          "samedi": {
+            "creuse": 12,
+            "pointe": 8,
+            "soir": 21
+          },
+          "dimanche": {
+            "creuse": 21,
+            "pointe": 16
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Hess SwissHybrid 18",
+          "nombre": 10,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/3.png",
+      "nouvelle": true,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 1431,
+      "correspondances": {
+        "Parc de Montjuzet": ["61"]
+      }
+    },
+    "4": {
+      "id": "4",
+      "code": "4",
+      "nom": "Ligne 4",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Abbaye de Saint-Alyre",
+      "terminus": "Gare de marchandises du Brézet",
+      "couleur": "#00afad",
+      "km": 12.4,
+      "temps": 47.0,
+      "arrets": 37,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 13,
+            "pointe": 8,
+            "soir": 19
+          },
+          "samedi": {
+            "creuse": 13,
+            "pointe": 10,
+            "soir": 16
+          },
+          "dimanche": {
+            "creuse": 24,
+            "pointe": 19
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 16,
+            "pointe": 9,
+            "soir": 24
+          },
+          "samedi": {
+            "creuse": 16,
+            "pointe": 10,
+            "soir": 19
+          },
+          "dimanche": {
+            "creuse": 24,
+            "pointe": 16
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro G C2",
+          "nombre": 12,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/4.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 1725,
+      "correspondances": {}
+    },
+    "5": {
+      "id": "5",
+      "code": "5",
+      "nom": "Ligne 5",
+      "mode": "bhns",
+      "famille": "volc_express",
+      "depart": "Musée d'art Roger-Quilliot",
+      "terminus": "Place de Jaude",
+      "couleur": "#e86a10",
+      "km": 9.3,
+      "temps": 37.0,
+      "arrets": 34,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": true,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 7,
+            "pointe": 5,
+            "soir": 12
+          },
+          "samedi": {
+            "creuse": 9,
+            "pointe": 7,
+            "soir": 12
+          },
+          "dimanche": {
+            "creuse": 15,
+            "pointe": 11
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 8,
+            "pointe": 5,
+            "soir": 15
+          },
+          "samedi": {
+            "creuse": 9,
+            "pointe": 6,
+            "soir": 15
+          },
+          "dimanche": {
+            "creuse": 12,
+            "pointe": 9
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Hess LighTram 25 TOSA",
+          "nombre": 15,
+          "energie": "Electrique"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/5.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 2588,
+      "correspondances": {
+        "Place de Jaude": ["15", "65"]
+      }
+    },
+    "6": {
+      "id": "6",
+      "code": "6",
+      "nom": "Ligne 6",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Hôtel de ville de Clermont-Ferrand",
+      "terminus": "Campus des Lettres (Carnot)",
+      "couleur": "#894e24",
+      "km": 5.0,
+      "temps": 20.0,
+      "arrets": 17,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 8,
+            "pointe": 6,
+            "soir": 20
+          },
+          "samedi": {
+            "creuse": 10,
+            "pointe": 8,
+            "soir": 20
+          },
+          "dimanche": {
+            "creuse": 20,
+            "pointe": 13
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 10,
+            "pointe": 7,
+            "soir": 20
+          },
+          "samedi": {
+            "creuse": 13,
+            "pointe": 10,
+            "soir": 20
+          },
+          "dimanche": {
+            "creuse": 20,
+            "pointe": 13
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2",
+          "nombre": 7,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/6.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 679,
+      "correspondances": {
+        "Hôtel de ville de Clermont-Ferrand": ["7"]
+      }
+    },
+    "7": {
+      "id": "7",
+      "code": "7",
+      "nom": "Ligne 7",
+      "mode": "bhns",
+      "famille": "volc_express",
+      "depart": "Quai de l'Allier (Pont-du-Château)",
+      "terminus": "Hôtel de ville de Clermont-Ferrand",
+      "couleur": "#007229",
+      "km": 10.2,
+      "temps": 36.0,
+      "arrets": 30,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": true,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 9,
+            "pointe": 7,
+            "soir": 18
+          },
+          "samedi": {
+            "creuse": 10,
+            "pointe": 7,
+            "soir": 14
+          },
+          "dimanche": {
+            "creuse": 18,
+            "pointe": 12
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 12,
+            "pointe": 8,
+            "soir": 24
+          },
+          "samedi": {
+            "creuse": 12,
+            "pointe": 9,
+            "soir": 18
+          },
+          "dimanche": {
+            "creuse": 24,
+            "pointe": 14
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2 BHNS",
+          "nombre": 11,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/7.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 1105,
+      "correspondances": {
+        "Hôtel de ville de Clermont-Ferrand": ["6"]
+      }
+    },
+    "8": {
+      "id": "8",
+      "code": "8",
+      "nom": "Ligne 8",
+      "mode": "bhns",
+      "famille": "volc_express",
+      "depart": "Place de la Victoire",
+      "terminus": "UCA Campus Centre",
+      "couleur": "#d799af",
+      "km": 7.8,
+      "temps": 32.0,
+      "arrets": 27,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": true,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 8,
+            "pointe": 6,
+            "soir": 21
+          },
+          "samedi": {
+            "creuse": 13,
+            "pointe": 11,
+            "soir": 16
+          },
+          "dimanche": {
+            "creuse": 21,
+            "pointe": 13
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 11,
+            "pointe": 7,
+            "soir": 21
+          },
+          "samedi": {
+            "creuse": 16,
+            "pointe": 13,
+            "soir": 21
+          },
+          "dimanche": {
+            "creuse": 21,
+            "pointe": 13
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2 BHNS",
+          "nombre": 11,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/8.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 1080,
+      "correspondances": {
+        "Place de la Victoire": ["63", "64", "103", "105"],
+        "UCA Campus Centre": ["B", "11"]
+      }
+    },
+    "9": {
+      "id": "9",
+      "code": "9",
+      "nom": "Ligne 9",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Lycée Sidoine-Apollinaire",
+      "terminus": "Cébazat - Bureau de poste",
+      "couleur": "#0B904C",
+      "km": 28.0,
+      "temps": 78.0,
+      "arrets": 5,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 22,
+            "pointe": 16,
+            "soir": 26
+          },
+          "samedi": {
+            "creuse": 26,
+            "pointe": 20,
+            "soir": 26
+          },
+          "dimanche": {
+            "creuse": 26,
+            "pointe": 26
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 26,
+            "pointe": 17,
+            "soir": 26
+          },
+          "samedi": {
+            "creuse": 22,
+            "pointe": 22,
+            "soir": 26
+          },
+          "dimanche": {
+            "creuse": 26,
+            "pointe": 26
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2",
+          "nombre": 10,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/9.png",
+      "nouvelle": true,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 947,
+      "correspondances": {
+        "Cébazat - Bureau de poste": ["151"],
+        "Lycée Sidoine-Apollinaire": ["B", "604"]
+      }
+    },
+    "10": {
+      "id": "10",
+      "code": "10",
+      "nom": "Ligne 10",
+      "mode": "bhns",
+      "famille": "volc_express",
+      "depart": "Montferrand - Centre historique",
+      "terminus": "Clinique Saint-Paul",
+      "couleur": "#ffce00",
+      "km": 17.3,
+      "temps": 51.0,
+      "arrets": 35,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": true,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 6,
+            "pointe": 5,
+            "soir": 13
+          },
+          "samedi": {
+            "creuse": 9,
+            "pointe": 6,
+            "soir": 15
+          },
+          "dimanche": {
+            "creuse": 13,
+            "pointe": 11
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 11,
+            "pointe": 8,
+            "soir": 20
+          },
+          "samedi": {
+            "creuse": 15,
+            "pointe": 10,
+            "soir": 26
+          },
+          "dimanche": {
+            "creuse": 20,
+            "pointe": 15
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes eCitaro G BHNS",
+          "nombre": 22,
+          "energie": "Electrique"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/10.png",
+      "nouvelle": false,
+      "origines": ["9"],
+      "changements": ["km 11.1 → 17.3", "temps 33 → 51 min", "arrêts 24 → 35"],
+      "ancien_terminus": null,
+      "frequentation_pointe": 3013,
+      "correspondances": {
+        "Montferrand - Centre historique": ["13", "BEN2"],
+        "Clinique Saint-Paul": ["A", "11", "BEN3"]
+      }
+    },
+    "11": {
+      "id": "11",
+      "code": "11",
+      "nom": "Ligne 11",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "UCA Campus Centre",
+      "terminus": "Clinique Saint-Paul",
+      "couleur": "#751056",
+      "km": 6.5,
+      "temps": 21.0,
+      "arrets": 14,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 7,
+            "pointe": 5,
+            "soir": 14
+          },
+          "samedi": {
+            "creuse": 8,
+            "pointe": 7,
+            "soir": 14
+          },
+          "dimanche": {
+            "creuse": 14,
+            "pointe": 10
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 8,
+            "pointe": 6,
+            "soir": 21
+          },
+          "samedi": {
+            "creuse": 10,
+            "pointe": 8,
+            "soir": 14
+          },
+          "dimanche": {
+            "creuse": 14,
+            "pointe": 10
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2",
+          "nombre": 9,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/11.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 825,
+      "correspondances": {
+        "UCA Campus Centre": ["B", "8"],
+        "Clinique Saint-Paul": ["A", "10", "BEN3"]
+      }
+    },
+    "12": {
+      "id": "12",
+      "code": "12",
+      "nom": "Ligne 12",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Gare de Clermont-Ferrand",
+      "terminus": "Vulcania",
+      "couleur": "#007229",
+      "km": 7.2,
+      "temps": 27.0,
+      "arrets": 21,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 11,
+            "pointe": 8,
+            "soir": 27
+          },
+          "samedi": {
+            "creuse": 14,
+            "pointe": 11,
+            "soir": 18
+          },
+          "dimanche": {
+            "creuse": 18,
+            "pointe": 11
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 14,
+            "pointe": 9,
+            "soir": 27
+          },
+          "samedi": {
+            "creuse": 18,
+            "pointe": 11,
+            "soir": 27
+          },
+          "dimanche": {
+            "creuse": 18,
+            "pointe": 11
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2",
+          "nombre": 7,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/12.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 666,
+      "correspondances": {
+        "Vulcania": ["63"],
+        "Gare de Clermont-Ferrand": ["B", "ET", "E1", "BEN1", "BEN4"]
+      }
+    },
+    "13": {
+      "id": "13",
+      "code": "13",
+      "nom": "Ligne 13",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Montferrand - Centre historique",
+      "terminus": "Les Vergnes",
+      "couleur": "#76d0bd",
+      "km": 6.5,
+      "temps": 18.0,
+      "arrets": 15,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 12,
+            "pointe": 6,
+            "soir": 18
+          },
+          "samedi": {
+            "creuse": 18,
+            "pointe": 9,
+            "soir": 18
+          },
+          "dimanche": {
+            "creuse": 18,
+            "pointe": 12
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 12,
+            "pointe": 7,
+            "soir": 18
+          },
+          "samedi": {
+            "creuse": 18,
+            "pointe": 12,
+            "soir": 18
+          },
+          "dimanche": {
+            "creuse": 18,
+            "pointe": 12
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2",
+          "nombre": 6,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/13.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": ["Montferrand - Centre historique", "Aéroport"],
+      "frequentation_pointe": 518,
+      "correspondances": {
+        "Montferrand - Centre historique": ["10", "BEN2"],
+        "Les Vergnes": ["A", "16", "BEN3"]
+      }
+    },
+    "14": {
+      "id": "14",
+      "code": "14",
+      "nom": "Ligne 14",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Place Delille",
+      "terminus": "Hôtel de Région Auvergne-Rhône-Alpes",
+      "couleur": "#dc241f",
+      "km": 7.2,
+      "temps": 24.0,
+      "arrets": 18,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 16,
+            "pointe": 10,
+            "soir": 24
+          },
+          "samedi": {
+            "creuse": 24,
+            "pointe": 12,
+            "soir": 24
+          },
+          "dimanche": {
+            "creuse": 24,
+            "pointe": 16
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 16,
+            "pointe": 10,
+            "soir": 24
+          },
+          "samedi": {
+            "creuse": 16,
+            "pointe": 12,
+            "soir": 24
+          },
+          "dimanche": {
+            "creuse": 24,
+            "pointe": 16
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2",
+          "nombre": 5,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/14.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 412,
+      "correspondances": {
+        "Hôtel de Région Auvergne-Rhône-Alpes": ["B", "18", "64", "101"]
+      }
+    },
+    "15": {
+      "id": "15",
+      "code": "15",
+      "nom": "Ligne 15",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Place de Jaude",
+      "terminus": "Cathédrale Notre-Dame-de-l'Assomption",
+      "couleur": "#751056",
+      "km": 11.3,
+      "temps": 48.0,
+      "arrets": 36,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 16,
+            "pointe": 11,
+            "soir": 24
+          },
+          "samedi": {
+            "creuse": 16,
+            "pointe": 14,
+            "soir": 19
+          },
+          "dimanche": {
+            "creuse": 24,
+            "pointe": 19
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 19,
+            "pointe": 12,
+            "soir": 24
+          },
+          "samedi": {
+            "creuse": 19,
+            "pointe": 16,
+            "soir": 24
+          },
+          "dimanche": {
+            "creuse": 24,
+            "pointe": 19
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2",
+          "nombre": 9,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "avril 2027",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/15.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 888,
+      "correspondances": {
+        "Place de Jaude": ["5", "65"]
+      }
+    },
+    "16": {
+      "id": "16",
+      "code": "16",
+      "nom": "Ligne 16",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Les Vergnes",
+      "terminus": "Gare routière de Clermont-Ferrand",
+      "couleur": "#ffce00",
+      "km": 6.4,
+      "temps": 22.0,
+      "arrets": 20,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 15,
+            "pointe": 11,
+            "soir": 22
+          },
+          "samedi": {
+            "creuse": 22,
+            "pointe": 15
+          },
+          "dimanche": {
+            "pointe": 15
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 22,
+            "pointe": 15,
+            "soir": 22
+          },
+          "samedi": {
+            "creuse": 22,
+            "pointe": 15
+          },
+          "dimanche": {
+            "pointe": 22
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Man Lion s City 12",
+          "nombre": 4,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/16.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": ["Aéroport", "Gare routière de Clermont-Ferrand"],
+      "frequentation_pointe": 405,
+      "correspondances": {
+        "Gare routière de Clermont-Ferrand": ["ET", "17", "61", "106", "201", "202", "203", "204", "205", "206"],
+        "Les Vergnes": ["A", "13", "BEN3"]
+      }
+    },
+    "17": {
+      "id": "17",
+      "code": "17",
+      "nom": "Ligne 17",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Gare routière de Clermont-Ferrand",
+      "terminus": "Montjuzet",
+      "couleur": "#00afad",
+      "km": 9.3,
+      "temps": 33.0,
+      "arrets": 28,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 11,
+            "pointe": 8,
+            "soir": 22
+          },
+          "samedi": {
+            "creuse": 16,
+            "pointe": 11,
+            "soir": 22
+          },
+          "dimanche": {
+            "creuse": 22,
+            "pointe": 16
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 9,
+            "pointe": 7,
+            "soir": 22
+          },
+          "samedi": {
+            "creuse": 13,
+            "pointe": 8,
+            "soir": 16
+          },
+          "dimanche": {
+            "creuse": 16,
+            "pointe": 11
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro G C2 BHNS",
+          "nombre": 8,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/17.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 1188,
+      "correspondances": {
+        "Gare routière de Clermont-Ferrand": ["ET", "16", "61", "106", "201", "202", "203", "204", "205", "206"]
+      }
+    },
+    "18": {
+      "id": "18",
+      "code": "18",
+      "nom": "Ligne 18",
+      "mode": "bus",
+      "famille": "urbain_dome",
+      "depart": "Les Salins",
+      "terminus": "Hôtel de Région Auvergne-Rhône-Alpes",
+      "couleur": "#868f98",
+      "km": 10.9,
+      "temps": 40.0,
+      "arrets": 33,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 20,
+            "pointe": 11,
+            "soir": 27
+          },
+          "samedi": {
+            "creuse": 27,
+            "pointe": 16
+          },
+          "dimanche": {
+            "pointe": 27
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 27,
+            "pointe": 13,
+            "soir": 27
+          },
+          "samedi": {
+            "creuse": 27,
+            "pointe": 20
+          },
+          "dimanche": {
+            "pointe": 27
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2",
+          "nombre": 7,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/18.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 666,
+      "correspondances": {
+        "Hôtel de Région Auvergne-Rhône-Alpes": ["B", "14", "64", "101"]
+      }
+    },
+    "60": {
+      "id": "60",
+      "code": "60",
+      "nom": "Ligne 60",
+      "mode": "bus",
+      "famille": "urbain_pariou",
+      "depart": "Préfecture du Puy-de-Dôme",
+      "terminus": "Lycée Blaise-Pascal",
+      "couleur": "#76d0bd",
+      "km": 5.2,
+      "temps": 20.0,
+      "arrets": 17,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 13,
+            "pointe": 10,
+            "soir": 20
+          },
+          "samedi": {
+            "pointe": 13
+          },
+          "dimanche": {}
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 20,
+            "pointe": 10,
+            "soir": 20
+          },
+          "samedi": {
+            "pointe": 20
+          },
+          "dimanche": {}
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Sprinter City 75",
+          "nombre": 3,
+          "energie": "Diesel"
+        },
+        {
+          "modele": "Mercedes Sprinter City 45",
+          "nombre": 2,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/60.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 132,
+      "correspondances": {
+        "Préfecture du Puy-de-Dôme": ["65"]
+      }
+    },
+    "61": {
+      "id": "61",
+      "code": "61",
+      "nom": "Ligne 61",
+      "mode": "bus",
+      "famille": "urbain_pariou",
+      "depart": "Gare routière de Clermont-Ferrand",
+      "terminus": "Parc de Montjuzet",
+      "couleur": "#0019a8",
+      "km": 8.5,
+      "temps": 32.0,
+      "arrets": 27,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 21,
+            "pointe": 16
+          },
+          "samedi": {
+            "pointe": 21
+          },
+          "dimanche": {}
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 21,
+            "pointe": 21
+          },
+          "samedi": {
+            "pointe": 21
+          },
+          "dimanche": {}
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2",
+          "nombre": 4,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/61.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 370,
+      "correspondances": {
+        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "106", "201", "202", "203", "204", "205", "206"],
+        "Parc de Montjuzet": ["3"]
+      }
+    },
+    "62": {
+      "id": "62",
+      "code": "62",
+      "nom": "Ligne 62",
+      "mode": "bus",
+      "famille": "urbain_pariou",
+      "depart": "Parc Bargoin",
+      "terminus": "Parc Bargoin",
+      "couleur": "#b727bf",
+      "km": 10.5,
+      "temps": 40.0,
+      "arrets": 30,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 27,
+            "pointe": 20,
+            "soir": 27
+          },
+          "samedi": {
+            "creuse": 27,
+            "pointe": 27,
+            "soir": 27
+          },
+          "dimanche": {
+            "creuse": 27,
+            "pointe": 27
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 27,
+            "pointe": 27,
+            "soir": 27
+          },
+          "samedi": {
+            "creuse": 27,
+            "pointe": 27,
+            "soir": 27
+          },
+          "dimanche": {
+            "pointe": 27
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro K C2",
+          "nombre": 4,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/62.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 302,
+      "correspondances": {
+        "Parc Bargoin": ["BEN2"]
+      }
+    },
+    "63": {
+      "id": "63",
+      "code": "63",
+      "nom": "Ligne 63",
+      "mode": "bus",
+      "famille": "urbain_pariou",
+      "depart": "Place de la Victoire",
+      "terminus": "Vulcania",
+      "couleur": "#e86a10",
+      "km": 7.8,
+      "temps": 29.0,
+      "arrets": 26,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 19,
+            "pointe": 14
+          },
+          "samedi": {
+            "creuse": 29,
+            "pointe": 19,
+            "soir": 29
+          },
+          "dimanche": {
+            "creuse": 14,
+            "pointe": 12
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 29,
+            "pointe": 14
+          },
+          "samedi": {
+            "creuse": 29,
+            "pointe": 19,
+            "soir": 29
+          },
+          "dimanche": {
+            "creuse": 14,
+            "pointe": 12
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro C2",
+          "nombre": 5,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/63.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 400,
+      "correspondances": {
+        "Place de la Victoire": ["8", "64", "103", "105"],
+        "Vulcania": ["12"]
+      }
+    },
+    "64": {
+      "id": "64",
+      "code": "64",
+      "nom": "Ligne 64",
+      "mode": "bus",
+      "famille": "urbain_pariou",
+      "depart": "Place de la Victoire",
+      "terminus": "Hôtel de Région Auvergne-Rhône-Alpes",
+      "couleur": "#ffce00",
+      "km": 3.9,
+      "temps": 14.0,
+      "arrets": 13,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 28,
+            "pointe": 14
+          },
+          "samedi": {
+            "pointe": 14
+          },
+          "dimanche": {}
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 28,
+            "pointe": 14
+          },
+          "samedi": {
+            "pointe": 28
+          },
+          "dimanche": {}
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro K C2",
+          "nombre": 2,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/64.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 160,
+      "correspondances": {
+        "Place de la Victoire": ["8", "63", "103", "105"],
+        "Hôtel de Région Auvergne-Rhône-Alpes": ["B", "14", "18", "101"]
+      }
+    },
+    "65": {
+      "id": "65",
+      "code": "65",
+      "nom": "Ligne 65",
+      "mode": "bus",
+      "famille": "urbain_pariou",
+      "depart": "Préfecture du Puy-de-Dôme",
+      "terminus": "Place de Jaude",
+      "couleur": "#9364cc",
+      "km": 6.4,
+      "temps": 25.0,
+      "arrets": 27,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 25,
+            "pointe": 12,
+            "soir": 25
+          },
+          "samedi": {
+            "pointe": 25
+          },
+          "dimanche": {
+            "pointe": 25
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 17,
+            "pointe": 17,
+            "soir": 25
+          },
+          "samedi": {
+            "pointe": 17
+          },
+          "dimanche": {
+            "pointe": 25
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Citaro K C2",
+          "nombre": 4,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/65.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 300,
+      "correspondances": {
+        "Place de Jaude": ["5", "15"],
+        "Préfecture du Puy-de-Dôme": ["60"]
+      }
+    },
+    "101": {
+      "id": "101",
+      "code": "101",
+      "nom": "Ligne 101",
+      "mode": "bus",
+      "famille": "peripherique",
+      "depart": "Hôtel de Région Auvergne-Rhône-Alpes",
+      "terminus": "Ceyrat - Étangs",
+      "couleur": "#751056",
+      "km": 21.2,
+      "temps": 36.0,
+      "arrets": 16,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 18,
+            "pointe": 10,
+            "soir": 36
+          },
+          "samedi": {
+            "creuse": 18,
+            "pointe": 14,
+            "soir": 24
+          },
+          "dimanche": {
+            "creuse": 36,
+            "pointe": 14
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 14,
+            "pointe": 8,
+            "soir": 36
+          },
+          "samedi": {
+            "creuse": 14,
+            "pointe": 10,
+            "soir": 24
+          },
+          "dimanche": {
+            "creuse": 24,
+            "pointe": 10
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Setra S 516 LE Hybrid",
+          "nombre": 7,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/101.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 585,
+      "correspondances": {
+        "Hôtel de Région Auvergne-Rhône-Alpes": ["B", "14", "18", "64"]
+      }
+    },
+    "102": {
+      "id": "102",
+      "code": "102",
+      "nom": "Ligne 102",
+      "mode": "bus",
+      "famille": "peripherique",
+      "depart": "Stade Marcel-Michelin",
+      "terminus": "Beaumont - Avenue de la Liberté",
+      "couleur": "#007229",
+      "km": 17.9,
+      "temps": 27.0,
+      "arrets": 12,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 27,
+            "pointe": 18,
+            "soir": 54
+          },
+          "samedi": {
+            "creuse": 54,
+            "pointe": 27,
+            "soir": 27
+          },
+          "dimanche": {
+            "pointe": 27
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 27,
+            "pointe": 18,
+            "soir": 54
+          },
+          "samedi": {
+            "creuse": 54,
+            "pointe": 27,
+            "soir": 27
+          },
+          "dimanche": {
+            "pointe": 27
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Setra S 416 LE Business",
+          "nombre": 3,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/102.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 268,
+      "correspondances": {
+        "Beaumont - Avenue de la Liberté": ["151"]
+      }
+    },
+    "103": {
+      "id": "103",
+      "code": "103",
+      "nom": "Ligne 103",
+      "mode": "bus",
+      "famille": "peripherique",
+      "depart": "Place de la Victoire",
+      "terminus": "Aubière - Place du Marché",
+      "couleur": "#ffce00",
+      "km": 10.8,
+      "temps": 21.0,
+      "arrets": 8,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 21,
+            "pointe": 10,
+            "soir": 42
+          },
+          "samedi": {
+            "creuse": 42,
+            "pointe": 21
+          },
+          "dimanche": {
+            "creuse": 42,
+            "pointe": 42
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 21,
+            "pointe": 10,
+            "soir": 42
+          },
+          "samedi": {
+            "creuse": 42,
+            "pointe": 21
+          },
+          "dimanche": {
+            "creuse": 42,
+            "pointe": 42
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Setra S 416 LE Business",
+          "nombre": 4,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/103.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": ["Place de la Victoire", "Aubière - Centre de recyclage"],
+      "frequentation_pointe": 350,
+      "correspondances": {
+        "Place de la Victoire": ["8", "63", "64", "105"]
+      }
+    },
+    "104": {
+      "id": "104",
+      "code": "104",
+      "nom": "Ligne 104",
+      "mode": "bus",
+      "famille": "peripherique",
+      "depart": "Lempdes - Place du Marché",
+      "terminus": "IUT Clermont Auvergne",
+      "couleur": "#9364cc",
+      "km": 12.3,
+      "temps": 24.0,
+      "arrets": 10,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 10,
+            "pointe": 7,
+            "soir": 48
+          },
+          "samedi": {
+            "pointe": 12,
+            "soir": 48
+          },
+          "dimanche": {
+            "creuse": 48,
+            "pointe": 16
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 10,
+            "pointe": 7,
+            "soir": 48
+          },
+          "samedi": {
+            "pointe": 12,
+            "soir": 48
+          },
+          "dimanche": {
+            "creuse": 48,
+            "pointe": 16
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes New Intouro Hybrid",
+          "nombre": 7,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/104.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 333,
+      "correspondances": {}
+    },
+    "105": {
+      "id": "105",
+      "code": "105",
+      "nom": "Ligne 105",
+      "mode": "bus",
+      "famille": "peripherique",
+      "depart": "Place de la Victoire",
+      "terminus": "Pont-du-Château - Église",
+      "couleur": "#00afad",
+      "km": 29.1,
+      "temps": 50.0,
+      "arrets": 20,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 50,
+            "pointe": 33,
+            "soir": 100
+          },
+          "samedi": {
+            "creuse": 100,
+            "pointe": 50
+          },
+          "dimanche": {
+            "creuse": 100,
+            "pointe": 50
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 50,
+            "pointe": 33,
+            "soir": 100
+          },
+          "samedi": {
+            "creuse": 100,
+            "pointe": 50
+          },
+          "dimanche": {
+            "creuse": 100,
+            "pointe": 50
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Setra S 516 LE Hybrid",
+          "nombre": 3,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/105.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 250,
+      "correspondances": {
+        "Place de la Victoire": ["8", "63", "64", "103"],
+        "Pont-du-Château - Église": ["107", "604", "BEN4"]
+      }
+    },
+    "106": {
+      "id": "106",
+      "code": "106",
+      "nom": "Ligne 106",
+      "mode": "bus",
+      "famille": "peripherique",
+      "depart": "Gare routière de Clermont-Ferrand",
+      "terminus": "Aéroport Clermont-Ferrand Auvergne",
+      "couleur": "#d799af",
+      "km": 23.1,
+      "temps": 41.0,
+      "arrets": 13,
+      "aeroport": true,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 20,
+            "pointe": 14,
+            "soir": 41
+          },
+          "samedi": {
+            "creuse": 41,
+            "pointe": 20,
+            "soir": 41
+          },
+          "dimanche": {
+            "creuse": 41,
+            "pointe": 41
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 16,
+            "pointe": 12,
+            "soir": 41
+          },
+          "samedi": {
+            "creuse": 27,
+            "pointe": 16,
+            "soir": 41
+          },
+          "dimanche": {
+            "creuse": 41,
+            "pointe": 41
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes New Intouro L",
+          "nombre": 6,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/106.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": ["km 13.4 → 23.1", "temps 26 → 41 min", "arrêts 11 → 13"],
+      "ancien_terminus": ["Cébazat - Bureau de poste", "Gare routière de Clermont-Ferrand"],
+      "frequentation_pointe": 390,
+      "correspondances": {
+        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "201", "202", "203", "204", "205", "206"],
+        "Aéroport Clermont-Ferrand Auvergne": ["ET"]
+      }
+    },
+    "107": {
+      "id": "107",
+      "code": "107",
+      "nom": "Ligne 107",
+      "mode": "car",
+      "famille": "peripherique",
+      "depart": "Pont-du-Château - Église",
+      "terminus": "Zone d'activités de Lempdes",
+      "couleur": "#3c78c5",
+      "km": 18.8,
+      "temps": 42.0,
+      "arrets": 9,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 21,
+            "pointe": 14,
+            "soir": 42,
+            "nuit": 42
+          },
+          "samedi": {
+            "creuse": 28,
+            "pointe": 21,
+            "soir": 42,
+            "nuit": 84
+          },
+          "dimanche": {
+            "creuse": 42,
+            "pointe": 42,
+            "nuit": 84
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 21,
+            "pointe": 14,
+            "soir": 42,
+            "nuit": 42
+          },
+          "samedi": {
+            "creuse": 28,
+            "pointe": 21,
+            "soir": 84,
+            "nuit": 84
+          },
+          "dimanche": {
+            "creuse": 84,
+            "pointe": 42,
+            "nuit": 84
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Man Lion's Coach L",
+          "nombre": 6,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/107.png",
+      "nouvelle": true,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 321,
+      "correspondances": {
+        "Pont-du-Château - Église": ["105", "604", "BEN4"]
+      }
+    },
+    "151": {
+      "id": "151",
+      "code": "151",
+      "nom": "Ligne 151",
+      "mode": "bus",
+      "famille": "peripherique",
+      "depart": "Beaumont - Avenue de la Liberté",
+      "terminus": "Cébazat - Bureau de poste",
+      "couleur": "#0019a8",
+      "km": 34.8,
+      "temps": 52.0,
+      "arrets": 21,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 26,
+            "pointe": 17,
+            "soir": 104
+          },
+          "samedi": {
+            "creuse": 52,
+            "pointe": 26,
+            "soir": 52
+          },
+          "dimanche": {
+            "creuse": 52,
+            "pointe": 52
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 26,
+            "pointe": 17,
+            "soir": 104
+          },
+          "samedi": {
+            "creuse": 52,
+            "pointe": 26,
+            "soir": 52
+          },
+          "dimanche": {
+            "creuse": 52,
+            "pointe": 52
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes Tourismo RHD",
+          "nombre": 6,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/151.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 264,
+      "correspondances": {
+        "Cébazat - Bureau de poste": ["9"],
+        "Beaumont - Avenue de la Liberté": ["102"]
+      }
+    },
+    "201": {
+      "id": "201",
+      "code": "201",
+      "nom": "Ligne 201",
+      "mode": "car",
+      "famille": "monts",
+      "depart": "Gare routière de Clermont-Ferrand",
+      "terminus": "Riom - Gare",
+      "couleur": "#894e24",
+      "km": 53.8,
+      "temps": 67.0,
+      "arrets": 6,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 45,
+            "pointe": 22,
+            "soir": 134
+          },
+          "samedi": {
+            "creuse": 134,
+            "pointe": 45,
+            "soir": 134
+          },
+          "dimanche": {
+            "pointe": 67
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 45,
+            "pointe": 22,
+            "soir": 134
+          },
+          "samedi": {
+            "creuse": 134,
+            "pointe": 45,
+            "soir": 134
+          },
+          "dimanche": {
+            "pointe": 67
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes New Intouro Hybrid",
+          "nombre": 6,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/201.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 299,
+      "correspondances": {
+        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "202", "203", "204", "205", "206"],
+        "Riom - Gare": ["251", "E1"]
+      }
+    },
+    "202": {
+      "id": "202",
+      "code": "202",
+      "nom": "Ligne 202",
+      "mode": "car",
+      "famille": "monts",
+      "depart": "Issoire - Gare routière",
+      "terminus": "Gare routière de Clermont-Ferrand",
+      "couleur": "#dc241f",
+      "km": 32.8,
+      "temps": 46.0,
+      "arrets": 5,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 92,
+            "pointe": 46,
+            "soir": 92
+          },
+          "samedi": {
+            "pointe": 92
+          },
+          "dimanche": {
+            "creuse": 46
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 92,
+            "pointe": 46,
+            "soir": 92
+          },
+          "samedi": {
+            "pointe": 92
+          },
+          "dimanche": {
+            "creuse": 46
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Setra S 418 LE Business",
+          "nombre": 2,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/202.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 111,
+      "correspondances": {
+        "Issoire - Gare routière": ["251"],
+        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "201", "203", "204", "205", "206"]
+      }
+    },
+    "203": {
+      "id": "203",
+      "code": "203",
+      "nom": "Ligne 203",
+      "mode": "car",
+      "famille": "monts",
+      "depart": "Orcines - Puy-de-Dôme",
+      "terminus": "Gare routière de Clermont-Ferrand",
+      "couleur": "#00afad",
+      "km": 42.1,
+      "temps": 62.0,
+      "arrets": 5,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 62,
+            "pointe": 31,
+            "soir": 124
+          },
+          "samedi": {
+            "creuse": 124,
+            "pointe": 41
+          },
+          "dimanche": {
+            "creuse": 124,
+            "pointe": 62
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 62,
+            "pointe": 31,
+            "soir": 124
+          },
+          "samedi": {
+            "creuse": 124,
+            "pointe": 41
+          },
+          "dimanche": {
+            "creuse": 124,
+            "pointe": 62
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Setra S 416 LE Business",
+          "nombre": 4,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/203.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 160,
+      "correspondances": {
+        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "201", "202", "204", "205", "206"]
+      }
+    },
+    "204": {
+      "id": "204",
+      "code": "204",
+      "nom": "Ligne 204",
+      "mode": "car",
+      "famille": "monts",
+      "depart": "Gare routière de Clermont-Ferrand",
+      "terminus": "Gerzat - Boulevard de l'Humanité",
+      "couleur": "#9364cc",
+      "km": 44.7,
+      "temps": 70.0,
+      "arrets": 8,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 70,
+            "pointe": 70,
+            "soir": 140
+          },
+          "samedi": {
+            "creuse": 140,
+            "pointe": 70,
+            "soir": 140
+          },
+          "dimanche": {
+            "creuse": 140,
+            "pointe": 70
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 70,
+            "pointe": 70,
+            "soir": 140
+          },
+          "samedi": {
+            "creuse": 140,
+            "pointe": 70,
+            "soir": 140
+          },
+          "dimanche": {
+            "creuse": 140,
+            "pointe": 70
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes New Intouro L",
+          "nombre": 2,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/204.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 132,
+      "correspondances": {
+        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "201", "202", "203", "205", "206"],
+        "Gerzat - Boulevard de l'Humanité": ["205"]
+      }
+    },
+    "205": {
+      "id": "205",
+      "code": "205",
+      "nom": "Ligne 205",
+      "mode": "car",
+      "famille": "monts",
+      "depart": "Gare routière de Clermont-Ferrand",
+      "terminus": "Gerzat - Boulevard de l'Humanité",
+      "couleur": "#007229",
+      "km": 44.7,
+      "temps": 70.0,
+      "arrets": 8,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 140,
+            "pointe": 70
+          },
+          "samedi": {
+            "pointe": 70
+          },
+          "dimanche": {}
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 140,
+            "pointe": 47
+          },
+          "samedi": {
+            "pointe": 70
+          },
+          "dimanche": {}
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes New Intouro L",
+          "nombre": 2,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/205.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": ["km 30.3 → 44.7", "temps 45 → 70 min", "arrêts 7 → 8"],
+      "ancien_terminus": null,
+      "frequentation_pointe": 123,
+      "correspondances": {
+        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "201", "202", "203", "204", "206"],
+        "Gerzat - Boulevard de l'Humanité": ["204"]
+      }
+    },
+    "206": {
+      "id": "206",
+      "code": "206",
+      "nom": "Ligne 206",
+      "mode": "car",
+      "famille": "monts",
+      "depart": "Billom - Beffroi",
+      "terminus": "Gare routière de Clermont-Ferrand",
+      "couleur": "#0019a8",
+      "km": 34.2,
+      "temps": 48.0,
+      "arrets": 5,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 48,
+            "pointe": 32,
+            "soir": 96
+          },
+          "samedi": {
+            "creuse": 96,
+            "pointe": 48,
+            "soir": 96
+          },
+          "dimanche": {
+            "pointe": 48
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 48,
+            "pointe": 32,
+            "soir": 96
+          },
+          "samedi": {
+            "creuse": 96,
+            "pointe": 48,
+            "soir": 96
+          },
+          "dimanche": {
+            "pointe": 48
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Man Lion's Coach L",
+          "nombre": 3,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/206.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 150,
+      "correspondances": {
+        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "201", "202", "203", "204", "205"]
+      }
+    },
+    "251": {
+      "id": "251",
+      "code": "251",
+      "nom": "Ligne 251",
+      "mode": "car",
+      "famille": "monts",
+      "depart": "Issoire - Gare routière",
+      "terminus": "Riom - Gare",
+      "couleur": "#d799af",
+      "km": 44.0,
+      "temps": 56.0,
+      "arrets": 7,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 112,
+            "pointe": 56,
+            "soir": 112
+          },
+          "samedi": {
+            "creuse": 112,
+            "pointe": 56
+          },
+          "dimanche": {
+            "pointe": 112
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 112,
+            "pointe": 56,
+            "soir": 112
+          },
+          "samedi": {
+            "creuse": 112,
+            "pointe": 56
+          },
+          "dimanche": {
+            "pointe": 112
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Setra S 516 LE Hybrid",
+          "nombre": 2,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/251.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 101,
+      "correspondances": {
+        "Issoire - Gare routière": ["202"],
+        "Riom - Gare": ["201", "E1"]
+      }
+    },
+    "601": {
+      "id": "601",
+      "code": "601",
+      "nom": "Ligne 601",
+      "mode": "scolaire",
+      "famille": "edu",
+      "depart": "Lempdes - Hôtel de ville",
+      "terminus": "Lycée Anne Frank",
+      "couleur": "#B7791F",
+      "km": 13.4,
+      "temps": 25.0,
+      "arrets": null,
+      "services_par_jour": 2,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/601.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "correspondances": {
+        "Lycée Anne Frank": ["652"]
+      }
+    },
+    "602": {
+      "id": "602",
+      "code": "602",
+      "nom": "Ligne 602",
+      "mode": "scolaire",
+      "famille": "edu",
+      "depart": "Collège Victor Hugo",
+      "terminus": "LE ROTO - Av. du Parc",
+      "couleur": "#B7791F",
+      "km": 18.4,
+      "temps": 30.0,
+      "arrets": null,
+      "services_par_jour": 2,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/602.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "correspondances": {}
+    },
+    "603": {
+      "id": "603",
+      "code": "603",
+      "nom": "Ligne 603",
+      "mode": "scolaire",
+      "famille": "edu",
+      "depart": "Ceyrat - Centre-ville",
+      "terminus": "Lycée Jean Zay",
+      "couleur": "#B7791F",
+      "km": 23.9,
+      "temps": 45.0,
+      "arrets": null,
+      "services_par_jour": 3,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/603.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "correspondances": {
+        "Lycée Jean Zay": ["653"]
+      }
+    },
+    "604": {
+      "id": "604",
+      "code": "604",
+      "nom": "Ligne 604",
+      "mode": "scolaire",
+      "famille": "edu",
+      "depart": "Lycée Sidoine-Apollinaire",
+      "terminus": "Pont-du-Château - Église",
+      "couleur": "#B7791F",
+      "km": 29.8,
+      "temps": 47.0,
+      "arrets": null,
+      "services_par_jour": 3,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/604.png",
+      "nouvelle": true,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "correspondances": {
+        "Lycée Sidoine-Apollinaire": ["B", "9"],
+        "Pont-du-Château - Église": ["105", "107", "BEN4"]
+      }
+    },
+    "651": {
+      "id": "651",
+      "code": "651",
+      "nom": "Ligne 651",
+      "mode": "scolaire",
+      "famille": "edu",
+      "depart": "Lycée Karl Max",
+      "terminus": "NAUBOURG - Grand-Place",
+      "couleur": "#B7791F",
+      "km": 37.0,
+      "temps": 60.0,
+      "arrets": null,
+      "services_par_jour": 2,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/651.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "correspondances": {}
+    },
+    "652": {
+      "id": "652",
+      "code": "652",
+      "nom": "Ligne 652",
+      "mode": "scolaire",
+      "famille": "edu",
+      "depart": "SALANBOURG - Église Sainte Marie",
+      "terminus": "Lycée Anne Frank",
+      "couleur": "#B7791F",
+      "km": 23.9,
+      "temps": 40.0,
+      "arrets": null,
+      "services_par_jour": 3,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/652.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "correspondances": {
+        "Lycée Anne Frank": ["601"]
+      }
+    },
+    "653": {
+      "id": "653",
+      "code": "653",
+      "nom": "Ligne 653",
+      "mode": "scolaire",
+      "famille": "edu",
+      "depart": "CHATONMEOW - La Poste",
+      "terminus": "Lycée Jean Zay",
+      "couleur": "#B7791F",
+      "km": 60.0,
+      "temps": 75.0,
+      "arrets": null,
+      "services_par_jour": 2,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/653.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "correspondances": {
+        "Lycée Jean Zay": ["603"]
+      }
+    },
+    "901": {
+      "id": "901",
+      "code": "901",
+      "nom": "TAD 901",
+      "mode": "tad",
+      "famille": "demande",
+      "depart": "Bellevue",
+      "terminus": "Haute-Ville",
+      "couleur": "#C026D3",
+      "km": null,
+      "temps": null,
+      "arrets": null,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/901.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "description": "**Le Petit Grimpeur.**\nBellevue porte bien son nom, mais ça monte dur. Ce minibus passe là où les autres ne peuvent pas.",
+      "correspondances": {}
+    },
+    "902": {
+      "id": "902",
+      "code": "902",
+      "nom": "TAD 902",
+      "mode": "tad",
+      "famille": "demande",
+      "depart": "Parc de l'Étang",
+      "terminus": "Observatoire",
+      "couleur": "#C026D3",
+      "km": null,
+      "temps": null,
+      "arrets": null,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/902.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "description": "**La Scientifique.**\nDesserte de l'Observatoire météo. C'est ici qu'on sait s'il va neiger demain. Le chauffeur a toujours la météo en avant-première.",
+      "correspondances": {}
+    },
+    "903": {
+      "id": "903",
+      "code": "903",
+      "nom": "TAD 903",
+      "mode": "tad",
+      "famille": "demande",
+      "depart": "Hôtel de police",
+      "terminus": "Globe",
+      "couleur": "#C026D3",
+      "km": null,
+      "temps": null,
+      "arrets": null,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/903.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "description": "**La Discrète.**\nMicro-ligne de quartier. Elle sert surtout aux mamies pour aller au marché.",
+      "correspondances": {}
+    },
+    "941": {
+      "id": "941",
+      "code": "941",
+      "nom": "TAD 941",
+      "mode": "tad",
+      "famille": "demande",
+      "depart": "Gare de l'Ouest",
+      "terminus": "Grand-Place",
+      "couleur": "#C026D3",
+      "km": null,
+      "temps": null,
+      "arrets": null,
+      "frequences": null,
+      "vehicules": [],
+      "electrique": null,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/941.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "description": "**L'Ouest Sauvage.**\nZone périurbaine peu dense. Vous réservez, il vient. C'est le Uber du service public.",
+      "correspondances": {}
+    },
+    "E1": {
+      "id": "E1",
+      "code": "E1",
+      "nom": "Ligne E1",
+      "mode": "car",
+      "famille": "tre",
+      "depart": "Gare de Clermont-Ferrand",
+      "terminus": "Riom - Gare",
+      "couleur": "#3c78d8",
+      "km": 68.0,
+      "temps": 57.0,
+      "arrets": 4,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "creuse": 38,
+            "pointe": 28,
+            "soir": 57,
+            "nuit": 57
+          },
+          "samedi": {
+            "creuse": 57,
+            "pointe": 38,
+            "soir": 38,
+            "nuit": 57
+          },
+          "dimanche": {
+            "creuse": 57,
+            "pointe": 114,
+            "nuit": 114
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "creuse": 23,
+            "pointe": 19,
+            "soir": 38,
+            "nuit": 57
+          },
+          "samedi": {
+            "creuse": 57,
+            "pointe": 28,
+            "soir": 28,
+            "nuit": 57
+          },
+          "dimanche": {
+            "creuse": 57,
+            "pointe": 57,
+            "nuit": 114
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes New Intouro M Hybrid",
+          "nombre": 4,
+          "energie": "Hybride"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/E1.png",
+      "nouvelle": true,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 225,
+      "correspondances": {
+        "Riom - Gare": ["201", "251"],
+        "Gare de Clermont-Ferrand": ["B", "ET", "12", "BEN1", "BEN4"]
+      }
+    },
+    "BEN1": {
+      "id": "BEN1",
+      "code": "PL1",
+      "nom": "BEN1",
+      "mode": "nuit",
+      "famille": "nocturne",
+      "depart": "Gare de Clermont-Ferrand",
+      "terminus": "Gare de Clermont-Ferrand",
+      "couleur": "#203ec0",
+      "km": 42.3,
+      "temps": 104.0,
+      "arrets": 17,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "nuit": 42
+          },
+          "samedi": {
+            "nuit": 35
+          },
+          "dimanche": {
+            "nuit": 52
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "nuit": 42
+          },
+          "samedi": {
+            "nuit": 35
+          },
+          "dimanche": {
+            "nuit": 69
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes eCitaro G",
+          "nombre": 6,
+          "energie": "Electrique"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/BEN1.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": ["km 39.4 → 42.3", "temps 94 → 104 min", "arrêts 15 → 17"],
+      "ancien_terminus": null,
+      "frequentation_pointe": 0,
+      "correspondances": {
+        "Gare de Clermont-Ferrand": ["B", "ET", "12", "E1", "BEN4"]
+      }
+    },
+    "BEN2": {
+      "id": "BEN2",
+      "code": "PL2",
+      "nom": "BEN2",
+      "mode": "nuit",
+      "famille": "nocturne",
+      "depart": "Montferrand - Centre historique",
+      "terminus": "Parc Bargoin",
+      "couleur": "#20b3c0",
+      "km": 15.6,
+      "temps": 41.0,
+      "arrets": 8,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "nuit": 41
+          },
+          "samedi": {
+            "nuit": 27
+          },
+          "dimanche": {
+            "nuit": 41
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "nuit": 41
+          },
+          "samedi": {
+            "nuit": 41
+          },
+          "dimanche": {
+            "nuit": 82
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Mercedes eCitaro G",
+          "nombre": 3,
+          "energie": "Electrique"
+        }
+      ],
+      "electrique": "décembre 2026",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/BEN2.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 0,
+      "correspondances": {
+        "Montferrand - Centre historique": ["10", "13"],
+        "Parc Bargoin": ["62"]
+      }
+    },
+    "BEN3": {
+      "id": "BEN3",
+      "code": "PL3",
+      "nom": "BEN3",
+      "mode": "nuit",
+      "famille": "nocturne",
+      "depart": "Les Vergnes",
+      "terminus": "Clinique Saint-Paul",
+      "couleur": "#5120c0",
+      "km": 14.6,
+      "temps": 44.0,
+      "arrets": 10,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "nuit": 44
+          },
+          "samedi": {
+            "nuit": 44
+          },
+          "dimanche": {
+            "nuit": 44
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "nuit": 44
+          },
+          "samedi": {
+            "nuit": 44
+          },
+          "dimanche": {
+            "nuit": 44
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Alstom Citadis 402",
+          "nombre": 4,
+          "energie": "Electrique"
+        }
+      ],
+      "electrique": "dès l'ouverture",
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/BEN3.png",
+      "nouvelle": false,
+      "origines": [],
+      "changements": ["km 8.9 → 14.6", "temps 30 → 44 min", "arrêts 7 → 10"],
+      "ancien_terminus": ["Place de la Victoire", "Clinique Saint-Paul"],
+      "frequentation_pointe": 0,
+      "correspondances": {
+        "Les Vergnes": ["A", "13", "16"],
+        "Clinique Saint-Paul": ["A", "10", "11"]
+      }
+    },
+    "BEN4": {
+      "id": "BEN4",
+      "code": "PL4",
+      "nom": "BEN4",
+      "mode": "nuit",
+      "famille": "nocturne",
+      "depart": "Pont-du-Château - Église",
+      "terminus": "Gare de Clermont-Ferrand",
+      "couleur": "#3c78d8",
+      "km": 35.0,
+      "temps": 50.0,
+      "arrets": 5,
+      "aeroport": false,
+      "gratuite": false,
+      "hns": false,
+      "frequences": {
+        "scolaire": {
+          "semaine": {
+            "nuit": 33
+          },
+          "samedi": {
+            "nuit": 17
+          },
+          "dimanche": {
+            "nuit": 25
+          }
+        },
+        "vacances": {
+          "semaine": {
+            "nuit": 33
+          },
+          "samedi": {
+            "nuit": 11
+          },
+          "dimanche": {
+            "nuit": 50
+          }
+        }
+      },
+      "vehicules": [
+        {
+          "modele": "Setra S 518 LE",
+          "nombre": 6,
+          "energie": "Diesel"
+        }
+      ],
+      "electrique": false,
+      "troncons": [],
+      "statut": {
+        "etat": "service",
+        "date": "2026-12-05"
+      },
+      "logo": "/img/lignes/BEN4.png",
+      "nouvelle": true,
+      "origines": [],
+      "changements": [],
+      "ancien_terminus": null,
+      "frequentation_pointe": 0,
+      "correspondances": {
+        "Pont-du-Château - Église": ["105", "107", "604"],
+        "Gare de Clermont-Ferrand": ["B", "ET", "12", "E1", "BEN1"]
+      }
+    }
+  },
+  "nouvelles": ["ET", "3", "107", "9", "E1", "BEN4", "604"],
+  "disparues": [
+    {
+      "ligne": "9",
+      "remplacee_par": "10"
+    },
+    {
+      "ligne": "3",
+      "remplacee_par": "B"
+    },
+    {
+      "ligne": "2",
+      "remplacee_par": "B"
+    }
+  ],
+  "etapes": [
+    {
+      "date": "2026-12-05",
+      "titre": "Le nouveau réseau entre en service",
+      "texte": "Nouvelles lignes de bus, lignes 3 et 9 redessinées, BHNS renforcés, tram A sur son nouveau parcours et réseau de nuit à quatre lignes."
+    },
+    {
+      "date": "2027-01-20",
+      "titre": "Ouverture du tram-train ET",
+      "texte": "La gare de Clermont-Ferrand reliée à l'aéroport en 28 minutes, avec un tarif dédié."
+    },
+    {
+      "date": "2028-01-15",
+      "titre": "Ouverture du tram B",
+      "texte": "Du campus des Cézeaux au campus Centre, la ligne B reprend les anciennes lignes 2 et 3 dès que toutes ses rames sont livrées."
+    }
+  ],
+  "chiffres": {
+    "lignes": 56,
+    "tram": 3,
+    "electriques": 23
+  }
+}

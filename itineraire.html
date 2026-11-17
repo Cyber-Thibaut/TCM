@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Calculer un itinéraire — TCM</title>
+    <meta name="description" content="Le trajet le plus rapide entre deux arrêts du réseau TCM : lignes à prendre, correspondances et durée estimée." />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Calculer un itinéraire — TCM" />
+    <meta property="og:description" content="Le trajet le plus rapide entre deux arrêts du réseau TCM : lignes à prendre, correspondances et durée estimée." />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/pont-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/itineraire.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <section class="trame border-b border-trait bg-tcm-950 text-white">
+        <div class="conteneur py-12 sm:py-16">
+          <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/50" aria-label="Fil d'Ariane">
+            <a href="/index.html" class="hover:text-white">Accueil</a> <span class="mx-2">/</span> <span class="text-white">Itinéraire</span>
+          </nav>
+          <h1 class="mt-6 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl">Itinéraire</h1>
+          <form id="form-iti" class="mt-10 grid gap-px bg-white/15 lg:grid-cols-[1fr_auto_1fr_auto_auto]" autocomplete="off">
+            <div class="relative bg-tcm-950">
+              <label for="de" class="absolute left-4 top-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/50">Départ</label>
+              <input
+                id="de"
+                type="text"
+                placeholder="Arrêt, lieu, commune"
+                class="h-16 w-full bg-transparent px-4 pt-5 text-lg font-bold text-white outline-none placeholder:font-normal placeholder:text-white/35 focus:bg-white/5"
+              />
+              <div
+                id="de-liste"
+                hidden
+                class="carte absolute inset-x-0 top-full z-30 max-h-[60vh] overflow-y-auto border-encre p-1 text-encre shadow-haute"
+              ></div>
+            </div>
+            <button
+              type="button"
+              id="inverser"
+              class="grid h-12 place-items-center bg-tcm-950 text-white/70 transition hover:bg-white/10 hover:text-white lg:h-16 lg:w-14"
+              aria-label="Inverser départ et arrivée"
+            >
+              <i class="fa-solid fa-arrow-right-arrow-left rotate-90 lg:rotate-0"></i>
+            </button>
+            <div class="relative bg-tcm-950">
+              <label for="a" class="absolute left-4 top-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/50">Arrivée</label>
+              <input
+                id="a"
+                type="text"
+                placeholder="Arrêt, lieu, commune"
+                class="h-16 w-full bg-transparent px-4 pt-5 text-lg font-bold text-white outline-none placeholder:font-normal placeholder:text-white/35 focus:bg-white/5"
+              />
+              <div
+                id="a-liste"
+                hidden
+                class="carte absolute inset-x-0 top-full z-30 max-h-[60vh] overflow-y-auto border-encre p-1 text-encre shadow-haute"
+              ></div>
+            </div>
+            <div class="relative bg-tcm-950">
+              <label for="quand" class="absolute left-4 top-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/50">Départ le</label>
+              <input
+                id="quand"
+                type="datetime-local"
+                class="h-16 w-full bg-transparent px-4 pt-5 font-bold text-white outline-none [color-scheme:dark] focus:bg-white/5 lg:w-60"
+              />
+            </div>
+            <button
+              type="submit"
+              class="flex h-16 items-center justify-center gap-3 bg-tcm-600 px-8 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-tcm-500"
+            >
+              Calculer <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+          <div class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/60">
+            <button type="button" id="maintenant" class="lien text-white/80">Partir maintenant</button>
+            <label class="inline-flex cursor-pointer items-center gap-2"
+              ><input id="moins-corr" type="checkbox" class="h-4 w-4 accent-[#10B4FF]" /> Moins de correspondances</label
+            >
+            <span id="periode" class="chiffres"></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="conteneur py-12">
+        <div id="iti-vide" class="grid gap-10 lg:grid-cols-12">
+          <div class="lg:col-span-5">
+            <p class="index-section">Comment ça marche</p>
+            <h2 class="mt-3 text-2xl uppercase">Le trajet le plus rapide sur le réseau</h2>
+            <p class="mt-3 text-doux">
+              Choisissez un arrêt de départ et un arrêt d'arrivée. Le calcul tient compte des fréquences de chaque ligne au moment du départ (heure de pointe,
+              heures creuses, soirée, nuit, vacances scolaires), du temps d'attente moyen et du temps de correspondance.
+            </p>
+            <p class="mt-3 text-sm text-doux">
+              Les durées sont des estimations : le temps de parcours de chaque ligne est réparti entre ses arrêts, et l'attente correspond à la moitié de
+              l'intervalle entre deux passages.
+            </p>
+          </div>
+          <div class="lg:col-span-7">
+            <p class="surtitre">Trajets fréquents</p>
+            <ul id="exemples" class="mt-4 border-t border-trait"></ul>
+          </div>
+        </div>
+        <div id="iti-resultats" hidden>
+          <div id="iti-alerte"></div>
+          <div class="grid gap-8 lg:grid-cols-12">
+            <div class="lg:col-span-4">
+              <p class="surtitre" id="iti-titre">Trajets proposés</p>
+              <ol id="iti-options" class="mt-4 grid gap-2"></ol>
+            </div>
+            <div class="lg:col-span-8">
+              <div id="iti-detail" class="carte"></div>
+            </div>
+          </div>
+          <p class="mt-8 text-xs text-doux">
+            <i class="fa-solid fa-circle-info mr-1"></i>Durées estimées à partir des fréquences moyennes du réseau, sans horaires précis. Consultez l'<a
+              href="/trafic.html"
+              class="lien"
+              >info trafic</a
+            >
+            avant de partir.
+          </p>
+        </div>
+      </div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

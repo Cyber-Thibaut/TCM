@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Mentions, crédits et accessibilité — TCM</title>
+    <meta name="description" content="Informations légales, crédits photographiques et accessibilité du site TCM." />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Mentions, crédits et accessibilité — TCM" />
+    <meta property="og:description" content="Informations légales, crédits photographiques et accessibilité du site TCM." />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/accessibilite-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <section class="border-b border-trait bg-carte">
+        <div class="conteneur py-12 sm:py-16">
+          <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux" aria-label="Fil d'Ariane">
+            <a href="/index.html" class="hover:text-encre">Accueil</a> <span class="mx-2">/</span> <span class="text-encre">Mentions et crédits</span>
+          </nav>
+          <h1 class="mt-6 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl">Mentions et crédits</h1>
+          <p class="mt-6 max-w-2xl text-lg text-doux">Informations sur le site, ses sources de données et ses crédits.</p>
+        </div>
+      </section>
+      <div class="conteneur mt-14 grid gap-12 lg:grid-cols-12">
+        <div class="space-y-12 lg:col-span-8">
+          <section>
+            <p class="index-section">01</p>
+            <h2 class="mt-3 text-2xl uppercase">Éditeur</h2>
+            <p class="mt-3 text-doux">Transport Clermont Métropole (TCM), réseau de transport de la métropole clermontoise. Site hébergé par Vercel Inc.</p>
+          </section>
+          <section>
+            <p class="index-section">02</p>
+            <h2 class="mt-3 text-2xl uppercase">Données</h2>
+            <p class="mt-3 text-doux">
+              Les lignes, fréquences et correspondances sont celles du service prévu par le réseau. Les fréquences sont des moyennes par créneau ; elles peuvent
+              varier selon la circulation. La disponibilité des parkings relais est une estimation. Le calendrier des vacances scolaires est celui de la zone A.
+            </p>
+          </section>
+          <section>
+            <p class="index-section">03</p>
+            <h2 class="mt-3 text-2xl uppercase">Crédits photographiques</h2>
+            <p class="mt-3 text-doux">
+              Photographies de véhicules : © Daimler Truck AG, photos de presse, utilisées avec l'autorisation du concessionnaire EvoBus. Pictogrammes de
+              lignes : TCM.
+            </p>
+          </section>
+          <section id="accessibilite" class="scroll-mt-28">
+            <p class="index-section">04</p>
+            <h2 class="mt-3 text-2xl uppercase">Accessibilité</h2>
+            <p class="mt-3 text-doux">
+              Le site s'adapte à la taille de l'écran, au mode sombre du système et à la réduction des animations. Il se parcourt entièrement au clavier. Les
+              véhicules du réseau disposent d'un emplacement pour fauteuil roulant ; les fiches de ligne précisent le matériel utilisé.
+            </p>
+          </section>
+        </div>
+        <aside class="lg:col-span-4">
+          <div class="border border-trait bg-carte p-6">
+            <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux">Typographie</p>
+            <p class="mt-3 text-4xl font-black">Aa</p>
+            <p class="mt-2 text-sm text-doux">Citroën Type, la police des documents officiels du réseau.</p>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

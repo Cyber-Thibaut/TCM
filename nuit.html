@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Réseau de nuit — TCM</title>
+    <meta name="description" content="BEN1, BEN2, BEN3 et BEN4 : le réseau de nuit TCM." />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Réseau de nuit — TCM" />
+    <meta property="og:description" content="BEN1, BEN2, BEN3 et BEN4 : le réseau de nuit TCM." />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/nuit-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/nuit.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <section class="trame border-b border-trait bg-tcm-950 text-white">
+        <div class="grid lg:grid-cols-2">
+          <div class="conteneur py-14 sm:py-20 lg:mr-0 lg:max-w-none lg:pl-[max(2.5rem,calc((100vw-80rem)/2+2.5rem))]">
+            <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/50" aria-label="Fil d'Ariane">
+              <a href="/index.html" class="hover:text-white">Accueil</a> <span class="mx-2">/</span> <span class="text-white">Réseau de nuit</span>
+            </nav>
+            <h1 class="mt-6 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl">Réseau<br />de nuit</h1>
+            <p class="mt-6 max-w-xl text-lg text-white/70">
+              Quand les lignes de jour s'arrêtent, les lignes BEN prennent le relais. Quatre lignes, dont le tram A qui roule toute la nuit sous le nom de BEN3.
+            </p>
+          </div>
+          <div class="relative min-h-72">
+            <img
+              src="/img/photos/nuit-1920.webp"
+              srcset="/img/photos/nuit-960.webp 960w, /img/photos/nuit-1920.webp 1920w"
+              sizes="(min-width:1024px) 50vw, 100vw"
+              alt="Un bus TCM de nuit à l'arrêt"
+              class="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+      <div class="conteneur mt-14">
+        <div id="nuit" class="grid gap-px border border-trait bg-trait md:grid-cols-2"></div>
+      </div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

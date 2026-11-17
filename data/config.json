@@ -1,0 +1,14 @@
+{
+  "_aide": "Réglages du site. Tout est facultatif : laissez une valeur vide pour la désactiver.",
+  "trafic_google_sheet_csv": "",
+  "_trafic_google_sheet_csv": "Lien CSV d'une feuille Google publiée (Fichier > Partager > Publier sur le Web > CSV). Colonnes attendues sur la première ligne : lignes, type, debut, fin, titre, detail. Si le lien est vide ou injoignable, le site lit data/trafic.json.",
+  "actualites_wordpress": "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts",
+  "actualites_categorie": 8,
+  "contact_email": "",
+  "telephone": "",
+  "reseaux_sociaux": {
+    "facebook": "",
+    "x": "",
+    "instagram": ""
+  }
+}

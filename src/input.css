@@ -1,4 +1,1 @@
-@import "tailwindcss";
-@plugin "daisyui" {
-  themes: light --default, night --prefersdark;
-}
+/* Ancienne feuille source Tailwind : le site utilise désormais assets/css/site.css (npm run css). */

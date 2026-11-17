@@ -1,0 +1,16 @@
+{
+  "name": "tcm-mobilite",
+  "private": true,
+  "description": "Site du réseau Transport Clermont Métropole (statique, hébergé sur Vercel)",
+  "scripts": {
+    "css": "tailwindcss -i assets/css/site.css -o dist/output.css --minify",
+    "css:watch": "tailwindcss -i assets/css/site.css -o dist/output.css --watch",
+    "reseau": "python outils/generer_reseau.py",
+    "plans": "python outils/maj_plans.py"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.1.11",
+    "daisyui": "5.0.43",
+    "tailwindcss": "4.1.11"
+  }
+}

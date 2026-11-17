@@ -1,0 +1,93 @@
+{
+  "redirects": [
+    {
+      "source": "/src/reseau.html",
+      "destination": "/reseau.html",
+      "permanent": true
+    },
+    {
+      "source": "/src/ligne.html",
+      "destination": "/ligne.html",
+      "permanent": true
+    },
+    {
+      "source": "/src/details.html",
+      "destination": "/ligne.html",
+      "permanent": true
+    },
+    {
+      "source": "/src/trafic.html",
+      "destination": "/trafic.html",
+      "permanent": true
+    },
+    {
+      "source": "/src/tarifs.html",
+      "destination": "/tarifs.html",
+      "permanent": true
+    },
+    {
+      "source": "/src/agences.html",
+      "destination": "/agences.html",
+      "permanent": true
+    },
+    {
+      "source": "/src/parkings.html",
+      "destination": "/parkings.html",
+      "permanent": true
+    },
+    {
+      "source": "/src/actualites.html",
+      "destination": "/actualites.html",
+      "permanent": true
+    },
+    {
+      "source": "/src/nocturne.html",
+      "destination": "/nuit.html",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    },
+    {
+      "source": "/data/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/api/plans-n6",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=600, stale-while-revalidate=3600"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/plans-n6",
+      "destination": "https://transport-manager.net/api/api_ao_plans.php?action=presets"
+    }
+  ]
+}

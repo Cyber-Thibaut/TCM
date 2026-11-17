@@ -1,0 +1,175 @@
+/* Feuille de style du site TCM — source Tailwind CSS v4.
+   Recompiler après modification :  npm run css   (ou  npx @tailwindcss/cli -i assets/css/site.css -o dist/output.css --minify) */
+@import "tailwindcss";
+@source "../../*.html";
+@source "../../src/**/*.html";
+@source "../js/**/*.js";
+@source "../../src/**/*.js";
+
+/* daisyUI : conservé pour les pages d'archives (classes btn, card, modal…) ; thèmes aux couleurs TCM */
+@plugin "daisyui" {
+  themes: light --default, night --prefersdark;
+}
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #204BFE;
+  --color-primary-content: #ffffff;
+  --color-secondary: #0A1A4F;
+  --color-secondary-content: #ffffff;
+  --color-accent: #10B4FF;
+  --color-accent-content: #04122e;
+  --color-base-100: #ffffff;
+  --color-base-200: #F4F6FB;
+  --color-base-300: #E3E8F2;
+  --color-base-content: #0B1530;
+  --radius-box: 0.25rem;
+  --radius-field: 0.125rem;
+}
+@plugin "daisyui/theme" {
+  name: "night";
+  prefersdark: true;
+  --color-primary: #5B7BFF;
+  --color-primary-content: #ffffff;
+  --color-secondary: #A9B8FF;
+  --color-secondary-content: #0A1A4F;
+  --color-accent: #39C3FF;
+  --color-accent-content: #04122e;
+  --color-base-100: #0F1730;
+  --color-base-200: #0A1124;
+  --color-base-300: #1A2445;
+  --color-base-content: #E7ECF8;
+  --radius-box: 0.25rem;
+  --radius-field: 0.125rem;
+}
+
+@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
+
+@font-face { font-family: "Citroen Type"; src: url("/assets/fonts/CitroenType-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Citroen Type"; src: url("/assets/fonts/CitroenType-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Citroen Type"; src: url("/assets/fonts/CitroenType-Black.woff2") format("woff2"); font-weight: 900; font-display: swap; }
+
+@theme {
+  --font-sans: "Citroen Type", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --color-tcm-50: #EEF2FF;
+  --color-tcm-100: #DCE4FF;
+  --color-tcm-200: #B9C8FF;
+  --color-tcm-300: #8CA5FF;
+  --color-tcm-400: #5B7BFF;
+  --color-tcm-500: #3A5CFF;
+  --color-tcm-600: #204BFE;
+  --color-tcm-700: #1738D1;
+  --color-tcm-800: #132DA3;
+  --color-tcm-900: #0A1A4F;
+  --color-tcm-950: #070B1A;
+  --color-ciel: #10B4FF;
+  /* surfaces sémantiques : basculent avec le thème */
+  --color-fond: var(--fond);
+  --color-carte: var(--carte);
+  --color-carte-2: var(--carte-2);
+  --color-trait: var(--trait);
+  --color-encre: var(--encre);
+  --color-doux: var(--doux);
+  --shadow-carte: none;
+  --shadow-haute: 0 18px 40px -20px rgb(7 11 26 / 0.35);
+}
+
+:root {
+  --fond: #F3F4F6;
+  --carte: #FFFFFF;
+  --carte-2: #F0F1F4;
+  --trait: #D9DCE3;
+  --encre: #070B1A;
+  --doux: #5B6275;
+  color-scheme: light;
+}
+[data-theme=night] {
+  --fond: #07090F;
+  --carte: #0E1119;
+  --carte-2: #161A25;
+  --trait: #262B38;
+  --encre: #F2F4F8;
+  --doux: #959CAE;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-fond text-encre font-sans antialiased; text-rendering: optimizeLegibility; }
+  h1, h2, h3, h4 { @apply font-black text-balance; letter-spacing: -0.01em; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-tcm-600); color: #fff; }
+  :focus-visible { outline: 3px solid var(--color-ciel); outline-offset: 2px; border-radius: 6px; }
+  [hidden] { display: none !important; }
+}
+
+@utility conteneur { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10; }
+@utility carte { @apply border border-trait bg-carte; }
+@utility carte-lien { @apply carte relative transition-colors duration-150 hover:border-encre focus-visible:border-encre; }
+@utility surtitre { @apply font-bold uppercase text-[11px] tracking-[0.22em] text-doux; }
+@utility titre-section { @apply text-3xl sm:text-[2.6rem] font-black uppercase leading-[0.95] tracking-[-0.02em]; }
+@utility bouton { @apply inline-flex items-center justify-center gap-3 px-5 h-12 text-[13px] font-bold uppercase tracking-[0.08em] transition-colors; }
+@utility bouton-plein { @apply bouton bg-tcm-600 text-white hover:bg-encre dark:hover:bg-white dark:hover:text-tcm-950; }
+@utility bouton-clair { @apply bouton bg-white text-tcm-950 hover:bg-tcm-600 hover:text-white; }
+@utility bouton-ligne { @apply bouton border border-encre text-encre hover:bg-encre hover:text-fond; }
+@utility pastille { @apply inline-flex items-center gap-1.5 px-2 py-1 text-[11px] font-bold uppercase tracking-[0.06em]; }
+@utility champ { @apply w-full border border-trait bg-carte px-4 h-12 text-base text-encre placeholder:text-doux focus:border-tcm-600 focus:outline-none; }
+@utility logo-ligne { @apply inline-block shrink-0 select-none object-contain; }
+@utility lien { @apply font-bold text-tcm-600 underline decoration-1 underline-offset-4 hover:decoration-2 dark:text-tcm-300; }
+@utility onglet { @apply px-3 py-2 text-[12px] font-bold uppercase tracking-[0.08em] text-doux transition-colors hover:text-encre border-b-2 border-transparent; }
+.onglet[aria-selected=true] { @apply border-tcm-600 text-encre; }
+@utility squelette { @apply animate-pulse bg-carte-2; }
+@utility filet { @apply border-t border-trait; }
+@utility index-section { @apply font-bold text-[11px] tracking-[0.22em] text-tcm-600 dark:text-tcm-300 tabular-nums; }
+
+/* statuts info trafic */
+.statut-ok { --s: #12A150; }
+.statut-info { --s: #204BFE; }
+.statut-travaux { --s: #E28A00; }
+.statut-perturbation { --s: #E35B00; }
+.statut-interruption { --s: #D7263D; }
+.statut-evenement { --s: #8B3FD9; }
+.statut-futur { --s: #7A869F; }
+.point-statut { width: .5rem; height: .5rem; background: var(--s); display: inline-block; }
+.bande-statut { box-shadow: inset 4px 0 0 var(--s); }
+.texte-statut { color: var(--s); }
+.fond-statut { background: color-mix(in oklab, var(--s) 11%, transparent); color: var(--s); }
+
+/* défilement horizontal propre */
+.rail { scrollbar-width: none; }
+.rail::-webkit-scrollbar { display: none; }
+
+/* afficheur des parkings relais */
+.afficheur { font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+
+/* apparition douce au défilement */
+.apparait { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.apparait.vu { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .apparait { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* fiche horaire imprimable */
+@media print {
+  #entete-site, #pied-site, .pas-imprime { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .carte { box-shadow: none !important; border-color: #ccc !important; break-inside: avoid; }
+  a { color: inherit !important; text-decoration: none !important; }
+}
+
+/* trame technique discrète des bandeaux sombres */
+.trame { background-image: linear-gradient(rgb(255 255 255 / .05) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / .05) 1px, transparent 1px); background-size: 48px 48px; }
+.chiffres { font-variant-numeric: tabular-nums; }
+
+/* contenu des articles d'actualité (HTML venant du site d'actualités) */
+.article h2, .article h3 { font-weight: 900; text-transform: uppercase; line-height: 1.05; margin-top: 2.5rem; }
+.article h2 { font-size: 1.75rem; }
+.article h3 { font-size: 1.3rem; }
+.article a { color: var(--color-tcm-600); text-decoration: underline; text-underline-offset: 4px; }
+.article img { max-width: 100%; height: auto; margin: 2rem 0; }
+.article ul { list-style: square; padding-left: 1.25rem; }
+.article ol { list-style: decimal; padding-left: 1.25rem; }
+.article li + li { margin-top: .35rem; }
+.article blockquote { border-left: 3px solid var(--color-tcm-600); padding-left: 1.25rem; color: var(--doux); }
+.article strong { font-weight: 700; color: var(--encre); }

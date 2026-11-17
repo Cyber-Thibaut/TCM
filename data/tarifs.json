@@ -1,0 +1,88 @@
+{
+  "_aide": "Grille tarifaire en vigueur (inchangée au 5 décembre 2026). Les prix sont en euros.",
+  "maj": "2026-12-05",
+  "groupes": [
+    {
+      "titre": "Voyager occasionnellement",
+      "icone": "fa-ticket",
+      "titres": [
+        {
+          "nom": "Ticket unitaire",
+          "prix": 1.8,
+          "unite": "",
+          "detail": "Un voyage sur le réseau.",
+          "inclus": ["Bus, tram et BHNS", "Un voyage"]
+        },
+        {
+          "nom": "Ticket liberté",
+          "prix": 5.3,
+          "unite": "",
+          "detail": "Voyages illimités pendant 24 heures après la première validation.",
+          "inclus": ["Illimité pendant 24 h", "Tout le réseau urbain"]
+        },
+        {
+          "nom": "Ticket Aéroport",
+          "prix": 4.5,
+          "unite": "",
+          "detail": "Le titre du tram-train ET entre la gare et l'aéroport. Les abonnements ne sont pas acceptés sur cette ligne.",
+          "inclus": ["Tram-train ET", "Gare ↔ aéroport en 28 min"]
+        }
+      ]
+    },
+    {
+      "titre": "S'abonner",
+      "icone": "fa-id-card",
+      "titres": [
+        {
+          "nom": "Pass TCM",
+          "prix": 62.0,
+          "unite": "/mois",
+          "detail": "L'abonnement mensuel tout public, voyages illimités.",
+          "inclus": ["Illimité 7 j/7", "Pris en charge à 50 % par l'employeur"]
+        },
+        {
+          "nom": "Pass Étudiant",
+          "prix": 37.0,
+          "unite": "/mois",
+          "detail": "Pour les élèves et étudiants, sur l'année scolaire (hors juillet et août).",
+          "inclus": ["Illimité", "Septembre à juin"]
+        },
+        {
+          "nom": "Pass Retraite",
+          "prix": 28.0,
+          "unite": "/mois",
+          "detail": "Pour les plus de 65 ans.",
+          "inclus": ["Illimité", "Dès 65 ans"]
+        }
+      ]
+    },
+    {
+      "titre": "Vélo en libre service",
+      "icone": "fa-bicycle",
+      "titres": [
+        {
+          "nom": "Ticket vélo",
+          "prix": 1.5,
+          "unite": "",
+          "detail": "La première demi-heure.",
+          "inclus": ["30 minutes"]
+        },
+        {
+          "nom": "Demi-heure supplémentaire",
+          "prix": 1.0,
+          "unite": "",
+          "detail": "Chaque demi-heure au-delà de la première.",
+          "inclus": ["Par tranche de 30 min"]
+        },
+        {
+          "nom": "Abonnement vélo",
+          "prix": 25.0,
+          "unite": "/mois",
+          "detail": "Sur l'année scolaire.",
+          "inclus": ["Trajets illimités"]
+        }
+      ]
+    }
+  ],
+  "notes": ["Tarification solidaire : selon votre quotient familial, réduction de 50 % jusqu'à la gratuité. Renseignez-vous en agence."]
+}

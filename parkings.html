@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Parkings relais — TCM</title>
+    <meta name="description" content="Places disponibles dans les parkings relais TCM et lignes en correspondance." />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Parkings relais — TCM" />
+    <meta property="og:description" content="Places disponibles dans les parkings relais TCM et lignes en correspondance." />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/depot-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/parkings.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <section class="border-b border-trait bg-carte">
+        <div class="conteneur py-12 sm:py-16">
+          <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux" aria-label="Fil d'Ariane">
+            <a href="/index.html" class="hover:text-encre">Accueil</a> <span class="mx-2">/</span> <span class="text-encre">Parkings relais</span>
+          </nav>
+          <h1 class="mt-6 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl">Parkings relais</h1>
+          <p class="mt-6 max-w-2xl text-lg text-doux">
+            Laissez votre voiture à l'entrée de la ville et terminez le trajet en tram ou en bus. Les parkings relais sont surveillés et équipés de bornes de
+            recharge.
+          </p>
+          <p class="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-doux">
+            <span class="statut-ok point-statut animate-pulse"></span>Disponibilités estimées · actualisées toutes les minutes ·
+            <span id="pr-heure" class="chiffres"></span>
+          </p>
+        </div>
+      </section>
+      <div class="conteneur mt-14">
+        <div id="parkings" class="grid gap-px border border-trait bg-trait lg:grid-cols-3"></div>
+        <div class="mt-16 grid gap-10 border-t border-encre pt-10 md:grid-cols-3">
+          <div>
+            <p class="index-section">01</p>
+            <h2 class="mt-3 text-xl uppercase">Garez-vous</h2>
+            <p class="mt-2 text-doux">Stationnez à l'entrée de la ville, sans chercher de place en centre-ville.</p>
+          </div>
+          <div>
+            <p class="index-section">02</p>
+            <h2 class="mt-3 text-xl uppercase">Rechargez</h2>
+            <p class="mt-2 text-doux">Chaque parking dispose de bornes de recharge pour véhicules électriques.</p>
+          </div>
+          <div>
+            <p class="index-section">03</p>
+            <h2 class="mt-3 text-xl uppercase">Montez à bord</h2>
+            <p class="mt-2 text-doux">Les lignes en correspondance partent à quelques mètres.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

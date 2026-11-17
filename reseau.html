@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lignes et plan du réseau — TCM</title>
+    <meta
+      name="description"
+      content="Toutes les lignes du réseau TCM : tram, tram-train, BHNS, bus urbains, lignes périurbaines et interurbaines, nuit, scolaires et transport à la demande."
+    />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Lignes et plan du réseau — TCM" />
+    <meta
+      property="og:description"
+      content="Toutes les lignes du réseau TCM : tram, tram-train, BHNS, bus urbains, lignes périurbaines et interurbaines, nuit, scolaires et transport à la demande."
+    />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/urbain-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/reseau.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <section class="border-b border-trait bg-carte">
+        <div class="conteneur py-12 sm:py-16">
+          <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux" aria-label="Fil d'Ariane">
+            <a href="/index.html" class="hover:text-encre">Accueil</a> <span class="mx-2">/</span> <span class="text-encre">Lignes</span>
+          </nav>
+          <h1 class="mt-6 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl">Lignes</h1>
+          <p class="mt-6 max-w-2xl text-lg text-doux">
+            <span id="nb">Toutes les</span> lignes du réseau TCM, du tramway aux services scolaires. Choisissez une ligne pour voir son parcours, ses fréquences
+            et ses correspondances.
+          </p>
+          <div class="mt-8 flex max-w-xl" role="search">
+            <label for="filtre" class="sr-only">Filtrer les lignes</label>
+            <input id="filtre" type="search" autocomplete="off" placeholder="Numéro, terminus, arrêt" class="champ h-14 border-encre text-lg" />
+            <span class="grid h-14 w-14 shrink-0 place-items-center bg-encre text-fond" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="sticky top-16 z-30 border-b border-trait bg-carte">
+        <div class="conteneur">
+          <div id="familles-nav" class="rail -mx-4 flex gap-1 overflow-x-auto px-4" role="tablist" aria-label="Familles de lignes"></div>
+        </div>
+      </div>
+
+      <div class="conteneur mt-10">
+        <p id="aucun" hidden class="carte p-10 text-center text-doux">Aucune ligne ne correspond à votre recherche.</p>
+        <div id="familles" class="space-y-16"></div>
+      </div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

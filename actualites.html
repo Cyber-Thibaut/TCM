@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Actualités — TCM</title>
+    <meta name="description" content="Les nouvelles du réseau TCM." />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Actualités — TCM" />
+    <meta property="og:description" content="Les nouvelles du réseau TCM." />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/depot-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/actualites.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <div id="actu-liste-vue">
+        <section class="border-b border-trait bg-carte">
+          <div class="conteneur py-12 sm:py-16">
+            <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux" aria-label="Fil d'Ariane">
+              <a href="/index.html" class="hover:text-encre">Accueil</a> <span class="mx-2">/</span> <span class="text-encre">Actualités</span>
+            </nav>
+            <h1 class="mt-6 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl">Actualités</h1>
+            <p class="mt-6 max-w-2xl text-lg text-doux">Nouveaux véhicules, travaux, événements : la vie du réseau TCM.</p>
+          </div>
+        </section>
+        <div class="conteneur mt-14">
+          <div id="actu-liste" class="grid gap-x-10 gap-y-14 md:grid-cols-2 lg:grid-cols-3"></div>
+          <p id="actu-erreur" hidden class="border border-trait bg-carte p-8 text-doux">Les actualités ne sont pas disponibles pour le moment.</p>
+        </div>
+      </div>
+      <article id="actu-article" hidden class="conteneur max-w-3xl py-12">
+        <a href="/actualites.html" class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux hover:text-encre"
+          ><i class="fa-solid fa-arrow-left mr-2"></i>Toutes les actualités</a
+        >
+        <p id="art-date" class="mt-10 index-section"></p>
+        <h1 id="art-titre" class="mt-4 text-4xl uppercase leading-[0.95] tracking-[-0.02em] sm:text-5xl"></h1>
+        <img id="art-image" alt="" class="mt-10 hidden aspect-[16/9] w-full object-cover" />
+        <div id="art-corps" class="article mt-10 space-y-5 text-lg leading-relaxed"></div>
+      </article>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

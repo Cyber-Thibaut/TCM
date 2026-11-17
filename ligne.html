@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Fiche ligne — TCM</title>
+    <meta name="description" content="Parcours, fréquences, correspondances et info trafic de la ligne." />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Fiche ligne — TCM" />
+    <meta property="og:description" content="Parcours, fréquences, correspondances et info trafic de la ligne." />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/urbain-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/ligne.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <div id="ligne-vide" hidden class="conteneur py-24 text-center">
+        <h1 class="text-3xl">Cette ligne n'existe pas</h1>
+        <p class="mt-3 text-doux">Elle a peut-être changé de numéro avec le nouveau réseau.</p>
+        <a href="/reseau.html" class="bouton-plein mt-8">Voir toutes les lignes</a>
+      </div>
+
+      <div id="ligne" hidden>
+        <section id="ligne-tete" class="border-b border-trait bg-carte">
+          <div class="conteneur py-10 sm:py-14">
+            <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux" aria-label="Fil d'Ariane">
+              <a href="/index.html" class="hover:text-encre">Accueil</a> <span class="mx-2">/</span> <a href="/reseau.html" class="hover:text-encre">Lignes</a>
+              <span class="mx-2">/</span> <span id="fil-ligne" class="text-encre"></span>
+            </nav>
+            <div class="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end">
+              <div id="ligne-picto" class="shrink-0"></div>
+              <div class="min-w-0">
+                <p id="ligne-famille" class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux"></p>
+                <h1 id="ligne-nom" class="mt-2 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl"></h1>
+              </div>
+              <div class="pas-imprime flex gap-2 sm:ml-auto">
+                <button type="button" onclick="window.print()" class="bouton-ligne"><i class="fa-solid fa-print"></i>Fiche horaire</button>
+              </div>
+            </div>
+            <p id="ligne-terminus" class="mt-8 border-t border-encre pt-5 text-xl font-bold sm:text-2xl"></p>
+            <div id="ligne-badges" class="mt-4 flex flex-wrap gap-2"></div>
+          </div>
+          <div id="ligne-teinte" class="h-2"></div>
+        </section>
+
+        <div class="conteneur mt-8 space-y-4" id="ligne-alertes"></div>
+
+        <div class="conteneur mt-8 grid gap-6 lg:grid-cols-[1fr_22rem]">
+          <div class="min-w-0 space-y-6">
+            <section id="bloc-maintenant" class="carte p-6 sm:p-8" aria-labelledby="t-maintenant">
+              <div class="flex flex-col gap-6 sm:flex-row sm:items-center">
+                <div class="flex-1">
+                  <p class="surtitre" id="t-maintenant">En ce moment</p>
+                  <p id="maintenant-texte" class="mt-2 text-2xl font-black leading-tight"></p>
+                  <p id="maintenant-detail" class="mt-1 text-sm text-doux"></p>
+                </div>
+                <div id="maintenant-chiffre" class="flex items-baseline gap-2 bg-carte-2 px-6 py-4"></div>
+              </div>
+            </section>
+
+            <section id="bloc-frequences" class="carte p-6 sm:p-8" aria-labelledby="t-freq">
+              <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                <div>
+                  <p class="surtitre">Fréquences</p>
+                  <h2 id="t-freq" class="mt-1 text-2xl">Un passage toutes les…</h2>
+                </div>
+                <div class="pas-imprime flex gap-1 bg-carte-2 p-1" role="tablist" aria-label="Période">
+                  <button class="onglet" role="tab" data-per="scolaire" aria-selected="true">Période scolaire</button>
+                  <button class="onglet" role="tab" data-per="vacances" aria-selected="false">Vacances</button>
+                </div>
+              </div>
+              <div class="mt-6 overflow-x-auto">
+                <table class="w-full min-w-[34rem] border-separate border-spacing-0 text-left">
+                  <thead>
+                    <tr class="text-xs uppercase tracking-wider text-doux">
+                      <th class="pb-3 font-bold" scope="col"></th>
+                      <th class="pb-3 text-center font-bold" scope="col">Heures creuses</th>
+                      <th class="pb-3 text-center font-bold" scope="col">Heures de pointe</th>
+                      <th class="pb-3 text-center font-bold" scope="col">Soirée</th>
+                      <th class="pb-3 text-center font-bold" scope="col">Nuit</th>
+                    </tr>
+                  </thead>
+                  <tbody id="freq-corps"></tbody>
+                </table>
+              </div>
+              <p class="mt-4 text-xs text-doux">
+                Heures de pointe : 7h–9h30 et 16h30–19h en semaine. Soirée : après 20h30. Nuit : de minuit à 5h. Les dimanches et jours fériés suivent la
+                colonne du dimanche. Fréquences moyennes du service prévu.
+              </p>
+            </section>
+
+            <section id="bloc-scolaire" hidden class="carte p-6 sm:p-8">
+              <p class="surtitre">Service scolaire</p>
+              <h2 class="mt-1 text-2xl">Les jours d'école</h2>
+              <p id="scolaire-texte" class="mt-3 text-doux"></p>
+            </section>
+
+            <section id="bloc-parcours" class="carte p-6 sm:p-8" aria-labelledby="t-parcours">
+              <p class="surtitre">Parcours</p>
+              <h2 id="t-parcours" class="mt-1 text-2xl">Arrêts principaux et correspondances</h2>
+              <ol id="parcours" class="relative mt-8"></ol>
+              <p id="parcours-note" class="mt-6 text-xs text-doux"></p>
+            </section>
+
+            <section id="bloc-description" hidden class="carte p-6 sm:p-8">
+              <p class="surtitre">La ligne</p>
+              <div id="description" class="mt-3 space-y-3 text-doux"></div>
+            </section>
+          </div>
+
+          <aside class="min-w-0 space-y-6">
+            <section class="carte p-6" aria-labelledby="t-chiffres">
+              <h2 id="t-chiffres" class="text-lg">La ligne en chiffres</h2>
+              <dl id="chiffres" class="mt-4 grid grid-cols-2 gap-3"></dl>
+            </section>
+            <section id="bloc-materiel" class="carte p-6" aria-labelledby="t-mat">
+              <h2 id="t-mat" class="text-lg">Véhicules</h2>
+              <ul id="materiel" class="mt-4 space-y-3"></ul>
+              <p class="mt-4 flex items-center gap-2 text-sm text-doux">
+                <i class="fa-solid fa-wheelchair text-tcm-600 dark:text-tcm-300"></i>Véhicules accessibles aux personnes en fauteuil roulant.
+              </p>
+            </section>
+            <section id="bloc-change" hidden class="carte border-tcm-200 bg-tcm-50/60 p-6 dark:border-tcm-800 dark:bg-tcm-900/30" aria-labelledby="t-change">
+              <h2 id="t-change" class="flex items-center gap-2 text-lg">
+                <i class="fa-solid fa-wand-magic-sparkles text-tcm-600 dark:text-tcm-300"></i>Ce qui change
+              </h2>
+              <ul id="change" class="mt-3 space-y-2 text-sm"></ul>
+              <a href="/nouveau-reseau.html" class="lien mt-4 inline-block text-sm">Le nouveau réseau <i class="fa-solid fa-arrow-right"></i></a>
+            </section>
+            <section id="bloc-tarif" class="carte p-6">
+              <h2 class="text-lg">Titre de transport</h2>
+              <p id="tarif" class="mt-2 text-sm text-doux"></p>
+              <a href="/tarifs.html" class="lien mt-3 inline-block text-sm">Tous les tarifs <i class="fa-solid fa-arrow-right"></i></a>
+            </section>
+          </aside>
+        </div>
+
+        <section class="conteneur mt-16 pas-imprime" aria-labelledby="t-autres">
+          <h2 id="t-autres" class="text-2xl">Autres lignes <span id="autres-famille" class="text-doux"></span></h2>
+          <div id="autres" class="rail -mx-4 mt-6 flex gap-3 overflow-x-auto px-4 pb-2"></div>
+        </section>
+      </div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

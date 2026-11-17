@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Agences — TCM</title>
+    <meta name="description" content="Horaires et correspondances des huit agences TCM." />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Agences — TCM" />
+    <meta property="og:description" content="Horaires et correspondances des huit agences TCM." />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/agence-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/agences.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <section class="border-b border-trait bg-carte">
+        <div class="conteneur py-12 sm:py-16">
+          <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux" aria-label="Fil d'Ariane">
+            <a href="/index.html" class="hover:text-encre">Accueil</a> <span class="mx-2">/</span> <span class="text-encre">Agences</span>
+          </nav>
+          <h1 class="mt-6 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl">Agences</h1>
+          <p class="mt-6 max-w-2xl text-lg text-doux">
+            Abonnements, titres de transport, renseignements : nos conseillers vous accueillent dans huit agences de la métropole.
+          </p>
+          <p id="ag-resume" class="mt-6 text-[11px] font-bold uppercase tracking-[0.16em] text-doux"></p>
+        </div>
+      </section>
+      <div class="conteneur mt-14">
+        <div id="agences" class="grid gap-px border border-trait bg-trait md:grid-cols-2 xl:grid-cols-4"></div>
+        <p class="mt-6 text-sm text-doux">
+          Les agences sont fermées les jours fériés. Le 1er de chaque mois, les petites agences ouvrent de 7h à 20h pour le renouvellement des abonnements.
+        </p>
+      </div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

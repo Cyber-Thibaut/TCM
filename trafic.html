@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Info trafic — TCM</title>
+    <meta name="description" content="Perturbations, travaux et informations en cours sur le réseau TCM, ligne par ligne." />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Info trafic — TCM" />
+    <meta property="og:description" content="Perturbations, travaux et informations en cours sur le réseau TCM, ligne par ligne." />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/pont-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/trafic.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <section class="border-b border-trait bg-carte">
+        <div class="conteneur py-12 sm:py-16">
+          <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux" aria-label="Fil d'Ariane">
+            <a href="/index.html" class="hover:text-encre">Accueil</a> <span class="mx-2">/</span> <span class="text-encre">Info trafic</span>
+          </nav>
+          <h1 class="mt-6 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl">Info trafic</h1>
+          <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <p id="tr-resume" class="max-w-2xl text-lg text-doux">Chargement…</p>
+            <p class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-doux">
+              <span class="statut-ok point-statut animate-pulse"></span>Mis à jour à <span id="tr-heure" class="chiffres">--:--</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="conteneur mt-10 grid gap-8 lg:grid-cols-[1fr_24rem]">
+        <section class="min-w-0" aria-labelledby="t-messages">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <h2 id="t-messages" class="text-2xl">Messages en cours</h2>
+            <div id="tr-types" class="flex flex-wrap gap-1 border-b border-trait" role="tablist" aria-label="Type de message"></div>
+          </div>
+          <div id="tr-messages" class="mt-6 space-y-4"></div>
+        </section>
+        <aside aria-labelledby="t-etat">
+          <div class="carte sticky top-28 p-6">
+            <h2 id="t-etat" class="text-lg">État des lignes</h2>
+            <p class="mt-1 text-sm text-doux">Touchez une ligne pour voir ses messages.</p>
+            <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-doux">
+              <span class="flex items-center gap-1.5"><span class="statut-ok point-statut !h-2 !w-2"></span>Normal</span>
+              <span class="flex items-center gap-1.5"><span class="statut-travaux point-statut !h-2 !w-2"></span>Travaux</span>
+              <span class="flex items-center gap-1.5"><span class="statut-perturbation point-statut !h-2 !w-2"></span>Perturbé</span>
+              <span class="flex items-center gap-1.5"><span class="statut-interruption point-statut !h-2 !w-2"></span>Interrompu</span>
+              <span class="flex items-center gap-1.5"><span class="statut-futur point-statut !h-2 !w-2"></span>Bientôt</span>
+            </div>
+            <div id="tr-lignes" class="mt-5 space-y-5"></div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "_aide": "Info trafic. Une entrée par message. lignes : numéros des lignes concernées (« TCM » = tout le réseau). type : interruption, perturbation, travaux, evenement ou information. debut et fin : date (2026-12-05) ou date et heure (2026-12-05T05:00). Le message s'affiche entre debut et fin, puis disparaît tout seul.",
+  "messages": [
+    {
+      "lignes": ["TCM"],
+      "type": "information",
+      "debut": "2026-11-17",
+      "fin": "2026-12-20",
+      "titre": "Le nouveau réseau TCM arrive le 5 décembre",
+      "detail": "Le samedi 5 décembre 2026, le réseau change : nouvelles lignes 3, 9, 107 et E1, tram A sur son nouveau parcours, lignes BHNS renforcées et réseau de nuit à quatre lignes. Consultez votre ligne avant de partir."
+    },
+    {
+      "lignes": ["2", "3", "9"],
+      "type": "information",
+      "debut": "2026-11-17",
+      "fin": "2027-01-31",
+      "titre": "Les anciennes lignes 2, 3 et 9 changent",
+      "detail": "Au 5 décembre, l'ancienne ligne 9 est reprise par la ligne 10 et les anciennes lignes 2 et 3 seront remplacées par le tram B. Les numéros 3 et 9 sont attribués à deux nouvelles lignes de bus."
+    },
+    {
+      "lignes": ["ET"],
+      "type": "travaux",
+      "debut": "2026-11-17",
+      "fin": "2027-01-20",
+      "titre": "Tram-train ET : ouverture le 20 janvier 2027",
+      "detail": "Les essais du tram-train entre la gare de Clermont-Ferrand et l'aéroport se poursuivent. D'ici l'ouverture, la ligne 106 dessert l'aéroport depuis la gare routière."
+    },
+    {
+      "lignes": ["B"],
+      "type": "travaux",
+      "debut": "2026-11-17",
+      "fin": "2028-01-15",
+      "titre": "Tram B : mise en service en janvier 2028",
+      "detail": "La ligne B ouvrira lorsque toutes ses rames auront été livrées et testées (marche à blanc)."
+    }
+  ]
+}

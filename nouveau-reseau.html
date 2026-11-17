@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Le nouveau réseau TCM — 5 décembre 2026</title>
+    <meta
+      name="description"
+      content="Ce qui change sur le réseau TCM au 5 décembre 2026 : nouvelles lignes, tram A, tram-train ET, tram B et réseau de nuit."
+    />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Le nouveau réseau TCM — 5 décembre 2026" />
+    <meta
+      property="og:description"
+      content="Ce qui change sur le réseau TCM au 5 décembre 2026 : nouvelles lignes, tram A, tram-train ET, tram B et réseau de nuit."
+    />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/pont-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/nouveau.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <section class="trame border-b border-trait bg-tcm-950 text-white">
+        <div class="conteneur grid gap-10 py-14 sm:py-20 lg:grid-cols-12">
+          <div class="lg:col-span-8">
+            <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/50" aria-label="Fil d'Ariane">
+              <a href="/index.html" class="hover:text-white">Accueil</a> <span class="mx-2">/</span> <span class="text-white">Nouveau réseau</span>
+            </nav>
+            <p class="index-section mt-10 !text-ciel" id="nr-surtitre">5 décembre 2026</p>
+            <h1 class="mt-4 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl xl:text-8xl">Le nouveau<br />réseau TCM</h1>
+            <p class="mt-8 max-w-2xl text-lg text-white/70">
+              Des lignes plus directes, plus fréquentes et de plus en plus électriques. Voici tout ce qui change, ligne par ligne.
+            </p>
+          </div>
+          <div id="compte" class="flex gap-px self-end lg:col-span-4 lg:justify-end"></div>
+        </div>
+      </section>
+
+      <section class="border-b border-trait bg-carte">
+        <dl id="nr-chiffres" class="conteneur grid grid-cols-2 lg:grid-cols-4"></dl>
+      </section>
+
+      <section class="conteneur mt-20" aria-labelledby="t-cal">
+        <p class="surtitre">Calendrier</p>
+        <h2 id="t-cal" class="titre-section mt-2">Trois grandes étapes</h2>
+        <ol id="nr-etapes" class="mt-10 grid gap-4 md:grid-cols-3"></ol>
+      </section>
+
+      <section class="conteneur mt-20" aria-labelledby="t-nouv">
+        <p class="surtitre">Nouveautés</p>
+        <h2 id="t-nouv" class="titre-section mt-2">Les nouvelles lignes</h2>
+        <div id="nr-nouvelles" class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
+      </section>
+
+      <section class="conteneur mt-20" aria-labelledby="t-fus">
+        <div class="carte grid gap-8 p-6 sm:p-10 lg:grid-cols-[1fr_1.2fr]">
+          <div>
+            <p class="surtitre">Lignes reprises</p>
+            <h2 id="t-fus" class="titre-section mt-2">Où sont passées les lignes 2, 3 et 9 ?</h2>
+            <p class="mt-4 text-doux">
+              L'ancienne ligne 9 est reprise par la ligne 10, prolongée et passée en bus électriques à haut niveau de service. Les anciennes lignes 2 et 3
+              seront remplacées par le tram B à son ouverture. Les numéros 3 et 9 sont désormais ceux de deux nouvelles lignes de bus.
+            </p>
+          </div>
+          <div id="nr-fusions" class="space-y-4"></div>
+        </div>
+      </section>
+
+      <section class="conteneur mt-20" aria-labelledby="t-lpl">
+        <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <p class="surtitre">Ligne par ligne</p>
+            <h2 id="t-lpl" class="titre-section mt-2">Ce qui change sur votre ligne</h2>
+          </div>
+          <label class="relative block sm:w-72"
+            ><span class="sr-only">Filtrer</span
+            ><i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-doux"></i
+            ><input id="nr-filtre" type="search" placeholder="Votre ligne…" class="champ pl-11"
+          /></label>
+        </div>
+        <div class="carte mt-8 overflow-hidden"><ul id="nr-lignes" class="divide-y divide-trait"></ul></div>
+      </section>
+
+      <section class="conteneur mt-20" aria-labelledby="t-faq">
+        <p class="surtitre">Questions fréquentes</p>
+        <h2 id="t-faq" class="titre-section mt-2">Vos questions</h2>
+        <div id="faq" class="mt-8 grid gap-3 lg:grid-cols-2"></div>
+      </section>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

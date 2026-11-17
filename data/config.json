@@ -1,7 +1,9 @@
 {
   "_aide": "Réglages du site. Tout est facultatif : laissez une valeur vide pour la désactiver.",
+  "google_sheet_id": "1JMixzkkemoVoOFGcPJwFHms1L8pHk9J-zFXUaLVd0Ls",
+  "_google_sheet_id": "Identifiant de la feuille Google « TCM — Données du site » (onglets trafic, lignes, parkings). Elle doit rester lisible par lien. Le site la lit à chaque visite : une modification dans la feuille est en ligne sans recompiler. Vide = le site lit data/trafic.json, data/reseau.json et data/parkings.json.",
   "trafic_google_sheet_csv": "",
-  "_trafic_google_sheet_csv": "Lien CSV d'une feuille Google publiée (Fichier > Partager > Publier sur le Web > CSV). Colonnes attendues sur la première ligne : lignes, type, debut, fin, titre, detail. Si le lien est vide ou injoignable, le site lit data/trafic.json.",
+  "_trafic_google_sheet_csv": "Ancien réglage (une seule feuille publiée en CSV pour l'info trafic). Inutile si google_sheet_id est rempli.",
   "actualites_wordpress": "https://seal.transport-manager.net/tibo_lyon/wp-json/wp/v2/posts",
   "actualites_categorie": 8,
   "contact_email": "",

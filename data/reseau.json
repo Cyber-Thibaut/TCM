@@ -82,7 +82,7 @@
       "nom": "Tram A",
       "mode": "tram",
       "famille": "volc_express",
-      "depart": "Les Vergnes",
+      "depart": "L'Attaque",
       "terminus": "Clinique Saint-Paul",
       "couleur": "#dc241f",
       "km": 14.6,
@@ -145,7 +145,7 @@
       "ancien_terminus": ["Aéroport", "Clinique Saint-Paul"],
       "frequentation_pointe": 4538,
       "correspondances": {
-        "Les Vergnes": ["13", "16", "BEN3"],
+        "L'Attaque": ["13", "16", "BEN3"],
         "Clinique Saint-Paul": ["10", "11", "BEN3"]
       }
     },
@@ -155,7 +155,7 @@
       "nom": "Tram B",
       "mode": "tram",
       "famille": "volc_express",
-      "depart": "UCA Campus Cézeaux",
+      "depart": "Campus Alan Turing",
       "terminus": "UCA Campus Centre",
       "couleur": "#f1ab00",
       "km": 13.8,
@@ -208,7 +208,7 @@
       "electrique": "dès l'ouverture",
       "troncons": [
         {
-          "de": "UCA Campus Cézeaux",
+          "de": "Campus Alan Turing",
           "a": "Hôtel de Région Auvergne-Rhône-Alpes",
           "minutes": 11
         },
@@ -311,11 +311,11 @@
       "troncons": [
         {
           "de": "Gare de Clermont-Ferrand",
-          "a": "Gare routière de Clermont-Ferrand",
+          "a": "Gare de Royat-Chamalières",
           "minutes": 10
         },
         {
-          "de": "Gare routière de Clermont-Ferrand",
+          "de": "Gare de Royat-Chamalières",
           "a": "Pôle d'activité du Circuit de Charade",
           "minutes": 8
         },
@@ -336,7 +336,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 2000,
       "correspondances": {
-        "Gare routière de Clermont-Ferrand": ["16", "17", "61", "106", "201", "202", "203", "204", "205", "206"],
+        "Gare de Royat-Chamalières": ["16", "17", "61", "106", "201", "202", "203", "204", "205", "206"],
         "Gare de Clermont-Ferrand": ["B", "12", "E1", "BEN1", "BEN4"],
         "Aéroport Clermont-Ferrand Auvergne": ["106"]
       }
@@ -347,8 +347,8 @@
       "nom": "Ligne 3",
       "mode": "bus",
       "famille": "urbain_dome",
-      "depart": "Montaudou",
-      "terminus": "Parc de Montjuzet",
+      "depart": "Chanturgue",
+      "terminus": "Jardin Lecoq",
       "couleur": "#3c78d8",
       "km": 11.8,
       "temps": 31.0,
@@ -410,7 +410,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 1431,
       "correspondances": {
-        "Parc de Montjuzet": ["61"]
+        "Jardin Lecoq": ["61"]
       }
     },
     "4": {
@@ -419,7 +419,7 @@
       "nom": "Ligne 4",
       "mode": "bus",
       "famille": "urbain_dome",
-      "depart": "Abbaye de Saint-Alyre",
+      "depart": "Abbaye",
       "terminus": "Gare de marchandises du Brézet",
       "couleur": "#00afad",
       "km": 12.4,
@@ -489,8 +489,8 @@
       "nom": "Ligne 5",
       "mode": "bhns",
       "famille": "volc_express",
-      "depart": "Musée d'art Roger-Quilliot",
-      "terminus": "Place de Jaude",
+      "depart": "Musée d'Art Moderne",
+      "terminus": "Pôle Tertiaire",
       "couleur": "#e86a10",
       "km": 9.3,
       "temps": 37.0,
@@ -552,7 +552,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 2588,
       "correspondances": {
-        "Place de Jaude": ["15", "65"]
+        "Pôle Tertiaire": ["15", "65"]
       }
     },
     "6": {
@@ -561,7 +561,7 @@
       "nom": "Ligne 6",
       "mode": "bus",
       "famille": "urbain_dome",
-      "depart": "Hôtel de ville de Clermont-Ferrand",
+      "depart": "Place de Jaude",
       "terminus": "Campus des Lettres (Carnot)",
       "couleur": "#894e24",
       "km": 5.0,
@@ -624,7 +624,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 679,
       "correspondances": {
-        "Hôtel de ville de Clermont-Ferrand": ["7"]
+        "Place de Jaude": ["7"]
       }
     },
     "7": {
@@ -633,8 +633,8 @@
       "nom": "Ligne 7",
       "mode": "bhns",
       "famille": "volc_express",
-      "depart": "Quai de l'Allier (Pont-du-Château)",
-      "terminus": "Hôtel de ville de Clermont-Ferrand",
+      "depart": "Port fluvial",
+      "terminus": "Place de Jaude",
       "couleur": "#007229",
       "km": 10.2,
       "temps": 36.0,
@@ -696,7 +696,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 1105,
       "correspondances": {
-        "Hôtel de ville de Clermont-Ferrand": ["6"]
+        "Place de Jaude": ["6"]
       }
     },
     "8": {
@@ -705,7 +705,7 @@
       "nom": "Ligne 8",
       "mode": "bhns",
       "famille": "volc_express",
-      "depart": "Place de la Victoire",
+      "depart": "Les Salins",
       "terminus": "UCA Campus Centre",
       "couleur": "#d799af",
       "km": 7.8,
@@ -768,7 +768,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 1080,
       "correspondances": {
-        "Place de la Victoire": ["63", "64", "103", "105"],
+        "Les Salins": ["63", "64", "103", "105"],
         "UCA Campus Centre": ["B", "11"]
       }
     },
@@ -779,7 +779,7 @@
       "mode": "bus",
       "famille": "urbain_dome",
       "depart": "Lycée Sidoine-Apollinaire",
-      "terminus": "Cébazat - Bureau de poste",
+      "terminus": "Ceyrat - Bureau de poste",
       "couleur": "#0B904C",
       "km": 28.0,
       "temps": 78.0,
@@ -841,7 +841,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 947,
       "correspondances": {
-        "Cébazat - Bureau de poste": ["151"],
+        "Ceyrat - Bureau de poste": ["151"],
         "Lycée Sidoine-Apollinaire": ["B", "604"]
       }
     },
@@ -851,7 +851,7 @@
       "nom": "Ligne 10",
       "mode": "bhns",
       "famille": "volc_express",
-      "depart": "Montferrand - Centre historique",
+      "depart": "Chamalières - Centre",
       "terminus": "Clinique Saint-Paul",
       "couleur": "#ffce00",
       "km": 17.3,
@@ -914,7 +914,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 3013,
       "correspondances": {
-        "Montferrand - Centre historique": ["13", "BEN2"],
+        "Chamalières - Centre": ["13", "BEN2"],
         "Clinique Saint-Paul": ["A", "11", "BEN3"]
       }
     },
@@ -998,7 +998,7 @@
       "mode": "bus",
       "famille": "urbain_dome",
       "depart": "Gare de Clermont-Ferrand",
-      "terminus": "Vulcania",
+      "terminus": "Parc d'attractions",
       "couleur": "#007229",
       "km": 7.2,
       "temps": 27.0,
@@ -1060,7 +1060,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 666,
       "correspondances": {
-        "Vulcania": ["63"],
+        "Parc d'attractions": ["63"],
         "Gare de Clermont-Ferrand": ["B", "ET", "E1", "BEN1", "BEN4"]
       }
     },
@@ -1070,8 +1070,8 @@
       "nom": "Ligne 13",
       "mode": "bus",
       "famille": "urbain_dome",
-      "depart": "Montferrand - Centre historique",
-      "terminus": "Les Vergnes",
+      "depart": "Chamalières - Centre",
+      "terminus": "L'Attaque",
       "couleur": "#76d0bd",
       "km": 6.5,
       "temps": 18.0,
@@ -1130,11 +1130,11 @@
       "nouvelle": false,
       "origines": [],
       "changements": [],
-      "ancien_terminus": ["Montferrand - Centre historique", "Aéroport"],
+      "ancien_terminus": ["Chamalières - Centre", "Aéroport"],
       "frequentation_pointe": 518,
       "correspondances": {
-        "Montferrand - Centre historique": ["10", "BEN2"],
-        "Les Vergnes": ["A", "16", "BEN3"]
+        "Chamalières - Centre": ["10", "BEN2"],
+        "L'Attaque": ["A", "16", "BEN3"]
       }
     },
     "14": {
@@ -1143,7 +1143,7 @@
       "nom": "Ligne 14",
       "mode": "bus",
       "famille": "urbain_dome",
-      "depart": "Place Delille",
+      "depart": "Trinité",
       "terminus": "Hôtel de Région Auvergne-Rhône-Alpes",
       "couleur": "#dc241f",
       "km": 7.2,
@@ -1215,7 +1215,7 @@
       "nom": "Ligne 15",
       "mode": "bus",
       "famille": "urbain_dome",
-      "depart": "Place de Jaude",
+      "depart": "Pôle Tertiaire",
       "terminus": "Cathédrale Notre-Dame-de-l'Assomption",
       "couleur": "#751056",
       "km": 11.3,
@@ -1278,7 +1278,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 888,
       "correspondances": {
-        "Place de Jaude": ["5", "65"]
+        "Pôle Tertiaire": ["5", "65"]
       }
     },
     "16": {
@@ -1287,8 +1287,8 @@
       "nom": "Ligne 16",
       "mode": "bus",
       "famille": "urbain_dome",
-      "depart": "Les Vergnes",
-      "terminus": "Gare routière de Clermont-Ferrand",
+      "depart": "L'Attaque",
+      "terminus": "Gare de Royat-Chamalières",
       "couleur": "#ffce00",
       "km": 6.4,
       "temps": 22.0,
@@ -1343,11 +1343,11 @@
       "nouvelle": false,
       "origines": [],
       "changements": [],
-      "ancien_terminus": ["Aéroport", "Gare routière de Clermont-Ferrand"],
+      "ancien_terminus": ["Aéroport", "Gare de Royat-Chamalières"],
       "frequentation_pointe": 405,
       "correspondances": {
-        "Gare routière de Clermont-Ferrand": ["ET", "17", "61", "106", "201", "202", "203", "204", "205", "206"],
-        "Les Vergnes": ["A", "13", "BEN3"]
+        "Gare de Royat-Chamalières": ["ET", "17", "61", "106", "201", "202", "203", "204", "205", "206"],
+        "L'Attaque": ["A", "13", "BEN3"]
       }
     },
     "17": {
@@ -1356,7 +1356,7 @@
       "nom": "Ligne 17",
       "mode": "bus",
       "famille": "urbain_dome",
-      "depart": "Gare routière de Clermont-Ferrand",
+      "depart": "Gare de Royat-Chamalières",
       "terminus": "Montjuzet",
       "couleur": "#00afad",
       "km": 9.3,
@@ -1419,7 +1419,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 1188,
       "correspondances": {
-        "Gare routière de Clermont-Ferrand": ["ET", "16", "61", "106", "201", "202", "203", "204", "205", "206"]
+        "Gare de Royat-Chamalières": ["ET", "16", "61", "106", "201", "202", "203", "204", "205", "206"]
       }
     },
     "18": {
@@ -1428,7 +1428,7 @@
       "nom": "Ligne 18",
       "mode": "bus",
       "famille": "urbain_dome",
-      "depart": "Les Salins",
+      "depart": "Bellevue",
       "terminus": "Hôtel de Région Auvergne-Rhône-Alpes",
       "couleur": "#868f98",
       "km": 10.9,
@@ -1563,8 +1563,8 @@
       "nom": "Ligne 61",
       "mode": "bus",
       "famille": "urbain_pariou",
-      "depart": "Gare routière de Clermont-Ferrand",
-      "terminus": "Parc de Montjuzet",
+      "depart": "Gare de Royat-Chamalières",
+      "terminus": "Jardin Lecoq",
       "couleur": "#0019a8",
       "km": 8.5,
       "temps": 32.0,
@@ -1614,8 +1614,8 @@
       "ancien_terminus": null,
       "frequentation_pointe": 370,
       "correspondances": {
-        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "106", "201", "202", "203", "204", "205", "206"],
-        "Parc de Montjuzet": ["3"]
+        "Gare de Royat-Chamalières": ["ET", "16", "17", "106", "201", "202", "203", "204", "205", "206"],
+        "Jardin Lecoq": ["3"]
       }
     },
     "62": {
@@ -1624,8 +1624,8 @@
       "nom": "Ligne 62",
       "mode": "bus",
       "famille": "urbain_pariou",
-      "depart": "Parc Bargoin",
-      "terminus": "Parc Bargoin",
+      "depart": "Parc de la Gauthière",
+      "terminus": "Parc de la Gauthière",
       "couleur": "#b727bf",
       "km": 10.5,
       "temps": 40.0,
@@ -1686,7 +1686,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 302,
       "correspondances": {
-        "Parc Bargoin": ["BEN2"]
+        "Parc de la Gauthière": ["BEN2"]
       }
     },
     "63": {
@@ -1695,8 +1695,8 @@
       "nom": "Ligne 63",
       "mode": "bus",
       "famille": "urbain_pariou",
-      "depart": "Place de la Victoire",
-      "terminus": "Vulcania",
+      "depart": "Les Salins",
+      "terminus": "Parc d'attractions",
       "couleur": "#e86a10",
       "km": 7.8,
       "temps": 29.0,
@@ -1756,8 +1756,8 @@
       "ancien_terminus": null,
       "frequentation_pointe": 400,
       "correspondances": {
-        "Place de la Victoire": ["8", "64", "103", "105"],
-        "Vulcania": ["12"]
+        "Les Salins": ["8", "64", "103", "105"],
+        "Parc d'attractions": ["12"]
       }
     },
     "64": {
@@ -1766,7 +1766,7 @@
       "nom": "Ligne 64",
       "mode": "bus",
       "famille": "urbain_pariou",
-      "depart": "Place de la Victoire",
+      "depart": "Les Salins",
       "terminus": "Hôtel de Région Auvergne-Rhône-Alpes",
       "couleur": "#ffce00",
       "km": 3.9,
@@ -1817,7 +1817,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 160,
       "correspondances": {
-        "Place de la Victoire": ["8", "63", "103", "105"],
+        "Les Salins": ["8", "63", "103", "105"],
         "Hôtel de Région Auvergne-Rhône-Alpes": ["B", "14", "18", "101"]
       }
     },
@@ -1828,7 +1828,7 @@
       "mode": "bus",
       "famille": "urbain_pariou",
       "depart": "Préfecture du Puy-de-Dôme",
-      "terminus": "Place de Jaude",
+      "terminus": "Pôle Tertiaire",
       "couleur": "#9364cc",
       "km": 6.4,
       "temps": 25.0,
@@ -1884,7 +1884,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 300,
       "correspondances": {
-        "Place de Jaude": ["5", "15"],
+        "Pôle Tertiaire": ["5", "15"],
         "Préfecture du Puy-de-Dôme": ["60"]
       }
     },
@@ -1895,7 +1895,7 @@
       "mode": "bus",
       "famille": "peripherique",
       "depart": "Hôtel de Région Auvergne-Rhône-Alpes",
-      "terminus": "Ceyrat - Étangs",
+      "terminus": "Cébazat - Étangs",
       "couleur": "#751056",
       "km": 21.2,
       "temps": 36.0,
@@ -1967,7 +1967,7 @@
       "mode": "bus",
       "famille": "peripherique",
       "depart": "Stade Marcel-Michelin",
-      "terminus": "Beaumont - Avenue de la Liberté",
+      "terminus": "Cournon-d'Auvergne - Avenue de la Liberté",
       "couleur": "#007229",
       "km": 17.9,
       "temps": 27.0,
@@ -2027,7 +2027,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 268,
       "correspondances": {
-        "Beaumont - Avenue de la Liberté": ["151"]
+        "Cournon-d'Auvergne - Avenue de la Liberté": ["151"]
       }
     },
     "103": {
@@ -2036,7 +2036,7 @@
       "nom": "Ligne 103",
       "mode": "bus",
       "famille": "peripherique",
-      "depart": "Place de la Victoire",
+      "depart": "Les Salins",
       "terminus": "Aubière - Place du Marché",
       "couleur": "#ffce00",
       "km": 10.8,
@@ -2094,10 +2094,10 @@
       "nouvelle": false,
       "origines": [],
       "changements": [],
-      "ancien_terminus": ["Place de la Victoire", "Aubière - Centre de recyclage"],
+      "ancien_terminus": ["Les Salins", "Aubière - Centre de recyclage"],
       "frequentation_pointe": 350,
       "correspondances": {
-        "Place de la Victoire": ["8", "63", "64", "105"]
+        "Les Salins": ["8", "63", "64", "105"]
       }
     },
     "104": {
@@ -2106,8 +2106,8 @@
       "nom": "Ligne 104",
       "mode": "bus",
       "famille": "peripherique",
-      "depart": "Lempdes - Place du Marché",
-      "terminus": "IUT Clermont Auvergne",
+      "depart": "Royat - Place du Marché",
+      "terminus": "Science Po",
       "couleur": "#9364cc",
       "km": 12.3,
       "temps": 24.0,
@@ -2174,8 +2174,8 @@
       "nom": "Ligne 105",
       "mode": "bus",
       "famille": "peripherique",
-      "depart": "Place de la Victoire",
-      "terminus": "Pont-du-Château - Église",
+      "depart": "Les Salins",
+      "terminus": "Le Cendre - Église",
       "couleur": "#00afad",
       "km": 29.1,
       "temps": 50.0,
@@ -2235,8 +2235,8 @@
       "ancien_terminus": null,
       "frequentation_pointe": 250,
       "correspondances": {
-        "Place de la Victoire": ["8", "63", "64", "103"],
-        "Pont-du-Château - Église": ["107", "604", "BEN4"]
+        "Les Salins": ["8", "63", "64", "103"],
+        "Le Cendre - Église": ["107", "604", "BEN4"]
       }
     },
     "106": {
@@ -2245,7 +2245,7 @@
       "nom": "Ligne 106",
       "mode": "bus",
       "famille": "peripherique",
-      "depart": "Gare routière de Clermont-Ferrand",
+      "depart": "Gare de Royat-Chamalières",
       "terminus": "Aéroport Clermont-Ferrand Auvergne",
       "couleur": "#d799af",
       "km": 23.1,
@@ -2305,10 +2305,10 @@
       "nouvelle": false,
       "origines": [],
       "changements": ["km 13.4 → 23.1", "temps 26 → 41 min", "arrêts 11 → 13"],
-      "ancien_terminus": ["Cébazat - Bureau de poste", "Gare routière de Clermont-Ferrand"],
+      "ancien_terminus": ["Ceyrat - Bureau de poste", "Gare de Royat-Chamalières"],
       "frequentation_pointe": 390,
       "correspondances": {
-        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "201", "202", "203", "204", "205", "206"],
+        "Gare de Royat-Chamalières": ["ET", "16", "17", "61", "201", "202", "203", "204", "205", "206"],
         "Aéroport Clermont-Ferrand Auvergne": ["ET"]
       }
     },
@@ -2318,7 +2318,7 @@
       "nom": "Ligne 107",
       "mode": "car",
       "famille": "peripherique",
-      "depart": "Pont-du-Château - Église",
+      "depart": "Le Cendre - Église",
       "terminus": "Zone d'activités de Lempdes",
       "couleur": "#3c78c5",
       "km": 18.8,
@@ -2387,7 +2387,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 321,
       "correspondances": {
-        "Pont-du-Château - Église": ["105", "604", "BEN4"]
+        "Le Cendre - Église": ["105", "604", "BEN4"]
       }
     },
     "151": {
@@ -2396,8 +2396,8 @@
       "nom": "Ligne 151",
       "mode": "bus",
       "famille": "peripherique",
-      "depart": "Beaumont - Avenue de la Liberté",
-      "terminus": "Cébazat - Bureau de poste",
+      "depart": "Cournon-d'Auvergne - Avenue de la Liberté",
+      "terminus": "Ceyrat - Bureau de poste",
       "couleur": "#0019a8",
       "km": 34.8,
       "temps": 52.0,
@@ -2459,8 +2459,8 @@
       "ancien_terminus": null,
       "frequentation_pointe": 264,
       "correspondances": {
-        "Cébazat - Bureau de poste": ["9"],
-        "Beaumont - Avenue de la Liberté": ["102"]
+        "Ceyrat - Bureau de poste": ["9"],
+        "Cournon-d'Auvergne - Avenue de la Liberté": ["102"]
       }
     },
     "201": {
@@ -2469,8 +2469,8 @@
       "nom": "Ligne 201",
       "mode": "car",
       "famille": "monts",
-      "depart": "Gare routière de Clermont-Ferrand",
-      "terminus": "Riom - Gare",
+      "depart": "Gare de Royat-Chamalières",
+      "terminus": "Vertaizon - Gare",
       "couleur": "#894e24",
       "km": 53.8,
       "temps": 67.0,
@@ -2530,8 +2530,8 @@
       "ancien_terminus": null,
       "frequentation_pointe": 299,
       "correspondances": {
-        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "202", "203", "204", "205", "206"],
-        "Riom - Gare": ["251", "E1"]
+        "Gare de Royat-Chamalières": ["ET", "16", "17", "61", "106", "202", "203", "204", "205", "206"],
+        "Vertaizon - Gare": ["251", "E1"]
       }
     },
     "202": {
@@ -2541,7 +2541,7 @@
       "mode": "car",
       "famille": "monts",
       "depart": "Issoire - Gare routière",
-      "terminus": "Gare routière de Clermont-Ferrand",
+      "terminus": "Gare de Royat-Chamalières",
       "couleur": "#dc241f",
       "km": 32.8,
       "temps": 46.0,
@@ -2598,7 +2598,7 @@
       "frequentation_pointe": 111,
       "correspondances": {
         "Issoire - Gare routière": ["251"],
-        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "201", "203", "204", "205", "206"]
+        "Gare de Royat-Chamalières": ["ET", "16", "17", "61", "106", "201", "203", "204", "205", "206"]
       }
     },
     "203": {
@@ -2608,7 +2608,7 @@
       "mode": "car",
       "famille": "monts",
       "depart": "Orcines - Puy-de-Dôme",
-      "terminus": "Gare routière de Clermont-Ferrand",
+      "terminus": "Gare de Royat-Chamalières",
       "couleur": "#00afad",
       "km": 42.1,
       "temps": 62.0,
@@ -2668,7 +2668,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 160,
       "correspondances": {
-        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "201", "202", "204", "205", "206"]
+        "Gare de Royat-Chamalières": ["ET", "16", "17", "61", "106", "201", "202", "204", "205", "206"]
       }
     },
     "204": {
@@ -2677,7 +2677,7 @@
       "nom": "Ligne 204",
       "mode": "car",
       "famille": "monts",
-      "depart": "Gare routière de Clermont-Ferrand",
+      "depart": "Gare de Royat-Chamalières",
       "terminus": "Gerzat - Boulevard de l'Humanité",
       "couleur": "#9364cc",
       "km": 44.7,
@@ -2740,7 +2740,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 132,
       "correspondances": {
-        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "201", "202", "203", "205", "206"],
+        "Gare de Royat-Chamalières": ["ET", "16", "17", "61", "106", "201", "202", "203", "205", "206"],
         "Gerzat - Boulevard de l'Humanité": ["205"]
       }
     },
@@ -2750,7 +2750,7 @@
       "nom": "Ligne 205",
       "mode": "car",
       "famille": "monts",
-      "depart": "Gare routière de Clermont-Ferrand",
+      "depart": "Gare de Royat-Chamalières",
       "terminus": "Gerzat - Boulevard de l'Humanité",
       "couleur": "#007229",
       "km": 44.7,
@@ -2801,7 +2801,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 123,
       "correspondances": {
-        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "201", "202", "203", "204", "206"],
+        "Gare de Royat-Chamalières": ["ET", "16", "17", "61", "106", "201", "202", "203", "204", "206"],
         "Gerzat - Boulevard de l'Humanité": ["204"]
       }
     },
@@ -2812,7 +2812,7 @@
       "mode": "car",
       "famille": "monts",
       "depart": "Billom - Beffroi",
-      "terminus": "Gare routière de Clermont-Ferrand",
+      "terminus": "Gare de Royat-Chamalières",
       "couleur": "#0019a8",
       "km": 34.2,
       "temps": 48.0,
@@ -2872,7 +2872,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 150,
       "correspondances": {
-        "Gare routière de Clermont-Ferrand": ["ET", "16", "17", "61", "106", "201", "202", "203", "204", "205"]
+        "Gare de Royat-Chamalières": ["ET", "16", "17", "61", "106", "201", "202", "203", "204", "205"]
       }
     },
     "251": {
@@ -2882,7 +2882,7 @@
       "mode": "car",
       "famille": "monts",
       "depart": "Issoire - Gare routière",
-      "terminus": "Riom - Gare",
+      "terminus": "Vertaizon - Gare",
       "couleur": "#d799af",
       "km": 44.0,
       "temps": 56.0,
@@ -2941,7 +2941,7 @@
       "frequentation_pointe": 101,
       "correspondances": {
         "Issoire - Gare routière": ["202"],
-        "Riom - Gare": ["201", "E1"]
+        "Vertaizon - Gare": ["201", "E1"]
       }
     },
     "601": {
@@ -2950,7 +2950,7 @@
       "nom": "Ligne 601",
       "mode": "scolaire",
       "famille": "edu",
-      "depart": "Lempdes - Hôtel de ville",
+      "depart": "Royat - Hôtel de ville",
       "terminus": "Lycée Anne Frank",
       "couleur": "#B7791F",
       "km": 13.4,
@@ -3014,7 +3014,7 @@
       "nom": "Ligne 603",
       "mode": "scolaire",
       "famille": "edu",
-      "depart": "Ceyrat - Centre-ville",
+      "depart": "Cébazat - Centre-ville",
       "terminus": "Lycée Jean Zay",
       "couleur": "#B7791F",
       "km": 23.9,
@@ -3048,7 +3048,7 @@
       "mode": "scolaire",
       "famille": "edu",
       "depart": "Lycée Sidoine-Apollinaire",
-      "terminus": "Pont-du-Château - Église",
+      "terminus": "Le Cendre - Église",
       "couleur": "#B7791F",
       "km": 29.8,
       "temps": 47.0,
@@ -3072,7 +3072,7 @@
       "hns": false,
       "correspondances": {
         "Lycée Sidoine-Apollinaire": ["B", "9"],
-        "Pont-du-Château - Église": ["105", "107", "BEN4"]
+        "Le Cendre - Église": ["105", "107", "BEN4"]
       }
     },
     "651": {
@@ -3179,7 +3179,7 @@
       "mode": "tad",
       "famille": "demande",
       "depart": "Bellevue",
-      "terminus": "Haute-Ville",
+      "terminus": "Chamalières - Centre",
       "couleur": "#C026D3",
       "km": null,
       "temps": null,
@@ -3209,7 +3209,7 @@
       "nom": "TAD 902",
       "mode": "tad",
       "famille": "demande",
-      "depart": "Parc de l'Étang",
+      "depart": "Parc de la Gauthière",
       "terminus": "Observatoire",
       "couleur": "#C026D3",
       "km": null,
@@ -3303,7 +3303,7 @@
       "mode": "car",
       "famille": "tre",
       "depart": "Gare de Clermont-Ferrand",
-      "terminus": "Riom - Gare",
+      "terminus": "Vertaizon - Gare",
       "couleur": "#3c78d8",
       "km": 68.0,
       "temps": 57.0,
@@ -3371,7 +3371,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 225,
       "correspondances": {
-        "Riom - Gare": ["201", "251"],
+        "Vertaizon - Gare": ["201", "251"],
         "Gare de Clermont-Ferrand": ["B", "ET", "12", "BEN1", "BEN4"]
       }
     },
@@ -3443,8 +3443,8 @@
       "nom": "BEN2",
       "mode": "nuit",
       "famille": "nocturne",
-      "depart": "Montferrand - Centre historique",
-      "terminus": "Parc Bargoin",
+      "depart": "Chamalières - Centre",
+      "terminus": "Parc de la Gauthière",
       "couleur": "#20b3c0",
       "km": 15.6,
       "temps": 41.0,
@@ -3496,8 +3496,8 @@
       "ancien_terminus": null,
       "frequentation_pointe": 0,
       "correspondances": {
-        "Montferrand - Centre historique": ["10", "13"],
-        "Parc Bargoin": ["62"]
+        "Chamalières - Centre": ["10", "13"],
+        "Parc de la Gauthière": ["62"]
       }
     },
     "BEN3": {
@@ -3506,7 +3506,7 @@
       "nom": "BEN3",
       "mode": "nuit",
       "famille": "nocturne",
-      "depart": "Les Vergnes",
+      "depart": "L'Attaque",
       "terminus": "Clinique Saint-Paul",
       "couleur": "#5120c0",
       "km": 14.6,
@@ -3556,10 +3556,10 @@
       "nouvelle": false,
       "origines": [],
       "changements": ["km 8.9 → 14.6", "temps 30 → 44 min", "arrêts 7 → 10"],
-      "ancien_terminus": ["Place de la Victoire", "Clinique Saint-Paul"],
+      "ancien_terminus": ["Les Salins", "Clinique Saint-Paul"],
       "frequentation_pointe": 0,
       "correspondances": {
-        "Les Vergnes": ["A", "13", "16"],
+        "L'Attaque": ["A", "13", "16"],
         "Clinique Saint-Paul": ["A", "10", "11"]
       }
     },
@@ -3569,7 +3569,7 @@
       "nom": "BEN4",
       "mode": "nuit",
       "famille": "nocturne",
-      "depart": "Pont-du-Château - Église",
+      "depart": "Le Cendre - Église",
       "terminus": "Gare de Clermont-Ferrand",
       "couleur": "#3c78d8",
       "km": 35.0,
@@ -3622,7 +3622,7 @@
       "ancien_terminus": null,
       "frequentation_pointe": 0,
       "correspondances": {
-        "Pont-du-Château - Église": ["105", "107", "604"],
+        "Le Cendre - Église": ["105", "107", "604"],
         "Gare de Clermont-Ferrand": ["B", "ET", "12", "E1", "BEN1"]
       }
     }
@@ -3656,7 +3656,7 @@
     {
       "date": "2028-01-15",
       "titre": "Ouverture du tram B",
-      "texte": "Du campus des Cézeaux au campus Centre, la ligne B reprend les anciennes lignes 2 et 3 dès que toutes ses rames sont livrées."
+      "texte": "Du campus Alan Turing au campus Centre, la ligne B reprend les anciennes lignes 2 et 3 dès que toutes ses rames sont livrées."
     }
   ],
   "chiffres": {

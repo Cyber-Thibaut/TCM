@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Arrêt : prochains départs — TCM</title>
+    <meta name="description" content="Les prochains passages de toutes les lignes à un arrêt du réseau TCM." />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Arrêt : prochains départs — TCM" />
+    <meta property="og:description" content="Les prochains passages de toutes les lignes à un arrêt du réseau TCM." />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/urbain-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/arret.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <section class="trame border-b border-trait bg-tcm-950 text-white">
+        <div class="conteneur grid gap-10 py-12 lg:grid-cols-[1fr_26rem] lg:py-16">
+          <div class="min-w-0">
+            <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/50" aria-label="Fil d'Ariane">
+              <a href="/index.html" class="hover:text-white">Accueil</a> <span class="mx-2">/</span> <a href="/reseau.html" class="hover:text-white">Lignes</a>
+              <span class="mx-2">/</span> <span class="text-white">Arrêt</span>
+            </nav>
+            <p class="mt-6 text-[11px] font-bold uppercase tracking-[0.2em] text-ciel">Arrêt</p>
+            <h1 id="arret-nom" class="mt-2 text-4xl uppercase leading-[0.95] tracking-[-0.02em] sm:text-6xl">…</h1>
+            <div id="arret-lignes" class="mt-6 flex flex-wrap gap-1.5"></div>
+            <div class="mt-8 flex flex-wrap gap-2">
+              <a id="arret-depuis" href="/itineraire.html" class="bouton bouton-plein"><i class="fa-solid fa-route"></i>Partir d'ici</a>
+              <a id="arret-vers" href="/itineraire.html" class="bouton border border-white/40 text-white hover:bg-white hover:text-tcm-950"
+                ><i class="fa-solid fa-location-dot"></i>Y aller</a
+              >
+              <a id="arret-carte" href="/carte.html" class="bouton border border-white/40 text-white hover:bg-white hover:text-tcm-950"
+                ><i class="fa-solid fa-map"></i>Sur la carte</a
+              >
+            </div>
+            <form class="relative mt-8 max-w-md" onsubmit="return false" autocomplete="off">
+              <label for="autre-arret" class="text-[10px] font-bold uppercase tracking-[0.18em] text-white/50">Un autre arrêt</label>
+              <input
+                id="autre-arret"
+                type="text"
+                placeholder="Nom de l'arrêt"
+                class="mt-2 h-12 w-full border border-white/25 bg-transparent px-4 font-bold text-white outline-none placeholder:font-normal placeholder:text-white/35 focus:border-white"
+              />
+              <div id="autre-arret-liste" hidden class="carte absolute inset-x-0 top-full z-30 max-h-[60vh] overflow-y-auto border-encre p-1 text-encre"></div>
+            </form>
+          </div>
+          <div id="arret-mini" class="min-h-64 border border-white/15 bg-white/5"></div>
+        </div>
+      </section>
+
+      <div class="conteneur py-12">
+        <div class="flex flex-wrap items-end justify-between gap-4 border-b border-encre pb-4">
+          <div>
+            <p class="surtitre">Prochains départs</p>
+            <h2 class="mt-1 text-2xl uppercase">Toutes les lignes de l'arrêt</h2>
+          </div>
+          <p class="text-sm text-doux"><span class="statut-ok point-statut mr-2"></span>Mis à jour <span id="arret-heure" class="chiffres font-bold"></span></p>
+        </div>
+        <ul id="departs" class="divide-y divide-trait"></ul>
+        <p class="mt-6 text-xs text-doux">
+          <i class="fa-solid fa-circle-info mr-1"></i>Passages théoriques, calculés à partir des fréquences du service prévu ; ils ne tiennent pas compte de la
+          circulation. Avant de partir, consultez l'<a href="/trafic.html" class="lien">info trafic</a>.
+        </p>
+        <p id="arret-inconnu" hidden class="py-16 text-center text-doux">
+          Cet arrêt n'existe pas. <a href="/reseau.html" class="lien">Voir toutes les lignes</a>
+        </p>
+      </div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

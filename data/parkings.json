@@ -1,35 +1,54 @@
 {
-  "_aide": "Parkings relais. arret : nom de l'arrêt (tel qu'il figure dans le réseau) qui sert à trouver les lignes en correspondance. La disponibilité affichée est une estimation selon l'heure et le jour.",
+  "_aide": "Secours si la feuille Google (onglet parkings) ne répond pas. arret : nom de l'arrêt affiché sur le site (sert aux correspondances). statut : ouvert, à venir ou fermé. La disponibilité affichée est une estimation selon l'heure et le jour.",
   "parkings": [
     {
       "id": "clinique",
       "nom": "Clinique Saint-Paul",
       "arret": "Clinique Saint-Paul",
-      "places": 100,
+      "places": 300,
+      "statut": "ouvert",
+      "tarif": "2,10 € la journée · 0,40 € avec un titre TCM",
       "recharge": true,
       "surveille": true,
       "image": "/img/parking_clinique.png",
-      "description": "Au terminus du tram A et des lignes 10 et 11 : garez-vous et rejoignez le centre sans chercher de place."
+      "description": "Au terminus du tram A et des lignes 4, 10 et 11 : garez-vous et rejoignez le centre sans chercher de place."
     },
     {
       "id": "cezeaux",
-      "nom": "Campus des Cézeaux",
-      "arret": "UCA Campus Cézeaux",
-      "places": 100,
+      "nom": "Campus Alan Turing",
+      "arret": "Campus Alan Turing",
+      "places": 280,
+      "statut": "ouvert",
+      "tarif": "2,10 € la journée · 0,40 € avec un titre TCM",
       "recharge": true,
       "surveille": true,
       "image": "/img/parking_cezeaux.png",
-      "description": "Le parking des étudiants et des chercheurs du campus, au départ du futur tram B."
+      "description": "Le parking des étudiants et des chercheurs du campus, au départ des lignes 10 et 17 et du futur tram B."
     },
     {
       "id": "jaude",
-      "nom": "Place de Jaude",
-      "arret": "Place de Jaude",
-      "places": 100,
+      "nom": "Pôle Tertiaire",
+      "arret": "Pôle Tertiaire",
+      "places": 200,
+      "statut": "ouvert",
+      "tarif": "2,00 € la journée · 0,40 € avec un titre TCM",
       "recharge": true,
       "surveille": true,
       "image": "/img/parking_luca.png",
-      "description": "En plein centre, au départ des lignes 5, 15 et 65."
+      "description": "Au sud du centre, au départ des lignes 5, 8, 9, 15, 65, 103 et 105."
+    },
+    {
+      "id": "campus-centre",
+      "nom": "UCA Campus Centre",
+      "arret": "UCA Campus Centre",
+      "places": 50,
+      "ouverture": "2026-12-05",
+      "statut": "à venir",
+      "tarif": "2,10 € la journée · 0,40 € avec un titre TCM",
+      "recharge": false,
+      "surveille": true,
+      "image": "",
+      "description": "Nouveau parking relais du pôle UCA Campus Centre, en correspondance avec les lignes 8 et 11 et le futur tram B. 50 places à l'ouverture."
     }
   ]
 }

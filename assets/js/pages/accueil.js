@@ -74,10 +74,10 @@
 
   /* ---- nouveau réseau ---- */
   const cartes = [
-    { id: "A", titre: "Tram A", texte: "Des Vergnes à la clinique Saint-Paul, sur un parcours redessiné." },
+    { id: "A", titre: "Tram A", texte: "De L'Attaque à la clinique Saint-Paul, sur un parcours redessiné." },
     { id: "ET", titre: "Tram-train ET", texte: "La gare reliée à l'aéroport en 28 minutes, avec un tarif dédié." },
     { id: "10", titre: "BHNS", texte: "Les lignes 5, 7, 8 et 10 à haut niveau de service ; la 10 en électrique." },
-    { id: "BEN1", titre: "Nuit", texte: "Quatre lignes BEN pour rentrer à toute heure, jusqu'à Pont-du-Château." },
+    { id: "BEN1", titre: "Nuit", texte: "Quatre lignes BEN pour rentrer à toute heure, jusqu'au Cendre." },
   ].filter((c) => L[c.id]);
   $("#nouveau-cartes").innerHTML = cartes
     .map((c, i) => {
@@ -121,20 +121,25 @@
   $("#chiffre-tram").textContent = R.chiffres.tram;
 
   /* ---- parkings relais ---- */
-  TCM.json("/data/parkings.json")
-    .then(async (P) => {
+  TCM.parkings()
+    .then(async (PR) => {
       const rows = await Promise.all(
-        P.parkings.map(async (p) => {
-          const o = await TCM.occupation(p);
+        PR.map(async (p) => {
           const lignes = Object.values(L).filter(
             (l) => l.depart === p.arret || l.terminus === p.arret || (l.troncons || []).some((t) => t.de === p.arret || t.a === p.arret)
           );
-          const cls = o.etat === "complet" ? "statut-interruption" : o.etat === "presque" ? "statut-perturbation" : "statut-ok";
+          let droite;
+          if (p.statut !== "ouvert")
+            droite = `<div class="${p.statut === "ferme" ? "statut-interruption" : "statut-futur"} text-right"><p class="texte-statut text-lg font-black uppercase leading-tight">${p.statut === "ferme" ? "Fermé" : "Bientôt"}</p><p class="mt-1 text-[11px] font-bold uppercase tracking-wider text-doux">${p.ouverture && p.statut !== "ferme" ? TCM.dateFr(p.ouverture) : p.places + " places"}</p></div>`;
+          else {
+            const o = await TCM.occupation(p);
+            const cls = o.etat === "complet" ? "statut-interruption" : o.etat === "presque" ? "statut-perturbation" : "statut-ok";
+            droite = `<div class="${cls} text-right"><p class="chiffres texte-statut text-4xl font-black leading-none">${o.libres}</p><p class="mt-1 text-[11px] font-bold uppercase tracking-wider text-doux">places libres</p></div>`;
+          }
           return `<li class="flex items-center gap-4 border-b border-trait py-4"><div class="min-w-0 flex-1"><p class="font-bold uppercase">${TCM.esc(p.nom)}</p><div class="mt-2 flex flex-wrap gap-1">${lignes
             .slice(0, 6)
             .map((l) => TCM.picto(l, 24, true))
-            .join("")}</div></div>
-        <div class="${cls} text-right"><p class="chiffres texte-statut text-4xl font-black leading-none">${o.libres}</p><p class="mt-1 text-[11px] font-bold uppercase tracking-wider text-doux">places libres</p></div></li>`;
+            .join("")}</div></div>${droite}</li>`;
         })
       );
       $("#pr-liste").innerHTML = rows.join("");
@@ -151,7 +156,7 @@
       $("#ag-liste").innerHTML = A.agences
         .map(
           (a, i) =>
-            `<li class="flex items-center gap-3 border-b border-trait py-3 sm:odd:pr-4 sm:even:pl-4"><span class="${etats[i].ouvert ? "statut-ok" : "statut-futur"} point-statut"></span><span class="min-w-0"><span class="block truncate text-sm font-bold">${TCM.esc(a.nom)}</span><span class="block text-xs text-doux">${etats[i].texte}</span></span></li>`
+            `<li class="flex items-center gap-3 border-b border-trait py-3 sm:odd:pr-4 sm:even:pl-4"><span class="${etats[i].classe} point-statut"></span><span class="min-w-0"><span class="block truncate text-sm font-bold">${TCM.esc(a.nom)}</span><span class="block text-xs text-doux">${etats[i].texte}</span></span></li>`
         )
         .join("");
     })

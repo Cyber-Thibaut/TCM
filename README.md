@@ -73,3 +73,12 @@ Source : les plans N6 publiés dans **AO Mobility Plan Studio** (tm-ao-beta.verc
 - Le calculateur (`itineraire.html`) construit son graphe dans le navigateur : plans N6 + temps et fréquences de `data/reseau.json`. Lignes sans plan (cars 2xx, E1, BEN2, BEN4) reliées par leurs terminus. Scolaires et TAD exclues.
 - Durée estimée = attente moyenne (moitié de l'intervalle au moment du départ) + temps de parcours réparti entre les arrêts + 4 min par correspondance.
 - Les fiches lignes affichent le plan complet quand il existe, sinon le schéma terminus et tronçons.
+
+## Passages, arrêts et carte en direct
+
+- `arret.html?a=<arrêt>` : prochains départs de toutes les lignes d'un arrêt ; `ligne.html` : prochains passages à l'arrêt choisi ; `carte.html` : tracés et véhicules sur le fond de carte de Clermont-Ferrand.
+- Les passages sont **théoriques** : les départs s'enchaînent au rythme des fréquences de `reseau.json` (créneau, jour, vacances), décalés d'une valeur propre à chaque ligne. Toutes les pages donnent les mêmes heures. Pas de suivi GPS.
+- `data/positions.json` : position des arrêts sur le plan du jeu (pixels), convertie autour de la gare de Clermont-Ferrand ; communes hors plan en coordonnées réelles.
+- Carte : Leaflet (cdnjs) et fond CARTO / OpenStreetMap, chargés uniquement sur les pages qui ont une carte.
+- Lignes scolaires : message automatique pendant les vacances, les week-ends et les jours fériés, avec la date de reprise.
+- Agences : « Ouvre bientôt », « Ferme bientôt » (45 min), prochaine ouverture quand l'agence est fermée.

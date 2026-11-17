@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Fiche horaire — TCM</title>
+    <meta
+      name="description"
+      content="La fiche horaire à imprimer de chaque ligne TCM : arrêts, temps de parcours et fréquences de passage, dans les deux sens."
+    />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Fiche horaire — TCM" />
+    <meta
+      property="og:description"
+      content="La fiche horaire à imprimer de chaque ligne TCM : arrêts, temps de parcours et fréquences de passage, dans les deux sens."
+    />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/urbain-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/fiche.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <style>
+        .feuille {
+          width: 210mm;
+          min-height: 297mm;
+          background: #fff;
+          color: #070b1a;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          font-size: 9pt;
+        }
+        .feuille * {
+          border-color: #d6dae3;
+        }
+        .feuille .fh-bande {
+          color: #fff;
+        }
+        .fh-cadre {
+          max-width: 100%;
+          overflow-x: auto;
+        }
+        .fh-zoom {
+          transform-origin: top left;
+        }
+        .fh-cellule {
+          background: color-mix(in srgb, var(--c) calc(var(--p) * 100%), #fff);
+          color: var(--t);
+        }
+        .fh-thermo li {
+          position: relative;
+        }
+        .fh-thermo li::before {
+          content: "";
+          position: absolute;
+          left: 7px;
+          top: 0;
+          bottom: 0;
+          width: 5px;
+          background: var(--c);
+        }
+        .fh-thermo li:first-child::before {
+          top: 9px;
+        }
+        .fh-thermo li:last-child::before {
+          bottom: calc(100% - 9px);
+        }
+        @page {
+          size: A4 portrait;
+          margin: 0;
+        }
+        @media print {
+          html,
+          body {
+            background: #fff !important;
+          }
+          #entete-site,
+          #pied-site,
+          .fh-outils,
+          .fh-ecran {
+            display: none !important;
+          }
+          main#contenu {
+            padding: 0 !important;
+            margin: 0 !important;
+          }
+          .fh-pile {
+            gap: 0 !important;
+            padding: 0 !important;
+          }
+          .fh-zoom {
+            transform: none !important;
+            height: auto !important;
+          }
+          .feuille {
+            break-after: page;
+            border: 0 !important;
+          }
+          .feuille:last-child {
+            break-after: auto;
+          }
+          * {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+        }
+      </style>
+
+      <section class="fh-ecran border-b border-trait bg-carte">
+        <div class="conteneur py-10">
+          <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-doux" aria-label="Fil d'Ariane">
+            <a href="/index.html" class="hover:text-encre">Accueil</a> <span class="mx-2">/</span> <a href="/reseau.html" class="hover:text-encre">Lignes</a>
+            <span class="mx-2">/</span> <span class="text-encre">Fiche horaire</span>
+          </nav>
+          <h1 class="mt-5 text-4xl uppercase leading-[0.95] tracking-[-0.02em] sm:text-6xl">Fiche horaire</h1>
+          <p class="mt-3 max-w-2xl text-doux">
+            Le document à imprimer ou à enregistrer en PDF : tous les arrêts, les temps de parcours et la fréquence de passage à chaque moment de la journée,
+            dans les deux sens.
+          </p>
+        </div>
+      </section>
+
+      <div class="fh-outils sticky top-0 z-20 border-b border-trait bg-fond/95 backdrop-blur">
+        <div class="conteneur flex flex-wrap items-center gap-3 py-3">
+          <label for="fh-ligne" class="sr-only">Ligne</label>
+          <select id="fh-ligne" class="champ h-11 w-auto min-w-56 font-bold"></select>
+          <div class="flex border border-encre" role="group" aria-label="Sens">
+            <button type="button" data-sens="2" class="h-11 px-4 text-xs font-bold uppercase tracking-wider aria-pressed:bg-encre aria-pressed:text-fond">
+              Les deux sens
+            </button>
+            <button
+              type="button"
+              data-sens="0"
+              class="h-11 border-l border-encre px-4 text-xs font-bold uppercase tracking-wider aria-pressed:bg-encre aria-pressed:text-fond"
+            >
+              Aller
+            </button>
+            <button
+              type="button"
+              data-sens="1"
+              class="h-11 border-l border-encre px-4 text-xs font-bold uppercase tracking-wider aria-pressed:bg-encre aria-pressed:text-fond"
+            >
+              Retour
+            </button>
+          </div>
+          <a id="fh-fiche" href="#" class="lien ml-auto hidden text-sm sm:inline">Fiche de la ligne</a>
+          <button type="button" id="fh-imprimer" class="bouton bouton-plein"><i class="fa-solid fa-print"></i>Imprimer ou PDF</button>
+        </div>
+      </div>
+
+      <div id="fh-pile" class="fh-pile flex flex-col items-center gap-8 bg-carte-2 px-4 py-10"></div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

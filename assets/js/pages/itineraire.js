@@ -50,9 +50,9 @@
   const parNom = (n) => I.arrets.find((x) => x.nom === n);
   const exemples = [
     ["Gare de Clermont-Ferrand", "Aéroport Clermont-Ferrand Auvergne"],
-    ["Les Vergnes", "Place de Jaude"],
-    ["UCA Campus Cézeaux", "Gare de Clermont-Ferrand"],
-    ["Montferrand - Centre historique", "Vulcania"],
+    ["L'Attaque", "Pôle Tertiaire"],
+    ["Campus Alan Turing", "Gare de Clermont-Ferrand"],
+    ["Chamalières - Centre", "Parc d'attractions"],
   ]
     .map(([x, y]) => [parNom(x), parNom(y)])
     .filter(([x, y]) => x && y);
@@ -77,6 +77,7 @@
       const l = L[id];
       if (!l) continue;
       if (l.statut && l.statut.etat === "ouverture" && TCM.date(l.statut.date) > d) continue;
+      if (l.statut && l.statut.etat === "fermee") continue;
       const coupe = ms.some((m) => m.type === "interruption" && (m.lignes.includes(id) || m.lignes.includes(l.code)) && (!m.fin || TCM.date(m.fin) >= d));
       if (coupe) continue;
       const f = l.frequences?.[per.vacances ? "vacances" : "scolaire"]?.[per.jour]?.[moment];
@@ -206,7 +207,7 @@
       if (i === 0)
         h += rangee(
           heure(plus(d, t)),
-          `<p class="text-lg font-black uppercase leading-tight">${TCM.esc(nomArret(e.depuis))}</p><p class="text-xs text-doux">Départ</p>`,
+          `<p class="text-lg font-black uppercase leading-tight"><a href="/arret.html?a=${encodeURIComponent(e.depuis)}" class="hover:text-tcm-600">${TCM.esc(nomArret(e.depuis))}</a></p><p class="text-xs text-doux">Départ</p>`,
           pointArret
         );
       else {
@@ -238,7 +239,7 @@
       const derniere = i === r.etapes.length - 1;
       h += rangee(
         heure(plus(d, t)),
-        `<p class="${derniere ? "text-lg font-black uppercase leading-tight" : "font-bold"}">${TCM.esc(nomArret(e.vers))}</p><p class="text-xs text-doux">${derniere ? "Arrivée" : "Descendre ici"}</p>`,
+        `<p class="${derniere ? "text-lg font-black uppercase leading-tight" : "font-bold"}"><a href="/arret.html?a=${encodeURIComponent(e.vers)}" class="hover:text-tcm-600">${TCM.esc(nomArret(e.vers))}</a></p><p class="text-xs text-doux">${derniere ? "Arrivée" : "Descendre ici"}</p>`,
         pointArret
       );
     });

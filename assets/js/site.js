@@ -16,7 +16,70 @@
         return r.json();
       }));
   TCM.config = () => TCM.json("/data/config.json").catch(() => ({}));
-  TCM.reseau = () => TCM.json("/data/reseau.json");
+  /* feuille Google « TCM — Données du site » : un onglet lu en CSV (lisible par lien), null si indisponible */
+  TCM.feuille = (onglet) =>
+    (cache["feuille:" + onglet] =
+      cache["feuille:" + onglet] ||
+      TCM.config().then(async (c) => {
+        if (!c.google_sheet_id) return null;
+        try {
+          const url = `https://docs.google.com/spreadsheets/d/${encodeURIComponent(c.google_sheet_id)}/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(onglet)}`;
+          const r = await fetch(url, { credentials: "omit" });
+          if (!r.ok) return null;
+          return TCM.lireCsv(await r.text());
+        } catch (e) {
+          return null;
+        }
+      }));
+  /* date saisie dans la feuille : 2026-12-05, 2026-12-05 05:00 ou 05/12/2026 */
+  TCM.dateSaisie = (s) => {
+    s = String(s || "").trim();
+    const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}:\d{2}))?/);
+    if (m) s = `${m[3]}-${m[2].padStart(2, "0")}-${m[1].padStart(2, "0")}` + (m[4] ? "T" + m[4].padStart(5, "0") : "");
+    return s.replace(" ", "T");
+  };
+  const oui = (v) => v === true || /^(oui|o|x|1|vrai|true)$/i.test(String(v || "").trim());
+  TCM.reseau = () =>
+    (cache.__reseau =
+      cache.__reseau ||
+      Promise.all([TCM.json("/data/reseau.json"), TCM.feuille("lignes")]).then(([R, rangs]) => {
+        for (const r of rangs || []) {
+          const l = R.lignes[(r.ligne || "").trim()];
+          if (!l) continue;
+          const st = TCM.sansAccent(r.statut || "");
+          const date = TCM.dateSaisie(r.ouverture) || (l.statut && l.statut.date);
+          if (st.startsWith("ferm")) l.statut = { etat: "fermee", date };
+          else if (st.startsWith("a venir") || st.startsWith("ouverture")) l.statut = { etat: "ouverture", date };
+          else if (st) l.statut = { etat: "service", date };
+          else if (date) l.statut = { ...(l.statut || { etat: "ouverture" }), date };
+          if (r.message) l.annonce = r.message;
+        }
+        return R;
+      }));
+  /* parkings relais : onglet parkings de la feuille, sinon data/parkings.json */
+  TCM.parkings = () =>
+    (cache.__pr =
+      cache.__pr ||
+      TCM.feuille("parkings").then(async (rangs) => {
+        const liste = rangs && rangs.length ? rangs : (await TCM.json("/data/parkings.json").catch(() => ({ parkings: [] }))).parkings;
+        const now = new Date();
+        return liste
+          .filter((p) => p.nom)
+          .map((p) => {
+            const ouverture = TCM.dateSaisie(p.ouverture);
+            let statut = TCM.sansAccent(p.statut || "ouvert");
+            if (ouverture && TCM.date(ouverture) > now && !statut.startsWith("ferm")) statut = "a venir";
+            else if (statut.startsWith("a venir") && (!ouverture || TCM.date(ouverture) <= now)) statut = "ouvert";
+            return {
+              ...p,
+              places: +p.places || 0,
+              ouverture,
+              statut: statut.startsWith("ferm") ? "ferme" : statut.startsWith("a venir") ? "a venir" : "ouvert",
+              recharge: oui(p.recharge),
+              surveille: oui(p.surveille),
+            };
+          });
+      }));
   TCM.calendrier = () => TCM.json("/data/calendrier.json").catch(() => ({ periodes: [], feries: [] }));
   TCM.lienLigne = (id) => "/ligne.html?l=" + encodeURIComponent(id);
   TCM.param = (k) => new URLSearchParams(location.search).get(k);
@@ -119,6 +182,7 @@
       ch = m.type === "arret" ? ch.map((c) => [...c, m]) : ch.flatMap((c) => m.branches.map((br) => [...c, ...br.filter((x) => x.type === "arret")]));
     return { chemins: ch, boucle: false };
   };
+  TCM.parcoursPlan = (p) => parcoursPlan(TCM.lirePlan(p));
   TCM.correspondancesPlan = (s) =>
     (s.connections || []).flatMap((c) =>
       c.$modeConnection
@@ -188,6 +252,20 @@
           const r = (l.temps || 0) / Math.max(1, R.lignes[jour].temps || 1);
           lignes[lid] = { chemins: j.chemins.map((c) => c.map(([k, t, i]) => [k, Math.round(t * r * 10) / 10, i])), boucle: j.boucle, source: "plan " + jour };
           lignes[lid].chemins.forEach((c) => c.forEach(([k]) => arrets[k].lignes.add(lid)));
+        }
+        /* lignes sans plan publié : tracé relevé sur les plans papier (noms du jeu) */
+        for (const [lid, t] of Object.entries(conf.traces_manuels || {})) {
+          const l = R.lignes[lid];
+          if (lid.startsWith("_") || !l || lignes[lid] || !t.arrets || t.arrets.length < 2) continue;
+          const n = t.arrets.length - (t.boucle ? 0 : 1);
+          const pas = (l.temps || 0) / Math.max(1, n);
+          const seq = t.arrets.map((nom, i) => {
+            const k = depuisJeu(nom);
+            arrets[k].lignes.add(lid);
+            return [k, Math.round(i * pas * 10) / 10];
+          });
+          if (t.boucle) seq.push([seq[0][0], Math.round(n * pas * 10) / 10]);
+          lignes[lid] = { chemins: [seq], boucle: !!t.boucle, source: "trace" };
         }
         const parNom = {};
         for (const [k, a] of Object.entries(arrets)) parNom[cleNom(a.nom)] = k;
@@ -456,19 +534,40 @@
 
   /* ---------- agences : ouvert / fermé maintenant ---------- */
   TCM.etatAgence = async (a, d = new Date()) => {
-    const per = await TCM.periodeDu(d);
-    const plage = d.getDate() === 1 && a.premier_du_mois ? a.premier_du_mois : per.ferie ? null : a.horaires[String(d.getDay())];
-    const enMin = (s) => {
-      const [h, m] = s.split(":").map(Number);
+    const enMin = (x) => {
+      const [h, m] = x.split(":").map(Number);
       return h * 60 + (m || 0);
     };
-    const fmt = (s) => s.replace(":00", "h").replace(":", "h");
-    if (!plage) return { ouvert: false, texte: per.ferie ? "Fermé (" + per.ferie + ")" : "Fermé aujourd'hui" };
-    const [o, f] = plage.split("-");
+    const fmt = (x) => x.replace(":00", "h").replace(":", "h");
+    const plageDu = async (j) => {
+      const per = await TCM.periodeDu(j);
+      if (j.getDate() === 1 && a.premier_du_mois) return { plage: a.premier_du_mois, per };
+      return { plage: per.ferie ? null : a.horaires[String(j.getDay())], per };
+    };
+    const prochaine = async () => {
+      for (let k = 1; k <= 8; k++) {
+        const j = new Date(d.getFullYear(), d.getMonth(), d.getDate() + k);
+        const { plage } = await plageDu(j);
+        if (plage) return (k === 1 ? "demain" : TCM.JOURS[j.getDay()]) + " à " + fmt(plage.split("-")[0]);
+      }
+      return null;
+    };
+    const { plage, per } = await plageDu(d);
     const m = d.getHours() * 60 + d.getMinutes();
-    if (m < enMin(o)) return { ouvert: false, texte: "Ouvre à " + fmt(o) };
-    if (m >= enMin(f)) return { ouvert: false, texte: "Fermé · a fermé à " + fmt(f) };
-    return { ouvert: true, texte: "Ouvert jusqu'à " + fmt(f), bientot: enMin(f) - m <= 45 };
+    if (plage) {
+      const [o, f] = plage.split("-");
+      if (m < enMin(o))
+        return enMin(o) - m <= 45
+          ? { ouvert: false, etat: "ouvre-bientot", classe: "statut-travaux", texte: `Ouvre bientôt · à ${fmt(o)}` }
+          : { ouvert: false, etat: "ferme", classe: "statut-futur", texte: "Fermé · ouvre à " + fmt(o) };
+      if (m < enMin(f))
+        return enMin(f) - m <= 45
+          ? { ouvert: true, etat: "ferme-bientot", bientot: true, classe: "statut-perturbation", texte: `Ferme bientôt · à ${fmt(f)}` }
+          : { ouvert: true, etat: "ouvert", classe: "statut-ok", texte: "Ouvert jusqu'à " + fmt(f) };
+    }
+    const p = await prochaine();
+    const raison = !plage && per.ferie ? `Fermé (${per.ferie})` : "Fermé";
+    return { ouvert: false, etat: "ferme", classe: "statut-futur", texte: raison + (p ? " · ouvre " + p : "") };
   };
 
   /* ---------- info trafic : data/trafic.json, ou une feuille Google publiée en CSV ---------- */
@@ -509,15 +608,25 @@
       lignes.push(ligne);
     }
     const tete = (lignes.shift() || []).map((h) => h.trim().toLowerCase());
-    return lignes.filter((l) => l.some((x) => x.trim())).map((l) => Object.fromEntries(tete.map((h, i) => [h, (l[i] || "").trim()])));
+    return lignes.filter((l) => l.some((x) => x.trim())).map((l) => Object.fromEntries(tete.map((h, i) => [h, (l[i] || "").trim()]).filter(([h]) => h)));
   };
+  TCM.lireCsv = csv;
   TCM.messages = () =>
     (cache.__msg =
       cache.__msg ||
       (async () => {
         const conf = await TCM.config();
         let liste = null;
-        if (conf.trafic_google_sheet_csv) {
+        const rangs = await TCM.feuille("trafic");
+        if (rangs)
+          liste = rangs.map((m) => ({
+            ...m,
+            lignes: (m.lignes || "TCM").split(/[\s,;]+/).filter(Boolean),
+            type: TCM.sansAccent(m.type || "information").toLowerCase(),
+            debut: TCM.dateSaisie(m.debut),
+            fin: TCM.dateSaisie(m.fin),
+          }));
+        if (!liste && conf.trafic_google_sheet_csv) {
           try {
             const r = await fetch(conf.trafic_google_sheet_csv, { cache: "no-cache" });
             if (r.ok)
@@ -543,6 +652,7 @@
     const ms = messages.filter((m) => m.lignes.includes(l.id) || m.lignes.includes(l.code));
     if (l.statut && l.statut.etat === "ouverture" && TCM.date(l.statut.date) > new Date())
       return { classe: "statut-futur", texte: "Ouverture le " + TCM.dateFr(l.statut.date), messages: ms, futur: true };
+    if (l.statut && l.statut.etat === "fermee") return { classe: "statut-interruption", texte: "Ligne fermée", messages: ms, ferme: true };
     const pire = ms.filter((m) => m.type !== "information" && m.type !== "evenement")[0];
     if (pire) return { classe: TCM.TYPES[pire.type].classe, texte: TCM.TYPES[pire.type].nom, messages: ms };
     return { classe: "statut-ok", texte: ms.length ? "Information" : "Trafic normal", messages: ms };
@@ -580,15 +690,17 @@
   const NAV = [
     { titre: "Itinéraire", href: "/itineraire.html" },
     { titre: "Lignes", href: "/reseau.html" },
+    { titre: "Carte", href: "/carte.html" },
     { titre: "Info trafic", href: "/trafic.html", badge: true },
     { titre: "Nouveau réseau", href: "/nouveau-reseau.html" },
     { titre: "Tarifs", href: "/tarifs.html" },
-    { titre: "Agences", href: "/agences.html" },
     {
       titre: "Plus",
       sous: [
+        { href: "/agences.html", titre: "Agences", texte: "Horaires et ouverture en direct" },
         { href: "/parkings.html", titre: "Parkings relais", texte: "Places disponibles en direct" },
         { href: "/nuit.html", titre: "Réseau de nuit", texte: "BEN1 à BEN4" },
+        { href: "/fiche-horaire.html", titre: "Fiches horaires", texte: "À imprimer, ligne par ligne" },
         { href: "/actualites.html", titre: "Actualités", texte: "La vie du réseau" },
         { href: "/archives.html", titre: "Archives", texte: "Événements passés" },
       ],
@@ -707,6 +819,7 @@
           <div class="grid gap-10 sm:grid-cols-3 md:col-span-1 lg:col-span-7">
             ${col("Réseau", [
               ["/itineraire.html", "Calculer un itinéraire"],
+              ["/carte.html", "Carte en direct"],
               ["/reseau.html", "Toutes les lignes"],
               ["/nouveau-reseau.html", "Nouveau réseau"],
               ["/nuit.html", "Réseau de nuit"],
@@ -742,6 +855,206 @@
         .join("");
     });
   }
+
+  /* ---------- passages théoriques : départs calculés à partir des fréquences (pas d'horaires réels) ----------
+     Pour chaque ligne et chaque sens, les départs du terminus s'enchaînent au rythme de la fréquence du créneau,
+     décalés d'une valeur propre à la ligne : toutes les pages affichent les mêmes passages. */
+  const graineTxt = (x) => {
+    let h = 2166136261;
+    for (const c of String(x)) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+    return (h >>> 0) / 4294967296;
+  };
+  const momentMin = (m) => (m < 300 ? "nuit" : (m >= 420 && m < 570) || (m >= 990 && m < 1140) ? "pointe" : m >= 1230 ? "soir" : "creuse");
+  TCM.circule = (l, d) => {
+    if (!l || ["scolaire", "tad"].includes(l.mode)) return false;
+    if (l.statut && l.statut.etat === "fermee") return false;
+    if (l.statut && l.statut.etat === "ouverture" && TCM.date(l.statut.date) > d) return false;
+    return true;
+  };
+  /* départs (minutes depuis minuit) d'une journée, pour un sens */
+  TCM.departs = async (l, sens, jour) => {
+    const per = await TCM.periodeDu(jour);
+    const f = l.frequences?.[per.vacances ? "vacances" : "scolaire"]?.[per.jour] || {};
+    const out = [];
+    const dec = graineTxt(l.id + ":" + sens + ":" + TCM.iso(jour));
+    let m = 0;
+    while (m < 1440) {
+      const fr = f[momentMin(m)];
+      if (!fr) {
+        m = momentMin(m) === "nuit" ? 300 : m + 5;
+        continue;
+      }
+      const debut = m;
+      let t = debut + Math.floor(dec * fr);
+      while (t < 1440 && f[momentMin(t)]) {
+        out.push(t);
+        t += f[momentMin(t)];
+      }
+      m = t;
+      while (m < 1440 && f[momentMin(m)]) m++;
+      if (m === debut) m++;
+    }
+    return out;
+  };
+  /* prochains passages d'une ligne à un arrêt situé à « decalage » minutes du terminus de départ du sens */
+  TCM.passages = async (l, sens, decalage, d = new Date(), n = 2) => {
+    if (!TCM.circule(l, d)) return [];
+    const res = [];
+    for (const k of [-1, 0, 1]) {
+      const jour = new Date(d.getFullYear(), d.getMonth(), d.getDate() + k);
+      for (const m of await TCM.departs(l, sens, jour)) {
+        const t = new Date(jour.getTime() + (m + decalage) * 60000);
+        if (t >= d) res.push(t);
+      }
+      if (res.length >= n && k >= 0) break;
+    }
+    return res.sort((a, b) => a - b).slice(0, n);
+  };
+  TCM.delai = (t, d = new Date()) => {
+    const m = Math.round((t - d) / 60000);
+    if (m <= 0) return "À l'approche";
+    if (m < 60) return m + " min";
+    return String(t.getHours()).padStart(2, "0") + "h" + String(t.getMinutes()).padStart(2, "0");
+  };
+  /* lignes scolaires : y a-t-il service aujourd'hui ? */
+  TCM.etatScolaire = async (l, d = new Date()) => {
+    const per = await TCM.periodeDu(d);
+    const reprise = async () => {
+      for (let k = 1; k <= 120; k++) {
+        const j = new Date(d.getFullYear(), d.getMonth(), d.getDate() + k);
+        const p = await TCM.periodeDu(j);
+        if (!p.vacances && !p.ferie && p.jour === "semaine") return j;
+      }
+      return null;
+    };
+    if (per.vacances) {
+      const r = await reprise();
+      return {
+        service: false,
+        titre:
+          "Pas de service pendant " +
+          (/^vacances/i.test(per.nom) ? "les " + per.nom.replace(/^Vacances/, "vacances") : "le " + per.nom.charAt(0).toLowerCase() + per.nom.slice(1)),
+        texte: r ? "Reprise le " + TCM.dateFr(r, { jour: true }) + "." : "",
+      };
+    }
+    if (per.ferie || per.jour !== "semaine") {
+      const r = await reprise();
+      const pourquoi = per.ferie ? per.ferie + " : pas de service" : "Pas de service le week-end";
+      return { service: false, titre: pourquoi, texte: r ? "Prochain service le " + TCM.dateFr(r, { jour: true }) + "." : "" };
+    }
+    return {
+      service: true,
+      titre: "Service assuré aujourd'hui",
+      texte: l.services_par_jour
+        ? `${l.services_par_jour} service${l.services_par_jour > 1 ? "s" : ""}, adapté${l.services_par_jour > 1 ? "s" : ""} aux horaires des établissements.`
+        : "Adapté aux horaires des établissements.",
+    };
+  };
+
+  /* ---------- géographie : arrêts placés sur Clermont-Ferrand, tracés des lignes ---------- */
+  let geoP = null;
+  TCM.geo = () =>
+    (geoP =
+      geoP ||
+      Promise.all([TCM.json("/data/positions.json"), TCM.itineraires(), TCM.plans(), TCM.json("/data/noms_arrets.json"), TCM.reseau()]).then(
+        ([G, I, P, conf, R]) => {
+          const o = G.origine,
+            e = G.echelle_m;
+          const enLatLon = ([x, y]) => [o.lat - ((y - o.pixel[1]) * e) / 111320, o.lon + ((x - o.pixel[0]) * e) / (111320 * Math.cos((o.lat * Math.PI) / 180))];
+          const alias = {};
+          for (const [k, v] of Object.entries(conf.alias || {})) alias[cleNom(k)] = cleNom(v);
+          const parCle = {};
+          for (const [k, v] of Object.entries(G.plan)) parCle[cleNom(k)] = enLatLon(v);
+          for (const [k, v] of Object.entries(G.reel || {})) parCle["site:" + cleNom(k)] = v;
+          const posCle = (k) => parCle[alias[k] || k] || null;
+          const parId = {};
+          for (const a of I.arrets) {
+            let p = posCle(a.cle);
+            if (!p && a.cle.startsWith("site:")) {
+              const jeu = Object.entries(conf.noms || {}).find(([, v]) => cleNom(v) === a.cle.slice(5));
+              if (jeu) p = posCle(cleNom(jeu[0]));
+            }
+            if (p) parId[a.id] = p;
+          }
+          /* tracé complet d'une ligne : arrêts nommés placés, arrêts sans nom répartis entre eux */
+          const traces = {};
+          for (const [lid, li] of Object.entries(I.lignes)) {
+            const p = P[lid] || (li.source && li.source.startsWith("plan ") && P[li.source.slice(5)]);
+            let pts = [];
+            if (p) {
+              const { chemins, boucle } = TCM.parcoursPlan(p);
+              const c = chemins[0];
+              const k = c.map((x) => (x.s.name || "").trim() && posCle(alias[cleNom(x.s.name)] || cleNom(x.s.name)));
+              const nommes = k.map((v, i) => (v ? i : -1)).filter((i) => i >= 0);
+              if (nommes.length < 2) continue;
+              pts = c
+                .map((x, i) => {
+                  if (k[i]) return { pos: k[i], cle: TCM.cleArretPlan(x), rang: i };
+                  const av = [...nommes].reverse().find((j) => j < i),
+                    ap = nommes.find((j) => j > i);
+                  if (av === undefined || ap === undefined) return null;
+                  const r = (i - av) / (ap - av);
+                  return { pos: [k[av][0] + (k[ap][0] - k[av][0]) * r, k[av][1] + (k[ap][1] - k[av][1]) * r], cle: TCM.cleArretPlan(x), rang: i };
+                })
+                .filter(Boolean);
+              traces[lid] = { pts, boucle, pas: (R.lignes[lid]?.temps || 0) / Math.max(1, c.length - 1 - (boucle ? 0 : 0)) };
+              const tot = R.lignes[lid]?.temps || 0;
+              const n = c.length - 1;
+              traces[lid].pts.forEach((q) => (q.t = (q.rang / Math.max(1, n)) * tot));
+            } else {
+              const c = li.chemins[0];
+              pts = c.map(([sid, t]) => parId[sid] && { pos: parId[sid], id: sid, t }).filter(Boolean);
+              if (pts.length < 2) continue;
+              traces[lid] = { pts, boucle: li.boucle };
+            }
+            traces[lid].temps = R.lignes[lid]?.temps || (pts.length ? pts[pts.length - 1].t : 0);
+            for (const q of traces[lid].pts) if (!q.id && q.cle) q.id = I.idDe(q.cle);
+          }
+          return { parId, traces, enLatLon };
+        }
+      ));
+  /* Leaflet (carte) chargé à la demande depuis cdnjs, fond de plan CARTO clair ou sombre selon le thème */
+  let leafletP = null;
+  TCM.leaflet = () =>
+    (leafletP =
+      leafletP ||
+      new Promise((ok, ko) => {
+        const css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+        document.head.appendChild(css);
+        const js = document.createElement("script");
+        js.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+        js.onload = () => ok(window.L);
+        js.onerror = () => ko(new Error("Leaflet indisponible"));
+        document.head.appendChild(js);
+      }));
+  TCM.fondCarte = (Lf, carte) => {
+    const sombre = () => document.documentElement.getAttribute("data-theme") === "night";
+    let couche = null;
+    const poser = () => {
+      if (couche) carte.removeLayer(couche);
+      couche = Lf.tileLayer(`https://{s}.basemaps.cartocdn.com/${sombre() ? "dark_all" : "light_all"}/{z}/{x}/{y}{r}.png`, {
+        subdomains: "abcd",
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      }).addTo(carte);
+      couche.bringToBack();
+    };
+    poser();
+    new MutationObserver(poser).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  };
+  /* position le long d'un tracé, t en minutes depuis le départ du sens 0 */
+  TCM.surTrace = (tr, t) => {
+    const pts = tr.pts;
+    if (t <= pts[0].t) return { pos: pts[0].pos, i: 0 };
+    for (let i = 1; i < pts.length; i++)
+      if (t <= pts[i].t) {
+        const r = (t - pts[i - 1].t) / Math.max(0.01, pts[i].t - pts[i - 1].t);
+        return { pos: [pts[i - 1].pos[0] + (pts[i].pos[0] - pts[i - 1].pos[0]) * r, pts[i - 1].pos[1] + (pts[i].pos[1] - pts[i - 1].pos[1]) * r], i };
+      }
+    return { pos: pts[pts.length - 1].pos, i: pts.length - 1 };
+  };
 
   /* ---------- apparition au défilement ---------- */
   TCM.observer = () => {

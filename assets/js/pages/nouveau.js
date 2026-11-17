@@ -132,16 +132,16 @@
     [
       "Quand ouvre le tram B ?",
       b
-        ? `Le tram B ouvrira le ${TCM.dateFr(b.statut.date)}, une fois toutes ses rames livrées et testées. Il reliera le campus des Cézeaux au campus Centre par l'hôtel de Région et la gare.`
+        ? `Le tram B ouvrira le ${TCM.dateFr(b.statut.date)}, une fois toutes ses rames livrées et testées. Il reliera le campus Alan Turing au campus Centre par l'hôtel de Région et la gare.`
         : "",
     ],
     [
       "Les services scolaires et le transport à la demande changent-ils ?",
-      "Non : les lignes Édu'Volcan et Volca'Demande sont maintenues. Une nouvelle ligne scolaire, la 604, relie le lycée Sidoine-Apollinaire à Pont-du-Château.",
+      "Non : les lignes Édu'Volcan et Volca'Demande sont maintenues. Une nouvelle ligne scolaire, la 604, relie le lycée Sidoine-Apollinaire au Cendre.",
     ],
     [
       "Les bus de nuit circulent-ils toujours ?",
-      "Oui, et le réseau de nuit s'agrandit : BEN1, BEN2, BEN3 (assurée par le tram) et une nouvelle ligne BEN4 vers Pont-du-Château.",
+      "Oui, et le réseau de nuit s'agrandit : BEN1, BEN2, BEN3 (assurée par le tram) et une nouvelle ligne BEN4 vers Le Cendre.",
     ],
     [
       "Où trouver les horaires de ma ligne ?",

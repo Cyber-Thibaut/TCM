@@ -1,164 +1,185 @@
 {
- "_lisezmoi": "Lu par le site (calculateur d'itinéraire et plans des fiches lignes). noms : nom du jeu -> nom affiché. alias : variantes d'écriture ramenées au même arrêt. arrets_partages : arrêts sans nom communs à plusieurs lignes, repérés par l'identifiant de l'arrêt dans les plans de AO Mobility Plan Studio. memes_traces : ligne de nuit qui suit le tracé d'une ligne de jour.",
- "noms": {
-  "Abbaye": "Abbaye de Saint-Alyre",
-  "Arena": "Zenith d'Auvergne",
-  "ARRONAY – Centre-ville": "Ceyrat - Centre-ville",
-  "ARRONAY – Étangs": "Ceyrat - Étangs",
-  "Aéroport – Steven Spielberg": "Aéroport Clermont-Ferrand Auvergne",
-  "Bellevue": "Les Salins",
-  "Bibliothèque": "Bibliothèque",
-  "Brasserie": "Brasserie",
-  "BRINTE – Avenue de la Liberté": "Beaumont - Avenue de la Liberté",
-  "C.C. Iris": "C.C. Iris",
-  "C.C. Lilas": "C.C. Lilas",
-  "C.C. Tulipe": "C.C. Tulipe",
-  "Campus Alan Turing": "UCA Campus Cézeaux",
-  "Campus Marthe Gautier": "UCA Campus Centre",
-  "Campus Maryse Esterle": "Campus des Lettres (Carnot)",
-  "Cathédrale": "Cathédrale Notre-Dame-de-l'Assomption",
-  "Centre Régional de Transport Est": "Centre Régional de Transport Est",
-  "Chapelle": "Chapelle",
-  "CHRU Marthe Gautier": "CHU Gabriel-Montpied",
-  "Cimetière": "Cimetière",
-  "Clinique Saint Paul": "Clinique Saint-Paul",
-  "Clinique Sainte Marie": "Clinique Sainte Marie",
-  "CLORENT – Circuit du Nurbrebzinbdgsbring": "Pôle d'activité du Circuit de Charade",
-  "CLORENT – Place du marché": "Aubière - Place du Marché",
-  "Collège Rosa Luxembourg": "Collège Rosa Luxembourg",
-  "Collège Rosa Parks": "Collège Rosa Parks",
-  "Collège Saint Paul": "Collège Saint-Paul",
-  "Collège Victor Hugo": "Collège Victor Hugo",
-  "Diamant": "Diamant",
-  "Floride": "Floride",
-  "Gare centrale": "Gare de Clermont-Ferrand",
-  "Gare de l’Est": "Gare de marchandises du Brézet",
-  "Gare de l’Ouest": "Gare routière de Clermont-Ferrand",
-  "Globe": "Globe",
-  "Grand Palais": "Hôtel de ville de Clermont-Ferrand",
-  "Haute Ville": "Montferrand - Centre historique",
-  "Hippodrome": "Hippodrome",
-  "Hôtel de police": "Hôtel de police",
-  "Hôtel de Région": "Hôtel de Région Auvergne-Rhône-Alpes",
-  "Hôtel de ville": "Hôtel de ville (tram B)",
-  "Institut Simone Weil": "Institut Simone Weil",
-  "Jardins Guillaume": "Jardins Guillaume",
-  "Jean Jaurès": "Jean Jaurès",
-  "Jules Verne": "Jules Verne",
-  "LACANAC – Hôtel de ville": "Lempdes - Hôtel de ville",
-  "LACANAC – Place du marché": "Lempdes - Place du Marché",
-  "LE ROTO – Avenue du Parc": "LE ROTO - Av. du Parc",
-  "LUNEBOURG-SUR-MER – Zone d’Activité Portuaire": "Zone d'activités de Lempdes",
-  "Lycée Anne Frank": "Lycée Anne Frank",
-  "Lycée Jean Zay": "Lycée Jean Zay",
-  "Lycée Karl Marx": "Lycée Blaise-Pascal",
-  "Lycée Sophie Adenot": "Lycée Sidoine-Apollinaire",
-  "L’Attaque": "Les Vergnes",
-  "Maisons Rouges": "Maisons Rouges",
-  "Molière": "Molière",
-  "Mont Aile G": "Montaudou",
-  "Moulin à vent": "Montjuzet",
-  "Musée d’Art Moderne": "Musée d'art Roger-Quilliot",
-  "Palais des Beaux-Arts": "Palais des Beaux-Arts",
-  "Parc Baudelaire": "Parc Baudelaire",
-  "Parc de l’Étang": "Parc Bargoin",
-  "Parc d’attractions": "Vulcania",
-  "Parc Jolimont": "Parc de Montjuzet",
-  "Parc Rive Droite": "Parc Rive Droite",
-  "Parc Verlaine": "Parc Verlaine",
-  "Peuplier": "Peuplier",
-  "Place de France": "Place de France",
-  "Place de l’Europe": "Place de la Victoire",
-  "Place de Verdun": "Place de Verdun",
-  "Place du 18 mars 1871": "Place du 18 mars 1871",
-  "Pont des arts": "Pont des arts",
-  "Port fluvial": "Quai de l'Allier (Pont-du-Château)",
-  "Préfecture": "Préfecture du Puy-de-Dôme",
-  "Pôle Luca Pacioli": "Place de Jaude",
-  "Rhin et Danube": "Rhin et Danube",
-  "Royal": "Royal",
-  "SAVIENS – Église": "Pont-du-Château - Église",
-  "Science Po": "IUT Clermont Auvergne",
-  "Stade": "Stade Marcel-Michelin",
-  "Tour Guillaume": "Tour Guillaume",
-  "Trinité": "Place Delille",
-  "TUTILLUS – Bureau de Poste": "Cébazat - Bureau de poste",
-  "TUTILLUS – Goncourt": "Cébazat - Goncourt",
-  "VANTIGUE – Bureau de Poste": "Royat - Bureau de Poste"
- },
- "alias": {
-  "CRT Est": "Centre Régional de Transport Est",
-  "Plae de l’Europe": "Place de l’Europe",
-  "Lycée Anne Franck": "Lycée Anne Frank",
-  "CLORENT – Place du marche": "CLORENT – Place du marché"
- },
- "arrets_partages": [
-  {
-   "id": "A-3",
-   "nom": "Arrêt sans nom (A / 3)",
-   "arrets": [
-    "9bbab093-a652-4756-8cec-dd267de2a78c",
-    "82839b74-0525-4be6-9079-9ba6a89c21e2"
-   ]
+  "_lisezmoi": "Lu par le site (calculateur d'itinéraire et plans des fiches lignes). noms : nom du jeu -> nom affiché. alias : variantes d'écriture ramenées au même arrêt. arrets_partages : arrêts sans nom communs à plusieurs lignes, repérés par l'identifiant de l'arrêt dans les plans de AO Mobility Plan Studio. memes_traces : ligne de nuit qui suit le tracé d'une ligne de jour.",
+  "noms": {
+    "Abbaye": "Abbaye",
+    "Arena": "Zénith d'Auvergne",
+    "ARRONAY – Centre-ville": "Cébazat - Centre-ville",
+    "ARRONAY – Étangs": "Cébazat - Étangs",
+    "Aéroport – Steven Spielberg": "Aéroport Clermont-Ferrand Auvergne",
+    "Bellevue": "Bellevue",
+    "Bibliothèque": "Bibliothèque",
+    "Brasserie": "Brasserie",
+    "BRINTE – Avenue de la Liberté": "Cournon-d'Auvergne - Avenue de la Liberté",
+    "C.C. Iris": "C.C. Iris",
+    "C.C. Lilas": "C.C. Lilas",
+    "C.C. Tulipe": "C.C. Tulipe",
+    "Campus Alan Turing": "Campus Alan Turing",
+    "Campus Marthe Gautier": "UCA Campus Centre",
+    "Campus Maryse Esterle": "Campus des Lettres (Carnot)",
+    "Cathédrale": "Cathédrale Notre-Dame-de-l'Assomption",
+    "Centre Régional de Transport Est": "Centre Régional de Transport Est",
+    "Chapelle": "Chapelle",
+    "CHRU Marthe Gautier": "CHU Estaing",
+    "Cimetière": "Cimetière",
+    "Clinique Saint Paul": "Clinique Saint-Paul",
+    "Clinique Sainte Marie": "Clinique Sainte Marie",
+    "CLORENT – Circuit du Nurbrebzinbdgsbring": "Pôle d'activité du Circuit de Charade",
+    "CLORENT – Place du marché": "Aubière - Place du Marché",
+    "Collège Rosa Luxembourg": "Collège Rosa Luxembourg",
+    "Collège Rosa Parks": "Collège Rosa Parks",
+    "Collège Saint Paul": "Collège Saint-Paul",
+    "Collège Victor Hugo": "Collège Victor Hugo",
+    "Diamant": "Diamant",
+    "Floride": "Floride",
+    "Gare centrale": "Gare de Clermont-Ferrand",
+    "Gare de l’Est": "Gare de marchandises du Brézet",
+    "Gare de l’Ouest": "Gare de Royat-Chamalières",
+    "Globe": "Globe",
+    "Grand Palais": "Place de Jaude",
+    "Haute Ville": "Chamalières - Centre",
+    "Hippodrome": "Hippodrome",
+    "Hôtel de police": "Hôtel de police",
+    "Hôtel de Région": "Hôtel de Région Auvergne-Rhône-Alpes",
+    "Hôtel de ville": "Hôtel de ville de Clermont-Ferrand",
+    "Institut Simone Weil": "Institut Simone Weil",
+    "Jardins Guillaume": "Jardins Guillaume",
+    "Jean Jaurès": "Jean Jaurès",
+    "Jules Verne": "Jules Verne",
+    "LACANAC – Hôtel de ville": "Royat - Hôtel de ville",
+    "LACANAC – Place du marché": "Royat - Place du Marché",
+    "LE ROTO – Avenue du Parc": "LE ROTO - Avenue du Parc",
+    "LUNEBOURG-SUR-MER – Zone d’Activité Portuaire": "Zone d'activités de Lempdes",
+    "Lycée Anne Frank": "Lycée Anne Frank",
+    "Lycée Jean Zay": "Lycée Jean Zay",
+    "Lycée Karl Marx": "Lycée Blaise-Pascal",
+    "Lycée Sophie Adenot": "Lycée Sidoine-Apollinaire",
+    "L’Attaque": "L'Attaque",
+    "Maisons Rouges": "Maisons Rouges",
+    "Molière": "Molière",
+    "Mont Aile G": "Chanturgue",
+    "Moulin à vent": "Montjuzet",
+    "Musée d’Art Moderne": "Musée d'Art Moderne",
+    "Palais des Beaux-Arts": "Palais des Beaux-Arts",
+    "Parc Baudelaire": "Parc Baudelaire",
+    "Parc de l’Étang": "Parc de la Gauthière",
+    "Parc d’attractions": "Parc d'attractions",
+    "Parc Jolimont": "Jardin Lecoq",
+    "Parc Rive Droite": "Parc Rive Droite",
+    "Parc Verlaine": "Parc Verlaine",
+    "Peuplier": "Peuplier",
+    "Place de France": "Place de France",
+    "Place de l’Europe": "Les Salins",
+    "Place de Verdun": "Place de Verdun",
+    "Place du 18 mars 1871": "Place Delille",
+    "Pont des arts": "Pont des arts",
+    "Port fluvial": "Port fluvial",
+    "Préfecture": "Préfecture du Puy-de-Dôme",
+    "Pôle Luca Pacioli": "Pôle Tertiaire",
+    "Rhin et Danube": "Rhin et Danube",
+    "Royal": "Royal",
+    "SAVIENS – Église": "Le Cendre - Église",
+    "Science Po": "Science Po",
+    "Stade": "Stade Marcel-Michelin",
+    "Tour Guillaume": "Tour Guillaume",
+    "Trinité": "Trinité",
+    "TUTILLUS – Bureau de Poste": "Ceyrat - Bureau de poste",
+    "TUTILLUS – Goncourt": "Ceyrat - Goncourt",
+    "VANTIGUE – Bureau de Poste": "Les Vergnes - Bureau de poste",
+    "Pont des Amis": "Pont des Amis",
+    "LUSIGNOL – Gare": "Vertaizon - Gare"
   },
-  {
-   "id": "A-6a",
-   "nom": "Arrêt sans nom (A / 6)",
-   "arrets": [
-    "aca18aaa-5e2e-454c-a092-303f29fa8762",
-    "44d3a51f-519a-4a1c-8a4c-d8e124b608bb"
-   ]
+  "alias": {
+    "CRT Est": "Centre Régional de Transport Est",
+    "Plae de l’Europe": "Place de l’Europe",
+    "Lycée Anne Franck": "Lycée Anne Frank",
+    "CLORENT – Place du marche": "CLORENT – Place du marché"
   },
-  {
-   "id": "A-6b",
-   "nom": "Arrêt sans nom (A / 6) bis",
-   "arrets": [
-    "9fbb8bb8-104f-4086-8503-99e080fd43d3",
-    "9bc027c1-0dd8-4ffa-ae11-d34893c3eeab"
-   ]
+  "arrets_partages": [
+    {
+      "id": "A-3",
+      "nom": "Arrêt sans nom (A / 3)",
+      "arrets": ["9bbab093-a652-4756-8cec-dd267de2a78c", "82839b74-0525-4be6-9079-9ba6a89c21e2"]
+    },
+    {
+      "id": "A-6a",
+      "nom": "Arrêt sans nom (A / 6)",
+      "arrets": ["aca18aaa-5e2e-454c-a092-303f29fa8762", "44d3a51f-519a-4a1c-8a4c-d8e124b608bb"]
+    },
+    {
+      "id": "A-6b",
+      "nom": "Arrêt sans nom (A / 6) bis",
+      "arrets": ["9fbb8bb8-104f-4086-8503-99e080fd43d3", "9bc027c1-0dd8-4ffa-ae11-d34893c3eeab"]
+    },
+    {
+      "id": "A-65",
+      "nom": "Arrêt sans nom (A / 65)",
+      "arrets": ["48936799-4edb-446d-b3de-131d23afc59c", "3407989c-d502-4e11-94de-fc2d9f966eb3"]
+    },
+    {
+      "id": "B-11",
+      "nom": "Arrêt sans nom (B / 11)",
+      "arrets": ["8fa01d3a-c25d-4978-982e-7be724dcd43e", "df6a5f6f-cb3c-4cb3-adc9-91e04da4f934"]
+    },
+    {
+      "id": "B-14a",
+      "nom": "Arrêt sans nom (B / 14)",
+      "arrets": ["9bc822f2-4de0-4c89-8e1f-fcfb697447ba", "c1abce58-36d6-4613-a942-2cd5cc96182d"]
+    },
+    {
+      "id": "B-14b",
+      "nom": "Arrêt sans nom (B / 14) bis",
+      "arrets": ["a4e03328-0eef-46cb-8890-4d487e08b1f2", "39614504-c95c-40c8-9c64-65b8cb9df088"]
+    },
+    {
+      "id": "B-15",
+      "nom": "Arrêt sans nom (B / 15)",
+      "arrets": ["c5444f09-558d-4576-9f17-46d86d0dee96", "25936e15-f6a4-4712-9ca1-ff33d80337b1"]
+    }
+  ],
+  "memes_traces": {
+    "BEN3": "A"
   },
-  {
-   "id": "A-65",
-   "nom": "Arrêt sans nom (A / 65)",
-   "arrets": [
-    "48936799-4edb-446d-b3de-131d23afc59c",
-    "3407989c-d502-4e11-94de-fc2d9f966eb3"
-   ]
-  },
-  {
-   "id": "B-11",
-   "nom": "Arrêt sans nom (B / 11)",
-   "arrets": [
-    "8fa01d3a-c25d-4978-982e-7be724dcd43e",
-    "df6a5f6f-cb3c-4cb3-adc9-91e04da4f934"
-   ]
-  },
-  {
-   "id": "B-14a",
-   "nom": "Arrêt sans nom (B / 14)",
-   "arrets": [
-    "9bc822f2-4de0-4c89-8e1f-fcfb697447ba",
-    "c1abce58-36d6-4613-a942-2cd5cc96182d"
-   ]
-  },
-  {
-   "id": "B-14b",
-   "nom": "Arrêt sans nom (B / 14) bis",
-   "arrets": [
-    "a4e03328-0eef-46cb-8890-4d487e08b1f2",
-    "39614504-c95c-40c8-9c64-65b8cb9df088"
-   ]
-  },
-  {
-   "id": "B-15",
-   "nom": "Arrêt sans nom (B / 15)",
-   "arrets": [
-    "c5444f09-558d-4576-9f17-46d86d0dee96",
-    "25936e15-f6a4-4712-9ca1-ff33d80337b1"
-   ]
+  "traces_manuels": {
+    "_aide": "Lignes sans plan publié : arrêts principaux dans l'ordre (noms du jeu), relevés sur les plans du réseau de nuit et du réseau suburbain. boucle : la ligne revient à son point de départ, dans ce sens uniquement.",
+    "BEN1": {
+      "boucle": true,
+      "arrets": [
+        "Gare centrale",
+        "C.C. Tulipe",
+        "Pont des Amis",
+        "Campus Maryse Esterle",
+        "Parc d’attractions",
+        "Stade",
+        "CHRU Marthe Gautier",
+        "Campus Marthe Gautier",
+        "Parc Jolimont",
+        "Place de l’Europe",
+        "Gare de l’Ouest",
+        "Musée d’Art Moderne",
+        "Campus Alan Turing",
+        "Clinique Sainte Marie",
+        "Hôtel de Région",
+        "Hôtel de ville"
+      ]
+    },
+    "BEN2": {
+      "arrets": [
+        "Haute Ville",
+        "Gare de l’Ouest",
+        "Préfecture",
+        "Hôtel de ville",
+        "Gare centrale",
+        "C.C. Tulipe",
+        "Pont des Amis",
+        "Cathédrale",
+        "Parc de l’Étang"
+      ]
+    },
+    "BEN4": {
+      "arrets": ["Gare centrale", "Palais des Beaux-Arts", "Campus Maryse Esterle", "C.C. Lilas", "BRINTE – Avenue de la Liberté", "SAVIENS – Église"]
+    },
+    "E1": {
+      "arrets": ["Gare centrale", "Pont des Amis", "LUNEBOURG-SUR-MER – Zone d’Activité Portuaire", "LUSIGNOL – Gare"]
+    }
   }
- ],
- "memes_traces": {
-  "BEN3": "A"
- }
 }

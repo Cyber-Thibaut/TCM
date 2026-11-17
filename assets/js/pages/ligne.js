@@ -11,6 +11,8 @@
     return;
   }
   $("#ligne").hidden = false;
+  if (document.getElementById("lien-fiche")) document.getElementById("lien-fiche").href = "/fiche-horaire.html?l=" + encodeURIComponent(l.id);
+  if (document.getElementById("lien-carte")) document.getElementById("lien-carte").href = "/carte.html?l=" + encodeURIComponent(l.id);
   document.title = `${l.nom} : ${l.depart} – ${l.terminus} — TCM`;
   const fam = R.familles.find((f) => f.cle === l.famille) || {};
   const m = TCM.MODES[l.mode] || TCM.MODES.bus;
@@ -24,6 +26,11 @@
   $("#ligne-nom").textContent = l.nom;
   $("#ligne-terminus").innerHTML = `${TCM.esc(l.depart)} <i class="fa-solid fa-arrow-right-arrow-left mx-2 text-base text-doux"></i> ${TCM.esc(l.terminus)}`;
   const e = TCM.etatLigne(l, ms);
+  if (l.annonce)
+    $("#ligne-badges").insertAdjacentHTML(
+      "afterend",
+      `<p class="mt-4 max-w-2xl text-sm text-doux"><i class="fa-solid fa-circle-info mr-2"></i>${TCM.esc(l.annonce)}</p>`
+    );
   $("#ligne-badges").innerHTML = [
     `<span class="${e.classe} pastille fond-statut"><span class="point-statut !h-2 !w-2"></span>${TCM.esc(e.texte)}</span>`,
     l.nouvelle ? '<span class="pastille border border-trait text-encre">Nouvelle ligne</span>' : "",
@@ -146,6 +153,70 @@
       ? `${l.arrets} arrêts au total.`
       : "";
 
+  /* ---- prochains passages (théoriques) et état des services scolaires ---- */
+  if (l.mode === "scolaire") {
+    const e = await TCM.etatScolaire(l);
+    $("#scolaire-etat").innerHTML =
+      `<div class="${e.service ? "statut-ok" : "statut-futur"} bande-statut bg-carte-2 p-4"><p class="font-black">${TCM.esc(e.titre)}</p>${e.texte ? `<p class="mt-1 text-sm text-doux">${TCM.esc(e.texte)}</p>` : ""}</div>`;
+  }
+  TCM.itineraires()
+    .then((I) => {
+      const li = I.lignes[l.id];
+      if (!li || !li.chemins[0] || li.chemins[0].length < 2) return;
+      const A = Object.fromEntries(I.arrets.map((a) => [a.id, a]));
+      const c = li.chemins[0];
+      const fin = c[c.length - 1][1];
+      const arrets = c.slice(0, li.boucle ? c.length - 1 : c.length).filter(([sid]) => A[sid] && !A[sid].partage);
+      if (!arrets.length) return;
+      $("#bloc-passages").hidden = false;
+      if (new Date() < TCM.date(R.mise_en_service))
+        $("#passages").insertAdjacentHTML(
+          "beforebegin",
+          `<p class="statut-futur fond-statut mt-4 p-3 text-sm"><i class="fa-solid fa-circle-info mr-2"></i>Passages du nouveau réseau, à partir du ${TCM.dateFr(R.mise_en_service, { jour: true })}.</p>`
+        );
+      $("#pass-arret").innerHTML = arrets.map(([sid, t]) => `<option value="${sid}|${t}">${TCM.esc(A[sid].nom)}</option>`).join("");
+      const voulu = TCM.param("arret");
+      const k = arrets.findIndex(([sid]) => sid === voulu);
+      if (k >= 0) $("#pass-arret").selectedIndex = k;
+      const nomDe = (sid) => (A[sid] ? A[sid].nom : "");
+      const sens = li.boucle
+        ? [{ s: 0, dir: "Ligne en boucle" }]
+        : [
+            { s: 0, dir: nomDe(c[c.length - 1][0]) },
+            { s: 1, dir: nomDe(c[0][0]) },
+          ];
+      const rendre = async () => {
+        const [sid, t] = $("#pass-arret").value.split("|");
+        const now = new Date();
+        $("#pass-heure").textContent = "· " + now.getHours() + "h" + String(now.getMinutes()).padStart(2, "0");
+        $("#t-passages").textContent = "À l'arrêt " + nomDe(sid);
+        $("#pass-lien").href = "/arret.html?a=" + encodeURIComponent(sid);
+        const cartes = await Promise.all(
+          sens.map(async ({ s, dir }) => {
+            const termine = !li.boucle && ((s === 0 && +t >= fin) || (s === 1 && +t <= 0));
+            if (termine)
+              return `<div class="bg-carte p-5"><p class="text-xs font-bold uppercase tracking-[0.14em] text-doux">Vers ${TCM.esc(dir)}</p><p class="mt-3 text-doux">Terminus : la ligne ne va pas plus loin dans ce sens.</p></div>`;
+            const ps = await TCM.passages(l, s, s === 0 ? +t : fin - +t, now, 2);
+            const etat = TCM.etatLigne(l, ms);
+            let corps;
+            if (!TCM.circule(l, now)) corps = `<p class="mt-3 font-bold text-doux">${TCM.esc(etat.texte)}</p>`;
+            else if (!ps.length) corps = `<p class="mt-3 font-bold text-doux">Plus de passage aujourd'hui</p>`;
+            else
+              corps = `<div class="mt-3 flex items-end gap-6">
+                <div><p class="chiffres text-4xl font-black leading-none text-tcm-600 dark:text-tcm-300">${TCM.delai(ps[0], now)}</p><p class="chiffres mt-1 text-xs font-bold text-doux">${ps[0].getHours()}h${String(ps[0].getMinutes()).padStart(2, "0")}</p></div>
+                ${ps[1] ? `<div><p class="chiffres text-2xl font-black leading-none">${TCM.delai(ps[1], now)}</p><p class="chiffres mt-1 text-xs font-bold text-doux">puis ${ps[1].getHours()}h${String(ps[1].getMinutes()).padStart(2, "0")}</p></div>` : ""}
+              </div>`;
+            return `<div class="bg-carte p-5"><p class="text-xs font-bold uppercase tracking-[0.14em] text-doux"><i class="fa-solid fa-arrow-right mr-1.5"></i>Vers ${TCM.esc(dir)}</p>${corps}</div>`;
+          })
+        );
+        $("#passages").innerHTML = cartes.join("");
+      };
+      $("#pass-arret").addEventListener("change", rendre);
+      rendre();
+      setInterval(rendre, 20000);
+    })
+    .catch(() => {});
+
   let nbPlan = null;
   const majArrets = () => {
     const e = document.getElementById("chiffre-arrets");
@@ -188,7 +259,16 @@
         const nom = a && !a.partage ? a.nom : null;
         const t = pas != null ? Math.round(rang * pas) : null;
         rang++;
-        return { nom, bout, corr, serv, t, poi: x.s.poi && POI[x.s.poi.kind], ferme: !!x.s.closed };
+        return {
+          nom,
+          lien: a && !a.partage ? "/arret.html?a=" + encodeURIComponent(a.id) : null,
+          bout,
+          corr,
+          serv,
+          t,
+          poi: x.s.poi && POI[x.s.poi.kind],
+          ferme: !!x.s.closed,
+        };
       };
       const liste = (ms) => {
         const out = [];
@@ -221,7 +301,11 @@
             if (r.branches)
               return `<li class="relative py-3"><p class="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-doux"><i class="fa-solid ${r.type === "boucle" ? "fa-rotate" : "fa-code-fork"} mr-2"></i>${r.type === "boucle" ? "Boucle : la ligne fait le tour dans un seul sens" : "La ligne se sépare en deux branches puis se rejoint"}</p>
               <div class="grid gap-4 sm:grid-cols-2">${r.branches.map((b, i) => `<div class="border border-trait p-4"><p class="mb-3 text-xs font-bold text-doux">${r.type === "boucle" ? (i ? "Retour" : "Aller") : "Branche " + (i + 1)}</p><ol>${rendre(b)}</ol></div>`).join("")}</div></li>`;
-            const titre = r.nom || '<span class="font-normal text-doux">Arrêt sans nom</span>';
+            const titre = r.nom
+              ? r.lien
+                ? `<a href="${r.lien}" class="hover:text-tcm-600 hover:underline">${TCM.esc(r.nom)}</a>`
+                : TCM.esc(r.nom)
+              : '<span class="font-normal text-doux">Arrêt sans nom</span>';
             return `<li class="relative flex gap-5 pb-5"><span class="absolute left-[11px] top-0 h-full w-[6px]" style="background:${l.couleur}"></span>
               <span class="relative z-10 mt-0.5 grid h-7 w-7 shrink-0 place-items-center"><span class="${r.bout ? "h-7 w-7 border-[6px]" : "h-4 w-4 border-4"} block bg-carte" style="border-color:${l.couleur}"></span></span>
               <div class="min-w-0 flex-1"><div class="flex flex-wrap items-baseline justify-between gap-x-4">

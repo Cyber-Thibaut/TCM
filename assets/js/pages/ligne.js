@@ -72,7 +72,7 @@
   const momentNoms = { creuse: "en heures creuses", pointe: "en heure de pointe", soir: "en soirée", nuit: "la nuit" };
   const jourNoms = { semaine: "en semaine", samedi: "le samedi", dimanche: per.ferie ? "un jour férié" : "le dimanche" };
   if (l.frequences) {
-    const moment = TCM.momentDu();
+    const moment = TCM.momentDu(new Date(), per.jour);
     const p = per.vacances ? "vacances" : "scolaire";
     const f = l.frequences[p]?.[per.jour]?.[moment];
     const ctx = `${per.vacances ? per.nom : "Période scolaire"} · ${jourNoms[per.jour]} ${momentNoms[moment]}`;
@@ -100,7 +100,7 @@
           const fj = l.frequences[periode]?.[j] || {};
           const cell = (k) =>
             fj[k]
-              ? `<span class="inline-flex min-w-16 justify-center ${per.jour === j && TCM.momentDu() === k && (periode === "vacances") === per.vacances ? "bg-tcm-600 text-white" : "bg-carte-2"} px-3 py-2 font-black">${fj[k]}<span class="ml-0.5 text-xs font-bold opacity-70">min</span></span>`
+              ? `<span class="inline-flex min-w-16 justify-center ${per.jour === j && TCM.momentDu(new Date(), per.jour) === k && (periode === "vacances") === per.vacances ? "bg-tcm-600 text-white" : "bg-carte-2"} px-3 py-2 font-black">${fj[k]}<span class="ml-0.5 text-xs font-bold opacity-70">min</span></span>`
               : '<span class="text-doux">—</span>';
           return `<tr class="border-t border-trait"><th scope="row" class="border-t border-trait py-3 pr-4 text-sm font-bold">${nom}</th>${["creuse", "pointe", "soir", "nuit"].map((k) => `<td class="border-t border-trait py-3 text-center">${cell(k)}</td>`).join("")}</tr>`;
         })

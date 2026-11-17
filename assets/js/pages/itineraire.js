@@ -71,7 +71,7 @@
   const PERIODE_NOM = { pointe: "heure de pointe", creuse: "heures creuses", soir: "soirée", nuit: "nuit" };
   async function contexte(d) {
     const per = await TCM.periodeDu(d);
-    const moment = TCM.momentDu(d);
+    const moment = TCM.momentDu(d, per.jour);
     const lignes = {};
     for (const id of Object.keys(I.lignes)) {
       const l = L[id];

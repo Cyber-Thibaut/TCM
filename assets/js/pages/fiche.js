@@ -25,16 +25,19 @@
     )
     .join("");
 
-  /* ---------- créneaux de la journée (mêmes bornes que le reste du site) ---------- */
-  const PLAGES = [
-    { de: "5h", a: "7h", c: "creuse", nom: "Début de matinée" },
-    { de: "7h", a: "9h30", c: "pointe", nom: "Pointe du matin" },
-    { de: "9h30", a: "16h30", c: "creuse", nom: "Journée" },
-    { de: "16h30", a: "19h", c: "pointe", nom: "Pointe du soir" },
-    { de: "19h", a: "20h30", c: "creuse", nom: "Fin de journée" },
-    { de: "20h30", a: "0h", c: "soir", nom: "Soirée" },
-    { de: "0h", a: "5h", c: "nuit", nom: "Nuit" },
-  ];
+  /* ---------- colonnes horaires : toutes les bornes des créneaux du site (TCM.CRENEAUX), de 5h à 5h ---------- */
+  const hFmt = (m) => `${Math.floor(m / 60) % 24}h${m % 60 ? String(m % 60).padStart(2, "0") : ""}`;
+  const bornes = [
+    ...new Set(
+      Object.values(TCM.CRENEAUX)
+        .flat()
+        .flatMap(([x, y]) => [x, y])
+        .map((m) => (m < 300 ? m + 1440 : m))
+    ),
+  ]
+    .filter((m) => m < 1740)
+    .sort((x, y) => x - y);
+  const PLAGES = bornes.map((m, i) => ({ m: m % 1440, de: hFmt(m), a: hFmt(bornes[i + 1] ?? 1740) }));
   const JOURS = [
     ["semaine", "Lundi au vendredi"],
     ["samedi", "Samedi"],
@@ -134,7 +137,7 @@
     const tableau = (per, titre) => {
       const lignesT = JOURS.map(([j, nomJ]) => {
         const cel = PLAGES.map((pl) => {
-          const v = f[per]?.[j]?.[pl.c];
+          const v = f[per]?.[j]?.[TCM.creneau(pl.m, j)];
           if (!v) return `<td class="border-l border-t px-1 py-2 text-center text-[#9aa1b1]">—</td>`;
           const p = Math.max(0.12, Math.min(1, 6 / v));
           const fonce = p > 0.55;

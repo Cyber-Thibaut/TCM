@@ -1,200 +1,315 @@
 {
-  "_aide": "Agences commerciales. horaires : un créneau par jour (0 = dimanche … 6 = samedi), au format « 9:00-19:00 », ou null si fermé. premier_du_mois : horaires élargis le 1er de chaque mois (rechargement des abonnements). arret : arrêt du réseau qui sert à trouver les correspondances ; lignes : lignes ajoutées à la main. poles : ce qu'on trouve sur place, en plus des lignes, parkings relais et stations vélos (ajoutés automatiquement) : [icône Font Awesome, libellé].",
-  "agences": [
-    {
-      "id": "GC",
-      "nom": "Gare de Clermont-Ferrand",
-      "arret": "Gare de Clermont-Ferrand",
-      "lignes": [],
-      "image": "/img/gc.png",
-      "horaires": {
-        "0": "10:00-17:00",
-        "1": "7:00-21:00",
-        "2": "7:00-21:00",
-        "3": "7:00-21:00",
-        "4": "7:00-21:00",
-        "5": "7:00-21:00",
-        "6": "8:00-20:00"
-      },
-      "premier_du_mois": null,
-      "poles": [["fa-train", "Gare ferroviaire"]],
-      "espaces": {
-        "information": true,
-        "conseils": true,
-        "ventes": true,
-        "abonnements": true
-      }
-    },
-    {
-      "id": "GO",
-      "nom": "Gare de Royat-Chamalières",
-      "arret": "Gare de Royat-Chamalières",
-      "lignes": ["5", "7", "61"],
-      "image": "/img/GO.png",
-      "horaires": {
-        "0": null,
-        "1": "9:00-19:00",
-        "2": "9:00-19:00",
-        "3": "9:00-19:00",
-        "4": "9:00-19:00",
-        "5": "9:00-19:00",
-        "6": "10:00-18:00"
-      },
-      "premier_du_mois": "7:00-20:00",
-      "poles": [
-        ["fa-train", "Gare ferroviaire"],
-        ["fa-van-shuttle", "Gare routière des cars interurbains"]
-      ],
-      "espaces": {
-        "information": true,
-        "conseils": false,
-        "ventes": true,
-        "abonnements": false
-      }
-    },
-    {
-      "id": "AE",
-      "nom": "Aéroport Clermont-Ferrand Auvergne",
-      "arret": "Aéroport Clermont-Ferrand Auvergne",
-      "lignes": [],
-      "image": "/img/Aeroport.png",
-      "horaires": {
-        "0": "10:00-17:00",
-        "1": "7:00-21:00",
-        "2": "7:00-21:00",
-        "3": "7:00-21:00",
-        "4": "7:00-21:00",
-        "5": "7:00-21:00",
-        "6": "8:00-20:00"
-      },
-      "premier_du_mois": null,
-      "poles": [["fa-plane", "Aérogare"]],
-      "espaces": {
-        "information": true,
-        "conseils": true,
-        "ventes": true,
-        "abonnements": true
-      }
-    },
-    {
-      "id": "CMG",
-      "nom": "UCA Campus Centre",
-      "arret": "UCA Campus Centre",
-      "lignes": ["11"],
-      "image": "/img/CMG.png",
-      "horaires": {
-        "0": null,
-        "1": "9:00-19:00",
-        "2": "9:00-19:00",
-        "3": "9:00-19:00",
-        "4": "9:00-19:00",
-        "5": "9:00-19:00",
-        "6": "10:00-18:00"
-      },
-      "premier_du_mois": "7:00-20:00",
-      "poles": [["fa-graduation-cap", "Pôle universitaire Santé"]],
-      "espaces": {
-        "information": true,
-        "conseils": true,
-        "ventes": true,
-        "abonnements": true
-      }
-    },
-    {
-      "id": "CdC",
-      "nom": "Campus Alan Turing",
-      "arret": "Campus Alan Turing",
-      "lignes": [],
-      "image": "/img/CdC.png",
-      "horaires": {
-        "0": null,
-        "1": "9:00-19:00",
-        "2": "9:00-19:00",
-        "3": "9:00-19:00",
-        "4": "9:00-19:00",
-        "5": "9:00-19:00",
-        "6": "10:00-18:00"
-      },
-      "premier_du_mois": "7:00-20:00",
-      "poles": [["fa-graduation-cap", "Pôle universitaire Sciences et technologies"]],
-      "espaces": {
-        "information": true,
-        "conseils": true,
-        "ventes": true,
-        "abonnements": true
-      }
-    },
-    {
-      "id": "PdJ",
-      "nom": "Pôle Tertiaire",
-      "arret": "Pôle Tertiaire",
-      "lignes": [],
-      "image": "/img/PdJ.png",
-      "horaires": {
-        "0": "10:00-17:00",
-        "1": "7:00-21:00",
-        "2": "7:00-21:00",
-        "3": "7:00-21:00",
-        "4": "7:00-21:00",
-        "5": "7:00-21:00",
-        "6": "8:00-20:00"
-      },
-      "premier_du_mois": null,
-      "poles": [["fa-graduation-cap", "Pôle universitaire Droit et comptabilité"]],
-      "espaces": {
-        "information": true,
-        "conseils": true,
-        "ventes": true,
-        "abonnements": true
-      }
-    },
-    {
-      "id": "RIOM",
-      "nom": "Vertaizon - Gare",
-      "arret": "Vertaizon - Gare",
-      "lignes": [],
-      "image": "/img/Riom.png",
-      "horaires": {
-        "0": null,
-        "1": "9:00-19:00",
-        "2": "9:00-19:00",
-        "3": "9:00-19:00",
-        "4": "9:00-19:00",
-        "5": "9:00-19:00",
-        "6": "10:00-18:00"
-      },
-      "premier_du_mois": "7:00-20:00",
-      "poles": [["fa-train", "Gare ferroviaire"]],
-      "espaces": {
-        "information": true,
-        "conseils": false,
-        "ventes": true,
-        "abonnements": false
-      }
-    },
-    {
-      "id": "AUB",
-      "nom": "Aubière - Place du Marché",
-      "arret": "Aubière - Place du Marché",
-      "lignes": [],
-      "image": "/img/Aubiere.png",
-      "horaires": {
-        "0": null,
-        "1": "9:00-19:00",
-        "2": "9:00-19:00",
-        "3": "9:00-19:00",
-        "4": "9:00-19:00",
-        "5": "9:00-19:00",
-        "6": "10:00-18:00"
-      },
-      "premier_du_mois": "7:00-20:00",
-      "poles": [["fa-store", "Place du marché"]],
-      "espaces": {
-        "information": true,
-        "conseils": false,
-        "ventes": true,
-        "abonnements": false
-      }
-    }
-  ]
+ "_aide": "Agences commerciales. horaires : un créneau par jour (0 = dimanche … 6 = samedi), au format « 9:00-19:00 », ou null si fermé. premier_du_mois : horaires élargis le 1er de chaque mois (rechargement des abonnements). arret : arrêt du réseau qui sert à trouver les correspondances ; lignes : lignes ajoutées à la main. poles : ce qu'on trouve sur place, en plus des lignes, parkings relais et stations vélos (ajoutés automatiquement) : [icône Font Awesome, libellé].",
+ "agences": [
+  {
+   "id": "GC",
+   "nom": "Gare de Clermont-Ferrand",
+   "arret": "Gare de Clermont-Ferrand",
+   "lignes": [],
+   "image": "/img/gc.png",
+   "horaires": {
+    "0": "10:00-17:00",
+    "1": "7:00-21:00",
+    "2": "7:00-21:00",
+    "3": "7:00-21:00",
+    "4": "7:00-21:00",
+    "5": "7:00-21:00",
+    "6": "8:00-20:00"
+   },
+   "premier_du_mois": null,
+   "poles": [
+    [
+     "fa-train",
+     "Gare ferroviaire"
+    ]
+   ],
+   "espaces": {
+    "information": true,
+    "conseils": true,
+    "ventes": true,
+    "abonnements": true
+   }
+  },
+  {
+   "id": "GO",
+   "nom": "Gare de Royat-Chamalières",
+   "arret": "Gare de Royat-Chamalières",
+   "lignes": [
+    "5",
+    "7",
+    "61"
+   ],
+   "image": "/img/GO.png",
+   "horaires": {
+    "0": null,
+    "1": "9:00-19:00",
+    "2": "9:00-19:00",
+    "3": "9:00-19:00",
+    "4": "9:00-19:00",
+    "5": "9:00-19:00",
+    "6": "10:00-18:00"
+   },
+   "premier_du_mois": "7:00-20:00",
+   "poles": [
+    [
+     "fa-train",
+     "Gare ferroviaire"
+    ],
+    [
+     "fa-van-shuttle",
+     "Gare routière des cars interurbains"
+    ]
+   ],
+   "espaces": {
+    "information": true,
+    "conseils": false,
+    "ventes": true,
+    "abonnements": false
+   }
+  },
+  {
+   "id": "ATQ",
+   "nom": "L'Attaque",
+   "arret": "L'Attaque",
+   "lignes": [
+    "A",
+    "13",
+    "16"
+   ],
+   "image": "/img/Attaque.png",
+   "horaires": {
+    "0": "10:00-17:00",
+    "1": "7:00-21:00",
+    "2": "7:00-21:00",
+    "3": "7:00-21:00",
+    "4": "7:00-21:00",
+    "5": "7:00-21:00",
+    "6": "8:00-20:00"
+   },
+   "premier_du_mois": null,
+   "poles": [
+    [
+     "fa-train-tram",
+     "Terminus du tram A, ancien site de l'aéroport"
+    ]
+   ],
+   "espaces": {
+    "information": true,
+    "conseils": true,
+    "ventes": true,
+    "abonnements": true
+   }
+  },
+  {
+   "id": "AE",
+   "nom": "Aéroport Clermont-Ferrand Auvergne",
+   "arret": "Aéroport Clermont-Ferrand Auvergne",
+   "lignes": [
+    "ET",
+    "106"
+   ],
+   "image": "/img/Aeroport.png",
+   "horaires": {
+    "0": "10:00-17:00",
+    "1": "7:00-21:00",
+    "2": "7:00-21:00",
+    "3": "7:00-21:00",
+    "4": "7:00-21:00",
+    "5": "7:00-21:00",
+    "6": "8:00-20:00"
+   },
+   "premier_du_mois": null,
+   "poles": [
+    [
+     "fa-plane",
+     "Nouvelle aérogare"
+    ]
+   ],
+   "espaces": {
+    "information": true,
+    "conseils": true,
+    "ventes": true,
+    "abonnements": true
+   }
+  },
+  {
+   "id": "CMG",
+   "nom": "UCA Campus Centre",
+   "arret": "UCA Campus Centre",
+   "lignes": [
+    "11"
+   ],
+   "image": "/img/CMG.png",
+   "horaires": {
+    "0": null,
+    "1": "9:00-19:00",
+    "2": "9:00-19:00",
+    "3": "9:00-19:00",
+    "4": "9:00-19:00",
+    "5": "9:00-19:00",
+    "6": "10:00-18:00"
+   },
+   "premier_du_mois": "7:00-20:00",
+   "poles": [
+    [
+     "fa-graduation-cap",
+     "Pôle universitaire Santé"
+    ]
+   ],
+   "espaces": {
+    "information": true,
+    "conseils": true,
+    "ventes": true,
+    "abonnements": true
+   }
+  },
+  {
+   "id": "CdC",
+   "nom": "Campus Alan Turing",
+   "arret": "Campus Alan Turing",
+   "lignes": [],
+   "image": "/img/CdC.png",
+   "horaires": {
+    "0": null,
+    "1": "9:00-19:00",
+    "2": "9:00-19:00",
+    "3": "9:00-19:00",
+    "4": "9:00-19:00",
+    "5": "9:00-19:00",
+    "6": "10:00-18:00"
+   },
+   "premier_du_mois": "7:00-20:00",
+   "poles": [
+    [
+     "fa-graduation-cap",
+     "Pôle universitaire Sciences et technologies"
+    ]
+   ],
+   "espaces": {
+    "information": true,
+    "conseils": true,
+    "ventes": true,
+    "abonnements": true
+   }
+  },
+  {
+   "id": "PdJ",
+   "nom": "Pôle Tertiaire",
+   "arret": "Pôle Tertiaire",
+   "lignes": [],
+   "image": "/img/PdJ.png",
+   "horaires": {
+    "0": "10:00-17:00",
+    "1": "7:00-21:00",
+    "2": "7:00-21:00",
+    "3": "7:00-21:00",
+    "4": "7:00-21:00",
+    "5": "7:00-21:00",
+    "6": "8:00-20:00"
+   },
+   "premier_du_mois": null,
+   "poles": [
+    [
+     "fa-graduation-cap",
+     "Pôle universitaire Droit et comptabilité"
+    ]
+   ],
+   "espaces": {
+    "information": true,
+    "conseils": true,
+    "ventes": true,
+    "abonnements": true
+   }
+  },
+  {
+   "id": "RIOM",
+   "nom": "Vertaizon - Gare",
+   "arret": "Vertaizon - Gare",
+   "lignes": [],
+   "image": "/img/Riom.png",
+   "horaires": {
+    "0": null,
+    "1": "9:00-19:00",
+    "2": "9:00-19:00",
+    "3": "9:00-19:00",
+    "4": "9:00-19:00",
+    "5": "9:00-19:00",
+    "6": "10:00-18:00"
+   },
+   "premier_du_mois": "7:00-20:00",
+   "poles": [
+    [
+     "fa-train",
+     "Gare ferroviaire"
+    ]
+   ],
+   "espaces": {
+    "information": true,
+    "conseils": false,
+    "ventes": true,
+    "abonnements": false
+   }
+  },
+  {
+   "id": "AUB",
+   "nom": "Aubière - Place du Marché",
+   "arret": "Aubière - Place du Marché",
+   "lignes": [],
+   "image": "/img/Aubiere.png",
+   "horaires": {
+    "0": null,
+    "1": "9:00-19:00",
+    "2": "9:00-19:00",
+    "3": "9:00-19:00",
+    "4": "9:00-19:00",
+    "5": "9:00-19:00",
+    "6": "10:00-18:00"
+   },
+   "premier_du_mois": "7:00-20:00",
+   "poles": [
+    [
+     "fa-store",
+     "Place du marché"
+    ]
+   ],
+   "espaces": {
+    "information": true,
+    "conseils": false,
+    "ventes": true,
+    "abonnements": false
+   }
+  },
+  {
+   "id": "ASQ",
+   "nom": "Gerzat - Boulevard de l'Humanité",
+   "arret": "Gerzat - Boulevard de l'Humanité",
+   "lignes": [
+    "204",
+    "205"
+   ],
+   "image": "/img/Gerzat.png",
+   "horaires": {
+    "0": null,
+    "1": "9:00-19:00",
+    "2": "9:00-19:00",
+    "3": "9:00-19:00",
+    "4": "9:00-19:00",
+    "5": "9:00-19:00",
+    "6": "10:00-18:00"
+   },
+   "premier_du_mois": "7:00-20:00",
+   "poles": [
+    [
+     "fa-bus",
+     "Terminus des lignes 204 et 205"
+    ]
+   ],
+   "espaces": {
+    "information": true,
+    "conseils": false,
+    "ventes": true,
+    "abonnements": false
+   }
+  }
+ ]
 }

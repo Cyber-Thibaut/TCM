@@ -489,13 +489,39 @@
       jour: ferie || d.getDay() === 0 ? "dimanche" : d.getDay() === 6 ? "samedi" : "semaine",
     };
   };
-  TCM.momentDu = (d = new Date()) => {
-    const h = d.getHours() + d.getMinutes() / 60;
-    if (h < 5) return "nuit";
-    if ((h >= 7 && h < 9.5) || (h >= 16.5 && h < 19)) return "pointe";
-    if (h >= 20.5) return "soir";
-    return "creuse";
+  /* créneaux horaires (minutes depuis minuit), mêmes durées que le dossier N6 :
+     semaine  creuses 540 · pointes 360 · soirée 240 · nuit 300
+     samedi   creuses 360 · pointes 540 · soirée 240 · nuit 300
+     dimanche et jours fériés  creuses 480 · pointes 540 · nuit 420 (pas de soirée) */
+  TCM.CRENEAUX = {
+    semaine: [
+      [0, 300, "nuit"],
+      [300, 390, "creuse"],
+      [390, 570, "pointe"],
+      [570, 990, "creuse"],
+      [990, 1170, "pointe"],
+      [1170, 1200, "creuse"],
+      [1200, 1440, "soir"],
+    ],
+    samedi: [
+      [0, 300, "nuit"],
+      [300, 600, "creuse"],
+      [600, 1140, "pointe"],
+      [1140, 1200, "creuse"],
+      [1200, 1440, "soir"],
+    ],
+    dimanche: [
+      [0, 300, "nuit"],
+      [300, 600, "creuse"],
+      [600, 1140, "pointe"],
+      [1140, 1320, "creuse"],
+      [1320, 1440, "nuit"],
+    ],
   };
+  const tranche = (m, jour) => (TCM.CRENEAUX[jour] || TCM.CRENEAUX.semaine).find(([a, b]) => m >= a && m < b) || [0, 1440, "creuse"];
+  TCM.creneau = (m, jour) => tranche(m, jour)[2];
+  TCM.momentDu = (d = new Date(), jour) =>
+    TCM.creneau(d.getHours() * 60 + d.getMinutes(), jour || (d.getDay() === 0 ? "dimanche" : d.getDay() === 6 ? "samedi" : "semaine"));
 
   /* ---------- parkings relais : estimation de l'occupation selon l'heure (pas de capteurs) ----------
  Tirage pseudo-aléatoire stable par parking et par quart d'heure : la même valeur sur toutes les pages. */
@@ -916,7 +942,6 @@
     for (const c of String(x)) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
     return (h >>> 0) / 4294967296;
   };
-  const momentMin = (m) => (m < 300 ? "nuit" : (m >= 420 && m < 570) || (m >= 990 && m < 1140) ? "pointe" : m >= 1230 ? "soir" : "creuse");
   TCM.circule = (l, d) => {
     if (!l || ["scolaire", "tad"].includes(l.mode)) return false;
     if (l.statut && l.statut.etat === "fermee") return false;
@@ -929,21 +954,22 @@
     const f = l.frequences?.[per.vacances ? "vacances" : "scolaire"]?.[per.jour] || {};
     const out = [];
     const dec = graineTxt(l.id + ":" + sens + ":" + TCM.iso(jour));
+    const mm = (x) => TCM.creneau(x, per.jour);
     let m = 0;
     while (m < 1440) {
-      const fr = f[momentMin(m)];
+      const fr = f[mm(m)];
       if (!fr) {
-        m = momentMin(m) === "nuit" ? 300 : m + 5;
+        m = tranche(m, per.jour)[1];
         continue;
       }
       const debut = m;
       let t = debut + Math.floor(dec * fr);
-      while (t < 1440 && f[momentMin(t)]) {
+      while (t < 1440 && f[mm(t)]) {
         out.push(t);
-        t += f[momentMin(t)];
+        t += f[mm(t)];
       }
       m = t;
-      while (m < 1440 && f[momentMin(m)]) m++;
+      while (m < 1440 && f[mm(m)]) m++;
       if (m === debut) m++;
     }
     return out;

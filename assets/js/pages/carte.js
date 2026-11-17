@@ -48,6 +48,16 @@
   }
   if (tout.length && !voulu && !TCM.param("arret")) carte.fitBounds(Lf.latLngBounds(tout).pad(-0.15));
 
+  /* tracés suivant les rues, chargés ligne par ligne (les véhicules suivent le nouveau tracé) */
+  (async () => {
+    for (const x of avecTrace) {
+      const pts = await TCM.rues(x, G.traces[x], A);
+      if (!pts) continue;
+      G.traces[x] = { ...G.traces[x], pts };
+      couchesTrace[x].setLatLngs(pts.map((p) => p.pos));
+    }
+  })();
+
   /* ---------- arrêts ---------- */
   const coucheArrets = Lf.layerGroup();
   const marqueurs = {};

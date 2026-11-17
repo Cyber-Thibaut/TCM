@@ -1087,6 +1087,72 @@
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">les contributeurs OpenStreetMap</a>',
     }).addTo(carte);
+  /* ---------- tracés dans les rues : itinéraire routier entre les arrêts nommés (OSRM, données OpenStreetMap) ----------
+     Ordre de recherche : data/rues.json (précalculé par outils/maj_rues.py), cache du navigateur, puis serveur OSRM public. */
+  let ruesFichier = null;
+  const fileOsrm = [];
+  let osrmOccupe = false;
+  const osrm = (url) =>
+    new Promise((ok) => {
+      fileOsrm.push({ url, ok });
+      const suivant = async () => {
+        if (osrmOccupe || !fileOsrm.length) return;
+        osrmOccupe = true;
+        const { url: u, ok: fin } = fileOsrm.shift();
+        try {
+          const r = await fetch(u);
+          fin(r.ok ? await r.json() : null);
+        } catch (e) {
+          fin(null);
+        }
+        setTimeout(() => {
+          osrmOccupe = false;
+          suivant();
+        }, 1100);
+      };
+      suivant();
+    });
+  TCM.rues = async (lid, tr, A) => {
+    const reperes = tr.pts.filter((p, k) => k === 0 || k === tr.pts.length - 1 || (p.id && A[p.id] && !A[p.id].partage));
+    if (reperes.length < 2) return null;
+    const cle = lid + ":" + reperes.map((p) => p.pos.map((x) => x.toFixed(4)).join(",")).join(";");
+    let geo = null;
+    if (!ruesFichier) ruesFichier = TCM.json("/data/rues.json").catch(() => ({}));
+    const fichier = await ruesFichier;
+    if (fichier[lid] && fichier[lid].cle === cle) geo = fichier[lid];
+    if (!geo)
+      try {
+        geo = JSON.parse(localStorage.getItem("tcm-rues:" + cle) || "null");
+      } catch (e) {}
+    if (!geo) {
+      const coords = reperes.map((p) => p.pos[1].toFixed(5) + "," + p.pos[0].toFixed(5)).join(";");
+      const d = await osrm(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson&annotations=distance`);
+      if (!d || d.code !== "Ok" || !d.routes || !d.routes[0]) return null;
+      const rt = d.routes[0];
+      geo = { cle, coords: rt.geometry.coordinates.map(([x, y]) => [+y.toFixed(5), +x.toFixed(5)]), legs: rt.legs.map((g) => g.annotation.distance.length) };
+      try {
+        localStorage.setItem("tcm-rues:" + cle, JSON.stringify(geo));
+      } catch (e) {}
+    }
+    /* temps de passage : réparti dans chaque tronçon selon la distance parcourue */
+    const pts = [];
+    let n = 0;
+    geo.legs.forEach((nb, k) => {
+      const seg = geo.coords.slice(n, n + nb + 1);
+      const dist = [0];
+      for (let j = 1; j < seg.length; j++) dist.push(dist[j - 1] + Math.hypot(seg[j][0] - seg[j - 1][0], (seg[j][1] - seg[j - 1][1]) * 0.7));
+      const tot = dist[dist.length - 1] || 1;
+      const t0 = reperes[k].t,
+        t1 = reperes[k + 1].t;
+      seg.forEach((c, j) => {
+        if (j === 0 && k > 0) return;
+        pts.push({ pos: c, t: t0 + ((t1 - t0) * dist[j]) / tot, id: j === 0 ? reperes[k].id : j === seg.length - 1 ? reperes[k + 1].id : undefined });
+      });
+      n += nb;
+    });
+    return pts.length > 1 ? pts : null;
+  };
+
   /* position le long d'un tracé, t en minutes depuis le départ du sens 0 */
   TCM.surTrace = (tr, t) => {
     const pts = tr.pts;

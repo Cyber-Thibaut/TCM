@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Vélos en libre service — TCM</title>
+    <meta
+      name="description"
+      content="Six stations de vélos en libre service aux grands pôles du réseau TCM, vélos mécaniques et électriques, à la demi-heure ou au mois."
+    />
+    <meta name="theme-color" content="#204BFE" />
+    <link rel="icon" href="/img/TCM.png" />
+    <link rel="apple-touch-icon" href="/img/TCM.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transport Clermont Métropole" />
+    <meta property="og:title" content="Vélos en libre service — TCM" />
+    <meta
+      property="og:description"
+      content="Six stations de vélos en libre service aux grands pôles du réseau TCM, vélos mécaniques et électriques, à la demi-heure ou au mois."
+    />
+    <meta property="og:image" content="https://tcm-mobilite.vercel.app/img/photos/pont-1920.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/CitroenType-Black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CitroenType-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/dist/output.css" />
+    <script>
+      try {
+        var t = localStorage.getItem("tcm-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "light");
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <script src="https://kit.fontawesome.com/d8bf012a3e.js" crossorigin="anonymous" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/pages/velos.js" defer></script>
+  </head>
+  <body>
+    <div id="entete-site"></div>
+    <main id="contenu">
+      <section class="trame border-b border-trait bg-tcm-950 text-white">
+        <div class="conteneur grid gap-10 py-14 lg:grid-cols-[1fr_24rem] lg:py-20">
+          <div class="min-w-0">
+            <nav class="text-[11px] font-bold uppercase tracking-[0.18em] text-white/50" aria-label="Fil d'Ariane">
+              <a href="/index.html" class="hover:text-white">Accueil</a> <span class="mx-2">/</span> <span class="text-white">Vélos en libre service</span>
+            </nav>
+            <h1 class="mt-6 text-5xl uppercase leading-[0.9] tracking-[-0.03em] sm:text-7xl">Vélos en<br />libre service</h1>
+            <p class="mt-6 max-w-xl text-lg text-white/70">
+              Le dernier kilomètre, à vélo. Six stations aux grands pôles du réseau, des vélos mécaniques et électriques, à prendre à la demi-heure ou à garder
+              au mois.
+            </p>
+            <p
+              id="v-ouverture"
+              class="mt-6 inline-flex items-center gap-3 border border-ciel px-4 py-2 text-sm font-bold uppercase tracking-[0.12em] text-ciel"
+            ></p>
+          </div>
+          <dl class="grid grid-cols-2 gap-px self-end border border-white/15 bg-white/15">
+            <div class="bg-tcm-950 p-5">
+              <dt class="text-[10px] font-bold uppercase tracking-[0.18em] text-white/50">Stations</dt>
+              <dd id="v-nb" class="chiffres mt-1 text-4xl font-black">6</dd>
+            </div>
+            <div class="bg-tcm-950 p-5">
+              <dt class="text-[10px] font-bold uppercase tracking-[0.18em] text-white/50">Vélos</dt>
+              <dd class="chiffres mt-1 text-4xl font-black">120</dd>
+            </div>
+            <div class="bg-tcm-950 p-5">
+              <dt class="text-[10px] font-bold uppercase tracking-[0.18em] text-white/50">Électriques</dt>
+              <dd class="chiffres mt-1 text-4xl font-black">40</dd>
+            </div>
+            <div class="bg-tcm-950 p-5">
+              <dt class="text-[10px] font-bold uppercase tracking-[0.18em] text-white/50">La demi-heure</dt>
+              <dd id="v-prix" class="chiffres mt-1 text-4xl font-black">1,50 €</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="border-b border-trait bg-carte">
+        <div class="conteneur grid gap-px py-12 md:grid-cols-3">
+          <div class="pr-8">
+            <p class="chiffres text-xs font-bold text-doux">01</p>
+            <h2 class="mt-3 text-xl uppercase">Station à bornes</h2>
+            <p class="mt-2 text-doux">
+              Le vélo vous attend, attaché et en charge, à sa borne. Vous le décrochez à la borne et le rendez à n'importe quelle borne libre d'une station.
+            </p>
+          </div>
+          <div class="border-t border-trait pt-8 md:border-l md:border-t-0 md:px-8 md:pt-0">
+            <p class="chiffres text-xs font-bold text-doux">02</p>
+            <h2 class="mt-3 text-xl uppercase">Station virtuelle</h2>
+            <p class="mt-2 text-doux">
+              Pas de borne : la station est une zone repérée par géolocalisation. On déverrouille et on rend le vélo avec l'application TCM.
+            </p>
+          </div>
+          <div class="border-t border-trait pt-8 md:border-l md:border-t-0 md:pl-8 md:pt-0">
+            <p class="chiffres text-xs font-bold text-doux">03</p>
+            <h2 class="mt-3 text-xl uppercase">Au mois</h2>
+            <p class="mt-2 text-doux">
+              La location longue durée : un vélo rien qu'à vous pendant l'année scolaire, à retirer au centre vélo, pour le prix d'un abonnement mensuel.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="conteneur py-14">
+        <div class="flex flex-wrap items-end justify-between gap-4 border-b border-encre pb-4">
+          <div>
+            <p class="index-section">Stations</p>
+            <h2 class="mt-2 text-3xl uppercase">Les six stations</h2>
+          </div>
+          <p class="text-sm text-doux">Dans l'ordre d'ouverture · <span id="v-heure" class="chiffres font-bold"></span></p>
+        </div>
+        <div class="mt-8 grid gap-8 lg:grid-cols-[1fr_26rem]">
+          <ol id="v-stations" class="grid gap-px border border-trait bg-trait sm:grid-cols-2"></ol>
+          <div id="v-carte" class="min-h-[24rem] border border-trait lg:sticky lg:top-24 lg:h-[34rem]"></div>
+        </div>
+        <p class="mt-6 text-xs text-doux">
+          <i class="fa-solid fa-circle-info mr-1"></i>Disponibilités estimées selon l'heure et le jour, rafraîchies chaque minute.
+        </p>
+
+        <section class="mt-16" aria-labelledby="t-v-tarifs">
+          <div class="border-b border-encre pb-4">
+            <p class="index-section">Tarifs</p>
+            <h2 id="t-v-tarifs" class="mt-2 text-3xl uppercase">Combien ça coûte</h2>
+          </div>
+          <div id="v-tarifs" class="mt-8 grid gap-px border border-trait bg-trait md:grid-cols-3"></div>
+        </section>
+      </div>
+    </main>
+    <div id="pied-site"></div>
+  </body>
+</html>

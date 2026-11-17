@@ -17,6 +17,21 @@
   $("#arret-depuis").href = "/itineraire.html?de=" + encodeURIComponent(a.id);
   $("#arret-vers").href = "/itineraire.html?a=" + encodeURIComponent(a.id);
   $("#arret-carte").href = "/carte.html?arret=" + encodeURIComponent(a.id);
+  TCM.velos()
+    .then(async (V) => {
+      const v = V.find((x) => TCM.cleNom(x.arret || x.nom) === TCM.cleNom(a.nom));
+      if (!v) return;
+      let txt = v.statut === "fermee" ? "station fermée" : v.statut === "a venir" ? "ouverture le " + TCM.dateFr(v.ouverture) : "";
+      if (v.statut === "ouverte") {
+        const d = await TCM.dispoVelo(v);
+        txt = `${d.velos} vélo${d.velos > 1 ? "s" : ""} disponible${d.velos > 1 ? "s" : ""}`;
+      }
+      $("#arret-lignes").insertAdjacentHTML(
+        "afterend",
+        `<p class="mt-4 flex items-center gap-2 text-sm font-bold text-white"><i class="fa-solid fa-bicycle text-ciel"></i>Station vélos n° ${v.numero} · ${TCM.esc(txt)} <a href="/velos.html" class="font-normal text-white/60 underline">en savoir plus</a></p>`
+      );
+    })
+    .catch(() => {});
   TCM.json("/data/agences.json")
     .then(async (AG) => {
       const ag = AG.agences.filter((x) => x.arret === a.nom);

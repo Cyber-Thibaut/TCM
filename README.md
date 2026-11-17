@@ -82,3 +82,9 @@ Source : les plans N6 publiés dans **AO Mobility Plan Studio** (tm-ao-beta.verc
 - Carte : Leaflet (cdnjs) et fond CARTO / OpenStreetMap, chargés uniquement sur les pages qui ont une carte.
 - Lignes scolaires : message automatique pendant les vacances, les week-ends et les jours fériés, avec la date de reprise.
 - Agences : « Ouvre bientôt », « Ferme bientôt » (45 min), prochaine ouverture quand l'agence est fermée.
+
+## Vélos en libre service
+
+`velos.html` : les six stations (onglet `velos` de la feuille Google, sinon `data/velos.json`), disponibilité estimée une fois ouvertes, carte et tarifs (groupe vélo de `data/tarifs.json`). Les stations apparaissent aussi sur la carte en direct et sur les pages des arrêts.
+
+Fond de carte : tuiles OpenStreetMap (gratuites, attribution obligatoire), assombries par CSS en thème nuit.

@@ -69,6 +69,42 @@
     m.addTo(coucheArrets);
   }
 
+  /* ---------- vélos en libre service ---------- */
+  const coucheVelos = Lf.layerGroup().addTo(carte);
+  TCM.velos()
+    .then((V) => {
+      const parNom = Object.fromEntries(I.arrets.map((a) => [TCM.cleNom(a.nom), a]));
+      for (const v of V) {
+        const a = parNom[TCM.cleNom(v.arret || v.nom)];
+        const p = a && G.parId[a.id];
+        if (!p) continue;
+        Lf.marker(p, {
+          icon: Lf.divIcon({
+            className: "",
+            html: `<span style="display:grid;place-items:center;width:24px;height:24px;background:#070B1A;color:#10B4FF;border:2px solid #10B4FF;font-size:12px"><i class="fa-solid fa-bicycle"></i></span>`,
+            iconSize: [24, 24],
+            iconAnchor: [-6, 30],
+          }),
+          zIndexOffset: 800,
+        })
+          .bindPopup("…")
+          .on("popupopen", async (e) => {
+            const contenu = async () => {
+              let txt = v.statut === "ouverte" ? "" : v.statut === "fermee" ? "Station fermée" : "Ouverture le " + TCM.dateFr(v.ouverture);
+              if (v.statut === "ouverte") {
+                const d = await TCM.dispoVelo(v);
+                txt = `${d.velos} vélo${d.velos > 1 ? "s" : ""} (${d.electriques} électrique${d.electriques > 1 ? "s" : ""}) · ${d.libres} place${d.libres > 1 ? "s" : ""} libre${d.libres > 1 ? "s" : ""}`;
+              }
+              return `<p style="font-weight:900;text-transform:uppercase">Vélos · ${TCM.esc(v.nom)}</p><p style="font-size:12px;margin-top:4px">${v.virtuelle ? "Station virtuelle" : "Station à bornes"} · ${txt}</p><p style="margin-top:8px"><a href="/velos.html" style="font-weight:700">Les vélos en libre service →</a></p>`;
+            };
+            e.popup.setContent(await contenu());
+          })
+          .addTo(coucheVelos);
+      }
+    })
+    .catch(() => {});
+  document.getElementById("c-voir-velos").addEventListener("change", (e) => (e.target.checked ? coucheVelos.addTo(carte) : carte.removeLayer(coucheVelos)));
+
   /* ---------- véhicules ---------- */
   const coucheVehicules = Lf.layerGroup().addTo(carte);
   const vehicules = new Map();

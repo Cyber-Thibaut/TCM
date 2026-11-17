@@ -1,0 +1,65 @@
+{
+  "_aide": "Secours si la feuille Google (onglet velos) ne répond pas. Les six stations du nouveau réseau, dans l'ordre d'ouverture. type : bornes ou virtuelle.",
+  "stations": [
+    {
+      "numero": 1,
+      "nom": "Gare de Clermont-Ferrand",
+      "arret": "Gare de Clermont-Ferrand",
+      "type": "bornes",
+      "places": 20,
+      "ouverture": "2027-02-03",
+      "statut": "à venir",
+      "description": "Devant la gare, au pied du tram A et du tram-train ET."
+    },
+    {
+      "numero": 2,
+      "nom": "Clinique Saint-Paul",
+      "arret": "Clinique Saint-Paul",
+      "type": "bornes",
+      "places": 20,
+      "ouverture": "2027-02-03",
+      "statut": "à venir",
+      "description": "Au terminus du tram A, à côté du parking relais."
+    },
+    {
+      "numero": 3,
+      "nom": "UCA Campus Centre",
+      "arret": "UCA Campus Centre",
+      "type": "bornes",
+      "places": 20,
+      "ouverture": "2027-02-03",
+      "statut": "à venir",
+      "description": "Au pôle d'échange du campus, avec les lignes 8 et 11."
+    },
+    {
+      "numero": 4,
+      "nom": "Gare de Royat-Chamalières",
+      "arret": "Gare de Royat-Chamalières",
+      "type": "virtuelle",
+      "places": 20,
+      "ouverture": "2027-02-03",
+      "statut": "à venir",
+      "description": "Station sans borne : vous prenez et rendez le vélo dans la zone, avec l'application."
+    },
+    {
+      "numero": 5,
+      "nom": "Les Salins",
+      "arret": "Les Salins",
+      "type": "virtuelle",
+      "places": 20,
+      "ouverture": "2027-02-03",
+      "statut": "à venir",
+      "description": "Station sans borne, au cœur du pôle des Salins."
+    },
+    {
+      "numero": 6,
+      "nom": "Campus Alan Turing",
+      "arret": "Campus Alan Turing",
+      "type": "virtuelle",
+      "places": 20,
+      "ouverture": "2027-02-03",
+      "statut": "à venir",
+      "description": "Station sans borne sur le campus, à côté du parking relais."
+    }
+  ]
+}

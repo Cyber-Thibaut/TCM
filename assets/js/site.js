@@ -698,6 +698,7 @@
       titre: "Plus",
       sous: [
         { href: "/agences.html", titre: "Agences", texte: "Horaires et ouverture en direct" },
+        { href: "/velos.html", titre: "Vélos en libre service", texte: "Six stations dès février 2027" },
         { href: "/parkings.html", titre: "Parkings relais", texte: "Places disponibles en direct" },
         { href: "/nuit.html", titre: "Réseau de nuit", texte: "BEN1 à BEN4" },
         { href: "/fiche-horaire.html", titre: "Fiches horaires", texte: "À imprimer, ligne par ligne" },
@@ -828,6 +829,7 @@
             ${col("Voyager", [
               ["/tarifs.html", "Tarifs"],
               ["/agences.html", "Agences"],
+              ["/velos.html", "Vélos en libre service"],
               ["/parkings.html", "Parkings relais"],
               ["/actualites.html", "Actualités"],
             ])}
@@ -855,6 +857,56 @@
         .join("");
     });
   }
+
+  /* ---------- vélos en libre service : onglet « velos » de la feuille, sinon data/velos.json ---------- */
+  TCM.velos = () =>
+    (cache.__velos =
+      cache.__velos ||
+      TCM.feuille("velos").then(async (rangs) => {
+        const liste = rangs && rangs.length ? rangs : (await TCM.json("/data/velos.json").catch(() => ({ stations: [] }))).stations;
+        const now = new Date();
+        return liste
+          .filter((v) => v.nom)
+          .map((v, i) => {
+            const ouverture = TCM.dateSaisie(v.ouverture);
+            let statut = TCM.sansAccent(v.statut || "ouverte");
+            if (ouverture && TCM.date(ouverture) > now && !statut.startsWith("ferm")) statut = "a venir";
+            else if (statut.startsWith("a venir") && (!ouverture || TCM.date(ouverture) <= now)) statut = "ouverte";
+            return {
+              ...v,
+              numero: +v.numero || i + 1,
+              places: +v.places || 20,
+              virtuelle: TCM.sansAccent(v.type || "").startsWith("virt"),
+              ouverture,
+              statut: statut.startsWith("ferm") ? "fermee" : statut.startsWith("a venir") ? "a venir" : "ouverte",
+            };
+          })
+          .sort((x, y) => x.numero - y.numero);
+      }));
+  /* disponibilité estimée (pas de capteurs) : vélos présents selon l'heure, stable par quart d'heure */
+  TCM.dispoVelo = async (v, d = new Date()) => {
+    const per = await TCM.periodeDu(d);
+    const quart = Math.floor((d.getHours() * 60 + d.getMinutes()) / 15);
+    const r = graine("velo" + v.numero + TCM.iso(d) + quart);
+    const h = d.getHours() + d.getMinutes() / 60;
+    const gare = /gare/i.test(v.nom);
+    let taux;
+    if (h < 6) taux = 0.55 + 0.2 * r();
+    else if (h < 9.5) taux = (gare ? 0.2 : 0.75) + 0.2 * r();
+    else if (h < 16.5) taux = 0.35 + 0.3 * r();
+    else if (h < 19.5) taux = (gare ? 0.7 : 0.2) + 0.2 * r();
+    else taux = 0.5 + 0.25 * r();
+    if (per.jour !== "semaine") taux = 0.4 + 0.35 * r();
+    const velos = Math.max(0, Math.min(v.places, Math.round(v.places * taux)));
+    const electriques = Math.round(velos * (0.25 + 0.15 * r()));
+    return {
+      velos,
+      electriques,
+      mecaniques: velos - electriques,
+      libres: v.places - velos,
+      etat: velos === 0 ? "vide" : velos <= 3 ? "peu" : v.places - velos === 0 ? "plein" : "ok",
+    };
+  };
 
   /* ---------- passages théoriques : départs calculés à partir des fréquences (pas d'horaires réels) ----------
      Pour chaque ligne et chaque sens, les départs du terminus s'enchaînent au rythme de la fréquence du créneau,
@@ -1029,21 +1081,12 @@
         js.onerror = () => ko(new Error("Leaflet indisponible"));
         document.head.appendChild(js);
       }));
-  TCM.fondCarte = (Lf, carte) => {
-    const sombre = () => document.documentElement.getAttribute("data-theme") === "night";
-    let couche = null;
-    const poser = () => {
-      if (couche) carte.removeLayer(couche);
-      couche = Lf.tileLayer(`https://{s}.basemaps.cartocdn.com/${sombre() ? "dark_all" : "light_all"}/{z}/{x}/{y}{r}.png`, {
-        subdomains: "abcd",
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      }).addTo(carte);
-      couche.bringToBack();
-    };
-    poser();
-    new MutationObserver(poser).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-  };
+  /* fond de plan OpenStreetMap (gratuit) ; en thème sombre, les tuiles sont inversées par CSS (.leaflet-tile-pane) */
+  TCM.fondCarte = (Lf, carte) =>
+    Lf.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">les contributeurs OpenStreetMap</a>',
+    }).addTo(carte);
   /* position le long d'un tracé, t en minutes depuis le départ du sens 0 */
   TCM.surTrace = (tr, t) => {
     const pts = tr.pts;
